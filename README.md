@@ -1,3 +1,3 @@
-# componark
+# ComponArk
 
 Knowark's Web Components Library
