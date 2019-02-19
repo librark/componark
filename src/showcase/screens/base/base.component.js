@@ -1,3 +1,4 @@
+import './_base.scss'
 
 export class BaseComponent extends HTMLElement {
   init () {
@@ -11,19 +12,20 @@ export class BaseComponent extends HTMLElement {
 
   render () {
     this.root.innerHTML = /* html */`
-    <div class="app-base">
-        <h1>Hello World</h1>
-        <section class="app-base__catalog">
-            <ul data-components>
-              <li data-component="accordion">Accordion</li>
-              <li data-component="button">Button</li>
-              <li data-component="card">Card</li>
-            </ul>
+    <div class="demo-base">
+      <h1>ComponArk</h1>
+      <div class="demo-base__container">
+        <section class="demo-base__catalog">
+          <ul data-components>
+            <li data-component="accordion">Accordion</li>
+            <li data-component="button">Button</li>
+            <li data-component="card">Card</li>
+          </ul>
         </section>
-        <section class="app-base__display" data-display>
-            Display
-            <app-button-demo></app-button-demo>
+        <section class="demo-base__display" data-display>
+          <p>Display</p>
         </section>
+      </div>
     </div>
     `
     this._listen()
@@ -42,7 +44,7 @@ export class BaseComponent extends HTMLElement {
 
   async _loadComponent (component) {
     await import(`./${component}/${component}Demo.js`)
-    return Promise.resolve(document.createElement(`ark-${component}`))
+    return Promise.resolve(document.createElement(`demo-${component}`))
   }
 
   _setDisplayComponent (displayComponent, screenComponent) {
