@@ -20,7 +20,7 @@ export class BaseComponent extends HTMLElement {
               <li data-component="card">Card</li>
             </ul>
         </section>
-        <section class="app-base__display">
+        <section class="app-base__display" data-display>
             Display
             <app-button-demo></app-button-demo>
         </section>
@@ -31,9 +31,23 @@ export class BaseComponent extends HTMLElement {
 
   _listen () {
     this.root.querySelector('[data-components]').addEventListener(
-      'click', () => {
-        console.log('Click@!!!')
+      'click', async (event) => {
+        const component = event.target.dataset.component
+        const displayComponent = this.root.querySelector('[data-display]')
+        const screenComponent = await this._loadComponent(component)
+        console.log('SCREEN>>>>', screenComponent)
+        this._setDisplayComponent(displayComponent, screenComponent)
       })
+  }
+
+  async _loadComponent (component) {
+    await import(`./${component}/${component}Demo.js`)
+    return Promise.resolve(document.createElement(`ark-${component}`))
+  }
+
+  _setDisplayComponent (displayComponent, screenComponent) {
+    while (displayComponent.firstChild) displayComponent.firstChild.remove()
+    displayComponent.appendChild(screenComponent)
   }
 }
 customElements.define('app-base', BaseComponent)
