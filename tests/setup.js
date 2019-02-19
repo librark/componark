@@ -3,9 +3,7 @@
 // Issue: https://github.com/jsdom/jsdom/issues/1030
 
 const customElements = {
-  define: (element, selector) => {
-    console.log('SEL', selector)
-  }
+  define: (element, selector) => {}
 }
 
 Object.defineProperty(window, 'customElements', { value: customElements })
