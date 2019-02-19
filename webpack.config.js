@@ -86,7 +86,8 @@ module.exports = (env, argv) => {
     config.devServer = {
       open: true,
       contentBase: './dist',
-      historyApiFallback: true
+      historyApiFallback: true,
+      port: 7890
     }
   }
 
