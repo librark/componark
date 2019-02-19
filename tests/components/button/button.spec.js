@@ -1,4 +1,4 @@
-import { Button } from '../../../src/components/button/button.js'
+import { Button } from '../../../src/components/button'
 
 describe('Button', () => {
   it('can be instantiated', () => {

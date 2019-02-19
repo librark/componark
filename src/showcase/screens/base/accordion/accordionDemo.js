@@ -1,3 +1,4 @@
+import '../../../../components/accordion'
 
 export class AccordionDemo extends HTMLElement {
   connectedCallback () {
@@ -8,6 +9,7 @@ export class AccordionDemo extends HTMLElement {
     this.root.innerHTML = /* html */`
         <div class="demo-accordion">
             <p>This is an accordion</p>
+            <ark-accordion></ark-accordion>
         </div>
         `
   }

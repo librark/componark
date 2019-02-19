@@ -1,3 +1,4 @@
+import '../../../../components/button'
 
 export class ButtonDemo extends HTMLElement {
   connectedCallback () {
@@ -8,6 +9,11 @@ export class ButtonDemo extends HTMLElement {
     this.root.innerHTML = /* html */`
         <div class="demo-button">
             <p>This is a button</p>
+            <ark-button></ark-button>
+            <ark-button></ark-button>
+            <ark-button></ark-button>
+            <ark-button></ark-button>
+            <ark-button></ark-button>
         </div>
         `
   }
