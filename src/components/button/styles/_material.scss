@@ -1,0 +1,6 @@
+@import "@material/button/mdc-button";
+@mixin button_material() {
+    .ark-button {
+        @extend .mdc-button;
+    }
+}

@@ -14,5 +14,5 @@ Guidelines
 Render
 ======
 
-The *render()* function must *set the innerHTML* property of an element and
-and must *return its outerHTML* property.
+The **render()** function must **set the innerHTML** property of an element and
+and must **return its outerHTML** property.

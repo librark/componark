@@ -1,0 +1,10 @@
+@import './styles/material';
+@import './styles/bootstrap';
+@mixin button($theme: "ark") {
+    @if $theme=="material" {
+        @include button_material();
+    }
+    @if $theme=="bootstrap" {
+        @include button_bootstrap();
+    }
+}

@@ -6,7 +6,7 @@ export class Button extends HTMLElement {
 
   render () {
     this.root.innerHTML = /* html */`
-    <button class="ark-button"></button>
+    <button class="ark-button">HOLA</button>
     `
   }
 }
