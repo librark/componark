@@ -1,4 +1,5 @@
 import './screens/base/base.component.js'
+import './styles/main.scss'
 
 /** @param {string} target */
 export function main (target) {

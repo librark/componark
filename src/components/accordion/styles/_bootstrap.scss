@@ -1,0 +1,10 @@
+@mixin accordion_bootstrap() {
+    .ark-accordion {
+        background-color: yellow;
+        width: 50%;
+    }
+    .ark-accordion-tab {
+        background-color: blue;
+        width: 50%;
+    }
+}

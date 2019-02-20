@@ -1,27 +1,28 @@
-import styles from './accordion.css'
+import { getSlots } from '../../utils'
 
 export class Accordion extends HTMLElement {
   connectedCallback () {
-    // this.root = this.attachShadow({ 'mode': 'open' })
     this.root = this
     this.render()
   }
 
-  //   _renderSlots()
-
   render () {
-    const child = this.root.querySelector('[slot]').outerHTML
+    const child = this.root.querySelector('[slot]')
+    const slots = getSlots(this.root)
     console.log('Children::::', child)
+    console.log('SLOTS>>>', slots)
 
     this.root.innerHTML = /* html */`
-    <style>
-        ${styles.toString()}
-    </style>
     <div class="ark-accordion">
         <hr>
         <p>PARENT</p>
-        ${child}
-        <slot name="tabs"></slot>
+
+        ${slots.first.map((element, index) => `
+          <span class="tab-${index}">
+          ${element.outerHTML}
+          </span>
+        `).join('')}
+
     </div>
     `
     return this.root.outerHTML

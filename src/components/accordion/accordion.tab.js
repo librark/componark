@@ -1,6 +1,6 @@
 export class AccordionTab extends HTMLElement {
   connectedCallback () {
-    this.root = this.attachShadow({ 'mode': 'open' })
+    this.root = this
     this.render()
   }
 

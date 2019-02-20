@@ -48,15 +48,15 @@ module.exports = (env, argv) => {
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            // (devMode ? 'style-loader'
-            //   : MiniCssExtractPlugin.loader),
-            { loader: 'css-loader', options: { modules: false } }
-            // {
-            //   loader: 'sass-loader',
-            //   options: {
-            //     includePaths: ['./node_modules']
-            //   }
-            // }
+            (devMode ? 'style-loader'
+              : MiniCssExtractPlugin.loader),
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: ['./node_modules']
+              }
+            }
           ]
         },
         {

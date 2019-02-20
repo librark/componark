@@ -11,7 +11,9 @@ export class AccordionDemo extends HTMLElement {
         <div class="demo-accordion">
             <p>This is an accordion with header</p>
             <ark-accordion>
-                <ark-accordion-tab slot="tabs" header="TAB Header">
+                <ark-accordion-tab slot="first" header="SECOND">
+                </ark-accordion-tab>
+                <ark-accordion-tab slot="first" header="FIRST">
                 </ark-accordion-tab>
             </ark-accordion>
         </div>
