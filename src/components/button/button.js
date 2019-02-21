@@ -19,4 +19,4 @@ export class Button extends HTMLElement {
     return colors[color] || 'ark-button'
   }
 }
-window.customElements.define('ark-button', Button)
+customElements.define('ark-button', Button)
