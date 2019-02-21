@@ -1,10 +1,17 @@
-@import "bootstrap/scss/mixins";
+$primary: $ark-theme-primary !default;
+$secondary: $ark-theme-secondary !default;
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/bootstrap";
 @import "bootstrap/scss/buttons";
 @mixin button_bootstrap() {
     .ark-button {
         @extend .btn;
-        @extend .btn-danger;
+        @extend .btn-primary;
+    }
+    .ark-button--secondary {
+        @extend .btn;
+        @extend .btn-secondary;
     }
 }

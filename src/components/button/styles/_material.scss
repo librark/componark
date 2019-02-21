@@ -2,5 +2,10 @@
 @mixin button_material() {
     .ark-button {
         @extend .mdc-button;
+        @include mdc-button-ink-color($ark-theme-primary);
+    }
+    .ark-button--secondary {
+        @extend .mdc-button;
+        @include mdc-button-ink-color($ark-theme-secondary);
     }
 }
