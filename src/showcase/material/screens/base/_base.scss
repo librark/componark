@@ -1,0 +1,17 @@
+.demo-base {
+    height: 100%;
+    width: 100%;
+}
+
+.demo-base__container {
+    display: flex;
+    flex-direction: row;
+}
+
+.demo-base__catalog {
+    margin: 10px;
+}
+
+.demo-base__display {
+    margin: 10px;
+}

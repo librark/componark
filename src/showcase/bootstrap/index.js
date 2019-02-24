@@ -1,6 +1,13 @@
 
-// @ts-ignore
-// eslint-disable-next-line no-undef
-const target = TARGET
+export class BootstrapShowcaseComponent extends HTMLElement {
+  connectedCallback () {
+    this.render()
+  }
 
-// main(target)
+  render () {
+    this.innerHTML = /* html */`
+        <p>Bootstrap Showcase</p>
+        `
+  }
+}
+customElements.define('app-showcase-bootstrap', BootstrapShowcaseComponent)

@@ -1,0 +1,7 @@
+// Variables
+@import "./variables";
+// Components
+@import "../../components/accordion/main.scss";
+@include accordion("bootstrap");
+@import "../../components/button/main.scss";
+@include button("bootstrap");

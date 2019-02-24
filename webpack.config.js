@@ -13,8 +13,9 @@ module.exports = (env, argv) => {
   const config = {
     mode: argv.mode,
     entry: {
-      app: './src/index.js',
+      app: './src/showcase/index.js',
       ark: './src/showcase/ark/index.js',
+      material: './src/showcase/material/index.js',
       bootstrap: './src/showcase/bootstrap/index.js'
     },
     output: {
@@ -30,13 +31,19 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         chunks: ['app', 'runtime'],
         title: 'ComponArk Index',
-        template: 'src/index.html'
+        template: 'src/showcase/index.html'
       }),
       new HtmlWebpackPlugin({
         chunks: ['bootstrap', 'runtime'],
         title: 'ComponArk Bootstrap',
         template: 'src/showcase/bootstrap/index.html',
         filename: './bootstrap.html' 
+      }),
+      new HtmlWebpackPlugin({
+        chunks: ['material', 'runtime'],
+        title: 'ComponArk Material',
+        template: 'src/showcase/material/index.html',
+        filename: './material.html'
       }),
       new HtmlWebpackPlugin({
         chunks: ['ark', 'runtime'],
