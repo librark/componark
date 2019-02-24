@@ -13,7 +13,9 @@ module.exports = (env, argv) => {
   const config = {
     mode: argv.mode,
     entry: {
-      app: './src/index.js'
+      app: './src/index.js',
+      ark: './src/showcase/ark/index.js',
+      bootstrap: './src/showcase/bootstrap/index.js'
     },
     output: {
       publicPath: '/',
@@ -26,8 +28,21 @@ module.exports = (env, argv) => {
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
-        title: 'ComponArk',
+        chunks: ['app', 'runtime'],
+        title: 'ComponArk Index',
         template: 'src/index.html'
+      }),
+      new HtmlWebpackPlugin({
+        chunks: ['bootstrap', 'runtime'],
+        title: 'ComponArk Bootstrap',
+        template: 'src/showcase/bootstrap/index.html',
+        filename: './bootstrap.html' 
+      }),
+      new HtmlWebpackPlugin({
+        chunks: ['ark', 'runtime'],
+        title: 'ComponArk Ark',
+        template: 'src/showcase/ark/index.html',
+        filename: './ark.html'
       }),
       new MiniCssExtractPlugin({
         filename: devMode ? '[name].css' : '[name].[hash].css',
