@@ -5,6 +5,7 @@ export function getSlots (container) {
   }
   for (const element of container.children) {
     let slot = element.getAttribute('slot')
+    console.log('SLOT>>>', slot)
     if (!slot) {
       slot = 'general'
     } else if (!Object.keys(slots).includes(slot)) {
@@ -12,5 +13,6 @@ export function getSlots (container) {
     }
     slots[slot].push(element)
   }
+  console.log('sss', slots)
   return slots
 }
