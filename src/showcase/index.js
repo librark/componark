@@ -1,13 +1,8 @@
 import './index.scss'
 
-// @ts-ignore
-// eslint-disable-next-line no-undef
-const target = TARGET
-
-
 class MainComponent extends HTMLElement {
-  connectedCallback() {
-    this.render();
+  connectedCallback () {
+    this.render()
   }
 
   render () {
@@ -24,5 +19,3 @@ class MainComponent extends HTMLElement {
   }
 }
 customElements.define('app-main', MainComponent)
-
-
