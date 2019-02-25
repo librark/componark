@@ -1,7 +1,10 @@
 // Variables
+// @import "./reset";
 @import "./variables";
 // Components
-@import "../../components/accordion/main.scss";
-@include accordion("bootstrap");
-@import "../../components/button/main.scss";
-@include button("bootstrap");
+// @import "../../components/accordion/main.scss";
+// @include accordion("bootstrap");
+// @import "../../components/button/main.scss";
+// @include button("bootstrap");
+@import "../../../components/card/main";
+@include card("ark");

@@ -37,7 +37,7 @@ module.exports = (env, argv) => {
         chunks: ['bootstrap', 'runtime'],
         title: 'ComponArk Bootstrap',
         template: 'src/showcase/bootstrap/index.html',
-        filename: './bootstrap.html' 
+        filename: './bootstrap.html'
       }),
       new HtmlWebpackPlugin({
         chunks: ['material', 'runtime'],

@@ -1,0 +1,7 @@
+@import './styles/ark';
+
+@mixin card($theme: "material") {
+    @if $theme=="ark" {
+        @include card_ark();
+    }
+}

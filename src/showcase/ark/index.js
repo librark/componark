@@ -1,3 +1,4 @@
+import './styles/main.scss'
 
 export class ArkShowcaseComponent extends HTMLElement {
   connectedCallback () {

@@ -1,0 +1,28 @@
+
+@mixin card_ark() {
+    $component: 'ark-card';
+
+    #{$component} {
+        display: block;
+        border-radius: 5px;
+        box-shadow: 0px 1px 10px 0px rgba(5, 5, 5, 0.13);
+
+        .#{&}__header {
+            font-weight: bold;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .#{&}__content {
+            display: block;
+            position: relative;
+
+            p {
+                font-size: 16px;
+                font-weight: normal;
+                line-height: 1.5;
+            }
+        }
+    }
+}
