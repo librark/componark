@@ -11,6 +11,15 @@ export class Navbar extends HTMLElement {
     this.innerHTML = /* html */`
         ${children.map((element) => element.outerHTML).join('')}
     `
+    if (this.fixedTop) this.addFixedTop()
+  }
+
+  get fixedTop () {
+    return this.hasAttribute('fixed-top')
+  }
+
+  addFixedTop () {
+    this.classList.add('ark-navbar--fixed-top')
   }
 }
 customElements.define('ark-navbar', Navbar)
