@@ -1,11 +1,11 @@
 import './styles/main.scss'
 
 export class ArkShowcaseComponent extends HTMLElement {
-  connectedCallback() {
+  connectedCallback () {
     this.render()
   }
 
-  styles() {
+  styles () {
     return /* html */`
     <style>
       .app-showcase-ark__main {
@@ -19,7 +19,7 @@ export class ArkShowcaseComponent extends HTMLElement {
     `
   }
 
-  render() {
+  render () {
     this.innerHTML = /* html */`${this.styles()}
     <p>Ark Showcase</p>
     <div class="app-showcase-ark__main">
@@ -28,6 +28,7 @@ export class ArkShowcaseComponent extends HTMLElement {
           <li data-component="accordion">Accordion</li>
           <li data-component="button">Button</li>
           <li data-component="card">Card</li>
+          <li data-component="navbar">Navbar</li>
           <li data-component="sidebar">Sidebar</li>
         </ul>
       </div>
@@ -38,7 +39,7 @@ export class ArkShowcaseComponent extends HTMLElement {
     this._listen()
   }
 
-  _listen() {
+  _listen () {
     this.querySelector('[data-components]').addEventListener(
       'click', async (event) => {
         const item = /** @type {HTMLElement} */ (event.target)
@@ -49,12 +50,12 @@ export class ArkShowcaseComponent extends HTMLElement {
       })
   }
 
-  async _loadComponent(component) {
+  async _loadComponent (component) {
     await import(`./screens/${component}/${component}Demo.js`)
     return Promise.resolve(document.createElement(`demo-${component}`))
   }
 
-  _setContent(component) {
+  _setContent (component) {
     const contentElement = this.querySelector('[data-content]')
     while (contentElement.firstChild) contentElement.firstChild.remove()
     contentElement.appendChild(component)

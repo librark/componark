@@ -1,0 +1,82 @@
+@mixin navbar_ark() {
+    $component: 'ark-navbar';
+
+    #{$component} {
+        background: aqua;
+
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: 1fr;
+        grid-template-areas: ". .";
+
+        width: 100%;
+        max-width: -webkit-fill-available;
+
+        height: 64px;
+        max-height: 64px;
+
+        padding: 0 16px;
+
+        &> :not(:last-child) {
+            margin-right: 16px;
+        }
+
+        * {
+            display: flex;
+            align-items: center;
+
+            height: 100%;
+
+            cursor: pointer;
+        }
+
+        &-body {
+            width: 100%;
+
+            &-nav {
+                &-item {
+                    padding: 0 5px;
+
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.2);
+                    }
+                }
+            }
+        }
+
+        &-header {
+            &> :not(:last-child) {
+                margin-right: 16px;
+            }
+
+            &-brand {
+                &> :not(:last-child) {
+                    margin-right: 5px;
+                }
+
+                &-image {
+                    width: 40px;
+
+                    img {
+                        max-width: 40px;
+                        height: auto;
+                    }
+                }
+
+                &-title * {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+
+            &-toggler {
+                * {
+                    width: 28px;
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    .#{$component} {}
+}
