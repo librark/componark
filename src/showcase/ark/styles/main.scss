@@ -6,5 +6,15 @@
 // @include accordion("bootstrap");
 // @import "../../components/button/main.scss";
 // @include button("bootstrap");
+
+// ----------------------------------------------------------
+// Card
+// ----------------------------------------------------------
 @import "../../../components/card/main";
 @include card("ark");
+
+// ----------------------------------------------------------
+// Sidebar
+// ----------------------------------------------------------
+@import "../../../components/sidebar/main";
+@include sidebar("ark");

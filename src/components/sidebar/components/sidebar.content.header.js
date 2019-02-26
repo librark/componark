@@ -1,8 +1,7 @@
-import './card.header'
-import './card.content'
-import './card.image'
+import "./sidebar.content.header.title"
+import "./sidebar.content.header.subtitle"
 
-export class Card extends HTMLElement {
+export class SidebarContentHeader extends HTMLElement {
     connectedCallback() {
         this.render()
     }
@@ -14,4 +13,4 @@ export class Card extends HTMLElement {
         `
     }
 }
-customElements.define('ark-card', Card)
+customElements.define('ark-sidebar-content-header', SidebarContentHeader)

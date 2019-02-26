@@ -1,0 +1,66 @@
+@mixin sidebar_ark() {
+    $component: 'ark-sidebar';
+
+    #{$component} {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+
+        position: fixed !important;
+        left: 0;
+        top: 0;
+        z-index: 1000;
+
+        &-content {
+            background: white;
+
+            display: block;
+            min-width: 304px;
+            height: 100vh;
+            overflow: auto;
+
+            &> :first-child {
+                border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+            }
+
+            &-header {
+                display: block;
+
+                &-title * {
+                    margin: 0;
+                    padding: 15px 0 0 15px;
+                    font-size: xx-large;
+
+                }
+
+                &-subtitle * {
+                    margin: 0;
+                    padding: 0 0 5px 15px;
+                    color: rgba(0, 0, 0, 0.6);
+                }
+            }
+
+            &-body {
+                display: block;
+            }
+        }
+
+        &-scrim {
+            background: rgba(0, 0, 0, 0.4);
+            width: 100%;
+        }
+    }
+
+    .#{$component} {
+
+        &--opened {
+            display: flex;
+        }
+
+        &-scrim {
+            &--solid {
+                background: rgba(0, 0, 0, 1);
+            }
+        }
+    }
+}
