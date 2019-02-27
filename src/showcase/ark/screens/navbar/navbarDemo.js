@@ -1,5 +1,4 @@
 // @ts-ignore
-import Image from './assets/logo.png'
 import '../../../../components/navbar'
 
 export class NavbarDemo extends HTMLElement {
@@ -10,71 +9,91 @@ export class NavbarDemo extends HTMLElement {
   render () {
     this.innerHTML = /* html */`
       <div>
-        <p>This is a navbar.</p>
-        <hr />
+        <p>MOBILE (360px).</p>
+        <hr align="left" width="360px"  />
       </div>
 
-      <ark-navbar fixed-top>
-        <!-- header -->
-        <ark-navbar-header>
+      <iframe data-mobile src="/ark.html" frameborder="1" width="360px">
+      </iframe>
 
-          <!-- toggler -->
-         <ark-navbar-header-toggler></ark-navbar-header-toggler>
+      <div>
+        <p>TABLET (768px).</p>
+        <hr align="left" width="768px" />
+      </div>
 
-          <!-- brand -->
-          <ark-navbar-header-brand>
+      <iframe data-tablet src="/ark.html" frameborder="1" width="768px">
+      </iframe>
 
-            <!-- brand-image -->
-            <ark-navbar-header-brand-image src="${Image}">
-            </ark-navbar-header-brand-image>
+      <div>
+        <p>DESKTOP (960px).</p>
+        <hr align="left" width="960px" />
+      </div>
 
-            <!-- brand-title -->
-            <ark-navbar-header-brand-title>
-              Nubark
-            </ark-navbar-header-brand-title>
-          </ark-navbar-header-brand>
-        </ark-navbar-header>
+      <iframe data-desktop src="/ark.html" frameborder="1" width="960px">
+      </iframe>
 
-        <!-- body -->
-        <ark-navbar-body justify-content-between>
-
-          <!-- nav -->
-          <ark-navbar-body-nav>
-            <ark-navbar-body-nav-item>item 1</ark-navbar-body-nav-item>
-            <ark-navbar-body-nav-item>item 2</ark-navbar-body-nav-item>
-            <ark-navbar-body-nav-item>item 3</ark-navbar-body-nav-item>
-          </ark-navbar-body-nav>
-
-          <!-- nav -->
-          <ark-navbar-body-nav >
-            <ark-navbar-body-nav-item>my_Item 1</ark-navbar-body-nav-item>
-            <ark-navbar-body-nav-item>my_Item 2</ark-navbar-body-nav-item>
-            <ark-navbar-body-nav-item>my_Item 3</ark-navbar-body-nav-item>
-          </ark-navbar-body-nav>
-
-          <!-- nav -->
-          <ark-navbar-body-nav>
-            <ark-navbar-body-nav-item>x_Item 1</ark-navbar-body-nav-item>
-            <ark-navbar-body-nav-item>x_Item 2</ark-navbar-body-nav-item>
-            <ark-navbar-body-nav-item>x_Item 3</ark-navbar-body-nav-item>
-          </ark-navbar-body-nav>
-        </ark-navbar-body>
-
-      </ark-navbar>
+      <!-- DOCUMENTATION -->
 
       <div>
         <h3>ark-navbar</h3>
         <small>Attributes:</small>
         <p>fixed-top</p>
+        <hr/>
+        <small>Justify:</small>
+        <p>center</p>
+        <p>end</p>
+        <p>between</p>
       </div>
       <div>
-        <h3>ark-navbar-body</h3>
+        <h3>ark-navbar-nav</h3>
         <small>Attributes:</small>
-        <p>justify-content-center</p>
-        <p>justify-content-end</p>
-        <p>justify-content-between</p>
+        <p>header</p>
       </div>
     `
+    this._setup()
+  }
+
+  _setup () {
+    this._setupFrame('[data-mobile]')
+    this._setupFrame('[data-tablet]')
+    this._setupFrame('[data-desktop]')
+  }
+
+  _setupContent () {
+    return /* html */`
+      <ark-navbar justify="between">
+        <ark-navbar-nav>
+          <button>Click!!</button>
+          <ark-navbar-nav-item>x_Item 1-1</ark-navbar-nav-item>
+          <ark-navbar-nav-item>x_Item 1-2</ark-navbar-nav-item>
+          <ark-navbar-nav-item>x_Item 1-3</ark-navbar-nav-item>
+          <button>Click!!</button>
+        </ark-navbar-nav>
+        <ark-navbar-nav>
+          <ark-navbar-nav-item>x_Item 2-4</ark-navbar-nav-item>
+          <ark-navbar-nav-item>x_Item 2-5</ark-navbar-nav-item>
+          <ark-navbar-nav-item>x_Item 2-6</ark-navbar-nav-item>
+          <ark-navbar-nav-item>x_Item 2-7</ark-navbar-nav-item>
+        </ark-navbar-nav>
+        <ark-navbar-nav>
+          <ark-navbar-nav-item>x_Item 3-8</ark-navbar-nav-item>
+          <ark-navbar-nav-item>x_Item 3-9</ark-navbar-nav-item>
+        </ark-navbar-nav>
+      </ark-navbar>
+    `
+  }
+
+  _setupFrame (frameName) {
+    const content = this._setupContent()
+    const frame = this.querySelector(frameName)
+    frame.onload = () => {
+      const frameBody = frame.contentDocument.querySelector('body')
+      const app = frameBody.querySelector('app-showcase-ark')
+      const main = document.createElement('main')
+      main.innerHTML = content
+      app.parentNode.removeChild(app)
+      frameBody.prepend(main)
+    }
   }
 }
 customElements.define('demo-navbar', NavbarDemo)

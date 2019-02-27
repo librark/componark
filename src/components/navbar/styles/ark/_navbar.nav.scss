@@ -1,0 +1,9 @@
+@mixin navbar_nav() {
+    $component: 'ark-navbar-nav';
+
+    #{$component} {
+        display: flex;
+    }
+
+    .#{$component} {}
+}

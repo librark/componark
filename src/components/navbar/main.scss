@@ -1,4 +1,4 @@
-@import './styles/ark';
+@import './styles/ark/main';
 
 @mixin navbar($theme: "material") {
     @if $theme=="ark" {

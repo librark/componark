@@ -1,0 +1,70 @@
+@mixin navbar_() {
+    $component: 'ark-navbar';
+
+    $mobile: "min-width: 360px";
+    $tablet: "min-width: 768px";
+    $desktop: "min-width: 960px";
+
+    #{$component} {
+        display: flex;
+        flex-wrap: wrap;
+
+        width: 100%;
+        max-width: 100%;
+
+        * {
+            height: 48px;
+            max-height: 48px;
+            width: auto;
+        }
+
+        >:not(:first-child) {
+            background: purple;
+            display: none;
+        }
+
+        >:first-child {
+            width: 100%;
+            display: flex;
+
+            justify-content: space-between;
+        }
+
+        @media ($tablet) {
+            >:first-child {
+                width: auto !important;
+            }
+
+            >* {
+                display: flex !important;
+            }
+        }
+    }
+
+    .#{$component} {
+        &--fixed-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100vw;
+            max-width: 100vw;
+        }
+
+        &--center {
+            justify-content: center;
+        }
+
+        &--end {
+            justify-content: flex-end;
+        }
+
+        &--between {
+            justify-content: space-between;
+        }
+
+        &--show>* {
+            display: flex !important;
+        }
+    }
+}
