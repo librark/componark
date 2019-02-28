@@ -1,0 +1,7 @@
+@import './styles/ark/main';
+
+@mixin icon($theme: "material") {
+    @if $theme=="ark" {
+        @include icon_ark();
+    }
+}

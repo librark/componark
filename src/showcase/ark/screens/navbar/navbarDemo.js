@@ -57,7 +57,7 @@ export class NavbarDemo extends HTMLElement {
       <div>
         <h3>ark-navbar-nav</h3>
         <small>Attributes:</small>
-        <p>header</p>
+        <p>data-ark-navbar-toggle</p>
       </div>
     `
     this._setup()
