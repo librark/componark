@@ -32,6 +32,16 @@ export class NavbarDemo extends HTMLElement {
       <iframe data-desktop src="/ark.html" frameborder="1" width="960px">
       </iframe>
 
+      <div>
+        <p>THIS DISPLAY.</p>
+        <hr align="left" width="960px" />
+      </div>
+
+      <div data-display style="border: 1px solid;">
+        ${this._setupContent()}
+      </div>
+
+
       <!-- DOCUMENTATION -->
 
       <div>
@@ -54,6 +64,9 @@ export class NavbarDemo extends HTMLElement {
   }
 
   _setup () {
+    const toggleButton = this.querySelector('[data-ark-navbar-toggle]')
+    const navbar = this.querySelector('ark-navbar')
+    toggleButton.addEventListener('click', () => navbar.toggleContent())
     this._setupFrame('[data-mobile]')
     this._setupFrame('[data-tablet]')
     this._setupFrame('[data-desktop]')
@@ -64,20 +77,21 @@ export class NavbarDemo extends HTMLElement {
       <ark-navbar justify="between">
         <ark-navbar-nav>
           <button>Click!!</button>
-          <ark-navbar-nav-item>x_Item 1-1</ark-navbar-nav-item>
-          <ark-navbar-nav-item>x_Item 1-2</ark-navbar-nav-item>
-          <ark-navbar-nav-item>x_Item 1-3</ark-navbar-nav-item>
-          <button>Click!!</button>
+          <span>x_Item 1-1</span>
+          <span>x_Item 1-1</span>
+          <span>x_Item 1-2</span>
+          <span>x_Item 1-3</span>
+          <button data-ark-navbar-toggle>Click!!</button>
         </ark-navbar-nav>
         <ark-navbar-nav>
-          <ark-navbar-nav-item>x_Item 2-4</ark-navbar-nav-item>
-          <ark-navbar-nav-item>x_Item 2-5</ark-navbar-nav-item>
-          <ark-navbar-nav-item>x_Item 2-6</ark-navbar-nav-item>
-          <ark-navbar-nav-item>x_Item 2-7</ark-navbar-nav-item>
+          <span>x_Item 2-4</span>
+          <span>x_Item 2-5</span>
+          <span>x_Item 2-6</span>
+          <span>x_Item 2-7</span>
         </ark-navbar-nav>
         <ark-navbar-nav>
-          <ark-navbar-nav-item>x_Item 3-8</ark-navbar-nav-item>
-          <ark-navbar-nav-item>x_Item 3-9</ark-navbar-nav-item>
+          <span>x_Item 3-8</span>
+          <span>x_Item 3-9</span>
         </ark-navbar-nav>
       </ark-navbar>
     `
@@ -91,8 +105,12 @@ export class NavbarDemo extends HTMLElement {
       const app = frameBody.querySelector('app-showcase-ark')
       const main = document.createElement('main')
       main.innerHTML = content
+      const toggleButton = main.querySelector('[data-ark-navbar-toggle]')
+      const navbar = main.querySelector('ark-navbar')
       app.parentNode.removeChild(app)
       frameBody.prepend(main)
+
+      toggleButton.addEventListener('click', () => navbar.toggleContent())
     }
   }
 }

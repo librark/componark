@@ -1,5 +1,3 @@
-import './navbar.body.nav.item'
-
 export class NavbarBodyNav extends HTMLElement {
   connectedCallback () {
     this.render()

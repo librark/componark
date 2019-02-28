@@ -1,9 +1,6 @@
 @mixin navbar_() {
     $component: 'ark-navbar';
-
-    $mobile: "min-width: 360px";
-    $tablet: "min-width: 768px";
-    $desktop: "min-width: 960px";
+    $desktop: "960px";
 
     #{$component} {
         display: flex;
@@ -11,15 +8,11 @@
 
         width: 100%;
         max-width: 100%;
+        max-height: 48px;
 
-        * {
-            height: 48px;
-            max-height: 48px;
-            width: auto;
-        }
+        border-bottom: 1px solid;
 
         >:not(:first-child) {
-            background: purple;
             display: none;
         }
 
@@ -30,7 +23,17 @@
             justify-content: space-between;
         }
 
-        @media ($tablet) {
+        >:not(:first-child) {
+            width: 100%;
+            flex-direction: column;
+        }
+
+        @media only screen and (min-width: $desktop) {
+            >:not(:first-child) {
+                width: auto;
+                flex-direction: row;
+            }
+
             >:first-child {
                 width: auto !important;
             }
@@ -63,8 +66,14 @@
             justify-content: space-between;
         }
 
-        &--show>* {
-            display: flex !important;
+        @media not screen and (min-width: $desktop) {
+            &--show {
+                display: contents;
+
+                >* {
+                    display: flex !important;
+                }
+            }
         }
     }
 }
