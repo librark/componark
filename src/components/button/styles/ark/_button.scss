@@ -1,0 +1,28 @@
+@import "./_colors";
+
+@mixin button_() {
+  $component: "ark-button";
+
+  #{$component} {
+    display: inline-block;
+
+    background: none;
+    font-size: unset;
+
+    padding: 10px 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &[disabled] {
+      cursor: default !important;
+      color: gray !important;
+      background: none !important;
+
+      &:hover {
+        background: none !important;
+      }
+    }
+  }
+}
