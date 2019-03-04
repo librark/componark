@@ -4,24 +4,43 @@
   $component: "ark-button";
 
   #{$component} {
+    margin: 2px 0;
     display: inline-block;
 
-    background: none;
-    font-size: unset;
+    button,
+    a {
+      display: inline-block;
 
-    padding: 10px 15px;
+      background: none;
+      font-size: unset;
+      border: 0px solid;
 
-    &:hover {
-      cursor: pointer;
-    }
-
-    &[disabled] {
-      cursor: default !important;
-      color: gray !important;
-      background: none !important;
+      padding: 10px 15px;
 
       &:hover {
+        cursor: pointer;
+      }
+
+      &[disabled] {
+        cursor: default !important;
+        color: gray !important;
         background: none !important;
+
+        &:hover {
+          background: none !important;
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &[disabled] {
+        text-decoration: none;
       }
     }
   }

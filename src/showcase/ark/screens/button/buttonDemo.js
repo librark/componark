@@ -29,7 +29,7 @@ export class ButtonDemo extends HTMLElement {
       </div>
 
       <div class="demo-button">
-          <p>This is a button</p>
+          <p>This is a outline button</p>
 
           <ark-button outline="disabled" disabled>disabled</ark-button>
           <ark-button outline="primary">primary</ark-button>
@@ -42,6 +42,40 @@ export class ButtonDemo extends HTMLElement {
           <ark-button outline="muted">muted</ark-button>
           <ark-button outline="light">light</ark-button>
           <ark-button outline="white">white</ark-button>
+      </div>
+
+      <div class="demo-button">
+        <p>This is a link</p>
+        <ark-button href="a" background="disabled" disabled>
+          disabled
+        </ark-button>
+        <ark-button href="a" background="primary">primary</ark-button>
+        <ark-button href="a" background="secondary">secondary</ark-button>
+        <ark-button href="a" background="success">success</ark-button>
+        <ark-button href="a" background="danger">danger</ark-button>
+        <ark-button href="a" background="warning">warning</ark-button>
+        <ark-button href="a" background="info">info</ark-button>
+        <ark-button href="a" background="dark">dark</ark-button>
+        <ark-button href="a" background="muted">muted</ark-button>
+        <ark-button href="a" background="light">light</ark-button>
+        <ark-button href="a" background="white">white</ark-button>
+      </div>
+
+      <div class="demo-button">
+        <p>This is a outline link</p>
+        <ark-button href="a" outline="disabled" disabled>
+          disabled
+        </ark-button>
+        <ark-button href="a" outline="primary">primary</ark-button>
+        <ark-button href="a" outline="secondary">secondary</ark-button>
+        <ark-button href="a" outline="success">success</ark-button>
+        <ark-button href="a" outline="danger">danger</ark-button>
+        <ark-button href="a" outline="warning">warning</ark-button>
+        <ark-button href="a" outline="info">info</ark-button>
+        <ark-button href="a" outline="dark">dark</ark-button>
+        <ark-button href="a" outline="muted">muted</ark-button>
+        <ark-button href="a" outline="light">light</ark-button>
+        <ark-button href="a" outline="white">white</ark-button>
       </div>
     `
   }
