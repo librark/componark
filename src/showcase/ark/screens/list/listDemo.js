@@ -13,7 +13,7 @@ export class ListDemo extends HTMLElement {
           <ark-item>
             <span>fa-address-book</span>
             <div slot="start">
-              <ark-icon name="fa-address-book"></ark-icon>
+              <ark-icon name="fas fa-address-book"></ark-icon>
             </div>
             <div slot="end">1</div>
             <div slot="end">2</div>
@@ -23,7 +23,7 @@ export class ListDemo extends HTMLElement {
           <ark-item>
             <div>fa-address-book</div>
             <div slot="start">
-              <ark-icon name="fa-address-book" type="far"></ark-icon>
+              <ark-icon name="far fa-address-book"></ark-icon>
             </div>
             <div slot="end">far</div>
           </ark-item>
@@ -33,13 +33,13 @@ export class ListDemo extends HTMLElement {
           <ark-item>
             <div>fa-address-book</div>
             <div slot="end">
-              <ark-icon name="fa-address-book"></ark-icon>
+              <ark-icon name="fas fa-address-book"></ark-icon>
             </div>
           </ark-item>
           <ark-item>
             <div>fa-address-book</div>
             <div slot="end">
-              <ark-icon name="fa-address-book" type="far"></ark-icon>
+              <ark-icon name="far fa-address-book"></ark-icon>
             </div>
           </ark-item>
         </ark-list>

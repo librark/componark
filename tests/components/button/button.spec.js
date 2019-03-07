@@ -21,7 +21,7 @@ describe('Button', () => {
     expect(content).toEqual('Submit')
   })
 
-  it('can be rendered with attribute', function () {
+  it('can be rendered without attribute value', function () {
     const button = document.createElement('ark-button')
 
     const attr = document.createAttribute('myAttr')

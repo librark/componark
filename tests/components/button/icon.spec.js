@@ -6,18 +6,20 @@ describe('Icon', () => {
     expect(icon).toBeTruthy()
   })
 
-  it('can be rendered without content', function () {
-    // const icon = document.createElement('ark-icon')
-    // icon.connectedCallback()
-    // const iconElement = icon.querySelector('icon')
-    // expect(iconElement).toBeTruthy()
+  it('can be rendered with default variables', function () {
+    const icon = document.createElement('ark-icon')
+    icon.connectedCallback()
+    const iconElement = icon.querySelector('i')
+    expect(iconElement).toBeTruthy()
   })
 
-  it('can be rendered with text content', function () {
-    // const icon = document.createElement('ark-icon')
-    // icon.textContent = 'Submit'
-    // icon.connectedCallback()
-    // const content = icon.querySelector('icon').textContent
-    // expect(content).toEqual('Submit')
+  it('can be rendered with undefined variables', function () {
+    const icon = document.createElement('ark-icon')
+    const type = document.createAttribute('type')
+    type.value = 'md'
+    icon.setAttributeNode(type)
+    icon.connectedCallback()
+    const iconElement = icon.querySelector('i')
+    expect(iconElement).toBeNull()
   })
 })

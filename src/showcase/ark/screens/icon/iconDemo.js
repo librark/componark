@@ -13,13 +13,13 @@ export class IconDemo extends HTMLElement {
       <div>
         <span>fas fa-address-book</span>
         <p style="font-size: 100px; margin: 10px auto;" >
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </p>
       </div>
       <div>
         <span>far fa-address-book</span>
         <p style="font-size: 100px; margin: 10px auto;" >
-          <ark-icon name="fa-address-book" type="far"></ark-icon>
+          <ark-icon name="far fa-address-book"></ark-icon>
         </p>
       </div>
     `

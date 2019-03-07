@@ -1,21 +1,18 @@
 export class Icon extends HTMLElement {
   connectedCallback () {
-    this.name = this.getAttribute('name') || 'cloud'
-    this.type = this.getAttribute('type') || 'fas'
+    this.type = this.getAttribute('type') || 'aws'
+    this.name = this.getAttribute('name') || 'fas cloud'
     this.render()
   }
 
   render () {
-    const template = this._renderFontawesome()
-    if (this.type === 'md') {
-
+    if (this.type === 'aws') {
+      this.innerHTML = this._renderFontawesome()
     }
-
-    this.innerHTML = template
   }
 
   _renderFontawesome () {
-    return /* html */ `<i class="${this.type} ${this.name}"></i>`
+    return /* html */ `<i class="${this.name}"></i>`
   }
 }
 customElements.define('ark-icon', Icon)

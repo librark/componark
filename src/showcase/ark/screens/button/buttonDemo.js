@@ -83,41 +83,41 @@ export class ButtonDemo extends HTMLElement {
         <p>This is a Fab Buttons</p>
 
         <ark-button fab background="disabled" disabled>
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="primary">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="secondary">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="success">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="danger">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="warning">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="info">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="dark">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="muted">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="light">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
         <ark-button fab background="white">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
         </ark-button>
 
         <ark-button horizontal="end" vertical="end" background="primary">
-          <ark-icon name="fa-address-book"></ark-icon>
+          <ark-icon name="fas fa-address-book"></ark-icon>
           <span>hola</span>
         </ark-button>
 
