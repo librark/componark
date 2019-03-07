@@ -20,7 +20,7 @@ export class Item extends HTMLElement {
   }
 
   getSlots (key, slots) {
-    if (!slots[key]) { return }
+    if (!slots[key]) { return '' }
 
     return /* HTML */`
         ${slots[key].map((element, index) => `

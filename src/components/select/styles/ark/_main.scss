@@ -1,0 +1,7 @@
+@import "./select-option";
+@import "./select";
+
+@mixin select_ark() {
+  @include select_option_();
+  @include select_();
+}

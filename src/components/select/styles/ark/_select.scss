@@ -1,0 +1,5 @@
+@mixin select_() {
+  $component: "ark-select";
+
+  #{$component} {}
+}

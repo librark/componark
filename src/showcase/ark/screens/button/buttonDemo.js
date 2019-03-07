@@ -116,8 +116,9 @@ export class ButtonDemo extends HTMLElement {
           <ark-icon name="fa-address-book"></ark-icon>
         </ark-button>
 
-        <ark-button fab horizontal="end" vertical="end" background="primary">
+        <ark-button horizontal="end" vertical="end" background="primary">
           <ark-icon name="fa-address-book"></ark-icon>
+          <span>hola</span>
         </ark-button>
 
       </div>
