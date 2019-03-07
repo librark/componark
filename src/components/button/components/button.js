@@ -16,16 +16,14 @@ export class Button extends HTMLElement {
     const attributes = Array.from(this.attributes)
 
     return attributes.map((attribute) => {
-      if (attribute.value) {
-        return `${attribute.name}=${attribute.value}`
-      }
-      return `${attribute.name}`
+      var attr = `${attribute.name}`
+      if (attribute.value) attr += `=${attribute.value}`
+      return attr
     }).join(' ')
   }
 
   _getType () {
-    const tag = this.attributes.href === undefined ? 'button' : 'a'
-    return tag
+    return this.attributes.href === undefined ? 'button' : 'a'
   }
 
   _removeAttribute () {
