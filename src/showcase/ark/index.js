@@ -29,6 +29,7 @@ export class ArkShowcaseComponent extends HTMLElement {
           <li data-component="button">Button</li>
           <li data-component="card">Card</li>
           <li data-component="icon">Icon</li>
+          <li data-component="list">List</li>
           <li data-component="navbar">Navbar</li>
           <li data-component="sidebar">Sidebar</li>
         </ul>

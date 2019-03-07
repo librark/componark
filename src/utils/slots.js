@@ -13,6 +13,6 @@ export function getSlots (container) {
     }
     slots[slot].push(element)
   }
-  console.log('sss', slots)
+  console.log('>> slots', slots)
   return slots
 }

@@ -1,0 +1,13 @@
+@import "./styles/ark/main";
+
+@mixin list($theme: "material") {
+    @if $theme=="ark" {
+        @include list_ark();
+    }
+}
+
+@mixin item($theme: "material") {
+    @if $theme=="ark" {
+        @include item_ark();
+    }
+}
