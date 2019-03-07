@@ -9,14 +9,18 @@ export class Button extends HTMLElement {
           ${this.innerHTML}
         </${this._getType()}>
     `
+    this._removeAttribute()
   }
 
   _getAttributes () {
     const attributes = Array.from(this.attributes)
 
-    return attributes.map((attribute) =>
-      `${attribute.name}=${attribute.value}`
-    ).join(' ')
+    return attributes.map((attribute) => {
+      if (attribute.value) {
+        return `${attribute.name}=${attribute.value}`
+      }
+      return `${attribute.name}`
+    }).join(' ')
   }
 
   _getType () {

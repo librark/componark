@@ -2,6 +2,7 @@
 
 @mixin button_() {
   $component: "ark-button";
+  $fab-size: 56px;
 
   #{$component} {
     margin: 2px 0;
@@ -42,6 +43,70 @@
       &[disabled] {
         text-decoration: none;
       }
+    }
+
+    [fab] {
+      border-radius: 50%;
+      width: $fab-size;
+      height: $fab-size;
+      position: relative;
+      white-space: nowrap;
+      vertical-align: baseline;
+      text-align: center;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+      align-items: flex-start;
+
+      &:focus {
+        outline: 0;
+      }
+
+      &[disabled] {
+        background: rgba($color: $muted, $alpha: 0.2) !important;
+
+        &:hover {
+          background: rgba($color: $muted, $alpha: 0.2) !important;
+        }
+      }
+    }
+
+    // ----------------------------------------
+    // position
+    // ----------------------------------------
+    [horizontal],
+    [vertical] {
+      position: fixed;
+    }
+
+    // ----------------------------------------
+    // horizontal
+    // ----------------------------------------
+    [horizontal~="center"] {
+      left: calc(50% - (#{$fab-size} / 2));
+    }
+
+    [horizontal~="start"] {
+      left: calc((#{$fab-size} / 3));
+    }
+
+    [horizontal~="end"] {
+      right: calc((#{$fab-size} / 3));
+    }
+
+    // ----------------------------------------
+    // vertical
+    // ----------------------------------------
+    [vertical~="center"] {
+      top: calc(50% - (#{$fab-size} / 2));
+    }
+
+    [vertical~="start"] {
+      top: calc((#{$fab-size} / 2));
+    }
+
+    [vertical~="end"] {
+      bottom: calc((#{$fab-size} / 2));
     }
   }
 }
