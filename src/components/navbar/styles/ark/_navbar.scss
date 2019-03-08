@@ -42,10 +42,8 @@
                 display: flex !important;
             }
         }
-    }
 
-    .#{$component} {
-        &--fixed-top {
+        &[fixed-top] {
             position: fixed;
             top: 0;
             left: 0;
@@ -54,18 +52,20 @@
             max-width: 100vw;
         }
 
-        &--center {
+        &[justify~="center"] {
             justify-content: center;
         }
 
-        &--end {
+        &[justify~="end"] {
             justify-content: flex-end;
         }
 
-        &--between {
+        &[justify~="between"] {
             justify-content: space-between;
         }
+    }
 
+    .#{$component} {
         @media not screen and (min-width: $desktop) {
             &--show {
                 display: contents;

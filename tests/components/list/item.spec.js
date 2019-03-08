@@ -1,6 +1,6 @@
 import '../../../src/components/list'
 
-describe('item', () => {
+describe('Item', () => {
   it('can be instantiated', () => {
     const item = document.createElement('ark-item')
     expect(item).toBeTruthy()

@@ -1,5 +1,5 @@
-@mixin navbar_nav() {
-    $component: 'ark-navbar-nav';
+@mixin nav_() {
+    $component: 'ark-nav';
     $desktop: "960px";
 
     #{$component} {
@@ -36,6 +36,4 @@
             }
         }
     }
-
-    .#{$component} {}
 }

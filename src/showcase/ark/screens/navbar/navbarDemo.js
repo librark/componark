@@ -55,7 +55,7 @@ export class NavbarDemo extends HTMLElement {
         <p>between</p>
       </div>
       <div>
-        <h3>ark-navbar-nav</h3>
+        <h3>ark-nav</h3>
         <small>Attributes:</small>
         <p>data-ark-navbar-toggle</p>
       </div>
@@ -75,24 +75,24 @@ export class NavbarDemo extends HTMLElement {
   _setupContent () {
     return /* html */`
       <ark-navbar justify="between">
-        <ark-navbar-nav>
+        <ark-nav>
           <button>Click!!</button>
           <span>x_Item 1-1</span>
           <span>x_Item 1-1</span>
           <span>x_Item 1-2</span>
           <span>x_Item 1-3</span>
           <button data-ark-navbar-toggle>Click!!</button>
-        </ark-navbar-nav>
-        <ark-navbar-nav>
+        </ark-nav>
+        <ark-nav>
           <span>x_Item 2-4</span>
           <span>x_Item 2-5</span>
           <span>x_Item 2-6</span>
           <span>x_Item 2-7</span>
-        </ark-navbar-nav>
-        <ark-navbar-nav>
+        </ark-nav>
+        <ark-nav>
           <span>x_Item 3-8</span>
           <span>x_Item 3-9</span>
-        </ark-navbar-nav>
+        </ark-nav>
       </ark-navbar>
     `
   }
