@@ -1,5 +1,4 @@
 export class List extends HTMLElement {
-  connectedCallback () {
-  }
+  connectedCallback () { }
 }
 customElements.define('ark-list', List)

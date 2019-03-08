@@ -1,8 +1,9 @@
-import './sidebar.content'
-import './sidebar.scrim'
+import { getSlots } from '../../../utils'
 
 export class Sidebar extends HTMLElement {
   connectedCallback () {
+    this.nameElement = 'ark-sidebar'
+
     this.render()
   }
 
@@ -11,9 +12,21 @@ export class Sidebar extends HTMLElement {
   }
 
   render () {
+    this.slots = getSlots(this)
+
     this.innerHTML = /* html */`
-      ${this._getContent()}
-      ${this._getScrim()}
+      <div class="${this.nameElement}-menu">
+        <div>
+          ${this._getContent('header', `${this.nameElement}-menu-header`)}
+          <div class="${this.nameElement}-menu-body">
+          ${this._getSlots('general')}
+          </div>
+        </div>
+        ${this._getContent('footer', `${this.nameElement}-menu-footer`)}
+      </div>
+      <div class="${this.nameElement}-scrim">
+        ${this._getSlots('scrim')}
+      </div>
     `
 
     if (this.opened) this.open()
@@ -22,34 +35,43 @@ export class Sidebar extends HTMLElement {
   }
 
   _listen () {
-    this.querySelector('ark-sidebar-scrim').addEventListener(
+    this.querySelector(`.${this.nameElement}-scrim`).addEventListener(
       'click', _ => this.close()
     )
   }
 
-  _getContent () {
-    return this.querySelector('ark-sidebar-content')
-      ? this.querySelector('ark-sidebar-content').outerHTML : null
+  _getContent (key, className) {
+    const slots = this._getSlots(key)
+
+    if (slots === '') { return '' }
+
+    return /* html */`
+      <div class="${className}">
+        ${slots}
+      </div>
+    `
   }
 
-  _getScrim () {
-    let scrim = /* html */`
-      <ark-sidebar-scrim></ark-sidebar-scrim>
-    `
-    return this.querySelector('ark-sidebar-scrim')
-      ? this.querySelector('ark-sidebar-scrim').outerHTML : scrim
+  _getSlots (key) {
+    if (!this.slots[key]) { return '' }
+
+    return /* html */`
+        ${this.slots[key].map((element, index) => `
+          ${element.outerHTML}
+        `).join('')}
+      `
   }
 
   open () {
-    this.classList.add('ark-sidebar--opened')
+    this.classList.add(`${this.nameElement}--opened`)
   }
 
   close () {
-    this.classList.remove('ark-sidebar--opened')
+    this.classList.remove(`${this.nameElement}--opened`)
   }
 
   toggle () {
-    this.classList.toggle('ark-sidebar--opened')
+    this.classList.toggle(`${this.nameElement}--opened`)
   }
 }
 customElements.define('ark-sidebar', Sidebar)

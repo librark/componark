@@ -67,6 +67,7 @@ export class NavbarDemo extends HTMLElement {
     const toggleButton = this.querySelector('[data-ark-navbar-toggle]')
     const navbar = this.querySelector('ark-navbar')
     toggleButton.addEventListener('click', () => navbar.toggleContent())
+
     this._setupFrame('[data-mobile]')
     this._setupFrame('[data-tablet]')
     this._setupFrame('[data-desktop]')
