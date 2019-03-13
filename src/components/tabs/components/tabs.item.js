@@ -18,7 +18,7 @@ export class TabsItem extends HTMLElement {
     return attributes.map((attribute) => {
       var attr = `${attribute.name}`
       if (attribute.value) attr += `=${attribute.value}`
-      return attr
+      return attr !== 'active' ? attr : ''
     }).join(' ')
   }
 
@@ -27,8 +27,14 @@ export class TabsItem extends HTMLElement {
   }
 
   _removeAttribute () {
-    while (this.attributes.length > 0) {
-      this.removeAttribute(this.attributes[0].name)
+    let i = 0
+    while (this.attributes.length > i) {
+      const name = this.attributes[i].name
+      if (name === 'id' || name === 'active') {
+        i++
+        break
+      }
+      this.removeAttribute(name)
     }
   }
 }

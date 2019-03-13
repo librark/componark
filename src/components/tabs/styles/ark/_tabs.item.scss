@@ -39,8 +39,8 @@
       font-size: 24px;
     }
 
-    [active] {
-      background: red;
+    &[active]>* {
+      background: red !important;
       border-bottom: 3px solid rgba(0, 0, 0, 0.8);
     }
   }
