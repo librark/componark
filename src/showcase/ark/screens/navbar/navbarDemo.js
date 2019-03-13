@@ -1,4 +1,5 @@
 // @ts-ignore
+import '../../../../components/icon'
 import '../../../../components/navbar'
 
 export class NavbarDemo extends HTMLElement {
@@ -77,12 +78,16 @@ export class NavbarDemo extends HTMLElement {
     return /* html */`
       <ark-navbar justify="between">
         <ark-nav>
-          <button>Click!!</button>
+          <button>
+              <ark-icon name="fas fa-bars"></ark-icon>
+          </button>
           <span>x_Item 1-1</span>
           <span>x_Item 1-1</span>
           <span>x_Item 1-2</span>
           <span>x_Item 1-3</span>
-          <button data-ark-navbar-toggle>Click!!</button>
+          <button data-ark-navbar-toggle>
+             <ark-icon name="fas fa-caret-down"></ark-icon>
+          </button>
         </ark-nav>
         <ark-nav>
           <span>x_Item 2-4</span>

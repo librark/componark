@@ -33,6 +33,7 @@ export class ArkShowcaseComponent extends HTMLElement {
           <li data-component="navbar">Navbar</li>
           <li data-component="select">Select</li>
           <li data-component="sidebar">Sidebar</li>
+          <li data-component="tabs">Tabs</li>
         </ul>
       </div>
       <div class="app-showcase-ark__content" data-content>

@@ -12,6 +12,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
 
             border: 0px;
 
@@ -20,6 +21,14 @@
 
         button {
             background: none;
+        }
+
+        [data-ark-navbar-toggle] *,
+        button * {
+            width: 50px;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
         }
 
         >* {
