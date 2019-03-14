@@ -1,8 +1,7 @@
-@import "./_colors";
-
 @mixin button_() {
   $component: "ark-button";
   $fab-size: 56px;
+  $muted: #6c757d;
 
   #{$component} {
     margin: 2px 0;
@@ -17,6 +16,7 @@
       border: 0px solid;
 
       padding: 10px 15px;
+      color: inherit;
 
       &:hover {
         cursor: pointer;

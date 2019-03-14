@@ -1,0 +1,64 @@
+@mixin alert_() {
+  $component: "ark-alert";
+  $desktop: "960px";
+
+  $background: rgba($color: #ffff, $alpha: .8);
+  $border: 1px solid rgba($color: #000, $alpha: .1);
+
+  #{$component} {
+    display: block;
+    margin: 15px;
+
+    background: $background;
+    border: $border;
+
+    &[hide] {
+      display: none !important;
+    }
+  }
+
+  .#{$component} {
+    &__body {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      position: relative;
+    }
+
+    &__content {
+      width: 100%;
+    }
+
+    &__icon-close {
+      $size: 30px;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      button {
+        background: none;
+        border: 0;
+
+        cursor: pointer;
+
+        width: $size;
+        height: $size;
+
+        img {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 15px;
+
+      &>:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+}

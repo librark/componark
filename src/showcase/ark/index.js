@@ -26,6 +26,7 @@ export class ArkShowcaseComponent extends HTMLElement {
       <div class="app-showcase-ark__catalog">
         <ul data-components>
           <li data-component="accordion">Accordion</li>
+          <li data-component="alert">Alert</li>
           <li data-component="button">Button</li>
           <li data-component="card">Card</li>
           <li data-component="icon">Icon</li>

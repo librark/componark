@@ -1,0 +1,10 @@
+@mixin alert_title_() {
+  $component: "ark-alert-title";
+  $desktop: "960px";
+
+  #{$component} {
+    h3 {
+      margin: 0;
+    }
+  }
+}

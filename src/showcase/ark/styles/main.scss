@@ -1,11 +1,12 @@
 // Variables
 @import "./reset";
 @import "./variables";
-// Components
-// @import "../../components/accordion/main.scss";
-// @include accordion("bootstrap");
-// @import "../../components/button/main.scss";
-// @include button("bootstrap");
+
+// ----------------------------------------------------------
+// Alert
+// ----------------------------------------------------------
+@import "../../../components/alert/main";
+@include alert("ark");
 
 // ----------------------------------------------------------
 // Button
@@ -55,3 +56,8 @@
 // ----------------------------------------------------------
 @import "../../../components/tabs/main";
 @include tabs("ark");
+
+// ----------------------------------------------------------
+// Tabs
+// ----------------------------------------------------------
+@import "../../../components/theme/theme";

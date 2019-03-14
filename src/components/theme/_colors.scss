@@ -19,10 +19,6 @@ $white: #FFFFFF;
   .ark-bg-#{$type} {
     background: $background;
     color: $color;
-
-    &:hover {
-      background: rgba($color: $background, $alpha:$alpha);
-    }
   }
 
   [outline~="#{$type}"],
@@ -30,12 +26,34 @@ $white: #FFFFFF;
     background: none;
     border: 1px solid $background;
     color: $background;
+  }
 
-    &:hover {
-      background: $background;
-      color: $color;
+
+  a,
+  button {
+
+    &[background~="#{$type}"],
+    &.ark-bg-#{$type} {
+
+      &:hover {
+        background: rgba($color: $background, $alpha:$alpha);
+      }
     }
   }
+
+  a,
+  button {
+
+    &[outline~="#{$type}"],
+    &.ark-outline-bg-#{$type} {
+
+      &:hover {
+        background: $background;
+        color: $color;
+      }
+    }
+  }
+
 }
 
 @mixin arkBackgroundLight($type, $background) {
@@ -45,10 +63,6 @@ $white: #FFFFFF;
   .ark-bg-#{$type} {
     background: $background;
     color: $color;
-
-    &:hover {
-      background: rgba($color: $dark, $alpha:0.1);
-    }
   }
 
   [outline~="#{$type}"],
@@ -56,10 +70,24 @@ $white: #FFFFFF;
     background: none;
     border: 1px solid $background;
     color: $background;
+  }
 
-    &:hover {
-      background: $background;
-      color: $color;
+  a,
+  button {
+
+    [background~="#{$type}"],
+    .ark-bg-#{$type} {
+      &:hover {
+        background: rgba($color: $dark, $alpha:0.1);
+      }
+    }
+
+    [outline~="#{$type}"],
+    .ark-outline-bg-#{$type} {
+      &:hover {
+        background: $background;
+        color: $color;
+      }
     }
   }
 }
