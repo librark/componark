@@ -1,19 +1,68 @@
 @mixin alert_() {
   $component: "ark-alert";
-  $desktop: "960px";
+  $mobile: 360px;
+  $desktop: 960px;
 
-  $background: rgba($color: #ffff, $alpha: .8);
-  $border: 1px solid rgba($color: #000, $alpha: .1);
+  $background: rgba($color: #ffff, $alpha: 1);
+
+  $border: 1px solid rgba($color: #000, $alpha: 0.1);
 
   #{$component} {
+    $margin: 15px;
+    $width: calc(#{$mobile} - (#{$margin} * 2));
+
     display: block;
-    margin: 15px;
+    margin: $margin;
 
     background: $background;
     border: $border;
 
-    &[hide] {
+    width: $width;
+    max-width: $mobile;
+
+    // ----------------------------------------
+    // hidden
+    // ----------------------------------------
+    &[hidden] {
       display: none !important;
+    }
+
+    // ----------------------------------------
+    // position
+    // ----------------------------------------
+    &[horizontal],
+    &[vertical] {
+      position: fixed;
+    }
+
+    // ----------------------------------------
+    // horizontal
+    // ----------------------------------------
+    &[horizontal~="center"] {
+      left: calc(50% - (#{$mobile} / 2)) !important;
+    }
+
+    &[horizontal~="start"] {
+      left: 0 !important;
+    }
+
+    &[horizontal~="end"] {
+      right: 0 !important;
+    }
+
+    // ----------------------------------------
+    // vertical
+    // ----------------------------------------
+    &[vertical~="center"] {
+      top: calc(50% - (100% / 3)) !important;
+    }
+
+    &[vertical~="start"] {
+      top: 0 !important;
+    }
+
+    &[vertical~="end"] {
+      bottom: 0 !important;
     }
   }
 
@@ -27,6 +76,7 @@
 
     &__content {
       width: 100%;
+      overflow: hidden;
     }
 
     &__icon-close {
@@ -56,7 +106,7 @@
       justify-content: flex-end;
       padding: 0 15px;
 
-      &>:not(:last-child) {
+      &> :not(:last-child) {
         margin-right: 10px;
       }
     }

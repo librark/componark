@@ -15,7 +15,7 @@ export class Alert extends HTMLElement {
           ${this._getSlots('general')}
         </div>
         <div class="ark-alert__icon-close">
-          <button hide>
+          <button close>
             <img src="${Image}" width="12px"/>
           </button>
         </div>
@@ -25,7 +25,7 @@ export class Alert extends HTMLElement {
       </div>
     `
 
-    this._lisen()
+    this._listen()
   }
 
   _getSlots (key) {
@@ -38,24 +38,26 @@ export class Alert extends HTMLElement {
       `
   }
 
-  _lisen () {
-    const btns = Array.from(this.querySelectorAll('[hide]'))
+  _listen () {
+    const btns = Array.from(this.querySelectorAll('[close]'))
     btns.forEach(btn => btn.addEventListener('click', _ =>
       this.close()
     ))
   }
 
   open () {
-    this.removeAttribute('hide')
+    this.removeAttribute('hidden')
   }
 
   close () {
-    const att = document.createAttribute('hide')
+    const att = document.createAttribute('hidden')
     this.setAttributeNode(att)
   }
 
   toggle () {
-    this.toggleAttribute('hide')
+    this.getAttributeNode('hidden')
+      ? this.removeAttribute('hidden')
+      : this.setAttributeNode(document.createAttribute('hidden'))
   }
 }
 customElements.define('ark-alert', Alert)
