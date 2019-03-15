@@ -1,5 +1,4 @@
 import { getSlots } from '../../../utils'
-import Image from '../assets/close.png'
 
 export class Alert extends HTMLElement {
   connectedCallback () {
@@ -15,9 +14,7 @@ export class Alert extends HTMLElement {
           ${this._getSlots('general')}
         </div>
         <div class="ark-alert__icon-close">
-          <button close>
-            <img src="${Image}" width="12px"/>
-          </button>
+          <button close>&times;</button>
         </div>
       </div>
       <div class="ark-alert__actions">

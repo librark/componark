@@ -1,0 +1,10 @@
+@mixin modal_title_() {
+  $component: "ark-modal-title";
+  $desktop: "960px";
+
+  #{$component} {
+    h3 {
+      margin: 0;
+    }
+  }
+}
