@@ -3,6 +3,10 @@ export class Button extends HTMLElement {
     this.render()
   }
 
+  init (context) {
+    return this
+  }
+
   render () {
     this.innerHTML = /* html */`
         <${this._getType()} ${this._getAttributes()}>

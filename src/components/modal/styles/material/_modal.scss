@@ -1,20 +1,19 @@
+@import "node_modules/material-components-web/node_modules/@material/dialog/mdc-dialog.scss";
+
 @mixin modal_() {
   $component: "ark-modal";
+  $desktop: "960px";
   $background: rgba($color: #ffff,
     $alpha: 1) !important;
   $color: rgba(0, 0, 0, 0.87) !important;
-  $border: 1px solid rgba($color: #000,
-    $alpha: 0.3);
-  $mobile: 360px;
-  $desktop: 960px;
 
   #{$component} {
-    display: block;
+    @extend .mdc-dialog;
+    @extend .mdc-dialog--open;
+    @extend .mdc-dialog--scrollable;
+
     color: $color;
 
-    // ----------------------------------------
-    // hidden
-    // ----------------------------------------
     &[hidden] {
       display: none !important;
     }
@@ -22,31 +21,17 @@
 
   .#{$component} {
     &__content {
-      $margin: 15px;
-      $width: calc(#{$mobile} - (#{$margin} * 2));
 
-      width: $width;
-      position: fixed;
-      left: calc(50% - (#{$mobile} / 2)) !important;
-      top: 0;
+      @extend .mdc-dialog__container;
+      @extend .mdc-dialog__surface;
 
-      background: rgba($color: #ffff, $alpha: 1);
-      border: $border;
-
-      margin: 15px;
-      overflow: hidden;
-
-      &>* {
-        padding: 15px;
-      }
-
-      > :not(:last-child) {
-        border-bottom: $border;
-      }
+      color: $color;
 
       @media only screen and (min-width: $desktop) {
         &[lg] {
+          $margin: 15px;
           $width: calc(#{$desktop} - (#{$margin} * 2));
+
           left: calc(50% - (#{$desktop} / 2)) !important;
           width: $width;
         }
@@ -56,9 +41,19 @@
     &__header {
       width: 100%;
       overflow: hidden;
+
+      display: -webkit-inline-box;
+      padding-top: 15px;
+      padding-bottom: 0;
+      margin: 0;
     }
 
-    &__title {}
+    &__title {
+      @extend .mdc-dialog__title;
+      padding-bottom: 0;
+      width: 100%;
+      display: -webkit-box;
+    }
 
     &__icon-close {
       $size: 30px;
@@ -82,15 +77,11 @@
     }
 
     &__body {
-      display: block;
-      width: 100%;
-      overflow: hidden;
+      @extend .mdc-dialog__content;
     }
 
     &__actions {
-      display: flex;
-      justify-content: flex-end;
-      padding: 0 15px;
+      @extend .mdc-dialog__actions;
 
       &> :not(:last-child) {
         margin-right: 10px;
@@ -98,12 +89,7 @@
     }
 
     &__scrim {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.4);
+      @extend .mdc-dialog__scrim;
     }
   }
 }
