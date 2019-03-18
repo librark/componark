@@ -1,0 +1,127 @@
+$primary: #007BFF;
+$secondary: #6C757D;
+$success: #28A745;
+$danger: #DC3545;
+$warning: #FFC107;
+$info: #17A2B8;
+$dark: #343A40;
+$muted: #6c757d;
+$light: #F8F9FA;
+$white: #FFFFFF;
+
+// -----------------------------------
+// Background
+// -----------------------------------
+@mixin arkBackground($type, $background, $color: $light) {
+  $alpha: 0.6;
+
+  [background~="#{$type}"],
+  .ark-bg-#{$type} {
+    background: $background;
+    color: $color;
+  }
+
+  [outline~="#{$type}"],
+  .ark-outline-bg-#{$type} {
+    background: none;
+    border: 1px solid $background;
+    color: $background;
+  }
+
+
+  a,
+  button {
+
+    &[background~="#{$type}"],
+    &.ark-bg-#{$type} {
+
+      &:hover {
+        background: rgba($color: $background, $alpha:$alpha);
+      }
+    }
+  }
+
+  a,
+  button {
+
+    &[outline~="#{$type}"],
+    &.ark-outline-bg-#{$type} {
+
+      &:hover {
+        background: $background;
+        color: $color;
+      }
+    }
+  }
+
+}
+
+@mixin arkBackgroundLight($type, $background) {
+  $color: $dark;
+
+  [background~="#{$type}"],
+  .ark-bg-#{$type} {
+    background: $background;
+    color: $color;
+  }
+
+  [outline~="#{$type}"],
+  .ark-outline-bg-#{$type} {
+    background: none;
+    border: 1px solid $background;
+    color: $background;
+  }
+
+  a,
+  button {
+
+    [background~="#{$type}"],
+    .ark-bg-#{$type} {
+      &:hover {
+        background: rgba($color: $dark, $alpha:0.1);
+      }
+    }
+
+    [outline~="#{$type}"],
+    .ark-outline-bg-#{$type} {
+      &:hover {
+        background: $background;
+        color: $color;
+      }
+    }
+  }
+}
+
+@include arkBackground("primary", $primary);
+@include arkBackground("secondary", $secondary);
+@include arkBackground("success", $success);
+@include arkBackground("danger", $danger);
+@include arkBackground("info", $info);
+@include arkBackground("dark", $dark);
+@include arkBackground("muted", $muted);
+
+@include arkBackground("warning", $warning, $dark);
+@include arkBackgroundLight("light", $light);
+@include arkBackgroundLight("white", $white);
+
+// -----------------------------------
+// Color
+// -----------------------------------
+@mixin arkColor($type, $color) {
+
+  [color~="#{$type}"],
+  .ark-t-#{$type} {
+    color: $color;
+  }
+}
+
+@include arkColor("primary", $primary);
+@include arkColor("secondary", $secondary);
+@include arkColor("success", $success);
+@include arkColor("danger", $danger);
+@include arkColor("warning", $warning);
+@include arkColor("info", $info);
+@include arkColor("dark", $dark);
+@include arkColor("muted", $muted);
+@include arkColor("light", $light);
+@include arkColor("white", $white);

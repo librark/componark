@@ -1,0 +1,10 @@
+@mixin alert_subtitle_() {
+  $component: "ark-alert-subtitle";
+  $desktop: "960px";
+
+  #{$component} {
+    p {
+      margin: 0;
+    }
+  }
+}

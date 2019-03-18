@@ -6,7 +6,7 @@ export class CardHeaderSubtitle extends HTMLElement {
   render () {
     const subtitle = this.innerText
     this.innerHTML = /* html */`
-    <h4>${subtitle}</h4>
+        <h4>${subtitle}</h4>
     `
   }
 }

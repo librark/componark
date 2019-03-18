@@ -1,0 +1,13 @@
+@mixin list_() {
+  $component: "ark-list";
+
+  #{$component} {
+    display: flex;
+    flex-direction: column;
+
+    &>* {
+      padding: 10px;
+      border-bottom: 1px solid rgba($color: #000000, $alpha: .2);
+    }
+  }
+}

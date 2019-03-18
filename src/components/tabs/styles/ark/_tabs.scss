@@ -1,0 +1,14 @@
+@mixin tabs_() {
+  $component: "ark-tabs";
+  $desktop: "960px";
+
+  #{$component} {
+    max-width: 100vw;
+    overflow: auto;
+
+    display: flex;
+    flex-flow: inherit;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+}

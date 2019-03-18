@@ -6,7 +6,7 @@ export class CardHeaderTitle extends HTMLElement {
   render () {
     const title = this.innerText
     this.innerHTML = /* html */`
-    <h3>${title}</h3>
+      <h3>${title}</h3>
     `
   }
 }

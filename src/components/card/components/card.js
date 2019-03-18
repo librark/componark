@@ -10,7 +10,7 @@ export class Card extends HTMLElement {
   render () {
     const children = Array.from(this.children)
     this.innerHTML = /* html */`
-    ${children.map((element) => element.outerHTML).join('')}
+      ${children.map((element) => element.outerHTML).join('')}
     `
   }
 }

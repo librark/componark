@@ -64,6 +64,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
+    "@fortawesome/fontawesome-free": "^5.7.2",
     "@types/jest": "^24.0.6",
     "@types/jsdom": "^12.2.2",
     "babel-eslint": "^10.0.1",
@@ -90,6 +91,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "@material/dialog": "^1.0.1",
     "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
     "material-components-web": "^0.44.1",
