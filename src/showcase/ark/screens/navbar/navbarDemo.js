@@ -83,6 +83,7 @@ export class NavbarDemo extends HTMLElement {
           </button>
           <span>x_Item 1-1</span>
           <span>x_Item 1-1</span>
+          +
           <span>x_Item 1-2</span>
           <span>x_Item 1-3</span>
           <button data-ark-navbar-toggle>

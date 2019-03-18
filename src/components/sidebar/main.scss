@@ -1,7 +1,12 @@
-@import './styles/ark';
+@import './styles/ark/main';
+@import './styles/material/main';
 
 @mixin sidebar($theme: "material") {
     @if $theme=="ark" {
         @include sidebar_ark();
+    }
+
+    @if $theme=="material" {
+        @include sidebar_material();
     }
 }

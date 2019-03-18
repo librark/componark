@@ -1,4 +1,4 @@
-@import "node_modules/material-components-web/node_modules/@material/dialog/mdc-dialog.scss";
+@import "@material/dialog/mdc-dialog.scss";
 
 @mixin modal_() {
   $component: "ark-modal";
