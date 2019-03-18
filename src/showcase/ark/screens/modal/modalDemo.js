@@ -61,7 +61,7 @@ export class modalDemo extends HTMLElement {
         <button btn-open>open</button>
         <button btn-toggle>toggle</button>
       </div>
-      <ark-modal horizontal="end" vertical="start" background="primary">
+      <ark-modal background="primary" lg>
         <div slot="header">
           <ark-modal-title>titulo</ark-modal-title>
           <ark-modal-subtitle>subtitulo</ark-modal-subtitle>
@@ -81,7 +81,7 @@ export class modalDemo extends HTMLElement {
 
         <ark-button slot="action">Aceptar</ark-button>
         <ark-button slot="action" close>Cerrar</ark-button>
-      </ark-select>
+      </ark-modal>
 
       <!-- DOCUMENTATION -->
 
@@ -89,11 +89,10 @@ export class modalDemo extends HTMLElement {
         <h3>ark-button</h3>
         <small>Attributes:</small>
         <hr />
-        <p>horizontal, vertical:</p>
+        <p>Size of a new modal window</p>
         <ul>
-          <li>center </li>
-          <li>start</li>
-          <li>end</li>
+          <li>360px [default]</li>
+          <li>lg => 960px</li>
         </ul>
       </div>
     `

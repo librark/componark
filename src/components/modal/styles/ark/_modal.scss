@@ -1,7 +1,9 @@
 @mixin modal_() {
   $component: "ark-modal";
-  $background: rgba($color: #ffff, $alpha: 1);
-  $border: 1px solid rgba($color: #000, $alpha: 0.3);
+  $background: rgba($color: #ffff,
+    $alpha: 1);
+  $border: 1px solid rgba($color: #000,
+    $alpha: 0.3);
   $mobile: 360px;
   $desktop: 960px;
 
@@ -24,7 +26,7 @@
       width: $width;
       position: fixed;
       left: calc(50% - (#{$mobile} / 2)) !important;
-      top: 5rem;
+      top: 0;
 
       background: rgba($color: #ffff, $alpha: 1);
       border: $border;
@@ -36,8 +38,16 @@
         padding: 15px;
       }
 
-      >:not(:last-child) {
+      > :not(:last-child) {
         border-bottom: $border;
+      }
+
+      @media only screen and (min-width: $desktop) {
+        &[lg] {
+          $width: calc(#{$desktop} - (#{$margin} * 2));
+          left: calc(50% - (#{$desktop} / 2)) !important;
+          width: $width;
+        }
       }
     }
 
