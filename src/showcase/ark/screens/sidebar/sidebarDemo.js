@@ -1,6 +1,3 @@
-// @ts-ignore
-import '../../../../components/sidebar'
-
 export class SidebarDemo extends HTMLElement {
   connectedCallback () {
     this.render()

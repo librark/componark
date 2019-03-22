@@ -1,6 +1,3 @@
-import '../../../../components/button'
-import '../../../../components/icon'
-
 export class ButtonDemo extends HTMLElement {
   connectedCallback () {
     this.render()

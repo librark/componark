@@ -1,6 +1,3 @@
-import '../../../../components/list'
-import '../../../../components/icon'
-
 export class ListDemo extends HTMLElement {
   connectedCallback () {
     this.render()

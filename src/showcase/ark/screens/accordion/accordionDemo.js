@@ -1,5 +1,3 @@
-import '../../../../components/accordion'
-
 export class AccordionDemo extends HTMLElement {
   connectedCallback () {
     this.root = this

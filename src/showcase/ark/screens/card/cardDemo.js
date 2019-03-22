@@ -1,6 +1,5 @@
 // @ts-ignore
 import Image from './assets/building.jpg'
-import '../../../../components/card'
 
 export class CardDemo extends HTMLElement {
   connectedCallback () {

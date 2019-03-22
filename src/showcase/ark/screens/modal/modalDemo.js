@@ -1,6 +1,3 @@
-import '../../../../components/modal'
-import '../../../../components/button'
-
 export class modalDemo extends HTMLElement {
   connectedCallback () {
     this.render()

@@ -1,6 +1,3 @@
-import '../../../../components/alert'
-import '../../../../components/button'
-
 export class alertDemo extends HTMLElement {
   connectedCallback () {
     this.render()
@@ -79,7 +76,7 @@ export class alertDemo extends HTMLElement {
 
         <ark-button slot="action">Aceptar</ark-button>
         <ark-button slot="action" close>Cerrar</ark-button>
-      </ark-select>
+      </ark-alert>
 
       <!-- DOCUMENTATION -->
 

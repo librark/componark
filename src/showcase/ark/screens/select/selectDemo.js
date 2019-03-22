@@ -1,5 +1,3 @@
-import '../../../../components/select'
-
 export class SelectDemo extends HTMLElement {
   connectedCallback () {
     this.render()
