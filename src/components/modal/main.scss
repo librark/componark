@@ -1,6 +1,11 @@
-@import "./styles/ark/main";
-@import "./styles/material/main";
-
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../../theme/main";
+// -------------------------------------------
+// -------------------------------------------
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
 
 @mixin modal($type:ark) {
   @if $type==ark {

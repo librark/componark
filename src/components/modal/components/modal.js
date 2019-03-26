@@ -13,7 +13,12 @@ export class Modal extends HTMLElement {
       <div class="ark-modal__content" ${this._getAttributes()}>
         <div class="ark-modal__header">
           <div class="ark-modal__title">
-            ${this._getSlots('header')}
+            <h3>
+              ${this._getSlots('title')}
+            </h3>
+            <span>
+              ${this._getSlots('subtitle')}
+            </span>
           </div>
           <div class="ark-modal__icon-close">
             <button close>&times;</button>

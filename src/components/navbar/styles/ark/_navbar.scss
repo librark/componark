@@ -63,6 +63,15 @@
         &[justify~="between"] {
             justify-content: space-between;
         }
+
+        ark-button * {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
     }
 
     .#{$component} {
