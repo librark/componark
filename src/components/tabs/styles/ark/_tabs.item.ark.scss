@@ -1,4 +1,6 @@
-@mixin tabs-item_() {
+@import 'src/theme/_variables.scss';
+
+@mixin tabs-item_ark_() {
   $component: "ark-tabs-item";
   $desktop: "960px";
 
@@ -18,16 +20,20 @@
       cursor: pointer;
       width: 100%;
       height: 100%;
+      padding: 10px;
 
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 5px 10px;
+      align-content: center;
+      align-items: center;
       cursor: pointer;
 
+      &>:not(:first-child) {
+        margin-left: 5px;
+      }
+
       &:hover {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba($color: $muted, $alpha: .3);
         border-bottom: 3px solid rgba(0, 0, 0, 0.8);
       }
 
@@ -40,7 +46,7 @@
     }
 
     &[active]>* {
-      background: red !important;
+      background: $primary !important;
       border-bottom: 3px solid rgba(0, 0, 0, 0.8);
     }
   }

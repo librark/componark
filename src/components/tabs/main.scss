@@ -4,10 +4,15 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import "./styles/ark/main";
+@import "./styles/material/main.material";
+@import "./styles/ark/main.ark";
 
-@mixin tabs($theme: "material") {
-  @if $theme=="ark" {
+@mixin tabs($type:ark) {
+  @if $type==ark {
     @include tabs_ark();
+  }
+
+  @if $type==material {
+    @include tabs_material();
   }
 }

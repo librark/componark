@@ -1,0 +1,37 @@
+@import "@material/tab-bar/mdc-tab-bar";
+@import "@material/tab-scroller/mdc-tab-scroller";
+@import "@material/tab-indicator/mdc-tab-indicator";
+@import "@material/tab/mdc-tab";
+
+@import 'src/theme/_variables.scss';
+
+@mixin tabs-item_material_() {
+  $component: "ark-tabs-item";
+  $desktop: "960px";
+
+  #{$component} {
+
+    button,
+    a {
+      @extend .mdc-tab;
+
+      &>:not(:first-child) {
+        margin-left: 5px;
+      }
+
+      &:hover {
+        background: rgba($color: $muted, $alpha: .3);
+        border-bottom: 3px solid rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    ark-icon {
+      font-size: 24px;
+    }
+
+    &[active]>* {
+      background: $primary !important;
+      border-bottom: 3px solid rgba(0, 0, 0, 0.8);
+    }
+  }
+}
