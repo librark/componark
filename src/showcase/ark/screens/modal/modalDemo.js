@@ -1,6 +1,3 @@
-import '../../../../components/modal'
-import '../../../../components/button'
-
 export class modalDemo extends HTMLElement {
   connectedCallback () {
     this.render()
@@ -61,11 +58,9 @@ export class modalDemo extends HTMLElement {
         <button btn-open>open</button>
         <button btn-toggle>toggle</button>
       </div>
-      <ark-modal background="primary" lg>
-        <div slot="header">
-          <ark-modal-title>titulo</ark-modal-title>
-          <ark-modal-subtitle>subtitulo</ark-modal-subtitle>
-        </div>
+      <ark-modal lg>
+        <span slot="title">My title</span>
+        <span slot="subtitle">My subtitle</span>
 
         <div>
           <p>Contenido Parrafo 1</p>

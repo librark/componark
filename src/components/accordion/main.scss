@@ -1,10 +1,18 @@
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../../theme/main";
+// -------------------------------------------
+// -------------------------------------------
 @import './styles/common';
 @import './styles/bootstrap';
-@mixin accordion($theme: "ark") {
-    @if $theme=="ark" {
-        @include accordion_common();
-    }
-    @if $theme=="bootstrap" {
-        @include accordion_bootstrap();
-    }
-}
+
+// -------------------------------------------
+// -------------------------------------------
+// @if $theme=="ark" {
+//     @include accordion_common();
+// }
+
+// @if $theme=="bootstrap" {
+//     @include accordion_bootstrap();
+// }

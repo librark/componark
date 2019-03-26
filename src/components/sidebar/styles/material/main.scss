@@ -1,0 +1,5 @@
+@import "./sidebar";
+
+@mixin sidebar_material() {
+    @include sidebar_();
+}

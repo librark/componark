@@ -1,7 +1,13 @@
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../../theme/main";
+// -------------------------------------------
+// -------------------------------------------
 @import "./styles/ark/main";
 
-@mixin alert($theme: "material") {
-  @if $theme== "ark" {
+@mixin alert($theme: material) {
+  @if $theme=="ark" {
     @include alert_ark();
   }
 }

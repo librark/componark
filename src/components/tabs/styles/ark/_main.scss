@@ -1,7 +1,0 @@
-@import "./tabs";
-@import "./tabs.item";
-
-@mixin tabs_ark() {
-  @include tabs_();
-  @include tabs-item_();
-}

@@ -1,9 +1,0 @@
-@import "./modal";
-@import "./modal.subtitle";
-@import "./modal.title";
-
-@mixin modal_ark() {
-  @include modal_();
-  @include modal_subtitle_();
-  @include modal_title_();
-}

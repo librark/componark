@@ -1,4 +1,4 @@
-export class ModalSubtitle extends HTMLElement {
+export class SidebarSubtitle extends HTMLElement {
   connectedCallback () {
     this.render()
   }
@@ -9,4 +9,4 @@ export class ModalSubtitle extends HTMLElement {
     `
   }
 }
-customElements.define('ark-modal-subtitle', ModalSubtitle)
+customElements.define('ark-sidebar-subtitle', SidebarSubtitle)

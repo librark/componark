@@ -1,13 +1,4 @@
-$primary: #007BFF;
-$secondary: #6C757D;
-$success: #28A745;
-$danger: #DC3545;
-$warning: #FFC107;
-$info: #17A2B8;
-$dark: #343A40;
-$muted: #6c757d;
-$light: #F8F9FA;
-$white: #FFFFFF;
+@import "./variables";
 
 // -----------------------------------
 // Background
@@ -17,15 +8,15 @@ $white: #FFFFFF;
 
   [background~="#{$type}"],
   .ark-bg-#{$type} {
-    background: $background;
-    color: $color;
+    background: $background !important;
+    color: $color !important;
   }
 
   [outline~="#{$type}"],
   .ark-outline-bg-#{$type} {
-    background: none;
-    border: 1px solid $background;
-    color: $background;
+    background: none !important;
+    border: 1px solid $background !important;
+    color: $background !important;
   }
 
 
@@ -36,7 +27,7 @@ $white: #FFFFFF;
     &.ark-bg-#{$type} {
 
       &:hover {
-        background: rgba($color: $background, $alpha:$alpha);
+        background: rgba($color: $background, $alpha:$alpha) !important;
       }
     }
   }
@@ -48,8 +39,8 @@ $white: #FFFFFF;
     &.ark-outline-bg-#{$type} {
 
       &:hover {
-        background: $background;
-        color: $color;
+        background: $background !important;
+        color: $color !important;
       }
     }
   }
@@ -61,15 +52,15 @@ $white: #FFFFFF;
 
   [background~="#{$type}"],
   .ark-bg-#{$type} {
-    background: $background;
-    color: $color;
+    background: $background !important;
+    color: $color !important;
   }
 
   [outline~="#{$type}"],
   .ark-outline-bg-#{$type} {
-    background: none;
-    border: 1px solid $background;
-    color: $background;
+    background: none !important;
+    border: 1px solid $background !important;
+    color: $background !important;
   }
 
   a,
@@ -78,15 +69,15 @@ $white: #FFFFFF;
     [background~="#{$type}"],
     .ark-bg-#{$type} {
       &:hover {
-        background: rgba($color: $dark, $alpha:0.1);
+        background: rgba($color: $dark, $alpha:0.1) !important;
       }
     }
 
     [outline~="#{$type}"],
     .ark-outline-bg-#{$type} {
       &:hover {
-        background: $background;
-        color: $color;
+        background: $background !important;
+        color: $color !important;
       }
     }
   }
@@ -111,7 +102,7 @@ $white: #FFFFFF;
 
   [color~="#{$type}"],
   .ark-t-#{$type} {
-    color: $color;
+    color: $color !important;
   }
 }
 

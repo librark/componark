@@ -1,6 +1,3 @@
-// @ts-ignore
-import '../../../../components/icon'
-
 export class IconDemo extends HTMLElement {
   connectedCallback () {
     this.render()

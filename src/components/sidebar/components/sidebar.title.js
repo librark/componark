@@ -1,4 +1,4 @@
-export class ModalTitle extends HTMLElement {
+export class SidebarTitle extends HTMLElement {
   connectedCallback () {
     this.render()
   }
@@ -9,4 +9,4 @@ export class ModalTitle extends HTMLElement {
     `
   }
 }
-customElements.define('ark-modal-title', ModalTitle)
+customElements.define('ark-sidebar-title', SidebarTitle)

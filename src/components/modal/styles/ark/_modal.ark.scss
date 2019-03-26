@@ -1,4 +1,4 @@
-@mixin modal_() {
+@mixin modal_ark_() {
   $component: "ark-modal";
   $background: rgba($color: #ffff,
     $alpha: 1) !important;
@@ -58,7 +58,11 @@
       overflow: hidden;
     }
 
-    &__title {}
+    &__title {
+      h3 {
+        margin-bottom: 5px;
+      }
+    }
 
     &__icon-close {
       $size: 30px;

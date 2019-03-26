@@ -1,8 +1,18 @@
-@mixin item_() {
+@import "@material/list/mdc-list.scss";
+@import "src/theme/_variables.scss";
+
+@mixin item_material_() {
   $component: "ark-item";
 
   #{$component} {
+    @extend .mdc-list-item;
+
+    width: initial;
+
+    display: flex;
     justify-content: space-between;
+
+    cursor: pointer;
   }
 
   #{$component},

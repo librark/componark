@@ -1,12 +1,18 @@
-@import "./styles/ark/main";
-@import "./styles/material/main";
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../../theme/main";
+// -------------------------------------------
+// -------------------------------------------
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
 
-@mixin modal($theme: "material") {
-  @if $theme=="ark" {
+@mixin modal($type:ark) {
+  @if $type==ark {
     @include modal_ark();
   }
 
-  @if $theme=="material" {
+  @if $type==material {
     @include modal_material();
   }
 }
