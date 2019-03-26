@@ -20,8 +20,8 @@
       }
 
       &:hover {
-        background: rgba($color: $muted, $alpha: .3);
-        border-bottom: 3px solid rgba(0, 0, 0, 0.8);
+        background: rgba($color: $muted, $alpha: .2);
+        border-bottom: 3px solid rgba(0, 0, 0, 0.5);
       }
     }
 
@@ -30,8 +30,8 @@
     }
 
     &[active]>* {
-      background: $primary !important;
-      border-bottom: 3px solid rgba(0, 0, 0, 0.8);
+      color: $primary !important;
+      border-bottom: 3px solid $primary;
     }
   }
 }

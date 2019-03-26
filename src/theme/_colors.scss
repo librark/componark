@@ -8,15 +8,15 @@
 
   [background~="#{$type}"],
   .ark-bg-#{$type} {
-    background: $background;
-    color: $color;
+    background: $background !important;
+    color: $color !important;
   }
 
   [outline~="#{$type}"],
   .ark-outline-bg-#{$type} {
-    background: none;
-    border: 1px solid $background;
-    color: $background;
+    background: none !important;
+    border: 1px solid $background !important;
+    color: $background !important;
   }
 
 
@@ -27,7 +27,7 @@
     &.ark-bg-#{$type} {
 
       &:hover {
-        background: rgba($color: $background, $alpha:$alpha);
+        background: rgba($color: $background, $alpha:$alpha) !important;
       }
     }
   }
@@ -39,8 +39,8 @@
     &.ark-outline-bg-#{$type} {
 
       &:hover {
-        background: $background;
-        color: $color;
+        background: $background !important;
+        color: $color !important;
       }
     }
   }
@@ -52,15 +52,15 @@
 
   [background~="#{$type}"],
   .ark-bg-#{$type} {
-    background: $background;
-    color: $color;
+    background: $background !important;
+    color: $color !important;
   }
 
   [outline~="#{$type}"],
   .ark-outline-bg-#{$type} {
-    background: none;
-    border: 1px solid $background;
-    color: $background;
+    background: none !important;
+    border: 1px solid $background !important;
+    color: $background !important;
   }
 
   a,
@@ -69,15 +69,15 @@
     [background~="#{$type}"],
     .ark-bg-#{$type} {
       &:hover {
-        background: rgba($color: $dark, $alpha:0.1);
+        background: rgba($color: $dark, $alpha:0.1) !important;
       }
     }
 
     [outline~="#{$type}"],
     .ark-outline-bg-#{$type} {
       &:hover {
-        background: $background;
-        color: $color;
+        background: $background !important;
+        color: $color !important;
       }
     }
   }
@@ -102,7 +102,7 @@
 
   [color~="#{$type}"],
   .ark-t-#{$type} {
-    color: $color;
+    color: $color !important;
   }
 }
 

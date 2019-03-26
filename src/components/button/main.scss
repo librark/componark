@@ -4,10 +4,15 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import './styles/ark/main';
+@import './styles/ark/main.ark';
+@import './styles/material/main.material';
 
-@mixin button($theme: "material") {
-    @if $theme=="ark" {
+@mixin button($theme:ark) {
+    @if $theme==ark {
         @include button_ark();
+    }
+
+    @if $theme==material {
+        @include button_material();
     }
 }
