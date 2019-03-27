@@ -1,0 +1,75 @@
+@import "@material/toolbar/mdc-toolbar.scss";
+@import "src/theme/_variables.scss";
+
+@mixin navbar_material_() {
+    $component: 'ark-navbar';
+    $desktop: "960px";
+
+    #{$component} {
+        @extend .mdc-toolbar;
+
+        background: $primary;
+        color: $light;
+
+        &[justify~="center"] {
+            justify-content: center;
+        }
+
+        &[justify~="end"] {
+            justify-content: flex-end;
+        }
+
+        &[justify~="between"] {
+            justify-content: space-between;
+        }
+    }
+
+    .#{$component} {
+        &__content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            > :first-child {
+                display: flex;
+                justify-content: space-between;
+                flex-flow: wrap;
+            }
+
+            > :not(:first-child) {
+                display: none;
+
+                * {
+                    display: flex;
+                    justify-content: end;
+                }
+
+                @media only screen and (min-width: $desktop) {
+                    display: flex;
+                    flex-direction: row;
+                    width: auto;
+                }
+            }
+
+            @media only screen and (min-width: $desktop) {
+                flex-direction: row;
+
+                > :first-child {
+                    flex-flow: unset;
+                }
+            }
+        }
+
+        &--show {
+            .#{$component} {
+                &__content {
+                    >:not(:first-child) {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

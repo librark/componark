@@ -5,39 +5,10 @@ export class NavbarDemo extends HTMLElement {
 
   render () {
     this.innerHTML = /* html */`
-      <div>
-        <p>MOBILE (360px).</p>
-        <hr align="left" width="360px"  />
-      </div>
-
-      <iframe data-mobile src="/ark.html" frameborder="1" width="360px">
-      </iframe>
-
-      <div>
-        <p>TABLET (768px).</p>
-        <hr align="left" width="768px" />
-      </div>
-
-      <iframe data-tablet src="/ark.html" frameborder="1" width="768px">
-      </iframe>
-
-      <div>
-        <p>DESKTOP (960px).</p>
-        <hr align="left" width="960px" />
-      </div>
-
-      <iframe data-desktop src="/ark.html" frameborder="1" width="960px">
-      </iframe>
-
-      <div>
-        <p>THIS DISPLAY.</p>
-        <hr align="left" width="960px" />
-      </div>
-
-      <div data-display style="border: 1px solid;">
-        ${this._setupContent()}
-      </div>
-
+      <div mobile><p>mobile (360px).</p></div>
+      <div tablet><p>tablet (768px).</p></div>
+      <div desktop><p>desktop (960px).</p></div>
+      ${this._setupContent()}
 
       <!-- DOCUMENTATION -->
 
@@ -57,63 +28,58 @@ export class NavbarDemo extends HTMLElement {
         <p>data-ark-navbar-toggle</p>
       </div>
     `
-    this._setup()
+    this._setupFrame('[mobile]', '360px')
+    this._setupFrame('[tablet]', '768px')
+    this._setupFrame('[desktop]', '960px')
   }
 
-  _setup () {
-    const toggleButton = this.querySelector('[data-ark-navbar-toggle]')
-    const navbar = this.querySelector('ark-navbar')
-    toggleButton.addEventListener('click', () => navbar.toggleContent())
-
-    this._setupFrame('[data-mobile]')
-    this._setupFrame('[data-tablet]')
-    this._setupFrame('[data-desktop]')
-  }
-
-  _setupContent () {
-    return /* html */`
-      <ark-navbar justify="between">
-        <ark-nav>
-          <ark-button>
-              <ark-icon name="fas fa-bars"></ark-icon>
-          </ark-button>
-          <span>x_Item 1-1</span>
-          <span>x_Item 1-1</span>
-          <span>x_Item 1-2</span>
-          <span>x_Item 1-3</span>
-          <ark-button data-ark-navbar-toggle>
-             <ark-icon name="fas fa-caret-down"></ark-icon>
-          </ark-button>
-        </ark-nav>
-        <ark-nav>
-          <span>x_Item 2-4</span>
-          <span>x_Item 2-5</span>
-          <span>x_Item 2-6</span>
-          <span>x_Item 2-7</span>
-        </ark-nav>
-        <ark-nav>
-          <span>x_Item 3-8</span>
-          <span>x_Item 3-9</span>
-        </ark-nav>
-      </ark-navbar>
-    `
-  }
-
-  _setupFrame (frameName) {
+  _setupFrame (selector, width) {
     const content = this._setupContent()
-    const frame = this.querySelector(frameName)
+    const frame = document.createElement('iframe')
+    frame.setAttribute('src', '/ark.html')
+    frame.setAttribute('frameborder', '1')
+    frame.setAttribute('width', width)
+    frame.setAttribute('height', '640px')
     frame.onload = () => {
       const frameBody = frame.contentDocument.querySelector('body')
       const app = frameBody.querySelector('app-showcase-ark')
       const main = document.createElement('main')
       main.innerHTML = content
-      const toggleButton = main.querySelector('[data-ark-navbar-toggle]')
-      const navbar = main.querySelector('ark-navbar')
+
       app.parentNode.removeChild(app)
       frameBody.prepend(main)
-
-      toggleButton.addEventListener('click', () => navbar.toggleContent())
     }
+
+    this.querySelector(selector).appendChild(frame)
+  }
+
+  _setupContent () {
+    return /* html */`
+      <ark-navbar justify="between" fixed-top>
+        <ark-nav>
+          <ark-button>
+              <ark-icon name="fas fa-bars"></ark-icon>
+          </ark-button>
+          <ark-button>x_Item 1-1</ark-button>
+          <ark-button>x_Item 1-1</ark-button>
+          <ark-button>x_Item 1-2</ark-button>
+          <ark-button>x_Item 1-3</ark-button>
+          <ark-button ark-navbar-toggle>
+            <ark-icon name="fas fa-caret-down"></ark-icon>
+          </ark-button>
+        </ark-nav>
+        <ark-nav>
+          <ark-button>x_Item 2-4</ark-button>
+          <ark-button>x_Item 2-5</ark-button>
+          <ark-button>x_Item 2-6</ark-button>
+          <ark-button>x_Item 2-7</ark-button>
+        </ark-nav>
+        <ark-nav>
+          <ark-button>x_Item 3-8</ark-button>
+          <ark-button>x_Item 3-9</ark-button>
+        </ark-nav>
+      </ark-navbar>
+    `
   }
 }
 customElements.define('demo-navbar', NavbarDemo)

@@ -4,10 +4,15 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import './styles/ark/main';
+@import './styles/ark/main.ark';
+@import './styles/material/main.material';
 
-@mixin navbar($theme: "material") {
-    @if $theme=="ark" {
+@mixin navbar($theme:ark) {
+    @if $theme==ark {
         @include navbar_ark();
+    }
+
+    @if $theme==material {
+        @include navbar_material();
     }
 }
