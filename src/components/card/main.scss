@@ -4,10 +4,15 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import './styles/ark';
+@import './styles/ark/main.ark';
+@import './styles/material/main.material';
 
-@mixin card($theme: "material") {
-    @if $theme=="ark" {
+@mixin card($theme: ark) {
+    @if $theme==ark {
         @include card_ark();
+    }
+
+    @if $theme==material {
+        @include card_material();
     }
 }

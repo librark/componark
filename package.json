@@ -92,6 +92,7 @@
   },
   "dependencies": {
     "@material/button": "^1.1.0",
+    "@material/card": "^1.1.0",
     "@material/dialog": "^1.0.1",
     "@material/drawer": "^1.0.1",
     "@material/fab": "^1.1.0",

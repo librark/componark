@@ -1,0 +1,5 @@
+@import "./_card.material";
+
+@mixin card_material() {
+    @include card_material_();
+}
