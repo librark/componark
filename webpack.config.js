@@ -13,10 +13,9 @@ module.exports = (env, argv) => {
   const config = {
     mode: argv.mode,
     entry: {
-      app: './src/showcase/index.js',
-      ark: './src/showcase/ark/index.js',
-      material: './src/showcase/material/index.js',
-      bootstrap: './src/showcase/bootstrap/index.js'
+      app: './src/showcase/screens/app/index.js',
+      ark: './src/showcase/screens/ark/index.js',
+      material: './src/showcase/screens/material/index.js'
     },
     output: {
       publicPath: '/',
@@ -31,25 +30,19 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         chunks: ['app', 'runtime'],
         title: 'ComponArk Index',
-        template: 'src/showcase/index.html'
-      }),
-      new HtmlWebpackPlugin({
-        chunks: ['bootstrap', 'runtime'],
-        title: 'ComponArk Bootstrap',
-        template: 'src/showcase/bootstrap/index.html',
-        filename: './bootstrap.html'
-      }),
-      new HtmlWebpackPlugin({
-        chunks: ['material', 'runtime'],
-        title: 'ComponArk Material',
-        template: 'src/showcase/material/index.html',
-        filename: './material.html'
+        template: 'src/showcase/screens/app/index.html'
       }),
       new HtmlWebpackPlugin({
         chunks: ['ark', 'runtime'],
         title: 'ComponArk Ark',
-        template: 'src/showcase/ark/index.html',
+        template: 'src/showcase/screens/ark/index.html',
         filename: './ark.html'
+      }),
+      new HtmlWebpackPlugin({
+        chunks: ['material', 'runtime'],
+        title: 'ComponArk Material',
+        template: 'src/showcase/screens/material/index.html',
+        filename: './material.html'
       }),
       new MiniCssExtractPlugin({
         filename: devMode ? '[name].css' : '[name].[hash].css',

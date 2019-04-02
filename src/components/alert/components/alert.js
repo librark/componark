@@ -1,6 +1,10 @@
 import { getSlots } from '../../../utils'
 
 export class Alert extends HTMLElement {
+  init (contex) {
+    return this
+  }
+
   connectedCallback () {
     this.render()
   }
