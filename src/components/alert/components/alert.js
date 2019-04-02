@@ -1,7 +1,7 @@
 import { getSlots } from '../../../utils'
 
 export class Alert extends HTMLElement {
-  init (contex) {
+  init (context) {
     return this
   }
 

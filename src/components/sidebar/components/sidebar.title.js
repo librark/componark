@@ -1,4 +1,8 @@
 export class SidebarTitle extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.render()
   }

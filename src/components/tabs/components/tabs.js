@@ -1,4 +1,8 @@
 export class Tabs extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.render()
   }

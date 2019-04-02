@@ -1,6 +1,10 @@
 import { getSlots } from '../../utils'
 
 export class Accordion extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.root = this
     this.render()

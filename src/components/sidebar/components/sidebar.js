@@ -1,6 +1,10 @@
 import { getSlots } from '../../../utils'
 
 export class Sidebar extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.nameElement = 'ark-sidebar'
 

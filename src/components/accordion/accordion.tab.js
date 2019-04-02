@@ -1,4 +1,8 @@
 export class AccordionTab extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.root = this
     this.render()

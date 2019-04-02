@@ -1,6 +1,10 @@
 import { getSlots } from '../../../utils'
 
 export class Item extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.render()
   }
