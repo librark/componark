@@ -4,10 +4,17 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import "./styles/ark/main";
+@import "./styles/_default/_default.position";
+// -------------------------------------------
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
 
-@mixin alert($theme: material) {
-  @if $theme=="ark" {
+@mixin alert($theme: ark) {
+  @if $theme==ark {
     @include alert_ark();
+  }
+
+  @if $theme==material {
+    @include alert_material();
   }
 }

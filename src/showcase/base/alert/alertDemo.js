@@ -63,24 +63,10 @@ export class alertDemo extends HTMLElement {
         <button btn-open>open</button>
         <button btn-toggle>toggle</button>
       </div>
-      <ark-alert horizontal="end" vertical="start" background="primary">
-        <ark-alert-title>titulo</ark-alert-title>
-        <ark-alert-subtitle>subtitulo</ark-alert-subtitle>
 
-        <div>
-          <p>Contenido Parrafo 1</p>
-          <p>Contenido Parrafo 2</p>
-          <p>Contenido Parrafo 3</p>
-        </div>
-
-        <div>
-          <p>Contenido2 Parrafo 1</p>
-          <p>Contenido2 Parrafo 2</p>
-          <p>Contenido2 Parrafo 3</p>
-        </div>
-
+      <ark-alert>
+        <span>My Alert</span>
         <ark-button slot="action">Aceptar</ark-button>
-        <ark-button slot="action" close>Cerrar</ark-button>
       </ark-alert>
 
       <!-- DOCUMENTATION -->

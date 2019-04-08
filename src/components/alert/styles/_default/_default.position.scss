@@ -1,0 +1,52 @@
+$component: "ark-alert";
+$mobile: 360px;
+$tablet: 768px;
+$desktop: 960px;
+
+#{$component} {
+
+    // ----------------------------------------
+    // hidden
+    // ----------------------------------------
+    &[hidden] {
+        display: none !important;
+    }
+
+    // ----------------------------------------
+    // position
+    // ----------------------------------------
+    &[horizontal],
+    &[vertical] {
+        position: fixed;
+    }
+
+    // ----------------------------------------
+    // horizontal
+    // ----------------------------------------
+    &[horizontal~="center"] {
+        left: calc(50% - (#{$mobile} / 2)) !important;
+    }
+
+    &[horizontal~="start"] {
+        left: 0 !important;
+    }
+
+    &[horizontal~="end"] {
+        right: 0 !important;
+    }
+
+    // ----------------------------------------
+    // vertical
+    // ----------------------------------------
+    &[vertical~="center"] {
+        top: calc(50% - (100% / 3)) !important;
+    }
+
+    &[vertical~="start"] {
+        top: 0 !important;
+    }
+
+    &[vertical~="end"] {
+        bottom: 0 !important;
+    }
+}

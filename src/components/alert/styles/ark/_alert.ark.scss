@@ -1,0 +1,71 @@
+@mixin alert_ark_() {
+  $component: "ark-alert";
+  $mobile: 360px;
+  $tablet: 768px;
+  $desktop: 960px;
+
+  #{$component} {
+    margin: 10px;
+    padding: 10px;
+
+    border: 1px solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+
+    max-width: 500px;
+
+    * {
+      width: auto;
+    }
+
+    @media only screen and (min-width: $tablet) {
+      margin: 10px auto;
+    }
+  }
+
+  .#{$component} {
+    &__content {
+      margin-right: auto;
+      max-width: 100%;
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: row;
+
+      :not(:first-child) {
+        margin-left: 5px;
+      }
+
+      * {
+        width: auto !important;
+      }
+    }
+
+    &__icon-close {
+      $size: 30px;
+
+      background: none;
+      border: 0;
+
+      cursor: pointer;
+
+      width: $size;
+      height: $size;
+
+      margin: auto;
+
+      font-size: 28px;
+      opacity: 0.5;
+    }
+  }
+}
