@@ -4,6 +4,9 @@ describe('Alert', () => {
   it('can be instantiated', () => {
     const alert = document.createElement('ark-alert')
     expect(alert).toBeTruthy()
+
+    var init = alert.init()
+    expect(alert === init).toBeTruthy()
   })
 
   it('can be rendered with slots', function () {

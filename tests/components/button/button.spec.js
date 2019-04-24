@@ -4,6 +4,9 @@ describe('Button', () => {
   it('can be instantiated', () => {
     const button = document.createElement('ark-button')
     expect(button).toBeTruthy()
+
+    var init = button.init()
+    expect(button === init).toBeTruthy()
   })
 
   it('can be rendered without content', function () {

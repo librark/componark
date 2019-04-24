@@ -4,6 +4,9 @@ describe('Sidebar', () => {
   it('can be instantiated', () => {
     const item = document.createElement('ark-tabs')
     expect(item).toBeTruthy()
+
+    var init = item.init()
+    expect(item === init).toBeTruthy()
   })
 
   it('can be rendered without active attribute', function () {

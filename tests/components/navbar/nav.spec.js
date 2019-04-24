@@ -2,17 +2,20 @@ import '../../../src/components/navbar'
 
 describe('Nav', () => {
   it('can be instantiated', () => {
-    const item = document.createElement('ark-nav')
-    expect(item).toBeTruthy()
+    const nav = document.createElement('ark-nav')
+    expect(nav).toBeTruthy()
+
+    var init = nav.init()
+    expect(nav === init).toBeTruthy()
   })
 
   it('can be rendered with content', function () {
-    const item = document.createElement('ark-nav')
-    item.innerHTML = /* HTML */`
+    const nav = document.createElement('ark-nav')
+    nav.innerHTML = /* HTML */`
       <span>mySpan</span>
     `
-    item.connectedCallback()
-    const itemElement = item.querySelector('span')
-    expect(itemElement.textContent).toEqual('mySpan')
+    nav.connectedCallback()
+    const navElement = nav.querySelector('span')
+    expect(navElement.textContent).toEqual('mySpan')
   })
 })

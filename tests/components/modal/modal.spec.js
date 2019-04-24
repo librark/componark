@@ -4,6 +4,9 @@ describe('Modal', () => {
   it('can be instantiated', () => {
     const modal = document.createElement('ark-modal')
     expect(modal).toBeTruthy()
+
+    var init = modal.init()
+    expect(modal === init).toBeTruthy()
   })
 
   it('can be rendered with slots', function () {
