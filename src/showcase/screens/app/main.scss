@@ -7,6 +7,7 @@
 @import "../../../components/navbar/main";
 @import "../../../components/select/main";
 @import "../../../components/sidebar/main";
+@import "../../../components/table/main";
 @import "../../../components/tabs/main";
 
 
@@ -22,5 +23,6 @@
     @include navbar($type);
     @include select($type);
     @include sidebar($type);
+    @include table($type);
     @include tabs($type);
 }
