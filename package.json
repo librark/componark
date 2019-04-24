@@ -97,11 +97,12 @@
     "@material/drawer": "^1.0.1",
     "@material/fab": "^1.1.0",
     "@material/list": "^1.1.0",
+    "@material/select": "^1.1.1",
     "@material/snackbar": "^1.1.0",
     "@material/tab-bar": "^1.0.1",
     "@material/toolbar": "^1.1.0",
     "bootstrap": "^4.3.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "material-components-web": "^0.44.1",
     "popper.js": "^1.14.7"
   }

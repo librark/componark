@@ -1,0 +1,5 @@
+@import "./select.ark";
+
+@mixin select_ark() {
+  @include select_ark_();
+}
