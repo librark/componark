@@ -1,0 +1,15 @@
+$mobile: 360px;
+$tablet: 768px; // md
+$desktop: 960px; // lg
+
+@mixin grid_item_ark_() {
+  $component: "ark-grid-item";
+
+  #{$component} {
+    $padding: 10px;
+    padding: $padding;
+
+    max-width: -webkit-fill-available;
+    max-height: calc(100% - #{$padding} * 2);
+  }
+}

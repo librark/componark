@@ -1,7 +1,7 @@
 @import "src/theme/_variables.scss";
 
 @mixin item_ark_() {
-  $component: "ark-item";
+  $component: "ark-list-item";
 
   #{$component} {
     justify-content: space-between;

@@ -1,5 +1,3 @@
-import { arrayExpression } from '@babel/types'
-
 export class Table extends HTMLElement {
   init (context) {
     this.headers = context['headers']
@@ -13,17 +11,15 @@ export class Table extends HTMLElement {
   }
 
   render () {
-    this._getPosition()
-
     this.innerHTML = /* html */`
       <table>
-        ${this._getHeaders()}
-        ${this._getData()}
+        ${this._renderHeaders()}
+        ${this._renderData()}
       </table>
     `
   }
 
-  _getHeaders () {
+  _renderHeaders () {
     var aux = ''
 
     if (this._getPosition()) {
@@ -37,14 +33,14 @@ export class Table extends HTMLElement {
     return aux ? /* html */ `<tr>${aux}</tr>` : ''
   }
 
-  _getData () {
+  _renderData () {
     var aux = ''
 
     this.data.forEach((d, index) => {
       var td = ''
 
       if (this._getPosition()) {
-        td += /* html */ `<td>${index}</td>`
+        td += /* html */ `<td>${index + 1}</td>`
       }
 
       Object.keys(this.headers).forEach(key => {

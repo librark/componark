@@ -45,7 +45,7 @@ export class ListDemo extends HTMLElement {
       <p>list item</p>
 
       <ark-list>
-        <ark-item>
+        <ark-list-item>
           <span>fa-address-book</span>
           <div slot="start">
             <ark-icon name="fas fa-address-book"></ark-icon>
@@ -54,29 +54,29 @@ export class ListDemo extends HTMLElement {
           <div slot="end">2</div>
           <div slot="end">3</div>
           <div slot="end">4</div>
-        </ark-item>
-        <ark-item>
+        </ark-list-item>
+        <ark-list-item>
           <div>fa-address-book</div>
           <div slot="start">
             <ark-icon name="far fa-address-book"></ark-icon>
           </div>
           <div slot="end">far</div>
-        </ark-item>
+        </ark-list-item>
       </ark-list>
 
       <ark-list>
-        <ark-item>
+        <ark-list-item>
           <div>fa-address-book</div>
           <div slot="end">
             <ark-icon name="fas fa-address-book"></ark-icon>
           </div>
-        </ark-item>
-        <ark-item>
+        </ark-list-item>
+        <ark-list-item>
           <div>fa-address-book</div>
           <div slot="end">
             <ark-icon name="far fa-address-book"></ark-icon>
           </div>
-        </ark-item>
+        </ark-list-item>
       </ark-list>
     `
   }

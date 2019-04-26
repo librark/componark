@@ -1,6 +1,6 @@
 import { getSlots } from '../../../utils'
 
-export class Item extends HTMLElement {
+export class ListItem extends HTMLElement {
   init (context) {
     return this
   }
@@ -33,4 +33,4 @@ export class Item extends HTMLElement {
       `
   }
 }
-customElements.define('ark-item', Item)
+customElements.define('ark-list-item', ListItem)

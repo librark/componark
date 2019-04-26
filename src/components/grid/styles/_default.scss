@@ -1,0 +1,41 @@
+$component: "ark-grid";
+
+#{$component},
+#{$component}-item {
+
+    // ----------------------------------------
+    // horizontal
+    // ----------------------------------------
+    &[horizontal~="center"] {
+        justify-self: center;
+        justify-items: center;
+    }
+
+    &[horizontal~="start"] {
+        justify-self: start;
+        justify-items: start;
+    }
+
+    &[horizontal~="end"] {
+        justify-self: end;
+        justify-items: end;
+    }
+
+    // ----------------------------------------
+    // vertical
+    // ----------------------------------------
+    &[vertical~="center"] {
+        align-self: center;
+        align-items: center;
+    }
+
+    &[vertical~="start"] {
+        align-self: flex-start;
+        align-items: flex-start;
+    }
+
+    &[vertical~="end"] {
+        align-self: flex-end;
+        align-items: flex-end;
+    }
+}
