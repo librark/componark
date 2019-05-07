@@ -68,7 +68,7 @@ export class GridDemo extends HTMLElement {
         <p>This is a Layout Grid.</p>
         <hr/>
 
-        <ark-grid cols="3">
+        <ark-grid cols="3" gap="15px">
           <ark-grid-item cols="3">header</ark-grid-item>
           <ark-grid-item rows="2">menu</ark-grid-item>
           <ark-grid-item>main</ark-grid-item>

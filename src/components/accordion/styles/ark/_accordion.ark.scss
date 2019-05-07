@@ -1,0 +1,10 @@
+@mixin accordion_ark_() {
+  $component: "ark-accordion";
+  $mobile: 360px;
+  $tablet: 768px;
+  $desktop: 960px;
+
+  #{$component} {}
+
+  .#{$component} {}
+}
