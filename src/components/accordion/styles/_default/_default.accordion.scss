@@ -8,10 +8,14 @@
     #{$component} {
         display: grid;
         width: 100%;
+        max-width: -webkit-fill-available !important;
     }
 
     .#{$component} {
         &-tab {
+            width: 100%;
+            max-width: -webkit-fill-available !important;
+
             &__btn-header {
                 width: 100%;
                 height: 45px;
@@ -19,12 +23,11 @@
                 padding-left: 10px;
             }
 
-            &__content {
-                overflow: hidden;
-            }
-
             &--show {
-                display: block !important;
+                ##{$component}-tab__content {
+                    display: block !important;
+                    overflow: hidden;
+                }
             }
         }
     }

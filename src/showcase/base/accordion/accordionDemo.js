@@ -57,6 +57,12 @@ export class AccordionDemo extends HTMLElement {
 
   _setupContent () {
     return /* html */`
+      <style>
+        ark-accordion{
+          margin: 10px;
+        }
+      </style>
+
       <ark-accordion closeOthers="true">
         <ark-accordion-tab header="tab 1">
           <span>content tab 1</span>

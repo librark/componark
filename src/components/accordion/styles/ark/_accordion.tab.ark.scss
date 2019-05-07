@@ -10,7 +10,6 @@
   }
 
   .#{$component} {
-
     &__btn-header {
       color: #444;
       cursor: pointer;
@@ -25,10 +24,5 @@
         background-color: #ccc;
       }
     }
-
-    &--show {
-      display: block !important;
-    }
-
   }
 }

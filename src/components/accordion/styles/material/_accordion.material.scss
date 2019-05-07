@@ -3,8 +3,30 @@
   $mobile: 360px;
   $tablet: 768px;
   $desktop: 960px;
+  $margin: 16px;
 
-  #{$component} {}
+  #{$component} {
+    width: 100%;
 
-  .#{$component} {}
+    &-tab {
+      max-width: -webkit-fill-available !important;
+    }
+  }
+
+  .#{$component} {
+    &-tab--show {
+      margin-top: $margin;
+      margin-bottom: $margin;
+
+      &:first-child {
+        margin-top: 0px;
+        margin-bottom: $margin;
+      }
+
+      &:last-child {
+        margin-top: $margin;
+        margin-bottom: 0;
+      }
+    }
+  }
 }

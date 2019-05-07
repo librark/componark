@@ -23,9 +23,7 @@ export class Accordion extends HTMLElement {
           items.forEach((aux, a) => {
             if (i !== a) {
               // aux.close()
-              aux.querySelector('#ark-accordion-tab__content').classList.remove(
-                `ark-accordion-tab--show`
-              )
+              aux.classList.remove(`ark-accordion-tab--show`)
             }
           })
         }

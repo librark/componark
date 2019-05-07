@@ -15,7 +15,7 @@ export class AccordionTab extends HTMLElement {
 
     this.innerHTML = /* html */`
       <button class="ark-accordion-tab__btn-header">
-        ${this.header}
+        <span>${this.header}</span>
       </button>
       <div id="ark-accordion-tab__content">
         ${this.innerHTML}
@@ -32,21 +32,15 @@ export class AccordionTab extends HTMLElement {
   }
 
   open () {
-    this.querySelector('#ark-accordion-tab__content').classList.add(
-      `ark-accordion-tab--show`
-    )
+    this.classList.add(`ark-accordion-tab--show`)
   }
 
   close () {
-    this.querySelector('#ark-accordion-tab__content').classList.remove(
-      `ark-accordion-tab--show`
-    )
+    this.classList.remove(`ark-accordion-tab--show`)
   }
 
   toggle () {
-    this.querySelector('#ark-accordion-tab__content').classList.toggle(
-      `ark-accordion-tab--show`
-    )
+    this.classList.toggle(`ark-accordion-tab--show`)
   }
 
   // ---------------------------------------------------------------------------

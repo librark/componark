@@ -1,5 +1,7 @@
 @import "./accordion.material";
+@import "./accordion.tab.material";
 
 @mixin accordion_material() {
   @include accordion_material_();
+  @include accordion_tab_material_();
 }

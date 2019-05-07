@@ -22,14 +22,12 @@ describe('Alert', () => {
     tab.innerHTML = /* html */`<h1>tab 1</h1>`
 
     tab.connectedCallback()
-
-    const content = tab.querySelector('#ark-accordion-tab__content')
-    expect(!content.classList.length).toBeTruthy()
+    expect(!tab.classList.length).toBeTruthy()
 
     const btn = tab.querySelector('.ark-accordion-tab__btn-header')
     if (btn) btn.click()
 
-    expect(content.classList[0] === 'ark-accordion-tab--show').toBeTruthy()
+    expect(tab.classList[0] === 'ark-accordion-tab--show').toBeTruthy()
   })
   it('can open content', () => {
     const tab = document.createElement('ark-accordion-tab')
@@ -40,13 +38,11 @@ describe('Alert', () => {
     tab.innerHTML = /* html */`<h1>tab 1</h1>`
 
     tab.connectedCallback()
-
-    const content = tab.querySelector('#ark-accordion-tab__content')
-    expect(!content.classList.length).toBeTruthy()
+    expect(!tab.classList.length).toBeTruthy()
 
     tab.open()
 
-    expect(content.classList[0] === 'ark-accordion-tab--show').toBeTruthy()
+    expect(tab.classList[0] === 'ark-accordion-tab--show').toBeTruthy()
   })
   it('can close content', () => {
     const tab = document.createElement('ark-accordion-tab')
@@ -57,17 +53,15 @@ describe('Alert', () => {
     tab.innerHTML = /* html */`<h1>tab 1</h1>`
 
     tab.connectedCallback()
-
-    const content = tab.querySelector('#ark-accordion-tab__content')
-    expect(!content.classList.length).toBeTruthy()
+    expect(!tab.classList.length).toBeTruthy()
 
     const btn = tab.querySelector('.ark-accordion-tab__btn-header')
     if (btn) {
       btn.click()
-      expect(content.classList[0] === 'ark-accordion-tab--show').toBeTruthy()
+      expect(tab.classList[0] === 'ark-accordion-tab--show').toBeTruthy()
     }
 
     tab.close()
-    expect(!content.classList.length).toBeTruthy()
+    expect(!tab.classList.length).toBeTruthy()
   })
 })
