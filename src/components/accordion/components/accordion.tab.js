@@ -46,7 +46,7 @@ export class AccordionTab extends HTMLElement {
   // ---------------------------------------------------------------------------
 
   get header () {
-    return this.getAttribute('header') || null
+    return this.hasAttribute('header')
   }
 }
 customElements.define('ark-accordion-tab', AccordionTab)

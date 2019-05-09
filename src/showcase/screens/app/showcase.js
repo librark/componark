@@ -35,6 +35,7 @@ export default class ArkShowcase extends HTMLElement {
               <li data-component="card">Card</li>
               <li data-component="grid">Grid</li>
               <li data-component="icon">Icon</li>
+              <li data-component="input">Input</li>
               <li data-component="list">List</li>
               <li data-component="modal">Modal</li>
               <li data-component="navbar">Navbar</li>
