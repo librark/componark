@@ -1,6 +1,6 @@
 import '../../../src/components/tabs'
 
-describe('Sidebar', () => {
+describe('Tabs', () => {
   it('can be instantiated', () => {
     const item = document.createElement('ark-tabs')
     expect(item).toBeTruthy()

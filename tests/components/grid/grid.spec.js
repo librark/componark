@@ -1,6 +1,6 @@
 import '../../../src/components/grid'
 
-describe('Icon', () => {
+describe('Grid', () => {
   it('can be instantiated', () => {
     const grid = document.createElement('ark-grid')
     expect(grid).toBeTruthy()

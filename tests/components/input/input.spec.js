@@ -1,6 +1,6 @@
 import '../../../src/components/input'
 
-describe('Item', () => {
+describe('Input', () => {
   it('can be instantiated', () => {
     const item = document.createElement('ark-input')
     expect(item).toBeTruthy()

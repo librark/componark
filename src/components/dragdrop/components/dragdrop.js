@@ -22,7 +22,7 @@ export class DragDrop extends HTMLElement {
 
   _listen () {
     if (this.hasAttribute('droppable')) {
-      this.addEventListener('dragover', (event) => this.droppableOver(event))
+      this.addEventListener('dragover', this.droppableOver.bind(this))
       this.addEventListener('dragenter', (event) => this.droppableEnter(event))
       this.addEventListener('dragleave', (event) => this.droppableLeave(event))
       this.addEventListener('drop', (event) => this.droppableDrop(event))
@@ -190,13 +190,11 @@ export class DragDrop extends HTMLElement {
   }
 
   _parseData (content) {
-    let data = null
     try {
-      data = JSON.parse(content)
+      return JSON.parse(content)
     } catch (e) {
-      return ''
+      return null
     }
-    return data
   }
 }
 customElements.define('ark-dragdrop', DragDrop)

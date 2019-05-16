@@ -1,6 +1,6 @@
 import '../../../src/components/accordion'
 
-describe('Alert', () => {
+describe('Accordion Tab', () => {
   it('can be instantiated', () => {
     const accordion = document.createElement('ark-accordion-tab')
     expect(accordion).toBeTruthy()

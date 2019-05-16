@@ -1,6 +1,6 @@
 import '../../../src/components/table'
 
-describe('Sidebar', () => {
+describe('Table', () => {
   it('can be instantiated', () => {
     const table = document.createElement('ark-table')
     expect(table).toBeTruthy()
