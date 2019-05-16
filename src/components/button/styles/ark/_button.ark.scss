@@ -6,6 +6,7 @@
   #{$component} {
     margin: 2px 0;
     display: inline-block;
+    width: inherit;
 
     button,
     a {
@@ -17,6 +18,8 @@
 
       padding: 10px 15px;
       color: inherit;
+
+      width: inherit;
 
       &:hover {
         cursor: pointer;

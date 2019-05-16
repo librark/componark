@@ -7,13 +7,16 @@
   $fab-size: 56px !important;
 
   #{$component} {
+    width: inherit;
+    color: inherit;
 
     button,
     a {
       @extend .mdc-button;
       @extend .mdc-button__label;
 
-      color: $primary !important;
+      color: inherit !important;
+      width: inherit;
 
 
       &[fab] {

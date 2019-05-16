@@ -4,15 +4,19 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import './styles/common';
-@import './styles/bootstrap';
-
+@import "./styles/_default/_default.accordion";
 // -------------------------------------------
-// -------------------------------------------
-// @if $theme=="ark" {
-//     @include accordion_common();
-// }
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
 
-// @if $theme=="bootstrap" {
-//     @include accordion_bootstrap();
-// }
+@mixin accordion($theme: ark) {
+    @include accordion_default();
+
+    @if $theme==ark {
+        @include accordion_ark();
+    }
+
+    @if $theme==material {
+        @include accordion_material();
+    }
+}

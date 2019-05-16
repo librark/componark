@@ -1,13 +1,16 @@
 import '../../../src/components/list'
 
-describe('Item', () => {
+describe('List item', () => {
   it('can be instantiated', () => {
-    const item = document.createElement('ark-item')
+    const item = document.createElement('ark-list-item')
     expect(item).toBeTruthy()
+
+    var init = item.init()
+    expect(item === init).toBeTruthy()
   })
 
   it('can be rendered without content', function () {
-    const item = document.createElement('ark-item')
+    const item = document.createElement('ark-list-item')
     item.innerHTML = /* HTML */``
     item.connectedCallback()
     const itemElement = item.querySelector('.general')
@@ -15,7 +18,7 @@ describe('Item', () => {
   })
 
   it('can be rendered with content', function () {
-    const item = document.createElement('ark-item')
+    const item = document.createElement('ark-list-item')
     item.innerHTML = /* HTML */`
       <span>mySpan</span>
       <div slot="start">start</div>

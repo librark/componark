@@ -1,10 +1,10 @@
 export class Button extends HTMLElement {
-  connectedCallback () {
-    this.render()
-  }
-
   init (context) {
     return this
+  }
+
+  connectedCallback () {
+    this.render()
   }
 
   render () {

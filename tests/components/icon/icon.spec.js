@@ -4,6 +4,9 @@ describe('Icon', () => {
   it('can be instantiated', () => {
     const icon = document.createElement('ark-icon')
     expect(icon).toBeTruthy()
+
+    var init = icon.init()
+    expect(icon === init).toBeTruthy()
   })
 
   it('can be rendered with default variables', function () {

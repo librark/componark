@@ -4,6 +4,9 @@ describe('List', () => {
   it('can be instantiated', () => {
     const list = document.createElement('ark-list')
     expect(list).toBeTruthy()
+
+    var init = list.init()
+    expect(list === init).toBeTruthy()
   })
 
   it('can be rendered without content', () => {

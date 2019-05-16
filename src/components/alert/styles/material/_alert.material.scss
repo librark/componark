@@ -1,0 +1,64 @@
+@import "@material/snackbar/mdc-snackbar";
+
+@mixin alert_material_() {
+  $component: "ark-alert";
+  $mobile: 360px;
+  $tablet: 768px;
+  $desktop: 960px;
+
+  #{$component} {
+    @extend .mdc-snackbar;
+
+    @extend .ark-bg-dark;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+
+    position: initial;
+    opacity: inherit;
+    pointer-events: inherit;
+
+    max-width: 500px;
+
+    * {
+      width: auto;
+    }
+
+    @media only screen and (min-width: $tablet) {
+      margin: 10px auto;
+    }
+  }
+
+  .#{$component} {
+    &__content {
+      @extend .mdc-snackbar__label;
+
+      color: inherit;
+    }
+
+    &__actions {
+      @extend .mdc-snackbar__actions;
+    }
+
+    &__icon-close {
+      @extend .mdc-button;
+      @extend .mdc-snackbar__action;
+
+      @extend .mdc-snackbar__dismiss;
+
+      max-width: 36px !important;
+      max-height: 36px !important;
+
+      &,
+      * {
+        color: inherit !important;
+        font-size: inherit !important;
+        background: inherit !important;
+        font-size: 18px;
+      }
+    }
+  }
+}

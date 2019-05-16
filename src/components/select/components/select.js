@@ -1,4 +1,8 @@
 export class Select extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.render()
   }
@@ -31,10 +35,9 @@ export class Select extends HTMLElement {
 
   get placeholder () {
     const placeholder = this.getAttribute('placeholder')
-    if (!placeholder) return ''
-    return /* html */ `
-      <p>${placeholder}</p>
-    `
+    return placeholder ? /* html */ `
+      <label>${placeholder}</label>
+    ` : ''
   }
 }
 customElements.define('ark-select', Select)

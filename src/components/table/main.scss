@@ -1,0 +1,18 @@
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../../theme/main";
+// -------------------------------------------
+// -------------------------------------------
+@import "./styles/material/main.material";
+@import "./styles/ark/main.ark";
+
+@mixin table($type:ark) {
+  @if $type==ark {
+    @include table_ark();
+  }
+
+  @if $type==material {
+    @include table_material();
+  }
+}

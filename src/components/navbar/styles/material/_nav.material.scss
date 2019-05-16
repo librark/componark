@@ -1,0 +1,22 @@
+@import "@material/toolbar/mdc-toolbar.scss";
+
+@mixin nav_material_() {
+    $component: 'ark-nav';
+    $desktop: "960px";
+
+    #{$component} {
+        * {
+            min-height: 64px;
+
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (min-width: $desktop) {
+            [ark-navbar-toggle] {
+                display: none !important;
+            }
+        }
+    }
+}

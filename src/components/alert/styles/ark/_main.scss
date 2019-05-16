@@ -1,9 +1,0 @@
-@import "./alert";
-@import "./alert.subtitle";
-@import "./alert.title";
-
-@mixin alert_ark() {
-  @include alert_();
-  @include alert_subtitle_();
-  @include alert_title_();
-}

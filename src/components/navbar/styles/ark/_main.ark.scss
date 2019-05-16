@@ -1,0 +1,7 @@
+@import './navbar.ark';
+@import './nav.ark';
+
+@mixin navbar_ark() {
+    @include navbar_ark_();
+    @include nav_ark_();
+}

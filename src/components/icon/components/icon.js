@@ -1,4 +1,8 @@
 export class Icon extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.type = this.getAttribute('type') || 'aws'
     this.name = this.getAttribute('name') || 'fas cloud'

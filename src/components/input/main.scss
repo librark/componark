@@ -1,0 +1,21 @@
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../../theme/main";
+// -------------------------------------------
+@import "./styles/_default/_default.input";
+// -------------------------------------------
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
+
+@mixin input($theme: ark) {
+    @include input_default();
+
+    @if $theme==ark {
+        @include input_ark();
+    }
+
+    @if $theme==material {
+        @include input_material();
+    }
+}

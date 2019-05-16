@@ -1,6 +1,10 @@
 import { getSlots } from '../../../utils'
 
 export class Alert extends HTMLElement {
+  init (context) {
+    return this
+  }
+
   connectedCallback () {
     this.render()
   }
@@ -9,16 +13,12 @@ export class Alert extends HTMLElement {
     this.slots = getSlots(this)
 
     this.innerHTML = /* html */`
-      <div class="ark-alert__body">
-        <div class="ark-alert__content">
-          ${this._getSlots('general')}
-        </div>
-        <div class="ark-alert__icon-close">
-          <button close>&times;</button>
-        </div>
+      <div class="ark-alert__content">
+        ${this._getSlots('general')}
       </div>
       <div class="ark-alert__actions">
         ${this._getSlots('action')}
+        <button class="ark-alert__icon-close" close>&times;</button>
       </div>
     `
 

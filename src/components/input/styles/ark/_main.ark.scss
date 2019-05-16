@@ -1,0 +1,5 @@
+@import "./input.ark";
+
+@mixin input_ark() {
+  @include input_ark_();
+}

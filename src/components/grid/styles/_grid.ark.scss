@@ -1,0 +1,20 @@
+$desktop: "960px";
+
+@mixin grid_ark_() {
+  $component: "ark-grid";
+
+  #{$component} {
+    max-width: -webkit-fill-available;
+    width: 100%;
+
+    &[no-gutters] {
+      grid-gap: 0 !important;
+      padding: 0 !important;
+
+      ark-grid-item {
+        padding: 0 !important;
+        max-height: 100%;
+      }
+    }
+  }
+}
