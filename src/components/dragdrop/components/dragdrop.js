@@ -22,61 +22,70 @@ export class DragDrop extends HTMLElement {
 
   _listen () {
     if (this.hasAttribute('droppable')) {
-      this.addEventListener('dragover', this.droppableOver.bind(this))
-      this.addEventListener('dragenter', (event) => this.droppableEnter(event))
-      this.addEventListener('dragleave', (event) => this.droppableLeave(event))
-      this.addEventListener('drop', (event) => this.droppableDrop(event))
       this._setAttributeDirection()
+      this._addEventDroppable()
     } else {
       this.setAttribute('draggable', 'true')
-      this.addEventListener('dragstart', this.draggableStart.bind(this))
-      this.addEventListener('dragend', (event) => this.draggableEnd(event))
-      this.addEventListener('dragenter', (event) => this.draggableEnter(event))
-      this.addEventListener('dragleave', (event) => this.draggableLeave(event))
-      this.addEventListener('drop', (event) => this.draggableDrop(event))
+      this._addEventDraggable()
     }
   }
 
   _setAttributeDirection () {
     if (!this.hasAttribute('direction')) {
-      const attr = document.createAttribute('direction')
-      attr.value = 'column'
-      this.setAttributeNode(attr)
+      this.setAttribute('direction', 'column')
     }
   }
 
   // --------------------------------------------------------------------------
   // Droppable
   // --------------------------------------------------------------------------
-  droppableOver (event) {
-    event.preventDefault()
+  _addEventDroppable () {
+    // ------------------------------------------------------------------------
+    // dragover
+    // ------------------------------------------------------------------------
+    this.addEventListener('dragover', (event) => {
+      event.preventDefault()
+    })
+
+    // ------------------------------------------------------------------------
+    // dragenter
+    // ------------------------------------------------------------------------
+    this.addEventListener('dragenter', (event) => {
+      event.preventDefault()
+      const draggable = this._getElementByDataTransfer(event)
+      this.droppableEnter(draggable)
+    })
+
+    // ------------------------------------------------------------------------
+    // dragleave
+    // ------------------------------------------------------------------------
+    this.addEventListener('dragleave', (event) => {
+      event.preventDefault()
+      this.droppableLeave()
+    })
+
+    // ------------------------------------------------------------------------
+    // dragleave
+    // ------------------------------------------------------------------------
+    this.addEventListener('drop', (event) => {
+      event.preventDefault()
+      const draggable = this._getElementByDataTransfer(event)
+      this.droppableDrop(draggable)
+    })
   }
 
-  droppableEnter (event) {
-    event.preventDefault()
-
-    const draggable = this._getElementByDataTransfer(
-      event.dataTransfer.types[0]
-    )
-
+  droppableEnter (draggable) {
     if (this._dropAllowed(this, draggable)) {
       this.classList.add('ark-dragdrop--hover')
     }
   }
 
-  droppableLeave (event) {
-    event.preventDefault()
+  droppableLeave () {
     this._droppableRemoveStyle()
   }
 
-  droppableDrop (event) {
-    event.preventDefault()
+  droppableDrop (draggable) {
     this._droppableRemoveStyle()
-
-    const draggable = this._getElementByDataTransfer(
-      event.dataTransfer.types[0]
-    )
-
     if (this._dropAllowed(this, draggable)) {
       this.appendChild(draggable)
     }
@@ -89,41 +98,77 @@ export class DragDrop extends HTMLElement {
   // --------------------------------------------------------------------------
   // Draggable
   // --------------------------------------------------------------------------
+  _addEventDraggable () {
+    // ------------------------------------------------------------------------
+    // dragstart
+    // ------------------------------------------------------------------------
+    this.addEventListener('dragstart', (event) => {
+      event.stopPropagation()
+      event.dataTransfer.clearData()
+      event.dataTransfer.setData(this.generateDataTransfer(), '')
+      this.draggableStart()
+    })
 
-  draggableStart (event) {
-    event.stopPropagation()
-    event.dataTransfer.clearData()
+    // ------------------------------------------------------------------------
+    // dragend
+    // ------------------------------------------------------------------------
+    this.addEventListener('dragend', (event) => {
+      this.draggableEnd()
+    })
 
-    if (!this.id) return
+    // ------------------------------------------------------------------------
+    // dragenter
+    // ------------------------------------------------------------------------
+    this.addEventListener('dragenter', (event) => {
+      const dataTransfer = this._getDataTransfer(event)
+      const draggable = this._getElementByDataTransfer(event)
+      this.draggableEnter(draggable, dataTransfer)
+    })
 
-    const data = {
+    // ------------------------------------------------------------------------
+    // dragleave
+    // ------------------------------------------------------------------------
+    this.addEventListener('dragleave', (event) => {
+      event.preventDefault()
+      this.draggableLeave()
+    })
+
+    // ------------------------------------------------------------------------
+    // drop
+    // ------------------------------------------------------------------------
+    this.addEventListener('drop', (event) => {
+      event.preventDefault()
+      const droppable = this._getElementByDataTransfer(event)
+      this.draggableDrop(droppable)
+    })
+  }
+
+  generateDataTransfer () {
+    if (!this.id) return ''
+    return JSON.stringify({
       id: this.id,
       width: this.offsetWidth,
       height: this.offsetHeight
-    }
+    })
+  }
 
-    event.dataTransfer.setData(JSON.stringify(data), '')
-
+  draggableStart () {
     this.classList.add(`ark-dragdrop--dragging`)
     setTimeout(() => {
       this.classList.add(`ark-dragdrop--hidden`)
     })
   }
 
-  draggableEnd (event) {
+  draggableEnd () {
     this.classList.remove(`ark-dragdrop--dragging`)
     setTimeout(() => {
       this.classList.remove(`ark-dragdrop--hidden`)
     })
   }
 
-  draggableEnter (event) {
-    let data = this._parseData(event.dataTransfer.types[0])
-    if (!data) return
-
-    const draggable = this._getElementByDataTransfer(
-      event.dataTransfer.types[0]
-    )
+  draggableEnter (draggable, dataTransfer) {
+    let data = this._parseData(dataTransfer)
+    if (!data || !this.parentElement) return
 
     if (this._dropAllowed(this, draggable)) {
       if (this.parentElement.getAttribute('direction') === 'column') {
@@ -136,19 +181,14 @@ export class DragDrop extends HTMLElement {
     }
   }
 
-  draggableLeave (event) {
-    event.preventDefault()
+  draggableLeave () {
     this._draggableRemoveStyle()
   }
 
-  draggableDrop (event) {
-    event.preventDefault()
+  draggableDrop (
+    /* @type {HTMLImageElement} */ draggable
+  ) {
     this._draggableRemoveStyle()
-
-    const draggable = this._getElementByDataTransfer(
-      event.dataTransfer.types[0]
-    )
-
     if (this._dropAllowed(this, draggable)) {
       this.parentElement.insertBefore(draggable, this)
     }
@@ -182,8 +222,15 @@ export class DragDrop extends HTMLElement {
     return levelDestination <= parseInt(draggable.getAttribute('level'))
   }
 
-  _getElementByDataTransfer (type) {
-    let data = this._parseData(type)
+  _getDataTransfer (event) {
+    const dataTransfer = event.dataTransfer
+    return dataTransfer ? dataTransfer.types[0] : null
+  }
+
+  _getElementByDataTransfer (event) {
+    const dataTransfer = this._getDataTransfer(event)
+
+    let data = this._parseData(dataTransfer)
     if (!data) return null
 
     return document.getElementById(data.id)
