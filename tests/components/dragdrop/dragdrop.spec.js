@@ -183,4 +183,30 @@ describe('Drag and Drop', () => {
     droppable.dispatchEvent(new Event('dragleave'))
     droppable.dispatchEvent(new Event('drop'))
   })
+
+  it('>>>> droppableEnter', () => {
+    const droppable = document.createElement('ark-dragdrop')
+    droppable.setAttribute('droppable', '')
+    droppable.connectedCallback()
+
+    const draggable = document.createElement('ark-dragdrop')
+    draggable.connectedCallback()
+
+    droppable.droppableEnter(draggable)
+
+    expect(
+      droppable.classList.contains('ark-dragdrop--hover')
+    ).toBeTruthy()
+
+    droppable.droppableDrop(draggable)
+
+    expect(
+      droppable.querySelector('[draggable]')
+    ).toBeTruthy()
+
+    droppable.droppableLeave()
+    expect(
+      !droppable.classList.contains('ark-dragdrop--hover')
+    ).toBeTruthy()
+  })
 })
