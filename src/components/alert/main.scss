@@ -4,12 +4,14 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import "./styles/_default/_default.position";
+@import "./styles/_default/alert.default";
 // -------------------------------------------
 @import "./styles/ark/main.ark";
 @import "./styles/material/main.material";
 
 @mixin alert($theme: ark) {
+  @include alert_default();
+
   @if $theme==ark {
     @include alert_ark();
   }

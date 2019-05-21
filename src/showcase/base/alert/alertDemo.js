@@ -1,3 +1,5 @@
+import { Alert } from '../../../components/alert'
+
 export class alertDemo extends HTMLElement {
   init (context) {
     this.type = context['type'] || 'ark'
@@ -47,12 +49,10 @@ export class alertDemo extends HTMLElement {
   _listen (main) {
     const open = main.querySelector('[btn-open]')
     open.addEventListener('click', _ => {
-      main.querySelector('ark-alert').open()
-    })
-
-    const toggle = main.querySelector('[btn-toggle]')
-    toggle.addEventListener('click', _ => {
-      main.querySelector('ark-alert').toggle()
+      Alert.launch({
+        title: 'estamos melos?? sisas ??',
+        text: 'sisas :v'
+      }, main)
     })
   }
 
@@ -61,13 +61,13 @@ export class alertDemo extends HTMLElement {
       <div>
         <p>This is a alert.</p>
         <button btn-open>open</button>
-        <button btn-toggle>toggle</button>
+        <!-- <button btn-toggle>toggle</button> -->
       </div>
 
-      <ark-alert>
+      <!-- <ark-alert>
         <span>My Alert</span>
         <ark-button slot="action">Aceptar</ark-button>
-      </ark-alert>
+      </ark-alert> -->
 
       <!-- DOCUMENTATION -->
 

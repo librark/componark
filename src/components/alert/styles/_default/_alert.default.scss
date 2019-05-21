@@ -1,0 +1,69 @@
+@mixin alert_default() {
+    $component: "ark-alert";
+    $mobile: 360px;
+    $tablet: 768px;
+    $desktop: 960px;
+
+    #{$component} {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        position: fixed;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+
+        // ----------------------------------------
+        // hidden
+        // ----------------------------------------
+        &[hidden] {
+            display: none !important;
+        }
+
+        // ----------------------------------------
+        // horizontal
+        // ----------------------------------------
+        &[horizontal~="center"] {
+            justify-content: center;
+        }
+
+        &[horizontal~="start"] {
+            justify-content: start;
+        }
+
+        &[horizontal~="end"] {
+            justify-content: flex-end;
+            ;
+        }
+
+        // ----------------------------------------
+        // vertical
+        // ----------------------------------------
+        &[vertical~="center"] {
+            align-items: center;
+        }
+
+        &[vertical~="start"] {
+            align-items: start;
+        }
+
+        &[vertical~="end"] {
+            align-items: flex-end;
+        }
+    }
+
+    .#{$component} {
+        &__body {
+            position: fixed;
+            z-index: 1024;
+            background: #fff;
+        }
+
+        &__scrim {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+    }
+}

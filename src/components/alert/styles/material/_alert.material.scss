@@ -1,64 +1,47 @@
-@import "@material/snackbar/mdc-snackbar";
+// @import "@material/snackbar/mdc-snackbar";
+@import "@material/dialog/mdc-dialog.scss";
 
 @mixin alert_material_() {
   $component: "ark-alert";
   $mobile: 360px;
   $tablet: 768px;
   $desktop: 960px;
+  $background: rgba($color: #ffff, $alpha: 1) !important;
+  $color: rgba(0, 0, 0, 0.87) !important;
 
-  #{$component} {
-    @extend .mdc-snackbar;
-
-    @extend .ark-bg-dark;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-
-    position: initial;
-    opacity: inherit;
-    pointer-events: inherit;
-
-    max-width: 500px;
-
-    * {
-      width: auto;
-    }
-
-    @media only screen and (min-width: $tablet) {
-      margin: 10px auto;
-    }
-  }
+  #{$component} {}
 
   .#{$component} {
-    &__content {
-      @extend .mdc-snackbar__label;
+    &__body {
+      min-width: calc(#{$mobile} - (12px * 2));
 
-      color: inherit;
+      :not(:first-child()) {
+        padding-top: 0 !important;
+      }
+    }
+
+    &__content {
+      padding: 24px 12px 12px;
+    }
+
+    &__title {
+      margin-top: 0;
+      padding-top: 0;
     }
 
     &__actions {
-      @extend .mdc-snackbar__actions;
-    }
+      padding: 12px;
 
-    &__icon-close {
-      @extend .mdc-button;
-      @extend .mdc-snackbar__action;
+      display: flex;
+      align-items: normal;
+      justify-content: flex-end;
+      flex-flow: wrap;
 
-      @extend .mdc-snackbar__dismiss;
-
-      max-width: 36px !important;
-      max-height: 36px !important;
-
-      &,
-      * {
-        color: inherit !important;
-        font-size: inherit !important;
-        background: inherit !important;
-        font-size: 18px;
+      :not(:last-child()) {
+        margin-right: 8px;
       }
     }
+
+    &__scrim {}
   }
 }
