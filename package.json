@@ -10,6 +10,7 @@
     "dev": "webpack-dev-server --mode development --env.TARGET=development",
     "build": "webpack -p --mode production --env.TARGET=production --inline=false"
   },
+  "main": "src/components/index.js",
   "jest": {
     "verbose": true,
     "clearMocks": true,
