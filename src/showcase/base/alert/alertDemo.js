@@ -51,12 +51,12 @@ export class alertDemo extends HTMLElement {
     open.addEventListener('click', _ => {
       Alert.launch({
         title: 'Title....',
-        text: ' Text ....',
+        text: 'Text ....',
         confirmButtonText: 'Confirm',
-        confirmButtonBackground: 'danger',
+        confirmButtonBackground: 'info',
         showCancelButton: true,
         cancelButtonText: 'Cancel',
-        cancelButtonBackground: 'muted'
+        cancelButtonBackground: 'dark'
       }, main)
     })
   }
