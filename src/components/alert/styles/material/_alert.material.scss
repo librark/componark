@@ -1,4 +1,6 @@
-// @import "@material/snackbar/mdc-snackbar";
+@import "@material/button/mdc-button.scss";
+@import "@material/fab/mdc-fab";
+@import "src/theme/_variables.scss";
 @import "@material/dialog/mdc-dialog.scss";
 
 @mixin alert_material_() {
@@ -9,15 +11,31 @@
   $background: rgba($color: #ffff, $alpha: 1) !important;
   $color: rgba(0, 0, 0, 0.87) !important;
 
-  #{$component} {}
+  #{$component} {
+
+    button,
+    a {
+      @extend .mdc-button;
+      @extend .mdc-button__label;
+
+      color: inherit !important;
+      width: inherit;
+
+      &[disabled] {
+        cursor: default !important;
+        color: gray !important;
+        background: rgba($color: gray, $alpha: .1) !important;
+
+        &:hover {
+          background: none !important;
+        }
+      }
+    }
+  }
 
   .#{$component} {
     &__body {
       min-width: calc(#{$mobile} - (12px * 2));
-
-      :not(:first-child()) {
-        padding-top: 0 !important;
-      }
     }
 
     &__content {

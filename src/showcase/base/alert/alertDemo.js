@@ -50,8 +50,13 @@ export class alertDemo extends HTMLElement {
     const open = main.querySelector('[btn-open]')
     open.addEventListener('click', _ => {
       Alert.launch({
-        title: 'estamos melos?? sisas ??',
-        text: 'sisas :v'
+        title: 'Title....',
+        text: ' Text ....',
+        confirmButtonText: 'Confirm',
+        confirmButtonBackground: 'danger',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
+        cancelButtonBackground: 'muted'
       }, main)
     })
   }

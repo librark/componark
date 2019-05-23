@@ -10,9 +10,15 @@ export class Alert extends HTMLElement {
     this.vertical = context['vertical']
 
     // Buttons
+    // confirmButton
+    this.showConfirmButton = context['showConfirmButton']
     this.confirmButtonText = context['confirmButtonText']
+    this.confirmButtonBackground = context['confirmButtonBackground']
+
+    // CancelButton
     this.showCancelButton = context['showCancelButton']
     this.cancelButtonText = context['cancelButtonText']
+    this.cancelButtonBackground = context['cancelButtonBackground']
 
     return this
   }
@@ -36,11 +42,8 @@ export class Alert extends HTMLElement {
         <div class="ark-alert__actions">
           ${this._getSlots('action')}
 
-          ${this.showCancelButton === true ? `
-            <button close>${this.cancelButtonText}</button>
-          ` : ''}
-
-          <button close>${this.confirmButtonText}</button>
+          ${this._getCancelButtonHtml()}
+          ${this._getConfirmButtonHtml()}
         </div>
       </div>
       <div class="ark-alert__scrim"></div>
@@ -71,8 +74,9 @@ export class Alert extends HTMLElement {
       this.close()
     ))
 
-    const scrim = this.querySelector('.ark-alert__scrim')
-    if (scrim) scrim.addEventListener('click', _ => this.close())
+    this.querySelector('.ark-alert__scrim').addEventListener(
+      'click', _ => this.close()
+    )
   }
 
   close () {
@@ -88,9 +92,9 @@ export class Alert extends HTMLElement {
   }
 
   toggle () {
-    this.getAttributeNode('hidden')
+    this.hasAttribute('hidden')
       ? this.removeAttribute('hidden')
-      : this.setAttributeNode('hidden', '')
+      : this.setAttribute('hidden', '')
   }
 
   // ---------------------------------------------------------
@@ -134,6 +138,14 @@ export class Alert extends HTMLElement {
   // Buttons
 
   // Confirm Button
+  get showConfirmButton () {
+    return this.getAttribute('showConfirmButton') || false
+  }
+
+  set showConfirmButton (value) {
+    return this.setAttribute('showConfirmButton', value)
+  }
+
   get confirmButtonText () {
     return this._confirmButtonText || 'Aceptar'
   }
@@ -142,13 +154,29 @@ export class Alert extends HTMLElement {
     this._confirmButtonText = value
   }
 
+  get confirmButtonBackground () {
+    return this._confirmButtonBackground || 'primary'
+  }
+
+  set confirmButtonBackground (value) {
+    this._confirmButtonBackground = value
+  }
+
+  _getConfirmButtonHtml () {
+    return this.showConfirmButton ? /* html */`
+      <button background="${this.confirmButtonBackground}" close confirmButton>
+        ${this.confirmButtonText}
+      </button>
+    ` : ''
+  }
+
   // Cancel Button
   get showCancelButton () {
     return this.getAttribute('showCancelButton') || false
   }
 
   set showCancelButton (value) {
-    return this.setAttribute('showCancelButton', value === 'true')
+    return this.setAttribute('showCancelButton', value)
   }
 
   get cancelButtonText () {
@@ -157,6 +185,22 @@ export class Alert extends HTMLElement {
 
   set cancelButtonText (value) {
     this._cancelButtonText = value
+  }
+
+  get cancelButtonBackground () {
+    return this._cancelButtonBackground || 'light'
+  }
+
+  set cancelButtonBackground (value) {
+    this._cancelButtonBackground = value
+  }
+
+  _getCancelButtonHtml () {
+    return this.showCancelButton ? /* html */`
+      <button background="${this.cancelButtonBackground}" close cancelButton>
+        ${this.cancelButtonText}
+      </button>
+    ` : ''
   }
 }
 customElements.define('ark-alert', Alert)
