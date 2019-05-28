@@ -37,6 +37,8 @@ export class Alert extends HTMLElement {
           ${this.title}
           ${this.text}
 
+          ${this._getSlots('title')}
+          ${this._getSlots('text')}
           ${this._getSlots('general')}
         </div>
         <div class="ark-alert__actions">
@@ -198,8 +200,6 @@ export class Alert extends HTMLElement {
   }
 
   _getCancelButtonHtml () {
-    console.log('this.showCancelButton', this.showCancelButton)
-
     return this.showCancelButton ? /* html */`
       <button background="${this.cancelButtonBackground}" close cancelButton>
         ${this.cancelButtonText}

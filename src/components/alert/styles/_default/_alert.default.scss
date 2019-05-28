@@ -72,5 +72,12 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.4);
     }
+
+    &__title {
+      font-size: x-large;
+      padding: 0;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
   }
 }

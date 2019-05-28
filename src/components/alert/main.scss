@@ -10,8 +10,6 @@
 @import "./styles/material/main.material";
 
 @mixin alert($theme: ark) {
-  @include alert_default();
-
   @if $theme==ark {
     @include alert_ark();
   }
@@ -19,4 +17,6 @@
   @if $theme==material {
     @include alert_material();
   }
+
+  @include alert_default();
 }

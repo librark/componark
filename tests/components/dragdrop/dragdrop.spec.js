@@ -227,7 +227,7 @@ describe('Drag and Drop', () => {
       } }
 
     expect(
-      droppable._getElementByDataTransfer(data)
+      droppable._getElementByDataTransfer(data, div).id === draggable.id
     ).toBeTruthy()
   })
 })
