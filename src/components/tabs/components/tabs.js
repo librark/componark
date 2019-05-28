@@ -23,8 +23,7 @@ export class Tabs extends HTMLElement {
     const items = Array.from(this.querySelectorAll('ark-tabs-item'))
     items.forEach(i => i.removeAttribute('active'))
 
-    const att = document.createAttribute('active')
-    element.setAttributeNode(att)
+    element.setAttribute('active', '')
   }
 
   _autoActiveElement () {

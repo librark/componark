@@ -90,14 +90,13 @@ export class Modal extends HTMLElement {
   }
 
   close () {
-    const att = document.createAttribute('hidden')
-    this.setAttributeNode(att)
+    this.setAttribute('hidden', '')
   }
 
   toggle () {
-    this.getAttributeNode('hidden')
+    this.hasAttribute('hidden')
       ? this.removeAttribute('hidden')
-      : this.setAttributeNode(document.createAttribute('hidden'))
+      : this.setAttribute('hidden', '')
   }
 }
 customElements.define('ark-modal', Modal)

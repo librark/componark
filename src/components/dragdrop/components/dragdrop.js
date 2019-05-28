@@ -16,6 +16,15 @@ export class DragDrop extends HTMLElement {
     this._listen()
   }
 
+  static launch (context, parent = document.body) {
+    const dragdrop = new DragDrop().init(context)
+
+    dragdrop.parent = parent
+    parent.appendChild(dragdrop)
+
+    return dragdrop
+  }
+
   _setAttributeUUID () {
     this.id = uuidv4()
   }
@@ -230,10 +239,10 @@ export class DragDrop extends HTMLElement {
   _getElementByDataTransfer (event) {
     const dataTransfer = this._getDataTransfer(event)
 
-    let data = this._parseData(dataTransfer)
+    const data = this._parseData(dataTransfer)
     if (!data) return null
 
-    return document.getElementById(data.id)
+    return this.parent.querySelector(`[id="${data.id}"]`)
   }
 
   _parseData (content) {
@@ -242,6 +251,17 @@ export class DragDrop extends HTMLElement {
     } catch (e) {
       return null
     }
+  }
+
+  // --------------------------------------------------------------------------
+  // Parent
+  // --------------------------------------------------------------------------
+  get parent () {
+    return this._parent || document
+  }
+
+  set parent (element) {
+    this._parseData = element
   }
 }
 customElements.define('ark-dragdrop', DragDrop)

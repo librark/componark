@@ -1,4 +1,4 @@
-import '../../../src/components/dragdrop'
+import { DragDrop } from '../../../src/components/dragdrop'
 
 describe('Drag and Drop', () => {
   it('can be instantiated', () => {
@@ -29,10 +29,6 @@ describe('Drag and Drop', () => {
     expect(element._getElementByDataTransfer(
       new Event('drop')) === null
     ).toBeTruthy()
-
-    // expect(
-    //   element._getElementByDataTransfer('{"id":123}') === null
-    // ).toBeTruthy()
   })
 
   it('parse Data', () => {
@@ -207,6 +203,31 @@ describe('Drag and Drop', () => {
     droppable.droppableLeave()
     expect(
       !droppable.classList.contains('ark-dragdrop--hover')
+    ).toBeTruthy()
+  })
+
+  it('get Element By DataTransfer', () => {
+    const div = document.createElement('div')
+
+    const droppable = DragDrop.launch({}, div)
+    droppable.setAttribute('droppable', '')
+    droppable.render()
+
+    const draggable = DragDrop.launch({}, droppable)
+    draggable.setAttribute('draggable', '')
+    draggable.render()
+
+    const data = {
+      dataTransfer: {
+        types: [
+          JSON.stringify({
+            id: draggable.id
+          })
+        ]
+      } }
+
+    expect(
+      droppable._getElementByDataTransfer(data)
     ).toBeTruthy()
   })
 })
