@@ -172,7 +172,9 @@ export class Alert extends HTMLElement {
 
   // Cancel Button
   get showCancelButton () {
-    return this.getAttribute('showCancelButton') || false
+    return this.hasAttribute('showCancelButton')
+      ? this.getAttribute('showCancelButton') === 'true'
+      : false
   }
 
   set showCancelButton (value) {
@@ -184,7 +186,7 @@ export class Alert extends HTMLElement {
   }
 
   set cancelButtonText (value) {
-    this._cancelButtonText = value
+    this._cancelButtonText = value || 'Cancelar'
   }
 
   get cancelButtonBackground () {
@@ -196,6 +198,8 @@ export class Alert extends HTMLElement {
   }
 
   _getCancelButtonHtml () {
+    console.log('this.showCancelButton', this.showCancelButton)
+
     return this.showCancelButton ? /* html */`
       <button background="${this.cancelButtonBackground}" close cancelButton>
         ${this.cancelButtonText}

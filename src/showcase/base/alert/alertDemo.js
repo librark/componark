@@ -55,7 +55,7 @@ export class alertDemo extends HTMLElement {
         confirmButtonText: 'Confirm',
         confirmButtonBackground: 'info',
         showCancelButton: true,
-        cancelButtonText: 'Cancel',
+        cancelButtonText: 'Cerrar',
         cancelButtonBackground: 'dark'
       }, main)
     })

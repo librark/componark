@@ -1,6 +1,6 @@
 @import "@material/button/mdc-button.scss";
 @import "@material/fab/mdc-fab";
-@import "src/theme/_variables.scss";
+@import "../../../../theme/_variables.scss";
 @import "@material/dialog/mdc-dialog.scss";
 
 @mixin alert_material_() {
@@ -8,7 +8,8 @@
   $mobile: 360px;
   $tablet: 768px;
   $desktop: 960px;
-  $background: rgba($color: #ffff, $alpha: 1) !important;
+  $background: rgba($color: #ffff,
+      $alpha: 1) !important;
   $color: rgba(0, 0, 0, 0.87) !important;
 
   #{$component} {
@@ -24,7 +25,7 @@
       &[disabled] {
         cursor: default !important;
         color: gray !important;
-        background: rgba($color: gray, $alpha: .1) !important;
+        background: rgba($color: gray, $alpha: 0.1) !important;
 
         &:hover {
           background: none !important;
