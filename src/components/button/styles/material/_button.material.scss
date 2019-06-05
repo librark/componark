@@ -1,6 +1,6 @@
 @import "@material/button/mdc-button.scss";
 @import "@material/fab/mdc-fab";
-@import "src/theme/_variables.scss";
+@import "../../../theme/_variables.scss";
 
 @mixin button_material_() {
   $component: "ark-button";
