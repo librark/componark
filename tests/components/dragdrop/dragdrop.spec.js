@@ -1,4 +1,4 @@
-import '../../../src/components/dragdrop'
+import { DragDrop } from '../../../src/components/dragdrop'
 
 describe('Drag and Drop', () => {
   it('can be instantiated', () => {
@@ -26,10 +26,8 @@ describe('Drag and Drop', () => {
     const element = document.createElement('ark-dragdrop')
     element.connectedCallback()
 
-    expect(element._getElementByDataTransfer(null) === null).toBeTruthy()
-
-    expect(
-      element._getElementByDataTransfer('{"id":123}') === null
+    expect(element._getElementByDataTransfer(
+      new Event('drop')) === null
     ).toBeTruthy()
   })
 
@@ -69,122 +67,167 @@ describe('Drag and Drop', () => {
     expect(!droppableL1._dropAllowed(droppableL2, newDrag)).toBeTruthy()
   })
 
-  it('droppable Events', () => {
-    // >>>>>> level 1
-    const draggableL1 = document.createElement('ark-dragdrop')
-    draggableL1.connectedCallback()
+  it('draggableStart draggableEnd', () => {
+    const draggable = document.createElement('ark-dragdrop')
+    draggable.connectedCallback()
+    draggable.draggableStart()
 
-    const droppableL1 = document.createElement('ark-dragdrop')
-    droppableL1.setAttribute('droppable', '')
-    droppableL1.connectedCallback()
-    droppableL1.appendChild(draggableL1)
+    expect(
+      draggable.classList.contains('ark-dragdrop--dragging')
+    ).toBeTruthy()
 
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
-    const dataTransfer = new DataTransfer()
-
-    const data = {
-      id: draggableL1.id,
-      width: draggableL1.offsetWidth,
-      height: draggableL1.offsetHeight
-    }
-    dataTransfer.setData(JSON.stringify(data), '')
-
-    droppableL1.click()
-
-    droppableL1.dispatchEvent(
-      new Event(('dragover'
-      , { dataTransfer: dataTransfer }
-      ))
-    )
-
-    // droppableL1.dispatchEvent(
-    //   new Event(('dragenter'
-    //   , { dataTransfer: dataTransfer }
-    //   ))
-    // )
-
-    // droppableL1.dispatchEvent(
-    //   new Event(('dragleave'
-    //   , { dataTransfer: dataTransfer }
-    //   ))
-    // )
-
-    // droppableL1.dispatchEvent(
-    //   new Event(('drop'
-    //   , { dataTransfer: dataTransfer }
-    //   ))
-    // )
+    draggable.draggableEnd()
+    expect(
+      !draggable.classList.contains('ark-dragdrop--dragging')
+    ).toBeTruthy()
   })
 
-  it('draggable Events', () => {
-    // >>>>>> level 1
-    const draggableL1 = document.createElement('ark-dragdrop')
-    draggableL1.connectedCallback()
+  it('insert before draggable element', () => {
+    const droppable = document.createElement('ark-dragdrop')
+    droppable.setAttribute('droppable', '')
+    droppable.setAttribute('direction', 'row')
+    droppable.connectedCallback()
 
-    const droppableL1 = document.createElement('ark-dragdrop')
-    droppableL1.setAttribute('droppable', '')
-    droppableL1.connectedCallback()
-    droppableL1.appendChild(draggableL1)
+    const draggable = document.createElement('ark-dragdrop')
+    draggable.connectedCallback()
+    droppable.appendChild(draggable)
 
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
-    const dataTransfer = new DataTransfer()
+    const newDraggable = document.createElement('ark-dragdrop')
+    newDraggable.connectedCallback()
 
-    const data = {
-      id: draggableL1.id,
-      width: draggableL1.offsetWidth,
-      height: draggableL1.offsetHeight
-    }
-    dataTransfer.setData(JSON.stringify(data), '')
+    draggable.draggableDrop(newDraggable)
 
-    draggableL1.dispatchEvent(
-      new Event(('dragstart'
-      , { dataTransfer: dataTransfer }
-      ))
-    )
-
-    draggableL1.dispatchEvent(
-      new Event(('dragend'
-      , { dataTransfer: dataTransfer }
-      ))
-    )
-
-    draggableL1.dispatchEvent(
-      new Event(('dragenter'
-      , { dataTransfer: dataTransfer }
-      ))
-    )
-
-    draggableL1.dispatchEvent(
-      new Event(('dragleave'
-      , { dataTransfer: dataTransfer }
-      ))
-    )
-
-    draggableL1.dispatchEvent(
-      new Event(('drop'
-      , { dataTransfer: dataTransfer }
-      ))
-    )
+    expect(newDraggable.id === droppable.firstChild.id).toBeTruthy()
   })
 
-  // ------------------------------------------------------------
-  // DataTransfer
-  // ------------------------------------------------------------
-  class DataTransfer {
-    constructor () {
-      this.data = {}
-      this.types = []
-      this.files = []
-    }
+  it('draggableEnter droppable [direction=column]', () => {
+    const droppable = document.createElement('ark-dragdrop')
+    droppable.setAttribute('droppable', '')
+    droppable.connectedCallback()
 
-    setData (format, data) {
-      this.data[format] = data
-    }
+    const draggable1 = document.createElement('ark-dragdrop')
+    draggable1.connectedCallback()
+    droppable.appendChild(draggable1)
 
-    getData (format) {
-      return this.data[format]
-    }
-  }
+    const draggable2 = document.createElement('ark-dragdrop')
+    draggable2.connectedCallback()
+
+    draggable1.draggableEnter(draggable2, draggable2.generateDataTransfer())
+    expect(draggable1.classList.contains('ark-dragdrop--enter')).toBeTruthy()
+
+    draggable1.draggableLeave()
+    expect(!draggable1.classList.contains('ark-dragdrop--enter')).toBeTruthy()
+  })
+
+  it('draggableEnter droppable [direction=row]', () => {
+    const droppable = document.createElement('ark-dragdrop')
+    droppable.setAttribute('droppable', '')
+    droppable.setAttribute('direction', 'row')
+    droppable.connectedCallback()
+
+    const draggable1 = document.createElement('ark-dragdrop')
+    draggable1.connectedCallback()
+    droppable.appendChild(draggable1)
+
+    const draggable2 = document.createElement('ark-dragdrop')
+    draggable2.connectedCallback()
+
+    draggable1.draggableEnter(draggable2, draggable2.generateDataTransfer())
+    expect(draggable1.classList.contains('ark-dragdrop--enter')).toBeTruthy()
+
+    draggable1.draggableLeave()
+    expect(!draggable1.classList.contains('ark-dragdrop--enter')).toBeTruthy()
+  })
+
+  it('draggableStart - draggableEnd', () => {
+    const draggable1 = document.createElement('ark-dragdrop')
+    draggable1.connectedCallback()
+
+    draggable1.draggableStart()
+    expect(
+      draggable1.classList.contains('ark-dragdrop--dragging')
+    ).toBeTruthy()
+
+    draggable1.draggableEnd()
+    expect(
+      !draggable1.classList.contains('ark-dragdrop--dragging')
+    ).toBeTruthy()
+  })
+
+  it('dispatchEvent draggable, droppable', () => {
+    // -----------------------------------
+    // draggable
+    // -----------------------------------
+    const draggable = document.createElement('ark-dragdrop')
+    draggable.connectedCallback()
+
+    draggable.dispatchEvent(new Event('drop'))
+    draggable.dispatchEvent(new Event('dragleave'))
+    draggable.dispatchEvent(new Event('dragenter'))
+    draggable.dispatchEvent(new Event('dragend'))
+    // draggable.dispatchEvent(new Event('dragstart'))
+
+    // -----------------------------------
+    // droppable
+    // -----------------------------------
+    const droppable = document.createElement('ark-dragdrop')
+    droppable.setAttribute('droppable', '')
+    droppable.connectedCallback()
+
+    droppable.dispatchEvent(new Event('dragover'))
+    droppable.dispatchEvent(new Event('dragenter'))
+    droppable.dispatchEvent(new Event('dragleave'))
+    droppable.dispatchEvent(new Event('drop'))
+  })
+
+  it('>>>> droppableEnter', () => {
+    const droppable = document.createElement('ark-dragdrop')
+    droppable.setAttribute('droppable', '')
+    droppable.connectedCallback()
+
+    const draggable = document.createElement('ark-dragdrop')
+    draggable.connectedCallback()
+
+    droppable.droppableEnter(draggable)
+
+    expect(
+      droppable.classList.contains('ark-dragdrop--hover')
+    ).toBeTruthy()
+
+    droppable.droppableDrop(draggable)
+
+    expect(
+      droppable.querySelector('[draggable]')
+    ).toBeTruthy()
+
+    droppable.droppableLeave()
+    expect(
+      !droppable.classList.contains('ark-dragdrop--hover')
+    ).toBeTruthy()
+  })
+
+  it('get Element By DataTransfer', () => {
+    const div = document.createElement('div')
+
+    const droppable = DragDrop.launch({}, div)
+    droppable.setAttribute('droppable', '')
+    droppable.render()
+
+    const draggable = DragDrop.launch({}, droppable)
+    draggable.setAttribute('draggable', '')
+    draggable.render()
+
+    const data = {
+      dataTransfer: {
+        types: [
+          JSON.stringify({
+            id: draggable.id
+          })
+        ]
+      } }
+
+    expect(
+      droppable._getElementByDataTransfer(data, div).id === draggable.id
+    ).toBeTruthy()
+  })
 })

@@ -4,7 +4,7 @@
 @import "../../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import "./styles/_default/_default.position";
+@import "./styles/_default/alert.default";
 // -------------------------------------------
 @import "./styles/ark/main.ark";
 @import "./styles/material/main.material";
@@ -17,4 +17,6 @@
   @if $theme==material {
     @include alert_material();
   }
+
+  @include alert_default();
 }

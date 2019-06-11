@@ -1,12 +1,17 @@
-import '../../../src/components/alert'
+import { Alert } from '../../../src/components/alert'
 
 describe('Alert', () => {
   it('can be instantiated', () => {
     const alert = document.createElement('ark-alert')
     expect(alert).toBeTruthy()
 
-    var init = alert.init()
+    var init = alert.init({})
     expect(alert === init).toBeTruthy()
+  })
+
+  it('can be instantiated with class', function () {
+    const alert = Alert.launch({})
+    alert.render()
   })
 
   it('can be rendered with slots', function () {
@@ -20,53 +25,72 @@ describe('Alert', () => {
     expect(content.childElementCount).toBeTruthy()
   })
 
-  it('can be hidden', function () {
+  it('hide, show and toggle method', function () {
     const alert = document.createElement('ark-alert')
+    alert.innerHTML = /* HTML */``
     alert.connectedCallback()
 
-    const btn = alert.querySelector('[close]')
-    btn.click()
+    alert.hide()
+    expect(alert.hasAttribute('hidden')).toBeTruthy()
 
-    const atts = Array.from(alert.attributes).filter(a => a.name === 'hidden')
-    expect(atts.length).toBeTruthy()
-  })
-
-  it('can be hidden by close method', function () {
-    const alert = document.createElement('ark-alert')
-    alert.connectedCallback()
-    alert.close()
-
-    const atts = Array.from(alert.attributes).filter(a => a.name === 'hidden')
-    expect(atts.length).toBeTruthy()
-  })
-
-  it('can be oppend by open method', function () {
-    const alert = document.createElement('ark-alert')
-    alert.connectedCallback()
-
-    alert.close()
-    expect(Array.from(alert.attributes).filter(
-      a => a.name === 'hidden').length).toBeTruthy()
-
-    alert.open()
-    expect(!Array.from(alert.attributes).filter(
-      a => a.name === 'hidden').length).toBeTruthy()
-  })
-
-  it('can be hidden by toggle method', function () {
-    const alert = document.createElement('ark-alert')
-    alert.connectedCallback()
-
-    alert.open()
-    expect(!Array.from(alert.attributes).filter(
-      a => a.name === 'hidden').length).toBeTruthy()
+    alert.show()
+    expect(!alert.hasAttribute('hidden')).toBeTruthy()
 
     alert.toggle()
-    expect(Array.from(alert.attributes).filter(
-      a => a.name === 'hidden').length).toBeTruthy()
+    expect(alert.hasAttribute('hidden')).toBeTruthy()
 
     alert.toggle()
-    expect(!Array.from(alert.attributes).filter(
-      a => a.name === 'hidden').length).toBeTruthy()
+    expect(!alert.hasAttribute('hidden')).toBeTruthy()
+  })
+
+  it('can be rendered with class', function () {
+    const div = document.createElement('div')
+
+    const alert = Alert.launch({
+      title: 'hello',
+      text: 'word',
+      horizontal: '',
+      vertical: '',
+      showConfirmButton: '',
+      confirmButtonText: 'confirm',
+      confirmButtonBackground: 'danger',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel'
+    }, div)
+    alert.render()
+
+    expect(alert.cancelButtonBackground === 'light').toBeTruthy()
+    expect(alert.cancelButtonText === 'Cancel').toBeTruthy()
+    expect(alert.confirmButtonBackground === 'danger').toBeTruthy()
+    expect(alert.confirmButtonText === 'confirm').toBeTruthy()
+    expect(alert.vertical === 'center').toBeTruthy()
+    expect(alert.horizontal === 'center').toBeTruthy()
+    expect(alert.getAttribute('title') === 'hello').toBeTruthy()
+    expect(alert.getAttribute('text') === 'word').toBeTruthy()
+
+    const btn = alert.querySelector('button')
+    if (btn) btn.click()
+
+    expect(!div.querySelector('ark-alert')).toBeTruthy()
+  })
+
+  it('can close from scrim event', function () {
+    const div = document.createElement('div')
+
+    const alert = Alert.launch({
+      title: 'hello',
+      text: 'word',
+      horizontal: '',
+      vertical: '',
+      showConfirmButton: 'false',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel'
+    }, div)
+    alert.render()
+
+    const scrim = alert.querySelector('.ark-alert__scrim')
+    scrim.click()
+
+    expect(!div.querySelector('ark-alert')).toBeTruthy()
   })
 })

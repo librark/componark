@@ -41,7 +41,7 @@ export class Card extends HTMLElement {
     if (titles === '' && subtitles === '') return ''
 
     return /* html */`
-      <div className="ark-card__header">
+      <div class="ark-card__header">
           ${titles}
           ${subtitles}
       </div>

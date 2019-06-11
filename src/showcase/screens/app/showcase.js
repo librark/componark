@@ -1,4 +1,4 @@
-import '../../base/index'
+import '../../../components'
 
 export default class ArkShowcase extends HTMLElement {
   init (context) {

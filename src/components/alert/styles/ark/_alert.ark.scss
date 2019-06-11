@@ -3,69 +3,83 @@
   $mobile: 360px;
   $tablet: 768px;
   $desktop: 960px;
+  $background: rgba($color: #ffff, $alpha: 1) !important;
+  $color: rgba(0, 0, 0, 0.87) !important;
 
   #{$component} {
-    margin: 10px;
-    padding: 10px;
 
-    border: 1px solid;
+    button,
+    a {
+      display: inline-block;
 
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    box-sizing: border-box;
-    flex-wrap: wrap;
+      background: none;
+      font-size: unset;
+      border: 0px solid;
 
-    max-width: 500px;
+      padding: 10px 15px;
+      color: inherit;
 
-    * {
-      width: auto;
+      width: inherit;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &[disabled] {
+        cursor: default !important;
+        color: gray !important;
+        background: none !important;
+
+        &:hover {
+          background: none !important;
+        }
+      }
+
+      &>:not(:first-child) {
+        margin-left: 5px;
+      }
     }
 
-    @media only screen and (min-width: $tablet) {
-      margin: 10px auto;
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &[disabled] {
+        text-decoration: none;
+      }
     }
   }
 
   .#{$component} {
-    &__content {
-      margin-right: auto;
-      max-width: 100%;
+    &__body {
+      min-width: calc(#{$mobile} - (12px * 2));
+    }
 
-      * {
-        margin: 0;
-        padding: 0;
-      }
+    &__content {
+      padding: 24px 12px 12px;
+    }
+
+    &__title {
+      margin-top: 0;
+      padding-top: 0;
     }
 
     &__actions {
+      padding: 12px;
+
       display: flex;
-      flex-direction: row;
+      align-items: normal;
+      justify-content: flex-end;
+      flex-flow: wrap;
 
-      :not(:first-child) {
-        margin-left: 5px;
-      }
-
-      * {
-        width: auto !important;
+      :not(:last-child()) {
+        margin-right: 8px;
       }
     }
 
-    &__icon-close {
-      $size: 30px;
-
-      background: none;
-      border: 0;
-
-      cursor: pointer;
-
-      width: $size;
-      height: $size;
-
-      margin: auto;
-
-      font-size: 28px;
-      opacity: 0.5;
-    }
+    &__scrim {}
   }
 }
