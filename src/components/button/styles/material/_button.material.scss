@@ -1,6 +1,5 @@
 @import "@material/button/mdc-button.scss";
 @import "@material/fab/mdc-fab";
-@import "../../../theme/_variables.scss";
 
 @mixin button_material_() {
   $component: "ark-button";
@@ -77,6 +76,5 @@
     [vertical~="end"] {
       bottom: calc((#{$fab-size} / 2));
     }
-
   }
 }
