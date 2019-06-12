@@ -1,7 +1,7 @@
 @import "@material/button/mdc-button.scss";
 @import "@material/fab/mdc-fab";
-@import "../../../../theme/_variables.scss";
 @import "@material/dialog/mdc-dialog.scss";
+// @import "../../../../theme/_variables.scss";
 
 @mixin alert_material_() {
   $component: "ark-alert";

@@ -1,6 +1,6 @@
 {
   "name": "componark",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Knowark's Web Components Library",
   "directories": {
     "test": "tests"
@@ -65,7 +65,6 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
-    "@fortawesome/fontawesome-free": "^5.8.2",
     "@types/jest": "^24.0.13",
     "@types/jsdom": "^12.2.3",
     "babel-eslint": "^10.0.1",
@@ -92,6 +91,7 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "@material/button": "^1.1.1",
     "@material/card": "^1.1.1",
     "@material/dialog": "^1.1.1",
