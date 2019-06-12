@@ -1,6 +1,4 @@
-import { Component } from '../../component'
-
-export class GridItem extends Component {
+export class GridItem extends HTMLElement {
   init (context) {
     return this
   }

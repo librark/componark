@@ -1,6 +1,4 @@
-import { Component } from '../../component'
-
-export class Tabs extends Component {
+export class Tabs extends HTMLElement {
   init (context) {
     return this
   }

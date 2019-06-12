@@ -1,8 +1,6 @@
-import { Component } from '../../component'
-
 export * from './accordion.tab.js'
 
-export class Accordion extends Component {
+export class Accordion extends HTMLElement {
   init (context) {
     return this
   }

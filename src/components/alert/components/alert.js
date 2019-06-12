@@ -1,7 +1,6 @@
 import { getSlots } from '../../../utils'
-import { Component } from '../../component'
 
-export class Alert extends Component {
+export class Alert extends HTMLElement {
   init (context) {
     this.title = context['title']
     this.text = context['text']

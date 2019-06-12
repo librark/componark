@@ -1,6 +1,4 @@
-import { Component } from '../../component'
-
-export class Table extends Component {
+export class Table extends HTMLElement {
   init (context) {
     this.headers = context['headers']
     this.data = context['data']

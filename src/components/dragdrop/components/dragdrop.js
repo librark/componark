@@ -1,7 +1,6 @@
 import { uuidv4 } from '../../../utils'
-import { Component } from '../../component'
 
-export class DragDrop extends Component {
+export class DragDrop extends HTMLElement {
   init (context) {
     return this
   }

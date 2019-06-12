@@ -1,6 +1,4 @@
-import { Component } from '../../component'
-
-export class Navbar extends Component {
+export class Navbar extends HTMLElement {
   init (context) {
     return this
   }
