@@ -1,4 +1,6 @@
-export class Icon extends HTMLElement {
+import { Component } from '../../component'
+
+export class Icon extends Component {
   init (context) {
     return this
   }

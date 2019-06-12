@@ -1,4 +1,3 @@
-
 export class Component extends HTMLElement {
   /** @param {Object} context */
   init (context) {

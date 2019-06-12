@@ -1,6 +1,7 @@
 import { getSlots } from '../../../utils'
+import { Component } from '../../component'
 
-export class Modal extends HTMLElement {
+export class Modal extends Component {
   init (context) {
     return this
   }

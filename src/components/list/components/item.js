@@ -1,6 +1,7 @@
 import { getSlots } from '../../../utils'
+import { Component } from '../../component'
 
-export class ListItem extends HTMLElement {
+export class ListItem extends Component {
   init (context) {
     return this
   }

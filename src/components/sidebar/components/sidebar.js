@@ -1,6 +1,7 @@
 import { getSlots } from '../../../utils'
+import { Component } from '../../component'
 
-export class Sidebar extends HTMLElement {
+export class Sidebar extends Component {
   init (context) {
     return this
   }

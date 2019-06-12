@@ -1,4 +1,6 @@
-export class Select extends HTMLElement {
+import { Component } from '../../component'
+
+export class Select extends Component {
   init (context) {
     return this
   }

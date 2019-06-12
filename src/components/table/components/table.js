@@ -1,4 +1,6 @@
-export class Table extends HTMLElement {
+import { Component } from '../../component'
+
+export class Table extends Component {
   init (context) {
     this.headers = context['headers']
     this.data = context['data']

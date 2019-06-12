@@ -1,4 +1,6 @@
-export class Button extends HTMLElement {
+import { Component } from '../../component'
+
+export class Button extends Component {
   init (context) {
     return this
   }

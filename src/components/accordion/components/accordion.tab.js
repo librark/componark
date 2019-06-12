@@ -1,4 +1,6 @@
-export class AccordionTab extends HTMLElement {
+import { Component } from '../../component'
+
+export class AccordionTab extends Component {
   init (context) {
     return this
   }

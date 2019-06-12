@@ -1,4 +1,6 @@
-export class Nav extends HTMLElement {
+import { Component } from '../../component'
+
+export class Nav extends Component {
   init (context) {
     return this
   }
