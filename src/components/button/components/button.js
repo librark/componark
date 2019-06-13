@@ -17,6 +17,7 @@ export class Button extends HTMLElement {
   }
 
   _getAttributes () {
+    this.isFab()
     const attributes = Array.from(this.attributes)
 
     return attributes.map((attribute) => {
@@ -24,6 +25,17 @@ export class Button extends HTMLElement {
       if (attribute.value) attr += `=${attribute.value}`
       return attr
     }).join(' ')
+  }
+
+  isFab () {
+    if (
+      this.hasAttribute('fab') &&
+      !this.hasAttribute('horizontal') &&
+      !this.hasAttribute('vertical')
+    ) {
+      this.setAttribute('horizontal', 'end')
+      this.setAttribute('vertical', 'end')
+    }
   }
 
   _getType () {

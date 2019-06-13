@@ -84,43 +84,8 @@ export class ButtonDemo extends HTMLElement {
       <div class="demo-button">
         <p>This is a Fab Buttons</p>
 
-        <ark-button fab background="disabled" disabled>
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
         <ark-button fab background="primary">
           <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="secondary">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="success">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="danger">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="warning">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="info">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="dark">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="muted">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="light">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-        <ark-button fab background="white">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </ark-button>
-
-        <ark-button horizontal="end" vertical="end" background="primary">
-          <ark-icon name="fas fa-address-book"></ark-icon>
-          <span>hola</span>
         </ark-button>
 
       </div>
@@ -137,6 +102,13 @@ export class ButtonDemo extends HTMLElement {
           <li>center </li>
           <li>start</li>
           <li>end</li>
+        </ul>
+        <br/>
+        <h3>Fab</h3>
+        <small>Default attributes:</small>
+        <ul>
+          <li>horizontal: end</li>
+          <li>vertical: end</li>
         </ul>
       </div>
     `
