@@ -2,8 +2,13 @@
 import { Component } from '../../component'
 
 export class Accordion extends Component {
-  properties () {
-    return ['close-others']
+  init (context) {
+    this.closeOthers = context['closeOthers']
+    return super.init(context)
+  }
+
+  reflectedProperties () {
+    return ['closeOthers']
   }
 
   render () {
@@ -19,8 +24,8 @@ export class Accordion extends Component {
     event.stopPropagation()
     if (!this.hasAttribute('close-others')) return
 
-    const closeAttr = this['close-others']
-    if (closeAttr === 'true' || !closeAttr.toString().length) {
+    if (this['closeOthers'] === 'true' ||
+    !this['closeOthers'].toString().length) {
       this.selectAll('ark-accordion-tab').forEach(
         (/** @type {AccordionTab} */ tab) => {
           tab.close()

@@ -1,19 +1,25 @@
 import { Component } from '../../component'
 
 export class AccordionTab extends Component {
-  properties () {
-    return ['header', 'tab-index']
+  init (context) {
+    this.header = context['header']
+    this.tabIndex = context['tabIndex']
+    return super.init(context)
+  }
+
+  reflectedProperties () {
+    return ['header', 'tabIndex']
   }
 
   render () {
-    if (!this['header']) {
+    if (!this.header) {
       this.innerHTML = ''
       return
     }
 
     this.innerHTML = /* html */`
       <button class="ark-accordion-tab__btn-header" listen on-click="toggle">
-        <span data-accordion-tab-header>${this['header']}</span>
+        <span data-accordion-tab-header>${this.header}</span>
       </button>
       <div id="ark-accordion-tab__content">
         ${this.innerHTML}
@@ -37,7 +43,7 @@ export class AccordionTab extends Component {
     this.hasAttribute('active') ? this.close() : this.open()
 
     this.dispatchEvent(new CustomEvent('accordiontab:click', {
-      detail: { 'tab-index': this['tab-index'] }
+      detail: { tabIndex: this.tabIndex }
     }))
   }
 }

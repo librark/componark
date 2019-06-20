@@ -53,12 +53,12 @@ export class alertDemo extends HTMLElement {
         title: 'Title....',
         text: 'Text ....',
         confirmButtonText: 'Confirm',
-        confirmButtonBackground: 'info',
+        // confirmButtonBackground: 'info',
         showCancelButton: true,
-        cancelButtonText: 'Cerrar',
-        cancelButtonBackground: 'dark',
-        horizontal: 'start',
-        vertical: 'start'
+        cancelButtonText: 'Cerrar'
+        // cancelButtonBackground: 'dark',
+        // horizontal: 'start',
+        // vertical: 'start'
       }, main)
     })
   }
