@@ -63,8 +63,8 @@ export class AccordionDemo extends HTMLElement {
         }
       </style>
 
-      <ark-accordion closeOthers="true">
-        <ark-accordion-tab header="tab 1">
+      <ark-accordion close-others>
+        <ark-accordion-tab header="tab 1" >
           <span>content tab 1</span>
         </ark-accordion-tab>
         <ark-accordion-tab header="tab 2">
