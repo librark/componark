@@ -1,12 +1,9 @@
+import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
-export class ListItem extends HTMLElement {
+export class ListItem extends Component {
   init (context) {
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
@@ -21,6 +18,8 @@ export class ListItem extends HTMLElement {
         ${this.getSlots('end', slots)}
       </div>
     `
+
+    return super.render()
   }
 
   getSlots (key, slots) {
