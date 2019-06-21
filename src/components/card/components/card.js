@@ -1,8 +1,15 @@
+import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
-export class Card extends HTMLElement {
+export class Card extends Component {
   init (context) {
-    return this
+    this.title = context['title']
+    this.subtitle = context['subtitle']
+    return super.init(context)
+  }
+
+  reflectedProperties () {
+    return ['title', 'subtitle']
   }
 
   connectedCallback () {
@@ -11,56 +18,54 @@ export class Card extends HTMLElement {
 
   render () {
     this.slots = getSlots(this)
-
     this.innerHTML = /* html */`
-      ${this._getMedia()}
-      ${this._getHeader()}
-      ${this._getBody()}
-      ${this._getActions()}
+      ${this._renderMedia()}
+      ${this._renderHeader()}
+      ${this._renderBody()}
+      ${this._renderActions()}
     `
+    return super.render()
   }
 
   _getSlots (key) {
-    if (!this.slots || !this.slots[key]) { return '' }
+    if (!this.slots || !this.slots[key]) return ''
 
     return /* html */`
-        ${this.slots[key].map((element, index) => `
-          ${element.outerHTML}
-        `).join('')}
+        ${this.slots[key].map((element) => `${element.outerHTML}`).join('')}
       `.trim()
   }
 
-  _getMedia () {
-    return this._generateContent('media', 'media')
+  _renderMedia () {
+    const content = this._getSlots('media')
+    return this._generateContent(content, 'media')
   }
 
-  _getHeader () {
-    const titles = this._generateContent('title', 'title', 'h3')
-    const subtitles = this._generateContent('subtitle', 'subtitle', 'span')
+  _renderHeader () {
+    const title = this._generateContent(this.title, 'title', 'h3')
+    const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
 
-    if (titles === '' && subtitles === '') return ''
-
-    return /* html */`
+    return title === '' && subtitle === '' ? '' : /* html */`
       <div class="ark-card__header">
-          ${titles}
-          ${subtitles}
+          ${title}
+          ${subtitle}
       </div>
     `
   }
 
-  _getBody () {
-    return this._generateContent('body', 'general')
+  _renderBody () {
+    const content = this._getSlots('general')
+    return this._generateContent(content, 'body')
   }
 
-  _getActions () {
-    return this._generateContent('actions', 'action')
+  _renderActions () {
+    const content = this._getSlots('action')
+    return this._generateContent(content, 'actions')
   }
 
-  _generateContent (className, slots, type = 'div') {
-    slots = this._getSlots(slots)
-    return slots ? /* html */`
+  _generateContent (content, className, type = 'div') {
+    return content ? /* html */`
       <${type} class="ark-card__${className}">
-        ${slots}
+        ${content}
       </${type}>
     ` : ''
   }
