@@ -1,17 +1,22 @@
-export class Grid extends HTMLElement {
+import { Component } from '../../component'
+
+export class Grid extends Component {
   init (context) {
-    return this
+    this.cols = context['cols'] || this.cols || 0
+    this.gap = context['gap'] || this.gap || '5px'
+    return super.init(context)
   }
 
-  connectedCallback () {
-    this.render()
+  reflectedProperties () {
+    return ['cols', 'gap']
   }
 
   render () {
-    this.elementStyle()
+    this._elementStyle()
+    return super.render()
   }
 
-  elementStyle () {
+  _elementStyle () {
     this.style.display = 'grid'
 
     this.style.gridTemplateColumns = `repeat(${this.cols}, 1fr)`
@@ -19,15 +24,6 @@ export class Grid extends HTMLElement {
 
     this.style.gridGap = `${this.gap}`
     this.style.padding = `${this.gap}`
-  }
-
-  // ---------------------------------------------------------------------
-  get cols () {
-    return this.getAttribute('cols') || 0
-  }
-
-  get gap () {
-    return this.getAttribute('gap') || '5px'
   }
 }
 customElements.define('ark-grid', Grid)

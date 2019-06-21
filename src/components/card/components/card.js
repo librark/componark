@@ -12,10 +12,6 @@ export class Card extends Component {
     return ['title', 'subtitle']
   }
 
-  connectedCallback () {
-    this.render()
-  }
-
   render () {
     this.slots = getSlots(this)
     this.innerHTML = /* html */`
