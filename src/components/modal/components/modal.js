@@ -1,19 +1,16 @@
+import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
-export class Modal extends HTMLElement {
+export class Modal extends Component {
   init (context) {
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
     this.slots = getSlots(this)
 
     this.innerHTML = /* html */`
-      <div class="ark-modal__scrim"></div>
+      <div class="ark-modal__scrim" listen on-click="close"></div>
       <div class="ark-modal__content" ${this._getAttributes()}>
         <div class="ark-modal__header">
           <div class="ark-modal__title">
@@ -37,30 +34,22 @@ export class Modal extends HTMLElement {
       </div>
     `
 
-    this._listen()
     this._removeAttribute()
+    return super.render()
+  }
+
+  load () {
+    this.querySelectorAll('[close]').forEach(
+      btn => btn.addEventListener('click', _ => this.close())
+    )
   }
 
   _getSlots (key) {
     if (!this.slots || !this.slots[key]) { return '' }
 
     return /* html */`
-        ${this.slots[key].map((element, index) => `
-          ${element.outerHTML}
-        `).join('')}
+        ${this.slots[key].map((element) => `${element.outerHTML}`).join('')}
       `
-  }
-
-  _listen () {
-    const btns = Array.from(this.querySelectorAll('[close]'))
-    btns.forEach(btn => btn.addEventListener('click', _ =>
-      this.close()
-    ))
-
-    const scrim = this.querySelector('.ark-modal__scrim')
-    scrim.addEventListener('click', _ =>
-      this.close()
-    )
   }
 
   _getAttributes () {

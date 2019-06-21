@@ -1,3 +1,1 @@
-// import './main.scss'
-// ------------------------------------------------
-export * from './components/modal.js'
+export { Modal } from './components/modal.js'
