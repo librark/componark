@@ -1,19 +1,14 @@
+import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
 
-export class DragDrop extends HTMLElement {
+export class DragDrop extends Component {
   init (context) {
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
-    this.innerHTML = /* html */`${this.innerHTML}`
-
     this._setAttributeUUID()
-    this._listen()
+    return super.render()
   }
 
   static launch (context, parent = document.body) {
@@ -22,11 +17,7 @@ export class DragDrop extends HTMLElement {
     return dragdrop
   }
 
-  _setAttributeUUID () {
-    this.id = uuidv4()
-  }
-
-  _listen () {
+  load () {
     if (this.hasAttribute('droppable')) {
       this._setAttributeDirection()
       this._addEventDroppable()
@@ -34,6 +25,10 @@ export class DragDrop extends HTMLElement {
       this.setAttribute('draggable', 'true')
       this._addEventDraggable()
     }
+  }
+
+  _setAttributeUUID () {
+    this.id = uuidv4()
   }
 
   _setAttributeDirection () {
