@@ -1,13 +1,11 @@
-export class Table extends HTMLElement {
+import { Component } from '../../component'
+
+export class Table extends Component {
   init (context) {
-    this.headers = context['headers']
-    this.data = context['data']
+    this.headers = context['headers'] || this.headers || {}
+    this.data = context['data'] || this.data || []
 
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
@@ -17,65 +15,42 @@ export class Table extends HTMLElement {
         ${this._renderData()}
       </table>
     `
+    return super.render()
   }
 
   _renderHeaders () {
-    var aux = ''
+    var headers = ''
 
-    if (this._getPosition()) {
-      aux += /* html */ `<th>No.</th>`
-    }
+    if (this._getPosition()) headers += /* html */ `<th>No.</th>`
 
     Object.keys(this.headers).forEach(key => {
-      aux += /* html */ `<th>${this.headers[key]}</th>`
+      headers += /* html */ `<th>${this.headers[key]}</th>`
     })
 
-    return aux ? /* html */ `<tr>${aux}</tr>` : ''
+    return headers ? /* html */ `<tr>${headers}</tr>` : ''
   }
 
   _renderData () {
-    var aux = ''
+    var data = ''
 
     this.data.forEach((d, index) => {
       var td = ''
 
-      if (this._getPosition()) {
-        td += /* html */ `<td>${index + 1}</td>`
-      }
+      if (this._getPosition()) td += /* html */ `<td>${index + 1}</td>`
 
       Object.keys(this.headers).forEach(key => {
         td += /* html */ `<td>${d[key] || ''}</td>`
       })
 
-      aux += /* html */ `<tr>${td}</tr>`
+      data += /* html */ `<tr>${td}</tr>`
     })
 
-    return aux || ''
+    return data || ''
   }
 
   _getPosition () {
     const attributes = Array.from(this.attributes)
     return attributes.map(att => { return att.name }).indexOf('position') >= 0
-  }
-
-  // ---------------------------------------------------------
-  // Get & Set
-  // ---------------------------------------------------------
-
-  get headers () {
-    return this._headers || {}
-  }
-
-  set headers (value) {
-    this._headers = value
-  }
-
-  get data () {
-    return this._data || []
-  }
-
-  set data (value) {
-    this._data = value
   }
 }
 customElements.define('ark-table', Table)
