@@ -4,6 +4,7 @@ import { camelToKebab } from './format'
 export function listen (self) {
   const elements = self.querySelectorAll('[listen]')
   for (const element of elements) {
+    element.removeAttribute('listen')
     for (const attribute of element.attributes) {
       if (attribute.name.startsWith('on-')) {
         const event = attribute.name.replace('on-', '')

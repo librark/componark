@@ -1,2 +1,2 @@
-export * from './components/navbar.js'
-export * from './components/nav.js'
+export { Navbar } from './components/navbar.js'
+export { Nav } from './components/nav.js'

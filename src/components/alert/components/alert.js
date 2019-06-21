@@ -5,14 +5,22 @@ export class Alert extends Component {
   init (context) {
     this.title = context['title']
     this.text = context['text']
-    this.horizontal = context['horizontal']
-    this.vertical = context['vertical']
-    this.showConfirmButton = context['showConfirmButton']
-    this.confirmButtonText = context['confirmButtonText']
-    this.confirmButtonBackground = context['confirmButtonBackground']
-    this.showCancelButton = context['showCancelButton']
-    this.cancelButtonText = context['cancelButtonText']
-    this.cancelButtonBackground = context['cancelButtonBackground']
+    this.horizontal = context['horizontal'] || this.horizontal || 'center'
+    this.vertical = context['vertical'] || this.vertical || 'center'
+    this.showConfirmButton = (
+      context['showConfirmButton'] || this.showConfirmButton || 'false')
+    this.confirmButtonText = (
+      context['confirmButtonText'] || this.confirmButtonText || 'Aceptar')
+    this.confirmButtonBackground = (
+      context['confirmButtonBackground'] || this.confirmButtonBackground ||
+      'primary')
+    this.showCancelButton = (
+      context['showCancelButton'] || this.showCancelButton || true)
+    this.cancelButtonText = (
+      context['cancelButtonText'] || this.cancelButtonText || 'Cancelar')
+    this.cancelButtonBackground = (
+      context['cancelButtonBackground'] || this.cancelButtonBackground ||
+      'light')
 
     return super.init(context)
   }
@@ -49,15 +57,6 @@ export class Alert extends Component {
   }
 
   load () {
-    this.horizontal = this.horizontal || 'center'
-    this.vertical = this.vertical || 'center'
-    this.showConfirmButton = this.showConfirmButton || 'false'
-    this.confirmButtonText = this.confirmButtonText || 'Aceptar'
-    this.confirmButtonBackground = this.confirmButtonBackground || 'primary'
-    this.showCancelButton = this.showCancelButton || true
-    this.cancelButtonText = this.cancelButtonText || 'Cancelar'
-    this.cancelButtonBackground = this.cancelButtonBackground || 'light'
-
     this.querySelectorAll('[close]').forEach(element =>
       element.addEventListener('click', _ =>
         this.close()
@@ -133,7 +132,8 @@ export class Alert extends Component {
   }
 
   _getSlots (key) {
-    if (!this.slots || !this.slots[key]) { return '' }
+    if (!this.slots || !this.slots[key]) return ''
+
     return /* html */`
         ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
       `
