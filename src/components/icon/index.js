@@ -1,1 +1,1 @@
-export * from './components/icon.js'
+export { Icon } from './components/icon.js'
