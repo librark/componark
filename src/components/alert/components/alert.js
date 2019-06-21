@@ -58,13 +58,15 @@ export class Alert extends Component {
 
   load () {
     this.querySelectorAll('[close]').forEach(element =>
-      element.addEventListener('click', _ =>
-        this.close()
-      ))
+      element.addEventListener('click', _ => this.close())
+    )
   }
 
+  /** @param {Object} context @param {HTMLElement=} parent @return {Alert} */
   static launch (context, parent = document.body) {
-    const alert = new Alert().init(context)
+    /** @type {Alert} */
+    const alert = new Alert()
+    alert.init(context)
     parent.appendChild(alert)
     return alert
   }
@@ -110,7 +112,7 @@ export class Alert extends Component {
   }
 
   _renderConfirmButton () {
-    if (this.showConfirmButton === 'false') return ''
+    if (!this._parseBooleanValue(this.showConfirmButton)) return ''
 
     return this.confirmButtonText.length ? /* html */`
         <button close alert-confirm-button
@@ -121,7 +123,7 @@ export class Alert extends Component {
   }
 
   _renderCancelButton () {
-    if (this.showCancelButton === 'false') return ''
+    if (!this._parseBooleanValue(this.showCancelButton)) return ''
 
     return this.cancelButtonText.length ? /* html */`
         <button close alert-cancel-button
@@ -129,6 +131,16 @@ export class Alert extends Component {
           ${this.cancelButtonText}
         </button>
       ` : ''
+  }
+
+  _parseBooleanValue (value) {
+    switch (value) {
+      case true: case 'true': case '':
+        return true
+      case false: case 'false':
+        return false
+    }
+    return false
   }
 
   _getSlots (key) {
