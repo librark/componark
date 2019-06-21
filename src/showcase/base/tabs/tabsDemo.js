@@ -62,29 +62,23 @@ export class TabsDemo extends HTMLElement {
       </div>
 
       <ark-tabs>
-        <ark-tabs-item id="1">
+        <ark-tabs-item title="tab 1">
           <ark-icon name="far fa-address-book"></ark-icon>
-          <span>span-1</span>
         </ark-tabs-item>
-        <ark-tabs-item id="2">
+        <ark-tabs-item title="tab 2">
           <ark-icon name="far fa-address-book"></ark-icon>
-          <span>span-2 asdf asdfs</span>
         </ark-tabs-item>
-        <ark-tabs-item id="3">
+        <ark-tabs-item title="tab 3">
           <ark-icon name="far fa-address-book"></ark-icon>
-          <span>span-3 asdfasdf</span>
         </ark-tabs-item>
-        <ark-tabs-item id="4">
+        <ark-tabs-item title="tab 4">
           <ark-icon name="far fa-address-book"></ark-icon>
-          <span>span-4</span>
         </ark-tabs-item>
-        <ark-tabs-item id="5">
+        <ark-tabs-item title="tab 5">
           <ark-icon name="far fa-address-book"></ark-icon>
-          <span>span-5 asdfasdf</span>
         </ark-tabs-item>
-        <ark-tabs-item id="6">
+        <ark-tabs-item title="tab 6">
           <ark-icon name="far fa-address-book"></ark-icon>
-          <span>span-6 asdfsdfefw</span>
         </ark-tabs-item>
       </ark-tabs>
     `

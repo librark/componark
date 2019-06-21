@@ -1,19 +1,24 @@
-export class TabsItem extends HTMLElement {
+import { Component } from '../../component'
+
+export class TabsItem extends Component {
   init (context) {
-    return this
+    this.title = context['title']
+    return super.init(context)
   }
 
-  connectedCallback () {
-    this.render()
+  reflectedProperties () {
+    return ['title']
   }
 
   render () {
     this.innerHTML = /* html */`
         <${this._getType()} ${this._getAttributes()}>
-          ${this.innerHTML}
+        ${this.innerHTML}
+        <span>${this.title}</span>
         </${this._getType()}>
     `
     this._removeAttribute()
+    return super.render()
   }
 
   _getAttributes () {
@@ -27,7 +32,7 @@ export class TabsItem extends HTMLElement {
   }
 
   _getType () {
-    return this.attributes.href === undefined ? 'button' : 'a'
+    return this.hasAttribute('href') ? 'a' : 'button'
   }
 
   _removeAttribute () {

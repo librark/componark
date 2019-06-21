@@ -11,9 +11,12 @@
 
   #{$component} {
 
+    width: 100%;
+
     button,
     a {
       @extend .mdc-tab;
+      width: 100%;
 
       &>:not(:first-child) {
         margin-left: 5px;

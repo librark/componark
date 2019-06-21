@@ -12,5 +12,6 @@
     @extend .mdc-tab-scroller;
     // @extend .mdc-tab-scroller__scroll-area;
     @extend .mdc-tab-scroller__scroll-content;
+    justify-content: space-between;
   }
 }

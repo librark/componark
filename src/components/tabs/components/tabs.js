@@ -1,27 +1,24 @@
-export class Tabs extends HTMLElement {
-  init (context) {
-    return this
-  }
+import { Component } from '../../component'
 
-  connectedCallback () {
-    this.render()
+export class Tabs extends Component {
+  init (context) {
+    return super.init(context)
   }
 
   render () {
     this._autoActiveElement()
-    this._listen()
+    return super.render()
   }
 
-  _listen () {
-    const items = Array.from(this.querySelectorAll('ark-tabs-item'))
-    items.forEach(i => i.addEventListener('click', _ =>
-      this._activeElement(i))
+  load () {
+    this.selectAll('ark-tabs-item').forEach(
+      item => item.addEventListener('click', _ => this._activeElement(item))
     )
   }
 
   _activeElement (element) {
-    const items = Array.from(this.querySelectorAll('ark-tabs-item'))
-    items.forEach(i => i.removeAttribute('active'))
+    this.selectAll('ark-tabs-item').forEach(
+      item => item.removeAttribute('active'))
 
     element.setAttribute('active', '')
   }
