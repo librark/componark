@@ -40,7 +40,7 @@ export class Modal extends Component {
 
   load () {
     this.querySelectorAll('[close]').forEach(
-      btn => btn.addEventListener('click', _ => this.close())
+      button => button.addEventListener('click', _ => this.close())
     )
   }
 
