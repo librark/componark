@@ -1,0 +1,5 @@
+@import "./radio-group.ark";
+
+@mixin radio-group_ark() {
+  @include radio-group_ark_();
+}

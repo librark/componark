@@ -14,6 +14,7 @@
 @import "../../../components/list/main";
 @import "../../../components/modal/main";
 @import "../../../components/navbar/main";
+@import "../../../components/radio/main";
 @import "../../../components/select/main";
 @import "../../../components/sidebar/main";
 @import "../../../components/table/main";
@@ -33,6 +34,7 @@
     @include list($type);
     @include modal($type);
     @include navbar($type);
+    @include radio($type);
     @include select($type);
     @include sidebar($type);
     @include table($type);
