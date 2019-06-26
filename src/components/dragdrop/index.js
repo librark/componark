@@ -1,1 +1,1 @@
-export * from './components/dragdrop.js'
+export { DragDrop } from './components/dragdrop.js'

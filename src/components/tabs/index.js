@@ -1,2 +1,2 @@
-export * from './components/tabs.item.js'
-export * from './components/tabs.js'
+export { TabsItem } from './components/tabs.item.js'
+export { Tabs } from './components/tabs.js'

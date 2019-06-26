@@ -1,7 +1,13 @@
+// $primary: black !default;
+
+// ----------------------------------------------------------
+// ----------------------------------------------------------
+
 @import "../../../components/accordion/main";
 @import "../../../components/alert/main";
 @import "../../../components/button/main";
 @import "../../../components/card/main";
+@import "../../../components/checkbox/main";
 @import "../../../components/dragdrop/main";
 @import "../../../components/grid/main";
 @import "../../../components/icon/main";
@@ -9,12 +15,11 @@
 @import "../../../components/list/main";
 @import "../../../components/modal/main";
 @import "../../../components/navbar/main";
+@import "../../../components/radio/main";
 @import "../../../components/select/main";
 @import "../../../components/sidebar/main";
 @import "../../../components/table/main";
 @import "../../../components/tabs/main";
-
-$primary: red;
 
 // ----------------------------------------------------------
 // ----------------------------------------------------------
@@ -23,6 +28,7 @@ $primary: red;
     @include alert($type);
     @include button($type);
     @include card($type);
+    @include checkbox($type);
     @include dragdrop($type);
     @include grid($type);
     @include icon($type);
@@ -30,6 +36,7 @@ $primary: red;
     @include list($type);
     @include modal($type);
     @include navbar($type);
+    @include radio($type);
     @include select($type);
     @include sidebar($type);
     @include table($type);

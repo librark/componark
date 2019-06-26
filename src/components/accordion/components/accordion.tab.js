@@ -1,10 +1,14 @@
-export class AccordionTab extends HTMLElement {
+import { Component } from '../../component'
+
+export class AccordionTab extends Component {
   init (context) {
-    return this
+    this.header = context['header']
+    this.tabIndex = context['tabIndex']
+    return super.init(context)
   }
 
-  connectedCallback () {
-    this.render()
+  reflectedProperties () {
+    return ['header', 'tabIndex']
   }
 
   render () {
@@ -14,39 +18,33 @@ export class AccordionTab extends HTMLElement {
     }
 
     this.innerHTML = /* html */`
-      <button class="ark-accordion-tab__btn-header">
-        <span>${this.header}</span>
+      <button class="ark-accordion-tab__btn-header" listen on-click="toggle">
+        <span data-accordion-tab-header>${this.header}</span>
       </button>
       <div id="ark-accordion-tab__content">
         ${this.innerHTML}
       </div>
     `
 
-    this._listen()
-  }
-
-  _listen () {
-    this.querySelector('.ark-accordion-tab__btn-header').addEventListener(
-      'click', () => { this.toggle() }
-    )
+    return super.render()
   }
 
   open () {
     this.classList.add(`ark-accordion-tab--show`)
+    this.setAttribute('active', '')
   }
 
   close () {
     this.classList.remove(`ark-accordion-tab--show`)
+    this.removeAttribute('active')
   }
 
-  toggle () {
-    this.classList.toggle(`ark-accordion-tab--show`)
-  }
+  toggle (event) {
+    this.hasAttribute('active') ? this.close() : this.open()
 
-  // ---------------------------------------------------------------------------
-
-  get header () {
-    return this.hasAttribute('header')
+    this.dispatchEvent(new CustomEvent('accordiontab:click', {
+      detail: { tabIndex: this.tabIndex }
+    }))
   }
 }
 customElements.define('ark-accordion-tab', AccordionTab)

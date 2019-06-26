@@ -1,12 +1,9 @@
+import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
-export class Input extends HTMLElement {
+export class Input extends Component {
   init (context) {
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
@@ -28,22 +25,19 @@ export class Input extends HTMLElement {
       </div>
     `
     this._removeAttribute()
+    return super.render()
   }
 
   _getSlots (key) {
     if (!this.slots || !this.slots[key]) { return '' }
 
     return /* html */`
-        ${this.slots[key].map(element => `
-          ${element.outerHTML}
-        `).join('')}
+        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
       `
   }
 
   _getAttributes () {
-    const attributes = Array.from(this.attributes)
-
-    return attributes.map((attribute) => {
+    return Array.from(this.attributes).map((attribute) => {
       return attribute.value
         ? `${attribute.name}=${attribute.value}`
         : attribute.name

@@ -1,1 +1,1 @@
-export * from './components/sidebar.js'
+export { Sidebar } from './components/sidebar.js'

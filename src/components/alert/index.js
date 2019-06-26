@@ -1,1 +1,1 @@
-export * from './components/alert.js'
+export { Alert } from './components/alert.js'

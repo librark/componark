@@ -1,8 +1,12 @@
-export class Nav extends HTMLElement {
+import { Component } from '../../component'
+
+export class Nav extends Component {
   init (context) {
-    return this
+    return super.init(context)
   }
 
-  connectedCallback () { }
+  render () {
+    return super.render()
+  }
 }
 customElements.define('ark-nav', Nav)

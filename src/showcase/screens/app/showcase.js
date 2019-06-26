@@ -33,6 +33,7 @@ export default class ArkShowcase extends HTMLElement {
               <li data-component="alert">Alert</li>
               <li data-component="button">Button</li>
               <li data-component="card">Card</li>
+              <li data-component="checkbox">Checkbox</li>
               <li data-component="dragdrop">Drag and Drop</li>
               <li data-component="grid">Grid</li>
               <li data-component="icon">Icon</li>
@@ -40,6 +41,7 @@ export default class ArkShowcase extends HTMLElement {
               <li data-component="list">List</li>
               <li data-component="modal">Modal</li>
               <li data-component="navbar">Navbar</li>
+              <li data-component="radio">Radio</li>
               <li data-component="select">Select</li>
               <li data-component="sidebar">Sidebar</li>
               <li data-component="table">Table</li>

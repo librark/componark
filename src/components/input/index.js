@@ -1,1 +1,1 @@
-export * from './components/input.js'
+export { Input } from './components/input.js'

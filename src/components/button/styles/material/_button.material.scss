@@ -3,7 +3,7 @@
 
 @mixin button_material_() {
   $component: "ark-button";
-  $fab-size: 56px !important;
+  $fab-size: 56px;
 
   #{$component} {
     width: inherit;
@@ -21,11 +21,11 @@
       &[fab] {
         @extend .mdc-fab;
 
-        width: $fab-size;
-        height: $fab-size;
+        width: $fab-size !important;
+        height: $fab-size !important;
 
-        min-width: $fab-size;
-        min-height: $fab-size;
+        min-width: $fab-size !important;
+        min-height: $fab-size !important;
       }
 
       &[disabled] {
@@ -44,7 +44,7 @@
     // ----------------------------------------
     [horizontal],
     [vertical] {
-      position: fixed;
+      position: fixed !important;
     }
 
     // ----------------------------------------
@@ -74,7 +74,7 @@
     }
 
     [vertical~="end"] {
-      bottom: calc((#{$fab-size} / 2));
+      bottom: calc((#{$fab-size} / 3));
     }
   }
 }

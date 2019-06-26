@@ -1,21 +1,18 @@
+import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
-export class Sidebar extends HTMLElement {
+export class Sidebar extends Component {
   init (context) {
-    return this
+    return super.init(context)
   }
 
-  connectedCallback () {
-    this.nameElement = 'ark-sidebar'
-
-    this.render()
-  }
-
-  get opened () {
-    return this.hasAttribute('opened')
+  reflectedProperties () {
+    return ['opened']
   }
 
   render () {
+    this.nameElement = 'ark-sidebar'
+
     this.slots = getSlots(this)
 
     this.innerHTML = /* html */`
@@ -28,20 +25,14 @@ export class Sidebar extends HTMLElement {
         </div>
         ${this._getContent('footer', `${this.nameElement}-menu-footer`)}
       </div>
-      <div class="${this.nameElement}-scrim">
+      <div class="${this.nameElement}-scrim" listen on-click="close">
         ${this._getSlots('scrim')}
       </div>
     `
 
-    if (this.opened) this.open()
+    if (this.hasAttribute('opened')) this.open()
 
-    this._listen()
-  }
-
-  _listen () {
-    this.querySelector(`.${this.nameElement}-scrim`).addEventListener(
-      'click', _ => this.close()
-    )
+    return super.render()
   }
 
   _getContent (key, className) {

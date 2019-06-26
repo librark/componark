@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "noImplicitThis": false,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "lib": [
+      "es6",
+      "webworker",
+      "dom",
+      "dom.iterable"
+    ],
+    "plugins": [{
+      "name": "typescript-tslint-plugin"
+    }]
+  }
+}

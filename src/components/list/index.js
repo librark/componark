@@ -1,2 +1,2 @@
-export * from './components/list.js'
-export * from './components/item.js'
+export { ListItem } from './components/item.js'
+export { List } from './components/list.js'

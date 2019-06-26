@@ -1,62 +1,78 @@
-import '../../../src/components/accordion'
+/** @typedef {import('../../../src/components').AccordionTab} AccordionTab */
+import { Accordion, AccordionTab } from '../../../src/components'
 
 describe('Accordion', () => {
   it('can be instantiated', () => {
-    const accordion = document.createElement('ark-accordion')
-    expect(accordion).toBeTruthy()
-
-    var init = accordion.init()
-    expect(accordion === init).toBeTruthy()
-  })
-  it('can be rendered without content', () => {
-    const accordion = document.createElement('ark-accordion')
+    const accordion = new Accordion()
     accordion.connectedCallback()
-    expect(!accordion.innerHTML.trim().length).toBeTruthy()
+    expect(accordion.outerHTML.trim()).toBe('<ark-accordion></ark-accordion>')
   })
-  it('can be renderd with closeOthers', () => {
-    const accordion = document.createElement('ark-accordion')
-    var att = document.createAttribute('closeOthers')
-    att.value = 'true'
-    accordion.setAttributeNode(att)
 
-    accordion.appendChild(generateTab('tab 1'))
-    accordion.appendChild(generateTab('tab 2'))
-    accordion.appendChild(generateTab('tab 3'))
+  it('can open all the tabs', () => {
+    const accordion = new Accordion()
+
+    const tab1 = new AccordionTab()
+    tab1.setAttribute('header', 'tab 1')
+    tab1.connectedCallback()
+    accordion.appendChild(tab1)
+
+    const tab2 = new AccordionTab()
+    tab2.setAttribute('header', 'tab 2')
+    tab2.connectedCallback()
+    accordion.appendChild(tab2)
 
     accordion.connectedCallback()
 
-    const tabs = accordion.querySelectorAll('ark-accordion-tab')
+    tab1.toggle()
+    tab2.toggle()
 
-    var btn = tabs[0].querySelector('button')
-    if (btn) btn.click()
+    expect(tab1.hasAttribute('active')).toBeTruthy()
+    expect(tab2.hasAttribute('active')).toBeTruthy()
   })
-  it('can be renderd without closeOthers', () => {
-    const accordion = document.createElement('ark-accordion')
-    var att = document.createAttribute('closeOthers')
-    att.value = 'false'
-    accordion.setAttributeNode(att)
 
-    accordion.appendChild(generateTab('tab 1'))
-    accordion.appendChild(generateTab('tab 2'))
-    accordion.appendChild(generateTab('tab 3'))
+  it('can open only one tabs', () => {
+    const accordion = new Accordion()
+    accordion.setAttributeNode(document.createAttribute('close-others'))
+
+    const tab1 = new AccordionTab()
+    tab1.setAttribute('header', 'tab 1')
+    tab1.connectedCallback()
+    accordion.appendChild(tab1)
+
+    const tab2 = new AccordionTab()
+    tab2.setAttribute('header', 'tab 2')
+    tab2.connectedCallback()
+    accordion.appendChild(tab2)
 
     accordion.connectedCallback()
 
-    const tabs = accordion.querySelectorAll('ark-accordion-tab')
+    tab1.toggle()
+    tab2.toggle()
 
-    var btn = tabs[0].querySelector('.ark-accordion-tab__btn-header')
-    if (btn) btn.click()
+    expect(!tab1.hasAttribute('active')).toBeTruthy()
+    expect(tab2.hasAttribute('active')).toBeTruthy()
   })
 
-  function generateTab (header) {
-    const tab = document.createElement('ark-accordion-tab')
-    var att = document.createAttribute('header')
-    att.value = header
-    tab.setAttributeNode(att)
+  it('can open all tab with false close-others attribute', () => {
+    const accordion = new Accordion()
+    accordion.setAttribute('close-others', 'false')
 
-    tab.innerHTML = /* html */`<h1>${header}</h1>`
+    const tab1 = new AccordionTab()
+    tab1.setAttribute('header', 'tab 1')
+    tab1.connectedCallback()
+    accordion.appendChild(tab1)
 
-    tab.connectedCallback()
-    return tab
-  }
+    const tab2 = new AccordionTab()
+    tab2.setAttribute('header', 'tab 2')
+    tab2.connectedCallback()
+    accordion.appendChild(tab2)
+
+    accordion.connectedCallback()
+
+    tab1.toggle()
+    tab2.toggle()
+
+    expect(tab1.hasAttribute('active')).toBeTruthy()
+    expect(tab2.hasAttribute('active')).toBeTruthy()
+  })
 })

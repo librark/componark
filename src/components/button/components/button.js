@@ -1,6 +1,8 @@
-export class Button extends HTMLElement {
+import { Component } from '../../component'
+
+export class Button extends Component {
   init (context) {
-    return this
+    return super.init(context)
   }
 
   connectedCallback () {
@@ -14,9 +16,11 @@ export class Button extends HTMLElement {
         </${this._getType()}>
     `
     this._removeAttribute()
+    return super.render()
   }
 
   _getAttributes () {
+    this.isFab()
     const attributes = Array.from(this.attributes)
 
     return attributes.map((attribute) => {
@@ -26,8 +30,19 @@ export class Button extends HTMLElement {
     }).join(' ')
   }
 
+  isFab () {
+    if (
+      this.hasAttribute('fab') &&
+      !this.hasAttribute('horizontal') &&
+      !this.hasAttribute('vertical')
+    ) {
+      this.setAttribute('horizontal', 'end')
+      this.setAttribute('vertical', 'end')
+    }
+  }
+
   _getType () {
-    return this.attributes.href === undefined ? 'button' : 'a'
+    return this.hasAttribute('href') ? 'a' : 'button'
   }
 
   _removeAttribute () {

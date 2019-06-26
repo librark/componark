@@ -1,10 +1,8 @@
-export class Select extends HTMLElement {
-  init (context) {
-    return this
-  }
+import { Component } from '../../component'
 
-  connectedCallback () {
-    this.render()
+export class Select extends Component {
+  init (context) {
+    return super.init(context)
   }
 
   render () {
@@ -14,7 +12,9 @@ export class Select extends HTMLElement {
           ${this.innerHTML}
         </select>
     `
+
     this._removeAttribute()
+    return super.render()
   }
 
   _getAttributes () {

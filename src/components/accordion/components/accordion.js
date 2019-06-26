@@ -1,39 +1,38 @@
-export * from './accordion.tab.js'
+/** @typedef {import('./accordion.tab.js').AccordionTab} AccordionTab */
+import { Component } from '../../component'
 
-export class Accordion extends HTMLElement {
+export class Accordion extends Component {
   init (context) {
-    return this
+    this.closeOthers = context['closeOthers']
+    return super.init(context)
   }
 
-  connectedCallback () {
-    this.render()
+  reflectedProperties () {
+    return ['closeOthers']
   }
 
   render () {
-    this.innerHTML = /* html */`${this.innerHTML}`
-    this._listen()
-  }
-
-  _listen () {
-    if (this._closeOthers) {
-      const items = Array.from(this.querySelectorAll('ark-accordion-tab'))
-
-      items.forEach((item, i) => {
-        item.querySelector('.ark-accordion-tab__btn-header').onclick = () => {
-          items.forEach((aux, a) => {
-            if (i !== a) {
-              // aux.close()
-              aux.classList.remove(`ark-accordion-tab--show`)
-            }
-          })
-        }
-      })
+    for (let [index, tab] of this.selectAll('ark-accordion-tab').entries()) {
+      tab.setAttribute('tab-index', index.toString())
+      tab.setAttribute('listen', 'listen')
+      tab.setAttribute('on-accordiontab:click', 'activateTab')
     }
+    return super.render()
   }
 
-  get _closeOthers () {
-    const att = this.getAttributeNode('closeOthers')
-    return att ? !(att.value === 'false') : true
+  activateTab (event) {
+    event.stopPropagation()
+    if (!this.hasAttribute('close-others')) return
+
+    if (this['closeOthers'] === 'true' ||
+    !this['closeOthers'].toString().length) {
+      this.selectAll('ark-accordion-tab').forEach(
+        (/** @type {AccordionTab} */ tab) => {
+          tab.close()
+        })
+
+      event.target.open()
+    }
   }
 }
 customElements.define('ark-accordion', Accordion)

@@ -1,10 +1,8 @@
-export class Navbar extends HTMLElement {
-  init (context) {
-    return this
-  }
+import { Component } from '../../component'
 
-  connectedCallback () {
-    this.render()
+export class Navbar extends Component {
+  init (context) {
+    return super.init(context)
   }
 
   render () {
@@ -13,19 +11,20 @@ export class Navbar extends HTMLElement {
         ${this.innerHTML}
       </div>
     `
-    this._listen()
+    return super.render()
   }
 
-  _listen () {
-    const toggleButton = this.querySelector('[ark-navbar-toggle]')
-    if (toggleButton) {
-      toggleButton.addEventListener('click', () => this.toggleContent())
+  load () {
+    const navbar = this.querySelector('[ark-navbar-toggle]')
+    if (navbar) {
+      navbar.addEventListener(
+        'click', () => this.toggleContent()
+      )
     }
   }
 
   toggleContent () {
-    const myClass = 'ark-navbar--show'
-    this.classList.toggle(myClass)
+    this.classList.toggle('ark-navbar--show')
   }
 }
 customElements.define('ark-navbar', Navbar)
