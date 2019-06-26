@@ -1,0 +1,21 @@
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../theme/main";
+// -------------------------------------------
+@import "./styles/_default/_default.checkbox";
+// -------------------------------------------
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
+
+@mixin checkbox($theme: ark) {
+    @include checkbox_default();
+
+    @if $theme==ark {
+        @include checkbox_ark();
+    }
+
+    @if $theme==material {
+        @include checkbox_material();
+    }
+}

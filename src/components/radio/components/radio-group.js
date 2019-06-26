@@ -17,17 +17,15 @@ export class RadioGroup extends Component {
     this.slots = getSlots(this)
 
     this.innerHTML = /* html */`
-      <div class="${this._getTypeClass()}">
-        <div class="ark-radio-group__label">
-          <small>${this.label}</small>
+      <div class="ark-radio-group__label">
+        <small>${this.label}</small>
+      </div>
+      <div>
+        <div class="ark-radio-group__list">
+          ${this._getRadioButtons()}
         </div>
-        <div>
-          <div class="ark-radio-group__list">
-            ${this._getRadioButtons()}
-          </div>
-          <div class="ark-radio-group__alert">
-            ${this._getSlots('alert')}
-          </div>
+        <div class="ark-radio-group__alert">
+          ${this._getSlots('alert')}
         </div>
       </div>
     `
@@ -59,15 +57,11 @@ export class RadioGroup extends Component {
     return buttons.length ? outerHTML() : ''
   }
 
-  _getTypeClass () {
-    return this.hasAttribute('type')
-      ? `ark-radio-group__type-${this.getAttribute('type')}`
-      : `ark-radio-group__type-text`
-  }
-
   // ---------------------------------------------------------------------------
   get value () {
-    const input = this.querySelector(`input[name="${this.name}"]:checked`)
+    const input = this.querySelector(
+      `ark-radio-button input[name="${this.name}"]:checked`
+    )
     return input ? input['value'] : ''
   }
 
