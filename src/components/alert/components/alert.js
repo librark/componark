@@ -8,14 +8,17 @@ export class Alert extends Component {
     this.horizontal = context['horizontal'] || this.horizontal || 'center'
     this.vertical = context['vertical'] || this.vertical || 'center'
     this.showConfirmButton = (
-      context['showConfirmButton'] || this.showConfirmButton || 'false')
+      context['showConfirmButton'] || this.showConfirmButton || false)
     this.confirmButtonText = (
       context['confirmButtonText'] || this.confirmButtonText || 'Aceptar')
     this.confirmButtonBackground = (
       context['confirmButtonBackground'] || this.confirmButtonBackground ||
       'primary')
+
+    // console.log('>>>', this.showCancelButton, context['showCancelButton'])
+
     this.showCancelButton = (
-      context['showCancelButton'] || this.showCancelButton || true)
+      context['showCancelButton'] || this.showCancelButton)
     this.cancelButtonText = (
       context['cancelButtonText'] || this.cancelButtonText || 'Cancelar')
     this.cancelButtonBackground = (
@@ -112,35 +115,41 @@ export class Alert extends Component {
   }
 
   _renderConfirmButton () {
-    if (!this._parseBooleanValue(this.showConfirmButton)) return ''
-
-    return this.confirmButtonText.length ? /* html */`
-        <button close alert-confirm-button
+    return (
+      this._parseBooleanValue(this.showConfirmButton) &&
+      this.confirmButtonText.length
+    ) ? /* html */`
+      <button close alert-confirm-button
         background="${this.confirmButtonBackground}">
-          ${this.confirmButtonText}
-        </button>
-      ` : ''
+        ${this.confirmButtonText}
+      </button>
+    ` : ''
   }
 
   _renderCancelButton () {
-    if (!this._parseBooleanValue(this.showCancelButton)) return ''
+    // console.log('>>>>>>>>>>><')
 
-    return this.cancelButtonText.length ? /* html */`
-        <button close alert-cancel-button
+    // console.log(this._parseBooleanValue(this.showCancelButton))
+
+    return (
+      this._parseBooleanValue(this.showCancelButton) &&
+      this.cancelButtonText.length !== 0
+    ) ? /* html */`
+      <button close alert-cancel-button
         background="${this.cancelButtonBackground}">
-          ${this.cancelButtonText}
-        </button>
-      ` : ''
+        ${this.cancelButtonText}
+      </button>
+    ` : ''
   }
 
   _parseBooleanValue (value) {
-    switch (value) {
-      case true: case 'true': case '':
-        return true
-      case false: case 'false':
-        return false
+    if (value === true || value === 'true' || value === '') {
+      return true
+    } else if (value === false || value === 'false') {
+      return false
+    } else {
+      return false
     }
-    return false
   }
 
   _getSlots (key) {

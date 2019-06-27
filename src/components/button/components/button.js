@@ -20,7 +20,7 @@ export class Button extends Component {
   }
 
   _getAttributes () {
-    this.isFab()
+    this._isFab()
     const attributes = Array.from(this.attributes)
 
     return attributes.map((attribute) => {
@@ -30,7 +30,7 @@ export class Button extends Component {
     }).join(' ')
   }
 
-  isFab () {
+  _isFab () {
     if (
       this.hasAttribute('fab') &&
       !this.hasAttribute('horizontal') &&

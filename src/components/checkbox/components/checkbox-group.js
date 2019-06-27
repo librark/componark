@@ -31,6 +31,16 @@ export class CheckboxGroup extends Component {
     return super.render()
   }
 
+  get value () {
+    const values = []
+    this.querySelectorAll(`ark-checkbox input:checked`).forEach(input => {
+      values.push(input['value'])
+    })
+    return values
+  }
+
+  // ---------------------------------------------------------------------------
+
   _getSlots (key) {
     if (!this.slots || !this.slots[key]) { return '' }
 
@@ -51,15 +61,6 @@ export class CheckboxGroup extends Component {
     }
 
     return checkboxs.length ? outerHTML() : ''
-  }
-
-  // ---------------------------------------------------------------------------
-  get value () {
-    const values = []
-    this.querySelectorAll(`ark-checkbox input:checked`).forEach(input => {
-      values.push(input['value'])
-    })
-    return values
   }
 }
 customElements.define('ark-checkbox-group', CheckboxGroup)

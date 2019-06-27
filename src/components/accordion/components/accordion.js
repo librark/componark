@@ -15,12 +15,12 @@ export class Accordion extends Component {
     for (let [index, tab] of this.selectAll('ark-accordion-tab').entries()) {
       tab.setAttribute('tab-index', index.toString())
       tab.setAttribute('listen', 'listen')
-      tab.setAttribute('on-accordiontab:click', 'activateTab')
+      tab.setAttribute('on-accordiontab:click', '_activateTab')
     }
     return super.render()
   }
 
-  activateTab (event) {
+  _activateTab (event) {
     event.stopPropagation()
     if (!this.hasAttribute('close-others')) return
 

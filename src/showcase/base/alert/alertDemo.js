@@ -52,10 +52,10 @@ export class alertDemo extends HTMLElement {
       Alert.launch({
         title: 'Title....',
         text: 'Text ....',
-        // showConfirmButton: true,
+        showConfirmButton: false,
         confirmButtonText: 'Confirm',
         confirmButtonBackground: 'info',
-        // showCancelButton: true,
+        showCancelButton: false,
         cancelButtonText: 'Cerrar',
         cancelButtonBackground: 'dark',
         horizontal: 'start',

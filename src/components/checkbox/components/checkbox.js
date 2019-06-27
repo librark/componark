@@ -12,7 +12,7 @@ export class Checkbox extends Component {
 
   render () {
     this.innerHTML = /* html */`
-      <div class="ark-checkbox__body" listen on-click="onChange">
+      <div class="ark-checkbox__body" listen on-click="_onChange">
         <div class="ark-checkbox__input">
           <input data-checkbox type="checkbox" ${this._getAttributes()}>
         </div>
@@ -22,14 +22,6 @@ export class Checkbox extends Component {
       </div>
     `
     return super.render()
-  }
-
-  onChange () {
-    this.toggel()
-
-    this.dispatchEvent(new CustomEvent('checkbox:click', {
-      detail: { value: this.value }
-    }))
   }
 
   checked () {
@@ -53,6 +45,14 @@ export class Checkbox extends Component {
   }
 
   // ---------------------------------------------------------------------------
+
+  _onChange () {
+    this.toggel()
+
+    this.dispatchEvent(new CustomEvent('checkbox:click', {
+      detail: { value: this.value }
+    }))
+  }
 
   _getAttributes () {
     const attributes = Array.from(this.attributes)

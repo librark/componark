@@ -44,6 +44,22 @@ export class Modal extends Component {
     )
   }
 
+  open () {
+    this.removeAttribute('hidden')
+  }
+
+  close () {
+    this.setAttribute('hidden', '')
+  }
+
+  toggle () {
+    this.hasAttribute('hidden')
+      ? this.removeAttribute('hidden')
+      : this.setAttribute('hidden', '')
+  }
+
+  // ---------------------------------------------------------------------------
+
   _getSlots (key) {
     if (!this.slots || !this.slots[key]) { return '' }
 
@@ -72,20 +88,6 @@ export class Modal extends Component {
       }
       this.removeAttribute(name)
     }
-  }
-
-  open () {
-    this.removeAttribute('hidden')
-  }
-
-  close () {
-    this.setAttribute('hidden', '')
-  }
-
-  toggle () {
-    this.hasAttribute('hidden')
-      ? this.removeAttribute('hidden')
-      : this.setAttribute('hidden', '')
   }
 }
 customElements.define('ark-modal', Modal)

@@ -7,7 +7,7 @@ export class Select extends Component {
 
   render () {
     this.innerHTML = /* html */`
-        ${this.placeholder}
+        ${this._getPlaceholder}
         <select ${this._getAttributes()}>
           ${this.innerHTML}
         </select>
@@ -33,7 +33,7 @@ export class Select extends Component {
     }
   }
 
-  get placeholder () {
+  _getPlaceholder () {
     const placeholder = this.getAttribute('placeholder')
     return placeholder ? /* html */ `
       <label>${placeholder}</label>

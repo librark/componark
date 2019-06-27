@@ -40,6 +40,7 @@ export class AccordionTab extends Component {
   }
 
   toggle (event) {
+    event.stopPropagation()
     this.hasAttribute('active') ? this.close() : this.open()
 
     this.dispatchEvent(new CustomEvent('accordiontab:click', {

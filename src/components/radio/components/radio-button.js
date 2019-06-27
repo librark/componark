@@ -12,7 +12,7 @@ export class RadioButton extends Component {
 
   render () {
     this.innerHTML = /* html */`
-      <div class="ark-radio-button__body" listen on-click="onChange">
+      <div class="ark-radio-button__body" listen on-click="_onChange">
         <div class="ark-radio-button__button">
           <input data-radio-button type="radio" ${this._getAttributes()}>
         </div>
@@ -22,14 +22,6 @@ export class RadioButton extends Component {
       </div>
     `
     return super.render()
-  }
-
-  onChange () {
-    this.toggel()
-
-    this.dispatchEvent(new CustomEvent('radiobutton:click', {
-      detail: { value: this.value }
-    }))
   }
 
   checked () {
@@ -53,6 +45,14 @@ export class RadioButton extends Component {
   }
 
   // ---------------------------------------------------------------------------
+
+  _onChange () {
+    this.toggel()
+
+    this.dispatchEvent(new CustomEvent('radiobutton:click', {
+      detail: { value: this.value }
+    }))
+  }
 
   _getAttributes () {
     const attributes = Array.from(this.attributes)

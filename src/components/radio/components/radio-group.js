@@ -32,6 +32,15 @@ export class RadioGroup extends Component {
     return super.render()
   }
 
+  get value () {
+    const input = this.querySelector(
+      `ark-radio-button input[name="${this.name}"]:checked`
+    )
+    return input ? input['value'] : ''
+  }
+
+  // ---------------------------------------------------------------------------
+
   _getSlots (key) {
     if (!this.slots || !this.slots[key]) { return '' }
 
@@ -48,7 +57,7 @@ export class RadioGroup extends Component {
       buttons.forEach(button => {
         button.setAttribute('name', this.name)
         button.setAttribute('listen', 'listen')
-        button.setAttribute('on-radiobutton:click', 'radioButtonEvent')
+        button.setAttribute('on-radiobutton:click', '_radioButtonEvent')
         aux += button.outerHTML
       })
       return aux
@@ -57,15 +66,7 @@ export class RadioGroup extends Component {
     return buttons.length ? outerHTML() : ''
   }
 
-  // ---------------------------------------------------------------------------
-  get value () {
-    const input = this.querySelector(
-      `ark-radio-button input[name="${this.name}"]:checked`
-    )
-    return input ? input['value'] : ''
-  }
-
-  radioButtonEvent (event) {
+  _radioButtonEvent (event) {
     event.stopPropagation()
     event.target.checked()
   }

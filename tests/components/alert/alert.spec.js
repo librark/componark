@@ -10,6 +10,13 @@ describe('Alert', () => {
     expect(alert === init).toBeTruthy()
   })
 
+  it('can be instantiated', () => {
+    const alert = /** @type {Alert} */ (document.createElement('ark-alert'))
+    alert.connectedCallback()
+    alert.toggle()
+    expect(alert.hasAttribute('hidden')).toBeTruthy()
+  })
+
   it('can be rendered with slots', function () {
     const alert = new Alert()
     alert.innerHTML = /* HTML */`
@@ -176,11 +183,27 @@ describe('Alert', () => {
       title: 'hello',
       text: 'word',
       showConfirmButton: true,
-      confirmButtonText: '<<<<'
+      confirmButtonText: 'confirmButtonText'
     }, div)
     alert.connectedCallback()
 
     alert.close()
     expect(!div.querySelector('ark-alert')).toBeTruthy()
+  })
+
+  it('can close from scrim event', function () {
+    /** @type {Alert} */
+    const alert = Alert.launch({
+      title: 'hello',
+      text: 'word',
+      showConfirmButton: 'false',
+      showCancelButton: 'false'
+    })
+    alert.connectedCallback()
+
+    alert.close()
+    expect(!alert.querySelector('ark-alert')).toBeTruthy()
+    expect(!alert.querySelector('[alert-confirm-button]')).toBeTruthy()
+    expect(!alert.querySelector('[alert-cancel-button]')).toBeTruthy()
   })
 })

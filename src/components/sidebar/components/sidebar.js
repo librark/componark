@@ -35,6 +35,20 @@ export class Sidebar extends Component {
     return super.render()
   }
 
+  open () {
+    this.classList.add(`${this.nameElement}--opened`)
+  }
+
+  close () {
+    this.classList.remove(`${this.nameElement}--opened`)
+  }
+
+  toggle () {
+    this.classList.toggle(`${this.nameElement}--opened`)
+  }
+
+  // ---------------------------------------------------------------------------
+
   _getContent (key, className) {
     const slots = this._getSlots(key)
 
@@ -55,18 +69,6 @@ export class Sidebar extends Component {
           ${element.outerHTML}
         `).join('')}
       `
-  }
-
-  open () {
-    this.classList.add(`${this.nameElement}--opened`)
-  }
-
-  close () {
-    this.classList.remove(`${this.nameElement}--opened`)
-  }
-
-  toggle () {
-    this.classList.toggle(`${this.nameElement}--opened`)
   }
 }
 customElements.define('ark-sidebar', Sidebar)

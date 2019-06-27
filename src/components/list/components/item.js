@@ -11,18 +11,18 @@ export class ListItem extends Component {
 
     this.innerHTML = /* html */`
       <div class="general">
-        ${this.getSlots('start', slots)}
-        ${this.getSlots('general', slots)}
+        ${this._getSlots('start', slots)}
+        ${this._getSlots('general', slots)}
       </div>
       <div class="end">
-        ${this.getSlots('end', slots)}
+        ${this._getSlots('end', slots)}
       </div>
     `
 
     return super.render()
   }
 
-  getSlots (key, slots) {
+  _getSlots (key, slots) {
     if (!slots[key]) { return '' }
 
     return /* HTML */`
