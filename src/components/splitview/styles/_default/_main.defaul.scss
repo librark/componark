@@ -1,0 +1,9 @@
+@import "./_default.detail";
+@import "./default.master";
+@import "./default.splitview";
+
+@mixin splitview_defaul() {
+  @include splitview_detail_default();
+  @include splitview_master_default();
+  @include splitview_default_();
+}

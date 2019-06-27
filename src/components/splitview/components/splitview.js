@@ -2,27 +2,31 @@
  * @typedef {import('./detail.js').SplitviewDetail} SplitviewDetail
  * @typedef {import('./master.js').SplitviewMaster} SplitviewMaster
  **/
+
+import './master'
+import './detail'
+
 import { Component } from '../../component'
-import { SplitviewDetail } from './detail'
-import { SplitviewMaster } from './master'
 
 export class Splitview extends Component {
   init (context) {
-    this.masterTemplate = context['masterTemplate']
     this.detailTemplate = context['detailTemplate']
-    this.masterEvent = context['masterEvent'] || this.masterEvent
+    this.title = context['title'] || this.title || ''
+
     return super.init(context)
   }
 
-  reflectedProperties () {
-    return ['masterEvent']
-  }
-
   render () {
-    if (this.masterTemplate && this.detailTemplate) {
-      this.innerHTML = /* html */ ``
-      this.append(this._newSplitviewMaster())
-      this.append(this._newSplitviewDetail())
+    if (this.master && this.detailTemplate) {
+      this.innerHTML = /* html */`
+        <div class="master-container">
+          ${this.innerHTML}
+        </div>
+        <ark-splitview-detail></ark-splitview-detail>
+      `
+
+      this._listenMaster()
+      this._initSplitviewDetail()
     }
     return super.render()
   }
@@ -38,28 +42,24 @@ export class Splitview extends Component {
   }
 
   // ---------------------------------------------------------------------------
+  /** @argument {Event} event */
   _onMasterChange (event) {
-    const item = event.detail ? event.detail.item : {}
+    event.stopImmediatePropagation()
+    const item = event['detail'] ? event['detail']['item'] : {}
     this.detail.init({ item: item }).render()
   }
 
-  /** @return {SplitviewMaster} */
-  _newSplitviewMaster () {
-    const master = new SplitviewMaster()
-    master.setAttribute('master-event', this.masterEvent)
-    master.setAttribute('listen', 'listen')
-    master.setAttribute('on-master:change', '_onMasterChange')
-    master.init({ template: this.masterTemplate })
-    master.connectedCallback()
-    return master
+  _listenMaster () {
+    this.master.setAttribute('listen', 'listen')
+    this.master.setAttribute('on-master:change', '_onMasterChange')
   }
 
-  /** @return {SplitviewDetail} */
-  _newSplitviewDetail () {
-    const detail = new SplitviewDetail()
-    detail.init({ template: this.detailTemplate })
-    detail.connectedCallback()
-    return detail
+  _initSplitviewDetail () {
+    this.detail.init({
+      template: this.detailTemplate,
+      title: this.title
+    })
+    this.detail.connectedCallback()
   }
 }
 customElements.define('ark-splitview', Splitview)

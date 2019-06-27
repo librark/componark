@@ -2,7 +2,6 @@ import { Component } from '../../component'
 
 export class SplitviewMaster extends Component {
   init (context) {
-    this.template = context['template'] || this.template || null
     this.masterEvent = this.masterEvent
     return super.init(context)
   }
@@ -12,22 +11,17 @@ export class SplitviewMaster extends Component {
   }
 
   render () {
-    if (this.template) {
-      this.innerHTML = this.template()
-      this._listen()
-    }
-    return super.render()
-  }
-
-  _listen () {
     if (this.firstElementChild) {
       this.firstElementChild.addEventListener(
         this.masterEvent, this._onMasterEvent.bind(this)
       )
     }
+    return super.render()
   }
 
+  /** @argument {Event} event */
   _onMasterEvent (event) {
+    event.stopImmediatePropagation()
     this.dispatchEvent(new CustomEvent('master:change', event))
   }
 }

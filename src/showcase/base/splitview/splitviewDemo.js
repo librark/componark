@@ -1,4 +1,8 @@
-/** @typedef {import('../../../components').Splitview} Splitview */
+/**
+ * @typedef {import('../../../components').Splitview} Splitview
+ * @typedef {import('../../../components').List} List
+ **/
+
 import { Component } from '../../../components/component'
 
 export class SplitviewDemo extends Component {
@@ -9,8 +13,14 @@ export class SplitviewDemo extends Component {
 
   render () {
     this.innerHTML = /* html */`
-      <h1>Splitview</h1>
-      <ark-splitview master-event="list:selected"></ark-splitview>
+      <ark-splitview>
+        <h1>Splitview</h1>
+
+        <ark-splitview-master master-event="list:selected">
+          <ark-list></ark-list>
+        </ark-splitview-master>
+
+      </ark-splitview>
     `
     return super.render()
   }
@@ -19,10 +29,6 @@ export class SplitviewDemo extends Component {
     // =========================================================================
     // splitview
     // =========================================================================
-    const masterTemplate = () => /* html */`
-      <ark-list></ark-list>
-    `
-
     const detailTemplate = (item) => /* html */`
       <h1>DETAIL</h1>
       <hr/>
@@ -32,8 +38,8 @@ export class SplitviewDemo extends Component {
 
     const splitview = /** @type {Splitview} */ (
       this.select('ark-splitview').init({
-        masterTemplate: masterTemplate,
-        detailTemplate: detailTemplate
+        detailTemplate: detailTemplate,
+        title: 'Resultados'
       }).render())
 
     // =========================================================================
@@ -53,7 +59,10 @@ export class SplitviewDemo extends Component {
       { first: 'Perú', second: 'Bolivia', year: 2019 }
     ]
 
-    const list = await splitview.master.select('ark-list').init({
+    const list = /** @type {List} */ (
+      splitview.master.querySelector('ark-list')
+    )
+    await list.init({
       source: source,
       template: template
     }).load()
