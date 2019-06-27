@@ -4,7 +4,7 @@ ComponArk
 Knowark's Web Components Library
 
 
-Guidelines
+GuideLines
 ##########
 
 
