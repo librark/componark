@@ -8,6 +8,15 @@ export class Component extends HTMLElement {
 
     reflectedProperties(): string[]
 
+    connectedCallback(): void
+
+    disconnectedCallback(): void
+
+    attributeChangedCallback(
+        name: string, oldValue: string, newValue: string): void
+
+    adoptedCallback(): void
+
     select(selectors: string): Component
 
     selectAll(selectors: string): NodeListOf<Component>
