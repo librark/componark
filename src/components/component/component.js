@@ -14,6 +14,7 @@ export class Component extends HTMLElement {
 
   connectedCallback () {
     this.render()
+    this.load()
   }
 
   /** @return {string[]} */
@@ -23,12 +24,12 @@ export class Component extends HTMLElement {
 
   /** @return {Component} */
   render () {
-    this.load()
     listen(this)
     return this
   }
 
-  load () {
+  /** @return {Promise<void>} */
+  async load () {
 
   }
 
