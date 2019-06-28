@@ -4,6 +4,7 @@ export class List extends Component {
   /** @param {Object} context */
   init (context) {
     this.source = context['source'] || null
+    this.template = context['template'] || null
 
     /** @type {Object[]} */
     this.items = []
@@ -22,25 +23,27 @@ export class List extends Component {
 
   async load () {
     if (!this.source) return
-
     this.items = await this.source()
-    this.render()
+    return this
   }
 
   _renderItems () {
     return /* html */`
-    <ul>
-      ${this.items.map((item, index) => `
-        ${this._renderItem(item, index)}
-      `).join('')}
-    </ul>
+    ${this.items.map((item, index) => `
+      ${this._renderItem(item, index)}
+    `).join('')}
     `
   }
 
   /** @param {Object} item @param {number} index */
   _renderItem (item, index) {
+    let content = (this.template ? this.template(item)
+      : `${item[Object.keys(item)[0]]}`)
+
     return /* html */`
-    <li>${item[Object.keys(item)[0]]}</li>
+    <div data-index="${index}" data-item>
+      ${content}
+    </div>
     `
   }
 }

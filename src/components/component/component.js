@@ -28,9 +28,9 @@ export class Component extends HTMLElement {
     return this
   }
 
-  /** @return {Promise<void>} */
+  /** @return {Promise<Component>} */
   async load () {
-
+    return this
   }
 
   /**

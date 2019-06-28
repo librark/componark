@@ -1,23 +1,20 @@
-export class ListDemo extends HTMLElement {
+import { Component } from '../../../components/component'
+
+export class ListDemo extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init({})
   }
 
   render () {
     this.innerHTML = /* html */`
-      <div mobile><p>mobile (360px).</p></div>
-      <div tablet><p>tablet (768px).</p></div>
-      <div desktop><p>desktop (960px).</p></div>
       ${this._setupContent()}
     `
-    this._setupFrame('[mobile]', '360px')
-    this._setupFrame('[tablet]', '768px')
-    this._setupFrame('[desktop]', '960px')
+    // this._setupFrame('[mobile]', '360px')
+    // this._setupFrame('[tablet]', '768px')
+    // this._setupFrame('[desktop]', '960px')
+
+    return super.render()
   }
 
   _setupFrame (selector, width) {
@@ -42,43 +39,48 @@ export class ListDemo extends HTMLElement {
 
   _setupContent () {
     return /* html */`
-      <p>list item</p>
+      <h1>Default List</h1>
 
-      <ark-list>
-        <ark-list-item>
-          <span>fa-address-book</span>
-          <div slot="start">
-            <ark-icon name="fas fa-address-book"></ark-icon>
-          </div>
-          <div slot="end">1</div>
-          <div slot="end">2</div>
-          <div slot="end">3</div>
-          <div slot="end">4</div>
-        </ark-list-item>
-        <ark-list-item>
-          <div>fa-address-book</div>
-          <div slot="start">
-            <ark-icon name="far fa-address-book"></ark-icon>
-          </div>
-          <div slot="end">far</div>
-        </ark-list-item>
-      </ark-list>
+      <ark-list data-default-list></ark-list>
 
-      <ark-list>
-        <ark-list-item>
-          <div>fa-address-book</div>
-          <div slot="end">
-            <ark-icon name="fas fa-address-book"></ark-icon>
-          </div>
-        </ark-list-item>
-        <ark-list-item>
-          <div>fa-address-book</div>
-          <div slot="end">
-            <ark-icon name="far fa-address-book"></ark-icon>
-          </div>
-        </ark-list-item>
-      </ark-list>
+      <h1>Template List</h1>
+
+      <ark-list data-template-list></ark-list>
+
     `
+  }
+
+  async load () {
+    const source = async () => [
+      { first: 'Colombia', second: 'Argentina', year: 2016 },
+      { first: 'Uruguay', second: 'Colombia', year: 2017 },
+      { first: 'Brasil', second: 'Argentina', year: 2018 },
+      { first: 'Perú', second: 'Bolivia', year: 2019 }
+    ]
+
+    // DEFAULT LIST
+
+    const defaultList = await this.select('[data-default-list]').init({
+      source: source
+    }).load()
+    defaultList.render()
+
+    // TEMPLATE LIST
+
+    const template = (item) => /* html */`
+      <h1>${item.year}</h1>
+      <span data-first>FIRST: ${item.first}</span>
+      <span> | </span>
+      <span data-second>SECOND: ${item.second}</span>
+    `
+
+    const templateList = await this.select('[data-template-list]').init({
+      source: source,
+      template: template
+    }).load()
+    templateList.render()
+
+    return this
   }
 }
 customElements.define('demo-list', ListDemo)
