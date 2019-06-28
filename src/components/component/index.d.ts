@@ -4,7 +4,7 @@ export class Component extends HTMLElement {
 
     render(): Component
 
-    load(): Promise<void>
+    load(): Promise<Component>
 
     reflectedProperties(): string[]
 

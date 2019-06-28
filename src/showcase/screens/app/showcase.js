@@ -1,4 +1,6 @@
-import '../../../components'
+import './components'
+
+/** @typedef {import('./components').Component} Component */
 
 export default class ArkShowcase extends HTMLElement {
   init (context) {
@@ -60,7 +62,8 @@ export default class ArkShowcase extends HTMLElement {
       'click', async (event) => {
         const item = /** @type {HTMLElement} */ (event.target)
         const componentName = item.dataset.component
-        const screenComponent = await this._loadComponent(componentName)
+        const screenComponent = /** @type {Component} */ (
+          await this._loadComponent(componentName))
 
         try {
           screenComponent.init({ 'type': this.type })
