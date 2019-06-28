@@ -1,4 +1,5 @@
 import { Component } from '../../component'
+export { ListItem } from './item.js'
 
 export class List extends Component {
   /** @param {Object} context */
@@ -8,6 +9,7 @@ export class List extends Component {
 
     /** @type {Object[]} */
     this.items = []
+    this.selected = {}
 
     return super.init(context)
   }
@@ -41,10 +43,22 @@ export class List extends Component {
       : `${item[Object.keys(item)[0]]}`)
 
     return /* html */`
-    <div data-index="${index}" data-item>
+    <ark-list-item index="${index}" 
+      listen on-list-item:selected="_onSelected">
       ${content}
-    </div>
+    </ark-list-item>
     `
+  }
+
+  _onSelected (event) {
+    const index = event.detail.index
+    this.selected = this.items[index]
+
+    this.dispatchEvent(new CustomEvent('list:selected', {
+      detail: {
+        item: this.selected
+      }
+    }))
   }
 }
 customElements.define('ark-list', List)

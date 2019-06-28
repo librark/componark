@@ -43,9 +43,10 @@ export class ListDemo extends Component {
 
       <ark-list data-default-list></ark-list>
 
-      <h1>Template List</h1>
+      <h1>Template List <span data-template-selected></span></h1>
 
-      <ark-list data-template-list></ark-list>
+      <ark-list data-template-list listen 
+        on-list:selected="onTemplateListSelected"></ark-list>
 
     `
   }
@@ -81,6 +82,13 @@ export class ListDemo extends Component {
     templateList.render()
 
     return this
+  }
+
+  onTemplateListSelected (event) {
+    const item = event.detail.item
+
+    this.select('[data-template-selected]').innerText = (
+      `${item.year} - ${item.first}`)
   }
 }
 customElements.define('demo-list', ListDemo)

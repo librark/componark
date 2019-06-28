@@ -1,35 +1,22 @@
 import { Component } from '../../component'
-import { getSlots } from '../../../utils'
 
 export class ListItem extends Component {
   init (context) {
+    this.index = this.index
+    this.addEventListener('click', this._onSelected.bind(this))
     return super.init(context)
   }
 
-  render () {
-    const slots = getSlots(this)
-
-    this.innerHTML = /* html */`
-      <div class="general">
-        ${this._getSlots('start', slots)}
-        ${this._getSlots('general', slots)}
-      </div>
-      <div class="end">
-        ${this._getSlots('end', slots)}
-      </div>
-    `
-
-    return super.render()
+  reflectedProperties () {
+    return ['index']
   }
 
-  _getSlots (key, slots) {
-    if (!slots[key]) { return '' }
-
-    return /* HTML */`
-        ${slots[key].map((element, index) => `
-          ${element.outerHTML}
-        `).join('')}
-      `
+  _onSelected (event) {
+    this.dispatchEvent(new CustomEvent('list-item:selected', {
+      detail: {
+        index: this.index
+      }
+    }))
   }
 }
 customElements.define('ark-list-item', ListItem)

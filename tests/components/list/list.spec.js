@@ -1,4 +1,5 @@
 import '../../../src/components/list'
+import '../../../src/components/list/components/item'
 
 /** @typedef {import('../../../src/components').List} List  */
 
@@ -32,7 +33,7 @@ describe('List', () => {
       list = await list.init(context).load()
       list.render()
 
-      const items = list.querySelectorAll('[data-item]')
+      const items = list.querySelectorAll('ark-list-item')
 
       expect(items.length).toEqual(4)
       expect(items[0].textContent.trim()).toEqual('Colombia')
@@ -67,7 +68,7 @@ describe('List', () => {
       list = await list.init(context).load()
       list.render()
 
-      const items = list.querySelectorAll('[data-item]')
+      const items = list.querySelectorAll('ark-list-item')
       expect(items.length).toEqual(4)
 
       const firstItem = items[0]
@@ -86,4 +87,43 @@ describe('List', () => {
 
       expect(list).toBeTruthy()
     })
+
+  it('can select an item when it is clicked', async () => {
+    let list = /** @type {List} */ (document.createElement('ark-list'))
+
+    const source = async () => [
+      { first: 'Colombia', second: 'Argentina', year: 2016 },
+      { first: 'Uruguay', second: 'Colombia', year: 2017 },
+      { first: 'Brasil', second: 'Argentina', year: 2018 },
+      { first: 'Perú', second: 'Bolivia', year: 2019 }
+    ]
+    const template = (item) => /* html */`
+      <h1>${item.year}</h1>
+      <span data-first>FIRST: ${item.first}</span>
+      <span> | </span>
+      <span data-second>SECOND: ${item.second}</span>
+      `
+
+    const context = {
+      source: source,
+      template: template
+    }
+
+    list = await list.init(context).load()
+    list.render()
+
+    // Simulate a click event on the third item
+    const event = new CustomEvent('list-item:selected', {
+      detail: {
+        index: 2
+      }
+    })
+
+    // @ts-ignore
+    list._onSelected(event)
+
+    const selected = list.selected
+
+    expect(selected['first']).toEqual('Brasil')
+  })
 })
