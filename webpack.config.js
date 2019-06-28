@@ -99,7 +99,7 @@ module.exports = (env, argv) => {
     config.devtool = 'source-map'
     // @ts-ignore
     config.devServer = {
-      open: true,
+      open: 'google-chrome',
       contentBase: './dist',
       historyApiFallback: true,
       port: 7890
