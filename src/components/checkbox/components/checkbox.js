@@ -44,6 +44,11 @@ export class Checkbox extends Component {
     }
   }
 
+  isChecked () {
+    const checkbox = this.querySelector('[data-checkbox]')
+    return checkbox.hasAttribute('checked')
+  }
+
   // ---------------------------------------------------------------------------
 
   _onChange () {
