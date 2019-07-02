@@ -25,6 +25,7 @@ export class DragDrop extends Component {
       this.setAttribute('draggable', 'true')
       this._addEventDraggable()
     }
+    return super.load()
   }
 
   _setAttributeUUID () {

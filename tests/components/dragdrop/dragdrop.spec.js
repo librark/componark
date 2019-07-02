@@ -1,74 +1,91 @@
+/** @typedef {import('../../../src/components').DragDrop} DragDrop */
 import { DragDrop } from '../../../src/components/dragdrop'
 
 describe('Drag and Drop', () => {
   it('can be instantiated', () => {
-    const element = document.createElement('ark-dragdrop')
+    const element = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     expect(element).toBeTruthy()
 
-    var init = element.init()
+    var init = element.init({})
     expect(element === init).toBeTruthy()
   })
 
   it('can be rendered without content', function () {
-    const element = document.createElement('ark-dragdrop')
+    const element = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     const att = document.createAttribute('droppable')
     element.setAttributeNode(att)
     element.connectedCallback()
   })
 
   it('is draggable by default', function () {
-    const element = document.createElement('ark-dragdrop')
+    const element = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     element.connectedCallback()
     expect(element.hasAttribute('draggable')).toBeTruthy()
   })
 
   it('get Element By DataTransfer', () => {
-    const element = document.createElement('ark-dragdrop')
+    const element = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     element.connectedCallback()
 
+    // @ts-ignore
     expect(element._getElementByDataTransfer(
       new Event('drop')) === null
     ).toBeTruthy()
   })
 
   it('parse Data', () => {
-    const element = document.createElement('ark-dragdrop')
+    const element = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     element.connectedCallback()
 
+    // @ts-ignore
     expect(element._parseData(null) === null).toBeTruthy()
+    // @ts-ignore
     expect(element._parseData('') === null).toBeTruthy()
 
     let data = '{"id":123}'
+    // @ts-ignore
     expect(element._parseData(data).id === 123).toBeTruthy()
   })
 
   it('drop Allowed', () => {
     // >>>>>> level 1
-    const draggableL1 = document.createElement('ark-dragdrop')
+    const draggableL1 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggableL1.connectedCallback()
 
-    const droppableL1 = document.createElement('ark-dragdrop')
+    const droppableL1 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     droppableL1.setAttribute('droppable', '')
     droppableL1.connectedCallback()
     droppableL1.appendChild(draggableL1)
 
     // >>>>>> level 2
-    const droppableL2 = document.createElement('ark-dragdrop')
+    const droppableL2 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     droppableL2.setAttribute('droppable', '')
     droppableL2.connectedCallback()
 
     draggableL1.appendChild(droppableL2)
 
     // >>>>>> new
-    const newDrag = document.createElement('ark-dragdrop')
+    const newDrag = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     newDrag.setAttribute('level', '1')
 
+    // @ts-ignore
     expect(droppableL1._dropAllowed(droppableL1, newDrag)).toBeTruthy()
+    // @ts-ignore
     expect(!droppableL1._dropAllowed(droppableL2, newDrag)).toBeTruthy()
   })
 
   it('draggableStart draggableEnd', () => {
-    const draggable = document.createElement('ark-dragdrop')
+    const draggable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable.connectedCallback()
     draggable.draggableStart()
 
@@ -83,16 +100,19 @@ describe('Drag and Drop', () => {
   })
 
   it('insert before draggable element', () => {
-    const droppable = document.createElement('ark-dragdrop')
+    const droppable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     droppable.setAttribute('droppable', '')
     droppable.setAttribute('direction', 'row')
     droppable.connectedCallback()
 
-    const draggable = document.createElement('ark-dragdrop')
+    const draggable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable.connectedCallback()
     droppable.appendChild(draggable)
 
-    const newDraggable = document.createElement('ark-dragdrop')
+    const newDraggable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     newDraggable.connectedCallback()
 
     draggable.draggableDrop(newDraggable)
@@ -101,15 +121,18 @@ describe('Drag and Drop', () => {
   })
 
   it('draggableEnter droppable [direction=column]', () => {
-    const droppable = document.createElement('ark-dragdrop')
+    const droppable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     droppable.setAttribute('droppable', '')
     droppable.connectedCallback()
 
-    const draggable1 = document.createElement('ark-dragdrop')
+    const draggable1 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable1.connectedCallback()
     droppable.appendChild(draggable1)
 
-    const draggable2 = document.createElement('ark-dragdrop')
+    const draggable2 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable2.connectedCallback()
 
     draggable1.draggableEnter(draggable2, draggable2.generateDataTransfer())
@@ -120,16 +143,19 @@ describe('Drag and Drop', () => {
   })
 
   it('draggableEnter droppable [direction=row]', () => {
-    const droppable = document.createElement('ark-dragdrop')
+    const droppable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     droppable.setAttribute('droppable', '')
     droppable.setAttribute('direction', 'row')
     droppable.connectedCallback()
 
-    const draggable1 = document.createElement('ark-dragdrop')
+    const draggable1 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable1.connectedCallback()
     droppable.appendChild(draggable1)
 
-    const draggable2 = document.createElement('ark-dragdrop')
+    const draggable2 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable2.connectedCallback()
 
     draggable1.draggableEnter(draggable2, draggable2.generateDataTransfer())
@@ -140,7 +166,8 @@ describe('Drag and Drop', () => {
   })
 
   it('draggableStart - draggableEnd', () => {
-    const draggable1 = document.createElement('ark-dragdrop')
+    const draggable1 = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable1.connectedCallback()
 
     draggable1.draggableStart()
@@ -158,7 +185,8 @@ describe('Drag and Drop', () => {
     // -----------------------------------
     // draggable
     // -----------------------------------
-    const draggable = document.createElement('ark-dragdrop')
+    const draggable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable.connectedCallback()
 
     draggable.dispatchEvent(new Event('drop'))
@@ -170,7 +198,8 @@ describe('Drag and Drop', () => {
     // -----------------------------------
     // droppable
     // -----------------------------------
-    const droppable = document.createElement('ark-dragdrop')
+    const droppable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     droppable.setAttribute('droppable', '')
     droppable.connectedCallback()
 
@@ -181,11 +210,13 @@ describe('Drag and Drop', () => {
   })
 
   it('>>>> droppableEnter', () => {
-    const droppable = document.createElement('ark-dragdrop')
+    const droppable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     droppable.setAttribute('droppable', '')
     droppable.connectedCallback()
 
-    const draggable = document.createElement('ark-dragdrop')
+    const draggable = /** @type {DragDrop} */ (
+      document.createElement('ark-dragdrop'))
     draggable.connectedCallback()
 
     droppable.droppableEnter(draggable)
@@ -227,6 +258,7 @@ describe('Drag and Drop', () => {
       } }
 
     expect(
+    // @ts-ignore
       droppable._getElementByDataTransfer(data, div).id === draggable.id
     ).toBeTruthy()
   })
