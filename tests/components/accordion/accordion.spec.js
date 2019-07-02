@@ -1,5 +1,6 @@
-/** @typedef {import('../../../src/components').AccordionTab} AccordionTab */
-import { Accordion, AccordionTab } from '../../../src/components'
+/** @typedef {import(
+ *  '../../../src/components/accordion').AccordionTab} AccordionTab */
+import { Accordion, AccordionTab } from '../../../src/components/accordion'
 
 describe('Accordion', () => {
   it('can be instantiated', () => {
@@ -23,8 +24,10 @@ describe('Accordion', () => {
 
     accordion.connectedCallback()
 
-    tab1.toggle()
-    tab2.toggle()
+    const eventClick = new Event('click')
+
+    tab1.toggle(eventClick)
+    tab2.toggle(eventClick)
 
     expect(tab1.hasAttribute('active')).toBeTruthy()
     expect(tab2.hasAttribute('active')).toBeTruthy()
@@ -46,8 +49,10 @@ describe('Accordion', () => {
 
     accordion.connectedCallback()
 
-    tab1.toggle()
-    tab2.toggle()
+    const eventClick = new Event('click')
+
+    tab1.toggle(eventClick)
+    tab2.toggle(eventClick)
 
     expect(!tab1.hasAttribute('active')).toBeTruthy()
     expect(tab2.hasAttribute('active')).toBeTruthy()
@@ -69,8 +74,10 @@ describe('Accordion', () => {
 
     accordion.connectedCallback()
 
-    tab1.toggle()
-    tab2.toggle()
+    const eventClick = new Event('click')
+
+    tab1.toggle(eventClick)
+    tab2.toggle(eventClick)
 
     expect(tab1.hasAttribute('active')).toBeTruthy()
     expect(tab2.hasAttribute('active')).toBeTruthy()
