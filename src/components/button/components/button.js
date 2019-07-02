@@ -31,13 +31,13 @@ export class Button extends Component {
   }
 
   _isFab () {
-    if (
-      this.hasAttribute('fab') &&
-      !this.hasAttribute('horizontal') &&
-      !this.hasAttribute('vertical')
-    ) {
-      this.setAttribute('horizontal', 'end')
-      this.setAttribute('vertical', 'end')
+    if (this.hasAttribute('fab')) {
+      if (!this.hasAttribute('horizontal')) {
+        this.setAttribute('horizontal', 'end')
+      }
+      if (!this.hasAttribute('vertical')) {
+        this.setAttribute('vertical', 'end')
+      }
     }
   }
 
