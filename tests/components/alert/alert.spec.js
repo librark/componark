@@ -12,7 +12,6 @@ describe('Alert', () => {
 
   it('can be instantiated', () => {
     const alert = /** @type {Alert} */ (document.createElement('ark-alert'))
-    alert.connectedCallback()
     alert.toggle()
     expect(alert.hasAttribute('hidden')).toBeTruthy()
   })
@@ -22,26 +21,198 @@ describe('Alert', () => {
     alert.innerHTML = /* HTML */`
       <div slot="action">Menu</div>
     `
-    alert.connectedCallback()
+    alert.render()
 
     const content = alert.querySelector('.ark-alert__actions')
     expect(content.childElementCount).toBeTruthy()
   })
 
-  it('can close from scrim event', function () {
+  it('can render confirm Button', function () {
     const div = document.createElement('div')
 
-    /** @type {Alert} */
-    const alert = Alert.launch({
+    let alert = /** @type {Alert} */ Alert.launch({
       title: 'hello',
       text: 'word',
-      showConfirmButton: true,
       confirmButtonText: 'confirmButtonText'
     }, div)
-    alert.connectedCallback()
+    alert.render()
 
-    alert.close()
-    expect(!div.querySelector('ark-alert')).toBeTruthy()
+    // @ts-ignore
+    expect(alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      confirmButtonText: 'confirmButtonText',
+      showConfirmButton: false
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      confirmButtonText: 'confirmButtonText',
+      showConfirmButton: 'false'
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      confirmButtonText: 'confirmButtonText',
+      showConfirmButton: 'False'
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      confirmButtonText: 'confirmButtonText',
+      showConfirmButton: true
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      confirmButtonText: 'confirmButtonText',
+      showConfirmButton: 'true'
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      confirmButtonText: 'confirmButtonText',
+      showConfirmButton: ''
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      showConfirmButton: false
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderConfirmButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      showConfirmButton: true
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderConfirmButton().length).toBeTruthy()
+  })
+
+  it('can render cancel Button', function () {
+    let alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      cancelButtonText: 'showCancelButton',
+      showCancelButton: false
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderCancelButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      cancelButtonText: 'showCancelButton',
+      showCancelButton: 'false'
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderCancelButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      cancelButtonText: 'showCancelButton',
+      showCancelButton: 'False'
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderCancelButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      cancelButtonText: 'showCancelButton',
+      showCancelButton: true
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderCancelButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      cancelButtonText: 'showCancelButton',
+      showCancelButton: 'true'
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderCancelButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      cancelButtonText: 'showCancelButton',
+      showCancelButton: ''
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderCancelButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      showCancelButton: false
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(!alert._renderCancelButton().length).toBeTruthy()
+
+    alert = /** @type {Alert} */ Alert.launch({
+      title: 'hello',
+      text: 'word',
+      showCancelButton: true
+    })
+    alert.render()
+
+    // @ts-ignore
+    expect(alert._renderCancelButton().length).toBeTruthy()
   })
 
   it('can close from scrim event', function () {
@@ -49,7 +220,7 @@ describe('Alert', () => {
 
     /** @type {Alert} */
     const alert = Alert.launch({}, div)
-    alert.connectedCallback()
+    alert.render()
 
     alert.toggle()
     expect(alert.hasAttribute('hidden')).toBeTruthy()
@@ -67,52 +238,36 @@ describe('Alert', () => {
       text: 'word',
       showCancelButton: false
     }, div)
-    alert.connectedCallback()
+    alert.render()
 
     alert.close()
     expect(!div.querySelector('ark-alert')).toBeTruthy()
   })
 
-  it('can close from scrim event showCancelButton false', function () {
-    const alert = new Alert()
-
-    alert.showCancelButton = false
-    expect(alert._renderCancelButton()).toBe('')
-
-    alert.showCancelButton = true
-    expect(alert._renderCancelButton().length).toBeTruthy()
-
-    alert.showCancelButton = true
-    alert.cancelButtonText = ''
-    expect(!alert._renderCancelButton().length).toBeTruthy()
-
-    alert.showConfirmButton = false
-    expect(alert._renderConfirmButton()).toBe('')
-
-    alert.showConfirmButton = true
-    expect(alert._renderConfirmButton().length).toBeTruthy()
-
-    alert.showConfirmButton = true
-    alert.confirmButtonText = ''
-    expect(!alert._renderConfirmButton().length).toBeTruthy()
-  })
-
   it('parse Boolean Value', function () {
     const alert = new Alert()
+    // @ts-ignore
     expect(alert._parseBooleanValue('')).toBeTruthy()
+    // @ts-ignore
     expect(alert._parseBooleanValue('true')).toBeTruthy()
+    // @ts-ignore
     expect(alert._parseBooleanValue(true)).toBeTruthy()
+    // @ts-ignore
     expect(!alert._parseBooleanValue('false')).toBeTruthy()
+    // @ts-ignore
     expect(!alert._parseBooleanValue(false)).toBeTruthy()
+    // @ts-ignore
     expect(!alert._parseBooleanValue(undefined)).toBeTruthy()
+    // @ts-ignore
     expect(!alert._parseBooleanValue(123)).toBeTruthy()
+    // @ts-ignore
     expect(!alert._parseBooleanValue('123')).toBeTruthy()
   })
 
   it('hide, show and toggle method', function () {
     const alert = new Alert()
     alert.innerHTML = /* HTML */``
-    alert.connectedCallback()
+    alert.render()
 
     alert.hide()
     expect(alert.hasAttribute('hidden')).toBeTruthy()
@@ -142,13 +297,19 @@ describe('Alert', () => {
       showCancelButton: true,
       cancelButtonText: 'Cancel'
     }, div)
-    alert.connectedCallback()
+    alert.render()
 
+    // @ts-ignore
     expect(alert.cancelButtonBackground === 'light').toBeTruthy()
+    // @ts-ignore
     expect(alert.cancelButtonText === 'Cancel').toBeTruthy()
+    // @ts-ignore
     expect(alert.confirmButtonBackground === 'danger').toBeTruthy()
+    // @ts-ignore
     expect(alert.confirmButtonText === 'confirm').toBeTruthy()
+    // @ts-ignore
     expect(alert.vertical === 'center').toBeTruthy()
+    // @ts-ignore
     expect(alert.horizontal === 'center').toBeTruthy()
     expect(alert.getAttribute('title') === 'hello').toBeTruthy()
     expect(alert.getAttribute('text') === 'word').toBeTruthy()
@@ -169,7 +330,8 @@ describe('Alert', () => {
       showConfirmButton: false,
       showCancelButton: false
     }, div)
-    alert.connectedCallback()
+    // @ts-ignore
+    alert.render()
 
     alert.close()
     expect(!div.querySelector('ark-alert')).toBeTruthy()
@@ -185,7 +347,8 @@ describe('Alert', () => {
       showConfirmButton: true,
       confirmButtonText: 'confirmButtonText'
     }, div)
-    alert.connectedCallback()
+    // @ts-ignore
+    alert.render()
 
     alert.close()
     expect(!div.querySelector('ark-alert')).toBeTruthy()
@@ -199,7 +362,8 @@ describe('Alert', () => {
       showConfirmButton: 'false',
       showCancelButton: 'false'
     })
-    alert.connectedCallback()
+    // @ts-ignore
+    alert.render()
 
     alert.close()
     expect(!alert.querySelector('ark-alert')).toBeTruthy()
