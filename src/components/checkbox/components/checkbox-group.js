@@ -17,7 +17,7 @@ export class CheckboxGroup extends Component {
 
     this.innerHTML = /* html */`
       <div class="ark-checkbox-group__label">
-        <small>${this.label}</small>
+        <small data-checkbox-group-label>${this.label}</small>
       </div>
       <div>
         <div class="ark-checkbox-group__list">
