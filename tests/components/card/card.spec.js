@@ -1,39 +1,36 @@
+/** @typedef {import('../../../src/components').Card} Card */
 import '../../../src/components/card'
 
 describe('Card', () => {
   it('can be instantiated', () => {
-    const element = document.createElement('ark-card')
+    const element = /** @type {Card} */ (document.createElement('ark-card'))
     expect(element).toBeTruthy()
 
-    var init = element.init()
+    var init = element.init({})
     expect(element === init).toBeTruthy()
   })
 
   it('can be rendered without content', function () {
-    const element = document.createElement('ark-card')
+    const element = /** @type {Card} */ (document.createElement('ark-card'))
     element.connectedCallback()
     expect(!element.innerHTML.trim().length).toBeTruthy()
   })
 
   it('can be rendered with content', function () {
-    const element = document.createElement('ark-card')
+    const element = /** @type {Card} */ (document.createElement('ark-card'))
     element.innerHTML = /* html */`
       <img src="" slot="media"/>
-      <span slot="title">title</span>
-      <span slot="subtitle">subtitle</span>
     `
-    element.connectedCallback()
+    element.setAttribute('title', 'my title')
+
+    element.render()
 
     expect(element.querySelector(
       'div.ark-card__media [slot="media"]'
     )).toBeTruthy()
 
-    expect(element.querySelector(
-      'div.ark-card__header h3.ark-card__title [slot="title"]'
-    )).toBeTruthy()
-
-    expect(element.querySelector(
-      'div.ark-card__header span.ark-card__subtitle [slot="subtitle"]'
-    )).toBeTruthy()
+    expect(
+      element.querySelector('.ark-card__title').textContent.trim()
+    ).toEqual('my title')
   })
 })

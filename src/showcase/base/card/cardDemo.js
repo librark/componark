@@ -45,11 +45,8 @@ export class CardDemo extends HTMLElement {
 
   _setupContent () {
     return /* html */`
-    <ark-card title="titulo" subtitle="Hello World">
+    <ark-card title="titulo" subtitle="subtitle [Hello World]">
       <img slot="media" src="${Image}" alt=""/>
-
-      <span slot="title">titulo</span>
-      <span slot="subtitle">subtitulo</span>
 
       <div>
         body
