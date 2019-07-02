@@ -1,5 +1,7 @@
-/** @typedef {import('../../../src/components').AccordionTab} AccordionTab */
-import { AccordionTab } from '../../../src/components'
+/** @typedef {import(
+ *  '../../../src/components/accordion').AccordionTab} AccordionTab */
+
+import { AccordionTab } from '../../../src/components/accordion'
 
 describe('Accordion Tab', () => {
   it('can be instantiated', () => {
@@ -22,10 +24,12 @@ describe('Accordion Tab', () => {
     tab.close()
     expect(!tab.hasAttribute('active')).toBeTruthy()
 
-    tab.toggle()
+    const eventClick = new Event('click')
+
+    tab.toggle(eventClick)
     expect(tab.hasAttribute('active')).toBeTruthy()
 
-    tab.toggle()
+    tab.toggle(eventClick)
     expect(!tab.hasAttribute('active')).toBeTruthy()
   })
 })
