@@ -7,7 +7,7 @@ export class Select extends Component {
 
   render () {
     this.innerHTML = /* html */`
-        ${this._getPlaceholder}
+        ${this._getPlaceholder()}
         <select ${this._getAttributes()}>
           ${this.innerHTML}
         </select>

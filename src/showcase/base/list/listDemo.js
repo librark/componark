@@ -1,4 +1,4 @@
-import { Component } from '../../../components/component'
+import { Component } from '../components'
 
 export class ListDemo extends Component {
   init (context) {
@@ -45,7 +45,7 @@ export class ListDemo extends Component {
 
       <h1>Template List <span data-template-selected></span></h1>
 
-      <ark-list data-template-list listen 
+      <ark-list data-template-list listen
         on-list:selected="onTemplateListSelected"></ark-list>
 
     `

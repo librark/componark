@@ -1,4 +1,4 @@
-import { Alert } from '../../../components/alert'
+import { Alert } from '../components'
 
 export class alertDemo extends HTMLElement {
   init (context) {
