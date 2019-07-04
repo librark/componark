@@ -1,6 +1,5 @@
-import './components'
-
-/** @typedef {import('./components').Component} Component */
+import '../../base/components'
+/** @typedef {import('../../base/components').Component} Component */
 
 export default class ArkShowcase extends HTMLElement {
   init (context) {
@@ -20,6 +19,8 @@ export default class ArkShowcase extends HTMLElement {
           }
           .app-showcase-ark__content {
             margin: 0 auto;
+            display: block;
+            width: 100%;
           }
         </style>
         `
@@ -35,6 +36,7 @@ export default class ArkShowcase extends HTMLElement {
               <li data-component="alert">Alert</li>
               <li data-component="button">Button</li>
               <li data-component="card">Card</li>
+              <li data-component="chart">Chart</li>
               <li data-component="checkbox">Checkbox</li>
               <li data-component="dragdrop">Drag and Drop</li>
               <li data-component="grid">Grid</li>
