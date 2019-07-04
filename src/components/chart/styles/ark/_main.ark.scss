@@ -1,0 +1,5 @@
+@import "./_chart.ark";
+
+@mixin chart_ark() {
+    @include chart_ark_();
+}

@@ -1,0 +1,18 @@
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../theme/main";
+// -------------------------------------------
+// -------------------------------------------
+@import './styles/ark/main.ark';
+@import './styles/material/main.material';
+
+@mixin chart($theme: ark) {
+    @if $theme==ark {
+        @include chart_ark();
+    }
+
+    @if $theme==material {
+        @include chart_material();
+    }
+}
