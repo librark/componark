@@ -16,3 +16,7 @@ update:
 	npm install -g npm-check-updates
 	npm update
 	npm outdated
+
+production:
+	rm -rf ./dist
+	npm run build
