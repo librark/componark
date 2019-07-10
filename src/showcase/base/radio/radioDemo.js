@@ -1,16 +1,14 @@
-export class RadioDemo extends HTMLElement {
+import { Component } from '../components'
+
+export class RadioDemo extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
     this.innerHTML = /* html */`
-      <div>
+      <!-- <div>
         <p>MOBILE (360px).</p>
         <hr align="left" width="360px"/>
       </div>
@@ -37,7 +35,7 @@ export class RadioDemo extends HTMLElement {
       <div>
         <p>THIS DISPLAY.</p>
         <hr align="left" width="960px" />
-      </div>
+      </div> -->
 
       <div data-display style="border: 1px solid;">
         ${this._setupContent()}
@@ -47,25 +45,32 @@ export class RadioDemo extends HTMLElement {
       <!-- DOCUMENTATION -->
     `
     this._setup()
+    return super.render()
   }
 
   _setup () {
-    this._setupFrame('[data-mobile]')
-    this._setupFrame('[data-tablet]')
-    this._setupFrame('[data-desktop]')
-    this._listen(this)
+    // this._setupFrame('[data-mobile]')
+    // this._setupFrame('[data-tablet]')
+    // this._setupFrame('[data-desktop]')
+    // this._listen(this)
   }
 
   _setupContent () {
     return /* html */`
-      <ark-radio-group label="Radio Buttons">
+      <ark-radio-group listen on-alter="radioGroup" label="Radio Buttons">
         <ark-radio-button value="op1">Opcion 1</ark-radio-button>
         <ark-radio-button value="op2">Opcion 2</ark-radio-button>
         <ark-radio-button value="op3">Opcion 3</ark-radio-button>
       </ark-radio-group>
 
+
       <p>Valor seleccionado: <span data-radio-button-value></span></p>
     `
+  }
+
+  radioGroup (event) {
+    this.querySelector(
+      '[data-radio-button-value]').innerHTML = event.detail.value || ''
   }
 
   _setupFrame (frameName) {
@@ -77,20 +82,20 @@ export class RadioDemo extends HTMLElement {
       const main = document.createElement('main')
       main.innerHTML = content
 
-      this._listen(main)
+      // this._listen(main)
 
       app.parentNode.removeChild(app)
       frameBody.prepend(main)
     }
   }
 
-  _listen (main) {
-    const radioGroup = main.querySelector('ark-radio-group')
-    radioGroup.addEventListener('click', () => {
-      main.querySelector(
-        '[data-radio-button-value]'
-      ).innerHTML = radioGroup['value']
-    })
-  }
+  // _listen (main) {
+  //   const radioGroup = main.querySelector('ark-radio-group')
+  //   radioGroup.addEventListener('click', () => {
+  //     main.querySelector(
+  //       '[data-radio-button-value]'
+  //     ).innerHTML = radioGroup['value']
+  //   })
+  // }
 }
 customElements.define('demo-radio', RadioDemo)

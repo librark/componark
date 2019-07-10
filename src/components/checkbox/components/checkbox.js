@@ -12,7 +12,7 @@ export class Checkbox extends Component {
 
   render () {
     this.innerHTML = /* html */`
-      <div class="ark-checkbox__body" listen on-click="_onChange">
+      <div class="ark-checkbox__body" listen on-click="_change">
         <div class="ark-checkbox__input">
           <input data-checkbox type="checkbox" ${this._getAttributes()}>
         </div>
@@ -44,21 +44,28 @@ export class Checkbox extends Component {
     }
   }
 
+  isChecked () {
+    const checkbox = this.querySelector('[data-checkbox]')
+    return checkbox.hasAttribute('checked')
+  }
+
   // ---------------------------------------------------------------------------
+  /** @param {Event} event */
+  _change (event) {
+    event.stopPropagation()
 
-  _onChange () {
     this.toggel()
-
-    this.dispatchEvent(new CustomEvent('checkbox:click', {
-      detail: { value: this.value }
+    this.dispatchEvent(new CustomEvent('alter', {
+      detail: {
+        value: this.value,
+        checked: this.isChecked()
+      }
     }))
   }
 
   _getAttributes () {
-    const attributes = Array.from(this.attributes)
-
-    return attributes.map((attribute) => {
-      if (attribute.name !== 'type') {
+    return Array.from(this.attributes).map((attribute) => {
+      if (!attribute.name.startsWith('on-') && attribute.name !== 'type') {
         return attribute.value
           ? `${attribute.name}=${attribute.value}`
           : attribute.name

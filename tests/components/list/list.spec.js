@@ -1,7 +1,5 @@
+/** @typedef {import('../../../src/components').List} List */
 import '../../../src/components/list'
-import '../../../src/components/list/components/item'
-
-/** @typedef {import('../../../src/components').List} List  */
 
 describe('List', () => {
   it('can be instantiated', () => {

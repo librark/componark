@@ -1,5 +1,4 @@
-/** @typedef {import('./checkbox').Checkbox} RadioButton */
-import { getSlots } from '../../../utils'
+/** @typedef {import('./checkbox').Checkbox} Checkbox */
 import { Component } from '../../component'
 
 export class CheckboxGroup extends Component {
@@ -13,21 +12,22 @@ export class CheckboxGroup extends Component {
   }
 
   render () {
-    this.slots = getSlots(this)
+    this.checkboxList = this.selectAll('ark-checkbox')
+    this.selectAll('ark-checkbox').forEach(checkbox => checkbox.remove())
 
     this.innerHTML = /* html */`
       <div class="ark-checkbox-group__label">
-        <small>${this.label}</small>
+        <small data-checkbox-group-label>${this.label}</small>
       </div>
       <div>
-        <div class="ark-checkbox-group__list">
-          ${this._getCheckbox()}
-        </div>
+        <div data-checkbox-list class="ark-checkbox-group__list"></div>
         <div class="ark-checkbox-group__alert">
-          ${this._getSlots('alert')}
+          ${this.innerHTML}
         </div>
       </div>
     `
+
+    this._renderCheckboxList()
     return super.render()
   }
 
@@ -40,27 +40,23 @@ export class CheckboxGroup extends Component {
   }
 
   // ---------------------------------------------------------------------------
-
-  _getSlots (key) {
-    if (!this.slots || !this.slots[key]) { return '' }
-
-    return /* html */`
-        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
-      `
+  /** @param {Event} event */
+  _change (event) {
+    event.stopPropagation()
+    this.dispatchEvent(new CustomEvent('alter', {
+      detail: { value: this.value }
+    }))
   }
 
-  _getCheckbox () {
-    const checkboxs = this.selectAll('ark-checkbox')
+  _renderCheckboxList () {
+    const container = this.querySelector('[data-checkbox-list]')
 
-    var outerHTML = _ => {
-      var aux = ''
-      checkboxs.forEach(checkbox => {
-        aux += checkbox.outerHTML
-      })
-      return aux
-    }
+    this.checkboxList.forEach(checkbox => {
+      checkbox.setAttribute('listen', '')
+      checkbox.setAttribute('on-alter', '_change')
 
-    return checkboxs.length ? outerHTML() : ''
+      if (container) container.appendChild(checkbox)
+    })
   }
 }
 customElements.define('ark-checkbox-group', CheckboxGroup)

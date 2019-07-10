@@ -1,53 +1,61 @@
 import { Component } from '../../component'
-import { getSlots } from '../../../utils'
 
 export class Input extends Component {
   init (context) {
+    this.label = context['label']
     return super.init(context)
   }
 
-  render () {
-    this.slots = getSlots(this)
+  reflectedProperties () {
+    return ['label']
+  }
 
+  render () {
     this.innerHTML = /* html */`
       <div class="${this._getTypeClass()}">
         <div class="ark-input__label" ${this._isRequired()}>
-          <small>${this._getSlots('label')}</small>
+          <small>${this.label}</small>
         </div>
+
         <div>
           <div class="ark-input__input">
-            <input ${this._getAttributes()}>
+            <input data-input ${this._getAttributes()}
+              listen on-input="_change">
           </div>
+
           <div class="ark-input__alert">
-            ${this._getSlots('alert')}
+            ${this.innerHTML}
           </div>
         </div>
       </div>
     `
-    this._removeAttribute()
+
     return super.render()
   }
 
-  _getSlots (key) {
-    if (!this.slots || !this.slots[key]) { return '' }
+  get value () {
+    const input = (/** @type {Input} */ (this.querySelector('[data-input]')))
+    return input ? input.value : ''
+  }
 
-    return /* html */`
-        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
-      `
+  // ---------------------------------------------------------------------------
+
+  /** @param {Event} event */
+  _change (event) {
+    event.stopPropagation()
+    this.dispatchEvent(new CustomEvent('alter', {
+      detail: { value: this.value }
+    }))
   }
 
   _getAttributes () {
     return Array.from(this.attributes).map((attribute) => {
-      return attribute.value
-        ? `${attribute.name}=${attribute.value}`
-        : attribute.name
+      if (!attribute.name.startsWith('on-')) {
+        return attribute.value
+          ? `${attribute.name}=${attribute.value}`
+          : attribute.name
+      }
     }).join(' ')
-  }
-
-  _removeAttribute () {
-    while (this.attributes.length > 0) {
-      this.removeAttribute(this.attributes[0].name)
-    }
   }
 
   _isRequired () {

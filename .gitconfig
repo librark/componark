@@ -1,0 +1,5 @@
+[credential]
+    helper = store
+
+[credential "https://git.nubark.com/web/componark.git"]
+    helper = cache

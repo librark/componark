@@ -7,18 +7,13 @@ export class Alert extends Component {
     this.text = context['text']
     this.horizontal = context['horizontal'] || this.horizontal || 'center'
     this.vertical = context['vertical'] || this.vertical || 'center'
-    this.showConfirmButton = (
-      context['showConfirmButton'] || this.showConfirmButton || false)
+    this.showConfirmButton = context['showConfirmButton']
     this.confirmButtonText = (
       context['confirmButtonText'] || this.confirmButtonText || 'Aceptar')
     this.confirmButtonBackground = (
       context['confirmButtonBackground'] || this.confirmButtonBackground ||
       'primary')
-
-    // console.log('>>>', this.showCancelButton, context['showCancelButton'])
-
-    this.showCancelButton = (
-      context['showCancelButton'] || this.showCancelButton)
+    this.showCancelButton = context['showCancelButton']
     this.cancelButtonText = (
       context['cancelButtonText'] || this.cancelButtonText || 'Cancelar')
     this.cancelButtonBackground = (
@@ -63,6 +58,7 @@ export class Alert extends Component {
     this.querySelectorAll('[close]').forEach(element =>
       element.addEventListener('click', _ => this.close())
     )
+    return super.load()
   }
 
   /** @param {Object} context @param {HTMLElement=} parent @return {Alert} */
@@ -127,10 +123,6 @@ export class Alert extends Component {
   }
 
   _renderCancelButton () {
-    // console.log('>>>>>>>>>>><')
-
-    // console.log(this._parseBooleanValue(this.showCancelButton))
-
     return (
       this._parseBooleanValue(this.showCancelButton) &&
       this.cancelButtonText.length !== 0

@@ -1,16 +1,17 @@
+/** @typedef {import('../../../src/components').Select} Select */
 import '../../../src/components/select'
 
 describe('Select', () => {
   it('can be instantiated', () => {
-    const item = document.createElement('ark-select')
+    const item = /** @type {Select} */(document.createElement('ark-select'))
     expect(item).toBeTruthy()
 
-    var init = item.init()
+    var init = item.init({})
     expect(item === init).toBeTruthy()
   })
 
   it('can be rendered with content', function () {
-    const item = document.createElement('ark-select')
+    const item = /** @type {Select} */(document.createElement('ark-select'))
     item.innerHTML = /* HTML */`
       <option>myOption</option>
     `
@@ -20,7 +21,7 @@ describe('Select', () => {
   })
 
   it('can be rendered with attributes', function () {
-    const item = document.createElement('ark-select')
+    const item = /** @type {Select} */(document.createElement('ark-select'))
     const att = document.createAttribute('placeholder')
     att.value = 'placeholder'
     item.setAttributeNode(att)
@@ -34,7 +35,7 @@ describe('Select', () => {
   })
 
   it('can be rendered with attributes', function () {
-    const item = document.createElement('ark-select')
+    const item = /** @type {Select} */(document.createElement('ark-select'))
     const att = document.createAttribute('autofocus')
     item.setAttributeNode(att)
 
