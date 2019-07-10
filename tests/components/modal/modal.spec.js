@@ -1,16 +1,17 @@
+/** @typedef {import('../../../src/components').Modal} Modal */
 import '../../../src/components/modal'
 
 describe('Modal', () => {
   it('can be instantiated', () => {
-    const modal = document.createElement('ark-modal')
+    const modal = /** @type {Modal} */(document.createElement('ark-modal'))
     expect(modal).toBeTruthy()
 
-    var init = modal.init()
+    var init = modal.init({})
     expect(modal === init).toBeTruthy()
   })
 
   it('can be rendered with slots', function () {
-    const modal = document.createElement('ark-modal')
+    const modal = /** @type {Modal} */(document.createElement('ark-modal'))
     modal.innerHTML = /* HTML */`
       <div slot="action">Menu</div>
     `
@@ -21,7 +22,7 @@ describe('Modal', () => {
   })
 
   it('can be hidden', function () {
-    const modal = document.createElement('ark-modal')
+    const modal = /** @type {Modal} */(document.createElement('ark-modal'))
     modal.connectedCallback()
 
     const btn = modal.querySelector('[close]')
@@ -32,10 +33,11 @@ describe('Modal', () => {
   })
 
   it('can be hidden', function () {
-    const modal = document.createElement('ark-modal')
+    const modal = /** @type {Modal} */(document.createElement('ark-modal'))
     modal.connectedCallback()
 
     const btn = modal.querySelector('.ark-modal__scrim')
+    // @ts-ignore
     btn.click()
 
     const atts = Array.from(modal.attributes).filter(a => a.name === 'hidden')
@@ -43,7 +45,7 @@ describe('Modal', () => {
   })
 
   it('can be hidden by close method', function () {
-    const modal = document.createElement('ark-modal')
+    const modal = /** @type {Modal} */(document.createElement('ark-modal'))
     modal.connectedCallback()
     modal.close()
 
@@ -52,7 +54,7 @@ describe('Modal', () => {
   })
 
   it('can be oppend by open method', function () {
-    const modal = document.createElement('ark-modal')
+    const modal = /** @type {Modal} */(document.createElement('ark-modal'))
     modal.connectedCallback()
 
     modal.close()
@@ -65,7 +67,7 @@ describe('Modal', () => {
   })
 
   it('can be hidden by toggle method', function () {
-    const modal = document.createElement('ark-modal')
+    const modal = /** @type {Modal} */(document.createElement('ark-modal'))
     modal.connectedCallback()
 
     modal.open()
@@ -82,7 +84,7 @@ describe('Modal', () => {
   })
 
   it('can remove attributes', function () {
-    const item = document.createElement('ark-modal')
+    const item = /** @type {Modal} */(document.createElement('ark-modal'))
 
     item.setAttribute('name', 'my-item')
     item.setAttribute('id', 'it-1')

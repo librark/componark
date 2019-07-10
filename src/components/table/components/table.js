@@ -21,7 +21,7 @@ export class Table extends Component {
   _renderHeaders () {
     var headers = ''
 
-    if (this._getPosition()) headers += /* html */ `<th>No.</th>`
+    if (this.hasAttribute('position')) headers += /* html */ `<th>No.</th>`
 
     Object.keys(this.headers).forEach(key => {
       headers += /* html */ `<th>${this.headers[key]}</th>`
@@ -36,7 +36,9 @@ export class Table extends Component {
     this.data.forEach((d, index) => {
       var td = ''
 
-      if (this._getPosition()) td += /* html */ `<td>${index + 1}</td>`
+      if (this.hasAttribute('position')) {
+        td += /* html */ `<td>${index + 1}</td>`
+      }
 
       Object.keys(this.headers).forEach(key => {
         td += /* html */ `<td>${d[key] || ''}</td>`
@@ -46,11 +48,6 @@ export class Table extends Component {
     })
 
     return data || ''
-  }
-
-  _getPosition () {
-    const attributes = Array.from(this.attributes)
-    return attributes.map(att => { return att.name }).indexOf('position') >= 0
   }
 }
 customElements.define('ark-table', Table)

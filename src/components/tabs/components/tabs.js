@@ -10,10 +10,11 @@ export class Tabs extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.selectAll('ark-tabs-item').forEach(
       item => item.addEventListener('click', _ => this._activeElement(item))
     )
+    return this
   }
 
   _activeElement (element) {

@@ -1,16 +1,17 @@
+/** @typedef {import('../../../src/components').Navbar} Navbar */
 import '../../../src/components/navbar'
 
 describe('Navbar', () => {
   it('can be instantiated', () => {
-    const navbar = document.createElement('ark-navbar')
+    const navbar = /** @type {Navbar} */(document.createElement('ark-navbar'))
     expect(navbar).toBeTruthy()
 
-    var init = navbar.init()
+    var init = navbar.init({})
     expect(navbar === init).toBeTruthy()
   })
 
   it('can be rendered without content', function () {
-    const navbar = document.createElement('ark-navbar')
+    const navbar = /** @type {Navbar} */(document.createElement('ark-navbar'))
     navbar.connectedCallback()
 
     navbar.toggleContent()
@@ -23,7 +24,7 @@ describe('Navbar', () => {
   })
 
   it('can be rendered without content', function () {
-    const navbar = document.createElement('ark-navbar')
+    const navbar = /** @type {Navbar} */(document.createElement('ark-navbar'))
 
     navbar.innerHTML = /* html */ `
       <span ark-navbar-toggle></span>

@@ -1,16 +1,17 @@
+/** @typedef {import('../../../src/components').Sidebar} Sidebar */
 import '../../../src/components/sidebar'
 
 describe('Sidebar', () => {
   it('can be instantiated', () => {
-    const item = document.createElement('ark-sidebar')
+    const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
     expect(item).toBeTruthy()
 
-    var init = item.init()
+    var init = item.init({})
     expect(item === init).toBeTruthy()
   })
 
   it('can be rendered with content', function () {
-    const item = document.createElement('ark-sidebar')
+    const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
     item.innerHTML = /* HTML */`
       <div slot="header">Menu</div>
       <div>body</div>
@@ -20,7 +21,7 @@ describe('Sidebar', () => {
   })
 
   it('can be opened with opened attribute', function () {
-    const item = document.createElement('ark-sidebar')
+    const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
     const att = document.createAttribute('opened')
     item.setAttributeNode(att)
     item.connectedCallback()
@@ -32,7 +33,7 @@ describe('Sidebar', () => {
   })
 
   it('can be closed', function () {
-    const item = document.createElement('ark-sidebar')
+    const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
     const att = document.createAttribute('opened')
     item.setAttributeNode(att)
     item.connectedCallback()
@@ -50,7 +51,7 @@ describe('Sidebar', () => {
   })
 
   it('can be closed with toggle option', function () {
-    const item = document.createElement('ark-sidebar')
+    const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
     const att = document.createAttribute('opened')
     item.setAttributeNode(att)
     item.connectedCallback()
@@ -68,7 +69,7 @@ describe('Sidebar', () => {
   })
 
   it('can be closed with scrim option', function () {
-    const item = document.createElement('ark-sidebar')
+    const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
     const att = document.createAttribute('opened')
     item.setAttributeNode(att)
     item.connectedCallback()
@@ -79,6 +80,7 @@ describe('Sidebar', () => {
     expect(isClass).toBeTruthy()
 
     const scrim = item.querySelector('.ark-sidebar-scrim')
+    // @ts-ignore
     scrim.click()
 
     isClass = Array.from(item.classList).filter(l =>

@@ -1,17 +1,17 @@
+/** @typedef {import('../../../src/components').Tabs} Tabs */
 import '../../../src/components/tabs'
 
 describe('Tabs Item', () => {
   it('can be instantiated', () => {
-    const item = document.createElement('ark-tabs-item')
+    const item = (/** @type {Tabs} */ (document.createElement('ark-tabs-item')))
     expect(item).toBeTruthy()
 
-    var init = item.init()
+    var init = item.init({})
     expect(item === init).toBeTruthy()
   })
 
   it('can be rendered with content', function () {
-    const item = document.createElement('ark-tabs-item')
-
+    const item = (/** @type {Tabs} */ (document.createElement('ark-tabs-item')))
     item.setAttribute('id', 'item-1')
 
     item.innerHTML = /* HTML */`
@@ -23,7 +23,7 @@ describe('Tabs Item', () => {
   })
 
   it('can remove attributes', function () {
-    const item = document.createElement('ark-tabs-item')
+    const item = (/** @type {Tabs} */ (document.createElement('ark-tabs-item')))
 
     item.setAttribute('name', 'my-item')
     item.setAttribute('id', 'it-1')
@@ -40,8 +40,8 @@ describe('Tabs Item', () => {
   })
 
   it('can be rendered with tag <a>', function () {
-    const item = document.createElement('ark-tabs-item')
-    item.setAttribute('href')
+    const item = (/** @type {Tabs} */ (document.createElement('ark-tabs-item')))
+    item.setAttribute('href', '')
 
     item.innerHTML = /* HTML */`
       <span>item-1</span>
