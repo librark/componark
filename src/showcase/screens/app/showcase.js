@@ -1,13 +1,10 @@
-import '../../base/components'
+import { Component } from '../../base/components'
 /** @typedef {import('../../base/components').Component} Component */
 
-export default class ArkShowcase extends HTMLElement {
+export default class ArkShowcase extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   styles () {
@@ -19,6 +16,7 @@ export default class ArkShowcase extends HTMLElement {
           }
           .app-showcase-ark__content {
             margin: 0 auto;
+            padding: 15px;
             display: block;
             width: 100%;
           }
@@ -57,6 +55,8 @@ export default class ArkShowcase extends HTMLElement {
         </div>
         `
     this._listen()
+
+    return super.render()
   }
 
   _listen () {

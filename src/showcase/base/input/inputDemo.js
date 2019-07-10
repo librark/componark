@@ -1,24 +1,24 @@
-export class InputDemo extends HTMLElement {
+import { Component } from '../components'
+
+export class InputDemo extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
     this.innerHTML = /* html */`
-      <div mobile><p>mobile (360px).</p></div>
+      <!-- <div mobile><p>mobile (360px).</p></div>
       <div tablet><p>tablet (768px).</p></div>
-      <div desktop><p>desktop (960px).</p></div>
+      <div desktop><p>desktop (960px).</p></div> -->
       ${this._setupContent()}
-      ${this.doc}
+      ${this.documentation}
     `
-    this._setupFrame('[mobile]', '360px')
-    this._setupFrame('[tablet]', '768px')
-    this._setupFrame('[desktop]', '960px')
+    // this._setupFrame('[mobile]', '360px')
+    // this._setupFrame('[tablet]', '768px')
+    // this._setupFrame('[desktop]', '960px')
+
+    return super.render()
   }
 
   _setupFrame (selector, width) {
@@ -43,71 +43,38 @@ export class InputDemo extends HTMLElement {
 
   _setupContent () {
     return /* html */`
-      <style>
-        main{
-          padding: 10px;
-        }
-      </style>
+      <ark-input type="text" label="Repite como loro"
+        listen on-alter="inputText"></ark-input>
 
-      <p>input item</p>
+      <p>:: <span data-input-value></span></p>
 
-      <ark-input type="date">
-        <label slot="label">date</label>
-        <label slot="alert">alert date</label>
-        <label slot="alert">alert date 2</label>
-      </ark-input>
-      <ark-input type="datetime-local">
-        <label slot="label">datetime-local</label>
-        <label slot="alert">alert datetime-local</label>
-      </ark-input>
-      <ark-input type="email">
-        <label slot="label">email</label>
-        <label slot="alert">alert email</label>
-      </ark-input>
-      <ark-input type="hidden">
-        <label slot="label">hidden</label>
-        <label slot="alert">alert hidden</label>
-      </ark-input>
-      <ark-input type="month">
-        <label slot="label">month</label>
-        <label slot="alert">alert month</label>
-      </ark-input>
-      <ark-input type="number">
-        <label slot="label">number</label>
-        <label slot="alert">alert number</label>
-      </ark-input>
-      <ark-input type="password">
-        <label slot="label">password</label>
-        <label slot="alert">alert password</label>
-      </ark-input>
-      <ark-input type="search">
-        <label slot="label">search</label>
-        <label slot="alert">alert search</label>
-      </ark-input>
-      <ark-input type="tel">
-        <label slot="label">tel</label>
-        <label slot="alert">alert tel</label>
-      </ark-input>
-      <ark-input type="text">
-        <label slot="label">text</label>
-        <label slot="alert">alert text</label>
-      </ark-input>
-      <ark-input type="time">
-        <label slot="label">time</label>
-        <label slot="alert">alert time</label>
-      </ark-input>
-      <ark-input type="url">
-        <label slot="label">url</label>
-        <label slot="alert">alert url</label>
-      </ark-input>
-      <ark-input type="week">
-        <label slot="label">week</label>
-        <label slot="alert">alert week</label>
-      </ark-input>
+      <hr/>
+      <br/>
+
+      <ark-input type="date" label="date"></ark-input>
+      <ark-input type="datetime-local" label="datetime-local"></ark-input>
+      <ark-input type="email" label="email"></ark-input>
+      <ark-input type="hidden" label="hidden"></ark-input>
+      <ark-input type="month" label="month"></ark-input>
+      <ark-input type="number" label="number"></ark-input>
+      <ark-input type="password" label="password"></ark-input>
+      <ark-input type="search" label="search"></ark-input>
+      <ark-input type="tel" label="tel"></ark-input>
+      <ark-input type="text" label="text"></ark-input>
+      <ark-input type="time" label="time"></ark-input>
+      <ark-input type="url" label="url"></ark-input>
+      <ark-input type="week" label="week"></ark-input>
     `
   }
 
-  get doc () {
+  inputText (event) {
+    const element = this.querySelector('[data-input-value]')
+    if (element) {
+      element.textContent = event.detail ? event.detail.value : ''
+    }
+  }
+
+  get documentation () {
     return /* html */`
       <br/>
       <hr/>

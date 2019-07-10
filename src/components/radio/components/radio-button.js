@@ -12,7 +12,7 @@ export class RadioButton extends Component {
 
   render () {
     this.innerHTML = /* html */`
-      <div class="ark-radio-button__body" listen on-click="_onChange">
+      <div class="ark-radio-button__body" listen on-click="_change">
         <div class="ark-radio-button__button">
           <input data-radio-button type="radio" ${this._getAttributes()}>
         </div>
@@ -37,28 +37,33 @@ export class RadioButton extends Component {
   }
 
   toggel () {
-    if (this.querySelector('[data-radio-button]').hasAttribute('checked')) {
+    if (this.isChecked()) {
       this.unchecked()
     } else {
       this.checked()
     }
   }
 
-  // ---------------------------------------------------------------------------
+  isChecked () {
+    return this.querySelector('[data-radio-button]').hasAttribute('checked')
+  }
 
-  _onChange () {
+  // ---------------------------------------------------------------------------
+  /** @param {Event} event */
+  _change (event) {
+    event.stopPropagation()
     this.toggel()
 
-    this.dispatchEvent(new CustomEvent('radiobutton:click', {
-      detail: { value: this.value }
+    this.dispatchEvent(new CustomEvent('alter', {
+      detail: {
+        value: this.value
+      }
     }))
   }
 
   _getAttributes () {
-    const attributes = Array.from(this.attributes)
-
-    return attributes.map((attribute) => {
-      if (attribute.name !== 'type') {
+    return Array.from(this.attributes).map((attribute) => {
+      if (!attribute.name.startsWith('on-') && attribute.name !== 'type') {
         return attribute.value
           ? `${attribute.name}=${attribute.value}`
           : attribute.name
