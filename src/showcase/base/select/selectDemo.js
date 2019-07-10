@@ -1,7 +1,9 @@
-export class SelectDemo extends HTMLElement {
+import { Component } from '../components'
+
+export class SelectDemo extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return this
+    return super.init(context)
   }
 
   connectedCallback () {
@@ -10,14 +12,15 @@ export class SelectDemo extends HTMLElement {
 
   render () {
     this.innerHTML = /* html */`
-      <div mobile><p>mobile (360px).</p></div>
+      <!-- <div mobile><p>mobile (360px).</p></div>
       <div tablet><p>tablet (768px).</p></div>
-      <div desktop><p>desktop (960px).</p></div>
+      <div desktop><p>desktop (960px).</p></div> -->
       ${this._setupContent()}
     `
-    this._setupFrame('[mobile]', '360px')
-    this._setupFrame('[tablet]', '768px')
-    this._setupFrame('[desktop]', '960px')
+    // this._setupFrame('[mobile]', '360px')
+    // this._setupFrame('[tablet]', '768px')
+    // this._setupFrame('[desktop]', '960px')
+    return super.render()
   }
 
   _setupFrame (selector, width) {
@@ -44,13 +47,20 @@ export class SelectDemo extends HTMLElement {
       <div>
         <p>This is a select.</p>
       </div>
-      <ark-select placeholder="my select">
+      <ark-select listen on-alter="selectEventListener" label="my select">
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="mercedes">Mercedes</option>
         <option value="audi">Audi</option>
       </ark-select>
+
+      <p>Elemento seleccionado: <span data-select-value></span></p>
     `
+  }
+
+  selectEventListener (event) {
+    const element = this.querySelector('[data-select-value]')
+    if (element) element.textContent = event.detail.value
   }
 }
 customElements.define('demo-select', SelectDemo)

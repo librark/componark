@@ -1,5 +1,5 @@
 /** @typedef {import('./radio-button').RadioButton} RadioButton */
-import { getSlots, uuidv4 } from '../../../utils'
+import { uuidv4 } from '../../../utils'
 import { Component } from '../../component'
 
 export class RadioGroup extends Component {
@@ -14,21 +14,22 @@ export class RadioGroup extends Component {
   }
 
   render () {
-    this.slots = getSlots(this)
+    this.radioButtonList = this.selectAll('ark-radio-button')
+    this.selectAll('ark-radio-button').forEach(button => button.remove())
 
     this.innerHTML = /* html */`
       <div class="ark-radio-group__label">
         <small>${this.label}</small>
       </div>
       <div>
-        <div class="ark-radio-group__list">
-          ${this._getRadioButtons()}
-        </div>
+        <div data-radiobutton-list class="ark-radio-group__list"></div>
         <div class="ark-radio-group__alert">
-          ${this._getSlots('alert')}
+          ${this.innerHTML}
         </div>
       </div>
     `
+
+    this._renderRadioButtonList()
     return super.render()
   }
 
@@ -40,30 +41,28 @@ export class RadioGroup extends Component {
   }
 
   // ---------------------------------------------------------------------------
+  /** @param {Event} event */
+  _change (event) {
+    event.stopPropagation()
 
-  _getSlots (key) {
-    if (!this.slots || !this.slots[key]) { return '' }
+    const target = (/** @type {RadioButton} */ (event.target))
+    target.checked()
 
-    return /* html */`
-        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
-      `
+    this.dispatchEvent(new CustomEvent('alter', {
+      detail: { value: this.value }
+    }))
   }
 
-  _getRadioButtons () {
-    const buttons = this.selectAll('ark-radio-button')
+  _renderRadioButtonList () {
+    const container = this.querySelector('[data-radiobutton-list]')
 
-    var outerHTML = _ => {
-      var aux = ''
-      buttons.forEach(button => {
-        button.setAttribute('name', this.name)
-        button.setAttribute('listen', 'listen')
-        button.setAttribute('on-radiobutton:click', '_radioButtonEvent')
-        aux += button.outerHTML
-      })
-      return aux
-    }
+    this.radioButtonList.forEach(button => {
+      button.setAttribute('name', this.name)
+      button.setAttribute('listen', '')
+      button.setAttribute('on-alter', '_change')
 
-    return buttons.length ? outerHTML() : ''
+      if (container) container.appendChild(button)
+    })
   }
 
   _radioButtonEvent (event) {

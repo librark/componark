@@ -1,16 +1,14 @@
-export class CheckboxDemo extends HTMLElement {
+import { Component } from '../components'
+
+export class CheckboxDemo extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return this
-  }
-
-  connectedCallback () {
-    this.render()
+    return super.init(context)
   }
 
   render () {
     this.innerHTML = /* html */`
-      <div>
+      <!-- <div>
         <p>MOBILE (360px).</p>
         <hr align="left" width="360px"/>
       </div>
@@ -37,7 +35,7 @@ export class CheckboxDemo extends HTMLElement {
       <div>
         <p>THIS DISPLAY.</p>
         <hr align="left" width="960px" />
-      </div>
+      </div> -->
 
       <div data-display style="border: 1px solid;">
         ${this._setupContent()}
@@ -47,18 +45,19 @@ export class CheckboxDemo extends HTMLElement {
       <!-- DOCUMENTATION -->
     `
     this._setup()
+    return super.render()
   }
 
   _setup () {
-    this._setupFrame('[data-mobile]')
-    this._setupFrame('[data-tablet]')
-    this._setupFrame('[data-desktop]')
-    this._listen(this)
+    // this._setupFrame('[data-mobile]')
+    // this._setupFrame('[data-tablet]')
+    // this._setupFrame('[data-desktop]')
+    // this._listen(this)
   }
 
   _setupContent () {
     return /* html */`
-      <ark-checkbox-group label="Checkboxs">
+      <ark-checkbox-group listen on-alter="checkboxGroup" label="Checkboxs">
         <ark-checkbox value="op1">Opcion 1</ark-checkbox>
         <ark-checkbox value="op2">Opcion 2</ark-checkbox>
         <ark-checkbox value="op3">Opcion 3</ark-checkbox>
@@ -77,20 +76,25 @@ export class CheckboxDemo extends HTMLElement {
       const main = document.createElement('main')
       main.innerHTML = content
 
-      this._listen(main)
+      // this._listen(main)
 
       app.parentNode.removeChild(app)
       frameBody.prepend(main)
     }
   }
 
-  _listen (main) {
-    const checkboxGroup = main.querySelector('ark-checkbox-group')
-    checkboxGroup.addEventListener('click', () => {
-      main.querySelector(
-        '[data-checkbox-value]'
-      ).innerHTML = checkboxGroup['value']
-    })
+  checkboxGroup (event) {
+    this.querySelector(
+      '[data-checkbox-value]').innerHTML = event.detail.value || ''
   }
+
+  // _listen (main) {
+  //   const checkboxGroup = main.querySelector('ark-checkbox-group')
+  //   checkboxGroup.addEventListener('click', () => {
+  //     main.querySelector(
+  //       '[data-checkbox-value]'
+  //     ).innerHTML = checkboxGroup['value']
+  //   })
+  // }
 }
 customElements.define('demo-checkbox', CheckboxDemo)

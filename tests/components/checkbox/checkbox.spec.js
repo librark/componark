@@ -41,7 +41,7 @@ describe('Checkbox', () => {
     element.render()
 
     // @ts-ignore
-    element._onChange()
+    element._change()
     expect(element.isChecked()).toBeTruthy()
   })
 })
