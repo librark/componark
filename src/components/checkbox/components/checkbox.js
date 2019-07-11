@@ -3,6 +3,7 @@ import { Component } from '../../component'
 export class Checkbox extends Component {
   init (context) {
     this.value = context['value']
+
     return super.init(context)
   }
 
@@ -24,6 +25,19 @@ export class Checkbox extends Component {
 
     this._moverAtributos()
     return super.render()
+  }
+
+  get value () {
+    const element = (/** @type {Checkbox} */ (
+      this.querySelector('[data-checkbox]')))
+    return element ? element.value : ''
+  }
+
+  set value (data) {
+    const element = (/** @type {Checkbox} */ (
+      this.querySelector('[data-checkbox]')))
+
+    element.value = data
   }
 
   checked () {
@@ -105,7 +119,6 @@ export class Checkbox extends Component {
       'size',
       'src',
       'step',
-      'value',
       'value',
       'width'
     ]
