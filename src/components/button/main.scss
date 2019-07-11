@@ -3,14 +3,11 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
-@import './styles/default/button.default';
 // -------------------------------------------
 @import './styles/ark/main.ark';
 @import './styles/material/main.material';
 
 @mixin button($theme:ark) {
-    // @include button_default();
-
     @if $theme==ark {
         @include button_ark();
     }

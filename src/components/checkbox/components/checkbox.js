@@ -7,9 +7,9 @@ export class Checkbox extends Component {
     return super.init(context)
   }
 
-  reflectedProperties () {
-    return ['value']
-  }
+  // reflectedProperties () {
+  //   return ['value']
+  // }
 
   render () {
     this.innerHTML = /* html */`
@@ -36,8 +36,7 @@ export class Checkbox extends Component {
   set value (data) {
     const element = (/** @type {Checkbox} */ (
       this.querySelector('[data-checkbox]')))
-
-    element.value = data
+    if (element) element.value = data
   }
 
   checked () {
