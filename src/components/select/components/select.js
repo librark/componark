@@ -8,10 +8,12 @@ export class Select extends Component {
   render () {
     this.innerHTML = /* html */`
         ${this._getLabel()}
-        <select data-select ${this._getAttributes()} listen on-change="_change">
+        <select data-select listen on-change="_change">
           ${this.innerHTML}
         </select>
     `
+
+    this._moverAtributos()
     return super.render()
   }
 
@@ -30,21 +32,36 @@ export class Select extends Component {
     }))
   }
 
-  _getAttributes () {
-    const attributes = Array.from(this.attributes)
-
-    return attributes.map((attribute) => {
-      var attr = `${attribute.name}`
-      if (attribute.value) attr += `=${attribute.value}`
-      return attr
-    }).join(' ')
-  }
-
   _getLabel () {
     const label = this.getAttribute('label')
     return label ? /* html */ `
       <label>${label}</label>
     ` : ''
+  }
+
+  _moverAtributos () {
+    const element = this.querySelector('[data-select]')
+    const attributes = Array.from(this.attributes)
+
+    attributes.forEach(attribute => {
+      if (this._defaultAttributes().find(item => item === attribute.name)) {
+        element.setAttribute(attribute.name, attribute.value)
+        this.removeAttribute(attribute.name)
+      }
+    })
+  }
+
+  /** @return {Array<string>} */
+  _defaultAttributes () {
+    return [
+      'autofocus',
+      'disabled',
+      'form',
+      'multiple',
+      'name',
+      'required',
+      'size'
+    ]
   }
 }
 customElements.define('ark-select', Select)

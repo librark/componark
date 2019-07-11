@@ -42,6 +42,7 @@ export class Modal extends Component {
     this.querySelectorAll('[close]').forEach(
       button => button.addEventListener('click', _ => this.close())
     )
+    return super.load()
   }
 
   open () {

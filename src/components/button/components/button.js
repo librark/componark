@@ -11,25 +11,16 @@ export class Button extends Component {
 
   render () {
     this.innerHTML = /* html */`
-        <${this._getType()} ${this._getAttributes()}>
+        <${this._getType()} data-element>
           ${this.innerHTML}
         </${this._getType()}>
     `
-    this._removeAttribute()
+
+    this._moverAtributos()
     return super.render()
   }
 
-  _getAttributes () {
-    this._isFab()
-    const attributes = Array.from(this.attributes)
-
-    return attributes.map((attribute) => {
-      var attr = `${attribute.name}`
-      if (attribute.value) attr += `=${attribute.value}`
-      return attr
-    }).join(' ')
-  }
-
+  // ---------------------------------------------------------------------------
   _isFab () {
     if (this.hasAttribute('fab')) {
       if (!this.hasAttribute('horizontal')) {
@@ -45,10 +36,43 @@ export class Button extends Component {
     return this.hasAttribute('href') ? 'a' : 'button'
   }
 
-  _removeAttribute () {
-    while (this.attributes.length > 0) {
-      this.removeAttribute(this.attributes[0].name)
-    }
+  _moverAtributos () {
+    this._isFab()
+
+    const element = this.querySelector('[data-element]')
+    const attributes = Array.from(this.attributes)
+
+    attributes.forEach(attribute => {
+      if (this._defaultAttributes().find(item => item === attribute.name)) {
+        element.setAttribute(attribute.name, attribute.value)
+        this.removeAttribute(attribute.name)
+      }
+    })
+  }
+
+  /** @return {Array<string>} */
+  _defaultAttributes () {
+    return [
+      'autofocus',
+      'disabled',
+      'download',
+      'form',
+      'formaction',
+      'formenctype',
+      'formmethod',
+      'formnovalidate',
+      'formtarget',
+      'href',
+      'hreflang',
+      'media',
+      'name',
+      'ping',
+      'referrerpolicy',
+      'rel',
+      'target',
+      'type',
+      'value'
+    ]
   }
 }
 customElements.define('ark-button', Button)
