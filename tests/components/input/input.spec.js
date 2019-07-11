@@ -1,5 +1,5 @@
 /** @typedef {import('../../../src/components').Input} Input */
-import '../../../src/components/input'
+import { Input } from '../../../src/components/input'
 
 describe('Input', () => {
   it('can be instantiated', () => {
@@ -17,14 +17,10 @@ describe('Input', () => {
   it('can be rendered without content', () => {
     const item = /** @type {Input} */(document.createElement('ark-input'))
     item.innerHTML = /* html */`
-      <label slot="label">label</label>
       <label slot="alert">alert label 1</label>
       <label slot="alert">alert label 2</label>
     `
     item.connectedCallback()
-
-    const labels = item.querySelector('.ark-input__label small')
-    expect(labels.childElementCount === 1).toBeTruthy()
 
     const alerts = item.querySelector('.ark-input__alert')
     expect(alerts.childElementCount === 2).toBeTruthy()
@@ -49,5 +45,28 @@ describe('Input', () => {
     item.connectedCallback()
 
     expect(item.querySelector('.ark-input__type-text') !== null).toBeTruthy()
+  })
+
+  it('can return value', function () {
+    const input = new Input()
+    input.setAttribute('value', 'abc')
+    input.connectedCallback()
+    expect(input.value === 'abc').toBeTruthy()
+
+    const event = new CustomEvent('input')
+    // @ts-ignore
+    input._change(event)
+
+    input.innerHTML = ''
+    expect(input.value === '').toBeTruthy()
+  })
+
+  it('can move attributes', function () {
+    const input = new Input()
+    input.setAttribute('value', 'abc')
+    input.setAttribute('listen', 'listen')
+    input.connectedCallback()
+
+    expect(input.hasAttribute('listen')).toBeTruthy()
   })
 })
