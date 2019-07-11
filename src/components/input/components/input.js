@@ -19,8 +19,7 @@ export class Input extends Component {
 
         <div>
           <div class="ark-input__input">
-            <input data-input ${this._getAttributes()}
-              listen on-input="_change">
+            <input data-input listen on-input="_change">
           </div>
 
           <div class="ark-input__alert">
@@ -29,7 +28,7 @@ export class Input extends Component {
         </div>
       </div>
     `
-
+    this._moverAtributos()
     return super.render()
   }
 
@@ -48,16 +47,6 @@ export class Input extends Component {
     }))
   }
 
-  _getAttributes () {
-    return Array.from(this.attributes).map((attribute) => {
-      if (!attribute.name.startsWith('on-')) {
-        return attribute.value
-          ? `${attribute.name}=${attribute.value}`
-          : attribute.name
-      }
-    }).join(' ')
-  }
-
   _isRequired () {
     return this.hasAttribute('required') ? 'required' : ''
   }
@@ -66,6 +55,53 @@ export class Input extends Component {
     return this.hasAttribute('type')
       ? `ark-input__type-${this.getAttribute('type')}`
       : `ark-input__type-text`
+  }
+
+  _moverAtributos () {
+    const element = this.querySelector('[data-input]')
+    const attributes = Array.from(this.attributes)
+
+    attributes.forEach(attribute => {
+      if (this._defaultAttributes().find(item => item === attribute.name)) {
+        element.setAttribute(attribute.name, attribute.value)
+        this.removeAttribute(attribute.name)
+      }
+    })
+  }
+
+  /** @return {Array<string>} */
+  _defaultAttributes () {
+    return [
+      'accept',
+      'alt',
+      'autocomplete',
+      'autofocus',
+      'checked',
+      'dirname',
+      'disabled',
+      'form',
+      'formaction',
+      'formenctype',
+      'formmethod',
+      'formnovalidate',
+      'formtarget',
+      'height',
+      'list',
+      'min',
+      'multiple',
+      'name',
+      'pattern',
+      'placeholder',
+      'readonly',
+      'required',
+      'size',
+      'src',
+      'step',
+      'type',
+      'value',
+      'value',
+      'width'
+    ]
   }
 }
 customElements.define('ark-input', Input)

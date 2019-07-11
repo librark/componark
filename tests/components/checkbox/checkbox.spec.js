@@ -14,12 +14,7 @@ describe('Checkbox', () => {
   it('can be instantiated', () => {
     const element = new Checkbox()
     element.value = 'op1'
-    element.render()
-
-    const input = element.querySelector('[data-checkbox]')
-    expect(input['value']).toEqual('op1')
-
-    expect(element.value).toEqual('op1')
+    element.connectedCallback()
 
     element.checked()
     expect(element.isChecked()).toBeTruthy()
@@ -38,10 +33,21 @@ describe('Checkbox', () => {
     const element = new Checkbox()
     element.setAttribute('type', 'text')
     element.setAttribute('value', '')
-    element.render()
+    element.connectedCallback()
+
+    const event = new CustomEvent('click')
 
     // @ts-ignore
-    element._change()
+    element._change(event)
     expect(element.isChecked()).toBeTruthy()
+
+    element.unchecked()
+    expect(!element.hasAttribute('checked')).toBeTruthy()
+  })
+
+  it('It does not allow changing the type of element.', () => {
+    const element = new Checkbox()
+    element.init({ value: 'op1' }).render()
+    expect(element.value).toEqual('op1')
   })
 })

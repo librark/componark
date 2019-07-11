@@ -1,49 +1,31 @@
-@import "@material/button/mdc-button.scss";
-@import "@material/fab/mdc-fab";
-
-@mixin button_material_() {
+@mixin button_default() {
   $component: "ark-button";
   $fab-size: 56px;
 
   #{$component} {
-    width: inherit;
-    color: inherit;
 
-    font-family: "Roboto medium", sans-serif;
-    font-size: 14px;
     display: inline-block;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 0;
-    border-radius: 2px;
-    outline: 0;
 
     button,
     a {
-      @extend .mdc-button;
-      @extend .mdc-button__label;
-
+      cursor: pointer;
       color: inherit !important;
-      width: inherit;
+      background: inherit !important;
+      // border: inherit !important;
 
-      &[fab] {
-        @extend .mdc-fab;
+      width: -webkit-fill-available;
+      height: inherit;
 
-        width: $fab-size !important;
-        height: $fab-size !important;
+      // display: contents;
+      display: block;
 
-        min-width: $fab-size !important;
-        min-height: $fab-size !important;
-      }
+      margin: auto;
+      padding: initial;
+
+      text-align: center;
+      // font-size: initial;
+      // font-family: inherit;
+      // text-decoration: inherit;
 
       &[disabled] {
         cursor: default !important;
@@ -54,9 +36,22 @@
           background: none !important;
         }
       }
+
     }
 
+    //----------------------------------------
+    // Fab
     // ----------------------------------------
+    &[fab] {
+      border-radius: 50%;
+      width: $fab-size !important;
+      height: $fab-size !important;
+
+      min-width: $fab-size !important;
+      min-height: $fab-size !important;
+    }
+
+    //----------------------------------------
     // position
     // ----------------------------------------
     [horizontal],

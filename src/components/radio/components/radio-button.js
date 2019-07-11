@@ -14,13 +14,15 @@ export class RadioButton extends Component {
     this.innerHTML = /* html */`
       <div class="ark-radio-button__body" listen on-click="_change">
         <div class="ark-radio-button__button">
-          <input data-radio-button type="radio" ${this._getAttributes()}>
+          <input data-radio-button type="radio">
         </div>
         <div class="ark-radio-button__label">
           <small>${this.innerHTML}</small>
         </div>
       </div>
     `
+
+    this._moverAtributos()
     return super.render()
   }
 
@@ -61,14 +63,50 @@ export class RadioButton extends Component {
     }))
   }
 
-  _getAttributes () {
-    return Array.from(this.attributes).map((attribute) => {
-      if (!attribute.name.startsWith('on-') && attribute.name !== 'type') {
-        return attribute.value
-          ? `${attribute.name}=${attribute.value}`
-          : attribute.name
+  _moverAtributos () {
+    const element = this.querySelector('[data-radio-button]')
+    const attributes = Array.from(this.attributes)
+
+    attributes.forEach(attribute => {
+      if (this._defaultAttributes().find(item => item === attribute.name)) {
+        element.setAttribute(attribute.name, attribute.value)
+        this.removeAttribute(attribute.name)
       }
-    }).join(' ')
+    })
+  }
+
+  /** @return {Array<string>} */
+  _defaultAttributes () {
+    return [
+      'accept',
+      'alt',
+      'autocomplete',
+      'autofocus',
+      'checked',
+      'dirname',
+      'disabled',
+      'form',
+      'formaction',
+      'formenctype',
+      'formmethod',
+      'formnovalidate',
+      'formtarget',
+      'height',
+      'list',
+      'min',
+      'multiple',
+      'name',
+      'pattern',
+      'placeholder',
+      'readonly',
+      'required',
+      'size',
+      'src',
+      'step',
+      'value',
+      'value',
+      'width'
+    ]
   }
 }
 customElements.define('ark-radio-button', RadioButton)

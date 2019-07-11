@@ -1,5 +1,5 @@
 /** @typedef {import('../../../src/components').RadioButton} RadioButton */
-// import { RadioButton } from '../../../src/components/radio'
+import { RadioButton } from '../../../src/components/radio'
 
 describe('RadioButton', () => {
   it('can be instantiated', () => {
@@ -9,5 +9,9 @@ describe('RadioButton', () => {
 
     var init = element.init({})
     expect(element === init).toBeTruthy()
+  })
+  it('can be instantiated', () => {
+    const element = new RadioButton()
+    console.log(element.value)
   })
 })

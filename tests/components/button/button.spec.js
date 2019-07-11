@@ -25,29 +25,13 @@ describe('Button', () => {
     expect(content).toEqual('Submit')
   })
 
-  it('can be rendered without attribute value', function () {
-    const button = /** @type {Button} */ (document.createElement('ark-button'))
-
-    const attr = document.createAttribute('myAttr')
-    button.setAttributeNode(attr)
-
-    button.connectedCallback()
-
-    const buttonElement = button.querySelector('button')
-    expect(buttonElement.getAttribute('myAttr')['value']).toBeUndefined()
-  })
-
   it('can be rendered with attribute value', function () {
     const button = /** @type {Button} */ (document.createElement('ark-button'))
-
-    const attr = document.createAttribute('myAttr')
-    attr.value = 'ok'
-    button.setAttributeNode(attr)
-
+    button.setAttribute('myAttr', 'ok')
     button.connectedCallback()
 
-    const buttonElement = button.querySelector('button')
-    expect(buttonElement.getAttribute('myAttr')).toEqual('ok')
+    expect(button.hasAttribute('myAttr')).toBeTruthy()
+    expect(button.getAttribute('myAttr')).toEqual('ok')
   })
 
   it('can be rendered with tag <a>', function () {
@@ -66,10 +50,9 @@ describe('Button', () => {
     button.setAttribute('fab', '')
 
     button.connectedCallback()
-    const buttonButton = button.querySelector('button')
 
-    expect(buttonButton.getAttribute('horizontal')).toEqual('end')
-    expect(buttonButton.getAttribute('vertical')).toEqual('end')
+    expect(button.getAttribute('horizontal')).toEqual('end')
+    expect(button.getAttribute('vertical')).toEqual('end')
   })
 
   it('can be rendered Fab button horizontal, vertical center', function () {
@@ -79,9 +62,8 @@ describe('Button', () => {
     button.setAttribute('vertical', 'center')
 
     button.connectedCallback()
-    const buttonButton = button.querySelector('button')
 
-    expect(buttonButton.getAttribute('horizontal')).toEqual('center')
-    expect(buttonButton.getAttribute('vertical')).toEqual('center')
+    expect(button.getAttribute('horizontal')).toEqual('center')
+    expect(button.getAttribute('vertical')).toEqual('center')
   })
 })
