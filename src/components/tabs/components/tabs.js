@@ -14,7 +14,7 @@ export class Tabs extends Component {
     this.selectAll('ark-tabs-item').forEach(
       item => item.addEventListener('click', _ => this._activeElement(item))
     )
-    return this
+    return super.load()
   }
 
   _activeElement (element) {

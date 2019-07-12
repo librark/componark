@@ -17,7 +17,7 @@ export class DragDrop extends Component {
     return dragdrop
   }
 
-  load () {
+  async load () {
     if (this.hasAttribute('droppable')) {
       this._setAttributeDirection()
       this._addEventDroppable()

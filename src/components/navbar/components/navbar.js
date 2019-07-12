@@ -14,13 +14,15 @@ export class Navbar extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     const navbar = this.querySelector('[ark-navbar-toggle]')
     if (navbar) {
       navbar.addEventListener(
         'click', () => this.toggleContent()
       )
     }
+
+    return super.load()
   }
 
   toggleContent () {

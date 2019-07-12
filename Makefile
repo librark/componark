@@ -14,8 +14,12 @@ update:
 
 	npm install -g npm
 	npm install -g npm-check-updates
-	npm update
-	npm outdated
+	ncu -u
+	npm i
+
+	# npm update
+	# npm outdated
+	# npm audit fix
 
 production:
 	rm -rf ./dist

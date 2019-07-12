@@ -37,6 +37,10 @@ describe('Checkbox', () => {
 
     element.render()
 
+    const event = new CustomEvent('alter')
+    // @ts-ignore
+    element._change(event)
+
     expect(element.value[0]).toEqual('op1')
   })
 
@@ -50,5 +54,28 @@ describe('Checkbox', () => {
     expect(
       element.querySelector('[slot="alert"]').textContent.trim()
     ).toEqual('Error')
+  })
+
+  it('can it initialize without content', () => {
+    const element = new CheckboxGroup()
+
+    const checkbox1 = new Checkbox()
+    checkbox1.value = 'op1'
+    checkbox1.render()
+    checkbox1.checked()
+
+    const checkbox2 = new Checkbox()
+    checkbox2.value = 'op2'
+    checkbox2.render()
+
+    element.appendChild(checkbox1)
+    element.appendChild(checkbox2)
+
+    element.render()
+    element.innerHTML = /* html */``
+    // @ts-ignore
+    element._renderCheckboxList()
+
+    expect(element.innerHTML.trim()).toEqual('')
   })
 })

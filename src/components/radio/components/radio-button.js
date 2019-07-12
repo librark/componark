@@ -103,8 +103,6 @@ export class RadioButton extends Component {
       'size',
       'src',
       'step',
-      'value',
-      'value',
       'width'
     ]
   }

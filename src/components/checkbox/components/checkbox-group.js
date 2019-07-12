@@ -33,9 +33,13 @@ export class CheckboxGroup extends Component {
 
   get value () {
     const values = []
-    this.querySelectorAll(`ark-checkbox input:checked`).forEach(input => {
-      values.push(input['value'])
-    })
+
+    this.selectAll('ark-checkbox').forEach(
+      (/** @type {Checkbox} */ checkbox) => {
+        if (checkbox.isChecked()) values.push(checkbox.value)
+      }
+    )
+
     return values
   }
 

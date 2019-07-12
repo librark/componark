@@ -7,9 +7,9 @@ export class Checkbox extends Component {
     return super.init(context)
   }
 
-  // reflectedProperties () {
-  //   return ['value']
-  // }
+  reflectedProperties () {
+    return ['value']
+  }
 
   render () {
     this.innerHTML = /* html */`
@@ -25,18 +25,6 @@ export class Checkbox extends Component {
 
     this._moverAtributos()
     return super.render()
-  }
-
-  get value () {
-    const element = (/** @type {Checkbox} */ (
-      this.querySelector('[data-checkbox]')))
-    return element ? element.value : ''
-  }
-
-  set value (data) {
-    const element = (/** @type {Checkbox} */ (
-      this.querySelector('[data-checkbox]')))
-    if (element) element.value = data
   }
 
   checked () {
@@ -118,7 +106,6 @@ export class Checkbox extends Component {
       'size',
       'src',
       'step',
-      'value',
       'width'
     ]
   }
