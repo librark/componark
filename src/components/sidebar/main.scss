@@ -3,11 +3,14 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import './styles/_default/_default.input';
 // -------------------------------------------
 @import './styles/ark/main';
 @import './styles/material/main';
 
 @mixin sidebar($theme: "material") {
+    @include sidebar_default();
+
     @if $theme=="ark" {
         @include sidebar_ark();
     }
