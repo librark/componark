@@ -26,7 +26,7 @@ export class List extends Component {
   async load () {
     if (!this.source) return
     this.items = await this.source()
-    return this
+    return super.load()
   }
 
   _renderItems () {

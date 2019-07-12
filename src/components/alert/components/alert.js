@@ -54,7 +54,7 @@ export class Alert extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.querySelectorAll('[close]').forEach(element =>
       element.addEventListener('click', _ => this.close())
     )
