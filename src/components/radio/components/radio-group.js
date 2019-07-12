@@ -19,7 +19,7 @@ export class RadioGroup extends Component {
 
     this.innerHTML = /* html */`
       <div class="ark-radio-group__label">
-        <small>${this.label}</small>
+        <small data-radio-group-label>${this.label}</small>
       </div>
       <div>
         <div data-radiobutton-list class="ark-radio-group__list"></div>
@@ -34,10 +34,14 @@ export class RadioGroup extends Component {
   }
 
   get value () {
-    const input = this.querySelector(
-      `ark-radio-button input[name="${this.name}"]:checked`
+    let value = ''
+    this.selectAll('ark-radio-button').forEach(
+      (/** @type {RadioButton} */ radio) => {
+        if (radio.isChecked()) value = radio.value
+      }
     )
-    return input ? input['value'] : ''
+
+    return value
   }
 
   // ---------------------------------------------------------------------------
@@ -45,7 +49,11 @@ export class RadioGroup extends Component {
   _change (event) {
     event.stopPropagation()
 
-    const target = (/** @type {RadioButton} */ (event.target))
+    this.selectAll('ark-radio-button').forEach(
+      (/** @type {RadioButton} */ radio) => radio.unchecked()
+    )
+
+    const target = /** @type {RadioButton} */ (event.target)
     target.checked()
 
     this.dispatchEvent(new CustomEvent('alter', {
@@ -63,11 +71,6 @@ export class RadioGroup extends Component {
 
       if (container) container.appendChild(button)
     })
-  }
-
-  _radioButtonEvent (event) {
-    event.stopPropagation()
-    event.target.checked()
   }
 }
 customElements.define('ark-radio-group', RadioGroup)

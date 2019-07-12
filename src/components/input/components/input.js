@@ -99,7 +99,6 @@ export class Input extends Component {
       'step',
       'type',
       'value',
-      'value',
       'width'
     ]
   }

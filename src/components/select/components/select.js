@@ -2,7 +2,12 @@ import { Component } from '../../component'
 
 export class Select extends Component {
   init (context) {
+    this.label = context['label']
     return super.init(context)
+  }
+
+  reflectedProperties () {
+    return ['label']
   }
 
   render () {
@@ -33,9 +38,8 @@ export class Select extends Component {
   }
 
   _getLabel () {
-    const label = this.getAttribute('label')
-    return label ? /* html */ `
-      <label>${label}</label>
+    return this.label ? /* html */ `
+      <label>${this.label}</label>
     ` : ''
   }
 

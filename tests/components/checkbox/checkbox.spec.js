@@ -33,6 +33,8 @@ describe('Checkbox', () => {
     const element = new Checkbox()
     element.setAttribute('type', 'text')
     element.setAttribute('value', '')
+    element.setAttribute('data-valid', '')
+    element.setAttribute('autofocus', 'autofocus')
     element.connectedCallback()
 
     const event = new CustomEvent('click')
@@ -40,6 +42,9 @@ describe('Checkbox', () => {
     // @ts-ignore
     element._change(event)
     expect(element.isChecked()).toBeTruthy()
+    expect(element.hasAttribute('type')).toBeTruthy()
+    expect(element.hasAttribute('value')).toBeTruthy()
+    expect(!element.hasAttribute('autofocus')).toBeTruthy()
 
     element.unchecked()
     expect(!element.hasAttribute('checked')).toBeTruthy()
