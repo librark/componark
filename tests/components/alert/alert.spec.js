@@ -21,7 +21,7 @@ describe('Alert', () => {
     alert.innerHTML = /* HTML */`
       <div slot="action">Menu</div>
     `
-    alert.connectedCallback()
+    alert.render()
 
     const content = alert.querySelector('.ark-alert__actions')
     expect(content.childElementCount).toBeTruthy()
