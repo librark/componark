@@ -4,14 +4,16 @@
  **/
 
 import './master'
-import './detail'
 
 import { Component } from '../../component'
+import { SplitviewDetail } from './detail'
 
 export class Splitview extends Component {
   init (context) {
+    this.detailTitle = context['title']
     this.detailTemplate = context['detailTemplate']
-    this.title = context['title'] || this.title || ''
+    this.detailDefaultTemplate = context['defaultTemplate']
+    this.detailBackButtonIcon = context['backButtonIcon']
 
     return super.init(context)
   }
@@ -22,11 +24,9 @@ export class Splitview extends Component {
         <div class="master-container">
           ${this.innerHTML}
         </div>
-        <ark-splitview-detail></ark-splitview-detail>
       `
-
       this._listenMaster()
-      this._initSplitviewDetail()
+      this.append(this._splitviewDetail())
     }
     return super.render()
   }
@@ -45,7 +45,7 @@ export class Splitview extends Component {
   /** @argument {Event} event */
   _onMasterChange (event) {
     event.stopImmediatePropagation()
-    const item = event['detail'] ? event['detail']['item'] : {}
+    const item = event['detail'] ? event['detail']['item'] : null
     this.detail.init({ item: item }).render()
   }
 
@@ -54,12 +54,15 @@ export class Splitview extends Component {
     this.master.setAttribute('on-master:change', '_onMasterChange')
   }
 
-  _initSplitviewDetail () {
-    this.detail.init({
+  _splitviewDetail () {
+    const detail = new SplitviewDetail()
+    detail.init({
       template: this.detailTemplate,
-      title: this.title
-    })
-    this.detail.connectedCallback()
+      title: this.detailTitle || '',
+      defaultTemplate: this.detailDefaultTemplate,
+      backButtonIcon: this.detailBackButtonIcon
+    }).connectedCallback()
+    return detail
   }
 }
 customElements.define('ark-splitview', Splitview)

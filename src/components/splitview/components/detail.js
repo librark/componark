@@ -2,12 +2,13 @@ import { Component } from '../../component'
 
 export class SplitviewDetail extends Component {
   init (context) {
-    this.item = context['item'] || this.item || null
     this.title = context['title'] || this.title || ''
+
+    this.item = context['item'] || this.item || null
     this.template = context['template'] || this.template || null
 
-    this.defaultTemplate = context['defaultTemplate'] || this.defaultTemplate
     this.backButtonIcon = context['backButtonIcon'] || this.backButtonIcon
+    this.defaultTemplate = context['defaultTemplate'] || this.defaultTemplate
     return super.init(context)
   }
 
@@ -19,7 +20,7 @@ export class SplitviewDetail extends Component {
             class="ark-splitview-detail__button--close">
             ${this._renderBackButtonIcon()}
           </button>
-          <div class="ark-splitview-detail__title">
+          <div data-master-title class="ark-splitview-detail__title">
             ${this.title}
           </div>
         </header>
@@ -30,6 +31,7 @@ export class SplitviewDetail extends Component {
       this.show()
     } else {
       this.innerHTML = this._innerHtmlDefaultTemplate()
+      this.hide()
     }
 
     return super.render()
@@ -49,7 +51,7 @@ export class SplitviewDetail extends Component {
 
   // ---------------------------------------------------------------------------
   _innerHtmlDefaultTemplate () {
-    const template = this.defaultTemplate ? this.defaultTemplate : ''
+    const template = this.defaultTemplate ? this.defaultTemplate() : ''
 
     return /* html */`
       <div class='ark-splitview-detail__default-template'>
@@ -59,7 +61,7 @@ export class SplitviewDetail extends Component {
   }
 
   _renderBackButtonIcon () {
-    return this.backButtonIcon ? this.backButtonIcon : '&times;'
+    return this.backButtonIcon ? this.backButtonIcon() : '&times;'
   }
 }
 customElements.define('ark-splitview-detail', SplitviewDetail)

@@ -38,10 +38,15 @@ export class SplitviewDemo extends Component {
 
     const splitview = /** @type {Splitview} */ (
       this.select('ark-splitview').init({
+        title: 'Resultados',
         detailTemplate: detailTemplate,
-        title: 'Resultados'
+        defaultTemplate: () => {
+          return /* html */`<ark-icon name='fas fa-ad'></ark-icon>`
+        },
+        backButtonIcon: () => {
+          return /* html */`<ark-icon name='fas fa-ad'></ark-icon>`
+        }
       }).render())
-
     // =========================================================================
     // List
     // =========================================================================
