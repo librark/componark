@@ -8,9 +8,10 @@ describe('Splitview', () => {
     const splitview = new Splitview()
     splitview.init({})
     splitview.connectedCallback()
-    expect(
-      splitview.outerHTML === '<ark-splitview></ark-splitview>'
-    ).toBeTruthy()
+
+    expect(splitview.outerHTML.trim()).toBe(
+      '<ark-splitview detail-percentage=""></ark-splitview>'
+    )
   })
 
   it('can be instantiated with elements', () => {

@@ -68,7 +68,6 @@
       overflow: auto;
     }
 
-
     &__default-template {
       width: 100%;
       height: 100%;
@@ -79,7 +78,7 @@
 
       color: $muted;
 
-      background: rgba($color: $muted, $alpha: .1);
+      background: rgba($color: $muted, $alpha: 0.1);
 
       ark-icon {
         font-size: 8rem;
@@ -87,10 +86,16 @@
     }
   }
 
+  @media only screen and (max-width: $tablet) {
+    #{$component} {
+      width: 100% !important;
+    }
+  }
+
   @media only screen and (min-width: $tablet) {
     #{$component} {
       position: initial;
-      border-left: 2px solid rgba($color: $muted, $alpha: .3);
+      border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
 
       &[hidden] {
         display: block !important;

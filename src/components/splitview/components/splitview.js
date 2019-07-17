@@ -10,23 +10,33 @@ import { SplitviewDetail } from './detail'
 
 export class Splitview extends Component {
   init (context) {
+    // -------------------------------------------------------------------------
+    // Detail
+    // -------------------------------------------------------------------------
     this.detailTitle = context['title']
     this.detailTemplate = context['detailTemplate']
-    this.detailDefaultTemplate = context['defaultTemplate']
     this.detailBackButtonIcon = context['backButtonIcon']
+    this.detailDefaultTemplate = context['defaultTemplate']
+
+    this.detailPercentage = context['detailPercentage'] || this.detailPercentage
 
     return super.init(context)
+  }
+
+  reflectedProperties () {
+    return ['detailPercentage']
   }
 
   render () {
     if (this.master && this.detailTemplate) {
       this.innerHTML = /* html */`
-        <div class="master-container">
+        <div data-master-container class="master-container">
           ${this.innerHTML}
         </div>
       `
       this._listenMaster()
       this.append(this._splitviewDetail())
+      this._setDetailWidth()
     }
     return super.render()
   }
@@ -52,6 +62,16 @@ export class Splitview extends Component {
   _listenMaster () {
     this.master.setAttribute('listen', 'listen')
     this.master.setAttribute('on-master:change', '_onMasterChange')
+  }
+
+  _setDetailWidth () {
+    const master = /** @type {HTMLElement} */ (
+      this.querySelector('[data-master-container]')
+    )
+    const percentage = parseInt(this.detailPercentage) || 50
+
+    master.style.width = `${100 - percentage}%`
+    this.detail.style.width = `${percentage}%`
   }
 
   _splitviewDetail () {

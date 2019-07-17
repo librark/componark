@@ -13,7 +13,7 @@ export class SplitviewDemo extends Component {
 
   render () {
     this.innerHTML = /* html */`
-      <ark-splitview>
+      <ark-splitview detail-percentage="30">
         <h1>Splitview</h1>
 
         <ark-splitview-master master-event="list:selected">

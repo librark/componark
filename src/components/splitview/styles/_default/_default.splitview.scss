@@ -15,22 +15,11 @@
 
     z-index: auto;
     background: $background;
-
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
   }
 
-  @media only screen and (min-width: $tablet) {
-    #{$component} {
-      grid-template-columns: repeat(5, 1fr);
-
-      .master-container {
-        grid-column: 1 / 3;
-      }
-
-      ark-splitview-detail {
-        grid-column: 3 / 6;
-      }
+  @media only screen and (max-width: $tablet) {
+    .master-container {
+      width: 100% !important;
     }
   }
 }
