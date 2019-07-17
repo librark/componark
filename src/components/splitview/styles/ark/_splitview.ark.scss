@@ -1,0 +1,10 @@
+@mixin splitview_ark_() {
+  $component: "ark-splitview";
+  $mobile: 360px;
+  $tablet: 768px;
+  $desktop: 960px;
+
+  #{$component} {}
+
+  .#{$component} {}
+}

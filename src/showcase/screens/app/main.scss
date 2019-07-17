@@ -19,6 +19,7 @@
 @import "../../../components/radio/main";
 @import "../../../components/select/main";
 @import "../../../components/sidebar/main";
+@import "../../../components/splitview/main";
 @import "../../../components/table/main";
 @import "../../../components/tabs/main";
 
@@ -41,6 +42,7 @@
     @include radio($type);
     @include select($type);
     @include sidebar($type);
+    @include splitview($type);
     @include table($type);
     @include tabs($type);
 }

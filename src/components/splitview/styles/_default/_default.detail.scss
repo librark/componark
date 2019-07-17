@@ -1,0 +1,115 @@
+// @import "../../../../theme/_variables.scss";
+
+@mixin splitview_detail_default() {
+  $component: "ark-splitview-detail";
+  $mobile: 360px;
+  $tablet: 768px;
+  $desktop: 960px;
+
+  #{$component} {
+    display: flex;
+    flex-direction: column;
+    background: $background;
+
+    position: absolute;
+    z-index: 3072;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    &[hidden] {
+      display: none !important;
+    }
+  }
+
+  .#{$component} {
+    &__header {
+      background: $primary;
+      color: $light;
+
+      display: flex;
+
+      &,
+      * {
+        min-height: 64px;
+      }
+    }
+
+    &__button--close {
+      display: block;
+
+      font-size: x-large;
+      font-weight: bolder;
+
+      padding: 0 19px;
+      border: 0;
+
+      background: inherit;
+      color: inherit;
+      cursor: pointer;
+
+      * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      font-size: larger;
+    }
+
+    &__body {
+      height: 100%;
+      overflow: auto;
+    }
+
+    &__default-template {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: $muted;
+
+      background: rgba($color: $muted, $alpha: 0.1);
+
+      ark-icon {
+        font-size: 8rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $tablet) {
+    #{$component} {
+      width: 100% !important;
+    }
+  }
+
+  @media only screen and (min-width: $tablet) {
+    #{$component} {
+      position: initial;
+      border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
+
+      &[hidden] {
+        display: block !important;
+      }
+    }
+
+    .#{$component} {
+      &__button--close {
+        display: none;
+      }
+
+      &__title {
+        margin-left: 20px;
+      }
+    }
+  }
+}

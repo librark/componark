@@ -3,9 +3,6 @@ import { Component } from '../../component'
 export class SplitviewMaster extends Component {
   init (context) {
     this.masterEvent = this.masterEvent
-
-    this.firstElementChild.addEventListener(
-      this.masterEvent, this._onMasterEvent.bind(this))
     return super.init(context)
   }
 
@@ -14,10 +11,17 @@ export class SplitviewMaster extends Component {
   }
 
   render () {
+    if (this.firstElementChild) {
+      this.firstElementChild.addEventListener(
+        this.masterEvent, this._onMasterEvent.bind(this)
+      )
+    }
     return super.render()
   }
 
+  /** @argument {Event} event */
   _onMasterEvent (event) {
+    event.stopImmediatePropagation()
     this.dispatchEvent(new CustomEvent('master:change', event))
   }
 }

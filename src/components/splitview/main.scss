@@ -1,0 +1,21 @@
+// -------------------------------------------
+// Theme
+// -------------------------------------------
+@import "../theme/main";
+// -------------------------------------------
+@import "./styles/_default/main.defaul";
+// -------------------------------------------
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
+
+@mixin splitview($theme: ark) {
+    @include splitview_defaul();
+
+    @if $theme==ark {
+        @include splitview_ark();
+    }
+
+    @if $theme==material {
+        @include splitview_material();
+    }
+}
