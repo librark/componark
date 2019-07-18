@@ -3,7 +3,7 @@ import { uuidv4 } from '../../../utils'
 
 export class DragDrop extends Component {
   init (context) {
-    return super.init(context)
+    return super.init()
   }
 
   render () {
@@ -45,14 +45,14 @@ export class DragDrop extends Component {
     // ------------------------------------------------------------------------
     // dragover
     // ------------------------------------------------------------------------
-    this.addEventListener('dragover', (event) => {
+    this.addEventListener('dragover', event => {
       event.preventDefault()
     })
 
     // ------------------------------------------------------------------------
     // dragenter
     // ------------------------------------------------------------------------
-    this.addEventListener('dragenter', (event) => {
+    this.addEventListener('dragenter', event => {
       event.preventDefault()
       const draggable = this._getElementByDataTransfer(event)
       this.droppableEnter(draggable)
@@ -61,7 +61,7 @@ export class DragDrop extends Component {
     // ------------------------------------------------------------------------
     // dragleave
     // ------------------------------------------------------------------------
-    this.addEventListener('dragleave', (event) => {
+    this.addEventListener('dragleave', event => {
       event.preventDefault()
       this.droppableLeave()
     })
@@ -69,7 +69,7 @@ export class DragDrop extends Component {
     // ------------------------------------------------------------------------
     // dragleave
     // ------------------------------------------------------------------------
-    this.addEventListener('drop', (event) => {
+    this.addEventListener('drop', event => {
       event.preventDefault()
       const draggable = this._getElementByDataTransfer(event)
       this.droppableDrop(draggable)
@@ -104,7 +104,7 @@ export class DragDrop extends Component {
     // ------------------------------------------------------------------------
     // dragstart
     // ------------------------------------------------------------------------
-    this.addEventListener('dragstart', (event) => {
+    this.addEventListener('dragstart', event => {
       event.stopPropagation()
       event.dataTransfer.clearData()
       event.dataTransfer.setData(this.generateDataTransfer(), '')
@@ -114,14 +114,14 @@ export class DragDrop extends Component {
     // ------------------------------------------------------------------------
     // dragend
     // ------------------------------------------------------------------------
-    this.addEventListener('dragend', (event) => {
+    this.addEventListener('dragend', event => {
       this.draggableEnd()
     })
 
     // ------------------------------------------------------------------------
     // dragenter
     // ------------------------------------------------------------------------
-    this.addEventListener('dragenter', (event) => {
+    this.addEventListener('dragenter', event => {
       const dataTransfer = this._getDataTransfer(event)
       const draggable = this._getElementByDataTransfer(event)
       this.draggableEnter(draggable, dataTransfer)
@@ -130,7 +130,7 @@ export class DragDrop extends Component {
     // ------------------------------------------------------------------------
     // dragleave
     // ------------------------------------------------------------------------
-    this.addEventListener('dragleave', (event) => {
+    this.addEventListener('dragleave', event => {
       event.preventDefault()
       this.draggableLeave()
     })
@@ -138,7 +138,7 @@ export class DragDrop extends Component {
     // ------------------------------------------------------------------------
     // drop
     // ------------------------------------------------------------------------
-    this.addEventListener('drop', (event) => {
+    this.addEventListener('drop', event => {
       event.preventDefault()
       const droppable = this._getElementByDataTransfer(event)
       this.draggableDrop(droppable)
@@ -169,7 +169,7 @@ export class DragDrop extends Component {
   }
 
   draggableEnter (draggable, dataTransfer) {
-    let data = this._parseData(dataTransfer)
+    const data = this._parseData(dataTransfer)
     if (!data || !this.parentElement) return
 
     if (this._dropAllowed(this, draggable)) {
@@ -187,9 +187,7 @@ export class DragDrop extends Component {
     this._draggableRemoveStyle()
   }
 
-  draggableDrop (
-    /* @type {HTMLImageElement} */ draggable
-  ) {
+  draggableDrop (/* @type {HTMLImageElement} */ draggable) {
     this._draggableRemoveStyle()
     if (this._dropAllowed(this, draggable)) {
       this.parentElement.insertBefore(draggable, this)
@@ -218,7 +216,9 @@ export class DragDrop extends Component {
       if (
         item.tagName.toLowerCase() === 'ark-dragdrop' &&
         item.hasAttribute('droppable')
-      ) levelDestination++
+      ) {
+        levelDestination++
+      }
     }
 
     return levelDestination <= parseInt(draggable.getAttribute('level'))

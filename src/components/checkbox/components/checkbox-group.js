@@ -4,7 +4,7 @@ import { Component } from '../../component'
 export class CheckboxGroup extends Component {
   init (context) {
     this.label = context['label']
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

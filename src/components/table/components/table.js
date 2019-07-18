@@ -5,7 +5,7 @@ export class Table extends Component {
     this.headers = context['headers'] || this.headers || {}
     this.data = context['data'] || this.data || []
 
-    return super.init(context)
+    return super.init()
   }
 
   render () {

@@ -4,7 +4,7 @@ import { Component } from '../../component'
 export class Accordion extends Component {
   init (context) {
     this.closeOthers = context['closeOthers']
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {
@@ -12,7 +12,7 @@ export class Accordion extends Component {
   }
 
   render () {
-    for (let [index, tab] of this.selectAll('ark-accordion-tab').entries()) {
+    for (const [index, tab] of this.selectAll('ark-accordion-tab').entries()) {
       tab.setAttribute('tab-index', index.toString())
       tab.setAttribute('listen', 'listen')
       tab.setAttribute('on-accordiontab:click', '_activateTab')
@@ -24,12 +24,15 @@ export class Accordion extends Component {
     event.stopPropagation()
     if (!this.hasAttribute('close-others')) return
 
-    if (this['closeOthers'] === 'true' ||
-    !this['closeOthers'].toString().length) {
-      this.selectAll('ark-accordion-tab').forEach(
-        (/** @type {AccordionTab} */ tab) => {
-          tab.close()
-        })
+    if (
+      this['closeOthers'] === 'true' ||
+      !this['closeOthers'].toString().length
+    ) {
+      this.selectAll('ark-accordion-tab').forEach((
+        /** @type {AccordionTab} */ tab
+      ) => {
+        tab.close()
+      })
 
       event.target.open()
     }

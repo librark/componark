@@ -3,7 +3,7 @@ import { getSlots } from '../../../utils'
 
 export class Sidebar extends Component {
   init (context) {
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

@@ -4,7 +4,7 @@ export class GridItem extends Component {
   init (context) {
     this.rows = context['rows'] || this.rows || 1
     this.cols = context['cols'] || this.cols || 1
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

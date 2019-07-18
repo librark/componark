@@ -5,7 +5,7 @@ export class Card extends Component {
   init (context) {
     this.title = context['title']
     this.subtitle = context['subtitle']
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

@@ -2,7 +2,7 @@ import { Component } from '../../component'
 
 export class Tabs extends Component {
   init (context) {
-    return super.init(context)
+    return super.init()
   }
 
   render () {

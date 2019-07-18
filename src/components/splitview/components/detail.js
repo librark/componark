@@ -9,7 +9,7 @@ export class SplitviewDetail extends Component {
 
     this.backButtonIcon = context['backButtonIcon'] || this.backButtonIcon
     this.defaultTemplate = context['defaultTemplate'] || this.defaultTemplate
-    return super.init(context)
+    return super.init()
   }
 
   render () {

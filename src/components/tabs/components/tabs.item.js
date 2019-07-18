@@ -3,7 +3,7 @@ import { Component } from '../../component'
 export class TabsItem extends Component {
   init (context) {
     this.title = context['title']
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

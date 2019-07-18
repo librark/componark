@@ -6,7 +6,7 @@ export class RadioGroup extends Component {
   init (context) {
     this.label = context['label']
     this.name = context['name'] || this.name || uuidv4()
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

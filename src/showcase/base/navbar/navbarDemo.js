@@ -1,15 +1,15 @@
 export class NavbarDemo extends HTMLElement {
-  init (context) {
-    this.type = context['type'] || 'ark'
-    return this
-  }
+	init(context) {
+		this.type = context['type'] || 'ark'
+		return this
+	}
 
-  connectedCallback () {
-    this.render()
-  }
+	connectedCallback() {
+		this.render()
+	}
 
-  render () {
-    this.innerHTML = /* html */`
+	render() {
+		this.innerHTML = /* html */ `
       <div mobile><p>mobile (360px).</p></div>
       <div tablet><p>tablet (768px).</p></div>
       <div desktop><p>desktop (960px).</p></div>
@@ -33,42 +33,41 @@ export class NavbarDemo extends HTMLElement {
         <p>data-ark-navbar-toggle</p>
       </div>
     `
-    this._setupFrame('[mobile]', '360px')
-    this._setupFrame('[tablet]', '768px')
-    this._setupFrame('[desktop]', '960px')
-  }
+		this._setupFrame('[mobile]', '360px')
+		this._setupFrame('[tablet]', '768px')
+		this._setupFrame('[desktop]', '960px')
+	}
 
-  _setupFrame (selector, width) {
-    const content = this._setupContent()
-    const frame = document.createElement('iframe')
-    frame.setAttribute('src', `/${this.type}.html`)
-    frame.setAttribute('frameborder', '1')
-    frame.setAttribute('width', width)
-    frame.setAttribute('height', '640px')
-    frame.onload = () => {
-      const frameBody = frame.contentDocument.querySelector('body')
-      const app = frameBody.querySelector('app-showcase-ark')
-      const main = document.createElement('main')
-      main.innerHTML = content
+	_setupFrame(selector, width) {
+		const content = this._setupContent()
+		const frame = document.createElement('iframe')
+		frame.setAttribute('src', `/${this.type}.html`)
+		frame.setAttribute('frameborder', '1')
+		frame.setAttribute('width', width)
+		frame.setAttribute('height', '640px')
+		frame.onload = () => {
+			const frameBody = frame.contentDocument.querySelector('body')
+			const app = frameBody.querySelector('app-showcase-ark')
+			const main = document.createElement('main')
+			main.innerHTML = content
 
-      app.parentNode.removeChild(app)
-      frameBody.prepend(main)
-    }
+			app.parentNode.removeChild(app)
+			frameBody.prepend(main)
+		}
 
-    this.querySelector(selector).appendChild(frame)
-  }
+		this.querySelector(selector).appendChild(frame)
+	}
 
-  _setupContent () {
-    return /* html */`
+	_setupContent() {
+		return /* html */ `
       <ark-navbar justify="between" fixed-top>
         <ark-nav>
-          <ark-button>
-              <ark-icon name="fas fa-bars"></ark-icon>
-          </ark-button>
-          <ark-button>x_Item 1-1</ark-button>
-          <ark-button>x_Item 1-1</ark-button>
-          <ark-button>x_Item 1-2</ark-button>
-          <ark-button>x_Item 1-3</ark-button>
+          <div>
+            <ark-button>
+                <ark-icon name="fas fa-bars"></ark-icon>
+            </ark-button>
+            <ark-button>x_Item 1-1</ark-button>
+          </div>
           <ark-button ark-navbar-toggle>
             <ark-icon name="fas fa-caret-down"></ark-icon>
           </ark-button>
@@ -85,6 +84,6 @@ export class NavbarDemo extends HTMLElement {
         </ark-nav>
       </ark-navbar>
     `
-  }
+	}
 }
 customElements.define('demo-navbar', NavbarDemo)

@@ -1,6 +1,6 @@
 export class Component extends HTMLElement {
 
-    init(context: Object): Component
+    init(context?): Component
 
     render(): Component
 

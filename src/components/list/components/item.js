@@ -4,7 +4,7 @@ export class ListItem extends Component {
   init (context) {
     this.index = this.index
     this.addEventListener('click', this._onSelected.bind(this))
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

@@ -3,7 +3,7 @@ import { Component } from '../components'
 export class SelectDemo extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return super.init(context)
+    return super.init()
   }
 
   connectedCallback () {

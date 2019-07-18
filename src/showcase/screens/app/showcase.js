@@ -4,11 +4,11 @@ import { Component } from '../../base/components'
 export default class ArkShowcase extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return super.init(context)
+    return super.init()
   }
 
   styles () {
-    return /* html */`
+    return /* html */ `
         <style>
           .app-showcase-ark__main {
             display: flex;
@@ -25,7 +25,7 @@ export default class ArkShowcase extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`${this.styles()}
+    this.innerHTML = /* html */ `${this.styles()}
         <p>Ark Showcase</p>
         <div class="app-showcase-ark__main">
           <div class="app-showcase-ark__catalog">
@@ -62,20 +62,23 @@ export default class ArkShowcase extends Component {
 
   _listen () {
     this.querySelector('[data-components]').addEventListener(
-      'click', async (event) => {
+      'click',
+      async event => {
         const item = /** @type {HTMLElement} */ (event.target)
         const componentName = item.dataset.component
-        const screenComponent = /** @type {Component} */ (
-          await this._loadComponent(componentName))
+        const screenComponent = /** @type {Component} */ (await this._loadComponent(
+          componentName
+        ))
 
         try {
-          screenComponent.init({ 'type': this.type })
+          screenComponent.init({ type: this.type })
         } catch (error) {
           console.log(error)
         }
 
         this._setContent(screenComponent)
-      })
+      }
+    )
   }
 
   async _loadComponent (component) {
