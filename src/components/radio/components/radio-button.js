@@ -3,7 +3,7 @@ import { Component } from '../../component'
 export class RadioButton extends Component {
   init (context) {
     this.value = context['value']
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

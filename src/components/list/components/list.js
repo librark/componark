@@ -11,12 +11,12 @@ export class List extends Component {
     this.items = []
     this.selected = {}
 
-    return super.init(context)
+    return super.init()
   }
 
   render () {
     if (this.items && this.items.length) {
-      this.innerHTML = /* html */`
+      this.innerHTML = /* html */ `
       ${this._renderItems()}
       `
     }
@@ -30,20 +30,25 @@ export class List extends Component {
   }
 
   _renderItems () {
-    return /* html */`
-    ${this.items.map((item, index) => `
+    return /* html */ `
+    ${this.items
+    .map(
+      (item, index) => `
       ${this._renderItem(item, index)}
-    `).join('')}
+    `
+    )
+    .join('')}
     `
   }
 
   /** @param {Object} item @param {number} index */
   _renderItem (item, index) {
-    let content = (this.template ? this.template(item)
-      : `${item[Object.keys(item)[0]]}`)
+    const content = this.template
+      ? this.template(item)
+      : `${item[Object.keys(item)[0]]}`
 
-    return /* html */`
-    <ark-list-item index="${index}" 
+    return /* html */ `
+    <ark-list-item index="${index}"
       listen on-list-item:selected="_onSelected">
       ${content}
     </ark-list-item>
@@ -54,11 +59,13 @@ export class List extends Component {
     const index = event.detail.index
     this.selected = this.items[index]
 
-    this.dispatchEvent(new CustomEvent('list:selected', {
-      detail: {
-        item: this.selected
-      }
-    }))
+    this.dispatchEvent(
+      new CustomEvent('list:selected', {
+        detail: {
+          item: this.selected
+        }
+      })
+    )
   }
 }
 customElements.define('ark-list', List)

@@ -4,7 +4,7 @@ export class Checkbox extends Component {
   init (context) {
     this.value = context['value']
 
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

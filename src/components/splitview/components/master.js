@@ -3,7 +3,7 @@ import { Component } from '../../component'
 export class SplitviewMaster extends Component {
   init (context) {
     this.masterEvent = this.masterEvent
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

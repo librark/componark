@@ -1,14 +1,14 @@
-import { reflect, listen } from '../../utils'
+import { listen, reflect } from '../../utils'
 
 export class Component extends HTMLElement {
   constructor () {
     super()
     reflect(this, this.reflectedProperties())
-    this.init({})
+    this.init()
   }
 
   /** @param {Object} context @return {Component} */
-  init (context) {
+  init (context = {}) {
     return this
   }
 
@@ -37,14 +37,15 @@ export class Component extends HTMLElement {
    * @param {string} selectors
    * @return {Component} */
   select (selectors) {
-    return (/** @type {Component} */ (this.querySelector(selectors)))
+    return /** @type {Component} */ (this.querySelector(selectors))
   }
 
   /**
    * @param {string} selectors
    * @return {NodeListOf<Component>} */
   selectAll (selectors) {
-    return (/** @type {NodeListOf<Component>} */ (
-      this.querySelectorAll(selectors)))
+    return /** @type {NodeListOf<Component>} */ (this.querySelectorAll(
+      selectors
+    ))
   }
 }

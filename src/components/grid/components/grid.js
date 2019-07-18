@@ -4,7 +4,7 @@ export class Grid extends Component {
   init (context) {
     this.cols = context['cols'] || this.cols || 0
     this.gap = context['gap'] || this.gap || '5px'
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

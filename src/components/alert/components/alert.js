@@ -20,7 +20,7 @@ export class Alert extends Component {
       context['cancelButtonBackground'] || this.cancelButtonBackground ||
       'light')
 
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

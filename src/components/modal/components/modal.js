@@ -3,7 +3,7 @@ import { getSlots } from '../../../utils'
 
 export class Modal extends Component {
   init (context) {
-    return super.init(context)
+    return super.init()
   }
 
   render () {

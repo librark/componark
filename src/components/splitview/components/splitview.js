@@ -20,7 +20,7 @@ export class Splitview extends Component {
 
     this.detailPercentage = context['detailPercentage'] || this.detailPercentage
 
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {

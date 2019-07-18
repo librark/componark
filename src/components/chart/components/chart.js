@@ -5,7 +5,7 @@ export class Chart extends Component {
   init (context) {
     this.details = context['details']
 
-    return super.init(context)
+    return super.init()
   }
 
   connectedCallback () {

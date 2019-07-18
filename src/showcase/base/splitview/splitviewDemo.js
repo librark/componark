@@ -8,7 +8,7 @@ import { Component } from '../../../components/component'
 export class SplitviewDemo extends Component {
   init (context) {
     this.type = context['type'] || 'ark'
-    return super.init(context)
+    return super.init()
   }
 
   render () {

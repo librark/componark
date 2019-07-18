@@ -3,7 +3,7 @@ import { Component } from '../../component'
 export class Input extends Component {
   init (context) {
     this.label = context['label']
-    return super.init(context)
+    return super.init()
   }
 
   reflectedProperties () {
