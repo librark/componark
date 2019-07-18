@@ -4,7 +4,7 @@ export class Component extends HTMLElement {
   constructor () {
     super()
     reflect(this, this.reflectedProperties())
-    this.init()
+    this.init({})
   }
 
   /** @param {Object} context @return {Component} */
