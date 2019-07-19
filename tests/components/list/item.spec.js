@@ -3,18 +3,37 @@ import { ListItem } from '../../../src/components/list'
 
 describe('List item', () => {
   it('can be instantiated', () => {
-    const item = /** @type {ListItem} */(
-      document.createElement('ark-list-item'))
-    expect(item).toBeTruthy()
-
-    var init = item.init({})
-    item.click()
-    expect(item === init).toBeTruthy()
-  })
-
-  it('can be rendered', function () {
     const item = new ListItem()
-    item.render()
-    expect(item.outerHTML).toEqual('<ark-list-item index=""></ark-list-item>')
+    item.connectedCallback()
+    expect(item.outerHTML).toEqual('<ark-list-item></ark-list-item>')
+  })
+  it('can be rendered with data', function () {
+    const item = new ListItem()
+    item.init({ data: 'my data' }).render()
+    expect(item.innerHTML.trim()).toEqual('my data')
+  })
+  it('can be rendered with template', function () {
+    const item = new ListItem()
+    item
+      .init({
+        data: 'my data',
+        template: data => /* html */ `<span>${data}</span>`
+      })
+      .render()
+    expect(item.innerHTML.trim()).toEqual('<span>my data</span>')
+  })
+  it('can be rendered with template', function () {
+    const item = new ListItem()
+    item
+      .init({
+        data: 'my data',
+        template: data => /* html */ `<span>${data}</span>`
+      })
+      .render()
+
+    item.addEventListener('list-item:selected', event => {
+      expect(event.detail.data).toEqual('my data')
+    })
+    item.click()
   })
 })
