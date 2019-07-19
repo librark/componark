@@ -12,7 +12,7 @@ export class SplitviewDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`
+    this.innerHTML = /* html */ `
       <ark-splitview detail-percentage="30">
         <h1>Splitview</h1>
 
@@ -29,28 +29,29 @@ export class SplitviewDemo extends Component {
     // =========================================================================
     // splitview
     // =========================================================================
-    const detailTemplate = (item) => /* html */`
+    const detailTemplate = item => /* html */ `
       <h1>DETAIL</h1>
       <hr/>
       <h4>First: ${item.first} - Second: ${item.second}</h4>
       <h5>Year ${item.year}</h5>
     `
 
-    const splitview = /** @type {Splitview} */ (
-      this.select('ark-splitview').init({
+    const splitview = /** @type {Splitview} */ (this.select('ark-splitview')
+      .init({
         title: 'Resultados',
         detailTemplate: detailTemplate,
         defaultTemplate: () => {
-          return /* html */`<ark-icon name='fas fa-ad'></ark-icon>`
+          return /* html */ `<ark-icon name='fas fa-ad'></ark-icon>`
         },
         backButtonIcon: () => {
-          return /* html */`<ark-icon name='fas fa-ad'></ark-icon>`
+          return /* html */ `<ark-icon name='fas fa-ad'></ark-icon>`
         }
-      }).render())
+      })
+      .render())
     // =========================================================================
     // List
     // =========================================================================
-    const template = (item) => /* html */`
+    const template = item => /* html */ `
       <h1>${item.year}</h1>
       <span data-first>FIRST: ${item.first}</span>
       <span> | </span>
@@ -64,14 +65,15 @@ export class SplitviewDemo extends Component {
       { first: 'Perú', second: 'Bolivia', year: 2019 }
     ]
 
-    const list = /** @type {List} */ (
-      splitview.master.querySelector('ark-list')
-    )
-    await list.init({
-      source: source,
-      template: template
-    }).load()
-    list.render()
+    const list = /** @type {List} */ (splitview.master.querySelector(
+      'ark-list'
+    ))
+    await list
+      .init({
+        source: source,
+        template: template
+      })
+      .load()
 
     return this
   }

@@ -103,12 +103,8 @@
     }
 
     .#{$component} {
-      &__button--close {
+      &__header {
         display: none;
-      }
-
-      &__title {
-        margin-left: 20px;
       }
     }
   }
