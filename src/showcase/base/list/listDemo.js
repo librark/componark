@@ -7,38 +7,7 @@ export class ListDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`
-      ${this._setupContent()}
-    `
-    // this._setupFrame('[mobile]', '360px')
-    // this._setupFrame('[tablet]', '768px')
-    // this._setupFrame('[desktop]', '960px')
-
-    return super.render()
-  }
-
-  _setupFrame (selector, width) {
-    const content = this._setupContent()
-    const frame = document.createElement('iframe')
-    frame.setAttribute('src', `/${this.type}.html`)
-    frame.setAttribute('frameborder', '1')
-    frame.setAttribute('width', width)
-    frame.setAttribute('height', '640px')
-    frame.onload = () => {
-      const frameBody = frame.contentDocument.querySelector('body')
-      const app = frameBody.querySelector('app-showcase-ark')
-      const main = document.createElement('main')
-      main.innerHTML = content
-
-      app.parentNode.removeChild(app)
-      frameBody.prepend(main)
-    }
-
-    this.querySelector(selector).appendChild(frame)
-  }
-
-  _setupContent () {
-    return /* html */`
+    this.innerHTML = /* html */ `
       <h1>Default List</h1>
 
       <ark-list data-default-list></ark-list>
@@ -46,49 +15,57 @@ export class ListDemo extends Component {
       <h1>Template List <span data-template-selected></span></h1>
 
       <ark-list data-template-list listen
-        on-list:selected="onTemplateListSelected"></ark-list>
-
+        on-list:selected="onTemplateListSelected" default></ark-list>
     `
+
+    return super.render()
   }
 
   async load () {
-    const source = async () => [
+    const sourceDefault = async () => ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+
+    // DEFAULT LIST
+
+    const defaultList = this.select('[data-default-list]')
+    await defaultList
+      .init({
+        source: sourceDefault
+      })
+      .load()
+
+    // TEMPLATE LIST
+
+    const sourceTemplate = async () => [
       { first: 'Colombia', second: 'Argentina', year: 2016 },
       { first: 'Uruguay', second: 'Colombia', year: 2017 },
       { first: 'Brasil', second: 'Argentina', year: 2018 },
       { first: 'Perú', second: 'Bolivia', year: 2019 }
     ]
 
-    // DEFAULT LIST
-
-    const defaultList = await this.select('[data-default-list]').init({
-      source: source
-    }).load()
-    defaultList.render()
-
-    // TEMPLATE LIST
-
-    const template = (item) => /* html */`
+    const template = item => /* html */ `
       <h1>${item.year}</h1>
       <span data-first>FIRST: ${item.first}</span>
       <span> | </span>
       <span data-second>SECOND: ${item.second}</span>
     `
 
-    const templateList = await this.select('[data-template-list]').init({
-      source: source,
-      template: template
-    }).load()
-    templateList.render()
+    const templateList = this.select('[data-template-list]')
+    await templateList
+      .init({
+        source: sourceTemplate,
+        template: template
+      })
+      .load()
 
-    return this
+    return super.load()
   }
 
   onTemplateListSelected (event) {
     const item = event.detail.item
 
-    this.select('[data-template-selected]').innerText = (
-      `${item.year} - ${item.first}`)
+    this.select('[data-template-selected]').innerText = `${item.year} - ${
+      item.first
+    }`
   }
 }
 customElements.define('demo-list', ListDemo)

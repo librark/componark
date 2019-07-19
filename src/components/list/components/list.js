@@ -1,5 +1,6 @@
+/** @typedef {import('./item').ListItem} ListItem */
 import { Component } from '../../component'
-export { ListItem } from './item.js'
+import { ListItem } from './item.js'
 
 export class List extends Component {
   /** @param {Object} context */
@@ -7,62 +8,39 @@ export class List extends Component {
     this.source = context['source'] || null
     this.template = context['template'] || null
 
-    /** @type {Object[]} */
-    this.items = []
-    this.selected = {}
-
     return super.init()
   }
 
   render () {
-    if (this.items && this.items.length) {
-      this.innerHTML = /* html */ `
-      ${this._renderItems()}
-      `
-    }
+    this.innerHTML = /* html */ ``
     return super.render()
   }
 
   async load () {
-    if (!this.source) return
-    this.items = await this.source()
+    if (this.source) {
+      this.items = /** @type {Array} */ (await this.source())
+      this.items.forEach(data => {
+        const item = new ListItem()
+          .init({ data: data, template: this.template })
+          .render()
+
+        item.addEventListener('list-item:selected', this._onSelected.bind(this))
+
+        this.appendChild(item)
+      })
+    }
+
     return super.load()
   }
 
-  _renderItems () {
-    return /* html */ `
-    ${this.items
-    .map(
-      (item, index) => `
-      ${this._renderItem(item, index)}
-    `
-    )
-    .join('')}
-    `
-  }
-
-  /** @param {Object} item @param {number} index */
-  _renderItem (item, index) {
-    const content = this.template
-      ? this.template(item)
-      : `${item[Object.keys(item)[0]]}`
-
-    return /* html */ `
-    <ark-list-item index="${index}"
-      listen on-list-item:selected="_onSelected">
-      ${content}
-    </ark-list-item>
-    `
-  }
-
+  /** @param {Event} event */
   _onSelected (event) {
-    const index = event.detail.index
-    this.selected = this.items[index]
-
+    event.stopImmediatePropagation()
+    const data = event['detail'] ? event['detail'].data : {}
     this.dispatchEvent(
       new CustomEvent('list:selected', {
         detail: {
-          item: this.selected
+          item: data
         }
       })
     )
