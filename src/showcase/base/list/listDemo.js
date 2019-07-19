@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('../components').List} List
+ */
 import { Component } from '../components'
 
 export class ListDemo extends Component {
@@ -16,6 +19,13 @@ export class ListDemo extends Component {
 
       <ark-list data-template-list listen
         on-list:selected="onTemplateListSelected" default></ark-list>
+
+
+      <p>Atributos:</p>
+      <ul>
+        <li>default</li>
+        <li>no-borders</li>
+      </ul>
     `
 
     return super.render()
@@ -49,7 +59,9 @@ export class ListDemo extends Component {
       <span data-second>SECOND: ${item.second}</span>
     `
 
-    const templateList = this.select('[data-template-list]')
+    const templateList = /** @type {List} */ (this.select(
+      '[data-template-list]'
+    ))
     await templateList
       .init({
         source: sourceTemplate,

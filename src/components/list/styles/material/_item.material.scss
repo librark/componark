@@ -8,6 +8,7 @@
     @extend .mdc-list-item;
 
     width: initial;
-    cursor: pointer;
+    cursor: pointer !important;
+    display: table;
   }
 }
