@@ -29,7 +29,7 @@ export class Splitview extends Component {
 
   render () {
     if (this.master && this.detailTemplate) {
-      this.innerHTML = /* html */`
+      this.innerHTML = /* html */ `
         <div data-master-container class="master-container">
           ${this.innerHTML}
         </div>
@@ -57,6 +57,7 @@ export class Splitview extends Component {
     event.stopImmediatePropagation()
     const item = event['detail'] ? event['detail']['item'] : null
     this.detail.init({ item: item }).render()
+    this.dispatchEvent(new CustomEvent('detail:change', event))
   }
 
   _listenMaster () {
@@ -65,9 +66,9 @@ export class Splitview extends Component {
   }
 
   _setDetailWidth () {
-    const master = /** @type {HTMLElement} */ (
-      this.querySelector('[data-master-container]')
-    )
+    const master = /** @type {HTMLElement} */ (this.querySelector(
+      '[data-master-container]'
+    ))
     const percentage = parseInt(this.detailPercentage) || 50
 
     master.style.width = `${100 - percentage}%`
@@ -76,12 +77,14 @@ export class Splitview extends Component {
 
   _splitviewDetail () {
     const detail = new SplitviewDetail()
-    detail.init({
-      template: this.detailTemplate,
-      title: this.detailTitle || '',
-      defaultTemplate: this.detailDefaultTemplate,
-      backButtonIcon: this.detailBackButtonIcon
-    }).connectedCallback()
+    detail
+      .init({
+        template: this.detailTemplate,
+        title: this.detailTitle || '',
+        defaultTemplate: this.detailDefaultTemplate,
+        backButtonIcon: this.detailBackButtonIcon
+      })
+      .connectedCallback()
     return detail
   }
 }
