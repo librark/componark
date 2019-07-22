@@ -17,7 +17,7 @@
     left: 0;
 
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     &[hidden] {
       display: none !important;
@@ -96,6 +96,7 @@
     #{$component} {
       position: initial;
       border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
+      height: initial;
 
       &[hidden] {
         display: block !important;
@@ -105,6 +106,14 @@
     .#{$component} {
       &__header {
         display: none;
+      }
+
+      &__button--close {
+        display: none;
+      }
+
+      &__title {
+        margin-left: 20px;
       }
     }
   }
