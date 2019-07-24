@@ -120,7 +120,7 @@ export class Alert extends Component {
       this.confirmButtonText.length
 			? /* html */ `
       <button listen on-click="_clickConfirmButton" alert-confirm-button
-        background="${this.confirmButtonBackground}">
+        background="${this.confirmButtonBackground}" close>
         ${this.confirmButtonText}
       </button>
     `
@@ -129,7 +129,7 @@ export class Alert extends Component {
 
 	/** @param {Event} event */
 	_clickConfirmButton (event) {
-		event.stopImmediatePropagation()
+		event.stopPropagation()
 		this.dispatchEvent(new CustomEvent('alert:confirm-button'))
 	}
 
@@ -147,7 +147,7 @@ export class Alert extends Component {
 
 	/** @param {Event} event */
 	_clickCancelButton (event) {
-		event.stopImmediatePropagation()
+		event.stopPropagation()
 		this.dispatchEvent(new CustomEvent('alert:cancel-button'))
 	}
 
