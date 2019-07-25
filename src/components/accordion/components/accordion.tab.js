@@ -1,53 +1,54 @@
 import { Component } from '../../component'
 
 export class AccordionTab extends Component {
-  init (context) {
-    this.header = context['header']
-    this.tabIndex = context['tabIndex']
-    return super.init()
-  }
+	init (context) {
+		this.header = context['header']
+		this.tabIndex = context['tabIndex']
 
-  reflectedProperties () {
-    return ['header', 'tabIndex']
-  }
+		return super.init()
+	}
 
-  render () {
-    if (!this.header) {
-      this.innerHTML = ''
-      return
-    }
+	reflectedProperties () {
+		return ['header', 'tabIndex']
+	}
 
-    this.innerHTML = /* html */ `
+	render () {
+		if (!this.header) {
+			this.innerHTML = ''
+			return
+		}
+
+		this.innerHTML = /* html */ `
       <button class="ark-accordion-tab__btn-header" listen on-click="toggle">
         <span data-accordion-tab-header>${this.header}</span>
       </button>
       <div id="ark-accordion-tab__content">
-        ${this.innerHTML}
+        ${this.defaultContent}
       </div>
     `
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  open () {
-    this.classList.add(`ark-accordion-tab--show`)
-    this.setAttribute('active', '')
-  }
+	open () {
+		this.classList.add(`ark-accordion-tab--show`)
+		this.setAttribute('active', '')
+	}
 
-  close () {
-    this.classList.remove(`ark-accordion-tab--show`)
-    this.removeAttribute('active')
-  }
+	close () {
+		this.classList.remove(`ark-accordion-tab--show`)
+		this.removeAttribute('active')
+	}
 
-  toggle (event) {
-    event.stopPropagation()
-    this.hasAttribute('active') ? this.close() : this.open()
+	toggle (event) {
+		event.stopPropagation()
+		this.hasAttribute('active') ? this.close() : this.open()
 
-    this.dispatchEvent(
-      new CustomEvent('accordiontab:click', {
-        detail: { tabIndex: this.tabIndex }
-      })
-    )
-  }
+		this.dispatchEvent(
+			new CustomEvent('accordiontab:click', {
+				detail: { tabIndex: this.tabIndex }
+			})
+		)
+	}
 }
 customElements.define('ark-accordion-tab', AccordionTab)
