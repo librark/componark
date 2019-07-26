@@ -1,0 +1,5 @@
+@import "./default.paginator";
+
+@mixin paginator_defaul() {
+  @include paginator_default_();
+}

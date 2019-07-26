@@ -2,13 +2,13 @@ import { Component } from '../../base/components'
 /** @typedef {import('../../base/components').Component} Component */
 
 export default class ArkShowcase extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
-    return super.init()
-  }
+	init (context) {
+		this.type = context['type'] || 'ark'
+		return super.init()
+	}
 
-  styles () {
-    return /* html */ `
+	styles () {
+		return /* html */ `
         <style>
           .app-showcase-ark__main {
             display: flex;
@@ -22,10 +22,10 @@ export default class ArkShowcase extends Component {
           }
         </style>
         `
-  }
+	}
 
-  render () {
-    this.innerHTML = /* html */ `${this.styles()}
+	render () {
+		this.innerHTML = /* html */ `${this.styles()}
         <p>Ark Showcase</p>
         <div class="app-showcase-ark__main">
           <div class="app-showcase-ark__catalog">
@@ -43,6 +43,7 @@ export default class ArkShowcase extends Component {
               <li data-component="list">List</li>
               <li data-component="modal">Modal</li>
               <li data-component="navbar">Navbar</li>
+              <li data-component="paginator">Paginator</li>
               <li data-component="radio">Radio</li>
               <li data-component="select">Select</li>
               <li data-component="sidebar">Sidebar</li>
@@ -55,40 +56,40 @@ export default class ArkShowcase extends Component {
           </div>
         </div>
         `
-    this._listen()
+		this._listen()
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  _listen () {
-    this.querySelector('[data-components]').addEventListener(
-      'click',
-      async event => {
-        const item = /** @type {HTMLElement} */ (event.target)
-        const componentName = item.dataset.component
-        const screenComponent = /** @type {Component} */ (await this._loadComponent(
-          componentName
-        ))
+	_listen () {
+		this.querySelector('[data-components]').addEventListener(
+			'click',
+			async event => {
+				const item = /** @type {HTMLElement} */ (event.target)
+				const componentName = item.dataset.component
+				const screen = /** @type {Component} */ (await this._loadComponent(
+					componentName
+				))
 
-        try {
-          screenComponent.init({ type: this.type })
-        } catch (error) {
-          console.log(error)
-        }
+				try {
+					screen.init({ type: this.type })
+				} catch (error) {
+					console.log(error)
+				}
 
-        this._setContent(screenComponent)
-      }
-    )
-  }
+				this._setContent(screen)
+			}
+		)
+	}
 
-  async _loadComponent (component) {
-    await import(`../../base/${component}/${component}Demo.js`)
-    return Promise.resolve(document.createElement(`demo-${component}`))
-  }
+	async _loadComponent (component) {
+		await import(`../../base/${component}/${component}Demo.js`)
+		return Promise.resolve(document.createElement(`demo-${component}`))
+	}
 
-  _setContent (component) {
-    const contentElement = this.querySelector('[data-content]')
-    while (contentElement.firstChild) contentElement.firstChild.remove()
-    contentElement.appendChild(component)
-  }
+	_setContent (component) {
+		const contentElement = this.querySelector('[data-content]')
+		while (contentElement.firstChild) contentElement.firstChild.remove()
+		contentElement.appendChild(component)
+	}
 }
