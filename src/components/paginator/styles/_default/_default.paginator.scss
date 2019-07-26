@@ -11,30 +11,47 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    button {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0;
+      background: initial;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+
+      margin: 1px;
+
+      &:hover {
+        background: rgba($color: $primary, $alpha: .5);
+        color: initial;
+      }
+    }
   }
 
   .#{$component} {
-    &__button-list {
-      :not(:first-child) {
-        margin-left: 1px;
-      }
+    &__body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
+    &__default-buttons {
       button {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        border: 0;
         background: initial;
-        cursor: pointer;
-        font-weight: bold;
-        text-align: center;
+        color: $muted;
+        font-weight: initial;
 
         &:hover {
-          background: rgba($color: $primary, $alpha: .5);
+          background: rgba($color: $muted, $alpha: .5);
           color: initial;
         }
       }
+    }
 
+    &__button-list {
       [active] {
         background: $primary;
         color: $white;

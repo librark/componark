@@ -30,7 +30,7 @@ export class SplitviewDemo extends Component {
 
 	async loadPaginator () {
 		const paginato = /** @type {Paginator} */ (this.select('ark-paginator'))
-		paginato.init({ collectionSize: this.list.length, pageSize: 3 }).render()
+		paginato.init({ collectionSize: this.list.length, pageSize: 1 }).render()
 	}
 
 	/** @param {Event} event */

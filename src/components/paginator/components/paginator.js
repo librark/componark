@@ -12,12 +12,18 @@ export class Paginator extends Component {
 	render () {
 		this.innerHTML = /* html */ `
       <div class="ark-paginator__body">
+        <div class="ark-paginator__default-buttons">
+          <button listen on-click="_prev"><</button>
+          <button listen on-click="_first"><<</button>
+        </div>
         <div class="ark-paginator__button-list" data-button-list></div>
+        <div class="ark-paginator__default-buttons">
+          <button listen on-click="_last">>></button>
+          <button listen on-click="_next">></button>
+        </div>
       </div>
       <div class="ark-paginator__footer">
-        <small data-info>
-
-        </small>
+        <small data-info></small>
       </div>
     `
 
@@ -77,10 +83,34 @@ export class Paginator extends Component {
 
 	/** @param {number} currentPage */
 	_setCurrentPage (currentPage) {
-		if (currentPage <= this._collectionLength) {
+		if (currentPage > 0 && currentPage <= this._collectionLength) {
 			this.currentPage = currentPage
 			this._renderButtons()
 		}
+	}
+
+	/** @param {Event} event */
+	_first (event) {
+		event.stopImmediatePropagation()
+		this._setCurrentPage(1)
+	}
+
+	/** @param {Event} event */
+	_prev (event) {
+		event.stopImmediatePropagation()
+		this._setCurrentPage(this.currentPage - 1)
+	}
+
+	/** @param {Event} event */
+	_last (event) {
+		event.stopImmediatePropagation()
+		this._setCurrentPage(this._collectionLength)
+	}
+
+	/** @param {Event} event */
+	_next (event) {
+		event.stopImmediatePropagation()
+		this._setCurrentPage(this.currentPage + 1)
 	}
 
 	get _collectionLength () {
