@@ -16,6 +16,7 @@
 @import "../../../components/list/main";
 @import "../../../components/modal/main";
 @import "../../../components/navbar/main";
+@import "../../../components/paginator/main";
 @import "../../../components/radio/main";
 @import "../../../components/select/main";
 @import "../../../components/sidebar/main";
@@ -25,24 +26,25 @@
 
 // ----------------------------------------------------------
 // ----------------------------------------------------------
-@mixin style ($type) {
-    @include accordion($type);
-    @include alert($type);
-    @include button($type);
-    @include card($type);
-    @include chart($type);
-    @include checkbox($type);
-    @include dragdrop($type);
-    @include grid($type);
-    @include icon($type);
-    @include input($type);
-    @include list($type);
-    @include modal($type);
-    @include navbar($type);
-    @include radio($type);
-    @include select($type);
-    @include sidebar($type);
-    @include splitview($type);
-    @include table($type);
-    @include tabs($type);
+@mixin style($type) {
+  @include accordion($type);
+  @include alert($type);
+  @include button($type);
+  @include card($type);
+  @include chart($type);
+  @include checkbox($type);
+  @include dragdrop($type);
+  @include grid($type);
+  @include icon($type);
+  @include input($type);
+  @include list($type);
+  @include modal($type);
+  @include navbar($type);
+  @include paginator($type);
+  @include radio($type);
+  @include select($type);
+  @include sidebar($type);
+  @include splitview($type);
+  @include table($type);
+  @include tabs($type);
 }

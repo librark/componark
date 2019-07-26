@@ -1,10 +1,10 @@
 class MainComponent extends HTMLElement {
-  connectedCallback () {
-    this.render()
-  }
+	connectedCallback () {
+		this.render()
+	}
 
-  render () {
-    this.innerHTML = /* html */`
+	render () {
+		this.innerHTML = /* html */ `
     <div>
       <p>ComponArk</p>
       <ul>
@@ -13,6 +13,6 @@ class MainComponent extends HTMLElement {
       </ul>
     </div>
     `
-  }
+	}
 }
 customElements.define('app-main', MainComponent)

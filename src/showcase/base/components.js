@@ -1,5 +1,4 @@
 // Components
-
 export * from '../../components/accordion'
 export * from '../../components/alert'
 export * from '../../components/button'
@@ -14,6 +13,7 @@ export * from '../../components/input'
 export * from '../../components/list'
 export * from '../../components/modal'
 export * from '../../components/navbar'
+export * from '../../components/paginator'
 export * from '../../components/radio'
 export * from '../../components/select'
 export * from '../../components/sidebar'
