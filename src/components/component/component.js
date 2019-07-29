@@ -30,8 +30,8 @@ export class Component extends HTMLElement {
 		return this
 	}
 
-	/** @return {Promise<Component>} */
-	async load () {
+	/** @return {Component} */
+	load () {
 		return this
 	}
 

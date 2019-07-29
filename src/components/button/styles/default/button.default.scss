@@ -43,6 +43,8 @@
     // Fab
     // ----------------------------------------
     &[fab] {
+      z-index: 1024;
+
       border-radius: 50%;
       width: $fab-size !important;
       height: $fab-size !important;

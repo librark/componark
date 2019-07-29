@@ -25,7 +25,7 @@ export class SplitviewDemo extends Component {
 		return super.render()
 	}
 
-	async load () {
+	load () {
 		// =========================================================================
 		// splitview
 		// =========================================================================
@@ -58,7 +58,7 @@ export class SplitviewDemo extends Component {
       <span data-second>SECOND: ${item.second}</span>
     `
 
-		const source = async () => [
+		const source = [
 			{ first: 'Colombia', second: 'Argentina', year: 2016 },
 			{ first: 'Uruguay', second: 'Colombia', year: 2017 },
 			{ first: 'Brasil', second: 'Argentina', year: 2018 },
@@ -66,14 +66,14 @@ export class SplitviewDemo extends Component {
 		]
 
 		const list = /** @type {List} */ (splitview.master.select('ark-list'))
-		await list
+		list
 			.init({
 				source: source,
 				template: template
 			})
 			.load()
 
-		return this
+		return super.load()
 	}
 }
 customElements.define('demo-splitview', SplitviewDemo)

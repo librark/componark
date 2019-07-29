@@ -16,9 +16,9 @@ export class List extends Component {
 		return super.render()
 	}
 
-	async load () {
+	load () {
 		if (this.source) {
-			this.items = /** @type {Array} */ (await this.source())
+			this.items = /** @type {Array} */ (this.source)
 			this.items.forEach(data => {
 				const item = new ListItem()
 					.init({ data: data, template: this.template })
