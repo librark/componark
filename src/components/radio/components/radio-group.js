@@ -24,7 +24,7 @@ export class RadioGroup extends Component {
       <div>
         <div data-radiobutton-list class="ark-radio-group__list"></div>
         <div class="ark-radio-group__alert">
-          ${this.defaultContent}
+          ${this.innerHTML}
         </div>
       </div>
     `

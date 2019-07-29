@@ -2,40 +2,45 @@
 import { Component } from '../../component'
 
 export class Accordion extends Component {
-  init (context) {
-    this.closeOthers = context['closeOthers']
-    return super.init()
-  }
+	init (context) {
+		this.closeOthers = context['closeOthers']
+		return super.init()
+	}
 
-  reflectedProperties () {
-    return ['closeOthers']
-  }
+	reflectedProperties () {
+		return ['closeOthers']
+	}
 
-  render () {
-    for (const [index, tab] of this.selectAll('ark-accordion-tab').entries()) {
-      tab.setAttribute('tab-index', index.toString())
-      tab.setAttribute('listen', 'listen')
-      tab.setAttribute('on-accordiontab:click', '_activateTab')
-    }
-    return super.render()
-  }
+	render () {
+		const tabs = this.selectAll('ark-accordion-tab').entries()
 
-  _activateTab (event) {
-    event.stopPropagation()
-    if (!this.hasAttribute('close-others')) return
+		while (this.firstChild) this.removeChild(this.firstChild)
 
-    if (
-      this['closeOthers'] === 'true' ||
+		for (const [index, tab] of tabs) {
+			tab.setAttribute('tab-index', index.toString())
+			tab.addEventListener('accordiontab:click', this._activateTab.bind(this))
+			this.append(tab)
+		}
+
+		return super.render()
+	}
+
+	_activateTab (event) {
+		event.stopPropagation()
+		if (!this.hasAttribute('close-others')) return
+
+		if (
+			this['closeOthers'] === 'true' ||
       !this['closeOthers'].toString().length
-    ) {
-      this.selectAll('ark-accordion-tab').forEach((
-        /** @type {AccordionTab} */ tab
-      ) => {
-        tab.close()
-      })
+		) {
+			this.selectAll('ark-accordion-tab').forEach((
+				/** @type {AccordionTab} */ tab
+			) => {
+				tab.close()
+			})
 
-      event.target.open()
-    }
-  }
+			event.target.open()
+		}
+	}
 }
 customElements.define('ark-accordion', Accordion)

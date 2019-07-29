@@ -55,14 +55,16 @@ export class Splitview extends Component {
 	/** @argument {Event} event */
 	_onMasterChange (event) {
 		event.stopImmediatePropagation()
-		const item = event['detail'] ? event['detail']['item'] : null
-		this.detail.init({ item: item }).render()
+		const data = event['detail'] || null
+		this.detail.init({ data: data }).render()
 		this.dispatchEvent(new CustomEvent('detail:change', event))
 	}
 
 	_listenMaster () {
-		this.master.setAttribute('listen', 'listen')
-		this.master.setAttribute('on-master:change', '_onMasterChange')
+		this.master.addEventListener(
+			'master:change',
+			this._onMasterChange.bind(this)
+		)
 	}
 
 	_setDetailWidth () {

@@ -4,7 +4,7 @@ export class SplitviewDetail extends Component {
 	init (context) {
 		this.title = context['title'] || this.title || ''
 
-		this.item = context['item'] || this.item || null
+		this.data = context['data'] || this.data || null
 		this.template = context['template'] || this.template || null
 
 		this.backButtonIcon = context['backButtonIcon'] || this.backButtonIcon
@@ -13,7 +13,7 @@ export class SplitviewDetail extends Component {
 	}
 
 	render () {
-		if (this.template && this.item) {
+		if (this.template && this.data) {
 			this.innerHTML = /* html */ `
         <header class="ark-splitview-detail__header">
           <button listen on-click="hide"
@@ -25,7 +25,7 @@ export class SplitviewDetail extends Component {
           </div>
         </header>
         <div class="ark-splitview-detail__body">
-          ${this.template(this.item)}
+          ${this.template(this.data)}
         </div>
       `
 			this.show()
