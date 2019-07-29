@@ -22,7 +22,7 @@ export class CheckboxGroup extends Component {
       <div>
         <div data-checkbox-list class="ark-checkbox-group__list"></div>
         <div class="ark-checkbox-group__alert">
-          ${this.defaultContent}
+          ${this.innerHTML}
         </div>
       </div>
     `

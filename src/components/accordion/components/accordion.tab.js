@@ -40,8 +40,10 @@ export class AccordionTab extends Component {
 		this.removeAttribute('active')
 	}
 
+	/** @param {Event} event */
 	toggle (event) {
-		event.stopPropagation()
+		event.stopImmediatePropagation()
+
 		this.hasAttribute('active') ? this.close() : this.open()
 
 		this.dispatchEvent(

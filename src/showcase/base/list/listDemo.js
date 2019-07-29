@@ -4,13 +4,13 @@
 import { Component } from '../components'
 
 export class ListDemo extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
-    return super.init({})
-  }
+	init (context) {
+		this.type = context['type'] || 'ark'
+		return super.init({})
+	}
 
-  render () {
-    this.innerHTML = /* html */ `
+	render () {
+		this.innerHTML = /* html */ `
       <h1>Default List</h1>
 
       <ark-list data-default-list></ark-list>
@@ -28,56 +28,56 @@ export class ListDemo extends Component {
       </ul>
     `
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  async load () {
-    const sourceDefault = async () => ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+	async load () {
+		const sourceDefault = async () => ['Colombia', 'Uruguay', 'Brasil', 'Perú']
 
-    // DEFAULT LIST
+		// DEFAULT LIST
 
-    const defaultList = this.select('[data-default-list]')
-    await defaultList
-      .init({
-        source: sourceDefault
-      })
-      .load()
+		const defaultList = this.select('[data-default-list]')
+		await defaultList
+			.init({
+				source: sourceDefault
+			})
+			.load()
 
-    // TEMPLATE LIST
+		// TEMPLATE LIST
 
-    const sourceTemplate = async () => [
-      { first: 'Colombia', second: 'Argentina', year: 2016 },
-      { first: 'Uruguay', second: 'Colombia', year: 2017 },
-      { first: 'Brasil', second: 'Argentina', year: 2018 },
-      { first: 'Perú', second: 'Bolivia', year: 2019 }
-    ]
+		const sourceTemplate = async () => [
+			{ first: 'Colombia', second: 'Argentina', year: 2016 },
+			{ first: 'Uruguay', second: 'Colombia', year: 2017 },
+			{ first: 'Brasil', second: 'Argentina', year: 2018 },
+			{ first: 'Perú', second: 'Bolivia', year: 2019 }
+		]
 
-    const template = item => /* html */ `
+		const template = item => /* html */ `
       <h1>${item.year}</h1>
       <span data-first>FIRST: ${item.first}</span>
       <span> | </span>
       <span data-second>SECOND: ${item.second}</span>
     `
 
-    const templateList = /** @type {List} */ (this.select(
-      '[data-template-list]'
-    ))
-    await templateList
-      .init({
-        source: sourceTemplate,
-        template: template
-      })
-      .load()
+		const templateList = /** @type {List} */ (this.select(
+			'[data-template-list]'
+		))
+		await templateList
+			.init({
+				source: sourceTemplate,
+				template: template
+			})
+			.load()
 
-    return super.load()
-  }
+		return super.load()
+	}
 
-  onTemplateListSelected (event) {
-    const item = event.detail.item
+	onTemplateListSelected (event) {
+		const item = event['detail'] || {}
 
-    this.select('[data-template-selected]').innerText = `${item.year} - ${
-      item.first
-    }`
-  }
+		this.select('[data-template-selected]').innerText = `${item.year} - ${
+			item.first
+		}`
+	}
 }
 customElements.define('demo-list', ListDemo)

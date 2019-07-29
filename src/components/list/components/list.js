@@ -3,47 +3,45 @@ import { Component } from '../../component'
 import { ListItem } from './item.js'
 
 export class List extends Component {
-  /** @param {Object} context */
-  init (context) {
-    this.source = context['source'] || null
-    this.template = context['template'] || null
+	/** @param {Object} context */
+	init (context) {
+		this.source = context['source'] || null
+		this.template = context['template'] || null
 
-    return super.init()
-  }
+		return super.init()
+	}
 
-  render () {
-    this.innerHTML = /* html */ ``
-    return super.render()
-  }
+	render () {
+		this.innerHTML = /* html */ ``
+		return super.render()
+	}
 
-  async load () {
-    if (this.source) {
-      this.items = /** @type {Array} */ (await this.source())
-      this.items.forEach(data => {
-        const item = new ListItem()
-          .init({ data: data, template: this.template })
-          .render()
+	async load () {
+		if (this.source) {
+			this.items = /** @type {Array} */ (await this.source())
+			this.items.forEach(data => {
+				const item = new ListItem()
+					.init({ data: data, template: this.template })
+					.render()
 
-        item.addEventListener('list-item:selected', this._onSelected.bind(this))
+				item.addEventListener('list-item:selected', this._onSelected.bind(this))
 
-        this.appendChild(item)
-      })
-    }
+				this.appendChild(item)
+			})
+		}
 
-    return super.load()
-  }
+		return super.load()
+	}
 
-  /** @param {Event} event */
-  _onSelected (event) {
-    event.stopImmediatePropagation()
-    const data = event['detail'] ? event['detail'].data : {}
-    this.dispatchEvent(
-      new CustomEvent('list:selected', {
-        detail: {
-          item: data
-        }
-      })
-    )
-  }
+	/** @param {Event} event */
+	_onSelected (event) {
+		event.stopImmediatePropagation()
+		const data = event['detail'] ? event['detail'].data : {}
+		this.dispatchEvent(
+			new CustomEvent('list:selected', {
+				detail: data
+			})
+		)
+	}
 }
 customElements.define('ark-list', List)
