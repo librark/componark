@@ -63,8 +63,9 @@ export class Paginator extends Component {
 	}
 
 	_setDataInfo () {
+		const currentPage = this._collectionLength ? this.currentPage : 0
 		this.querySelector('[data-info]').innerHTML = /* html */ `
-      Página ${this.currentPage} de ${this._collectionLength}
+      Página ${currentPage} de ${this._collectionLength}
     `
 	}
 

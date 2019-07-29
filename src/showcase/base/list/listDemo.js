@@ -31,13 +31,13 @@ export class ListDemo extends Component {
 		return super.render()
 	}
 
-	async load () {
-		const sourceDefault = async () => ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+	load () {
+		const sourceDefault = ['Colombia', 'Uruguay', 'Brasil', 'Perú']
 
 		// DEFAULT LIST
 
 		const defaultList = this.select('[data-default-list]')
-		await defaultList
+		defaultList
 			.init({
 				source: sourceDefault
 			})
@@ -45,7 +45,7 @@ export class ListDemo extends Component {
 
 		// TEMPLATE LIST
 
-		const sourceTemplate = async () => [
+		const sourceTemplate = [
 			{ first: 'Colombia', second: 'Argentina', year: 2016 },
 			{ first: 'Uruguay', second: 'Colombia', year: 2017 },
 			{ first: 'Brasil', second: 'Argentina', year: 2018 },
@@ -62,7 +62,7 @@ export class ListDemo extends Component {
 		const templateList = /** @type {List} */ (this.select(
 			'[data-template-list]'
 		))
-		await templateList
+		templateList
 			.init({
 				source: sourceTemplate,
 				template: template
@@ -75,9 +75,9 @@ export class ListDemo extends Component {
 	onTemplateListSelected (event) {
 		const item = event['detail'] || {}
 
-		this.select('[data-template-selected]').innerText = `${item.year} - ${
-			item.first
-		}`
+		this.select('[data-template-selected]').innerText = `
+      ${item.year} - ${item.first}
+    `.trim()
 	}
 }
 customElements.define('demo-list', ListDemo)

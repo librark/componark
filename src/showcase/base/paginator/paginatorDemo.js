@@ -20,21 +20,21 @@ export class SplitviewDemo extends Component {
 		return super.render()
 	}
 
-	async load () {
+	load () {
 		// =========================================================================
 		// List
 		// =========================================================================
 		this.loadPaginator()
-		return this
+		return super.load()
 	}
 
-	async loadPaginator () {
+	loadPaginator () {
 		const paginato = /** @type {Paginator} */ (this.select('ark-paginator'))
 		paginato.init({ collectionSize: this.list.length, pageSize: 1 }).render()
 	}
 
 	/** @param {Event} event */
-	async updateList (event) {
+	updateList (event) {
 		event.stopImmediatePropagation()
 		const offset = event['detail'] ? event['detail'].offset : 0
 		const limit = event['detail'] ? event['detail'].limit : 0
@@ -46,7 +46,7 @@ export class SplitviewDemo extends Component {
       <span data-second>SECOND: ${item.second}</span>
     `
 
-		const source = async () => {
+		const source = () => {
 			let list = this.list
 			if (limit) list = list.slice(0, limit)
 			if (offset) list = list.slice(offset)
@@ -54,9 +54,9 @@ export class SplitviewDemo extends Component {
 		}
 
 		const list = /** @type {List} */ this.select('ark-list')
-		await list
+		list
 			.init({
-				source: source,
+				source: source(),
 				template: template
 			})
 			.render()

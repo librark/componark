@@ -14,7 +14,7 @@ export class Navbar extends Component {
 		return super.render()
 	}
 
-	async load () {
+	load () {
 		const navbar = this.querySelector('[ark-navbar-toggle]')
 		if (navbar) {
 			navbar.addEventListener('click', () => this.toggleContent())
