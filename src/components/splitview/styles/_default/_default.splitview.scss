@@ -19,6 +19,7 @@
 
   .master-container {
     overflow: auto;
+    height: inherit;
   }
 
   @media only screen and (min-width: $tablet) {

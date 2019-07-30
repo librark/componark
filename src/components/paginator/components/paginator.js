@@ -4,7 +4,7 @@ export class Paginator extends Component {
 	init (context) {
 		this.collectionSize = context['collectionSize']
 		this.currentPage = context['currentPage'] || 1
-		this.pageSize = context['pageSize'] || 10
+		this.pageSize = context['pageSize'] || 24
 
 		return super.init()
 	}
