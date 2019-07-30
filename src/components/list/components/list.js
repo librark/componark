@@ -5,7 +5,7 @@ import { ListItem } from './item.js'
 export class List extends Component {
 	/** @param {Object} context */
 	init (context) {
-		this.source = context['source'] || null
+		this.source = context['source'] || []
 		this.template = context['template'] || null
 
 		return super.init()
