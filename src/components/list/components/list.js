@@ -13,24 +13,16 @@ export class List extends Component {
 
 	render () {
 		this.innerHTML = /* html */ ``
+		this.source.forEach(data => {
+			const item = new ListItem()
+				.init({ data: data, template: this.template })
+				.render()
+
+			item.addEventListener('list-item:selected', this._onSelected.bind(this))
+
+			this.appendChild(item)
+		})
 		return super.render()
-	}
-
-	load () {
-		if (this.source) {
-			this.items = /** @type {Array} */ (this.source)
-			this.items.forEach(data => {
-				const item = new ListItem()
-					.init({ data: data, template: this.template })
-					.render()
-
-				item.addEventListener('list-item:selected', this._onSelected.bind(this))
-
-				this.appendChild(item)
-			})
-		}
-
-		return super.load()
 	}
 
 	/** @param {Event} event */
