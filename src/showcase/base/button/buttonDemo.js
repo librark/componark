@@ -1,14 +1,15 @@
 export class ButtonDemo extends HTMLElement {
-  init (context) {
-    this.type = context['type'] || 'ark'
-    return this
-  }
+	init (context) {
+		this.type = context['type'] || 'ark'
+		return this
+	}
 
-  connectedCallback () {
-    this.render()
-  }
-  render () {
-    this.innerHTML = /* html */`
+	connectedCallback () {
+		this.render()
+	}
+
+	render () {
+		this.innerHTML = /* html */ `
       <div class="demo-button">
         <p>This is a button</p>
 
@@ -112,6 +113,6 @@ export class ButtonDemo extends HTMLElement {
         </ul>
       </div>
     `
-  }
+	}
 }
 customElements.define('demo-button', ButtonDemo)

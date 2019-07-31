@@ -9,7 +9,7 @@
 @import "./styles/material/main.material";
 
 @mixin button($theme: ark) {
-  //   @include button_default();
+  @include button_default();
 
   @if $theme==ark {
     @include button_ark();

@@ -1,8 +1,6 @@
-class MainComponent extends HTMLElement {
-	connectedCallback () {
-		this.render()
-	}
+import { Component } from '../../base/components'
 
+class MainComponent extends Component {
 	render () {
 		this.innerHTML = /* html */ `
     <div>
@@ -13,6 +11,7 @@ class MainComponent extends HTMLElement {
       </ul>
     </div>
     `
+		return super.render()
 	}
 }
 customElements.define('app-main', MainComponent)

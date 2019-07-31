@@ -76,11 +76,7 @@ export class Button extends Component {
 			'rel',
 			'target',
 			'type',
-			'value',
-			// ---
-			'fab',
-			'horizontal',
-			'vertical'
+			'value'
 		]
 	}
 }
