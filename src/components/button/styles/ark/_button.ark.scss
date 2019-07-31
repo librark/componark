@@ -1,7 +1,5 @@
 @mixin button_ark_() {
   $component: "ark-button";
-  $fab-size: 56px;
-  $muted: #6c757d;
 
   #{$component} {
     margin: 2px 0;
@@ -10,110 +8,9 @@
 
     button,
     a {
-      display: inline-block;
-
-      background: none;
-      font-size: unset;
-      border: 0px solid;
-
       padding: 10px 15px;
-      color: inherit;
-
-      width: inherit;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &[disabled] {
-        cursor: default !important;
-        color: gray !important;
-        background: none !important;
-
-        &:hover {
-          background: none !important;
-        }
-      }
-
-      &>:not(:first-child) {
-        margin-left: 5px;
-      }
-    }
-
-    a {
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &[disabled] {
-        text-decoration: none;
-      }
-    }
-
-    [fab] {
-      border-radius: 50%;
-      width: $fab-size;
-      height: $fab-size;
-      position: relative;
-      white-space: nowrap;
-      vertical-align: baseline;
-      text-align: center;
-      margin: 0;
-      font-size: 18px;
-      font-weight: 500;
-      align-items: flex-start;
-
-      &:focus {
-        outline: 0;
-      }
-
-      &[disabled] {
-        background: rgba($color: $muted, $alpha: 0.2) !important;
-
-        &:hover {
-          background: rgba($color: $muted, $alpha: 0.2) !important;
-        }
-      }
-    }
-
-    // ----------------------------------------
-    // position
-    // ----------------------------------------
-    [horizontal],
-    [vertical] {
-      position: fixed !important;
-    }
-
-    // ----------------------------------------
-    // horizontal
-    // ----------------------------------------
-    [horizontal~="center"] {
-      left: calc(50% - (#{$fab-size} / 2));
-    }
-
-    [horizontal~="start"] {
-      left: calc((#{$fab-size} / 3));
-    }
-
-    [horizontal~="end"] {
-      right: calc((#{$fab-size} / 3));
-    }
-
-    // ----------------------------------------
-    // vertical
-    // ----------------------------------------
-    [vertical~="center"] {
-      top: calc(50% - (#{$fab-size} / 2));
-    }
-
-    [vertical~="start"] {
-      top: calc((#{$fab-size} / 2));
-    }
-
-    [vertical~="end"] {
-      bottom: calc((#{$fab-size} / 3));
+      border: 0;
+      border-radius: inherit;
     }
   }
 }

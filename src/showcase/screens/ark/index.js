@@ -1,10 +1,12 @@
-import ArkShowcase from '../app/showcase'
 // style
 import './main.scss'
 
-export class ArkScreen extends ArkShowcase {
-  constructor () {
-    super()
-    this.type = 'ark'
-  }
-} customElements.define('app-showcase-ark', ArkScreen)
+import Showcase from '../app/showcase'
+
+export class ArkScreen extends Showcase {
+	constructor () {
+		super()
+		this.type = 'ark'
+	}
+}
+customElements.define('app-showcase-ark', ArkScreen)

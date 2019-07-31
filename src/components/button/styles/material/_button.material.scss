@@ -3,95 +3,22 @@
 
 @mixin button_material_() {
   $component: "ark-button";
-  $fab-size: 56px;
 
   #{$component} {
     width: inherit;
+    height: 36px;
     color: inherit;
-
-    font-family: "Roboto medium", sans-serif;
-    font-size: 14px;
-    display: inline-block;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 0;
-    border-radius: 2px;
-    outline: 0;
 
     button,
     a {
       @extend .mdc-button;
       @extend .mdc-button__label;
+      padding: 0 8px;
 
-      color: inherit !important;
-      width: inherit;
-
-      &[fab] {
-        @extend .mdc-fab;
-
-        width: $fab-size !important;
-        height: $fab-size !important;
-
-        min-width: $fab-size !important;
-        min-height: $fab-size !important;
-      }
-
-      &[disabled] {
-        cursor: default !important;
-        color: gray !important;
-        background: rgba($color: gray, $alpha: .1) !important;
-
-        &:hover {
-          background: none !important;
-        }
-      }
     }
 
-    // ----------------------------------------
-    // position
-    // ----------------------------------------
-    [horizontal],
-    [vertical] {
-      position: fixed !important;
-    }
-
-    // ----------------------------------------
-    // horizontal
-    // ----------------------------------------
-    [horizontal~="center"] {
-      left: calc(50% - (#{$fab-size} / 2));
-    }
-
-    [horizontal~="start"] {
-      left: calc((#{$fab-size} / 3));
-    }
-
-    [horizontal~="end"] {
-      right: calc((#{$fab-size} / 3));
-    }
-
-    // ----------------------------------------
-    // vertical
-    // ----------------------------------------
-    [vertical~="center"] {
-      top: calc(50% - (#{$fab-size} / 2));
-    }
-
-    [vertical~="start"] {
-      top: calc((#{$fab-size} / 2));
-    }
-
-    [vertical~="end"] {
-      bottom: calc((#{$fab-size} / 3));
+    &[fab] {
+      @extend .mdc-fab;
     }
   }
 }

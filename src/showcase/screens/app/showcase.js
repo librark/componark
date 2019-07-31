@@ -1,7 +1,7 @@
 import { Component } from '../../base/components'
 /** @typedef {import('../../base/components').Component} Component */
 
-export default class ArkShowcase extends Component {
+export default class Showcase extends Component {
 	init (context) {
 		this.type = context['type'] || 'ark'
 		return super.init()

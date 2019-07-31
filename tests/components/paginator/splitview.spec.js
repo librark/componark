@@ -9,21 +9,24 @@ describe('Paginator', () => {
 		const paginator = new Paginator()
 
 		paginator.init({
-			collectionSize: 100
+			collectionSize: 100,
+			pageSize: 10
 		})
 
 		// @ts-ignore
 		expect(paginator._collectionLength).toBe(10)
 
 		paginator.init({
-			collectionSize: 105
+			collectionSize: 105,
+			pageSize: 10
 		})
 
 		// @ts-ignore
 		expect(paginator._collectionLength).toBe(11)
 
 		paginator.init({
-			collectionSize: 96
+			collectionSize: 96,
+			pageSize: 10
 		})
 
 		// @ts-ignore
@@ -31,7 +34,8 @@ describe('Paginator', () => {
 
 		paginator
 			.init({
-				collectionSize: 0
+				collectionSize: 0,
+				pageSize: 10
 			})
 			.render()
 
@@ -40,7 +44,8 @@ describe('Paginator', () => {
 
 		paginator
 			.init({
-				collectionSize: 3
+				collectionSize: 3,
+				pageSize: 10
 			})
 			.render()
 
@@ -53,7 +58,8 @@ describe('Paginator', () => {
 
 		paginator
 			.init({
-				collectionSize: 101
+				collectionSize: 101,
+				pageSize: 10
 			})
 			.render()
 
@@ -88,7 +94,8 @@ describe('Paginator', () => {
 
 		paginator
 			.init({
-				collectionSize: 101
+				collectionSize: 101,
+				pageSize: 10
 			})
 			.render()
 
@@ -116,7 +123,8 @@ describe('Paginator', () => {
 
 		paginator
 			.init({
-				collectionSize: 101
+				collectionSize: 101,
+				pageSize: 10
 			})
 			.render()
 

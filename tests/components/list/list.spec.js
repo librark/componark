@@ -10,11 +10,11 @@ describe('List', () => {
 
 	it('can be instantiated with items', async () => {
 		const context = {
-			source: async () => ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+			source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
 		}
 
 		const list = new List()
-		await list.init(context).load()
+		await list.init(context).render()
 
 		const items = list.selectAll('ark-list-item')
 
@@ -26,11 +26,11 @@ describe('List', () => {
 	})
 	it('can be instantiated with items', async () => {
 		const context = {
-			source: async () => ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+			source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
 		}
 
 		const list = new List()
-		await list.init(context).load()
+		await list.init(context).render()
 
 		const items = list.selectAll('ark-list-item')
 		expect(items.length).toEqual(4)
@@ -42,11 +42,11 @@ describe('List', () => {
 	})
 	it('can select an item when it is clicked', async () => {
 		const context = {
-			source: async () => ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+			source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
 		}
 
 		const list = new List()
-		await list.init(context).load()
+		await list.init(context).render()
 
 		const items = list.selectAll('ark-list-item')
 		expect(items.length).toEqual(4)
