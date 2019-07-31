@@ -1,135 +1,89 @@
-export class DragDropDemo extends HTMLElement {
-  init (context) {
-    this.type = context['type'] || 'ark'
-    return this
-  }
+import { Component } from '../components'
 
-  connectedCallback () {
-    this.render()
-  }
+export class DragDropDemo extends Component {
+	init (context) {
+		this.type = context['type'] || 'ark'
+		return super.init()
+	}
 
-  render () {
-    this.innerHTML = /* html */`
-      <!-- <div mobile><p>mobile (360px).</p></div>
-      <div tablet><p>tablet (768px).</p></div>
-      <div desktop><p>desktop (960px).</p></div> -->
-      ${this._getStyle()}
-      ${this._setupContent()}
-      ${this._getDoc()}
-    `
-    // this._setupFrame('[mobile]', '360px')
-    // this._setupFrame('[tablet]', '768px')
-    // this._setupFrame('[desktop]', '960px')
-  }
+	render () {
+		this.innerHTML = /* html */ `
+      <ark-grid cols="4">
+        <ark-grid-item cols="1" rows="3">
+          <ark-dragdrop droppable>
+            <ark-dragdrop>draggable 1</ark-dragdrop>
+            <ark-dragdrop>draggable 2</ark-dragdrop>
 
-  _setupContent () {
-    return /* html */`
-      <ark-grid cols="1" gap="5px">
-
-        <ark-grid-item>
-          <ark-grid cols="3" gap="5px">
-
-            <ark-dragdrop droppable>
-              <ark-dragdrop draggable>
-                <h4>dragdrop 1</h4>
-              </ark-dragdrop>
-
-              <ark-dragdrop draggable>
-                <h4>dragdrop 2</h4>
-              </ark-dragdrop>
-
-              <ark-dragdrop draggable>
-                <h4>dragdrop 4</h4>
-              </ark-dragdrop>
-
-              <ark-dragdrop draggable>
-                <h4>dragdrop 5</h4>
-              </ark-dragdrop>
-            </ark-dragdrop>
-
-            <ark-dragdrop droppable>
-              <ark-dragdrop draggable>
-                <h4>dragdrop 3</h4>
-              </ark-dragdrop>
-            </ark-dragdrop>
-
-            <ark-dragdrop droppable>
-
-              <h1>PAPA</h1>
-              <ark-dragdrop draggable level="1">
-                <h4>HEADER</h4>
-
-                <ark-dragdrop droppable>
-                  <ark-dragdrop draggable>
-                    <h4>dragdrop 6</h4>
-                  </ark-dragdrop>
-                  <ark-dragdrop draggable>
-                    <h4>dragdrop 7</h4>
-                  </ark-dragdrop>
+            <ark-dragdrop level="1">
+              <h4>Container 2</h4>
+              <ark-dragdrop droppable>
+                <ark-dragdrop draggable>
+                  <h4>dragdrop 7</h4>
                 </ark-dragdrop>
-
-              </ark-dragdrop>
-
-              <ark-dragdrop draggable level="1">
-                <h4>HEADER 2</h4>
-
-                <ark-dragdrop droppable>
-                  <ark-dragdrop draggable>
-                    <h4>dragdrop 6</h4>
-                  </ark-dragdrop>
-                  <ark-dragdrop draggable>
-                    <h4>dragdrop 7</h4>
-                  </ark-dragdrop>
-                </ark-dragdrop>
-
               </ark-dragdrop>
             </ark-dragdrop>
 
-          </ark-grid>
-        </ark-grid-item>
-
-        <ark-grid-item>
-          <ark-grid cols="1" gap="5px">
-
-          <ark-dragdrop droppable direction="row">
-            <ark-dragdrop>
-              <h4>dragdrop 8</h4>
-            </ark-dragdrop>
-            <ark-dragdrop>
-              <h4>dragdrop 9</h4>
-            </ark-dragdrop>
-            <ark-dragdrop>
-              <h4>dragdrop 0</h4>
-            </ark-dragdrop>
           </ark-dragdrop>
-
-          </ark-grid>
         </ark-grid-item>
+        <ark-grid-item cols="3" rows="1">
+          <ark-dragdrop droppable direction="row">
+            <ark-dragdrop>draggable 3</ark-dragdrop>
+            <ark-dragdrop>draggable 4</ark-dragdrop>
+            <ark-dragdrop>draggable 5</ark-dragdrop>
 
+            <ark-dragdrop level="1">
+              <h4>Container 1</h4>
+              <ark-dragdrop droppable>
+                <ark-dragdrop draggable>
+                  <h4>dragdrop 6</h4>
+                </ark-dragdrop>
+              </ark-dragdrop>
+            </ark-dragdrop>
+
+        </ark-grid-item>
+        <ark-grid-item>
+          <ark-dragdrop droppable></ark-dragdrop>
+        </ark-grid-item>
+        <ark-grid-item>
+          <ark-dragdrop droppable></ark-dragdrop>
+        </ark-grid-item>
+        <ark-grid-item>
+          <ark-dragdrop droppable></ark-dragdrop>
+        </ark-grid-item>
+        <ark-grid-item>
+          <ark-dragdrop droppable></ark-dragdrop>
+        </ark-grid-item>
+        <ark-grid-item>
+          <ark-dragdrop droppable></ark-dragdrop>
+        </ark-grid-item>
+        <ark-grid-item>
+          <ark-dragdrop droppable></ark-dragdrop>
+        </ark-grid-item>
       </ark-grid>
     `
-  }
+		// ${this._setupContent()}
+		// ${this._getDoc()}
 
-  _getStyle () {
-    return /* html */`
-      <style>
-        ark-grid>* {
+		this._appendStyle()
+		return super.render()
+	}
+
+	_appendStyle () {
+		const style = document.createElement('style')
+		style.innerHTML = /* css */ `
+        ark-grid{
+          height: 80vh;
+        }
+        ark-grid-item{
           background: rgba(0, 0, 255, .1);
         }
+      `
 
-        ark-grid{
-          width: 80vw;
-        }
+		this.appendChild(style)
+	}
 
-        ark-grid-item{
-          height: 40vh;
-        }
-      </style>
-    `
-  }
-
-  _getDoc () {
-    return /* html */`
+	_getDoc () {
+		return /* html */ `
       <h4>default</h4>
       <ul>
         <li>[draggable] ark-dragdrop</li>
@@ -142,27 +96,6 @@ export class DragDropDemo extends HTMLElement {
         <li>[direction]: column || row </li>
       </ul>
     `
-  }
-
-  _setupFrame (selector, width) {
-    const content = this._setupContent()
-    const frame = document.createElement('iframe')
-    frame.setAttribute('src', `/${this.type}.html`)
-    frame.setAttribute('frameborder', '1')
-    frame.setAttribute('width', width)
-    frame.setAttribute('height', '640px')
-    frame.onload = () => {
-      const frameBody = frame.contentDocument.querySelector('body')
-
-      const app = frameBody.querySelector('app-showcase-ark')
-      app.parentNode.removeChild(app)
-
-      const main = document.createElement('main')
-      main.innerHTML = content
-      frameBody.prepend(main)
-    }
-
-    this.querySelector(selector).appendChild(frame)
-  }
+	}
 }
 customElements.define('demo-dragdrop', DragDropDemo)

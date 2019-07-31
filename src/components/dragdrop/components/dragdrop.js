@@ -3,7 +3,13 @@ import { uuidv4 } from '../../../utils'
 
 export class DragDrop extends Component {
 	init (context) {
+		this.x = null
+		this.y = null
 		return super.init()
+	}
+
+	reflectedProperties () {
+		return ['x', 'y']
 	}
 
 	render () {
@@ -28,6 +34,7 @@ export class DragDrop extends Component {
 		return super.load()
 	}
 
+	// --------------------------------------------------------------------------
 	_setAttributeUUID () {
 		this.id = uuidv4()
 	}
@@ -67,7 +74,7 @@ export class DragDrop extends Component {
 		})
 
 		// ------------------------------------------------------------------------
-		// dragleave
+		// drop
 		// ------------------------------------------------------------------------
 		this.addEventListener('drop', event => {
 			event.preventDefault()

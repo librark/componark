@@ -24,6 +24,7 @@
       border: 2px solid;
       padding: 0;
       overflow: auto;
+      cursor: grab;
     }
 
     &[direction~="column"] {
