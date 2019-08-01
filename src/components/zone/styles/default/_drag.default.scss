@@ -1,0 +1,44 @@
+@mixin drag_default_() {
+  $component: "ark-zone-drag";
+
+  #{$component} {
+    cursor: grab;
+
+    background: blueviolet;
+
+    min-height: 48px;
+    min-width: 48px;
+
+    // display: block;
+
+    // width: initial;
+    // max-width: -webkit-fill-available;
+
+    // height: initial;
+    // max-height: -webkit-fill-available;
+
+    // margin: 0;
+    // padding: 0;
+
+    // overflow: auto;
+  }
+
+  .#{$component} {
+    &--dragging {
+      background: red;
+      border: 1px solid rgba($color: $muted, $alpha: .5);
+    }
+
+    &--hidden {
+      display: none;
+    }
+
+    &--enter {
+      background: green;
+    }
+
+    &--enter_disabled {
+      filter: contrast(0.5);
+    }
+  }
+}

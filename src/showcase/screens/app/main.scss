@@ -23,6 +23,7 @@
 @import "../../../components/splitview/main";
 @import "../../../components/table/main";
 @import "../../../components/tabs/main";
+@import "../../../components/zone/main";
 
 // ----------------------------------------------------------
 // ----------------------------------------------------------
@@ -47,4 +48,5 @@
   @include splitview($type);
   @include table($type);
   @include tabs($type);
+  @include zone($type);
 }

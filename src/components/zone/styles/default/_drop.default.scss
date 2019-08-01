@@ -1,0 +1,44 @@
+@mixin drop_default_() {
+  $component: "ark-zone-drop";
+
+  #{$component} {
+    background: yellow;
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 48px;
+    min-width: 48px;
+
+    // display: block;
+
+    // height: 100%;
+    // width: 100%;
+
+    // margin: 0;
+    // padding: 0;
+
+    // overflow: auto;
+
+    &[direction~="column"] {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &[direction~="row"] {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .#{$component} {
+    &--hover {
+      // background: rgba($color: $muted, $alpha: .2);
+      background: blue !important;
+    }
+
+    &--hover_disabled {
+      filter: contrast(0.5);
+    }
+  }
+}

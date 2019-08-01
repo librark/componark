@@ -50,6 +50,7 @@ export default class Showcase extends Component {
               <li data-component="splitview">Splitview</li>
               <li data-component="table">Table</li>
               <li data-component="tabs">Tabs</li>
+              <li data-component="zone">Zone</li>
             </ul>
           </div>
           <div class="app-showcase-ark__content" data-content>
