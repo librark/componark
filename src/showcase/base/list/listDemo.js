@@ -41,7 +41,7 @@ export class ListDemo extends Component {
 			.init({
 				source: sourceDefault
 			})
-			.load()
+			.render()
 
 		// TEMPLATE LIST
 
@@ -67,7 +67,7 @@ export class ListDemo extends Component {
 				source: sourceTemplate,
 				template: template
 			})
-			.load()
+			.render()
 
 		return super.load()
 	}

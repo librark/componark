@@ -4,28 +4,22 @@
   #{$component} {
     cursor: grab;
 
-    background: blueviolet;
+    display: block;
 
-    min-height: 48px;
-    min-width: 48px;
+    width: initial;
+    height: initial;
 
-    // display: block;
+    margin: 0;
+    padding: 0;
 
-    // width: initial;
-    // max-width: -webkit-fill-available;
-
-    // height: initial;
-    // max-height: -webkit-fill-available;
-
-    // margin: 0;
-    // padding: 0;
-
-    // overflow: auto;
+    ark-zone-drop {
+      height: auto;
+      width: auto;
+    }
   }
 
   .#{$component} {
     &--dragging {
-      background: red;
       border: 1px solid rgba($color: $muted, $alpha: .5);
     }
 
@@ -34,7 +28,7 @@
     }
 
     &--enter {
-      background: green;
+      background: rgba($color: $muted, $alpha: .2);
     }
 
     &--enter_disabled {

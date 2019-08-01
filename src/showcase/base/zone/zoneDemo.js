@@ -21,7 +21,7 @@ export class ZoneDemo extends Component {
           <ark-zone-drop direction="row">
 
             <ark-zone-drag level="1">
-              <h1>Drop 1</h1>
+              <h1>XX Drag level 1</h1>
               <ark-zone-drop>
                 drop
                 <ark-zone-drag>drag 5</ark-zone-drag>
@@ -29,7 +29,7 @@ export class ZoneDemo extends Component {
             </ark-zone-drag>
 
             <ark-zone-drag level="2">
-              <h1>Drop 2</h1>
+              <h1>XX Drag level 2</h1>
               <ark-zone-drop>
                 drop
                 <ark-zone-drag>drag 6</ark-zone-drag>
@@ -72,16 +72,19 @@ export class ZoneDemo extends Component {
         ark-grid{
           height: 80vh;
         }
-        ark-grid-item{ }
+
+        ark-grid-item{
+          background: rgba(0,0, 255, .1);
+        }
 
         ark-zone-drag{
           min-height: 100px;
           min-width: 100px;
           border: 1px solid;
-          padding: 10px;
         }
 
-
+        ark-zone-drop{
+        }
       `
 
 		this.appendChild(style)

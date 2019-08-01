@@ -1,9 +1,24 @@
 /**
  * @typedef {import('./drag').DragZone} DragZone
  * */
-import Zone from './zone'
+import { getElementByDataTransfer, isValidLevel } from './utils'
 
-export class DropZone extends Zone {
+import { Component } from '../../component'
+import { uuidv4 } from '../../../utils'
+
+export class DropZone extends Component {
+	init () {
+		this.x = null
+		this.y = null
+		this.id = uuidv4()
+
+		return super.init()
+	}
+
+	reflectedProperties () {
+		return ['x', 'y']
+	}
+
 	render () {
 		// ------------------------------------------------------------------------
 		// dragover
@@ -19,7 +34,7 @@ export class DropZone extends Zone {
 		this.addEventListener('dragenter', event => {
 			event.stopImmediatePropagation()
 			event.preventDefault()
-			const drag = this._getElementByDataTransfer(event)
+			const drag = getElementByDataTransfer(event)
 			this.droppableEnter(/** @type {DragZone} */ (drag))
 		})
 
@@ -38,7 +53,7 @@ export class DropZone extends Zone {
 		this.addEventListener('drop', event => {
 			event.stopImmediatePropagation()
 			event.preventDefault()
-			const drag = this._getElementByDataTransfer(event)
+			const drag = getElementByDataTransfer(event)
 			this.droppableDrop(/** @type {DragZone} */ (drag))
 		})
 
@@ -49,7 +64,7 @@ export class DropZone extends Zone {
 
 	/** @param {DragZone} drag */
 	droppableEnter (drag) {
-		if (this._isValidLevel(this, drag)) {
+		if (isValidLevel(this, drag)) {
 			this.classList.add('ark-zone-drop--hover')
 		} else {
 			this.classList.add('ark-zone-drop--hover_disabled')
@@ -64,7 +79,7 @@ export class DropZone extends Zone {
 	droppableDrop (drag) {
 		this._droppableRemoveStyle()
 
-		if (this._isValidLevel(this, drag)) {
+		if (isValidLevel(this, drag)) {
 			this.appendChild(drag)
 		}
 	}

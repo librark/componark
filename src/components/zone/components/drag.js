@@ -1,6 +1,26 @@
-import Zone from './zone'
+import {
+	getDataTransfer,
+	getElementByDataTransfer,
+	isValidLevel,
+	parseData
+} from './utils'
 
-export class DragZone extends Zone {
+import { Component } from '../../component'
+import { uuidv4 } from '../../../utils'
+
+export class DragZone extends Component {
+	init () {
+		this.x = null
+		this.y = null
+		this.id = uuidv4()
+
+		return super.init()
+	}
+
+	reflectedProperties () {
+		return ['x', 'y']
+	}
+
 	render () {
 		this.setAttribute('draggable', 'true')
 		// ------------------------------------------------------------------------
@@ -26,8 +46,8 @@ export class DragZone extends Zone {
 		// ------------------------------------------------------------------------
 		this.addEventListener('dragenter', event => {
 			event.stopImmediatePropagation()
-			const dataTransfer = this._getDataTransfer(event)
-			const drag = this._getElementByDataTransfer(event)
+			const dataTransfer = getDataTransfer(event)
+			const drag = getElementByDataTransfer(event)
 			this.draggableEnter(/** @type {DragZone} */ (drag), dataTransfer)
 		})
 
@@ -46,7 +66,7 @@ export class DragZone extends Zone {
 		this.addEventListener('drop', event => {
 			event.stopImmediatePropagation()
 			event.preventDefault()
-			const drag = this._getElementByDataTransfer(event)
+			const drag = getElementByDataTransfer(event)
 			this.draggableDrop(/** @type {DragZone} */ (drag))
 		})
 
@@ -74,10 +94,10 @@ export class DragZone extends Zone {
 
 	/** @param {DragZone} drag */
 	draggableEnter (drag, dataTransfer) {
-		const data = this._parseData(dataTransfer)
+		const data = parseData(dataTransfer)
 		if (!data || !this.parentElement) return
 
-		if (this._isValidLevel(this, drag)) {
+		if (isValidLevel(this, drag)) {
 			if (this.parentElement.getAttribute('direction') === 'column') {
 				this.style.paddingTop = `${data.height + 5}px`
 			} else {
@@ -98,7 +118,7 @@ export class DragZone extends Zone {
 	draggableDrop (drag) {
 		this._draggableRemoveStyle()
 
-		if (this._isValidLevel(this, drag)) {
+		if (isValidLevel(this, drag)) {
 			this.parentElement.insertBefore(drag, this)
 		}
 	}
