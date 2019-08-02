@@ -1,6 +1,6 @@
 import {
 	getDataTransfer,
-	getElementByDataTransfer,
+	getElementsByDataTransfer,
 	isValidLevel,
 	parseData
 } from './utils'
@@ -23,13 +23,28 @@ export class DragZone extends Component {
 
 	render () {
 		this.setAttribute('draggable', 'true')
+
+		return super.render()
+	}
+
+	load () {
 		// ------------------------------------------------------------------------
 		// dragstart
 		// ------------------------------------------------------------------------
 		this.addEventListener('dragstart', event => {
-			event.stopImmediatePropagation()
-			event.dataTransfer.clearData()
-			event.dataTransfer.setData(this.generateDataTransfer(), '')
+			// event.stopImmediatePropagation()
+			// event.dataTransfer.clearData()
+
+			// const transferArray = getDataTransfer(event)
+
+			// transferArray.push()
+
+			// transferArray.push(this.generateDataTransfer())
+
+			// event.dataTransfer.setData(JSON.stringify(transferArray), '')
+
+			// console.log(event.dataTransfer)
+
 			this.draggableStart()
 		})
 
@@ -47,7 +62,7 @@ export class DragZone extends Component {
 		this.addEventListener('dragenter', event => {
 			event.stopImmediatePropagation()
 			const dataTransfer = getDataTransfer(event)
-			const drag = getElementByDataTransfer(event)
+			const drag = getElementsByDataTransfer(event)
 			this.draggableEnter(/** @type {DragZone} */ (drag), dataTransfer)
 		})
 
@@ -70,16 +85,24 @@ export class DragZone extends Component {
 			this.draggableDrop(/** @type {DragZone} */ (drag))
 		})
 
-		return super.render()
+		// ------------------------------------------------------------------------
+		// click
+		// ------------------------------------------------------------------------
+		this.addEventListener('click', event => {
+			if (event.ctrlKey) {
+				event.stopImmediatePropagation()
+				this._toggleSelected()
+			}
+		})
+		return super.load()
 	}
 
 	generateDataTransfer () {
-		if (!this.id) return ''
-		return JSON.stringify({
+		return {
 			id: this.id,
 			width: this.offsetWidth,
 			height: this.offsetHeight
-		})
+		}
 	}
 
 	draggableStart () {
@@ -120,6 +143,27 @@ export class DragZone extends Component {
 
 		if (isValidLevel(this, drag)) {
 			this.parentElement.insertBefore(drag, this)
+		}
+	}
+
+	selected () {
+		this.setAttribute('selected', '')
+	}
+
+	unselected () {
+		this.removeAttribute('selected')
+	}
+
+	isSelected () {
+		return this.hasAttribute('selected')
+	}
+
+	// ---------------------------------------------------------------------------
+	_toggleSelected () {
+		if (this.isSelected()) {
+			this.unselected()
+		} else {
+			this.selected()
 		}
 	}
 

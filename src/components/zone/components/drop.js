@@ -1,7 +1,7 @@
 /**
  * @typedef {import('./drag').DragZone} DragZone
  * */
-import { getElementByDataTransfer, isValidLevel } from './utils'
+import { getElementsByDataTransfer, isValidLevel } from './utils'
 
 import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
@@ -12,6 +12,10 @@ export class DropZone extends Component {
 		this.y = null
 		this.id = uuidv4()
 
+		/** @type {HTMLElement} */
+		const parent = /** @type {unknown} */ (window.document)
+		this.parent = /** @type {HTMLElement} */ (parent)
+
 		return super.init()
 	}
 
@@ -20,6 +24,11 @@ export class DropZone extends Component {
 	}
 
 	render () {
+		this._setAttributeDirection()
+		return super.render()
+	}
+
+	load () {
 		// ------------------------------------------------------------------------
 		// dragover
 		// ------------------------------------------------------------------------
@@ -32,9 +41,12 @@ export class DropZone extends Component {
 		// dragenter
 		// ------------------------------------------------------------------------
 		this.addEventListener('dragenter', event => {
+			console.log('enterrrr')
+
 			event.stopImmediatePropagation()
 			event.preventDefault()
-			const drag = getElementByDataTransfer(event)
+			const drags = getElementsByDataTransfer(this.parent, event)
+			const drag = drags[0] || null
 			this.droppableEnter(/** @type {DragZone} */ (drag))
 		})
 
@@ -53,17 +65,16 @@ export class DropZone extends Component {
 		this.addEventListener('drop', event => {
 			event.stopImmediatePropagation()
 			event.preventDefault()
-			const drag = getElementByDataTransfer(event)
+			const drag = getElementsByDataTransfer(this.parent, event)
 			this.droppableDrop(/** @type {DragZone} */ (drag))
 		})
 
-		// -------------------------------------------------------------------------
-		this._setAttributeDirection()
-		return super.render()
+		return super.load()
 	}
 
 	/** @param {DragZone} drag */
 	droppableEnter (drag) {
+		if (!drag) return
 		if (isValidLevel(this, drag)) {
 			this.classList.add('ark-zone-drop--hover')
 		} else {

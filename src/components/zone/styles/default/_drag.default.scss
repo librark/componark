@@ -16,6 +16,10 @@
       height: auto;
       width: auto;
     }
+
+    &[selected] {
+      background: red;
+    }
   }
 
   .#{$component} {

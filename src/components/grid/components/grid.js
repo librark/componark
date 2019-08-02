@@ -3,7 +3,7 @@ import { Component } from '../../component'
 export class Grid extends Component {
 	init (context) {
 		this.cols = context['cols'] || this.cols || 0
-		this.gap = context['gap'] || this.gap || '5px'
+		this.gap = context['gap'] || this.gap || '0px'
 		return super.init()
 	}
 
@@ -23,7 +23,6 @@ export class Grid extends Component {
 		this.style.gridTemplateRows = `auto`
 
 		this.style.gridGap = `${this.gap}`
-		this.style.padding = `${this.gap}`
 	}
 }
 customElements.define('ark-grid', Grid)

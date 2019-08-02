@@ -34,15 +34,19 @@ export function parseData (content) {
 /** @param {event} event */
 export function getDataTransfer (event) {
 	const dataTransfer = event['dataTransfer']
-	return dataTransfer ? dataTransfer.types[0] : null
+	return dataTransfer.types[0] ? JSON.parse(dataTransfer.types[0]) : []
 }
 
-/** @param {event} event @return {DragZone | DropZone} */
-export function getElementByDataTransfer (event) {
-	const dataTransfer = getDataTransfer(event)
-	const data = parseData(dataTransfer)
+/**
+ * @param {HTMLElement} parent @param {event} event
+ * @return {DragZone[] | DropZone[]} */
+export function getElementsByDataTransfer (parent, event) {
+	const data = getDataTransfer(event)
 
-	if (!data) return null
+	const elements = []
+	for (const item of data) {
+		elements.push(parent.querySelector(`[id="${item.id}"]`))
+	}
 
-	return document.querySelector(`[id="${data.id}"]`)
+	return elements
 }

@@ -8,53 +8,37 @@ export class ZoneDemo extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `<!--  -->
-      <ark-grid cols="4">
+      <ark-grid cols="4" gap="5px" class="container">
         <ark-grid-item cols="1" rows="3">
-          <ark-zone-drop>
-            <ark-zone-drag>drag 1</ark-zone-drag>
-            <ark-zone-drag>drag 2</ark-zone-drag>
-            <ark-zone-drag>drag 3</ark-zone-drag>
-            <ark-zone-drag>drag 4</ark-zone-drag>
-          </ark-zone-drop>
+          <ark-zone>
+            <ark-zone-drop>
+              <ark-zone-drag>drag 1</ark-zone-drag>
+              <ark-zone-drag>drag 2</ark-zone-drag>
+            </ark-zone-drop>
+          </ark-zone>
         </ark-grid-item>
         <ark-grid-item cols="3" rows="1">
-          <ark-zone-drop direction="row">
-
-            <ark-zone-drag level="1">
-              <h1>XX Drag level 1</h1>
-              <ark-zone-drop>
-                drop
-                <ark-zone-drag>drag 5</ark-zone-drag>
-              </ark-zone-drop>
-            </ark-zone-drag>
-
-            <ark-zone-drag level="2">
-              <h1>XX Drag level 2</h1>
-              <ark-zone-drop>
-                drop
-                <ark-zone-drag>drag 6</ark-zone-drag>
-              </ark-zone-drop>
-            </ark-zone-drag>
-
-          </ark-zone-drop>
+          <ark-zone>
+            <ark-zone-drop></ark-zone-drop>
+          </ark-zone>
         </ark-grid-item>
-        <ark-grid-item>
-          <ark-zone-drop></ark-zone-drop>
-        </ark-grid-item>
-        <ark-grid-item>
-          <ark-zone-drop></ark-zone-drop>
-        </ark-grid-item>
-        <ark-grid-item>
-          <ark-zone-drop></ark-zone-drop>
-        </ark-grid-item>
-        <ark-grid-item>
-          <ark-zone-drop></ark-zone-drop>
-        </ark-grid-item>
-        <ark-grid-item>
-          <ark-zone-drop></ark-zone-drop>
-        </ark-grid-item>
-        <ark-grid-item>
-          <ark-zone-drop></ark-zone-drop>
+        <ark-grid-item cols="3" rows="2">
+          <ark-zone style="background: white;">
+            <ark-grid cols="2" gap="5px">
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+            </ark-grid>
+          </ark-zone>
         </ark-grid-item>
       </ark-grid>
       <!--  -->
@@ -69,12 +53,12 @@ export class ZoneDemo extends Component {
 	_appendStyle () {
 		const style = document.createElement('style')
 		style.innerHTML = /* css */ `
-        ark-grid{
+        .container{
           height: 80vh;
         }
 
-        ark-grid-item{
-          background: rgba(0,0, 255, .1);
+        ark-grid ark-grid-item{
+          background: #E5E5FF;
         }
 
         ark-zone-drag{

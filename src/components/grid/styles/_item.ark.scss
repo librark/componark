@@ -6,10 +6,7 @@ $desktop: 960px; // lg
   $component: "ark-grid-item";
 
   #{$component} {
-    $padding: 10px;
-    padding: $padding;
-
-    max-width: -webkit-fill-available;
-    max-height: calc(100% - #{$padding} * 2);
+    margin: 0;
+    padding: 0;
   }
 }

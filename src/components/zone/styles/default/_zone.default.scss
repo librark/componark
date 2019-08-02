@@ -1,0 +1,18 @@
+@mixin zone_default_() {
+  $component: "ark-zone";
+
+  #{$component} {
+    display: block;
+
+    height: 100%;
+    width: 100%;
+
+    max-height: initial;
+    max-width: initial;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: auto;
+  }
+}
