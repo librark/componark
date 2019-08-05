@@ -3,7 +3,13 @@ import { getSlots } from '../../../utils'
 
 export class Modal extends Component {
 	init (context) {
+		this.title = context['title']
+		this.subtitle = context['subtitle']
 		return super.init()
+	}
+
+	reflectedProperties () {
+		return ['title', 'subtitle']
 	}
 
 	render () {
@@ -11,16 +17,9 @@ export class Modal extends Component {
 
 		this.innerHTML = /* html */ `
       <div class="ark-modal__scrim" listen on-click="close"></div>
-      <div class="ark-modal__content" ${this._getAttributes()}>
+      <div class="ark-modal__content">
         <div class="ark-modal__header">
-          <div class="ark-modal__title">
-            <h3>
-              ${this._getSlots('title')}
-            </h3>
-            <span>
-              ${this._getSlots('subtitle')}
-            </span>
-          </div>
+          ${this._renderHeader()}
           <div class="ark-modal__icon-close">
             <button close>&times;</button>
           </div>
@@ -34,7 +33,6 @@ export class Modal extends Component {
       </div>
     `
 
-		this._removeAttribute()
 		return super.render()
 	}
 
@@ -46,17 +44,17 @@ export class Modal extends Component {
 	}
 
 	open () {
-		this.removeAttribute('hidden')
+		this.setAttribute('open', '')
 	}
 
 	close () {
-		this.setAttribute('hidden', '')
+		this.removeAttribute('open')
 	}
 
 	toggle () {
-		this.hasAttribute('hidden')
-			? this.removeAttribute('hidden')
-			: this.setAttribute('hidden', '')
+		this.hasAttribute('open')
+			? this.removeAttribute('open')
+			: this.setAttribute('open', '')
 	}
 
 	// ---------------------------------------------------------------------------
@@ -71,28 +69,28 @@ export class Modal extends Component {
       `
 	}
 
-	_getAttributes () {
-		const attributes = Array.from(this.attributes)
+	_renderHeader () {
+		const title = this._generateContent(this.title, 'title', 'h3')
+		const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
 
-		return attributes
-			.map(attribute => {
-				var attr = `${attribute.name}`
-				if (attribute.value) attr += `=${attribute.value}`
-				return attr !== 'hidden' ? attr : ''
-			})
-			.join(' ')
+		return title === '' && subtitle === ''
+			? ''
+			: /* html */ `
+      <div class="ark-modal__title">
+          ${title}
+          ${subtitle}
+      </div>
+    `
 	}
 
-	_removeAttribute () {
-		let i = 0
-		while (this.attributes.length > i) {
-			const name = this.attributes[i].name
-			if (name === 'hidden') {
-				i++
-				break
-			}
-			this.removeAttribute(name)
-		}
+	_generateContent (content, className, type = 'div') {
+		return content
+			? /* html */ `
+      <${type} class="ark-card__${className}">
+        ${content}
+      </${type}>
+    `
+			: ''
 	}
 }
 customElements.define('ark-modal', Modal)
