@@ -40,19 +40,9 @@ export class Button extends Component {
 		attributes.forEach(attribute => {
 			if (this._defaultAttributes().find(item => item === attribute.name)) {
 				element.setAttribute(attribute.name, attribute.value)
-
-				if (
-					!this._allowedAttributes().find(allowed => allowed === attribute.name)
-				) {
-					this.removeAttribute(attribute.name)
-				}
+				this.removeAttribute(attribute.name)
 			}
 		})
-	}
-
-	/** @return {Array<string>} */
-	_allowedAttributes () {
-		return ['fab', 'horizontal', 'vertical']
 	}
 
 	/** @return {Array<string>} */
