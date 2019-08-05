@@ -1,17 +1,17 @@
 import '../../../src/components/tabs'
 
 describe('Tabs', () => {
-  it('can be instantiated', () => {
-    const item = document.createElement('ark-tabs')
-    expect(item).toBeTruthy()
+	it('can be instantiated', () => {
+		const item = document.createElement('ark-tabs')
+		expect(item).toBeTruthy()
 
-    var init = item.init()
-    expect(item === init).toBeTruthy()
-  })
+		var init = item.init()
+		expect(item === init).toBeTruthy()
+	})
 
-  it('can be rendered without active attribute', function () {
-    const item = document.createElement('ark-tabs')
-    item.innerHTML = /* HTML */`
+	it('can be rendered without active attribute', function () {
+		const item = document.createElement('ark-tabs')
+		item.innerHTML = /* HTML */ `
       <ark-tabs-item id="t-1">
         <ark-icon name="far fa-address-book"></ark-icon>
         <span>span-1</span>
@@ -21,15 +21,15 @@ describe('Tabs', () => {
         <span>span-2 asdf asdfs</span>
       </ark-tabs-item>
     `
-    item.connectedCallback()
+		item.connectedCallback()
 
-    const element = item.querySelector('[active]')
-    expect(element.getAttribute('id') === 't-1').toBeTruthy()
-  })
+		const element = item.querySelector('[active]')
+		expect(element.getAttribute('id') === 't-1').toBeTruthy()
+	})
 
-  it('can be rendered with active attribute', function () {
-    const item = document.createElement('ark-tabs')
-    item.innerHTML = /* HTML */`
+	it('can be rendered with active attribute', function () {
+		const item = document.createElement('ark-tabs')
+		item.innerHTML = /* HTML */ `
       <ark-tabs-item id="t-1">
         <ark-icon name="far fa-address-book"></ark-icon>
         <span>span-1</span>
@@ -39,15 +39,15 @@ describe('Tabs', () => {
         <span>span-2 asdf asdfs</span>
       </ark-tabs-item>
     `
-    item.connectedCallback()
+		item.connectedCallback()
 
-    const element = item.querySelector('[active]')
-    expect(element.getAttribute('id') === 't-2').toBeTruthy()
-  })
+		const element = item.querySelector('[active]')
+		expect(element.getAttribute('id') === 't-2').toBeTruthy()
+	})
 
-  it('can be rendered replace active attribute', function () {
-    const item = document.createElement('ark-tabs')
-    item.innerHTML = /* HTML */`
+	it('can be rendered replace active attribute', function () {
+		const item = document.createElement('ark-tabs')
+		item.innerHTML = /* HTML */ `
       <ark-tabs-item id="t-1">
         <ark-icon name="far fa-address-book"></ark-icon>
         <span>span-1</span>
@@ -57,12 +57,12 @@ describe('Tabs', () => {
         <span>span-2 asdf asdfs</span>
       </ark-tabs-item>
     `
-    item.connectedCallback()
+		item.connectedCallback()
 
-    const element = item.querySelector('[id="t-1"]')
-    element.click()
+		const element = item.querySelector('[id="t-1"]')
+		element.click()
 
-    const element2 = item.querySelector('[id="t-2"]')
-    expect(!element2.getAttribute('active')).toBeTruthy()
-  })
+		const element2 = item.querySelector('[id="t-2"]')
+		expect(!element2.getAttribute('active')).toBeTruthy()
+	})
 })

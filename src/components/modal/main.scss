@@ -3,11 +3,14 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/default/modal.default";
 // -------------------------------------------
 @import "./styles/ark/main.ark";
 @import "./styles/material/main.material";
 
 @mixin modal($type:ark) {
+  @include modal_default_();
+
   @if $type==ark {
     @include modal_ark();
   }
