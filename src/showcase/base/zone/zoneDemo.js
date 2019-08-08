@@ -23,10 +23,19 @@ export class ZoneDemo extends Component {
           </ark-zone>
         </ark-grid-item>
         <ark-grid-item cols="3" rows="2">
-          <ark-zone style="background: white;">
+          <ark-zone cols="2" rows="2" style="background: white;">
             <ark-grid cols="2" gap="5px">
               <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
+                <ark-zone-drop>
+
+                  <ark-zone-drag>
+                    <p>===== Drag =====</p>
+                    <!-- <ark-zone-drop>
+                      <p>Drop</p>
+                    </ark-zone-drop> -->
+                  </ark-zone-drag>
+
+                </ark-zone-drop>
               </ark-grid-item>
               <ark-grid-item>
                 <ark-zone-drop></ark-zone-drop>

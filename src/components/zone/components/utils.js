@@ -34,7 +34,7 @@ export function parseData (content) {
 /** @param {event} event */
 export function getDataTransfer (event) {
 	const dataTransfer = event['dataTransfer']
-	return dataTransfer.types[0] ? JSON.parse(dataTransfer.types[0]) : []
+	return dataTransfer.types[0] ? parseData(dataTransfer.types[0]) : []
 }
 
 /**

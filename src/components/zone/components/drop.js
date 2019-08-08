@@ -8,8 +8,9 @@ import { uuidv4 } from '../../../utils'
 
 export class DropZone extends Component {
 	init () {
-		this.x = null
-		this.y = null
+		this.x = this.x
+		this.y = this.y
+
 		this.id = uuidv4()
 
 		/** @type {HTMLElement} */
@@ -25,6 +26,7 @@ export class DropZone extends Component {
 
 	render () {
 		this._setAttributeDirection()
+		this.updateDragspositions()
 		return super.render()
 	}
 
@@ -41,8 +43,6 @@ export class DropZone extends Component {
 		// dragenter
 		// ------------------------------------------------------------------------
 		this.addEventListener('dragenter', event => {
-			console.log('enterrrr')
-
 			event.stopImmediatePropagation()
 			event.preventDefault()
 			const drags = getElementsByDataTransfer(this.parent, event)
@@ -65,8 +65,11 @@ export class DropZone extends Component {
 		this.addEventListener('drop', event => {
 			event.stopImmediatePropagation()
 			event.preventDefault()
-			const drag = getElementsByDataTransfer(this.parent, event)
-			this.droppableDrop(/** @type {DragZone} */ (drag))
+			const drags = /** @type {DragZone[]} */ (getElementsByDataTransfer(
+				this.parent,
+				event
+			))
+			this.droppableDrop(drags)
 		})
 
 		return super.load()
@@ -86,13 +89,26 @@ export class DropZone extends Component {
 		this._droppableRemoveStyle()
 	}
 
-	/** @param {DragZone} drag */
-	droppableDrop (drag) {
+	/** @param {DragZone[]} drags */
+	droppableDrop (drags) {
 		this._droppableRemoveStyle()
 
-		if (isValidLevel(this, drag)) {
-			this.appendChild(drag)
-		}
+		this.dispatchEvent(
+			new CustomEvent('zone:drop', {
+				detail: {
+					drop: this,
+					drags: drags
+				}
+			})
+		)
+	}
+
+	updateDragspositions () {
+		this.selectAll('ark-zone-drag').forEach(drag => {
+			drag.setAttribute('x', this.x)
+			drag.setAttribute('y', this.y)
+			drag.setAttribute('drop', this.id)
+		})
 	}
 
 	// --------------------------------------------------------------------------
