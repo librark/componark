@@ -22,20 +22,43 @@ export class ZoneDemo extends Component {
             <ark-zone-drop></ark-zone-drop>
           </ark-zone>
         </ark-grid-item>
-        <ark-grid-item cols="3" rows="2">
-          <ark-zone cols="2" rows="2" style="background: white;">
-            <ark-grid cols="2" gap="5px">
+        <ark-grid-item cols="3" rows="4">
+          <ark-zone cols="3" rows="4" style="background: white;">
+            <ark-grid cols="3" gap="5px">
               <ark-grid-item>
                 <ark-zone-drop>
-
                   <ark-zone-drag>
-                    <p>===== Drag =====</p>
-                    <!-- <ark-zone-drop>
-                      <p>Drop</p>
-                    </ark-zone-drop> -->
+                    <p>===== Drag 1 =====</p>
                   </ark-zone-drag>
-
                 </ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop>
+                  <ark-zone-drag>
+                    <p>===== Drag 2 =====</p>
+                  </ark-zone-drag>
+                </ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
+              </ark-grid-item>
+              <ark-grid-item>
+                <ark-zone-drop></ark-zone-drop>
               </ark-grid-item>
               <ark-grid-item>
                 <ark-zone-drop></ark-zone-drop>

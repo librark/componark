@@ -101,11 +101,13 @@ export class DragZone extends Component {
 		return super.load()
 	}
 
-	generateDataTransfer () {
+	/** @param {Boolean?} dragstart */
+	generateDataTransfer (dragstart = false) {
 		return {
 			id: this.id,
 			width: this.offsetWidth,
-			height: this.offsetHeight
+			height: this.offsetHeight,
+			dragstart: dragstart
 		}
 	}
 

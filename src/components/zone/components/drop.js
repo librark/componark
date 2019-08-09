@@ -1,7 +1,11 @@
 /**
  * @typedef {import('./drag').DragZone} DragZone
  * */
-import { getElementsByDataTransfer, isValidLevel } from './utils'
+import {
+	getDataTransfer,
+	getElementsByDataTransfer,
+	isValidLevel
+} from './utils'
 
 import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
@@ -26,7 +30,7 @@ export class DropZone extends Component {
 
 	render () {
 		this._setAttributeDirection()
-		this.updateDragspositions()
+		this.updateDragPosition()
 		return super.render()
 	}
 
@@ -46,8 +50,7 @@ export class DropZone extends Component {
 			event.stopImmediatePropagation()
 			event.preventDefault()
 			const drags = getElementsByDataTransfer(this.parent, event)
-			const drag = drags[0] || null
-			this.droppableEnter(/** @type {DragZone} */ (drag))
+			this.droppableEnter(/** @type {DragZone[]} */ (drags))
 		})
 
 		// ------------------------------------------------------------------------
@@ -69,16 +72,29 @@ export class DropZone extends Component {
 				this.parent,
 				event
 			))
-			this.droppableDrop(drags)
+
+			const dataDragstart = getDataTransfer(event).find(
+				data => data.dragstart === true
+			)
+
+			const dragstart = /** @type {DragZone} */ drags.find(
+				drag => drag.id === dataDragstart.id
+			)
+
+			this.droppableDrop(dragstart, drags)
 		})
 
 		return super.load()
 	}
 
-	/** @param {DragZone} drag */
-	droppableEnter (drag) {
-		if (!drag) return
-		if (isValidLevel(this, drag)) {
+	/** @param {DragZone[]} drags */
+	droppableEnter (drags) {
+		let isValid = true
+		drags.forEach(drag => {
+			if (!isValidLevel(this, drag)) isValid = false
+		})
+
+		if (isValid) {
 			this.classList.add('ark-zone-drop--hover')
 		} else {
 			this.classList.add('ark-zone-drop--hover_disabled')
@@ -89,21 +105,22 @@ export class DropZone extends Component {
 		this._droppableRemoveStyle()
 	}
 
-	/** @param {DragZone[]} drags */
-	droppableDrop (drags) {
+	/** @param {DragZone} dragstart @param {DragZone[]} drags */
+	droppableDrop (dragstart, drags) {
 		this._droppableRemoveStyle()
 
 		this.dispatchEvent(
 			new CustomEvent('zone:drop', {
 				detail: {
 					drop: this,
-					drags: drags
+					drags: drags,
+					dragstart: dragstart
 				}
 			})
 		)
 	}
 
-	updateDragspositions () {
+	updateDragPosition () {
 		this.selectAll('ark-zone-drag').forEach(drag => {
 			drag.setAttribute('x', this.x)
 			drag.setAttribute('y', this.y)

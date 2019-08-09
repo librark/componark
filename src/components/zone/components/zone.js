@@ -35,7 +35,8 @@ export class Zone extends Component {
 			this.selectAll('ark-zone-drag[selected]').forEach((
 				/** @type {DragZone} */ selectedDrag
 			) => {
-				dataTransfer.push(selectedDrag.generateDataTransfer())
+				const isDragstart = event.target === selectedDrag
+				dataTransfer.push(selectedDrag.generateDataTransfer(isDragstart))
 				selectedDrag.draggableStart()
 			})
 
@@ -57,18 +58,52 @@ export class Zone extends Component {
 		for (const drop of this.selectAll('ark-zone-drop')) {
 			drop.addEventListener('zone:drop', event => {
 				event.stopImmediatePropagation()
+
 				const drop = /** @type {DropZone} */ (event.detail.drop)
 				const drags = /** @type {DragZone[]} */ (event.detail.drags)
+				const dragstart = /** @type {DragZone} */ (event.detail.dragstart)
 
-				for (const drag of drags) {
-					if (isValidLevel(drop, drag)) {
-						drag.selected = false
-						drop.appendChild(drag)
-						drag.draggableEnd()
+				const changePosition = this._getChangePosition(dragstart, drop)
+
+				let isValid = true
+
+				drags.forEach(drag => {
+					const absolutePosition = this._getAbsolutePosition(
+						drag,
+						changePosition
+					)
+
+					const dropDestination = this._selectDrop(
+						absolutePosition.x,
+						absolutePosition.y
+					)
+
+					if (
+						dropDestination === null ||
+            !isValidLevel(dropDestination, drag)
+					) {
+						isValid = false
 					}
-				}
+				})
 
-				drop.updateDragspositions()
+				drags.forEach(drag => {
+					if (isValid) {
+						const absolutePosition = this._getAbsolutePosition(
+							drag,
+							changePosition
+						)
+
+						const dropDestination = this._selectDrop(
+							absolutePosition.x,
+							absolutePosition.y
+						)
+
+						dropDestination.appendChild(drag)
+						dropDestination.updateDragPosition()
+					}
+
+					drag.draggableEnd()
+				})
 			})
 		}
 
@@ -102,13 +137,13 @@ export class Zone extends Component {
 				for (let row = 0; row < parseInt(this.rows); row++) {
 					for (let col = 0; col < parseInt(this.cols); col++) {
 						const drop = /** @type {DropZone} */ (drops[index])
-						this.setPosition(drop, String(row), String(col))
+						this._setPosition(drop, String(row), String(col))
 						index++
 					}
 				}
 			} else {
 				drops.forEach((/** @type {DropZone} */ drop, index) => {
-					this.setPosition(drop, String(0), String(index))
+					this._setPosition(drop, String(0), String(index))
 				})
 			}
 		}
@@ -117,9 +152,32 @@ export class Zone extends Component {
 	/**
    * @param {DropZone} drop @param {String} x @param {String} y
    * */
-	setPosition (drop, x, y) {
+	_setPosition (drop, x, y) {
 		drop.setAttribute('x', x)
 		drop.setAttribute('y', y)
+	}
+
+	/** @return {DropZone} */
+	_selectDrop (x, y) {
+		return /** @type {DropZone} */ (this.select(
+			`ark-zone-drop[x='${x}'][y='${y}']`
+		))
+	}
+
+	/** @param {DragZone} start @param {DropZone | Object} end */
+	_getChangePosition (start, end) {
+		return {
+			x: parseInt(end.x) - parseInt(start.x),
+			y: parseInt(end.y) - parseInt(start.y)
+		}
+	}
+
+	/** @param {DragZone} drag @param {Object} changePosition */
+	_getAbsolutePosition (drag, changePosition) {
+		return {
+			x: parseInt(drag.x) + parseInt(changePosition.x),
+			y: parseInt(drag.y) + parseInt(changePosition.y)
+		}
 	}
 }
 customElements.define('ark-zone', Zone)
