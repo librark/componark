@@ -87,6 +87,7 @@ export class Zone extends Component {
 				})
 
 				drags.forEach(drag => {
+					let targetDrag = drag
 					if (isValid) {
 						const absolutePosition = this._getAbsolutePosition(
 							drag,
@@ -98,11 +99,15 @@ export class Zone extends Component {
 							absolutePosition.y
 						)
 
-						dropDestination.appendChild(drag)
+						if (event.detail.copy) {
+							targetDrag = this.cloneDrag(drag)
+							drag.draggableEnd()
+						}
+
+						dropDestination.appendChild(targetDrag)
 						dropDestination.updateDragPosition()
 					}
-
-					drag.draggableEnd()
+					targetDrag.draggableEnd()
 				})
 			})
 		}
@@ -115,6 +120,12 @@ export class Zone extends Component {
 		this._assignPosition()
 
 		return super.load()
+	}
+
+	cloneDrag (drag) {
+		const clone = /** @type {DragZone} */ (drag.cloneNode(true))
+		clone.id = uuidv4()
+		return clone
 	}
 
 	clearSelected () {

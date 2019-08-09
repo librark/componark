@@ -22,55 +22,57 @@ export class ZoneDemo extends Component {
             <ark-zone-drop></ark-zone-drop>
           </ark-zone>
         </ark-grid-item>
-        <ark-grid-item cols="3" rows="4">
-          <ark-zone cols="3" rows="4" style="background: white;">
-            <ark-grid cols="3" gap="5px">
-              <ark-grid-item>
-                <ark-zone-drop>
-                  <ark-zone-drag>
-                    <p>===== Drag 1 =====</p>
-                  </ark-zone-drag>
-                </ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop>
-                  <ark-zone-drag>
-                    <p>===== Drag 2 =====</p>
-                  </ark-zone-drag>
-                </ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-              <ark-grid-item>
-                <ark-zone-drop></ark-zone-drop>
-              </ark-grid-item>
-            </ark-grid>
-          </ark-zone>
+        <ark-grid-item cols="3" rows="2">
+
+            <ark-zone cols="3" rows="4" style="background: white;">
+              <ark-grid cols="3" rows="4" gap="5px">
+                <ark-grid-item>
+                  <ark-zone-drop>
+                    <ark-zone-drag>
+                      <p>===== Drag 1 =====</p>
+                    </ark-zone-drag>
+                  </ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop>
+                    <ark-zone-drag>
+                      <p>===== Drag 2 =====</p>
+                    </ark-zone-drag>
+                  </ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+                <ark-grid-item>
+                  <ark-zone-drop></ark-zone-drop>
+                </ark-grid-item>
+              </ark-grid>
+            </ark-zone>
+
         </ark-grid-item>
       </ark-grid>
       <!--  -->

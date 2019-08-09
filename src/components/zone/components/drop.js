@@ -81,7 +81,9 @@ export class DropZone extends Component {
 				drag => drag.id === dataDragstart.id
 			)
 
-			this.droppableDrop(dragstart, drags)
+			const copy = event.ctrlKey || false
+
+			this.droppableDrop(dragstart, drags, copy)
 		})
 
 		return super.load()
@@ -106,7 +108,7 @@ export class DropZone extends Component {
 	}
 
 	/** @param {DragZone} dragstart @param {DragZone[]} drags */
-	droppableDrop (dragstart, drags) {
+	droppableDrop (dragstart, drags, copy) {
 		this._droppableRemoveStyle()
 
 		this.dispatchEvent(
@@ -114,7 +116,8 @@ export class DropZone extends Component {
 				detail: {
 					drop: this,
 					drags: drags,
-					dragstart: dragstart
+					dragstart: dragstart,
+					copy: copy
 				}
 			})
 		)
