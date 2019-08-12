@@ -11,7 +11,7 @@ export function isValidLevel (destination, drag) {
 
 	for (
 		let item = /** @type {HTMLElement} */ (destination);
-		item.tagName.toLowerCase() !== 'html';
+		item && item.tagName.toLowerCase() !== 'html';
 		item = /** @type {HTMLElement} */ (item.parentNode)
 	) {
 		if (item.tagName.toLowerCase() === 'ark-zone-drop') {

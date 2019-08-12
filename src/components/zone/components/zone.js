@@ -29,96 +29,32 @@ export class Zone extends Component {
 	}
 
 	load () {
-		this.addEventListener('dragstart', event => {
-			event.stopImmediatePropagation()
-			const dataTransfer = []
-			this.selectAll('ark-zone-drag[selected]').forEach((
-				/** @type {DragZone} */ selectedDrag
-			) => {
-				const isDragstart = event.target === selectedDrag
-				dataTransfer.push(selectedDrag.generateDataTransfer(isDragstart))
-				selectedDrag.draggableStart()
-			})
+		// ------------------------------------------------------------------------
+		// dragstart
+		// ------------------------------------------------------------------------
+		this.addEventListener('dragstart', this.onDragstart.bind(this))
 
-			event.dataTransfer.clearData()
-			event.dataTransfer.setData(JSON.stringify(dataTransfer), '')
+		// ------------------------------------------------------------------------
+		// zone:drop
+		// ------------------------------------------------------------------------
+		this.selectAll('ark-zone-drop').forEach(drop => {
+			drop.addEventListener('zone:drop', this.onZoneDrop.bind(this))
 		})
 
-		this.addEventListener('click', event => {
-			this.dispatchEvent(
-				new CustomEvent('zone:selected', {
-					bubbles: true,
-					detail: {
-						zoneId: this.id
-					}
-				})
-			)
-		})
+		// ------------------------------------------------------------------------
+		// zone:selected
+		// ------------------------------------------------------------------------
+		this.parent.addEventListener(
+			'zone:selected', this.onZoneSelected.bind(this)
+		)
 
-		for (const drop of this.selectAll('ark-zone-drop')) {
-			drop.addEventListener('zone:drop', event => {
-				event.stopImmediatePropagation()
+		// ------------------------------------------------------------------------
+		// click
+		// ------------------------------------------------------------------------
+		this.addEventListener('click', this.onClick.bind(this))
 
-				const drop = /** @type {DropZone} */ (event.detail.drop)
-				const drags = /** @type {DragZone[]} */ (event.detail.drags)
-				const dragstart = /** @type {DragZone} */ (event.detail.dragstart)
-
-				const changePosition = this._getChangePosition(dragstart, drop)
-
-				let isValid = true
-
-				drags.forEach(drag => {
-					const absolutePosition = this._getAbsolutePosition(
-						drag,
-						changePosition
-					)
-
-					const dropDestination = this._selectDrop(
-						absolutePosition.x,
-						absolutePosition.y
-					)
-
-					if (
-						dropDestination === null ||
-            !isValidLevel(dropDestination, drag)
-					) {
-						isValid = false
-					}
-				})
-
-				drags.forEach(drag => {
-					let targetDrag = drag
-					if (isValid) {
-						const absolutePosition = this._getAbsolutePosition(
-							drag,
-							changePosition
-						)
-
-						const dropDestination = this._selectDrop(
-							absolutePosition.x,
-							absolutePosition.y
-						)
-
-						if (event.detail.copy) {
-							targetDrag = this.cloneDrag(drag)
-							drag.draggableEnd()
-						}
-
-						dropDestination.appendChild(targetDrag)
-						dropDestination.updateDragPosition()
-					}
-					targetDrag.draggableEnd()
-				})
-			})
-		}
-
-		this.parent.addEventListener('zone:selected', event => {
-			const zoneId = event.detail.zoneId
-			if (this.id !== zoneId) this.clearSelected()
-		})
-
+		// ------------------------------------------------------------------------
 		this._assignPosition()
-
 		return super.load()
 	}
 
@@ -134,6 +70,107 @@ export class Zone extends Component {
 		) => {
 			selectedDrag.selected = false
 		})
+	}
+
+	// ---------------------------------------------------------------------------
+	/** @param {event} event */
+	onDragstart (event) {
+		event.stopImmediatePropagation()
+		const dataTransfer = []
+		this.selectAll('ark-zone-drag[selected]').forEach((
+			/** @type {DragZone} */ selectedDrag
+		) => {
+			const isDragstart = event.target === selectedDrag
+			dataTransfer.push(selectedDrag.generateDataTransfer(isDragstart))
+			selectedDrag.draggableStart()
+		})
+
+		event['dataTransfer'].clearData()
+		event['dataTransfer'].setData(JSON.stringify(dataTransfer), '')
+	}
+
+	/** @param {event} event */
+	onClick (event) {
+		this.dispatchEvent(
+			new CustomEvent('zone:selected', {
+				bubbles: true,
+				detail: {
+					zoneId: this.id
+				}
+			})
+		)
+	}
+
+	/** @param {event} event */
+	onZoneDrop (event) {
+		event.stopImmediatePropagation()
+
+		const drop = /** @type {DropZone} */ (
+			event['detail'] ? event['detail'].drop : null
+		)
+
+		const drags = /** @type {DragZone[]} */ (
+			event['detail'] ? event['detail'].drags : null
+		)
+
+		const dragstart = /** @type {DragZone} */ (
+			event['detail'] ? event['detail'].dragstart : null
+		)
+
+		if (dragstart && drop) {
+			const changePosition = this._getChangePosition(dragstart, drop)
+
+			let isValid = true
+
+			drags.forEach(drag => {
+				const absolutePosition = this._getAbsolutePosition(
+					drag,
+					changePosition
+				)
+
+				const dropDestination = this._selectDrop(
+					absolutePosition.x,
+					absolutePosition.y
+				)
+
+				if (
+					dropDestination === null ||
+            !isValidLevel(dropDestination, drag)
+				) {
+					isValid = false
+				}
+			})
+
+			drags.forEach(drag => {
+				let targetDrag = drag
+				if (isValid) {
+					const absolutePosition = this._getAbsolutePosition(
+						drag,
+						changePosition
+					)
+
+					const dropDestination = this._selectDrop(
+						absolutePosition.x,
+						absolutePosition.y
+					)
+
+					if (event['detail'].copy) {
+						targetDrag = this.cloneDrag(drag)
+						drag.draggableEnd()
+					}
+
+					dropDestination.appendChild(targetDrag)
+					dropDestination.updateDragPosition()
+				}
+				targetDrag.draggableEnd()
+			})
+		}
+	}
+
+	/** @param {event} event */
+	onZoneSelected (event) {
+		const zoneId = event['detail'] ? event['detail'].zoneId : null
+		if (this.id !== zoneId) this.clearSelected()
 	}
 
 	// ---------------------------------------------------------------------------

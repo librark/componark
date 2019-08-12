@@ -38,54 +38,24 @@ export class DropZone extends Component {
 		// ------------------------------------------------------------------------
 		// dragover
 		// ------------------------------------------------------------------------
-		this.addEventListener('dragover', event => {
-			event.stopImmediatePropagation()
-			event.preventDefault()
-		})
+		this.addEventListener('dragover', this.onDragover.bind(this))
 
 		// ------------------------------------------------------------------------
 		// dragenter
 		// ------------------------------------------------------------------------
-		this.addEventListener('dragenter', event => {
-			event.stopImmediatePropagation()
-			event.preventDefault()
-			const drags = getElementsByDataTransfer(this.parent, event)
-			this.droppableEnter(/** @type {DragZone[]} */ (drags))
-		})
+		this.addEventListener('dragenter', this.onDragenter.bind(this))
 
 		// ------------------------------------------------------------------------
 		// dragleave
 		// ------------------------------------------------------------------------
-		this.addEventListener('dragleave', event => {
-			event.stopImmediatePropagation()
-			event.preventDefault()
-			this.droppableLeave()
-		})
+		this.addEventListener('dragleave', this.onDragleave.bind(this))
 
 		// ------------------------------------------------------------------------
 		// drop
 		// ------------------------------------------------------------------------
-		this.addEventListener('drop', event => {
-			event.stopImmediatePropagation()
-			event.preventDefault()
-			const drags = /** @type {DragZone[]} */ (getElementsByDataTransfer(
-				this.parent,
-				event
-			))
+		this.addEventListener('drop', this.onDrop.bind(this))
 
-			const dataDragstart = getDataTransfer(event).find(
-				data => data.dragstart === true
-			)
-
-			const dragstart = /** @type {DragZone} */ drags.find(
-				drag => drag.id === dataDragstart.id
-			)
-
-			const copy = event.ctrlKey || false
-
-			this.droppableDrop(dragstart, drags, copy)
-		})
-
+		// ------------------------------------------------------------------------
 		return super.load()
 	}
 
@@ -129,6 +99,50 @@ export class DropZone extends Component {
 			drag.setAttribute('y', this.y)
 			drag.setAttribute('drop', this.id)
 		})
+	}
+
+	// --------------------------------------------------------------------------
+	/** @param {event} event */
+	onDragover (event) {
+		event.stopImmediatePropagation()
+		event.preventDefault()
+	}
+
+	/** @param {event} event */
+	onDragenter (event) {
+		event.stopImmediatePropagation()
+		event.preventDefault()
+		const drags = getElementsByDataTransfer(this.parent, event)
+		this.droppableEnter(/** @type {DragZone[]} */ (drags))
+	}
+
+	/** @param {event} event */
+	onDragleave (event) {
+		event.stopImmediatePropagation()
+		event.preventDefault()
+		this.droppableLeave()
+	}
+
+	/** @param {event} event */
+	onDrop (event) {
+		event.stopImmediatePropagation()
+		event.preventDefault()
+		const drags = /** @type {DragZone[]} */ (getElementsByDataTransfer(
+			this.parent,
+			event
+		))
+
+		const dataDragstart = getDataTransfer(event).find(
+			data => data.dragstart === true
+		)
+
+		const dragstart = /** @type {DragZone} */ drags.find(
+			drag => drag.id === dataDragstart.id
+		)
+
+		const copy = event['ctrlKey'] || false
+
+		this.droppableDrop(dragstart, drags, copy)
 	}
 
 	// --------------------------------------------------------------------------

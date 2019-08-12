@@ -5,7 +5,7 @@ import { ListItem } from './item.js'
 export class List extends Component {
 	/** @param {Object} context */
 	init (context) {
-		this.source = context['source'] || []
+		this.source = /** @type {Array} */ (context['source'] || [])
 		this.template = context['template'] || null
 
 		return super.init()
@@ -13,9 +13,9 @@ export class List extends Component {
 
 	render () {
 		this.innerHTML = /* html */ ``
-		this.source.forEach(data => {
+		this.source.forEach((data, index) => {
 			const item = new ListItem()
-				.init({ data: data, template: this.template })
+				.init({ data: data, template: this.template, index: index })
 				.render()
 
 			item.addEventListener('list-item:selected', this._onSelected.bind(this))
@@ -23,6 +23,16 @@ export class List extends Component {
 			this.appendChild(item)
 		})
 		return super.render()
+	}
+
+	/** @param {number} start @param {number?} deleteCount  */
+	delete (start, deleteCount = 1) {
+		this.source.splice(start, deleteCount)
+
+		for (let i = start; i < deleteCount + start; i++) {
+			const item = this.select(`[index="${i}"]`)
+			if (item) item.remove()
+		}
 	}
 
 	/** @param {Event} event */

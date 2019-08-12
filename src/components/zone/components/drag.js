@@ -49,67 +49,38 @@ export class DragZone extends Component {
 		// ------------------------------------------------------------------------
 		// dragstart
 		// ------------------------------------------------------------------------
-		this.addEventListener('dragstart', event => {
-			this.draggableStart()
-		})
+		this.addEventListener('dragstart', this.onDraggableStart.bind(this))
 
 		// ------------------------------------------------------------------------
 		// dragend
 		// ------------------------------------------------------------------------
-		this.addEventListener('dragend', event => {
-			event.stopImmediatePropagation()
-			this.draggableEnd()
-		})
+		this.addEventListener('dragend', this.onDraggableEnd.bind(this))
 
 		// ------------------------------------------------------------------------
 		// dragenter
 		// ------------------------------------------------------------------------
-		this.addEventListener('dragenter', event => {
-			event.stopImmediatePropagation()
-			const dataTransfer = getDataTransfer(event)
-			const drags = getElementsByDataTransfer(this.parent, event)
-			this.draggableEnter(/** @type {DragZone[]} */ (drags), dataTransfer)
-		})
+		this.addEventListener('dragenter', this.onDraggableEnter.bind(this))
 
 		// ------------------------------------------------------------------------
 		// dragleave
 		// ------------------------------------------------------------------------
-		this.addEventListener('dragleave', event => {
-			event.stopImmediatePropagation()
-			event.preventDefault()
-			this.draggableLeave()
-		})
+		this.addEventListener('dragleave', this.onDraggableLeave.bind(this))
 
 		// ------------------------------------------------------------------------
 		// drop
 		// ------------------------------------------------------------------------
-		this.addEventListener('drop', event => {
-			event.stopImmediatePropagation()
-			event.preventDefault()
-			const drags = getElementsByDataTransfer(this.parent, event)
-			this.draggableDrop(/** @type {DragZone[]} */ (drags))
-		})
+		this.addEventListener('drop', this.onDraggableDrop.bind(this))
 
 		// ------------------------------------------------------------------------
 		// click
 		// ------------------------------------------------------------------------
-		this.addEventListener('click', event => {
-			if (event.shiftKey) {
-				this.selected = true
-			}
-		})
+		this.addEventListener('click', this.onClick.bind(this))
+
+		// ------------------------------------------------------------------------
 		return super.load()
 	}
 
-	/** @param {Boolean?} dragstart */
-	generateDataTransfer (dragstart = false) {
-		return {
-			id: this.id,
-			width: this.offsetWidth,
-			height: this.offsetHeight,
-			dragstart: dragstart
-		}
-	}
+	// --------------------------------------------------------------------------
 
 	draggableStart () {
 		this.selected = true
@@ -178,6 +149,60 @@ export class DragZone extends Component {
 			this.setAttribute('selected', 'selected')
 		} else {
 			this.removeAttribute('selected')
+		}
+	}
+
+	/** @param {Boolean?} dragstart */
+	generateDataTransfer (dragstart = false) {
+		return {
+			id: this.id,
+			width: this.offsetWidth,
+			height: this.offsetHeight,
+			dragstart: dragstart
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
+
+	/** @param {event} event */
+	onDraggableStart (event) {
+		this.draggableStart()
+	}
+
+	/** @param {event} event */
+	onDraggableEnd (event) {
+		event.stopImmediatePropagation()
+		this.draggableEnd()
+	}
+
+	/** @param {event} event */
+	onDraggableEnter (event) {
+		event.stopImmediatePropagation()
+		const drags = getElementsByDataTransfer(this.parent, event)
+		const dataTransfer = getDataTransfer(event)
+		this.draggableEnter(/** @type {DragZone[]} */ (drags), dataTransfer)
+	}
+
+	/** @param {event} event */
+	onDraggableLeave (event) {
+		event.stopImmediatePropagation()
+		event.preventDefault()
+		this.draggableLeave()
+	}
+
+	/** @param {event} event */
+	onDraggableDrop (event) {
+		event.stopImmediatePropagation()
+		event.preventDefault()
+		const drags = getElementsByDataTransfer(this.parent, event)
+		this.draggableDrop(/** @type {DragZone[]} */ (drags))
+	}
+
+	/** @param {event} event */
+	onClick (event) {
+		if (event['shiftKey']) {
+			this.selected = true
 		}
 	}
 

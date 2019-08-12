@@ -1,7 +1,7 @@
 import { Zone } from '../../../src/components/zone/components/zone'
 
 describe('Zone', () => {
-	it('can be instantiated', () => {
+	it('can calculate the absolute position', () => {
 		const zone = new Zone().init({
 			rows: 3,
 			cols: 4
@@ -71,5 +71,61 @@ describe('Zone', () => {
 		changePosition = zone._getChangePosition(start, end)
 		expect(changePosition.x).toEqual(-2)
 		expect(changePosition.y).toEqual(3)
+	})
+
+	it('dragstart', () => {
+		const event = new CustomEvent('dragstart', {})
+		event['dataTransfer'] = {
+			types: [],
+			clearData: _ => {},
+			setData: _ => {}
+		}
+
+		const zone = new Zone()
+		zone.connectedCallback()
+
+		zone.onDragstart(event)
+	})
+
+	it('zone:drop', () => {
+		const event = new CustomEvent('zone:drop', {})
+		event['dataTransfer'] = {
+			types: [],
+			clearData: _ => {},
+			setData: _ => {}
+		}
+
+		const zone = new Zone()
+		zone.connectedCallback()
+
+		zone.onZoneDrop(event)
+	})
+
+	it('zone:selected', () => {
+		const event = new CustomEvent('zone:selected', {})
+		event['dataTransfer'] = {
+			types: [],
+			clearData: _ => {},
+			setData: _ => {}
+		}
+
+		const zone = new Zone()
+		zone.connectedCallback()
+
+		zone.onZoneSelected(event)
+	})
+
+	it('click', () => {
+		const event = new CustomEvent('click', {})
+		event['dataTransfer'] = {
+			types: [],
+			clearData: _ => {},
+			setData: _ => {}
+		}
+
+		const zone = new Zone()
+		zone.connectedCallback()
+
+		zone.onClick(event)
 	})
 })
