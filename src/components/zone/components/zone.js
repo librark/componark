@@ -73,50 +73,13 @@ export class Zone extends Component {
 	}
 
 	// ---------------------------------------------------------------------------
-	/** @param {event} event */
-	onDragstart (event) {
-		event.stopImmediatePropagation()
-		const dataTransfer = []
-		this.selectAll('ark-zone-drag[selected]').forEach((
-			/** @type {DragZone} */ selectedDrag
-		) => {
-			const isDragstart = event.target === selectedDrag
-			dataTransfer.push(selectedDrag.generateDataTransfer(isDragstart))
-			selectedDrag.draggableStart()
-		})
-
-		event['dataTransfer'].clearData()
-		event['dataTransfer'].setData(JSON.stringify(dataTransfer), '')
-	}
-
-	/** @param {event} event */
-	onClick (event) {
-		this.dispatchEvent(
-			new CustomEvent('zone:selected', {
-				bubbles: true,
-				detail: {
-					zoneId: this.id
-				}
-			})
-		)
-	}
-
-	/** @param {event} event */
-	onZoneDrop (event) {
-		event.stopImmediatePropagation()
-
-		const drop = /** @type {DropZone} */ (
-			event['detail'] ? event['detail'].drop : null
-		)
-
-		const drags = /** @type {DragZone[]} */ (
-			event['detail'] ? event['detail'].drags : null
-		)
-
-		const dragstart = /** @type {DragZone} */ (
-			event['detail'] ? event['detail'].dragstart : null
-		)
-
+	/**
+   * @param {DropZone} drop
+   * @param {DragZone[]} drags
+   * @param {DragZone} dragstart
+   * @param {boolean?} copy
+   * */
+	zoneDrop (drop, drags, dragstart, copy = false) {
 		if (dragstart && drop) {
 			const changePosition = this._getChangePosition(dragstart, drop)
 
@@ -154,7 +117,7 @@ export class Zone extends Component {
 						absolutePosition.y
 					)
 
-					if (event['detail'].copy) {
+					if (copy) {
 						targetDrag = this.cloneDrag(drag)
 						drag.draggableEnd()
 					}
@@ -165,6 +128,57 @@ export class Zone extends Component {
 				targetDrag.draggableEnd()
 			})
 		}
+	}
+
+	// ---------------------------------------------------------------------------
+	/** @param {event} event */
+	onDragstart (event) {
+		event.stopImmediatePropagation()
+		const dataTransfer = []
+
+		this.selectAll('ark-zone-drag[selected]').forEach((
+			/** @type {DragZone} */ selectedDrag
+		) => {
+			const isDragstart = event.target === selectedDrag
+			dataTransfer.push(selectedDrag.generateDataTransfer(isDragstart))
+			selectedDrag.draggableStart()
+		})
+
+		event['dataTransfer'].clearData()
+		event['dataTransfer'].setData(JSON.stringify(dataTransfer), '')
+	}
+
+	/** @param {event} event */
+	onClick (event) {
+		this.dispatchEvent(
+			new CustomEvent('zone:selected', {
+				bubbles: true,
+				detail: {
+					zoneId: this.id
+				}
+			})
+		)
+	}
+
+	/** @param {event} event */
+	onZoneDrop (event) {
+		event.stopImmediatePropagation()
+
+		const drop = /** @type {DropZone} */ (
+			event['detail'] ? event['detail'].drop : null
+		)
+
+		const drags = /** @type {DragZone[]} */ (
+			event['detail'] ? event['detail'].drags : []
+		)
+
+		const dragstart = /** @type {DragZone} */ (
+			event['detail'] ? event['detail'].dragstart : null
+		)
+
+		const copy = event['detail'] ? event['detail'].copy : false
+
+		this.zoneDrop(drop, drags, dragstart, copy)
 	}
 
 	/** @param {event} event */

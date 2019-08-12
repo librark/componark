@@ -1,4 +1,5 @@
 import { DragZone } from '../../../src/components/zone/components/drag'
+import { DropZone } from '../../../src/components/zone/components/drop'
 
 describe('Drag Zone', () => {
 	it('dragstart', () => {
@@ -100,5 +101,113 @@ describe('Drag Zone', () => {
 
 		const dataTransfer = drag.generateDataTransfer()
 		expect(dataTransfer.id).toEqual(drag.id)
+	})
+
+	it('can add items at startup', () => {
+		const drop = new DropZone()
+		drop.connectedCallback()
+
+		const drag = new DragZone()
+		drag.connectedCallback()
+		drop.appendChild(drag)
+
+		drag.draggableDrop([new DragZone(), new DragZone(), new DragZone()])
+
+		expect(drop.lastChild['id'] === drag.id).toBeTruthy()
+	})
+
+	it('can add style when entering', () => {
+		const drop = new DropZone()
+		drop.connectedCallback()
+		drop.setAttribute('direction', 'row')
+
+		const drag = new DragZone()
+		drag.connectedCallback()
+		drop.appendChild(drag)
+
+		const drag1 = new DragZone()
+		drag1.connectedCallback()
+
+		const drag2 = new DragZone()
+		drag2.connectedCallback()
+
+		drag.draggableEnter(
+			[drag1, drag2],
+			[drag1.generateDataTransfer(), drag2.generateDataTransfer()]
+		)
+
+		expect(drag.classList.contains('ark-zone-drag--enter')).toBeTruthy()
+	})
+
+	it('can add style when entering', () => {
+		const drop = new DropZone()
+		drop.connectedCallback()
+		drop.setAttribute('direction', 'column')
+
+		const drag = new DragZone()
+		drag.connectedCallback()
+		drop.appendChild(drag)
+
+		const drag1 = new DragZone()
+		drag1.connectedCallback()
+
+		const drag2 = new DragZone()
+		drag2.connectedCallback()
+
+		drag.draggableEnter(
+			[drag1, drag2],
+			[drag1.generateDataTransfer(), drag2.generateDataTransfer()]
+		)
+
+		expect(drag.classList.contains('ark-zone-drag--enter')).toBeTruthy()
+	})
+
+	it('can add style when entering', () => {
+		const dropLevel1 = new DropZone()
+		dropLevel1.connectedCallback()
+
+		const dragLevel1 = new DragZone()
+		dragLevel1.connectedCallback()
+		dropLevel1.appendChild(dragLevel1)
+
+		const dropLevel0 = new DropZone()
+		dropLevel1.connectedCallback()
+		dropLevel0.appendChild(dragLevel1)
+
+		const drag1 = new DragZone()
+		drag1.connectedCallback()
+		drag1.setAttribute('level', '0')
+
+		const drag2 = new DragZone()
+		drag2.connectedCallback()
+		drag2.setAttribute('level', '0')
+
+		dragLevel1.draggableEnter(
+			[drag1, drag2],
+			[drag1.generateDataTransfer(), drag2.generateDataTransfer()]
+		)
+
+		expect(
+			dragLevel1.classList.contains('ark-zone-drag--enter_disabled')
+		).toBeTruthy()
+	})
+
+	it('can add style when entering', () => {
+		const drop = new DropZone()
+		drop.connectedCallback()
+
+		const drag = new DragZone()
+		drag.connectedCallback()
+		drop.appendChild(drag)
+
+		const drag1 = new DragZone()
+		drag1.connectedCallback()
+
+		const drag2 = new DragZone()
+		drag2.connectedCallback()
+
+		drag.draggableEnter([drag1, drag2], [])
+
+		expect(drag.classList.contains('ark-zone-drag--enter')).toBeTruthy()
 	})
 })

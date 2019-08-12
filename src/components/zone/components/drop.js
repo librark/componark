@@ -127,6 +127,7 @@ export class DropZone extends Component {
 	onDrop (event) {
 		event.stopImmediatePropagation()
 		event.preventDefault()
+
 		const drags = /** @type {DragZone[]} */ (getElementsByDataTransfer(
 			this.parent,
 			event
@@ -137,7 +138,7 @@ export class DropZone extends Component {
 		)
 
 		const dragstart = /** @type {DragZone} */ drags.find(
-			drag => drag.id === dataDragstart.id
+			drag => { if (drag) { return drag.id === dataDragstart.id } }
 		)
 
 		const copy = event['ctrlKey'] || false

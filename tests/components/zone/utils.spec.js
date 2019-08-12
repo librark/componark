@@ -1,4 +1,5 @@
-import { getDataTransfer, getElementsByDataTransfer, isValidLevel, parseData } from '../../../src/components/zone/components/utils'
+import { getDataTransfer, getElementsByDataTransfer, isValidLevel, parseData }
+	from '../../../src/components/zone/components/utils'
 
 import { DragZone } from '../../../src/components/zone/components/drag'
 import { DropZone } from '../../../src/components/zone/components/drop'
@@ -38,6 +39,7 @@ describe('Utils Zone', () => {
 
 		expect(!parse).toBeTruthy()
 	})
+
 	it('getDataTransfer', () => {
 		const parent = document.createElement('div')
 		parent.innerHTML = /** html */`
@@ -65,6 +67,7 @@ describe('Utils Zone', () => {
 
 		expect(isValidLevel(drop, drag)).toBeTruthy()
 
+		// @ts-ignore
 		expect(isValidLevel(document.createElement('div'), drag)).toBeTruthy()
 	})
 
