@@ -1,29 +1,28 @@
 import { Component } from '../../component'
 
 export class Grid extends Component {
-  init (context) {
-    this.cols = context['cols'] || this.cols || 0
-    this.gap = context['gap'] || this.gap || '5px'
-    return super.init()
-  }
+	init (context) {
+		this.cols = context['cols'] || this.cols || 0
+		this.gap = context['gap'] || this.gap || '0px'
+		return super.init()
+	}
 
-  reflectedProperties () {
-    return ['cols', 'gap']
-  }
+	reflectedProperties () {
+		return ['cols', 'gap']
+	}
 
-  render () {
-    this._elementStyle()
-    return super.render()
-  }
+	render () {
+		this._elementStyle()
+		return super.render()
+	}
 
-  _elementStyle () {
-    this.style.display = 'grid'
+	_elementStyle () {
+		this.style.display = 'grid'
 
-    this.style.gridTemplateColumns = `repeat(${this.cols}, 1fr)`
-    this.style.gridTemplateRows = `1fr`
+		this.style.gridTemplateColumns = `repeat(${this.cols}, 1fr)`
+		this.style.gridTemplateRows = `auto`
 
-    this.style.gridGap = `${this.gap}`
-    this.style.padding = `${this.gap}`
-  }
+		this.style.gridGap = `${this.gap}`
+	}
 }
 customElements.define('ark-grid', Grid)

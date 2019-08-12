@@ -1,0 +1,42 @@
+@mixin drag_default_() {
+  $component: "ark-zone-drag";
+
+  #{$component} {
+    cursor: grab;
+
+    display: block;
+
+    width: initial;
+    height: initial;
+
+    margin: 0;
+    padding: 0;
+
+    ark-zone-drop {
+      height: auto;
+      width: auto;
+    }
+
+    &[selected] {
+      background: red;
+    }
+  }
+
+  .#{$component} {
+    &--dragging {
+      border: 1px solid rgba($color: $muted, $alpha: .5);
+    }
+
+    &--hidden {
+      display: none;
+    }
+
+    &--enter {
+      background: rgba($color: $muted, $alpha: .2);
+    }
+
+    &--enter_disabled {
+      filter: contrast(0.5);
+    }
+  }
+}

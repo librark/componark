@@ -36,7 +36,6 @@ export default class Showcase extends Component {
               <li data-component="card">Card</li>
               <li data-component="chart">Chart</li>
               <li data-component="checkbox">Checkbox</li>
-              <li data-component="dragdrop">Drag and Drop</li>
               <li data-component="grid">Grid</li>
               <li data-component="icon">Icon</li>
               <li data-component="input">Input</li>
@@ -50,6 +49,7 @@ export default class Showcase extends Component {
               <li data-component="splitview">Splitview</li>
               <li data-component="table">Table</li>
               <li data-component="tabs">Tabs</li>
+              <li data-component="zone">Zone</li>
             </ul>
           </div>
           <div class="app-showcase-ark__content" data-content>

@@ -4,8 +4,8 @@ $desktop: "960px";
   $component: "ark-grid";
 
   #{$component} {
-    max-width: -webkit-fill-available;
-    width: 100%;
+    width: inherit;
+    height: inherit;
 
     &[no-gutters] {
       grid-gap: 0 !important;

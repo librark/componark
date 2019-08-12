@@ -60,7 +60,6 @@ export class SplitviewDemo extends Component {
 				template: template
 			})
 			.render()
-			.load()
 	}
 
 	get list () {
