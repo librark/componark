@@ -36,7 +36,6 @@ export default class Showcase extends Component {
               <li data-component="card">Card</li>
               <li data-component="chart">Chart</li>
               <li data-component="checkbox">Checkbox</li>
-              <li data-component="dragdrop">Drag and Drop</li>
               <li data-component="grid">Grid</li>
               <li data-component="icon">Icon</li>
               <li data-component="input">Input</li>

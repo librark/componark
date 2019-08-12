@@ -9,7 +9,6 @@
 @import "../../../components/card/main";
 @import "../../../components/chart/main";
 @import "../../../components/checkbox/main";
-@import "../../../components/dragdrop/main";
 @import "../../../components/grid/main";
 @import "../../../components/icon/main";
 @import "../../../components/input/main";
@@ -34,7 +33,6 @@
   @include card($type);
   @include chart($type);
   @include checkbox($type);
-  @include dragdrop($type);
   @include grid($type);
   @include icon($type);
   @include input($type);
