@@ -137,9 +137,7 @@ export class DropZone extends Component {
 			data => data.dragstart === true
 		)
 
-		const dragstart = /** @type {DragZone} */ drags.find(
-			drag => { if (drag) { return drag.id === dataDragstart.id } }
-		)
+		const dragstart = this._searchDragStart(dataDragstart, drags)
 
 		const copy = event['ctrlKey'] || false
 
@@ -147,6 +145,13 @@ export class DropZone extends Component {
 	}
 
 	// --------------------------------------------------------------------------
+	/** @param {object} dataDrag @param {DragZone[]} drags @returns {DragZone} */
+	_searchDragStart (dataDrag, drags) {
+		return /** @type {DragZone} */ drags.find(
+			drag => { if (drag) { return drag.id === dataDrag.id } }
+		)
+	}
+
 	_droppableRemoveStyle () {
 		this.classList.remove(`ark-zone-drop--hover`)
 		this.classList.remove(`ark-zone-drop--hover_disabled`)

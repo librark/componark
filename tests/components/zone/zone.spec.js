@@ -127,6 +127,18 @@ describe('Zone', () => {
 	})
 
 	it('zone:selected', () => {
+		const zone = new Zone()
+
+		const event = new CustomEvent('zone:selected', { detail: {
+			zoneId: zone.id
+		} })
+
+		zone.connectedCallback()
+
+		zone.onZoneSelected(event)
+	})
+
+	it('zone:selected', () => {
 		const event = new CustomEvent('zone:selected', {})
 		event['dataTransfer'] = {
 			types: [],
@@ -226,6 +238,16 @@ describe('Zone', () => {
 		expect(!drag0.selected).toBeTruthy()
 		expect(!drag1.selected).toBeTruthy()
 		expect(!drag2.selected).toBeTruthy()
+	})
+
+	it('can move drags', () => {
+		const zone = new Zone()
+		const event = new CustomEvent('click', { detail: {
+			drop: new DropZone(),
+			drags: [new DragZone(), new DragZone()],
+			dragstart: new DragZone()
+		} })
+		zone.onZoneDrop(event)
 	})
 
 	it('can move drags', () => {

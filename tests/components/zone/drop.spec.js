@@ -77,6 +77,21 @@ describe('Drop Zone', () => {
 		drop.onDrop(event)
 	})
 
+	it('_searchDragStart', () => {
+		const drop = new DropZone()
+		drop.connectedCallback()
+
+		const drag = new DragZone()
+
+		expect(
+			!drop._searchDragStart({ id: drag.id }, [new DragZone()])
+		).toBeTruthy()
+
+		expect(
+			drop._searchDragStart({ id: drag.id }, [drag])
+		).toBeTruthy()
+	})
+
 	it('can add style when entering', () => {
 		const dropLevel1 = new DropZone()
 		dropLevel1.connectedCallback()
@@ -104,5 +119,15 @@ describe('Drop Zone', () => {
 		expect(
 			dropLevel1.classList.contains('ark-zone-drop--hover_disabled')
 		).toBeTruthy()
+	})
+	it('can add style when entering', () => {
+		const drop = new DropZone()
+		drop.connectedCallback()
+
+		const drag = new DragZone()
+		drag.setAttribute('lavel', '-1')
+
+		drop.droppableEnter([drag])
+		expect(!drag.childElementCount).toBeTruthy()
 	})
 })

@@ -116,6 +116,22 @@ describe('Drag Zone', () => {
 		expect(drop.lastChild['id'] === drag.id).toBeTruthy()
 	})
 
+	it('can add items at startup', () => {
+		const drop = new DropZone()
+		drop.connectedCallback()
+
+		const drag = new DragZone()
+		drag.connectedCallback()
+		drop.appendChild(drag)
+
+		const drag0 = new DragZone()
+		drag0.setAttribute('level', '-1')
+
+		drag.draggableDrop([drag0])
+
+		expect(drop.childElementCount).toEqual(1)
+	})
+
 	it('can add style when entering', () => {
 		const drop = new DropZone()
 		drop.connectedCallback()

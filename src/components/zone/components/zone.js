@@ -189,9 +189,7 @@ export class Zone extends Component {
 
 	// ---------------------------------------------------------------------------
 	_assignPosition () {
-		const drops = Array.from(
-			/** @type {DropZone[]} */ (this.selectAll('ark-zone-drop') || [])
-		)
+		const drops = /** @type {DropZone[]} */ this.selectAll('ark-zone-drop')
 
 		if (drops.length) {
 			if (parseInt(this.rows)) {
