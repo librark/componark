@@ -1,0 +1,16 @@
+@mixin item_default_() {
+  $component: "ark-list-item";
+
+  #{$component} {
+    &[click-disabled="true"] {
+
+      &:hover,
+      &:active,
+      &::after {
+        background-color: transparent !important;
+        background: transparent !important;
+        cursor: default !important;
+      }
+    }
+  }
+}

@@ -2,12 +2,14 @@ import { Component } from '../../component'
 
 export class Input extends Component {
 	init (context) {
-		this.label = context['label']
+		this.label = context['label'] || this.label
+		this.value = context['value'] || this.value || ''
+
 		return super.init()
 	}
 
 	reflectedProperties () {
-		return ['label']
+		return ['label', 'value']
 	}
 
 	render () {
@@ -19,7 +21,7 @@ export class Input extends Component {
 
         <div>
           <div class="ark-input__input">
-            <input data-input listen on-input="_change">
+            <input data-input listen on-input="_change" value="${this.value}">
           </div>
 
           <div class="ark-input__alert">
@@ -28,20 +30,16 @@ export class Input extends Component {
         </div>
       </div>
     `
-		this._moverAtributos()
+		this._moveAttributes()
 		return super.render()
-	}
-
-	get value () {
-		const input = /** @type {Input} */ (this.querySelector('[data-input]'))
-		return input ? input.value : ''
 	}
 
 	// ---------------------------------------------------------------------------
 
 	/** @param {Event} event */
 	_change (event) {
-		event.stopPropagation()
+		event.stopImmediatePropagation()
+		this.value = this.select('[data-input]')['value']
 		this.dispatchEvent(
 			new CustomEvent('alter', {
 				detail: { value: this.value }
@@ -59,7 +57,7 @@ export class Input extends Component {
 			: `ark-input__type-text`
 	}
 
-	_moverAtributos () {
+	_moveAttributes () {
 		const element = this.querySelector('[data-input]')
 		const attributes = Array.from(this.attributes)
 
@@ -87,7 +85,6 @@ export class Input extends Component {
 			'formmethod',
 			'formnovalidate',
 			'formtarget',
-			'height',
 			'list',
 			'min',
 			'multiple',
@@ -99,9 +96,7 @@ export class Input extends Component {
 			'size',
 			'src',
 			'step',
-			'type',
-			'value',
-			'width'
+			'type'
 		]
 	}
 }

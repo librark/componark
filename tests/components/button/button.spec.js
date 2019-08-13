@@ -1,5 +1,5 @@
 /** @typedef {import('../../../src/components').Button} Button */
-import '../../../src/components/button'
+import { Button } from '../../../src/components/button'
 
 describe('Button', () => {
 	it('can be instantiated', () => {
@@ -15,14 +15,6 @@ describe('Button', () => {
 		button.connectedCallback()
 		const buttonElement = button.querySelector('button')
 		expect(buttonElement).toBeTruthy()
-	})
-
-	it('can be rendered with text content', function () {
-		const button = /** @type {Button} */ (document.createElement('ark-button'))
-		button.textContent = 'Submit'
-		button.connectedCallback()
-		const content = button.querySelector('button').textContent.trim()
-		expect(content).toEqual('Submit')
 	})
 
 	it('can be rendered with attribute value', function () {

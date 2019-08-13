@@ -18,7 +18,7 @@ export class Select extends Component {
         </select>
     `
 
-		this._moverAtributos()
+		this._moveAttributes()
 		return super.render()
 	}
 
@@ -47,7 +47,7 @@ export class Select extends Component {
 			: ''
 	}
 
-	_moverAtributos () {
+	_moveAttributes () {
 		const element = this.querySelector('[data-select]')
 		const attributes = Array.from(this.attributes)
 

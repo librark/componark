@@ -22,7 +22,7 @@ export class RadioButton extends Component {
       </div>
     `
 
-		this._moverAtributos()
+		this._moveAttributes()
 		return super.render()
 	}
 
@@ -65,7 +65,7 @@ export class RadioButton extends Component {
 		)
 	}
 
-	_moverAtributos () {
+	_moveAttributes () {
 		const element = this.querySelector('[data-radio-button]')
 		const attributes = Array.from(this.attributes)
 
@@ -93,7 +93,6 @@ export class RadioButton extends Component {
 			'formmethod',
 			'formnovalidate',
 			'formtarget',
-			'height',
 			'list',
 			'min',
 			'multiple',
@@ -104,8 +103,7 @@ export class RadioButton extends Component {
 			'required',
 			'size',
 			'src',
-			'step',
-			'width'
+			'step'
 		]
 	}
 }

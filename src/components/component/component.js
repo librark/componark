@@ -9,7 +9,6 @@ export class Component extends HTMLElement {
 
 	/** @param {Object} context @return {Component} */
 	init (context = {}) {
-		// HTML
 		this.defaultContent = this.innerHTML
 		return this
 	}
@@ -55,7 +54,7 @@ export class Component extends HTMLElement {
 	//  Default Content
 	// ---------------------------------------------------------------------------
 	get defaultContent () {
-		return this._defaultContent || this.innerHTML
+		return this._defaultContent
 	}
 
 	set defaultContent (html) {

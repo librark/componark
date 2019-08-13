@@ -2,22 +2,26 @@ import { Component } from '../../component'
 
 export class ListItem extends Component {
 	init (context) {
-		this.index = context['index'] || null
+		this.index = context['index']
 		this.data = context['data'] || null
 		this.template = context['template'] || (data => `${data}`)
+
+		this.clickDisabled = context['clickDisabled'] || false
 
 		return super.init()
 	}
 
 	reflectedProperties () {
-		return ['index']
+		return ['index', 'clickDisabled']
 	}
 
 	render () {
-		if (this.data) {
-			this.innerHTML = this.template(this.data)
+		this.innerHTML = this.template(this.data)
+
+		if (this.clickDisabled === 'false') {
 			this.addEventListener('click', this._onSelected.bind(this))
 		}
+
 		return super.render()
 	}
 

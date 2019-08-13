@@ -1,3 +1,4 @@
+/** @typedef {import('../components').Input} Input */
 import { Component } from '../components'
 
 export class InputDemo extends Component {
@@ -8,47 +9,15 @@ export class InputDemo extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `
-      <!-- <div mobile><p>mobile (360px).</p></div>
-      <div tablet><p>tablet (768px).</p></div>
-      <div desktop><p>desktop (960px).</p></div> -->
-      ${this._setupContent()}
-      ${this.documentation}
-    `
-		// this._setupFrame('[mobile]', '360px')
-		// this._setupFrame('[tablet]', '768px')
-		// this._setupFrame('[desktop]', '960px')
-
-		return super.render()
-	}
-
-	_setupFrame (selector, width) {
-		const content = this._setupContent()
-		const frame = document.createElement('iframe')
-		frame.setAttribute('src', `/${this.type}.html`)
-		frame.setAttribute('frameborder', '1')
-		frame.setAttribute('width', width)
-		frame.setAttribute('height', '640px')
-		frame.onload = () => {
-			const frameBody = frame.contentDocument.querySelector('body')
-			const app = frameBody.querySelector('app-showcase-ark')
-			const main = document.createElement('main')
-			main.innerHTML = content
-
-			app.parentNode.removeChild(app)
-			frameBody.prepend(main)
-		}
-
-		this.querySelector(selector).appendChild(frame)
-	}
-
-	_setupContent () {
-		return /* html */ `
-      <ark-input type="text" label="Repite como loro"
-        listen on-alter="inputText"></ark-input>
+      <ark-input data-input-text type="text" label="Repite como loro"
+      listen on-alter="inputText"></ark-input>
 
       <p>:: <span data-input-value></span></p>
 
       <hr/>
+
+      <button listen on-click="defaultValue">Default value</button>
+
       <br/>
 
       <ark-input type="date" label="date"></ark-input>
@@ -64,7 +33,11 @@ export class InputDemo extends Component {
       <ark-input type="time" label="time"></ark-input>
       <ark-input type="url" label="url"></ark-input>
       <ark-input type="week" label="week"></ark-input>
+
+      ${this.documentation}
     `
+
+		return super.render()
 	}
 
 	inputText (event) {
@@ -72,6 +45,12 @@ export class InputDemo extends Component {
 		if (element) {
 			element.textContent = event.detail ? event.detail.value : ''
 		}
+	}
+
+	defaultValue (event) {
+		const input = /** @type {Input} */ (this.select('[data-input-text]'))
+		input.value = 'Hello World'
+		input.render()
 	}
 
 	get documentation () {

@@ -5,10 +5,12 @@ export class List extends Component {
   selected?: Object
 
   init(context: { source: Array<any>, template: () => void }): List
+
+  delete(start: number, deleteCount?: number)
 }
 
 export class ListItem extends Component {
   index: string
 
-  init(context: { data: {}, template: () => void }): ListItem
+  init(context: { data: any, template: () => void }): ListItem
 }
