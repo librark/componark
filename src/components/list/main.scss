@@ -3,16 +3,19 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/default/main.default";
 // -------------------------------------------
 @import "./styles/ark/main.ark";
 @import "./styles/material/main.material";
 
 @mixin list($theme:material) {
-    @if $theme==ark {
-        @include list_ark();
-    }
+  @include list_default();
 
-    @if $theme==material {
-        @include list_material();
-    }
+  @if $theme==ark {
+    @include list_ark();
+  }
+
+  @if $theme==material {
+    @include list_material();
+  }
 }

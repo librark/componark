@@ -13,7 +13,7 @@ export class ListDemo extends Component {
 		this.innerHTML = /* html */ `
       <h1>Default List</h1>
 
-      <ark-list data-default-list></ark-list>
+      <ark-list data-default-list click-disabled></ark-list>
 
       <h1>Template List <span data-template-selected></span></h1>
 

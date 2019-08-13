@@ -28,18 +28,6 @@ export class DragZone extends Component {
 	}
 
 	render () {
-		const dataInfo = this.querySelector('[data-info]')
-		const info = `[${this.x},${this.y}] ${this.drop}`
-		if (!dataInfo) {
-			const element = document.createElement('p')
-			element.setAttribute('data-info', '')
-			element.innerHTML = info
-			this.appendChild(element)
-		} else {
-			dataInfo.innerHTML = info
-		}
-		// -------------------------------------------------------------------------
-
 		this.setAttribute('draggable', 'true')
 
 		return super.render()

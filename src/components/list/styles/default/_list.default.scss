@@ -1,0 +1,5 @@
+@mixin list_default_() {
+  $component: "ark-list";
+
+  #{$component} {}
+}

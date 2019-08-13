@@ -11,7 +11,8 @@ export class Button extends Component {
           ${this.defaultContent}
         </${this._getType()}>
     `
-		this._moverAtributos()
+
+		this._moveAttributes()
 		return super.render()
 	}
 
@@ -31,7 +32,7 @@ export class Button extends Component {
 		return this.hasAttribute('href') ? 'a' : 'button'
 	}
 
-	_moverAtributos () {
+	_moveAttributes () {
 		this._isFab()
 
 		const element = this.querySelector('[data-element]')

@@ -23,7 +23,7 @@ export class Checkbox extends Component {
       </div>
     `
 
-		this._moverAtributos()
+		this._moveAttributes()
 		return super.render()
 	}
 
@@ -68,7 +68,7 @@ export class Checkbox extends Component {
 		)
 	}
 
-	_moverAtributos () {
+	_moveAttributes () {
 		const element = this.querySelector('[data-checkbox]')
 		const attributes = Array.from(this.attributes)
 

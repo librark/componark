@@ -7,6 +7,7 @@ export class List extends Component {
 	init (context) {
 		this.source = /** @type {Array} */ (context['source'] || [])
 		this.template = context['template'] || null
+		this.clickDisabled = context['clickDisabled'] || false
 
 		return super.init()
 	}
@@ -15,7 +16,13 @@ export class List extends Component {
 		this.innerHTML = /* html */ ``
 		this.source.forEach((data, index) => {
 			const item = new ListItem()
-				.init({ data: data, template: this.template, index: index })
+				.init({ data: data,
+					template: this.template,
+					index: index,
+					clickDisabled: (
+						this.clickDisabled || this.hasAttribute('click-disabled')
+					)
+				})
 				.render()
 
 			item.addEventListener('list-item:selected', this._onSelected.bind(this))
@@ -30,9 +37,10 @@ export class List extends Component {
 		this.source.splice(start, deleteCount)
 
 		for (let i = start; i < deleteCount + start; i++) {
-			const item = this.select(`[index="${i}"]`)
-			if (item) item.remove()
+			this.select(`[index="${i}"]`).remove()
 		}
+
+		this.render()
 	}
 
 	/** @param {Event} event */
