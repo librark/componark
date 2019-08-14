@@ -3,10 +3,7 @@
  * @typedef {import('./master.js').SplitviewMaster} SplitviewMaster
  **/
 
-import './master'
-
 import { Component } from '../../component'
-import { SplitviewDetail } from './detail'
 
 export class Splitview extends Component {
 	init (context) {
@@ -14,10 +11,11 @@ export class Splitview extends Component {
 		// Detail
 		// -------------------------------------------------------------------------
 		this.detailTitle = context['title']
-		this.detailTemplate = context['detailTemplate']
 		this.detailBackButtonIcon = context['backButtonIcon']
-		this.detailDefaultTemplate = context['defaultTemplate']
 
+		// -------------------------------------------------------------------------
+		// Local
+		// -------------------------------------------------------------------------
 		this.detailPercentage = context['detailPercentage'] || this.detailPercentage
 
 		return super.init()
@@ -28,17 +26,19 @@ export class Splitview extends Component {
 	}
 
 	render () {
-		if (this.master && this.detailTemplate) {
-			this.innerHTML = /* html */ `
-        <div data-master-container class="master-container">
-          ${this.defaultContent}
-        </div>
-      `
-			this._listenMaster()
-			this.append(this._splitviewDetail())
-			this._setDetailWidth()
-		}
+		this._setDetailWidth()
 		return super.render()
+	}
+
+	load () {
+		if (this.master) {
+			this.master.addEventListener(
+				'master:change',
+				this._onMasterChange.bind(this)
+			)
+		}
+
+		return super.load()
 	}
 
 	/** @return {SplitviewMaster} */
@@ -52,42 +52,35 @@ export class Splitview extends Component {
 	}
 
 	// ---------------------------------------------------------------------------
-	/** @argument {Event} event */
+
+	/** @param {Event} event */
 	_onMasterChange (event) {
 		event.stopImmediatePropagation()
-		const data = event['detail'] || null
-		this.detail.init({ data: data }).render()
+
+		const context = event['detail'] || {}
+		this._renderDetail(context)
+
 		this.dispatchEvent(new CustomEvent('detail:change', event))
 	}
 
-	_listenMaster () {
-		this.master.addEventListener(
-			'master:change',
-			this._onMasterChange.bind(this)
+	/** @param {Object} context */
+	_renderDetail (context) {
+		context['title'] = context['title'] || this.detailTitle
+		context['backButtonIcon'] = (
+			context['backButtonIcon'] || this.detailBackButtonIcon
 		)
+
+		if (this.detail && this.detail.init) {
+			this.detail.init(context).render()
+			this.detail.show()
+		}
 	}
 
 	_setDetailWidth () {
-		const master = /** @type {HTMLElement} */ (this.querySelector(
-			'[data-master-container]'
-		))
 		const percentage = parseInt(this.detailPercentage) || 50
 
-		master.style.width = `${100 - percentage}%`
-		this.detail.style.width = `${percentage}%`
-	}
-
-	_splitviewDetail () {
-		const detail = new SplitviewDetail()
-		detail
-			.init({
-				template: this.detailTemplate,
-				title: this.detailTitle || '',
-				defaultTemplate: this.detailDefaultTemplate,
-				backButtonIcon: this.detailBackButtonIcon
-			})
-			.render()
-		return detail
+		if (this.master) this.master.style.width = `${100 - percentage}%`
+		if (this.detail) this.detail.style.width = `${percentage}%`
 	}
 }
 customElements.define('ark-splitview', Splitview)
