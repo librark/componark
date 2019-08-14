@@ -1,79 +1,44 @@
 /**
  * @typedef {import('../../../src/components').Splitview} Splitview
  **/
-import { Splitview } from '../../../src/components/splitview'
+
+import {
+	Splitview
+} from '../../../src/components/splitview/components/splitview'
+import {
+	SplitviewDetail
+} from '../../../src/components/splitview/components/detail'
+import {
+	SplitviewMaster
+} from '../../../src/components/splitview/components/master'
 
 describe('Splitview', () => {
-	it('can be instantiated', () => {
+	it('can be instantiated without elements', () => {
 		const splitview = new Splitview()
-		splitview.init({})
 		splitview.connectedCallback()
-
-		expect(splitview.outerHTML.trim()).toBe(
-			'<ark-splitview detail-percentage=""></ark-splitview>'
-		)
+		splitview._onMasterChange(new CustomEvent(''))
+		expect(!splitview.innerHTML.trim().length).toBeTruthy()
 	})
 
 	it('can be instantiated with elements', () => {
-		const detailTemplate = item => {
-			return /* html */ `
-        <span data-detail>${item}</span>
-      `
-		}
-
 		const splitview = new Splitview()
+		const master = new SplitviewMaster()
+		const detail = new SplitviewDetail()
 
-		splitview.innerHTML = /* html */ `
-      <ark-splitview-master>
-      <p data-info-splitview-master>ok</p>
-      </ark-splitview-master>
-    `
-		splitview
-			.init({
-				detailTemplate: detailTemplate
-			})
-			.render()
+		splitview.append(master)
+		splitview.append(detail)
 
-		expect(
-			splitview.master.querySelector('[data-info-splitview-master]')
-				.textContent === 'ok'
-		).toBeTruthy()
+		splitview.render().load()
 
-		expect(splitview.detail.outerHTML.trim().length).toBeTruthy()
-	})
+		splitview.addEventListener('test', event => {
+			expect(event.detail.data).toBeTruthy()
+		})
 
-	it('can change detail status', () => {
-		const detailTemplate = data => {
-			return /* html */ `
-        <span data-detail>${data}</span>
-      `
-		}
-
-		const splitview = new Splitview()
-
-		splitview.innerHTML = /* html */ `
-      <ark-splitview-master>
-        <p data-info-splitview-master>ok</p>
-      </ark-splitview-master>
-    `
-
-		splitview
-			.init({
-				detailTemplate: detailTemplate
-			})
-			.render()
-
-		let event = new CustomEvent('click')
-		// @ts-ignore
-		splitview._onMasterChange(event)
-		expect(!splitview.detail.querySelector('[data-detail]')).toBeTruthy()
-
-		event = new CustomEvent('click', { detail: 'ok' })
-		// @ts-ignore
+		const event = new CustomEvent('test', { detail: { data: true } })
 		splitview._onMasterChange(event)
 
-		expect(
-			splitview.detail.querySelector('[data-detail]').textContent === 'ok'
-		).toBeTruthy()
+		splitview._onMasterChange(new CustomEvent(''))
+
+		splitview._renderDetail({})
 	})
 })

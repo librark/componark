@@ -2,38 +2,45 @@ import { Component } from '../../component'
 
 export class SplitviewDetail extends Component {
 	init (context) {
-		this.title = context['title'] || this.title || ''
-
-		this.data = context['data'] || this.data || null
-		this.template = context['template'] || this.template || null
-
+		this.title = context['title'] || this.title || ' '
 		this.backButtonIcon = context['backButtonIcon'] || this.backButtonIcon
-		this.defaultTemplate = context['defaultTemplate'] || this.defaultTemplate
+
+		// -------------------------------------------------------------------------
+		// local variables
+		// -------------------------------------------------------------------------
+		this.global = document
+
+		this.detail = this.detail || /** @type {Component} */ (
+			this.firstElementChild
+		)
+
+		if (this.detail && this.detail.init) this.detail.init(context)
+
 		return super.init()
 	}
 
 	render () {
-		if (this.template && this.data) {
-			this.innerHTML = /* html */ `
-        <header class="ark-splitview-detail__header">
-          <button listen on-click="hide"
-            class="ark-splitview-detail__button--close">
-            ${this._renderBackButtonIcon()}
-          </button>
-          <div data-master-title class="ark-splitview-detail__title">
-            ${this.title}
-          </div>
-        </header>
-        <div class="ark-splitview-detail__body">
-          ${this.template(this.data)}
-        </div>
-      `
-			this.show()
-		} else {
-			this.innerHTML = this._innerHtmlDefaultTemplate()
-			this.hide()
+		let header = this.querySelector('header')
+
+		if (!header) {
+			header = this.global.createElement('header')
+			header.classList.add('ark-splitview-detail__header')
+			this.insertBefore(header, this.firstChild)
 		}
 
+		header.innerHTML = /* html */`
+      <button listen on-click="hide"
+        class="ark-splitview-detail__button--close">
+        ${this._renderBackButtonIcon()}
+      </button>
+      <div data-master-title class="ark-splitview-detail__title">
+        ${this.title}
+      </div>
+    `
+
+		if (this.detail && this.detail.render) this.detail.render()
+
+		this.hide()
 		return super.render()
 	}
 
@@ -50,16 +57,6 @@ export class SplitviewDetail extends Component {
 	}
 
 	// ---------------------------------------------------------------------------
-	_innerHtmlDefaultTemplate () {
-		const template = this.defaultTemplate ? this.defaultTemplate() : ''
-
-		return /* html */ `
-      <div class='ark-splitview-detail__default-template'>
-        ${template}
-      </div>
-    `
-	}
-
 	_renderBackButtonIcon () {
 		return this.backButtonIcon ? this.backButtonIcon() : '&times;'
 	}
