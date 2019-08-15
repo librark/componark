@@ -6,6 +6,9 @@ export class RadioGroup extends Component {
 	init (context) {
 		this.label = context['label']
 		this.name = context['name'] || this.name || uuidv4()
+
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 		return super.init()
 	}
 
@@ -14,9 +17,6 @@ export class RadioGroup extends Component {
 	}
 
 	render () {
-		this.radioButtonList = this.selectAll('ark-radio-button')
-		this.selectAll('ark-radio-button').forEach(button => button.remove())
-
 		this.innerHTML = /* html */ `
       <div class="ark-radio-group__label">
         <small data-radio-group-label>${this.label}</small>
@@ -24,7 +24,7 @@ export class RadioGroup extends Component {
       <div>
         <div data-radiobutton-list class="ark-radio-group__list"></div>
         <div class="ark-radio-group__alert">
-          ${this.innerHTML}
+          ${this.defaultContent}
         </div>
       </div>
     `
@@ -65,13 +65,14 @@ export class RadioGroup extends Component {
 
 	_renderRadioButtonList () {
 		const container = this.querySelector('[data-radiobutton-list]')
+		const radioButtonList = this.selectAll('ark-radio-button')
 
-		this.radioButtonList.forEach(button => {
+		radioButtonList.forEach(button => {
 			button.setAttribute('name', this.name)
 			button.setAttribute('listen', '')
 			button.setAttribute('on-alter', '_change')
 
-			if (container) container.appendChild(button)
+			container.appendChild(button)
 		})
 	}
 }

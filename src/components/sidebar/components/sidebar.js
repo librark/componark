@@ -2,73 +2,82 @@ import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
 export class Sidebar extends Component {
-  init (context) {
-    return super.init()
-  }
+	init (context) {
+		// local variables
+		this.slots = getSlots(this)
+		return super.init()
+	}
 
-  reflectedProperties () {
-    return ['opened']
-  }
+	reflectedProperties () {
+		return ['opened']
+	}
 
-  render () {
-    this.nameElement = 'ark-sidebar'
-
-    this.slots = getSlots(this)
-
-    this.innerHTML = /* html */`
-      <div class="${this.nameElement}-menu">
+	render () {
+		this.innerHTML = /* html */`
+      <div class="ark-sidebar__menu">
         <div>
-          ${this._getContent('header', `${this.nameElement}-menu-header`)}
-          <div class="${this.nameElement}-menu-body">
+          ${this._getContent('header', `ark-sidebar__header`)}
+          <div class="ark-sidebar__body">
           ${this._getSlots('general')}
           </div>
         </div>
-        ${this._getContent('footer', `${this.nameElement}-menu-footer`)}
+        ${this._getContent('footer', `ark-sidebar__footer`)}
       </div>
-      <div class="${this.nameElement}-scrim" listen on-click="close">
+      <div class="ark-sidebar__scrim" listen on-click="close">
         ${this._getSlots('scrim')}
       </div>
     `
 
-    if (this.hasAttribute('opened')) this.open()
+		if (this.hasAttribute('opened')) this.open()
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  open () {
-    this.classList.add(`${this.nameElement}--opened`)
-  }
+	open () {
+		this.classList.add(`ark-sidebar--opened`)
+	}
 
-  close () {
-    this.classList.remove(`${this.nameElement}--opened`)
-  }
+	close () {
+		this.classList.remove(`ark-sidebar--opened`)
+	}
 
-  toggle () {
-    this.classList.toggle(`${this.nameElement}--opened`)
-  }
+	toggle () {
+		this.classList.toggle(`ark-sidebar--opened`)
+	}
 
-  // ---------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
+	/** @returns {Object} */
+	get slots () {
+		return this._slots || {}
+	}
 
-  _getContent (key, className) {
-    const slots = this._getSlots(key)
+	/** @param {Object} value */
+	set slots (value) {
+		this._slots = Object.keys(this._slots || {}).length ? this._slots : value
+	}
 
-    if (slots === '') { return '' }
+	// ---------------------------------------------------------------------------
 
-    return /* html */`
+	_getContent (key, className) {
+		const slots = this._getSlots(key)
+
+		if (slots === '') { return '' }
+
+		return /* html */`
       <div class="${className}">
         ${slots}
       </div>
     `
-  }
+	}
 
-  _getSlots (key) {
-    if (!this.slots[key]) { return '' }
+	_getSlots (key) {
+		if (!this.slots[key]) { return '' }
 
-    return /* html */`
+		return /* html */`
         ${this.slots[key].map((element, index) => `
           ${element.outerHTML}
         `).join('')}
       `
-  }
+	}
 }
 customElements.define('ark-sidebar', Sidebar)

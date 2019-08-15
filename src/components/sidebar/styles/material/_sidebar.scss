@@ -1,55 +1,56 @@
 @import "@material/drawer/mdc-drawer.scss";
 
 @mixin sidebar_() {
-    $component: 'ark-sidebar';
+  $component: 'ark-sidebar';
 
-    $border: 1px solid rgba(0, 0, 0, 0.2);
+  $border: 1px solid rgba(0, 0, 0, 0.2);
 
-    #{$component} {
-        display: none;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
+  #{$component} {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .#{$component} {
+    &__menu {
+      @extend .mdc-drawer;
+      @extend .mdc-drawer--modal;
+      @extend .mdc-drawer__content;
+
+      display: flex;
+      justify-content: space-between;
+
     }
 
-    .#{$component} {
-        &-menu {
-            @extend .mdc-drawer;
-            @extend .mdc-drawer--modal;
-            @extend .mdc-drawer__content;
+    &__header,
+    &__footer {
+      @extend .mdc-drawer__header;
 
-            display: flex;
-            justify-content: space-between;
-
-            &-header,
-            &-footer {
-                @extend .mdc-drawer__header;
-
-                padding: 15px;
-                min-height: 0;
-            }
-
-            &-header {
-                border-bottom: $border;
-            }
-
-            &-footer {
-                border-top: $border;
-            }
-        }
-
-        &-scrim {
-            @extend .mdc-drawer-scrim;
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        &--opened {
-            @extend .mdc-drawer--open;
-            display: block;
-        }
+      padding: 15px;
+      min-height: 0;
     }
+
+    &__header {
+      border-bottom: $border;
+    }
+
+    &__footer {
+      border-top: $border;
+    }
+
+    &__scrim {
+      @extend .mdc-drawer-scrim;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    &--opened {
+      @extend .mdc-drawer--open;
+      display: block;
+    }
+  }
 }

@@ -4,6 +4,9 @@ export class Checkbox extends Component {
 	init (context) {
 		this.value = context['value']
 
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
+
 		return super.init()
 	}
 

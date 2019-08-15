@@ -9,7 +9,6 @@ export class Component extends HTMLElement {
 
 	/** @param {Object} context @return {Component} */
 	init (context = {}) {
-		this.defaultContent = this.innerHTML
 		return this
 	}
 
@@ -29,7 +28,7 @@ export class Component extends HTMLElement {
 		return this
 	}
 
-	/** @return {Component} */
+	/** @return {Component | Promise<Component>} */
 	load () {
 		return this
 	}
@@ -48,16 +47,5 @@ export class Component extends HTMLElement {
 		return /** @type {NodeListOf<Component>} */ (this.querySelectorAll(
 			selectors
 		))
-	}
-
-	// ---------------------------------------------------------------------------
-	//  Default Content
-	// ---------------------------------------------------------------------------
-	get defaultContent () {
-		return this._defaultContent
-	}
-
-	set defaultContent (html) {
-		this._defaultContent = this._defaultContent || html
 	}
 }

@@ -6,6 +6,9 @@ export class Paginator extends Component {
 		this.currentPage = context['currentPage'] || 1
 		this.pageSize = context['pageSize'] || 24
 
+		// Local Variables
+		this.global = document
+
 		return super.init()
 	}
 
@@ -47,7 +50,7 @@ export class Paginator extends Component {
 		}
 
 		for (let index = init; index < init + numberButtons; index++) {
-			const button = document.createElement('button')
+			const button = this.global.createElement('button')
 			button.innerText = index.toString()
 			button.id = index.toString()
 			button.addEventListener('click', event => {

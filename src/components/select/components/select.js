@@ -3,6 +3,9 @@ import { Component } from '../../component'
 export class Select extends Component {
 	init (context) {
 		this.label = context['label']
+
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 		return super.init()
 	}
 

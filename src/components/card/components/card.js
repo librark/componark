@@ -5,6 +5,10 @@ export class Card extends Component {
 	init (context) {
 		this.title = context['title']
 		this.subtitle = context['subtitle']
+
+		// local variables
+		this.slots = this.slots || getSlots(this)
+
 		return super.init()
 	}
 
@@ -13,7 +17,6 @@ export class Card extends Component {
 	}
 
 	render () {
-		this.slots = getSlots(this)
 		this.innerHTML = /* html */ `
       ${this._renderMedia()}
       ${this._renderHeader()}

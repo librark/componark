@@ -1,81 +1,82 @@
 /** @typedef {import('../../../src/components').CheckboxGroup} CheckboxGroup */
 /** @typedef {import('../../../src/components').Checkbox} Checkbox */
-import { CheckboxGroup, Checkbox } from '../../../src/components/checkbox'
+import { Checkbox, CheckboxGroup } from '../../../src/components/checkbox'
 
 describe('Checkbox', () => {
-  it('can be instantiated', () => {
-    const element = /** @type {CheckboxGroup} */ (
-      document.createElement('ark-checkbox-group'))
-    expect(element).toBeTruthy()
+	it('can be instantiated', () => {
+		const element = /** @type {CheckboxGroup} */ (
+			document.createElement('ark-checkbox-group'))
+		expect(element).toBeTruthy()
 
-    var init = element.init({})
-    expect(element === init).toBeTruthy()
-  })
-  it('can be instantiated', () => {
-    const element = new CheckboxGroup()
-    element.setAttribute('label', 'my group')
-    element.render()
+		var init = element.init({})
+		expect(element === init).toBeTruthy()
+	})
+	it('can be instantiated', () => {
+		const element = new CheckboxGroup()
+		element.setAttribute('label', 'my group')
+		element.render()
 
-    const label = element.querySelector('[data-checkbox-group-label]')
-    expect(label.textContent.trim()).toEqual('my group')
-  })
+		const label = element.querySelector('[data-checkbox-group-label]')
+		expect(label.textContent.trim()).toEqual('my group')
+	})
 
-  it('returns selected values', () => {
-    const element = new CheckboxGroup()
+	it('returns selected values', () => {
+		const element = new CheckboxGroup()
 
-    const checkbox1 = new Checkbox()
-    checkbox1.value = 'op1'
-    checkbox1.render()
-    checkbox1.checked()
+		const checkbox1 = new Checkbox()
+		checkbox1.value = 'op1'
+		checkbox1.render()
+		checkbox1.checked()
 
-    const checkbox2 = new Checkbox()
-    checkbox2.value = 'op2'
-    checkbox2.render()
+		const checkbox2 = new Checkbox()
+		checkbox2.value = 'op2'
+		checkbox2.render()
 
-    element.appendChild(checkbox1)
-    element.appendChild(checkbox2)
+		element.appendChild(checkbox1)
+		element.appendChild(checkbox2)
 
-    element.render()
+		element.render()
 
-    const event = new CustomEvent('alter')
-    // @ts-ignore
-    element._change(event)
+		const event = new CustomEvent('alter')
+		// @ts-ignore
+		element._change(event)
 
-    expect(element.value[0]).toEqual('op1')
-  })
+		expect(element.value[0]).toEqual('op1')
+	})
 
-  it('returns selected values', () => {
-    const element = new CheckboxGroup()
-    element.innerHTML = /* html */`
+	it('returns selected values', () => {
+		const element = new CheckboxGroup()
+		element.innerHTML = /* html */`
       <span slot="alert">Error</span>
     `
-    element.render()
+		element.init({})
+		element.render()
 
-    expect(
-      element.querySelector('[slot="alert"]').textContent.trim()
-    ).toEqual('Error')
-  })
+		expect(
+			element.querySelector('[slot="alert"]').textContent.trim()
+		).toEqual('Error')
+	})
 
-  it('can it initialize without content', () => {
-    const element = new CheckboxGroup()
+	it('can it initialize without content', () => {
+		const element = new CheckboxGroup()
 
-    const checkbox1 = new Checkbox()
-    checkbox1.value = 'op1'
-    checkbox1.render()
-    checkbox1.checked()
+		const checkbox1 = new Checkbox()
+		checkbox1.value = 'op1'
+		checkbox1.render()
+		checkbox1.checked()
 
-    const checkbox2 = new Checkbox()
-    checkbox2.value = 'op2'
-    checkbox2.render()
+		const checkbox2 = new Checkbox()
+		checkbox2.value = 'op2'
+		checkbox2.render()
 
-    element.appendChild(checkbox1)
-    element.appendChild(checkbox2)
+		element.appendChild(checkbox1)
+		element.appendChild(checkbox2)
 
-    element.render()
-    element.innerHTML = /* html */``
-    // @ts-ignore
-    element._renderCheckboxList()
+		element.render()
+		element.innerHTML = /* html */``
+		// @ts-ignore
+		element._renderCheckboxList()
 
-    expect(element.innerHTML.trim()).toEqual('')
-  })
+		expect(element.innerHTML.trim()).toEqual('')
+	})
 })
