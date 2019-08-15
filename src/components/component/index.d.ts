@@ -1,12 +1,10 @@
 export class Component extends HTMLElement {
 
-  defaultContent: string
-
   init(context?): Component
 
   render(): Component
 
-  load(): Component
+  load(): Component | Promise<Component>
 
   reflectedProperties(): string[]
 
@@ -22,5 +20,4 @@ export class Component extends HTMLElement {
   select(selectors: string): Component
 
   selectAll(selectors: string): NodeListOf<Component>
-
 }

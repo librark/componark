@@ -5,6 +5,8 @@ export class Input extends Component {
 		this.label = context['label'] || this.label
 		this.value = context['value'] || this.value || ''
 
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 		return super.init()
 	}
 

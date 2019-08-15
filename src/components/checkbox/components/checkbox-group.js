@@ -4,6 +4,10 @@ import { Component } from '../../component'
 export class CheckboxGroup extends Component {
 	init (context) {
 		this.label = context['label']
+
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
+
 		return super.init()
 	}
 
@@ -12,8 +16,8 @@ export class CheckboxGroup extends Component {
 	}
 
 	render () {
-		this.checkboxList = this.selectAll('ark-checkbox')
-		this.selectAll('ark-checkbox').forEach(checkbox => checkbox.remove())
+		// this.checkboxList = this.selectAll('ark-checkbox')
+		// this.selectAll('ark-checkbox').forEach(checkbox => checkbox.remove())
 
 		this.innerHTML = /* html */ `
       <div class="ark-checkbox-group__label">
@@ -22,7 +26,7 @@ export class CheckboxGroup extends Component {
       <div>
         <div data-checkbox-list class="ark-checkbox-group__list"></div>
         <div class="ark-checkbox-group__alert">
-          ${this.innerHTML}
+          ${this.defaultContent}
         </div>
       </div>
     `
@@ -56,12 +60,14 @@ export class CheckboxGroup extends Component {
 
 	_renderCheckboxList () {
 		const container = this.querySelector('[data-checkbox-list]')
+		const checkboxList = this.selectAll('ark-checkbox')
 
-		this.checkboxList.forEach(checkbox => {
+		checkboxList.forEach(checkbox => {
 			checkbox.setAttribute('listen', '')
 			checkbox.setAttribute('on-alter', '_change')
 
-			if (container) container.appendChild(checkbox)
+			container.appendChild(checkbox)
+			// checkbox.remove()
 		})
 	}
 }

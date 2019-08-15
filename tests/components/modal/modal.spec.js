@@ -13,8 +13,10 @@ describe('Modal', () => {
 	it('can be rendered with slots', function () {
 		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
 		modal.innerHTML = /* HTML */ `
-      <div slot="action">Menu</div>
+      <div>Menu</div>
+      <div slot="action">action</div>
     `
+		modal.init({})
 		modal.connectedCallback()
 
 		const content = modal.querySelector('.ark-modal__actions')
@@ -86,5 +88,44 @@ describe('Modal', () => {
 		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
 		// @ts-ignore
 		expect(item._generateContent(null)).toEqual('')
+	})
+
+	it('can render header', function () {
+		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+
+		// @ts-ignore
+		expect(item._renderHeader()).toEqual('')
+
+		// @ts-ignore
+		item.title = 'title'
+		// @ts-ignore
+		item.subtitle = 'subtitle'
+
+		// @ts-ignore
+		expect(item._renderHeader().length).toBeTruthy()
+	})
+
+	it('can set slots', function () {
+		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+
+		item['slots'] = undefined
+		// @ts-ignore
+		item._appendSlots()
+
+		expect(item['slots']).toEqual({})
+
+		item['slots'] = {}
+
+		expect(item['slots']).toEqual({})
+
+		item['slots'] = { abc: true }
+
+		expect(item['slots']).toEqual({ abc: true })
+
+		item['slots'] = undefined
+
+		expect(item['slots']).toEqual({ abc: true })
+		// @ts-ignore
+		item._appendSlots()
 	})
 })

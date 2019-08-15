@@ -5,6 +5,8 @@ export class AccordionTab extends Component {
 		this.header = context['header']
 		this.tabIndex = context['tabIndex']
 
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 		return super.init()
 	}
 

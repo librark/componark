@@ -2,6 +2,8 @@ import { Component } from '../../component'
 
 export class Navbar extends Component {
 	init (context) {
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 		return super.init()
 	}
 

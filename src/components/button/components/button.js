@@ -2,14 +2,16 @@ import { Component } from '../../component'
 
 export class Button extends Component {
 	init (context) {
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 		return super.init()
 	}
 
 	render () {
 		this.innerHTML = /* html */ `
-        <${this._getType()} data-element>
-          ${this.defaultContent}
-        </${this._getType()}>
+      <${this._getType()} data-element>
+        ${this.defaultContent}
+      </${this._getType()}>
     `
 
 		this._moveAttributes()
