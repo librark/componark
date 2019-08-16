@@ -5,8 +5,8 @@ import { ListItem } from './item.js'
 export class List extends Component {
 	/** @param {Object} context */
 	init (context) {
-		this.source = /** @type {Array} */ (context['source'] || [])
-		this.template = context['template'] || null
+		this.source = /** @type {Array} */ (context['source']) || []
+		this.template = context['template'] || (_ => {})
 		this.clickDisabled = context['clickDisabled'] || false
 
 		return super.init()

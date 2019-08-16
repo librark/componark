@@ -32,7 +32,8 @@ export class ListItem extends Component {
 		this.dispatchEvent(
 			new CustomEvent('list-item:selected', {
 				detail: {
-					data: this.data
+					data: this.data,
+					bubbles: true
 				}
 			})
 		)
