@@ -15,11 +15,12 @@
 
     z-index: auto;
     background: $background;
-  }
 
-  .master-container {
-    overflow: auto;
-    height: inherit;
+    &[resize] {
+      ark-splitview-master {
+        resize: horizontal;
+      }
+    }
   }
 
   @media only screen and (min-width: $tablet) {
@@ -30,7 +31,7 @@
   }
 
   @media only screen and (max-width: $tablet) {
-    .master-container {
+    ark-splitview-master {
       width: 100% !important;
     }
   }

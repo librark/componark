@@ -80,7 +80,7 @@ export class Splitview extends Component {
 		const percentage = parseInt(this.detailPercentage) || 50
 
 		if (this.master) this.master.style.width = `${100 - percentage}%`
-		if (this.detail) this.detail.style.width = `${percentage}%`
+		// if (this.detail) this.detail.style.width = `${percentage}%`
 	}
 }
 customElements.define('ark-splitview', Splitview)
