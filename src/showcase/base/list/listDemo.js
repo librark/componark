@@ -73,10 +73,11 @@ export class ListDemo extends Component {
 	}
 
 	onTemplateListSelected (event) {
-		const item = event['detail'] || {}
+		const item = event['detail']['data'] || {}
+		const index = event['detail']['index'] || {}
 
 		this.select('[data-template-selected]').innerText = `
-      ${item.year} - ${item.first}
+      [${index}]    ${item.year} - ${item.first}
     `.trim()
 	}
 }

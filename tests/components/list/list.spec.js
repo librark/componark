@@ -42,7 +42,7 @@ describe('List', () => {
 		expect(items.length).toEqual(4)
 
 		list.addEventListener('list:selected', event => {
-			expect(event.detail).toEqual('Brasil')
+			expect(event.detail.data).toEqual('Brasil')
 		})
 		items[2].click()
 	})
@@ -59,25 +59,9 @@ describe('List', () => {
 		expect(items.length).toEqual(4)
 
 		list.addEventListener('list:selected', event => {
-			expect(event.detail).toEqual('Brasil')
+			expect(event.detail.data).toEqual('Brasil')
 		})
 		items[2].click()
-	})
-
-	it('can select an item when it is clicked', async () => {
-		const list = new List()
-		await list.connectedCallback()
-
-		const items = list.selectAll('ark-list-item')
-		expect(items.length).toEqual(0)
-
-		list.addEventListener('list:selected', event => {
-			expect(event.detail).toEqual({})
-		})
-
-		const event = new CustomEvent('click')
-		// @ts-ignore
-		list._onSelected(event)
 	})
 
 	it('can delete', async () => {
@@ -86,6 +70,7 @@ describe('List', () => {
 		}
 
 		const list = new List()
+		list.setAttribute('click-disabled', '')
 		await list.init(context).render()
 
 		let items = list.selectAll('ark-list-item')

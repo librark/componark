@@ -4,21 +4,19 @@ export class ListItem extends Component {
 	init (context) {
 		this.index = context['index']
 		this.data = context['data'] || null
-		this.template = context['template'] || (data => `${data}`)
-
-		this.clickDisabled = context['clickDisabled'] || false
+		this.template = context['template'] || ((data) => `${data}`)
 
 		return super.init()
 	}
 
 	reflectedProperties () {
-		return ['index', 'clickDisabled']
+		return ['index']
 	}
 
 	render () {
 		this.innerHTML = this.template(this.data)
 
-		if (this.clickDisabled === 'false') {
+		if (!this.hasAttribute('click-disabled')) {
 			this.addEventListener('click', this._onSelected.bind(this))
 		}
 
@@ -33,7 +31,7 @@ export class ListItem extends Component {
 			new CustomEvent('list-item:selected', {
 				detail: {
 					data: this.data,
-					bubbles: true
+					index: this.index
 				}
 			})
 		)

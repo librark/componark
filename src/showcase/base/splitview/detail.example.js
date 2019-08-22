@@ -2,9 +2,11 @@ import { Component } from '../../../components/component'
 
 export class ArkDetailExample extends Component {
 	init (context) {
-		this.first = context['first']
-		this.second = context['second']
-		this.year = context['year']
+		const data = context['data']
+
+		this.first = data['first']
+		this.second = data['second']
+		this.year = data['year']
 
 		return super.init()
 	}
