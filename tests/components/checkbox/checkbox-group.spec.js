@@ -35,12 +35,13 @@ describe('Checkbox', () => {
 		element.appendChild(checkbox1)
 		element.appendChild(checkbox2)
 
-		element.render()
+		element.init({}).render().load()
 
 		const event = new CustomEvent('alter')
 		// @ts-ignore
 		element._change(event)
 
+		console.log(element.value)
 		expect(element.value[0]).toEqual('op1')
 	})
 

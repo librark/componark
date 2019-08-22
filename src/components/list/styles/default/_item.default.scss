@@ -2,7 +2,7 @@
   $component: "ark-list-item";
 
   #{$component} {
-    &[click-disabled="true"] {
+    &[click-disabled] {
 
       &:hover,
       &:active,
