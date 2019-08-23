@@ -1,14 +1,14 @@
 export class NavbarDemo extends HTMLElement {
-	init(context) {
+	init (context) {
 		this.type = context['type'] || 'ark'
 		return this
 	}
 
-	connectedCallback() {
+	connectedCallback () {
 		this.render()
 	}
 
-	render() {
+	render () {
 		this.innerHTML = /* html */ `
       <div mobile><p>mobile (360px).</p></div>
       <div tablet><p>tablet (768px).</p></div>
@@ -38,7 +38,7 @@ export class NavbarDemo extends HTMLElement {
 		this._setupFrame('[desktop]', '960px')
 	}
 
-	_setupFrame(selector, width) {
+	_setupFrame (selector, width) {
 		const content = this._setupContent()
 		const frame = document.createElement('iframe')
 		frame.setAttribute('src', `/${this.type}.html`)
@@ -58,27 +58,36 @@ export class NavbarDemo extends HTMLElement {
 		this.querySelector(selector).appendChild(frame)
 	}
 
-	_setupContent() {
+	_setupContent () {
 		return /* html */ `
-      <ark-navbar justify="between" fixed-top>
-        <ark-nav>
+      <ark-navbar fixed-top>
+
+        <ark-nav justify="between">
           <div>
             <ark-button>
                 <ark-icon name="fas fa-bars"></ark-icon>
             </ark-button>
             <ark-button>x_Item 1-1</ark-button>
           </div>
-          <ark-button ark-navbar-toggle>
-            <ark-icon name="fas fa-caret-down"></ark-icon>
-          </ark-button>
+          <div>
+            <ark-button ark-navbar-hide-large>
+              |CUENTA|
+            </ark-button>
+            <ark-button ark-navbar-toggle>
+              <ark-icon name="fas fa-caret-down"></ark-icon>
+            </ark-button>
+          </div>
         </ark-nav>
-        <ark-nav>
+
+        <ark-nav justify="center">
           <ark-button>x_Item 2-4</ark-button>
-          <ark-button>x_Item 2-5</ark-button>
-          <ark-button>x_Item 2-6</ark-button>
-          <ark-button>x_Item 2-7</ark-button>
+          <ark-button>x_Item 2-4</ark-button>
         </ark-nav>
-        <ark-nav>
+
+        <ark-nav justify="end">
+          <ark-button ark-navbar-hide-small>
+              |CUENTA XXX|
+          </ark-button>
           <ark-button>x_Item 3-8</ark-button>
           <ark-button>x_Item 3-9</ark-button>
         </ark-nav>

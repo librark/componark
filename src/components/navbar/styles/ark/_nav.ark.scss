@@ -1,14 +1,44 @@
 @mixin nav_ark_() {
-    $component: 'ark-nav';
-    $desktop: "960px";
+  $component: 'ark-nav';
+  $desktop: "960px";
 
-    #{$component} {
-        @media only screen and (min-width: $desktop) {
-            flex-wrap: nowrap !important;
+  #{$component} {
+    width: 100%;
 
-            [ark-navbar-toggle] {
-                display: none !important;
-            }
-        }
+    &[justify~="center"] {
+      justify-content: center;
     }
+
+    &[justify~="end"] {
+      justify-content: flex-end;
+    }
+
+    &[justify~="between"] {
+      justify-content: space-between;
+    }
+
+    [ark-navbar-hide-small] {
+      display: none !important;
+    }
+
+    @media only screen and (min-width: $desktop) {
+      flex-wrap: nowrap !important;
+
+      [ark-navbar-toggle] {
+        display: none !important;
+      }
+
+      [ark-navbar-toggle] {
+        display: none !important;
+      }
+
+      [ark-navbar-hide-small] {
+        display: initial !important;
+      }
+
+      [ark-navbar-hide-large] {
+        display: none !important;
+      }
+    }
+  }
 }

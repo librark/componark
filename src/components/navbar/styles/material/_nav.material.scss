@@ -1,22 +1,48 @@
 @import "@material/toolbar/mdc-toolbar.scss";
 
 @mixin nav_material_() {
-    $component: 'ark-nav';
-    $desktop: "960px";
+  $component: 'ark-nav';
+  $desktop: "960px";
 
-    #{$component} {
-        * {
-            min-height: 64px;
+  #{$component} {
+    width: 100%;
 
-            display: flex !important;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media only screen and (min-width: $desktop) {
-            [ark-navbar-toggle] {
-                display: none !important;
-            }
-        }
+    &[justify~="center"] {
+      justify-content: center;
     }
+
+    &[justify~="end"] {
+      justify-content: flex-end;
+    }
+
+    &[justify~="between"] {
+      justify-content: space-between;
+    }
+
+    * {
+      min-height: 64px;
+
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+    }
+
+    [ark-navbar-hide-small] {
+      display: none !important;
+    }
+
+    @media only screen and (min-width: $desktop) {
+      [ark-navbar-toggle] {
+        display: none !important;
+      }
+
+      [ark-navbar-hide-small] {
+        display: initial !important;
+      }
+
+      [ark-navbar-hide-large] {
+        display: none !important;
+      }
+    }
+  }
 }

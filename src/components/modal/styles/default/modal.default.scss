@@ -35,6 +35,8 @@
       $padding: 15px;
 
       max-height: calc(100vh - (#{$padding}*2));
+      height: auto;
+
       max-width: calc(100vw - (#{$padding}*2));
 
       background: $background;
