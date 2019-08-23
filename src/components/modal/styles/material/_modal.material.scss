@@ -44,6 +44,7 @@
     &__body {
       @extend .mdc-dialog__content;
       width: 100%;
+      height: auto;
     }
 
     &__scrim {

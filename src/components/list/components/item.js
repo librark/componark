@@ -31,7 +31,7 @@ export class ListItem extends Component {
 			new CustomEvent('list-item:selected', {
 				detail: {
 					data: this.data,
-					index: this.index
+					index: parseInt(this.index)
 				}
 			})
 		)

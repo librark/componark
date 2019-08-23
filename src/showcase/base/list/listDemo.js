@@ -74,7 +74,7 @@ export class ListDemo extends Component {
 
 	onTemplateListSelected (event) {
 		const item = event['detail']['data'] || {}
-		const index = event['detail']['index'] || {}
+		const index = event['detail']['index']
 
 		this.select('[data-template-selected]').innerText = `
       [${index}]    ${item.year} - ${item.first}
