@@ -4,13 +4,14 @@ import { camelToKebab } from './format'
 export function listen (self) {
 	const elements = self.querySelectorAll('[listen]')
 	for (const element of elements) {
-		for (const attribute of element.attributes) {
+		for (const attribute of Array.from(element.attributes)) {
 			if (attribute.name.startsWith('on-')) {
 				const event = attribute.name.replace('on-', '')
 				const handler = self[attribute.value]
 				if (!handler) continue
+
 				element.addEventListener(event, handler.bind(self))
-				element.removeAttribute('listen')
+				if (element.hasAttribute('listen')) element.removeAttribute('listen')
 			}
 		}
 	}

@@ -1,14 +1,14 @@
+import { EventDragDropped, isValidLevel } from './utils'
+
 /**
  * @typedef {import('./drag').DragZone} DragZone
  * @typedef {import('./drop').DropZone} DropZone
  * */
 import { Component } from '../../component'
-import { isValidLevel } from './utils'
 import { uuidv4 } from '../../../utils'
 
 export class Zone extends Component {
 	init (context) {
-		this.rows = context['rows'] || this.rows || 0
 		this.cols = context['cols'] || this.cols || 0
 
 		this.id = uuidv4()
@@ -21,7 +21,7 @@ export class Zone extends Component {
 	}
 
 	reflectedProperties () {
-		return ['rows', 'cols']
+		return ['cols']
 	}
 
 	render () {
@@ -42,6 +42,13 @@ export class Zone extends Component {
 		})
 
 		// ------------------------------------------------------------------------
+		// zone:drag
+		// ------------------------------------------------------------------------
+		this.selectAll('ark-zone-drag').forEach(drop => {
+			drop.addEventListener('zone:drag', this.onZoneDrag.bind(this))
+		})
+
+		// ------------------------------------------------------------------------
 		// zone:selected
 		// ------------------------------------------------------------------------
 		this.parent.addEventListener(
@@ -51,7 +58,7 @@ export class Zone extends Component {
 		// ------------------------------------------------------------------------
 		// click
 		// ------------------------------------------------------------------------
-		this.addEventListener('click', this.onClick.bind(this))
+		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 
 		// ------------------------------------------------------------------------
 		this._assignPosition()
@@ -80,54 +87,88 @@ export class Zone extends Component {
    * @param {boolean?} copy
    * */
 	zoneDrop (drop, drags, dragstart, copy = false) {
-		if (dragstart && drop) {
-			const changePosition = this._getChangePosition(dragstart, drop)
+		if (!(dragstart && drop)) return
 
-			let isValid = true
+		const changePosition = this._getChangePosition(dragstart, drop)
+		let isValid = true
 
-			drags.forEach(drag => {
-				const absolutePosition = this._getAbsolutePosition(
-					drag,
-					changePosition
-				)
+		drags.forEach(drag => {
+			const absolutePosition = this._getAbsolutePosition(
+				drag,
+				changePosition
+			)
 
-				const dropDestination = this._selectDrop(
-					absolutePosition.x,
-					absolutePosition.y
-				)
+			const dropDestination = this._selectDrop(
+				absolutePosition.x,
+				absolutePosition.y
+			)
 
-				if (
-					dropDestination === null ||
+			if (
+				dropDestination === null ||
             !isValidLevel(dropDestination, drag)
-				) {
-					isValid = false
+			) {
+				isValid = false
+			}
+		})
+
+		if (!isValid) return
+
+		const dragDropped = new EventDragDropped()
+
+		drags.forEach(drag => {
+			let targetDrag = drag
+			const absolutePosition = this._getAbsolutePosition(
+				drag,
+				changePosition
+			)
+
+			const dropDestination = this._selectDrop(
+				absolutePosition.x,
+				absolutePosition.y
+			)
+
+			if (copy) {
+				targetDrag = this.cloneDrag(drag)
+				drag.draggableEnd()
+			}
+
+			dragDropped.setItem(dropDestination, targetDrag)
+
+			dropDestination.appendChild(targetDrag)
+			dropDestination.updateDragPosition()
+			targetDrag.draggableEnd()
+		})
+
+		dragDropped.dispatch(this)
+	}
+
+	/**
+   * @param {DropZone} drop
+   * @param {DragZone[]} drags
+   * @param {DragZone} referenceDrag
+   * @param {boolean?} copy
+   * */
+	zoneDrag (drop, drags, referenceDrag, copy = false) {
+		const dragDropped = new EventDragDropped()
+		if (!drags.length || !referenceDrag) return
+
+		drags.forEach(drag => {
+			let targetDrag = drag
+
+			if (isValidLevel(referenceDrag, targetDrag)) {
+				if (copy) {
+					targetDrag = this.cloneDrag(drag)
+					drag.draggableEnd()
 				}
-			})
 
-			drags.forEach(drag => {
-				let targetDrag = drag
-				if (isValid) {
-					const absolutePosition = this._getAbsolutePosition(
-						drag,
-						changePosition
-					)
+				dragDropped.setItem(drop, targetDrag)
 
-					const dropDestination = this._selectDrop(
-						absolutePosition.x,
-						absolutePosition.y
-					)
-
-					if (copy) {
-						targetDrag = this.cloneDrag(drag)
-						drag.draggableEnd()
-					}
-
-					dropDestination.appendChild(targetDrag)
-					dropDestination.updateDragPosition()
-				}
+				drop.insertBefore(targetDrag, referenceDrag)
 				targetDrag.draggableEnd()
-			})
-		}
+			}
+		})
+
+		dragDropped.dispatch(this)
 	}
 
 	// ---------------------------------------------------------------------------
@@ -149,7 +190,10 @@ export class Zone extends Component {
 	}
 
 	/** @param {event} event */
-	onClick (event) {
+	onDragClicked (event) {
+		const target = (/** @type {DragZone} */ (event.target))
+		if (target && !target.hasAttribute('selected')) this.clearSelected()
+
 		this.dispatchEvent(
 			new CustomEvent('zone:selected', {
 				bubbles: true,
@@ -182,6 +226,27 @@ export class Zone extends Component {
 	}
 
 	/** @param {event} event */
+	onZoneDrag (event) {
+		event.stopImmediatePropagation()
+
+		const drop = /** @type {DropZone} */ (
+			event['detail'] ? event['detail'].drop : null
+		)
+
+		const drags = /** @type {DragZone[]} */ (
+			event['detail'] ? event['detail'].drags : []
+		)
+
+		const referenceDrag = /** @type {DragZone} */ (
+			event['detail'] ? event['detail'].referenceDrag : null
+		)
+
+		const copy = event['detail'] ? event['detail'].copy : false
+
+		this.zoneDrag(drop, drags, referenceDrag, copy)
+	}
+
+	/** @param {event} event */
 	onZoneSelected (event) {
 		const zoneId = event['detail'] ? event['detail'].zoneId : null
 		if (this.id !== zoneId) this.clearSelected()
@@ -190,23 +255,19 @@ export class Zone extends Component {
 	// ---------------------------------------------------------------------------
 	_assignPosition () {
 		const drops = /** @type {DropZone[]} */ this.selectAll('ark-zone-drop')
+		let x = 0
+		let y = 0
 
-		if (drops.length) {
-			if (parseInt(this.rows)) {
-				let index = 0
-				for (let row = 0; row < parseInt(this.rows); row++) {
-					for (let col = 0; col < parseInt(this.cols); col++) {
-						const drop = /** @type {DropZone} */ (drops[index])
-						this._setPosition(drop, String(row), String(col))
-						index++
-					}
-				}
+		drops.forEach((/** @type {DropZone} */ drop) => {
+			this._setPosition(drop, String(x), String(y))
+
+			if (y < this.cols - 1) {
+				y++
 			} else {
-				drops.forEach((/** @type {DropZone} */ drop, index) => {
-					this._setPosition(drop, String(0), String(index))
-				})
+				x++
+				y = 0
 			}
-		}
+		})
 	}
 
 	/**

@@ -9,10 +9,11 @@ import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
 
 export class DragZone extends Component {
-	init () {
+	init (context) {
 		this.x = this.x
 		this.y = this.y
 		this.drop = this.drop
+		this.detail = this.detail || context['detail']
 
 		this.id = uuidv4()
 
@@ -24,7 +25,7 @@ export class DragZone extends Component {
 	}
 
 	reflectedProperties () {
-		return ['x', 'y', 'drop']
+		return ['x', 'y', 'drop', 'detail']
 	}
 
 	render () {
@@ -119,12 +120,14 @@ export class DragZone extends Component {
 	/** @param {DragZone[]} drags */
 	draggableDrop (drags) {
 		this._draggableRemoveStyle()
-		drags.forEach(drag => {
-			if (isValidLevel(this, drag)) {
-				this.parentElement.insertBefore(drag, this)
-				drag.draggableEnd()
+
+		this.dispatchEvent(new CustomEvent('zone:drag', {
+			detail: {
+				drop: this.parentElement,
+				referenceDrag: this,
+				drags: drags
 			}
-		})
+		}))
 	}
 
 	get selected () {
@@ -189,9 +192,19 @@ export class DragZone extends Component {
 
 	/** @param {event} event */
 	onClick (event) {
+		event.stopImmediatePropagation()
+
 		if (event['shiftKey']) {
 			this.selected = true
 		}
+
+		this.dispatchEvent(new CustomEvent('drag:clicked', {
+			bubbles: true,
+			detail: {
+				id: this.id,
+				detail: this.detail
+			}
+		}))
 	}
 
 	// ---------------------------------------------------------------------------

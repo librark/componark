@@ -1,6 +1,7 @@
 /**
  * @typedef {import('./drop').DropZone} DropZone
  * @typedef {import('./drag').DragZone} DragZone
+ * @typedef {import('../../component').Component} Component
  * */
 
 /** @param {DragZone | DropZone} destination @param {DragZone} drag */
@@ -49,4 +50,41 @@ export function getElementsByDataTransfer (parent, event) {
 	}
 
 	return elements
+}
+
+export class EventDragDropped {
+	constructor () {
+		this.detail = new Map()
+	}
+
+	setItem (drop, drag) {
+		const item = this.detail.get(drop.id)
+		if (item) {
+			item.drags.push({
+				id: drag.id,
+				detail: drag.detail
+			})
+
+			this.detail.set(drop.id, item)
+		} else {
+			this.detail.set(drop.id, {
+				drop: {
+					id: drop.id,
+					detail: drop.detail
+				},
+				drags: [{
+					id: drag.id,
+					detail: drag.detail
+				}] })
+		}
+	}
+
+	/** @param {Component} component */
+	dispatch (component) {
+		component.dispatchEvent(
+			new CustomEvent('drag:dropped', {
+				detail: Array.from(this.detail.values())
+			})
+		)
+	}
 }

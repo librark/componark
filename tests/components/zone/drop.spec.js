@@ -116,6 +116,11 @@ describe('Drop Zone', () => {
 			[drag1, drag2]
 		)
 
+		dropLevel1.addEventListener('click', event => {
+			expect(event['detail']['id']).toEqual(dropLevel1.id)
+		})
+		dropLevel1.click()
+
 		expect(
 			dropLevel1.classList.contains('ark-zone-drop--hover_disabled')
 		).toBeTruthy()
