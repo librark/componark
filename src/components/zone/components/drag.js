@@ -120,12 +120,21 @@ export class DragZone extends Component {
 	/** @param {DragZone[]} drags */
 	draggableDrop (drags) {
 		this._draggableRemoveStyle()
-		drags.forEach(drag => {
-			if (isValidLevel(this, drag)) {
-				this.parentElement.insertBefore(drag, this)
-				drag.draggableEnd()
+
+		this.dispatchEvent(new CustomEvent('zone:drag', {
+			detail: {
+				drop: this.parentElement,
+				referenceDrag: this,
+				drags: drags
 			}
-		})
+		}))
+
+		// drags.forEach(drag => {
+		// 	if (isValidLevel(this, drag)) {
+		// 		this.parentElement.insertBefore(drag, this)
+		// 		drag.draggableEnd()
+		// 	}
+		// })
 	}
 
 	get selected () {
