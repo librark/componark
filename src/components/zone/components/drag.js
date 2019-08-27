@@ -128,13 +128,6 @@ export class DragZone extends Component {
 				drags: drags
 			}
 		}))
-
-		// drags.forEach(drag => {
-		// 	if (isValidLevel(this, drag)) {
-		// 		this.parentElement.insertBefore(drag, this)
-		// 		drag.draggableEnd()
-		// 	}
-		// })
 	}
 
 	get selected () {
@@ -199,9 +192,19 @@ export class DragZone extends Component {
 
 	/** @param {event} event */
 	onClick (event) {
+		event.stopImmediatePropagation()
+
 		if (event['shiftKey']) {
 			this.selected = true
 		}
+
+		this.dispatchEvent(new CustomEvent('drag:clicked', {
+			bubbles: true,
+			detail: {
+				id: this.id,
+				detail: this.detail
+			}
+		}))
 	}
 
 	// ---------------------------------------------------------------------------

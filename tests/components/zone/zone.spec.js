@@ -163,7 +163,11 @@ describe('Zone', () => {
 		const zone = new Zone()
 		zone.connectedCallback()
 
-		zone.onClick(event)
+		zone.addEventListener('click', event => {
+			zone.onDragClicked(event)
+		})
+
+		zone.click()
 	})
 
 	it('_selectDrop', () => {
@@ -248,6 +252,40 @@ describe('Zone', () => {
 			dragstart: new DragZone()
 		} })
 		zone.onZoneDrop(event)
+	})
+
+	it('can move onZoneDrag', () => {
+		const zone = new Zone()
+
+		const drop = new DropZone()
+		zone.append(drop)
+
+		const drag = new DragZone()
+		drop.append(drag)
+
+		const event = new CustomEvent('click', { detail: {
+			drop: drop,
+			drags: [new DragZone(), new DragZone()],
+			referenceDrag: drag
+		} })
+		zone.onZoneDrag(event)
+	})
+
+	it('can move onZoneDrag', () => {
+		const zone = new Zone()
+		const event = new CustomEvent('click')
+		zone.onZoneDrag(event)
+		zone.onDragClicked(event)
+	})
+
+	it('can copy onZoneDrag', () => {
+		const zone = new Zone()
+		const event = new CustomEvent('click', { detail: {
+			drop: new DropZone(),
+			drags: [new DragZone(), new DragZone()],
+			copy: true
+		} })
+		zone.onZoneDrag(event)
 	})
 
 	it('can move drags', () => {
@@ -362,5 +400,65 @@ describe('Zone', () => {
 
 		expect(drop0.selectAll('ark-zone-drag').length).toEqual(3)
 		expect(!drop1.selectAll('ark-zone-drag').length).toBeTruthy()
+	})
+
+	it('can move drags', () => {
+		const zone = new Zone()
+
+		const drop0 = new DropZone()
+
+		const drag1 = new DragZone()
+		const drag2 = new DragZone()
+		const drag3 = new DragZone()
+
+		drop0.append(drag1)
+		drop0.append(drag2)
+		drop0.append(drag3)
+
+		zone.append(drop0)
+		zone.connectedCallback()
+
+		drop0.updateDragPosition()
+
+		let drags =	zone.selectAll('ark-zone-drag')
+
+		expect(drags[0].id).toEqual(drag1.id)
+
+		zone.zoneDrag(drop0, [drag2, drag3], drag1)
+		drags =	zone.selectAll('ark-zone-drag')
+
+		expect(drags[0].id).toEqual(drag2.id)
+	})
+
+	it('can copy drags', () => {
+		const zone = new Zone()
+
+		const drop0 = new DropZone()
+
+		const drag1 = new DragZone()
+		const drag2 = new DragZone()
+		const drag3 = new DragZone()
+
+		drop0.append(drag1)
+		drop0.append(drag2)
+		drop0.append(drag3)
+
+		zone.append(drop0)
+		zone.connectedCallback()
+
+		drop0.updateDragPosition()
+
+		let drags =	zone.selectAll('ark-zone-drag')
+		expect(drags.length).toEqual(3)
+
+		zone.zoneDrag(drop0, [drag2, drag3], drag1, true)
+		drags =	zone.selectAll('ark-zone-drag')
+
+		expect(drags.length).toEqual(5)
+
+		drag1.setAttribute('level', '0')
+		drag2.setAttribute('level', '-1')
+
+		zone.zoneDrag(drop0, [drag2, drag3], drag1)
 	})
 })

@@ -28,8 +28,11 @@ export class ZoneDemo extends Component {
         </ark-grid-item>
         <ark-grid-item cols="3" rows="2">
 
-            <ark-zone cols="3" listen on-drag:dropped="_onDragDropped"
-            style="background: white;">
+            <ark-zone cols="3" listen style="background: white;"
+              on-drag:dropped="_onDragDropped"
+              on-drop:clicked="_onDropClicked"
+              on-drag:clicked="_onDragClicked"
+            >
               <ark-grid cols="3" rows="4" gap="5px">
                 <ark-grid-item>
                   <ark-zone-drop detail="Drop 1">
@@ -80,6 +83,13 @@ export class ZoneDemo extends Component {
 
         </ark-grid-item>
       </ark-grid>
+
+      <p>
+        Elemento Arrastrados: [<span data-drags></span>]
+      </p>
+      <p>
+        Elementos Seleccionado: <span data-detail></span>
+      </p>
     `
 
 		this._appendStyle()
@@ -88,7 +98,27 @@ export class ZoneDemo extends Component {
 
 	/** @param {event} event */
 	_onDragDropped (event) {
-		console.log(event['detail'])
+		const detail = event['detail']
+
+		let data = ''
+
+		detail.forEach(element => {
+			element['drags'].forEach(drag => {
+				data += drag['detail'] + ', '
+			})
+		})
+
+		this.select('[data-drags]').innerHTML = data
+	}
+
+	/** @param {event} event */
+	_onDropClicked (event) {
+		this.select('[data-detail]').innerHTML = event['detail']['detail']
+	}
+
+	/** @param {event} event */
+	_onDragClicked (event) {
+		this.select('[data-detail]').innerHTML = event['detail']['detail']
 	}
 
 	_appendStyle () {

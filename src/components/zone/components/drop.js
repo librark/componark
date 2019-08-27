@@ -57,6 +57,11 @@ export class DropZone extends Component {
 		this.addEventListener('drop', this.onDrop.bind(this))
 
 		// ------------------------------------------------------------------------
+		// click
+		// ------------------------------------------------------------------------
+		this.addEventListener('click', this.onClick.bind(this))
+
+		// ------------------------------------------------------------------------
 		return super.load()
 	}
 
@@ -143,6 +148,18 @@ export class DropZone extends Component {
 		const copy = event['ctrlKey'] || false
 
 		this.droppableDrop(dragstart, drags, copy)
+	}
+
+	/** @param {event} event */
+	onClick (event) {
+		event.stopImmediatePropagation()
+		this.dispatchEvent(new CustomEvent('drop:clicked', {
+			bubbles: true,
+			detail: {
+				id: this.id,
+				detail: this.detail
+			}
+		}))
 	}
 
 	// --------------------------------------------------------------------------

@@ -58,7 +58,7 @@ export class Zone extends Component {
 		// ------------------------------------------------------------------------
 		// click
 		// ------------------------------------------------------------------------
-		this.addEventListener('click', this.onClick.bind(this))
+		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 
 		// ------------------------------------------------------------------------
 		this._assignPosition()
@@ -142,8 +142,15 @@ export class Zone extends Component {
 		dragDropped.dispatch(this)
 	}
 
+	/**
+   * @param {DropZone} drop
+   * @param {DragZone[]} drags
+   * @param {DragZone} referenceDrag
+   * @param {boolean?} copy
+   * */
 	zoneDrag (drop, drags, referenceDrag, copy = false) {
 		const dragDropped = new EventDragDropped()
+		if (!drags.length || !referenceDrag) return
 
 		drags.forEach(drag => {
 			let targetDrag = drag
@@ -183,7 +190,10 @@ export class Zone extends Component {
 	}
 
 	/** @param {event} event */
-	onClick (event) {
+	onDragClicked (event) {
+		const target = (/** @type {DragZone} */ (event.target))
+		if (target && !target.hasAttribute('selected')) this.clearSelected()
+
 		this.dispatchEvent(
 			new CustomEvent('zone:selected', {
 				bubbles: true,
