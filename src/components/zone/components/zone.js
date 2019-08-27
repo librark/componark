@@ -8,7 +8,6 @@ import { uuidv4 } from '../../../utils'
 
 export class Zone extends Component {
 	init (context) {
-		this.rows = context['rows'] || this.rows || 0
 		this.cols = context['cols'] || this.cols || 0
 
 		this.id = uuidv4()
@@ -21,7 +20,7 @@ export class Zone extends Component {
 	}
 
 	reflectedProperties () {
-		return ['rows', 'cols']
+		return ['cols']
 	}
 
 	render () {
@@ -104,29 +103,60 @@ export class Zone extends Component {
 				}
 			})
 
+			if (!isValid) return
+
+			const detail = new Map()
+			const itemDetail = (/** @type {DropZone} */ drop, drag) => {
+				const item = detail.get(drop.id)
+				if (item) {
+					item.drags.push({
+						id: drag.id,
+						detail: drag.detail
+					})
+
+					detail.set(drop.id, item)
+				} else {
+					detail.set(drop.id, {
+						drop: {
+							id: drop.id,
+							detail: drop.detail
+						},
+						drags: [{
+							id: drag.id,
+							detail: drag.detail
+						}] })
+				}
+			}
+
 			drags.forEach(drag => {
 				let targetDrag = drag
-				if (isValid) {
-					const absolutePosition = this._getAbsolutePosition(
-						drag,
-						changePosition
-					)
+				const absolutePosition = this._getAbsolutePosition(
+					drag,
+					changePosition
+				)
 
-					const dropDestination = this._selectDrop(
-						absolutePosition.x,
-						absolutePosition.y
-					)
+				const dropDestination = this._selectDrop(
+					absolutePosition.x,
+					absolutePosition.y
+				)
 
-					if (copy) {
-						targetDrag = this.cloneDrag(drag)
-						drag.draggableEnd()
-					}
-
-					dropDestination.appendChild(targetDrag)
-					dropDestination.updateDragPosition()
+				if (copy) {
+					targetDrag = this.cloneDrag(drag)
+					drag.draggableEnd()
 				}
+
+				itemDetail(dropDestination, targetDrag)
+
+				dropDestination.appendChild(targetDrag)
+				dropDestination.updateDragPosition()
 				targetDrag.draggableEnd()
 			})
+
+			this.dispatchEvent(
+				new CustomEvent('drag:dropped', {
+					detail: Array.from(detail.values())
+				})
+			)
 		}
 	}
 
@@ -190,23 +220,19 @@ export class Zone extends Component {
 	// ---------------------------------------------------------------------------
 	_assignPosition () {
 		const drops = /** @type {DropZone[]} */ this.selectAll('ark-zone-drop')
+		let x = 0
+		let y = 0
 
-		if (drops.length) {
-			if (parseInt(this.rows)) {
-				let index = 0
-				for (let row = 0; row < parseInt(this.rows); row++) {
-					for (let col = 0; col < parseInt(this.cols); col++) {
-						const drop = /** @type {DropZone} */ (drops[index])
-						this._setPosition(drop, String(row), String(col))
-						index++
-					}
-				}
+		drops.forEach((/** @type {DropZone} */ drop) => {
+			this._setPosition(drop, String(x), String(y))
+
+			if (y < this.cols - 1) {
+				y++
 			} else {
-				drops.forEach((/** @type {DropZone} */ drop, index) => {
-					this._setPosition(drop, String(0), String(index))
-				})
+				x++
+				y = 0
 			}
-		}
+		})
 	}
 
 	/**

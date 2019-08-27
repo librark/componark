@@ -11,9 +11,10 @@ import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
 
 export class DropZone extends Component {
-	init () {
+	init (context) {
 		this.x = this.x
 		this.y = this.y
+		this.detail = this.detail || context['detail']
 
 		this.id = uuidv4()
 
@@ -25,7 +26,7 @@ export class DropZone extends Component {
 	}
 
 	reflectedProperties () {
-		return ['x', 'y']
+		return ['x', 'y', 'detail']
 	}
 
 	render () {
