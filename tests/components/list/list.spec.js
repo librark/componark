@@ -7,10 +7,14 @@ describe('List', () => {
 		list.connectedCallback()
 		expect(list.outerHTML).toEqual('<ark-list></ark-list>')
 
-		const context = {			source: []		}
+		const context = { source: [] }
 
 		list.init(context)
 		list.render()
+
+		list.setAttribute('click-disabled', '')
+		const event = new CustomEvent('click')
+		list._onSelected(event)
 	})
 
 	it('can be instantiated with items', async () => {

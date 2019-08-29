@@ -3,10 +3,11 @@
 
   #{$component} {
     &[click-disabled] {
-
       &:hover,
+      &:focus,
       &:active,
-      &::after {
+      &::after,
+      &::before {
         background-color: transparent !important;
         background: transparent !important;
         cursor: default !important;
