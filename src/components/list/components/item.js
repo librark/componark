@@ -4,7 +4,7 @@ export class ListItem extends Component {
 	init (context) {
 		this.index = context['index']
 		this.data = context['data'] || null
-		this.template = context['template'] || ((data) => `${data}`)
+		this.template = context['template'] || (data => `${data}`)
 
 		return super.init()
 	}
@@ -26,6 +26,8 @@ export class ListItem extends Component {
 	/** @param {Event} event */
 	_onSelected (event) {
 		event.stopImmediatePropagation()
+
+		if (this.hasAttribute('click-disabled')) return
 
 		this.dispatchEvent(
 			new CustomEvent('list-item:selected', {

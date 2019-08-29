@@ -9,8 +9,13 @@ describe('List item', () => {
 	// })
 	it('can be rendered with data', function () {
 		const item = new ListItem()
-		item.init({ data: 'my data', clickDisabled: true }).render()
+		item.init({ data: 'my data' }).render()
 		expect(item.innerHTML.trim()).toEqual('my data')
+
+		item.setAttribute('click-disabled', '')
+
+		const event = new CustomEvent('click')
+		item._onSelected(event)
 	})
 	it('can be rendered with template', function () {
 		const item = new ListItem()

@@ -6,7 +6,7 @@ export class List extends Component {
 	/** @param {Object} context */
 	init (context) {
 		this.source = /** @type {Array} */ (context['source']) || []
-		this.template = context['template'] || ((data) => `${data}`)
+		this.template = context['template'] || (data => `${data}`)
 
 		return super.init()
 	}
@@ -20,10 +20,10 @@ export class List extends Component {
 				item.setAttribute('click-disabled', '')
 			}
 
-			item.init({ data: data,
-				template: this.template,
-				index: index
-			}).render().load()
+			item
+				.init({ data: data, template: this.template, index: index })
+				.render()
+				.load()
 
 			item.addEventListener('list-item:selected', this._onSelected.bind(this))
 
@@ -46,6 +46,9 @@ export class List extends Component {
 	/** @param {Event} event */
 	_onSelected (event) {
 		event.stopImmediatePropagation()
+
+		if (this.hasAttribute('click-disabled')) return
+
 		this.dispatchEvent(
 			new CustomEvent('list:selected', {
 				bubbles: true,
