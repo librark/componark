@@ -6,7 +6,7 @@ describe('Input', () => {
 		const item = /** @type {Input} */(document.createElement('ark-input'))
 		expect(item).toBeTruthy()
 
-		var init = item.init({})
+		var init = item.init()
 		expect(item === init).toBeTruthy()
 	})
 	it('can be rendered without content', () => {
@@ -16,7 +16,7 @@ describe('Input', () => {
 	})
 	it('can be rendered without content', () => {
 		const item = /** @type {Input} */(document.createElement('ark-input'))
-		item.defaultContent = /* html */`
+		item['defaultContent'] = /* html */`
       <label slot="alert">alert label 1</label>
       <label slot="alert">alert label 2</label>
     `

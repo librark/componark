@@ -7,6 +7,7 @@ import { Paginator } from '../../../src/components/paginator'
 describe('Paginator', () => {
 	it('get collection Length', () => {
 		const paginator = new Paginator()
+		paginator.init()
 
 		paginator.init({
 			collectionSize: 100,

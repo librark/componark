@@ -8,8 +8,11 @@ describe('Checkbox', () => {
 			document.createElement('ark-checkbox-group'))
 		expect(element).toBeTruthy()
 
-		var init = element.init({})
+		var init = element.init()
 		expect(element === init).toBeTruthy()
+
+		const checkboxGroup = new CheckboxGroup()
+		expect(!checkboxGroup.value.length).toBeTruthy()
 	})
 	it('can be instantiated', () => {
 		const element = new CheckboxGroup()
@@ -26,7 +29,7 @@ describe('Checkbox', () => {
 		const checkbox1 = new Checkbox()
 		checkbox1.value = 'op1'
 		checkbox1.render()
-		checkbox1.checked()
+		checkbox1.check()
 
 		const checkbox2 = new Checkbox()
 		checkbox2.value = 'op2'
@@ -41,8 +44,7 @@ describe('Checkbox', () => {
 		// @ts-ignore
 		element._change(event)
 
-		console.log(element.value)
-		expect(element.value[0]).toEqual('op1')
+		expect(element.value.length).toEqual(1)
 	})
 
 	it('returns selected values', () => {
@@ -64,7 +66,7 @@ describe('Checkbox', () => {
 		const checkbox1 = new Checkbox()
 		checkbox1.value = 'op1'
 		checkbox1.render()
-		checkbox1.checked()
+		checkbox1.check()
 
 		const checkbox2 = new Checkbox()
 		checkbox2.value = 'op2'

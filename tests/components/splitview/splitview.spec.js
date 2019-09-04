@@ -15,6 +15,7 @@ import {
 describe('Splitview', () => {
 	it('can be instantiated without elements', () => {
 		const splitview = new Splitview()
+		splitview.init()
 		splitview.connectedCallback()
 		splitview._onMasterChange(new CustomEvent(''))
 		expect(!splitview.innerHTML.trim().length).toBeTruthy()

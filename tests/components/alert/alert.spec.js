@@ -4,6 +4,7 @@ import { Alert } from '../../../src/components/alert'
 describe('Alert', () => {
 	it('can be instantiated', () => {
 		const alert = new Alert()
+		alert.init()
 		expect(alert).toBeTruthy()
 
 		var init = alert.init({})

@@ -4,7 +4,7 @@ import { ListItem } from './item.js'
 
 export class List extends Component {
 	/** @param {Object} context */
-	init (context) {
+	init (context = {}) {
 		this.source = /** @type {Array} */ (context['source']) || []
 		this.template = context['template'] || (data => `${data}`)
 
@@ -46,13 +46,18 @@ export class List extends Component {
 	/** @param {Event} event */
 	_onSelected (event) {
 		event.stopImmediatePropagation()
-
 		if (this.hasAttribute('click-disabled')) return
+
+		const detail = event['detail']
 
 		this.dispatchEvent(
 			new CustomEvent('list:selected', {
 				bubbles: true,
-				detail: event['detail']
+				detail: {
+					data: detail.data,
+					index: detail.index,
+					origin: detail.origin
+				}
 			})
 		)
 	}

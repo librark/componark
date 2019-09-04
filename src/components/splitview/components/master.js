@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class SplitviewMaster extends Component {
-	init (context) {
+	init (context = {}) {
 		this.masterEvent = this.masterEvent
 		return super.init()
 	}

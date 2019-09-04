@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class TabsItem extends Component {
-	init (context) {
+	init (context = {}) {
 		this.title = context['title']
 
 		// local variables

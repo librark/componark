@@ -6,7 +6,7 @@ describe('Sidebar', () => {
 		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
 		expect(item).toBeTruthy()
 
-		var init = item.init({})
+		var init = item.init()
 		expect(item === init).toBeTruthy()
 	})
 
@@ -40,7 +40,7 @@ describe('Sidebar', () => {
 		item.init({})
 		item.connectedCallback()
 
-		item.slots = {}
+		item['slots'] = {}
 
 		let isClass = Array.from(item.classList).filter(l =>
 			l === 'ark-sidebar--opened').length

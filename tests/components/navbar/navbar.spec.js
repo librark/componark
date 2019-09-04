@@ -6,7 +6,7 @@ describe('Navbar', () => {
 		const navbar = /** @type {Navbar} */(document.createElement('ark-navbar'))
 		expect(navbar).toBeTruthy()
 
-		var init = navbar.init({})
+		var init = navbar.init()
 		expect(navbar === init).toBeTruthy()
 	})
 

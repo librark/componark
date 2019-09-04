@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class ListItem extends Component {
-	init (context) {
+	init (context = {}) {
 		this.index = context['index']
 		this.data = context['data'] || null
 		this.template = context['template'] || (data => `${data}`)
@@ -33,7 +33,8 @@ export class ListItem extends Component {
 			new CustomEvent('list-item:selected', {
 				detail: {
 					data: this.data,
-					index: parseInt(this.index)
+					index: parseInt(this.index),
+					origin: event
 				}
 			})
 		)

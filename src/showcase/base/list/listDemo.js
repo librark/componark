@@ -73,11 +73,13 @@ export class ListDemo extends Component {
 	}
 
 	onTemplateListSelected (event) {
-		const item = event['detail']['data'] || {}
-		const index = event['detail']['index']
+		const detail = event['detail']
+
+		const index = detail.index
+		const data = detail.data
 
 		this.select('[data-template-selected]').innerText = `
-      [${index}]    ${item.year} - ${item.first}
+      [${index}]    ${data.year} - ${data.first}
     `.trim()
 	}
 }

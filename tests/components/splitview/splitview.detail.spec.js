@@ -6,7 +6,7 @@ import {
 describe('SplitviewDetail', () => {
 	it('can be instantiated', () => {
 		const detail = new SplitviewDetail()
-		detail.init({})
+		detail.init()
 		detail.connectedCallback()
 		expect(detail.outerHTML.trim().length).toBeTruthy()
 	})

@@ -1,11 +1,16 @@
 import { Component } from '../../component'
 
 export class RadioButton extends Component {
-	init (context) {
+	/**
+   * @param {{ value:string, checked:boolean } | {}} context?
+   */
+	init (context = {}) {
 		this.value = context['value']
+		this.checked = context['checked']
 
 		// local variables
 		this.defaultContent = this.defaultContent || this.innerHTML
+
 		return super.init()
 	}
 
@@ -17,7 +22,7 @@ export class RadioButton extends Component {
 		this.innerHTML = /* html */ `
       <div class="ark-radio-button__body" listen on-click="_change">
         <div class="ark-radio-button__button">
-          <input data-radio-button type="radio">
+          <input data-input type="radio">
         </div>
         <div class="ark-radio-button__label">
           <small>${this.defaultContent}</small>
@@ -29,47 +34,59 @@ export class RadioButton extends Component {
 		return super.render()
 	}
 
-	checked () {
-		const button = this.querySelector('[data-radio-button]')
-		button.setAttribute('checked', 'checked')
-		button['checked'] = true
+	check () {
+		this.checked = true
 	}
 
-	unchecked () {
-		const button = this.querySelector('[data-radio-button]')
-		button.removeAttribute('checked')
-		button['checked'] = false
+	uncheck () {
+		this.checked = false
 	}
 
-	toggel () {
-		if (this.isChecked()) {
-			this.unchecked()
+	toggle () {
+		this.checked = !this.checked
+	}
+
+	// ---------------------------------------------------------------------------
+	/** @returns {Boolean} */
+	get checked () {
+		return this.hasAttribute('checked')
+	}
+
+	/** @param {Boolean} value */
+	set checked (value) {
+		const input = this.querySelector('[data-input]')
+		if (!input) return
+
+		input['checked'] = value
+
+		if (value) {
+			this.setAttribute('checked', '')
+			input.setAttribute('checked', 'checked')
 		} else {
-			this.checked()
+			this.removeAttribute('checked')
+			input.removeAttribute('checked')
 		}
-	}
-
-	isChecked () {
-		return this.querySelector('[data-radio-button]').hasAttribute('checked')
 	}
 
 	// ---------------------------------------------------------------------------
 	/** @param {Event} event */
 	_change (event) {
 		event.stopPropagation()
-		this.toggel()
+		this.toggle()
 
 		this.dispatchEvent(
 			new CustomEvent('alter', {
 				detail: {
-					value: this.value
+					value: this.value,
+					origin: event
 				}
 			})
 		)
 	}
 
 	_moveAttributes () {
-		const element = this.querySelector('[data-radio-button]')
+		this.checked = this.hasAttribute('checked')
+		const element = this.querySelector('[data-input]')
 		const attributes = Array.from(this.attributes)
 
 		attributes.forEach(attribute => {
@@ -87,7 +104,6 @@ export class RadioButton extends Component {
 			'alt',
 			'autocomplete',
 			'autofocus',
-			'checked',
 			'dirname',
 			'disabled',
 			'form',

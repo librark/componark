@@ -1,16 +1,16 @@
 import { Component } from "../component";
 
 export class RadioButton extends Component {
-    value: string
+  value: string
+  checked: boolean
 
-    checked(): void
-    unchecked(): void
-    toggel(): void
-    isChecked(): boolean
+  check(): void
+  uncheck(): void
+  toggle(): void
 }
 
 export class RadioGroup extends Component {
-    value: string
+  value: string
 }
 
 

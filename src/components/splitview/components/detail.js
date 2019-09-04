@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class SplitviewDetail extends Component {
-	init (context) {
+	init (context = {}) {
 		this.title = context['title'] || this.title || ' '
 		this.backButtonIcon = context['backButtonIcon'] || this.backButtonIcon
 

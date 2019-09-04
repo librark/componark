@@ -1,14 +1,14 @@
 import { Component } from "../component";
 
 export class Checkbox extends Component {
-    value: string
+  value: string
+  checked: boolean
 
-    checked(): void
-    unchecked(): void
-    toggel(): void
-    isChecked(): boolean
+  check(): void
+  uncheck(): void
+  toggle(): void
 }
 
 export class CheckboxGroup extends Component {
-    value: string[]
+  value: string[]
 }

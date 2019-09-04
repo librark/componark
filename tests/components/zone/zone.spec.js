@@ -4,7 +4,9 @@ import { Zone } from '../../../src/components/zone/components/zone'
 
 describe('Zone', () => {
 	it('can calculate the absolute position', () => {
-		const zone = new Zone().init({
+		const zone = new Zone()
+		zone.init()
+		zone.init({
 			rows: 3,
 			cols: 4
 		})
@@ -18,8 +20,7 @@ describe('Zone', () => {
 		expect(changePosition.y).toEqual(-1)
 
 		// @ts-ignore
-		let absolutePosition = zone._getAbsolutePosition(
-			{ x: 0, y: 1 },
+		let absolutePosition = zone._getAbsolutePosition({ x: 0, y: 1 },
 			changePosition
 		)
 
@@ -82,6 +83,9 @@ describe('Zone', () => {
 		changePosition = zone._getChangePosition(start, end)
 		expect(changePosition.x).toEqual(-2)
 		expect(changePosition.y).toEqual(3)
+
+		// @ts-ignore
+		zone.onDropClicked(new CustomEvent(''))
 	})
 
 	it('dragstart', () => {

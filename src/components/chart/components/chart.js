@@ -2,7 +2,7 @@ import { Chart as ChartJs } from 'chart.js'
 import { Component } from '../../component'
 
 export class Chart extends Component {
-	init (context) {
+	init (context = {}) {
 		this.details = context['details']
 
 		return super.init()

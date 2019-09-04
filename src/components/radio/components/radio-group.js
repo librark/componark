@@ -1,10 +1,12 @@
-import { Component } from '../../component'
+import './radio-button'
+
 /** @typedef {import('./radio-button').RadioButton} RadioButton */
+import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
 
 export class RadioGroup extends Component {
-	init (context) {
-		this.label = context['label']
+	init (context = {}) {
+		this.label = context['label'] || this.label || ''
 		this.name = context['name'] || this.name || uuidv4()
 
 		// local variables
@@ -34,32 +36,39 @@ export class RadioGroup extends Component {
 	}
 
 	get value () {
-		let value = ''
-		this.selectAll('ark-radio-button').forEach((
-			/** @type {RadioButton} */ radio
-		) => {
-			if (radio.isChecked()) value = radio.value
-		})
+		const button = /** @type {RadioButton} */ (
+			this.select('ark-radio-button[checked]')
+		)
 
-		return value
+		return button ? button.value : ''
 	}
 
 	// ---------------------------------------------------------------------------
 	/** @param {Event} event */
 	_change (event) {
 		event.stopPropagation()
-
-		this.selectAll('ark-radio-button').forEach((
-			/** @type {RadioButton} */ radio
-		) => radio.unchecked())
-
-		const target = /** @type {RadioButton} */ (event.target)
-		target.checked()
+		const value = event['detail'].value
+		this._checkButton(value)
 
 		this.dispatchEvent(
 			new CustomEvent('alter', {
-				detail: { value: this.value }
+				detail: {
+					value: this.value,
+					origin: event
+				}
 			})
+		)
+	}
+
+	_checkButton (value) {
+		this.selectAll('ark-radio-button').forEach(
+			(/** @type {RadioButton} */ radio) => {
+				if (radio.value === value) {
+					radio.check()
+				} else {
+					radio.uncheck()
+				}
+			}
 		)
 	}
 

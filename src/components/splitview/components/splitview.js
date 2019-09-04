@@ -6,7 +6,7 @@
 import { Component } from '../../component'
 
 export class Splitview extends Component {
-	init (context) {
+	init (context = {}) {
 		// -------------------------------------------------------------------------
 		// Detail
 		// -------------------------------------------------------------------------

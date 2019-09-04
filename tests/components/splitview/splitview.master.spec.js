@@ -1,9 +1,11 @@
-import { SplitviewMaster } from '../../../src/components/splitview/components/master'
+import {
+	SplitviewMaster
+} from '../../../src/components/splitview/components/master'
 
 describe('SplitviewMaster', () => {
 	it('can be instantiated', () => {
 		const master = new SplitviewMaster()
-		master.init({})
+		master.init()
 		master.connectedCallback()
 		expect(master.getAttribute('master-event') === '').toBeTruthy()
 	})

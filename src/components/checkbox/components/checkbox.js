@@ -1,8 +1,12 @@
 import { Component } from '../../component'
 
 export class Checkbox extends Component {
-	init (context) {
+	/**
+   * @param {{ value:string, checked:boolean } | {}} context?
+   */
+	init (context = {}) {
 		this.value = context['value']
+		this.checked = context['checked']
 
 		// local variables
 		this.defaultContent = this.defaultContent || this.innerHTML
@@ -18,7 +22,7 @@ export class Checkbox extends Component {
 		this.innerHTML = /* html */ `
       <div class="ark-checkbox__body" listen on-click="_change">
         <div class="ark-checkbox__input">
-          <input data-checkbox type="checkbox">
+          <input data-input type="checkbox">
         </div>
         <div class="ark-checkbox__label">
           <small>${this.defaultContent}</small>
@@ -30,49 +34,61 @@ export class Checkbox extends Component {
 		return super.render()
 	}
 
-	checked () {
-		const checkbox = this.querySelector('[data-checkbox]')
-		checkbox.setAttribute('checked', 'checked')
-		checkbox['checked'] = true
+	check () {
+		this.checked = true
 	}
 
-	unchecked () {
-		const checkbox = this.querySelector('[data-checkbox]')
-		checkbox.removeAttribute('checked')
-		checkbox['checked'] = false
+	uncheck () {
+		this.checked = false
 	}
 
-	toggel () {
-		if (this.querySelector('[data-checkbox]').hasAttribute('checked')) {
-			this.unchecked()
-		} else {
-			this.checked()
-		}
-	}
-
-	isChecked () {
-		const checkbox = this.querySelector('[data-checkbox]')
-		return checkbox.hasAttribute('checked')
+	toggle () {
+		this.checked = !this.checked
 	}
 
 	// ---------------------------------------------------------------------------
+	/** @returns {Boolean} */
+	get checked () {
+		return this.hasAttribute('checked')
+	}
+
+	/** @param {Boolean} value */
+	set checked (value) {
+		const input = this.querySelector('[data-input]')
+		if (!input) return
+
+		input['checked'] = value
+
+		if (value) {
+			this.setAttribute('checked', '')
+			input.setAttribute('checked', 'checked')
+		} else {
+			this.removeAttribute('checked')
+			input.removeAttribute('checked')
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+
 	/** @param {Event} event */
 	_change (event) {
 		event.stopPropagation()
 
-		this.toggel()
+		this.toggle()
 		this.dispatchEvent(
 			new CustomEvent('alter', {
 				detail: {
 					value: this.value,
-					checked: this.isChecked()
+					checked: this.checked,
+					origin: event
 				}
 			})
 		)
 	}
 
 	_moveAttributes () {
-		const element = this.querySelector('[data-checkbox]')
+		this.checked = this.hasAttribute('checked')
+		const element = this.querySelector('[data-input]')
 		const attributes = Array.from(this.attributes)
 
 		attributes.forEach(attribute => {
@@ -90,7 +106,6 @@ export class Checkbox extends Component {
 			'alt',
 			'autocomplete',
 			'autofocus',
-			'checked',
 			'dirname',
 			'disabled',
 			'form',

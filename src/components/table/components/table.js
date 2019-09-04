@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class Table extends Component {
-	init (context) {
+	init (context = {}) {
 		this.headers = context['headers'] || this.headers || {}
 		this.data = context['data'] || this.data || []
 

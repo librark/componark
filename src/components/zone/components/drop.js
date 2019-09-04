@@ -11,10 +11,10 @@ import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
 
 export class DropZone extends Component {
-	init (context) {
+	init (context = {}) {
 		this.x = this.x
 		this.y = this.y
-		this.detail = this.detail || context['detail']
+		this.value = this.value || context['value']
 
 		this.id = uuidv4()
 
@@ -26,7 +26,7 @@ export class DropZone extends Component {
 	}
 
 	reflectedProperties () {
-		return ['x', 'y', 'detail']
+		return ['x', 'y', 'value']
 	}
 
 	render () {
@@ -153,21 +153,26 @@ export class DropZone extends Component {
 	/** @param {event} event */
 	onClick (event) {
 		event.stopImmediatePropagation()
-		this.dispatchEvent(new CustomEvent('drop:clicked', {
-			bubbles: true,
-			detail: {
-				id: this.id,
-				detail: this.detail
-			}
-		}))
+		this.dispatchEvent(
+			new CustomEvent('drop:clicked', {
+				bubbles: true,
+				detail: {
+					id: this.id,
+					value: this.value,
+					origin: event
+				}
+			})
+		)
 	}
 
 	// --------------------------------------------------------------------------
 	/** @param {object} dataDrag @param {DragZone[]} drags @returns {DragZone} */
 	_searchDragStart (dataDrag, drags) {
-		return /** @type {DragZone} */ drags.find(
-			drag => { if (drag) { return drag.id === dataDrag.id } }
-		)
+		return /** @type {DragZone} */ drags.find(drag => {
+			if (drag) {
+				return drag.id === dataDrag.id
+			}
+		})
 	}
 
 	_droppableRemoveStyle () {

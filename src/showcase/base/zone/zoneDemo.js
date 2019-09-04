@@ -12,9 +12,9 @@ export class ZoneDemo extends Component {
         <ark-grid-item cols="1" rows="3">
 
           <ark-zone listen on-drag:dropped="_onDragDropped">
-            <ark-zone-drop detail="Drop A1">
-              <ark-zone-drag detail="Drag 1">drag 1</ark-zone-drag>
-              <ark-zone-drag detail="Drag 2">drag 2</ark-zone-drag>
+            <ark-zone-drop value="Drop A1">
+              <ark-zone-drag value="Drag 1">drag 1</ark-zone-drag>
+              <ark-zone-drag value="Drag 2">drag 2</ark-zone-drag>
             </ark-zone-drop>
           </ark-zone>
 
@@ -22,7 +22,7 @@ export class ZoneDemo extends Component {
         <ark-grid-item cols="3" rows="1">
 
           <ark-zone listen on-drag:dropped="_onDragDropped">
-            <ark-zone-drop detail="Drop A2" direction="row"></ark-zone-drop>
+            <ark-zone-drop value="Drop A2" direction="row"></ark-zone-drop>
           </ark-zone>
 
         </ark-grid-item>
@@ -35,48 +35,48 @@ export class ZoneDemo extends Component {
             >
               <ark-grid cols="3" rows="4" gap="5px">
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 1">
-                    <ark-zone-drag detail="Drag 3">
+                  <ark-zone-drop value="Drop 1">
+                    <ark-zone-drag value="Drag 3">
                       <p>===== Drag 3 =====</p>
                     </ark-zone-drag>
                   </ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 2">
-                    <ark-zone-drag detail="Drag 4">
+                  <ark-zone-drop value="Drop 2">
+                    <ark-zone-drag value="Drag 4">
                       <p>===== Drag 4 =====</p>
                     </ark-zone-drag>
                   </ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 3"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 3"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 4"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 4"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 5"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 5"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 6"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 6"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 7"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 7"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 8"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 8"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 9"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 9"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 10"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 10"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 11"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 11"></ark-zone-drop>
                 </ark-grid-item>
                 <ark-grid-item>
-                  <ark-zone-drop detail="Drop 12"></ark-zone-drop>
+                  <ark-zone-drop value="Drop 12"></ark-zone-drop>
                 </ark-grid-item>
               </ark-grid>
             </ark-zone>
@@ -85,7 +85,7 @@ export class ZoneDemo extends Component {
       </ark-grid>
 
       <p>
-        Elemento Arrastrados: [<span data-drags></span>]
+        Elemento Arrastrados: <span data-drags></span>
       </p>
       <p>
         Elementos Seleccionado: <span data-detail></span>
@@ -98,27 +98,18 @@ export class ZoneDemo extends Component {
 
 	/** @param {event} event */
 	_onDragDropped (event) {
-		const detail = event['detail']
-
-		let data = ''
-
-		detail.forEach(element => {
-			element['drags'].forEach(drag => {
-				data += drag['detail'] + ', '
-			})
-		})
-
-		this.select('[data-drags]').innerHTML = data
+		const value = event['detail']['value']
+		this.select('[data-drags]').innerHTML = JSON.stringify(value)
 	}
 
 	/** @param {event} event */
 	_onDropClicked (event) {
-		this.select('[data-detail]').innerHTML = event['detail']['detail']
+		this.select('[data-detail]').innerHTML = event['detail']['value']
 	}
 
 	/** @param {event} event */
 	_onDragClicked (event) {
-		this.select('[data-detail]').innerHTML = event['detail']['detail']
+		this.select('[data-detail]').innerHTML = event['detail']['value']
 	}
 
 	_appendStyle () {
