@@ -17,3 +17,12 @@ export function kebabToCamel (input) {
 		return g[1].toUpperCase()
 	})
 }
+
+/**
+ * Convert Strings from snake to camelCase
+ * @param {string} input @returns {string} */
+export function snakeToCamel (input) {
+	return input.replace(/_([a-z])/g, function (g) {
+		return g[1].toUpperCase()
+	})
+}

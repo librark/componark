@@ -6,7 +6,7 @@ describe('Card', () => {
 		const element = /** @type {Card} */ (document.createElement('ark-card'))
 		expect(element).toBeTruthy()
 
-		var init = element.init({})
+		var init = element.init()
 		expect(element === init).toBeTruthy()
 	})
 

@@ -6,7 +6,7 @@ describe('Modal', () => {
 		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
 		expect(modal).toBeTruthy()
 
-		var init = modal.init({})
+		var init = modal.init()
 		expect(modal === init).toBeTruthy()
 	})
 

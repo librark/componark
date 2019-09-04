@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class Input extends Component {
-	init (context) {
+	init (context = {}) {
 		this.label = context['label'] || this.label
 		this.value = context['value'] || this.value || ''
 
@@ -44,7 +44,10 @@ export class Input extends Component {
 		this.value = this.select('[data-input]')['value']
 		this.dispatchEvent(
 			new CustomEvent('alter', {
-				detail: { value: this.value }
+				detail: {
+					value: this.value,
+					origin: event
+				}
 			})
 		)
 	}

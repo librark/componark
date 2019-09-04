@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class Paginator extends Component {
-	init (context) {
+	init (context = {}) {
 		this.collectionSize = context['collectionSize']
 		this.currentPage = context['currentPage'] || 1
 		this.pageSize = context['pageSize'] || 24

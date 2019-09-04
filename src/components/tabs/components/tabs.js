@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class Tabs extends Component {
-	init (context) {
+	init (context = {}) {
 		return super.init()
 	}
 

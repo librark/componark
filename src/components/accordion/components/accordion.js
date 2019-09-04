@@ -2,7 +2,7 @@
 import { Component } from '../../component'
 
 export class Accordion extends Component {
-	init (context) {
+	init (context = {}) {
 		this.closeOthers = context['closeOthers']
 		return super.init()
 	}

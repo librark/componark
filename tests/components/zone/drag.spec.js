@@ -9,6 +9,7 @@ describe('Drag Zone', () => {
 		}
 
 		const drag = new DragZone()
+		drag.init()
 		drag.connectedCallback()
 
 		drag.onDraggableStart(event)

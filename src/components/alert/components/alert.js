@@ -1,43 +1,56 @@
 import { Component } from '../../component'
 
 export class Alert extends Component {
-	init (context) {
+	init (context = {}) {
 		this.title = this._defaultvalue(this.title, context['title'])
 		this.text = this._defaultvalue(this.text, context['text'])
 
 		this.horizontal = this._defaultvalue(
-			this.horizontal, context['horizontal'] || 'center')
+			this.horizontal,
+			context['horizontal'] || 'center'
+		)
 
 		this.vertical = this._defaultvalue(
-			this.vertical, context['vertical'] || 'center')
-
-		const showConfirmButton = (
-			context['showConfirmButton'] === undefined
-				? true : context['showConfirmButton']
+			this.vertical,
+			context['vertical'] || 'center'
 		)
+
+		let showConfirmButton = context['showConfirmButton']
+		showConfirmButton =
+      showConfirmButton === undefined ? true : showConfirmButton
+
 		this.showConfirmButton = this._defaultvalue(
-			this.showConfirmButton, showConfirmButton
+			this.showConfirmButton,
+			showConfirmButton
 		)
 
 		this.confirmButtonText = this._defaultvalue(
-			this.confirmButtonText, context['confirmButtonText'] || 'Aceptar')
+			this.confirmButtonText,
+			context['confirmButtonText'] || 'Aceptar'
+		)
 
 		this.confirmButtonBackground = this._defaultvalue(
 			this.confirmButtonBackground,
-			context['confirmButtonBackground'] || 'primary')
-
-		const showCancelButton = (
-			context['showCancelButton'] === undefined
-				? true : context['showCancelButton']
+			context['confirmButtonBackground'] || 'primary'
 		)
+
+		let showCancelButton = context['showCancelButton']
+		showCancelButton = showCancelButton === undefined ? true : showCancelButton
+
 		this.showCancelButton = this._defaultvalue(
-			this.showCancelButton, showCancelButton)
+			this.showCancelButton,
+			showCancelButton
+		)
 
 		this.cancelButtonText = this._defaultvalue(
-			this.cancelButtonText, context['cancelButtonText'] || 'Cancelar')
+			this.cancelButtonText,
+			context['cancelButtonText'] || 'Cancelar'
+		)
 
 		this.cancelButtonBackground = this._defaultvalue(
-			this.cancelButtonBackground, context['cancelButtonBackground'] || 'light')
+			this.cancelButtonBackground,
+			context['cancelButtonBackground'] || 'light'
+		)
 
 		// local variables
 		this.global = document
@@ -135,9 +148,13 @@ export class Alert extends Component {
 
 	/** @returns {HTMLElement} */
 	_createConfirmButton (show, text) {
-		if (!this._parseBooleanValue(this.showConfirmButton) ||
-    (this._parseBooleanValue(this.showConfirmButton) &&
-    !this.confirmButtonText.length)) { return null }
+		if (
+			!this._parseBooleanValue(this.showConfirmButton) ||
+      (this._parseBooleanValue(this.showConfirmButton) &&
+        !this.confirmButtonText.length)
+		) {
+			return null
+		}
 
 		const button = this.global.createElement('button')
 		button.setAttribute('listen', '')
@@ -153,14 +170,24 @@ export class Alert extends Component {
 	/** @param {Event} event */
 	_clickConfirmButton (event) {
 		event.stopPropagation()
-		this.dispatchEvent(new CustomEvent('alert:confirm-button'))
+		this.dispatchEvent(
+			new CustomEvent('alert:confirm-button', {
+				detail: {
+					origin: event
+				}
+			})
+		)
 	}
 
 	/** @returns {HTMLElement} */
 	_createCancelButton () {
-		if (!this._parseBooleanValue(this.showCancelButton) ||
-    (this._parseBooleanValue(this.showCancelButton) &&
-      !this.cancelButtonText.length)) { return null }
+		if (
+			!this._parseBooleanValue(this.showCancelButton) ||
+      (this._parseBooleanValue(this.showCancelButton) &&
+        !this.cancelButtonText.length)
+		) {
+			return null
+		}
 
 		const button = this.global.createElement('button')
 		button.setAttribute('listen', '')
@@ -176,7 +203,13 @@ export class Alert extends Component {
 	/** @param {Event} event */
 	_clickCancelButton (event) {
 		event.stopPropagation()
-		this.dispatchEvent(new CustomEvent('alert:cancel-button'))
+		this.dispatchEvent(
+			new CustomEvent('alert:cancel-button', {
+				detail: {
+					origin: event
+				}
+			})
+		)
 	}
 
 	_parseBooleanValue (value) {

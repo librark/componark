@@ -9,6 +9,7 @@ describe('Drop Zone', () => {
 		}
 
 		const drop = new DropZone()
+		drop.init()
 		drop.connectedCallback()
 
 		drop.onDragover(event)

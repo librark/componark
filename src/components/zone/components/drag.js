@@ -9,11 +9,11 @@ import { Component } from '../../component'
 import { uuidv4 } from '../../../utils'
 
 export class DragZone extends Component {
-	init (context) {
+	init (context = {}) {
 		this.x = this.x
 		this.y = this.y
 		this.drop = this.drop
-		this.detail = this.detail || context['detail']
+		this.value = this.value || context['value']
 
 		this.id = uuidv4()
 
@@ -25,7 +25,7 @@ export class DragZone extends Component {
 	}
 
 	reflectedProperties () {
-		return ['x', 'y', 'drop', 'detail']
+		return ['x', 'y', 'drop', 'value']
 	}
 
 	render () {
@@ -121,13 +121,15 @@ export class DragZone extends Component {
 	draggableDrop (drags) {
 		this._draggableRemoveStyle()
 
-		this.dispatchEvent(new CustomEvent('zone:drag', {
-			detail: {
-				drop: this.parentElement,
-				referenceDrag: this,
-				drags: drags
-			}
-		}))
+		this.dispatchEvent(
+			new CustomEvent('zone:drag', {
+				detail: {
+					drop: this.parentElement,
+					referenceDrag: this,
+					drags: drags
+				}
+			})
+		)
 	}
 
 	get selected () {
@@ -198,13 +200,16 @@ export class DragZone extends Component {
 			this.selected = true
 		}
 
-		this.dispatchEvent(new CustomEvent('drag:clicked', {
-			bubbles: true,
-			detail: {
-				id: this.id,
-				detail: this.detail
-			}
-		}))
+		this.dispatchEvent(
+			new CustomEvent('drag:clicked', {
+				bubbles: true,
+				detail: {
+					id: this.id,
+					value: this.value,
+					origin: event
+				}
+			})
+		)
 	}
 
 	// ---------------------------------------------------------------------------

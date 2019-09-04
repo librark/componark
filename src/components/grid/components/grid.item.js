@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class GridItem extends Component {
-	init (context) {
+	init (context = {}) {
 		this.rows = context['rows'] || this.rows || 1
 		this.cols = context['cols'] || this.cols || 1
 		return super.init()

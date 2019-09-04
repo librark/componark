@@ -2,7 +2,7 @@ import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
 export class Modal extends Component {
-	init (context) {
+	init (context = {}) {
 		this.title = context['title']
 		this.subtitle = context['subtitle']
 

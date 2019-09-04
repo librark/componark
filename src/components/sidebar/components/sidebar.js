@@ -2,7 +2,7 @@ import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
 export class Sidebar extends Component {
-	init (context) {
+	init (context = {}) {
 		// local variables
 		this.slots = getSlots(this)
 		return super.init()

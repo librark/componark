@@ -11,5 +11,6 @@
         "snackbar",
         "splitview",
         "webcomponents"
-    ]
+    ],
+    "jshint.enable": false
 }

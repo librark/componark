@@ -2,11 +2,11 @@
 import { ListItem } from '../../../src/components/list'
 
 describe('List item', () => {
-	// it('can be instantiated', () => {
-	// 	const item = new ListItem()
-	// 	item.connectedCallback()
-	// 	expect(item.outerHTML).toEqual('<ark-list-item></ark-list-item>')
-	// })
+	it('can be instantiated', () => {
+		const item = new ListItem()
+		item.init()
+		item.connectedCallback()
+	})
 	it('can be rendered with data', function () {
 		const item = new ListItem()
 		item.init({ data: 'my data' }).render()
@@ -15,6 +15,7 @@ describe('List item', () => {
 		item.setAttribute('click-disabled', '')
 
 		const event = new CustomEvent('click')
+		// @ts-ignore
 		item._onSelected(event)
 	})
 	it('can be rendered with template', function () {

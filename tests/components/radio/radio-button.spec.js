@@ -16,17 +16,17 @@ describe('RadioButton', () => {
 		element.value = 'op1'
 		element.connectedCallback()
 
-		element.checked()
-		expect(element.isChecked()).toBeTruthy()
+		element.check()
+		expect(element.hasAttribute('checked')).toBeTruthy()
 
-		element.unchecked()
-		expect(!element.isChecked()).toBeTruthy()
+		element.uncheck()
+		expect(!element.hasAttribute('checked')).toBeTruthy()
 
-		element.toggel()
-		expect(element.isChecked()).toBeTruthy()
+		element.toggle()
+		expect(element.hasAttribute('checked')).toBeTruthy()
 
-		element.toggel()
-		expect(!element.isChecked()).toBeTruthy()
+		element.toggle()
+		expect(!element.hasAttribute('checked')).toBeTruthy()
 	})
 
 	it('It does not allow changing the type of element.', () => {
@@ -41,12 +41,12 @@ describe('RadioButton', () => {
 
 		// @ts-ignore
 		element._change(event)
-		expect(element.isChecked()).toBeTruthy()
+		expect(element.hasAttribute('checked')).toBeTruthy()
 		expect(element.hasAttribute('type')).toBeTruthy()
 		expect(element.hasAttribute('value')).toBeTruthy()
 		expect(!element.hasAttribute('autofocus')).toBeTruthy()
 
-		element.unchecked()
+		element.uncheck()
 		expect(!element.hasAttribute('checked')).toBeTruthy()
 	})
 
@@ -54,5 +54,22 @@ describe('RadioButton', () => {
 		const element = new RadioButton()
 		element.init({ value: 'op1' }).render()
 		expect(element.value).toEqual('op1')
+	})
+
+	it('can render several times', () => {
+		const container = document.createElement('div')
+		container.appendChild(new RadioButton())
+
+		const radio = /** @type {RadioButton} */(
+			container.querySelector('ark-radio-button')
+		)
+
+		radio.init()
+		radio.init()
+		radio.init()
+		radio.render()
+		radio.render().load()
+
+		expect(radio.querySelectorAll('input').length).toEqual(1)
 	})
 })

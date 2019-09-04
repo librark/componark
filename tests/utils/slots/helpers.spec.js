@@ -1,72 +1,98 @@
 import { listen, reflect } from '../../../src/utils'
 
 describe('Helpers', () => {
-  /****************************************************************************
+	/****************************************************************************
    * listen
    ***************************************************************************/
-  it('does not allow invalid attribute', () => {
-    const element = document.createElement('div')
-    element.innerHTML = /* html */`
-      <button listen ark-on-click="myMethod"></button>
+
+	it('does not allow invalid attribute', () => {
+		const element = document.createElement('div')
+		element.innerHTML = /* html */`
+      <button on-open="click" listen on-click="click" on-click="myMethod"
+      on-close="click"></button>
     `
 
-    listen(element)
+		listen(element)
 
-    element.querySelector('button').click()
-    expect(!element.hasAttribute('clicked-element')).toBeTruthy()
-  })
+		element.querySelector('button').click()
+		expect(!element.hasAttribute('clicked-element')).toBeTruthy()
+	})
 
-  it('It does not allow to execute undeclared methods.', () => {
-    const element = document.createElement('div')
-    element.innerHTML = /* html */`
-      <button listen on-click="myMethod"></button>
-    `
+	it('does not allow invalid attribute', () => {
+		const element = document.createElement('div')
+		element.innerHTML = /* html */`
+	    <button listen ark-on-click="myMethod"></button>
+	  `
 
-    listen(element)
+		listen(element)
 
-    element.querySelector('button').click()
-    expect(!element.hasAttribute('clicked-element')).toBeTruthy()
-  })
+		element.querySelector('button').click()
+		expect(!element.hasAttribute('clicked-element')).toBeTruthy()
+	})
 
-  it('can create events', () => {
-    const element = document.createElement('div')
-    element.innerHTML = /* html */`
-      <button listen on-click="myMethod"></button>
-    `
-    element['myMethod'] = function () {
-      element.setAttribute('clicked-element', '')
-    }
+	it('attribute ', () => {
+		const button = document.createElement('button')
+		button.setAttribute('listen', '')
+		button.setAttribute('on-abc', 'method')
+		button.setAttribute('on-xyz', 'method')
 
-    listen(element)
+		const content = document.createElement('div')
+		content.appendChild(button)
 
-    element.querySelector('button').click()
-    expect(element.hasAttribute('clicked-element')).toBeTruthy()
-  })
+		listen(content)
+	})
 
-  /****************************************************************************
-   * reflect
-   ***************************************************************************/
-  it('can create attribute', () => {
-    const element = document.createElement('div')
-    const properties = ['myProperty']
+	it('It does not allow to execute undeclared methods.', () => {
+		const element = document.createElement('div')
+		element.innerHTML = /* html */`
+	    <button listen on-click="myMethod"></button>
+	  `
 
-    reflect(element, properties)
+		listen(element)
 
-    element['myProperty'] = 'value'
+		element.querySelector('button').click()
+		expect(!element.hasAttribute('clicked-element')).toBeTruthy()
+	})
 
-    expect(element['myProperty']).toBe('value')
-    expect(element.hasAttribute('my-property')).toBeTruthy()
-  })
+	it('can create events', () => {
+		const element = document.createElement('div')
+		element.innerHTML = /* html */`
+	    <button listen on-click="myMethod"></button>
+	  `
+		element['myMethod'] = function () {
+			element.setAttribute('clicked-element', '')
+		}
 
-  it('cannot create attribute with property undefined', () => {
-    const element = document.createElement('div')
-    const properties = ['myProperty']
+		listen(element)
 
-    reflect(element, properties)
+		element.querySelector('button').click()
+		expect(element.hasAttribute('clicked-element')).toBeTruthy()
+	})
 
-    element['myProperty'] = undefined
+	/****************************************************************************
+	 * reflect
+	 ***************************************************************************/
+	it('can create attribute', () => {
+		const element = document.createElement('div')
+		const properties = ['myProperty']
 
-    expect(element['myProperty']).toBe('')
-    expect(!element.hasAttribute('my-property')).toBeTruthy()
-  })
+		reflect(element, properties)
+
+		element['myProperty'] = 'value'
+
+		expect(element['myProperty']).toBe('value')
+		expect(element.hasAttribute('my-property')).toBeTruthy()
+	})
+
+	it('cannot create attribute with property undefined', () => {
+		const element = document.createElement('div')
+		const properties = ['myProperty']
+
+		reflect(element, properties)
+
+		element['myProperty'] = undefined
+
+		expect(element['myProperty']).toBe('')
+		expect(!element.hasAttribute('my-property')).toBeTruthy()
+	})
 })

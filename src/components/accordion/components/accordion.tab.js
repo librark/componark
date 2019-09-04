@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class AccordionTab extends Component {
-	init (context) {
+	init (context = {}) {
 		this.header = context['header']
 		this.tabIndex = context['tabIndex']
 
@@ -50,7 +50,10 @@ export class AccordionTab extends Component {
 
 		this.dispatchEvent(
 			new CustomEvent('accordiontab:click', {
-				detail: { tabIndex: this.tabIndex }
+				detail: {
+					tabIndex: this.tabIndex,
+					origin: event
+				}
 			})
 		)
 	}

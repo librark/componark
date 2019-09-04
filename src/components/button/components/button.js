@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class Button extends Component {
-	init (context) {
+	init (context = {}) {
 		// local variables
 		this.defaultContent = this.defaultContent || this.innerHTML
 		return super.init()

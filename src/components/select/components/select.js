@@ -1,7 +1,7 @@
 import { Component } from '../../component'
 
 export class Select extends Component {
-	init (context) {
+	init (context = {}) {
 		this.label = context['label']
 
 		// local variables
@@ -37,7 +37,10 @@ export class Select extends Component {
 		event.stopPropagation()
 		this.dispatchEvent(
 			new CustomEvent('alter', {
-				detail: { value: this.value }
+				detail: {
+					value: this.value,
+					origin: event
+				}
 			})
 		)
 	}
