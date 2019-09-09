@@ -35,7 +35,11 @@ export function parseData (content) {
 /** @param {event} event @return {Array} */
 export function getDataTransfer (event) {
 	const dataTransfer = event['dataTransfer']
-	return dataTransfer.types[0] ? parseData(dataTransfer.types[0]) : []
+	const data = dataTransfer.types[0]
+
+	if (!data) return []
+
+	return parseData(data) || []
 }
 
 /**

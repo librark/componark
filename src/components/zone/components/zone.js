@@ -43,8 +43,8 @@ export class Zone extends Component {
 		// ------------------------------------------------------------------------
 		// zone:drag
 		// ------------------------------------------------------------------------
-		this.selectAll('ark-zone-drag').forEach(drop => {
-			drop.addEventListener('zone:drag', this.onZoneDrag.bind(this))
+		this.selectAll('ark-zone-drag').forEach(drag => {
+			drag.addEventListener('zone:drag', this.onZoneDrag.bind(this))
 		})
 
 		// ------------------------------------------------------------------------
@@ -60,6 +60,8 @@ export class Zone extends Component {
 		// ------------------------------------------------------------------------
 		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 		this.addEventListener('drop:clicked', this.onDropClicked.bind(this))
+		this.addEventListener('drop:mouseEnter', this.onDropMouseEnter.bind(this))
+		this.addEventListener('mousedown', this.onSelectionMode.bind(this))
 
 		// ------------------------------------------------------------------------
 		this._assignPosition()
@@ -72,11 +74,19 @@ export class Zone extends Component {
 		return clone
 	}
 
-	clearSelected () {
+	clearSelectedDrags () {
 		this.selectAll('ark-zone-drag[selected]').forEach((
 			/** @type {DragZone} */ selectedDrag
 		) => {
 			selectedDrag.selected = false
+		})
+	}
+
+	clearSelectedDrop () {
+		this.selectAll('ark-zone-drop[selected]').forEach((
+			/** @type {DragZone} */ selectedDrop
+		) => {
+			selectedDrop.selected = false
 		})
 	}
 
@@ -172,6 +182,8 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		const dataTransfer = []
 
+		this.clearSelectedDrop()
+
 		this.selectAll('ark-zone-drag[selected]').forEach((
 			/** @type {DragZone} */ selectedDrag
 		) => {
@@ -187,32 +199,53 @@ export class Zone extends Component {
 	/** @param {event} event */
 	onDragClicked (event) {
 		const target = /** @type {DragZone} */ (event.target)
-		if (target && !target.hasAttribute('selected')) this.clearSelected()
+		const detail = event['detail'] || {}
+		const originalEvent = detail.origin
+		let selected = target.selected
 
-		this.dispatchEvent(
-			new CustomEvent('zone:selected', {
-				bubbles: true,
-				detail: {
-					zoneId: this.id,
-					origin: event
-				}
-			})
-		)
+		if (this.selectAll('ark-zone-drag[selected]').length) {
+			selected = true
+		}
+
+		if (!originalEvent.shiftKey) {
+			this.clearSelectedDrags()
+			target.selected = !selected
+		}
+
+		this.clearSelectedDrop()
+		this._dispatchSelectedZone()
 	}
 
 	/** @param {event} event */
 	onDropClicked (event) {
-		this.clearSelected()
+		const target = /** @type {DropZone} */ (event.target)
+		const selected = target ? target.selected : false
 
-		this.dispatchEvent(
-			new CustomEvent('zone:selected', {
-				bubbles: true,
-				detail: {
-					zoneId: this.id,
-					origin: event
-				}
-			})
-		)
+		this.clearSelectedDrop()
+		target.selected = selected
+
+		this._dispatchSelectedZone()
+	}
+
+	/** @param {event} event */
+	onSelectionMode (event) {
+		event.stopImmediatePropagation()
+
+		const detail = event['detail']
+		this.selected = detail ? detail.value : false
+
+		this.dropStart = /** @type {DropZone} */ (event.target)
+		this.dropEnd = /** @type {DropZone} */ (event.target)
+
+		this._selectDrags(this.dropStart)
+
+		this._dispatchSelectedZone()
+	}
+
+	onDropMouseEnter (event) {
+		event.stopImmediatePropagation()
+		if (!this.selected) return
+		this.dropEnd = /** @type {DropZone} */ (event.target)
 	}
 
 	/** @param {event} event */
@@ -260,10 +293,49 @@ export class Zone extends Component {
 	/** @param {event} event */
 	onZoneSelected (event) {
 		const zoneId = event['detail'] ? event['detail'].zoneId : null
-		if (this.id !== zoneId) this.clearSelected()
+		this.selected = this.id === zoneId
+
+		if (!this.selected) {
+			this.clearSelectedDrags()
+			this.clearSelectedDrop()
+		}
 	}
 
 	// ---------------------------------------------------------------------------
+
+	get selected () {
+		return this.hasAttribute('selected')
+	}
+
+	/** @param {boolean} value */
+	set selected (value) {
+		if (value) {
+			this.setAttribute('selected', 'selected')
+		} else {
+			this.removeAttribute('selected')
+		}
+	}
+
+	// ---------------------------------------------------------------------------
+	_dispatchSelectedZone () {
+		this.dispatchEvent(
+			new CustomEvent('zone:selected', {
+				bubbles: true,
+				detail: {
+					zoneId: this.id,
+					origin: event
+				}
+			})
+		)
+	}
+
+	/** @param {DropZone} drop */
+	_selectDrags (drop) {
+		drop.selectAll('ark-zone-drag').forEach((/** @type {DragZone} */ drag) => {
+			drag.selected = true
+		})
+	}
+
 	_assignPosition () {
 		const drops = /** @type {DropZone[]} */ this.selectAll('ark-zone-drop')
 		let x = 0

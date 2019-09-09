@@ -89,10 +89,10 @@ describe('Drag Zone', () => {
 		drag.selected = true
 		expect(drag.selected).toBeTruthy()
 
-		drag._toggleSelected()
+		drag.toggleSelected()
 		expect(!drag.selected).toBeTruthy()
 
-		drag._toggleSelected()
+		drag.toggleSelected()
 		expect(drag.selected).toBeTruthy()
 	})
 

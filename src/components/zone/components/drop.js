@@ -60,6 +60,7 @@ export class DropZone extends Component {
 		// click
 		// ------------------------------------------------------------------------
 		this.addEventListener('click', this.onClick.bind(this))
+		this.addEventListener('mouseover', this.onMouseOver.bind(this))
 
 		// ------------------------------------------------------------------------
 		return super.load()
@@ -153,6 +154,9 @@ export class DropZone extends Component {
 	/** @param {event} event */
 	onClick (event) {
 		event.stopImmediatePropagation()
+
+		this._toggleSelected()
+
 		this.dispatchEvent(
 			new CustomEvent('drop:clicked', {
 				bubbles: true,
@@ -163,6 +167,36 @@ export class DropZone extends Component {
 				}
 			})
 		)
+	}
+
+	/** @param {MouseEvent} event */
+	onMouseOver (event) {
+		event.stopImmediatePropagation()
+
+		this.dispatchEvent(
+			new CustomEvent('drop:mouseEnter', {
+				bubbles: true,
+				detail: {
+					id: this.id,
+					value: true,
+					origin: event
+				}
+			})
+		)
+	}
+
+	// --------------------------------------------------------------------------
+	get selected () {
+		return this.hasAttribute('selected')
+	}
+
+	/** @param {boolean} value */
+	set selected (value) {
+		if (value) {
+			this.setAttribute('selected', 'selected')
+		} else {
+			this.removeAttribute('selected')
+		}
 	}
 
 	// --------------------------------------------------------------------------
@@ -184,6 +218,10 @@ export class DropZone extends Component {
 		if (!this.hasAttribute('direction')) {
 			this.setAttribute('direction', 'column')
 		}
+	}
+
+	_toggleSelected () {
+		this.selected = !this.selected
 	}
 }
 customElements.define('ark-zone-drop', DropZone)
