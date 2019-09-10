@@ -243,32 +243,34 @@ export class Zone extends Component {
 			target.getAttribute('x'), target.getAttribute('y')
 		)
 
-		this.dropStart = /** @type {DropZone} */ (drop)
-		this.dropEnd = /** @type {DropZone} */ (drop)
+		this.dropStart = this.dropEnd = /** @type {DropZone} */ (drop)
 
 		this._dispatchSelectedZone()
 	}
 
 	onMouseUp () {
+		this._startSelection()
 		this.selectionMode = false
 	}
 
 	/** @param {KeyboardEvent} event */
 	onkeyDown (event) {
-		if (event.shiftKey) {
-			this.selectAll('ark-zone-drag').forEach(drag => {
-				drag.removeAttribute('draggable')
-			})
-		}
+		if (!event.shiftKey) return
+
+		this.selectAll('ark-zone-drag').forEach(drag => {
+			drag.removeAttribute('draggable')
+		})
 	}
 
 	/** @param {KeyboardEvent} event */
 	onKeyUp (event) {
-		if (event.key === 'Shift') {
-			this.selectAll('ark-zone-drag').forEach(drag => {
-				drag.setAttribute('draggable', 'true')
-			})
-		}
+		if (event.key !== 'Shift') return
+
+		this.selectAll('ark-zone-drag').forEach(drag => {
+			drag.setAttribute('draggable', 'true')
+		})
+
+		this.selectionMode = false
 	}
 
 	/** @param {MouseEvent} event */
@@ -276,6 +278,7 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		const origin = event.detail['origin']
 		const target = /** @type {DropZone} */ (event.target)
+
 		if (
 			!origin.shiftKey || !this.dropStart || !this.selectionMode ||
       this.dropEnd === target
@@ -283,14 +286,7 @@ export class Zone extends Component {
 
 		this.dropEnd = target
 
-		this.clearSelectedDrags()
-		this.clearSelectedDrops()
-
-		const start = { x: this.dropStart.x, y: this.dropStart.y }
-		const end = { x: this.dropEnd.x, y: this.dropEnd.y }
-
-		const drops = this._getDropStartEnd(start, end)
-		this._selectDrags(drops.start, drops.end)
+		this._startSelection()
 	}
 
 	/** @param {event} event */
@@ -343,7 +339,6 @@ export class Zone extends Component {
 		if (!this.selectionMode) {
 			this.clearSelectedDrags()
 			this.clearSelectedDrops()
-			this.dropStart = this.dropEnd = null
 		}
 	}
 
@@ -359,10 +354,24 @@ export class Zone extends Component {
 			this.setAttribute('selected', 'selected')
 		} else {
 			this.removeAttribute('selected')
+			this.dropStart = this.dropEnd = null
 		}
 	}
 
 	// ---------------------------------------------------------------------------
+	_startSelection () {
+		this.clearSelectedDrags()
+		this.clearSelectedDrops()
+
+		if (!this.dropStart || !this.dropEnd) return
+
+		const start = { x: this.dropStart.x, y: this.dropStart.y }
+		const end = { x: this.dropEnd.x, y: this.dropEnd.y }
+
+		const drops = this._getDropStartEnd(start, end)
+		this._selectDrags(drops.start, drops.end)
+	}
+
 	/**
    * @param {{x, y}} drag1
    * @param {{x, y}} drag2
