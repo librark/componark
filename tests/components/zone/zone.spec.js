@@ -241,7 +241,7 @@ describe('Zone', () => {
 
 		expect(!drag2.selected).toBeTruthy()
 
-		zone.clearSelected()
+		zone.clearSelectedDrags()
 
 		expect(!drag0.selected).toBeTruthy()
 		expect(!drag1.selected).toBeTruthy()

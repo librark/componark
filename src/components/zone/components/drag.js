@@ -213,9 +213,11 @@ export class DragZone extends Component {
 	}
 
 	// ---------------------------------------------------------------------------
-	_toggleSelected () {
+	toggleSelected () {
 		this.selected = !this.selected
 	}
+
+	// ---------------------------------------------------------------------------
 
 	_draggableRemoveStyle () {
 		this.style.padding = `0`
