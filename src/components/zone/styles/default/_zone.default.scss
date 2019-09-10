@@ -18,5 +18,10 @@
     &[selected] {
       background: blue;
     }
+
+    &,
+    * {
+      user-select: none;
+    }
   }
 }

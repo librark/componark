@@ -60,8 +60,13 @@ export class Zone extends Component {
 		// ------------------------------------------------------------------------
 		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 		this.addEventListener('drop:clicked', this.onDropClicked.bind(this))
-		this.addEventListener('drop:mouseEnter', this.onDropMouseEnter.bind(this))
-		this.addEventListener('mousedown', this.onSelectionMode.bind(this))
+		this.addEventListener('drop:mouseover', this.onDropMouseOver.bind(this))
+		this.addEventListener('mousedown', this.onMouseDown.bind(this))
+		this.parent.addEventListener('mouseup', this.onMouseUp.bind(this))
+
+		// ------------------------------------------------------------------------
+		this.parent.addEventListener('keydown', this.onkeyDown.bind(this))
+		this.parent.addEventListener('keyup', this.onKeyUp.bind(this))
 
 		// ------------------------------------------------------------------------
 		this._assignPosition()
@@ -82,7 +87,7 @@ export class Zone extends Component {
 		})
 	}
 
-	clearSelectedDrop () {
+	clearSelectedDrops () {
 		this.selectAll('ark-zone-drop[selected]').forEach((
 			/** @type {DragZone} */ selectedDrop
 		) => {
@@ -182,7 +187,7 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		const dataTransfer = []
 
-		this.clearSelectedDrop()
+		this.clearSelectedDrops()
 
 		this.selectAll('ark-zone-drag[selected]').forEach((
 			/** @type {DragZone} */ selectedDrag
@@ -212,7 +217,7 @@ export class Zone extends Component {
 			target.selected = !selected
 		}
 
-		this.clearSelectedDrop()
+		this.clearSelectedDrops()
 		this._dispatchSelectedZone()
 	}
 
@@ -221,31 +226,71 @@ export class Zone extends Component {
 		const target = /** @type {DropZone} */ (event.target)
 		const selected = target ? target.selected : false
 
-		this.clearSelectedDrop()
+		this.clearSelectedDrops()
 		target.selected = selected
 
 		this._dispatchSelectedZone()
 	}
 
-	/** @param {event} event */
-	onSelectionMode (event) {
+	/** @param {MouseEvent} event */
+	onMouseDown (event) {
 		event.stopImmediatePropagation()
+		if (!event.shiftKey) return
 
-		const detail = event['detail']
-		this.selected = detail ? detail.value : false
+		const target = /** @type {Component} */(event.target)
 
-		this.dropStart = /** @type {DropZone} */ (event.target)
-		this.dropEnd = /** @type {DropZone} */ (event.target)
+		const drop = this._selectDropByPosition(
+			target.getAttribute('x'), target.getAttribute('y')
+		)
 
-		this._selectDrags(this.dropStart)
+		this.dropStart = /** @type {DropZone} */ (drop)
+		this.dropEnd = /** @type {DropZone} */ (drop)
 
 		this._dispatchSelectedZone()
 	}
 
-	onDropMouseEnter (event) {
+	onMouseUp () {
+		this.selectionMode = false
+	}
+
+	/** @param {KeyboardEvent} event */
+	onkeyDown (event) {
+		if (event.shiftKey) {
+			this.selectAll('ark-zone-drag').forEach(drag => {
+				drag.removeAttribute('draggable')
+			})
+		}
+	}
+
+	/** @param {KeyboardEvent} event */
+	onKeyUp (event) {
+		if (event.key === 'Shift') {
+			this.selectAll('ark-zone-drag').forEach(drag => {
+				drag.setAttribute('draggable', 'true')
+			})
+		}
+	}
+
+	/** @param {MouseEvent} event */
+	onDropMouseOver (event) {
 		event.stopImmediatePropagation()
-		if (!this.selected) return
-		this.dropEnd = /** @type {DropZone} */ (event.target)
+		const origin = event.detail['origin']
+		const target = /** @type {DropZone} */ (event.target)
+		if (
+			!origin.shiftKey || !this.dropStart || !this.selectionMode ||
+      this.dropEnd === target
+		) return
+
+		this.dropEnd = target
+
+		this.clearSelectedDrags()
+		this.clearSelectedDrops()
+
+		const start = { x: this.dropStart.x, y: this.dropStart.y }
+		const end = { x: this.dropEnd.x, y: this.dropEnd.y }
+
+		const drops = this._getDropStartEnd(start, end)
+		this._selectDrags(drops.start, drops.end)
 	}
 
 	/** @param {event} event */
@@ -293,22 +338,23 @@ export class Zone extends Component {
 	/** @param {event} event */
 	onZoneSelected (event) {
 		const zoneId = event['detail'] ? event['detail'].zoneId : null
-		this.selected = this.id === zoneId
+		this.selectionMode = this.id === zoneId
 
-		if (!this.selected) {
+		if (!this.selectionMode) {
 			this.clearSelectedDrags()
-			this.clearSelectedDrop()
+			this.clearSelectedDrops()
+			this.dropStart = this.dropEnd = null
 		}
 	}
 
 	// ---------------------------------------------------------------------------
 
-	get selected () {
+	get selectionMode () {
 		return this.hasAttribute('selected')
 	}
 
 	/** @param {boolean} value */
-	set selected (value) {
+	set selectionMode (value) {
 		if (value) {
 			this.setAttribute('selected', 'selected')
 		} else {
@@ -317,6 +363,60 @@ export class Zone extends Component {
 	}
 
 	// ---------------------------------------------------------------------------
+	/**
+   * @param {{x, y}} drag1
+   * @param {{x, y}} drag2
+   * @returns {{start: {x, y}, end: {x, y}}}
+   * */
+	_getDropStartEnd (drag1, drag2) {
+		let start = (
+			drag1.x < drag2.x ? drag1 : drag2
+		)
+
+		let end = (
+			start === drag1 ? drag2 : drag1
+		)
+
+		if (start.x === end.x && start.y > end.y) {
+			const currentStart = start
+			start = end
+			end = currentStart
+		}
+
+		if (start.x < end.x && start.y > end.y) {
+			const currentStartY = start.y
+			const currentEndY = end.y
+
+			end.y = currentStartY
+			start.y = currentEndY
+		}
+
+		return { start: start, end: end }
+	}
+
+	/** @param {{x, y}} start @param {{x, y}} end */
+	_selectDrags (start, end) {
+		for (let x = start.x; x <= end.x; x++) {
+			for (let y = start.y; y <= end.y; y++) {
+				const drop = this._selectDropByPosition(x, y)
+
+				drop.selected = true
+
+				drop.selectAll('ark-zone-drag').forEach(
+					(/** @type {DragZone} */ drag) => {
+						drag.selected = true
+					})
+			}
+		}
+	}
+
+	/** @param {string} x @param {string} y @return {DropZone} */
+	_selectDropByPosition (x, y) {
+		return /** @type {DropZone} */ (
+			this.select(`ark-zone-drop[x="${x}"][y="${y}"]`)
+		)
+	}
+
 	_dispatchSelectedZone () {
 		this.dispatchEvent(
 			new CustomEvent('zone:selected', {
@@ -327,13 +427,6 @@ export class Zone extends Component {
 				}
 			})
 		)
-	}
-
-	/** @param {DropZone} drop */
-	_selectDrags (drop) {
-		drop.selectAll('ark-zone-drag').forEach((/** @type {DragZone} */ drag) => {
-			drag.selected = true
-		})
 	}
 
 	_assignPosition () {

@@ -174,7 +174,7 @@ export class DropZone extends Component {
 		event.stopImmediatePropagation()
 
 		this.dispatchEvent(
-			new CustomEvent('drop:mouseEnter', {
+			new CustomEvent('drop:mouseover', {
 				bubbles: true,
 				detail: {
 					id: this.id,
