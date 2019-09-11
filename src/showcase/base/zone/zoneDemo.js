@@ -24,7 +24,7 @@ export class ZoneDemo extends Component {
         </ark-grid-item>
         <ark-grid-item cols="3" rows="1">
 
-          <ark-zone listen on-drag:dropped="_onDragDropped">
+          <ark-zone cols="4" listen on-drag:dropped="_onDragDropped">
             <ark-grid cols="4" gap="5px">
               <ark-zone-drop value="Drop A01"></ark-zone-drop>
               <ark-zone-drop value="Drop A02"></ark-zone-drop>

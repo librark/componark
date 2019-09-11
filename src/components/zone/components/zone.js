@@ -73,6 +73,8 @@ export class Zone extends Component {
 		return super.load()
 	}
 
+	// ---------------------------------------------------------------------------
+
 	cloneDrag (drag) {
 		const clone = /** @type {DragZone} */ (drag.cloneNode(true))
 		clone.id = uuidv4()
@@ -93,7 +95,6 @@ export class Zone extends Component {
 		})
 	}
 
-	// ---------------------------------------------------------------------------
 	/**
    * @param {DropZone} drop
    * @param {DragZone[]} drags
@@ -142,9 +143,9 @@ export class Zone extends Component {
 	/** @param {event} event */
 	onDragstart (event) {
 		event.stopImmediatePropagation()
-		const dataTransfer = []
+		this._dispatchSelectedZone('drops')
 
-		this.clearSelectedDrops()
+		const dataTransfer = []
 
 		this._getSelectedDrags().forEach((/** @type {DragZone} */ selectedDrag) => {
 			const isDragstart = event.target === selectedDrag
@@ -162,15 +163,13 @@ export class Zone extends Component {
 		const selected = target.selected
 		const drags = this._getSelectedDrags()
 
-		this.clearSelectedDrags()
+		this._dispatchSelectedZone()
 
 		if (target.selected && drags.length - 1) {
 			target.selected = selected
 		} else {
 			target.selected = !selected
 		}
-
-		this._dispatchSelectedZone()
 	}
 
 	/** @param {event} event */
@@ -178,10 +177,9 @@ export class Zone extends Component {
 		const target = /** @type {DropZone} */ (event.target)
 		const selected = target ? target.selected : false
 
-		this.clearSelectedDrops()
-		target.selected = selected
+		this._dispatchSelectedZone('drops')
 
-		this._dispatchSelectedZone()
+		target.selected = selected
 	}
 
 	/** @param {MouseEvent} event */
@@ -203,7 +201,6 @@ export class Zone extends Component {
 
 	onMouseUp () {
 		this._startSelection()
-		// this.selectionMode = false
 		this._resetDropStartEnd()
 	}
 
@@ -241,7 +238,6 @@ export class Zone extends Component {
 			drag.setAttribute('draggable', 'true')
 		})
 
-		// this.selectionMode = false
 		this._resetDropStartEnd()
 	}
 
@@ -312,6 +308,17 @@ export class Zone extends Component {
 	onZoneSelected (event) {
 		const zoneId = event['detail'] ? event['detail'].zoneId : null
 		this.selectionMode = this.id === zoneId
+
+		const clear = event['detail'] ? event['detail'].clear : 'all'
+
+		if (clear === 'drags') {
+			this.clearSelectedDrags()
+		} else if (clear === 'drops') {
+			this.clearSelectedDrops()
+		} else {
+			this.clearSelectedDrags()
+			this.clearSelectedDrops()
+		}
 	}
 
 	// ---------------------------------------------------------------------------
@@ -326,8 +333,6 @@ export class Zone extends Component {
 			this.setAttribute('selected', 'selected')
 		} else {
 			this.removeAttribute('selected')
-			this.clearSelectedDrags()
-			this.clearSelectedDrops()
 			this._resetDropStartEnd()
 		}
 	}
@@ -453,9 +458,6 @@ export class Zone extends Component {
 	}
 
 	_startSelection () {
-		// this.clearSelectedDrags()
-		// this.clearSelectedDrops()
-
 		if (!this.dropStart || !this.dropEnd) return
 
 		const start = {
@@ -521,20 +523,20 @@ export class Zone extends Component {
 
 	/** @param {string} x @param {string} y @return {DropZone} */
 	_selectDropByPosition (x, y) {
-		console.log(`ark-zone-drop[x="${x}"][y="${y}"]`)
-
 		return /** @type {DropZone} */ (this.select(
 			`ark-zone-drop[x="${x}"][y="${y}"]`
 		))
 	}
 
-	_dispatchSelectedZone () {
+	/** @param {string?} clear */
+	_dispatchSelectedZone (clear = 'all') {
 		this.dispatchEvent(
 			new CustomEvent('zone:selected', {
 				bubbles: true,
 				detail: {
 					zoneId: this.id,
-					origin: event
+					origin: event,
+					clear: clear
 				}
 			})
 		)
