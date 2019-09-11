@@ -12,23 +12,31 @@ export class ZoneDemo extends Component {
         <ark-grid-item cols="1" rows="3">
 
           <ark-zone listen on-drag:dropped="_onDragDropped">
-            <ark-zone-drop value="Drop A1">
-              <ark-zone-drag value="Drag 1">drag 1</ark-zone-drag>
-              <ark-zone-drag value="Drag 2">drag 2</ark-zone-drag>
-            </ark-zone-drop>
+            <ark-grid cols="1" rows="2" gap="5px">
+              <ark-zone-drop value="Drop A1">
+                <ark-zone-drag value="Drag 1">drag 1</ark-zone-drag>
+                <ark-zone-drag value="Drag 2">drag 2</ark-zone-drag>
+              </ark-zone-drop>
+              <ark-zone-drop value="Drop A2"></ark-zone-drop>
+            </ark-grid>
           </ark-zone>
 
         </ark-grid-item>
         <ark-grid-item cols="3" rows="1">
 
           <ark-zone listen on-drag:dropped="_onDragDropped">
-            <ark-zone-drop value="Drop A2" direction="row"></ark-zone-drop>
+            <ark-grid cols="4" gap="5px">
+              <ark-zone-drop value="Drop A01"></ark-zone-drop>
+              <ark-zone-drop value="Drop A02"></ark-zone-drop>
+              <ark-zone-drop value="Drop A03"></ark-zone-drop>
+              <ark-zone-drop value="Drop A04"></ark-zone-drop>
+            </ark-grid>
           </ark-zone>
 
         </ark-grid-item>
         <ark-grid-item cols="3" rows="2">
 
-            <ark-zone cols="3" listen style="background: white;"
+            <ark-zone cols="3" listen
               on-drag:dropped="_onDragDropped"
               on-drop:clicked="_onDropClicked"
               on-drag:clicked="_onDragClicked"
@@ -130,6 +138,14 @@ export class ZoneDemo extends Component {
         }
 
         ark-zone-drop{
+          background: #E5E5FF;
+        }
+
+        ark-zone{
+          background: white;
+        }
+        ark-zone[selected]{
+          background: blue;
         }
       `
 

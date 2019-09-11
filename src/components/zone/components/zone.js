@@ -458,10 +458,16 @@ export class Zone extends Component {
 
 		if (!this.dropStart || !this.dropEnd) return
 
-		const start = { x: this.dropStart.x, y: this.dropStart.y }
-		const end = { x: this.dropEnd.x, y: this.dropEnd.y }
+		const start = {
+			x: parseInt(this.dropStart.x), y: parseInt(this.dropStart.y)
+		}
+
+		const end = {
+			x: parseInt(this.dropEnd.x), y: parseInt(this.dropEnd.y)
+		}
 
 		const drops = this._getDropStartEnd(start, end)
+
 		this._selectDrags(drops.start, drops.end)
 	}
 
@@ -515,6 +521,8 @@ export class Zone extends Component {
 
 	/** @param {string} x @param {string} y @return {DropZone} */
 	_selectDropByPosition (x, y) {
+		console.log(`ark-zone-drop[x="${x}"][y="${y}"]`)
+
 		return /** @type {DropZone} */ (this.select(
 			`ark-zone-drop[x="${x}"][y="${y}"]`
 		))
