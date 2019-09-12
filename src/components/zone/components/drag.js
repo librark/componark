@@ -72,7 +72,7 @@ export class DragZone extends Component {
 	// --------------------------------------------------------------------------
 
 	draggableStart () {
-		this.selected = true
+		// this.selected = true
 		this.classList.add(`ark-zone-drag--dragging`)
 		setTimeout(_ => this.classList.add(`ark-zone-drag--hidden`))
 	}
@@ -192,13 +192,10 @@ export class DragZone extends Component {
 		this.draggableDrop(/** @type {DragZone[]} */ (drags))
 	}
 
-	/** @param {event} event */
+	/** @param {MouseEvent} event */
 	onClick (event) {
 		event.stopImmediatePropagation()
-
-		if (event['shiftKey']) {
-			this.selected = true
-		}
+		const origin = new MouseEvent(event.type, event)
 
 		this.dispatchEvent(
 			new CustomEvent('drag:clicked', {
@@ -206,7 +203,7 @@ export class DragZone extends Component {
 				detail: {
 					id: this.id,
 					value: this.value,
-					origin: event
+					origin: origin
 				}
 			})
 		)

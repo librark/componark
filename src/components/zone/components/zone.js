@@ -145,11 +145,19 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		this._dispatchSelectedZone('drops')
 
+		const dragStart = /** @type {DragZone} */ (event.target)
 		const dataTransfer = []
+
+		if (!dragStart.selected) {
+			this.clearSelectedDrags()
+		}
+
+		dragStart.selected = true
 
 		this._getSelectedDrags().forEach((/** @type {DragZone} */ selectedDrag) => {
 			const isDragstart = event.target === selectedDrag
 			dataTransfer.push(selectedDrag.generateDataTransfer(isDragstart))
+			selectedDrag.selected = true
 			selectedDrag.draggableStart()
 		})
 
@@ -160,15 +168,16 @@ export class Zone extends Component {
 	/** @param {event} event */
 	onDragClicked (event) {
 		const target = /** @type {DragZone} */ (event.target)
-		const selected = target.selected
-		const drags = this._getSelectedDrags()
+		const origin = event['detail'].origin
+		const selected = !target.selected
 
-		this._dispatchSelectedZone()
+		this._dispatchSelectedZone('drops')
 
-		if (target.selected && drags.length - 1) {
+		if (origin.ctrlKey) {
 			target.selected = selected
 		} else {
-			target.selected = !selected
+			this._dispatchSelectedZone()
+			target.selected = selected
 		}
 	}
 
