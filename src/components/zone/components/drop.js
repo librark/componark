@@ -98,6 +98,8 @@ export class DropZone extends Component {
 	onMouseOver (event) {
 		event.stopImmediatePropagation()
 
+		if (!event.shiftKey) return
+
 		this.dispatchEvent(
 			new CustomEvent('drop:mouseover', {
 				bubbles: true,
@@ -127,6 +129,29 @@ export class DropZone extends Component {
 		}
 
 		return null
+	}
+
+	/** @returns {{x:number, y:number}} */
+	getPositions () {
+		return {
+			x: parseInt(this.x) || 0,
+			y: parseInt(this.y) || 0
+		}
+	}
+
+	/** @param {string} x @param {string} y @returns {DropZone} */
+	selectDropByPosition (x, y) {
+		return /** @type {DropZone} */ (
+			this.select(`ark-zone-drop[x="${x}"][y="${y}"]`)
+		)
+	}
+
+	/** @param {boolean} selected */
+	setSelectedDrags (selected) {
+		this.selectAll('ark-zone-drag').forEach(
+			(/** @type {DragZone} */ drap) => {
+				drap.selected = selected
+			})
 	}
 
 	// --------------------------------------------------------------------------
