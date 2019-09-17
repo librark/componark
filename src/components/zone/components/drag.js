@@ -66,6 +66,9 @@ export class DragZone extends Component {
 		this.addEventListener('click', this.onClick.bind(this))
 
 		// ------------------------------------------------------------------------
+
+		this._setPosition(this.getParentDrop())
+
 		return super.load()
 	}
 
@@ -214,12 +217,34 @@ export class DragZone extends Component {
 		this.selected = !this.selected
 	}
 
+	/** @returns {DropZone} */
+	getParentDrop () {
+		let node = null
+		node = this
+		while (node) {
+			node = node.parentElement
+
+			if (!node || node.nodeName.toLowerCase() === 'ark-zone-drop') {
+				return /** @type {DropZone} */ (node)
+			}
+		}
+
+		return null
+	}
+
 	// ---------------------------------------------------------------------------
 
 	_draggableRemoveStyle () {
 		this.style.padding = `0`
 		this.classList.remove(`ark-zone-drag--enter`)
 		this.classList.remove(`ark-zone-drag--enter_disabled`)
+	}
+
+	/** @param {DropZone} parent */
+	_setPosition (parent) {
+		if (!parent) return
+		this.x = parent.x
+		this.y = parent.y
 	}
 }
 customElements.define('ark-zone-drag', DragZone)

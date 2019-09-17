@@ -8,19 +8,11 @@ import { uuidv4 } from '../../../utils'
 
 export class Zone extends Component {
 	init (context = {}) {
-		this.cols = context['cols'] || this.cols || 0
-
-		this.id = uuidv4()
-
 		/** @type {HTMLElement} */
 		const parent = /** @type {unknown} */ (window.document)
 		this.parent = /** @type {HTMLElement} */ (parent)
 
 		return super.init()
-	}
-
-	reflectedProperties () {
-		return ['cols']
 	}
 
 	render () {
@@ -69,7 +61,6 @@ export class Zone extends Component {
 		this.parent.addEventListener('keyup', this.onKeyUp.bind(this))
 
 		// ------------------------------------------------------------------------
-		this._assignPosition()
 		return super.load()
 	}
 
@@ -148,18 +139,11 @@ export class Zone extends Component {
 		const dragStart = /** @type {DragZone} */ (event.target)
 		const dataTransfer = []
 
-		if (!dragStart.selected) {
-			this.clearSelectedDrags()
-		}
+		this.clearSelectedDrags()
+		this.clearSelectedDrops()
 
 		dragStart.selected = true
-
-		this._getSelectedDrags().forEach((/** @type {DragZone} */ selectedDrag) => {
-			const isDragstart = event.target === selectedDrag
-			dataTransfer.push(selectedDrag.generateDataTransfer(isDragstart))
-			selectedDrag.selected = true
-			selectedDrag.draggableStart()
-		})
+		dataTransfer.push(dragStart.generateDataTransfer(true))
 
 		event['dataTransfer'].clearData()
 		event['dataTransfer'].setData(JSON.stringify(dataTransfer), '')
@@ -261,7 +245,9 @@ export class Zone extends Component {
       !this.dropStart ||
       !this.selectionMode ||
       this.dropEnd === target
-		) { return }
+		) {
+			return
+		}
 
 		this.dropEnd = target
 
@@ -448,9 +434,9 @@ export class Zone extends Component {
 
 	/** @param {string} keyboardAction */
 	_pasteSelectedDrags (keyboardAction) {
-		const drop = /** @type {DropZone} */ (
-			this.select('ark-zone-drop[selected]')
-		)
+		const drop = /** @type {DropZone} */ (this.select(
+			'ark-zone-drop[selected]'
+		))
 
 		const drags = this._getSelectedDrags()
 
@@ -470,11 +456,13 @@ export class Zone extends Component {
 		if (!this.dropStart || !this.dropEnd) return
 
 		const start = {
-			x: parseInt(this.dropStart.x), y: parseInt(this.dropStart.y)
+			x: parseInt(this.dropStart.x),
+			y: parseInt(this.dropStart.y)
 		}
 
 		const end = {
-			x: parseInt(this.dropEnd.x), y: parseInt(this.dropEnd.y)
+			x: parseInt(this.dropEnd.x),
+			y: parseInt(this.dropEnd.y)
 		}
 
 		const drops = this._getDropStartEnd(start, end)
@@ -549,31 +537,6 @@ export class Zone extends Component {
 				}
 			})
 		)
-	}
-
-	_assignPosition () {
-		const drops = /** @type {DropZone[]} */ this.selectAll('ark-zone-drop')
-		let x = 0
-		let y = 0
-
-		drops.forEach((/** @type {DropZone} */ drop) => {
-			this._setPosition(drop, String(x), String(y))
-
-			if (y < this.cols - 1) {
-				y++
-			} else {
-				x++
-				y = 0
-			}
-		})
-	}
-
-	/**
-   * @param {DropZone} drop @param {String} x @param {String} y
-   * */
-	_setPosition (drop, x, y) {
-		drop.setAttribute('x', x)
-		drop.setAttribute('y', y)
 	}
 
 	/** @return {DropZone} */

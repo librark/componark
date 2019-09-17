@@ -12,11 +12,14 @@ import { uuidv4 } from '../../../utils'
 
 export class DropZone extends Component {
 	init (context = {}) {
-		this.x = this.x
-		this.y = this.y
 		this.value = this.value || context['value']
 
+		this.x = this.x
+		this.y = this.y
+
 		this.id = uuidv4()
+		this.cols = this.cols || 1
+		this.sequence = 0
 
 		/** @type {HTMLElement} */
 		const parent = /** @type {unknown} */ (window.document)
@@ -26,7 +29,7 @@ export class DropZone extends Component {
 	}
 
 	reflectedProperties () {
-		return ['x', 'y', 'value']
+		return ['x', 'y', 'value', 'cols']
 	}
 
 	render () {
@@ -63,6 +66,8 @@ export class DropZone extends Component {
 		this.addEventListener('mouseover', this.onMouseOver.bind(this))
 
 		// ------------------------------------------------------------------------
+		this._setPosition(this.getParentDrop())
+
 		return super.load()
 	}
 
@@ -155,6 +160,8 @@ export class DropZone extends Component {
 	onClick (event) {
 		event.stopImmediatePropagation()
 
+		if (!this.fixed) return
+
 		this._toggleSelected()
 
 		this.dispatchEvent(
@@ -186,12 +193,45 @@ export class DropZone extends Component {
 	}
 
 	// --------------------------------------------------------------------------
+
+	/** @returns {DropZone} */
+	getParentDrop () {
+		let node = null
+		node = this
+		while (node) {
+			node = node.parentElement
+
+			if (!node || node.nodeName.toLowerCase() === 'ark-zone-drop') {
+				return /** @type {DropZone} */ (node)
+			}
+
+			if (node.nodeName.toLowerCase() === 'ark-zone-drag') return null
+		}
+
+		return null
+	}
+
+	// --------------------------------------------------------------------------
+	get fixed () {
+		return this.hasAttribute('fixed')
+	}
+
+	set fixed (value) {
+		if (value) {
+			this.setAttribute('fixed', 'true')
+		} else {
+			this.removeAttribute('fixed')
+		}
+	}
+
 	get selected () {
 		return this.hasAttribute('selected')
 	}
 
 	/** @param {boolean} value */
 	set selected (value) {
+		if (!this.fixed) value = false
+
 		if (value) {
 			this.setAttribute('selected', 'selected')
 		} else {
@@ -222,6 +262,20 @@ export class DropZone extends Component {
 
 	_toggleSelected () {
 		this.selected = !this.selected
+	}
+
+	/** @param {DropZone} parent */
+	_setPosition (parent) {
+		if (!parent) return
+
+		const sequence = parent.sequence
+		const cols = parseInt(parent.cols)
+
+		this.x = sequence % cols
+		this.y = Math.floor(sequence / cols)
+		this.fixed = true
+
+		parent.sequence += 1
 	}
 }
 customElements.define('ark-zone-drop', DropZone)

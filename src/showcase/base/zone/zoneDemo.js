@@ -8,89 +8,83 @@ export class ZoneDemo extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `<!--  -->
-      <ark-grid cols="4" gap="5px" class="container">
-        <ark-grid-item cols="1" rows="3">
 
-          <ark-zone listen on-drag:dropped="_onDragDropped">
-            <ark-grid cols="1" rows="2" gap="5px">
-              <ark-zone-drop value="Drop A1">
-                <ark-zone-drag value="Drag 1">drag 1</ark-zone-drag>
-                <ark-zone-drag value="Drag 2">drag 2</ark-zone-drag>
+      <ark-zone>
+          <ark-grid cols="4" gap="15px">
+
+            <ark-grid-item cols="4">
+              <ark-zone-drop cols="5" value="Drop A" class="white">
+                <ark-grid cols="5" gap="5px">
+
+                  <ark-zone-drop value="Drop A 01">
+                    <ark-zone-drag value="Drag A 01">drag 1</ark-zone-drag>
+                  </ark-zone-drop>
+
+                  <ark-zone-drop value="Drop A 02">
+                    <ark-zone-drag value="Drag A 02">drag 2</ark-zone-drag>
+                  </ark-zone-drop>
+
+                  <ark-zone-drop value="Drop A 03"></ark-zone-drop>
+                  <ark-zone-drop value="Drop A 04"></ark-zone-drop>
+                  <ark-zone-drop value="Drop A 05"></ark-zone-drop>
+                  <ark-zone-drop value="Drop A 06"></ark-zone-drop>
+                  <ark-zone-drop value="Drop A 07"></ark-zone-drop>
+                  <ark-zone-drop value="Drop A 08"></ark-zone-drop>
+                  <ark-zone-drop value="Drop A 09"></ark-zone-drop>
+                  <ark-zone-drop value="Drop A 010"></ark-zone-drop>
+
+                </ark-grid>
               </ark-zone-drop>
-              <ark-zone-drop value="Drop A2"></ark-zone-drop>
-            </ark-grid>
-          </ark-zone>
+            </ark-grid-item>
 
-        </ark-grid-item>
-        <ark-grid-item cols="3" rows="1">
+            <ark-grid-item cols="4">
+              <ark-zone-drop cols="5" value="Drop B" class="white">
+                <ark-grid cols="5" gap="5px">
 
-          <ark-zone cols="4" listen on-drag:dropped="_onDragDropped">
-            <ark-grid cols="4" gap="5px">
-              <ark-zone-drop value="Drop A01"></ark-zone-drop>
-              <ark-zone-drop value="Drop A02"></ark-zone-drop>
-              <ark-zone-drop value="Drop A03"></ark-zone-drop>
-              <ark-zone-drop value="Drop A04"></ark-zone-drop>
-            </ark-grid>
-          </ark-zone>
+                  <ark-zone-drop value="Drop B 01"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 02"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 03"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 04"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 05"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 06"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 07"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 08"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 09"></ark-zone-drop>
+                  <ark-zone-drop value="Drop B 010"></ark-zone-drop>
 
-        </ark-grid-item>
-        <ark-grid-item cols="3" rows="2">
+                </ark-grid>
+              </ark-zone-drop>
+            </ark-grid-item>
 
-            <ark-zone cols="3" listen
-              on-drag:dropped="_onDragDropped"
-              on-drop:clicked="_onDropClicked"
-              on-drag:clicked="_onDragClicked"
-            >
-              <ark-grid cols="3" rows="4" gap="5px">
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 1">
-                    <ark-zone-drag value="Drag 3">
-                      <p>===== Drag 3 =====</p>
-                    </ark-zone-drag>
-                  </ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 2">
-                    <ark-zone-drag value="Drag 4">
-                      <p>===== Drag 4 =====</p>
-                    </ark-zone-drag>
-                  </ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 3"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 4"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 5"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 6"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 7"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 8"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 9"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 10"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 11"></ark-zone-drop>
-                </ark-grid-item>
-                <ark-grid-item>
-                  <ark-zone-drop value="Drop 12"></ark-zone-drop>
-                </ark-grid-item>
-              </ark-grid>
-            </ark-zone>
 
-        </ark-grid-item>
-      </ark-grid>
+            <ark-grid-item cols="2">
+              <ark-zone-drop cols="2" value="Drop C" class="white">
+                <ark-grid cols="2" gap="5px">
+
+                  <ark-zone-drop value="Drop C 01"></ark-zone-drop>
+                  <ark-zone-drop value="Drop C 02"></ark-zone-drop>
+                  <ark-zone-drop value="Drop C 03"></ark-zone-drop>
+                  <ark-zone-drop value="Drop C 04"></ark-zone-drop>
+
+                </ark-grid>
+              </ark-zone-drop>
+            </ark-grid-item>
+
+            <ark-grid-item cols="2">
+              <ark-zone-drop cols="2" value="Drop D" class="white">
+                <ark-grid cols="2" gap="5px">
+
+                  <ark-zone-drop value="Drop D 01"></ark-zone-drop>
+                  <ark-zone-drop value="Drop D 02"></ark-zone-drop>
+                  <ark-zone-drop value="Drop D 03"></ark-zone-drop>
+                  <ark-zone-drop value="Drop D 04"></ark-zone-drop>
+
+                </ark-grid>
+              </ark-zone-drop>
+            </ark-grid-item>
+
+          </ark-grid>
+      </ark-zone>
 
       <p>
         Elemento Arrastrados: <span data-drags></span>
@@ -123,8 +117,9 @@ export class ZoneDemo extends Component {
 	_appendStyle () {
 		const style = document.createElement('style')
 		style.innerHTML = /* css */ `
-        .container{
+        demo-zone{
           height: 80vh;
+          display: block;
         }
 
         ark-grid ark-grid-item{
@@ -141,9 +136,11 @@ export class ZoneDemo extends Component {
           background: #E5E5FF;
         }
 
-        ark-zone{
+        .white{
           background: white;
+          outline: 1px solid;
         }
+
         ark-zone[selected]{
           background: blue;
         }
