@@ -58,6 +58,9 @@ export class DragZone extends Component {
 	/** @param {event} event */
 	onDraggableStart (event) {
 		event.stopImmediatePropagation()
+		this.dispatchEvent(new CustomEvent('drag:dragstart', {
+			bubbles: true
+		}))
 
 		this.selected = true
 

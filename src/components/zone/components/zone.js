@@ -30,6 +30,7 @@ export class Zone extends Component {
 		// -------------------------------------------------------------------------
 		// drag
 		// -------------------------------------------------------------------------
+		this.addEventListener('drag:dragstart', this.onDragDragstart.bind(this))
 		this.addEventListener('drag:dragenter', this.onDragDragenter.bind(this))
 		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 
@@ -86,6 +87,14 @@ export class Zone extends Component {
 	// ---------------------------------------------------------------------------
 	// Drop
 	// ---------------------------------------------------------------------------
+	/** @param {event} event */
+	onDragDragstart (event) {
+		event.stopImmediatePropagation()
+		this._cleanSelectedDrags()
+		this._cleanSelectedDrops()
+
+		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+	}
 
 	/** @param {event} event */
 	onDragDragenter (event) {
