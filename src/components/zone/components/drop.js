@@ -154,6 +154,48 @@ export class DropZone extends Component {
 			})
 	}
 
+	/**
+   * @param {DropZone} selectedDrop
+   * @param {DragZone[]} drags
+   * @returns {boolean}
+   * */
+	isDestinationValid (selectedDrop, drags) {
+		if (!drags.length) return
+
+		const difference = this.getDifferenceDropsPositions(selectedDrop, drags[0])
+
+		for (const drag of drags) {
+			const relativeDrop = this.getRelativeDrop(drag, difference)
+			if (!relativeDrop) return false
+		}
+
+		return true
+	}
+
+	/**
+   * @param {DropZone} selectedDrop
+   * @param {DragZone} drag
+   * @returns {{x:number, y:number}}
+   * */
+	getDifferenceDropsPositions (selectedDrop, drag) {
+		return {
+			x: parseInt(selectedDrop.x) - parseInt(drag.x),
+			y: parseInt(selectedDrop.y) - parseInt(drag.y)
+		}
+	}
+
+	/**
+   * @param {DragZone} drag
+   * @param {{x:number, y:number}} differenceDropsPositions
+   * @returns {DropZone}
+   * */
+	getRelativeDrop (drag, differenceDropsPositions) {
+		const x = parseInt(drag.x) + differenceDropsPositions.x
+		const y = parseInt(drag.y) + differenceDropsPositions.y
+
+		return this.selectDropByPosition(x.toString(), y.toString())
+	}
+
 	// --------------------------------------------------------------------------
 	get fixed () {
 		return this.hasAttribute('fixed')
@@ -199,8 +241,8 @@ export class DropZone extends Component {
 		const sequence = parent.sequence
 		const cols = parseInt(parent.cols)
 
-		this.x = sequence % cols
-		this.y = Math.floor(sequence / cols)
+		this.x = Math.floor(sequence / cols)
+		this.y = sequence % cols
 		this.fixed = true
 
 		parent.sequence += 1

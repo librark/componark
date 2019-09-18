@@ -5,6 +5,9 @@
 import {
 	Component
 } from '../../component'
+import {
+	uuidv4
+} from '../../../utils'
 
 export class Zone extends Component {
 	init (context = {}) {
@@ -92,8 +95,6 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		this._cleanSelectedDrags()
 		this._cleanSelectedDrops()
-
-		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 	}
 
 	/** @param {event} event */
@@ -136,6 +137,72 @@ export class Zone extends Component {
 				drag.removeAttribute('draggable')
 			})
 		}
+
+		if (!event.ctrlKey) return
+
+		const keyCode = String.fromCharCode(event.keyCode).toLowerCase()
+
+		if (keyCode === 'c') {
+			this.keyboardAction = 'copy'
+		} else if (keyCode === 'x') {
+			this.keyboardAction = 'cut'
+		} else if (keyCode === 'v') {
+			this._pasteSelectedDrags(this.keyboardAction)
+			this.keyboardAction = undefined
+		}
+	}
+
+	/** @param {string} keyboardAction */
+	_pasteSelectedDrags (keyboardAction) {
+		if (!keyboardAction) return
+
+		const drops = this._getSelectedDrops()
+		const drags = this._getSelectedDrags()
+
+		if (!drops.length || !drags.length) return
+		const selectedDrop = drops[0]
+
+		if (keyboardAction === 'copy') {
+			this._copyDrags(selectedDrop, drags)
+		} else if (keyboardAction === 'cut') {
+			this._cutDrags(selectedDrop, drags)
+		}
+	}
+
+	/** @param {DropZone} drop @param {DragZone[]} drags */
+	_copyDrags (drop, drags) {
+		const parentDrop = drop.getParentDrop()
+
+		if (!parentDrop.isDestinationValid(drop, drags)) return
+
+		const difference = parentDrop.getDifferenceDropsPositions(drop, drags[0])
+
+		for (const drag of drags) {
+			const relativeDrop = parentDrop.getRelativeDrop(drag, difference)
+			drag.selected = false
+
+			const clone = /** @type {DragZone} */ (drag.cloneNode(true))
+			relativeDrop.appendChild(clone)
+
+			clone.id = uuidv4()
+			clone.setPosition()
+		}
+	}
+
+	/** @param {DropZone} drop @param {DragZone[]} drags */
+	_cutDrags (drop, drags) {
+		const parentDrop = drop.getParentDrop()
+
+		if (!parentDrop.isDestinationValid(drop, drags)) return
+
+		const difference = parentDrop.getDifferenceDropsPositions(drop, drags[0])
+
+		for (const drag of drags) {
+			const relativeDrop = parentDrop.getRelativeDrop(drag, difference)
+			relativeDrop.appendChild(drag)
+			drag.setPosition()
+			drag.selected = false
+		}
 	}
 
 	/** @param {KeyboardEvent} event */
@@ -155,6 +222,9 @@ export class Zone extends Component {
 		if (!event.shiftKey) return
 
 		const target = /** @type {Component} */ (event.target)
+
+		if (target.tagName.toLowerCase() !== 'ark-zone-drop') return
+
 		this.dropStart = this.dropEnd = /** @type {DropZone} */ (target)
 
 		this._showMultipleSelection()
@@ -164,6 +234,8 @@ export class Zone extends Component {
 		this._showMultipleSelection()
 		this._cleanDropStartDropEnd()
 	}
+
+	// ---------------------------------------------------------------------------
 
 	_showMultipleSelection () {
 		if (
@@ -224,7 +296,6 @@ export class Zone extends Component {
 		}
 	}
 
-	// ---------------------------------------------------------------------------
 	/** @returns {DropZone[]} */
 	_getSelectedDrops () {
 		return /** @type {DropZone[]} */ ([
