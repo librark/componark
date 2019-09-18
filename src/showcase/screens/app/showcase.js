@@ -74,7 +74,7 @@ export default class Showcase extends Component {
 				try {
 					screen.init({ type: this.type })
 				} catch (error) {
-					console.log(error)
+					console.error(error)
 				}
 
 				this._setContent(screen)

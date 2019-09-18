@@ -1,60 +1,46 @@
 /**
  * @typedef {import('./drag').DragZone} DragZone
  * */
-import {
-	getDataTransfer,
-	getElementsByDataTransfer,
-	isValidLevel
-} from './utils'
 
-import { Component } from '../../component'
-import { uuidv4 } from '../../../utils'
+import {
+	Component
+} from '../../component'
+import {
+	uuidv4
+} from '../../../utils'
 
 export class DropZone extends Component {
 	init (context = {}) {
-		this.x = this.x
-		this.y = this.y
 		this.value = this.value || context['value']
 
-		this.id = uuidv4()
+		// -------------------------------------------------------------------------
+		// Local
+		// -------------------------------------------------------------------------
 
-		/** @type {HTMLElement} */
-		const parent = /** @type {unknown} */ (window.document)
-		this.parent = /** @type {HTMLElement} */ (parent)
+		this.x = this.x
+		this.y = this.y
+		this.id = uuidv4()
+		this.cols = this.cols || 1
+		this.sequence = 0
+		this.selected = false
 
 		return super.init()
 	}
 
 	reflectedProperties () {
-		return ['x', 'y', 'value']
+		return ['x', 'y', 'value', 'cols']
 	}
 
 	render () {
-		this._setAttributeDirection()
-		this.updateDragPosition()
 		return super.render()
 	}
 
 	load () {
 		// ------------------------------------------------------------------------
-		// dragover
-		// ------------------------------------------------------------------------
-		this.addEventListener('dragover', this.onDragover.bind(this))
-
-		// ------------------------------------------------------------------------
-		// dragenter
+		// drag
 		// ------------------------------------------------------------------------
 		this.addEventListener('dragenter', this.onDragenter.bind(this))
-
-		// ------------------------------------------------------------------------
-		// dragleave
-		// ------------------------------------------------------------------------
 		this.addEventListener('dragleave', this.onDragleave.bind(this))
-
-		// ------------------------------------------------------------------------
-		// drop
-		// ------------------------------------------------------------------------
-		this.addEventListener('drop', this.onDrop.bind(this))
 
 		// ------------------------------------------------------------------------
 		// click
@@ -63,99 +49,38 @@ export class DropZone extends Component {
 		this.addEventListener('mouseover', this.onMouseOver.bind(this))
 
 		// ------------------------------------------------------------------------
+		this._setPosition(this.getParentDrop())
+
 		return super.load()
-	}
-
-	/** @param {DragZone[]} drags */
-	droppableEnter (drags) {
-		let isValid = true
-		drags.forEach(drag => {
-			if (!isValidLevel(this, drag)) isValid = false
-		})
-
-		if (isValid) {
-			this.classList.add('ark-zone-drop--hover')
-		} else {
-			this.classList.add('ark-zone-drop--hover_disabled')
-		}
-	}
-
-	droppableLeave () {
-		this._droppableRemoveStyle()
-	}
-
-	/** @param {DragZone} dragstart @param {DragZone[]} drags */
-	droppableDrop (dragstart, drags, copy) {
-		this._droppableRemoveStyle()
-
-		this.dispatchEvent(
-			new CustomEvent('zone:drop', {
-				detail: {
-					drop: this,
-					drags: drags,
-					dragstart: dragstart,
-					copy: copy
-				}
-			})
-		)
-	}
-
-	updateDragPosition () {
-		this.selectAll('ark-zone-drag').forEach(drag => {
-			drag.setAttribute('x', this.x)
-			drag.setAttribute('y', this.y)
-			drag.setAttribute('drop', this.id)
-		})
 	}
 
 	// --------------------------------------------------------------------------
 	/** @param {event} event */
-	onDragover (event) {
-		event.stopImmediatePropagation()
-		event.preventDefault()
-	}
-
-	/** @param {event} event */
 	onDragenter (event) {
 		event.stopImmediatePropagation()
-		event.preventDefault()
-		const drags = getElementsByDataTransfer(this.parent, event)
-		this.droppableEnter(/** @type {DragZone[]} */ (drags))
+
+		if (!this.fixed) return
+
+		this.classList.add('ark-zone-drop--hover')
+
+		this.dispatchEvent(new CustomEvent('drop:dragenter', {
+			bubbles: true
+		}))
 	}
 
 	/** @param {event} event */
 	onDragleave (event) {
 		event.stopImmediatePropagation()
-		event.preventDefault()
-		this.droppableLeave()
-	}
 
-	/** @param {event} event */
-	onDrop (event) {
-		event.stopImmediatePropagation()
-		event.preventDefault()
-
-		const drags = /** @type {DragZone[]} */ (getElementsByDataTransfer(
-			this.parent,
-			event
-		))
-
-		const dataDragstart = getDataTransfer(event).find(
-			data => data.dragstart === true
-		)
-
-		const dragstart = this._searchDragStart(dataDragstart, drags)
-
-		const copy = event['ctrlKey'] || false
-
-		this.droppableDrop(dragstart, drags, copy)
+		this._droppableRemoveStyle()
 	}
 
 	/** @param {event} event */
 	onClick (event) {
 		event.stopImmediatePropagation()
 
-		this._toggleSelected()
+		if (!this.fixed) return
+		const origin = new MouseEvent(event.type, event)
 
 		this.dispatchEvent(
 			new CustomEvent('drop:clicked', {
@@ -163,7 +88,7 @@ export class DropZone extends Component {
 				detail: {
 					id: this.id,
 					value: this.value,
-					origin: event
+					origin: origin
 				}
 			})
 		)
@@ -172,6 +97,8 @@ export class DropZone extends Component {
 	/** @param {MouseEvent} event */
 	onMouseOver (event) {
 		event.stopImmediatePropagation()
+
+		if (!event.shiftKey) return
 
 		this.dispatchEvent(
 			new CustomEvent('drop:mouseover', {
@@ -186,12 +113,110 @@ export class DropZone extends Component {
 	}
 
 	// --------------------------------------------------------------------------
+
+	/** @returns {DropZone} */
+	getParentDrop () {
+		let node = null
+		node = this
+		while (node) {
+			node = node.parentElement
+
+			if (!node || node.nodeName.toLowerCase() === 'ark-zone-drop') {
+				return /** @type {DropZone} */ (node)
+			}
+
+			if (node.nodeName.toLowerCase() === 'ark-zone-drag') return null
+		}
+
+		return null
+	}
+
+	/** @returns {{x:number, y:number}} */
+	getPositions () {
+		return {
+			x: parseInt(this.x) || 0,
+			y: parseInt(this.y) || 0
+		}
+	}
+
+	/** @param {string} x @param {string} y @returns {DropZone} */
+	selectDropByPosition (x, y) {
+		return /** @type {DropZone} */ (
+			this.select(`ark-zone-drop[x="${x}"][y="${y}"]`)
+		)
+	}
+
+	/** @param {boolean} selected */
+	setSelectedDrags (selected) {
+		this.selectAll('ark-zone-drag').forEach(
+			(/** @type {DragZone} */ drap) => {
+				drap.selected = selected
+			})
+	}
+
+	/**
+   * @param {DropZone} selectedDrop
+   * @param {DragZone[]} drags
+   * @returns {boolean}
+   * */
+	isDestinationValid (selectedDrop, drags) {
+		if (!drags.length) return
+
+		const difference = this.getDifferenceDropsPositions(selectedDrop, drags[0])
+
+		for (const drag of drags) {
+			const relativeDrop = this.getRelativeDrop(drag, difference)
+			if (!relativeDrop) return false
+		}
+
+		return true
+	}
+
+	/**
+   * @param {DropZone} selectedDrop
+   * @param {DragZone} drag
+   * @returns {{x:number, y:number}}
+   * */
+	getDifferenceDropsPositions (selectedDrop, drag) {
+		return {
+			x: parseInt(selectedDrop.x) - parseInt(drag.x),
+			y: parseInt(selectedDrop.y) - parseInt(drag.y)
+		}
+	}
+
+	/**
+   * @param {DragZone} drag
+   * @param {{x:number, y:number}} differenceDropsPositions
+   * @returns {DropZone}
+   * */
+	getRelativeDrop (drag, differenceDropsPositions) {
+		const x = parseInt(drag.x) + differenceDropsPositions.x
+		const y = parseInt(drag.y) + differenceDropsPositions.y
+
+		return this.selectDropByPosition(x.toString(), y.toString())
+	}
+
+	// --------------------------------------------------------------------------
+	get fixed () {
+		return this.hasAttribute('fixed')
+	}
+
+	set fixed (value) {
+		if (value) {
+			this.setAttribute('fixed', 'true')
+		} else {
+			this.removeAttribute('fixed')
+		}
+	}
+
 	get selected () {
 		return this.hasAttribute('selected')
 	}
 
 	/** @param {boolean} value */
 	set selected (value) {
+		if (!this.fixed) value = false
+
 		if (value) {
 			this.setAttribute('selected', 'selected')
 		} else {
@@ -200,28 +225,27 @@ export class DropZone extends Component {
 	}
 
 	// --------------------------------------------------------------------------
-	/** @param {object} dataDrag @param {DragZone[]} drags @returns {DragZone} */
-	_searchDragStart (dataDrag, drags) {
-		return /** @type {DragZone} */ drags.find(drag => {
-			if (drag) {
-				return drag.id === dataDrag.id
-			}
-		})
-	}
-
 	_droppableRemoveStyle () {
 		this.classList.remove(`ark-zone-drop--hover`)
 		this.classList.remove(`ark-zone-drop--hover_disabled`)
 	}
 
-	_setAttributeDirection () {
-		if (!this.hasAttribute('direction')) {
-			this.setAttribute('direction', 'column')
-		}
-	}
-
 	_toggleSelected () {
 		this.selected = !this.selected
+	}
+
+	/** @param {DropZone} parent */
+	_setPosition (parent) {
+		if (!parent) return
+
+		const sequence = parent.sequence
+		const cols = parseInt(parent.cols)
+
+		this.x = Math.floor(sequence / cols)
+		this.y = sequence % cols
+		this.fixed = true
+
+		parent.sequence += 1
 	}
 }
 customElements.define('ark-zone-drop', DropZone)

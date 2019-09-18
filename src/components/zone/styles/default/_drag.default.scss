@@ -24,15 +24,16 @@
 
   .#{$component} {
     &--dragging {
-      border: 1px solid rgba($color: $muted, $alpha: .5);
+      border: 1px solid rgba($color: $muted, $alpha: 0.5);
     }
 
     &--hidden {
-      display: none;
+      // visibility: hidden;
+      opacity: 0;
     }
 
     &--enter {
-      background: rgba($color: $muted, $alpha: .2);
+      background: rgba($color: $muted, $alpha: 0.2);
     }
 
     &--enter_disabled {
