@@ -1,4 +1,6 @@
-import { Component } from '../components'
+import {
+	Component
+} from '../components'
 
 export class ZoneDemo extends Component {
 	init (context) {
@@ -9,7 +11,12 @@ export class ZoneDemo extends Component {
 	render () {
 		this.innerHTML = /* html */ `<!--  -->
 
-      <ark-zone>
+      <ark-zone
+        listen
+        on-zone:alter="_onZoneAlter"
+        on-drop:clicked="_onDropClicked"
+        on-drag:clicked="_onDragClicked"
+      >
           <ark-grid cols="4" gap="15px">
 
             <ark-grid-item cols="4">
@@ -99,7 +106,7 @@ export class ZoneDemo extends Component {
 	}
 
 	/** @param {event} event */
-	_onDragDropped (event) {
+	_onZoneAlter (event) {
 		const value = event['detail']['value']
 		this.select('[data-drags]').innerHTML = JSON.stringify(value)
 	}

@@ -35,6 +35,7 @@ export class Zone extends Component {
 		// -------------------------------------------------------------------------
 		this.addEventListener('drag:dragstart', this.onDragDragstart.bind(this))
 		this.addEventListener('drag:dragenter', this.onDragDragenter.bind(this))
+		this.addEventListener('drag:dragend', this.onDragDragend.bind(this))
 		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 
 		// -------------------------------------------------------------------------
@@ -116,6 +117,19 @@ export class Zone extends Component {
 	}
 
 	/** @param {event} event */
+	onDragDragend (event) {
+		event.stopImmediatePropagation()
+
+		const dragDropped = new EventAlterZone('MOVE')
+
+		const drag = /** @type {DragZone} */ (event.target)
+		const drop = drag.getParentDrop()
+
+		dragDropped.setItem(drop, drag)
+		dragDropped.dispatch(this)
+	}
+
+	/** @param {event} event */
 	onDragClicked (event) {
 		const target = /** @type {DragZone} */ (event.target)
 		const selected = target ? target.selected : false
@@ -147,61 +161,8 @@ export class Zone extends Component {
 		} else if (keyCode === 'x') {
 			this.keyboardAction = 'cut'
 		} else if (keyCode === 'v') {
-			this._pasteSelectedDrags(this.keyboardAction)
+			this._pasteOption(this.keyboardAction)
 			this.keyboardAction = undefined
-		}
-	}
-
-	/** @param {string} keyboardAction */
-	_pasteSelectedDrags (keyboardAction) {
-		if (!keyboardAction) return
-
-		const drops = this._getSelectedDrops()
-		const drags = this._getSelectedDrags()
-
-		if (!drops.length || !drags.length) return
-		const selectedDrop = drops[0]
-
-		if (keyboardAction === 'copy') {
-			this._copyDrags(selectedDrop, drags)
-		} else if (keyboardAction === 'cut') {
-			this._cutDrags(selectedDrop, drags)
-		}
-	}
-
-	/** @param {DropZone} drop @param {DragZone[]} drags */
-	_copyDrags (drop, drags) {
-		const parentDrop = drop.getParentDrop()
-
-		if (!parentDrop.isDestinationValid(drop, drags)) return
-
-		const difference = parentDrop.getDifferenceDropsPositions(drop, drags[0])
-
-		for (const drag of drags) {
-			const relativeDrop = parentDrop.getRelativeDrop(drag, difference)
-			drag.selected = false
-
-			const clone = /** @type {DragZone} */ (drag.cloneNode(true))
-			relativeDrop.appendChild(clone)
-
-			clone.id = uuidv4()
-			clone.setPosition()
-		}
-	}
-
-	/** @param {DropZone} drop @param {DragZone[]} drags */
-	_cutDrags (drop, drags) {
-		const parentDrop = drop.getParentDrop()
-
-		if (!parentDrop.isDestinationValid(drop, drags)) return
-
-		const difference = parentDrop.getDifferenceDropsPositions(drop, drags[0])
-
-		for (const drag of drags) {
-			const relativeDrop = parentDrop.getRelativeDrop(drag, difference)
-			relativeDrop.appendChild(drag)
-			drag.setPosition()
-			drag.selected = false
 		}
 	}
 
@@ -236,6 +197,71 @@ export class Zone extends Component {
 	}
 
 	// ---------------------------------------------------------------------------
+	/** @param {string} keyboardAction */
+	_pasteOption (keyboardAction) {
+		if (!keyboardAction) return
+
+		const drops = this._getSelectedDrops()
+		const drags = this._getSelectedDrags()
+
+		if (!drops.length || !drags.length) return
+		const selectedDrop = drops[0]
+
+		if (keyboardAction === 'copy') {
+			this._copyDrags(selectedDrop, drags)
+		} else if (keyboardAction === 'cut') {
+			this._cutDrags(selectedDrop, drags)
+		}
+	}
+
+	/** @param {DropZone} drop @param {DragZone[]} drags */
+	_moveSelectedDrags (type, drop, drags, action) {
+		const parentDrop = drop.getParentDrop()
+
+		if (!parentDrop.isDestinationValid(drop, drags)) return
+
+		const difference = parentDrop.getDifferenceDropsPositions(drop, drags[0])
+		const dragDropped = new EventAlterZone(type)
+
+		for (const drag of drags) {
+			const relativeDrop = parentDrop.getRelativeDrop(drag, difference)
+			const targetDrag = action(drag, relativeDrop)
+			dragDropped.setItem(relativeDrop, targetDrag)
+		}
+
+		this._cleanSelectedDrops()
+		dragDropped.dispatch(this)
+	}
+
+	/** @param {DropZone} drop @param {DragZone[]} drags */
+	_copyDrags (drop, drags) {
+		const action = (drag, relativeDrop) => {
+			drag.selected = false
+
+			const clone = /** @type {DragZone} */ (drag.cloneNode(true))
+			relativeDrop.appendChild(clone)
+
+			clone.id = uuidv4()
+			clone.setPosition()
+
+			return clone
+		}
+
+		this._moveSelectedDrags('COPY', drop, drags, action)
+	}
+
+	/** @param {DropZone} drop @param {DragZone[]} drags */
+	_cutDrags (drop, drags) {
+		const action = (drag, relativeDrop) => {
+			relativeDrop.appendChild(drag)
+			drag.setPosition()
+			drag.selected = false
+
+			return drag
+		}
+
+		this._moveSelectedDrags('MOVE', drop, drags, action)
+	}
 
 	_showMultipleSelection () {
 		if (
@@ -327,3 +353,49 @@ export class Zone extends Component {
 	}
 }
 customElements.define('ark-zone', Zone)
+
+class EventAlterZone {
+	/** @param {string} type */
+	constructor (type) {
+		this.detail = new Map()
+		this.type = type
+	}
+
+	setItem (drop, drag) {
+		const item = this.detail.get(drop.id)
+
+		if (item) {
+			item.drags.push({
+				id: drag.id,
+				value: drag.value
+			})
+
+			this.detail.set(drop.id, item)
+		} else {
+			this.detail.set(drop.id, {
+				drop: {
+					id: drop.id,
+					value: drop.value
+				},
+				drags: [{
+					id: drag.id,
+					value: drag.value
+				}]
+			})
+		}
+	}
+
+	/** @param {Component} component */
+	dispatch (component) {
+		const value = Array.from(this.detail.values())
+
+		component.dispatchEvent(
+			new CustomEvent('zone:alter', {
+				detail: {
+					value: value,
+					type: this.type
+				}
+			})
+		)
+	}
+}

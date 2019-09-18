@@ -79,6 +79,10 @@ export class DragZone extends Component {
 
 		this.classList.remove(`ark-zone-drag--dragging`)
 		setTimeout(_ => this.classList.remove(`ark-zone-drag--hidden`))
+
+		this.dispatchEvent(new CustomEvent('drag:dragend', {
+			bubbles: true
+		}))
 	}
 
 	/** @param {event} event */
