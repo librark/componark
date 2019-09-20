@@ -41,12 +41,18 @@ export class Zone extends Component {
 		// -------------------------------------------------------------------------
 		// zone
 		// -------------------------------------------------------------------------
+		this.addEventListener('mousedown', this.onMouseDown.bind(this))
 		this.parent.addEventListener('keydown', this.onkeyDown.bind(this))
 		this.parent.addEventListener('keyup', this.onKeyUp.bind(this))
-		this.addEventListener('mousedown', this.onMouseDown.bind(this))
 		this.parent.addEventListener('mouseup', this.onMouseUp.bind(this))
 
 		return super.load()
+	}
+
+	disconnectedCallback () {
+		this.parent.removeEventListener('keydown', this.onkeyDown.bind(this))
+		this.parent.removeEventListener('keyup', this.onKeyUp.bind(this))
+		this.parent.removeEventListener('mouseup', this.onMouseUp.bind(this))
 	}
 
 	// ---------------------------------------------------------------------------
