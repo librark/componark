@@ -192,11 +192,14 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		if (!event.shiftKey) return
 
-		const target = /** @type {Component} */ (event.target)
+		const target = /** @type {DragZone | DropZone} */ (event.target)
+		const tagName = target.tagName.toLowerCase()
 
-		if (target.tagName.toLowerCase() !== 'ark-zone-drop') return
+		if (!(tagName === 'ark-zone-drag' || tagName === 'ark-zone-drop')) return
 
-		this.dropStart = this.dropEnd = /** @type {DropZone} */ (target)
+		const drop = tagName === 'ark-zone-drag' ? target.getParentDrop() : target
+
+		this.dropStart = this.dropEnd = /** @type {DropZone} */ (drop)
 
 		this._showMultipleSelection()
 	}
