@@ -154,6 +154,12 @@ export class DropZone extends Component {
 			})
 	}
 
+	cleanSelectedDrags () {
+		this._getSelectedDrags().forEach(drag => {
+			drag.selected = false
+		})
+	}
+
 	/**
    * @param {DropZone} selectedDrop
    * @param {DragZone[]} drags
@@ -246,6 +252,13 @@ export class DropZone extends Component {
 		this.fixed = true
 
 		parent.sequence += 1
+	}
+
+	/** @returns {DragZone[]} */
+	_getSelectedDrags () {
+		return /** @type {DragZone[]} */ ([
+			...this.selectAll('ark-zone-drag[selected]')
+		])
 	}
 }
 customElements.define('ark-zone-drop', DropZone)
