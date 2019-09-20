@@ -148,12 +148,18 @@ export class Zone extends Component {
 	/** @param {event} event */
 	onDragClicked (event) {
 		const target = /** @type {DragZone} */ (event.target)
-		const selected = target ? target.selected : false
+		const selected = !(target ? target.selected : false)
 
-		this._cleanSelectedDrags()
-		this._cleanSelectedDrops()
+		if (event['detail'].origin.ctrlKey) {
+			const drop = target.getParentDrop()
+			drop.setSelectedDrags(selected)
+			drop.selected = selected
+		} else {
+			this._cleanSelectedDrags()
+			this._cleanSelectedDrops()
 
-		target.selected = !selected
+			target.selected = selected
+		}
 	}
 
 	// ---------------------------------------------------------------------------
