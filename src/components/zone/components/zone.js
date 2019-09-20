@@ -204,12 +204,9 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		if (!event.shiftKey) return
 
-		const target = /** @type {DragZone | DropZone} */ (event.target)
-		const tagName = target.tagName.toLowerCase()
+		const drop = this._getParentDrop(/** @type {HTMLElement} */ (event.target))
 
-		if (!(tagName === 'ark-zone-drag' || tagName === 'ark-zone-drop')) return
-
-		const drop = tagName === 'ark-zone-drag' ? target.getParentDrop() : target
+		if (!drop || !drop.fixed) return
 
 		this.dropStart = this.dropEnd = /** @type {DropZone} */ (drop)
 
@@ -375,6 +372,26 @@ export class Zone extends Component {
 
 	_cleanDropStartDropEnd () {
 		this.dropStart = this.dropEnd = null
+	}
+
+	/** @param {HTMLElement} target @returns {DropZone} */
+	_getParentDrop (target) {
+		let node = target
+
+		while (node) {
+			const tagName = node.tagName.toLowerCase()
+
+			if (tagName === 'ark-zone-drag') {
+				const drag = /** @type {DragZone} */ (node)
+				return drag.getParentDrop()
+			} else if (tagName === 'ark-zone-drop') {
+				return /** @type {DropZone} */ (node)
+			}
+
+			node = node.parentElement
+		}
+
+		return null
 	}
 }
 customElements.define('ark-zone', Zone)
