@@ -151,9 +151,7 @@ export class Zone extends Component {
 		const selected = !(target ? target.selected : false)
 
 		if (event['detail'].origin.ctrlKey) {
-			const drop = target.getParentDrop()
-			drop.setSelectedDrags(selected)
-			drop.selected = selected
+			target.selected = selected
 		} else {
 			this._cleanSelectedDrags()
 			this._cleanSelectedDrops()
