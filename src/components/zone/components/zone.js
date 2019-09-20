@@ -65,12 +65,22 @@ export class Zone extends Component {
 
 	/** @param {event} event */
 	onDropClicked (event) {
-		const target = /** @type {DropZone} */ (event.target)
-		const selected = target ? target.selected : false
+		const ctrlKey = event['detail'].origin.ctrlKey
 
-		this._cleanSelectedDrops()
+		const drop = /** @type {DropZone} */ (event.target)
+		const selected = drop ? drop.selected : false
 
-		target.selected = !selected
+		if (!ctrlKey) {
+			this._cleanSelectedDrops()
+		}
+
+		drop.selected = !selected
+
+		if (!drop.selected && ctrlKey) {
+			drop.cleanSelectedDrags()
+		} else if (drop.selected && ctrlKey) {
+			drop.setSelectedDrags(true)
+		}
 	}
 
 	/** @param {event} event */
@@ -89,7 +99,7 @@ export class Zone extends Component {
 	}
 
 	// ---------------------------------------------------------------------------
-	// Drop
+	// Drag
 	// ---------------------------------------------------------------------------
 	/** @param {event} event */
 	onDragDragstart (event) {
