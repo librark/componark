@@ -118,17 +118,17 @@ export class DropZone extends Component {
 	getParentDrop () {
 		let node = null
 		node = this
+
 		while (node) {
 			node = node.parentElement
+			const nodeName = node ? node.nodeName.toLowerCase() : null
 
-			if (!node || node.nodeName.toLowerCase() === 'ark-zone-drop') {
+			if (!node || nodeName === 'ark-zone-drag') {
+				return null
+			} else if (nodeName === 'ark-zone-drop') {
 				return /** @type {DropZone} */ (node)
 			}
-
-			if (node.nodeName.toLowerCase() === 'ark-zone-drag') return null
 		}
-
-		return null
 	}
 
 	/** @returns {{x:number, y:number}} */
@@ -230,14 +230,14 @@ export class DropZone extends Component {
 		}
 	}
 
+	toggleSelected () {
+		this.selected = !this.selected
+	}
+
 	// --------------------------------------------------------------------------
 	_droppableRemoveStyle () {
 		this.classList.remove(`ark-zone-drop--hover`)
 		this.classList.remove(`ark-zone-drop--hover_disabled`)
-	}
-
-	_toggleSelected () {
-		this.selected = !this.selected
 	}
 
 	/** @param {DropZone} parent */
