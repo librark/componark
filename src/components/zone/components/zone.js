@@ -394,7 +394,7 @@ export class Zone extends Component {
 }
 customElements.define('ark-zone', Zone)
 
-class EventAlterZone {
+export class EventAlterZone {
 	/** @param {string} type */
 	constructor (type) {
 		this.detail = new Map()
@@ -425,11 +425,11 @@ class EventAlterZone {
 		}
 	}
 
-	/** @param {Component} component */
-	dispatch (component) {
+	/** @param {HTMLElement} element */
+	dispatch (element) {
 		const value = Array.from(this.detail.values())
 
-		component.dispatchEvent(
+		element.dispatchEvent(
 			new CustomEvent('zone:alter', {
 				detail: {
 					value: value,

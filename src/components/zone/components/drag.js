@@ -151,8 +151,6 @@ export class DragZone extends Component {
 				return /** @type {DropZone} */ (node)
 			}
 		}
-
-		return null
 	}
 
 	setPosition () {
