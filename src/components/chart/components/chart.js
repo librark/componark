@@ -30,6 +30,26 @@ export class Chart extends Component {
 		return super.render()
 	}
 
+	/**
+   * @param {number} sizePalette
+   * @param {string?} paletteName
+   * @returns {{backgroundColor: Array, borderColor: Array }}
+   * */
+	generateColors (sizePalette, paletteName = 'mpn65') {
+		const palette = require('google-palette/palette')
+		const colors = palette('mpn65', sizePalette)
+
+		const backgroundColor = []
+		const borderColor = []
+
+		colors.forEach(color => {
+			backgroundColor.push(this._hexToRgba(color, 0.3))
+			borderColor.push(this._hexToRgba(color))
+		})
+
+		return { backgroundColor: backgroundColor, borderColor: borderColor }
+	}
+
 	/** @return {ChartJs} */
 	get chart () {
 		return this._chart || null
@@ -54,5 +74,11 @@ export class Chart extends Component {
 			}
 		}
 	}
+
+	/** @param {string} hex @param {number} alpha @returns {string} */
+	_hexToRgba (hex, alpha = 1) {
+		const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16))
+		return `rgba(${r},${g},${b},${alpha})`
+	};
 }
 customElements.define('ark-chart', Chart)

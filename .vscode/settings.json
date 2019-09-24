@@ -13,5 +13,6 @@
         "webcomponents"
     ],
     "jshint.enable": false,
-    "standard.enable": false
+    "standard.enable": false,
+    "files.autoSave": "onFocusChange"
 }

@@ -30,4 +30,19 @@ describe('Chart', () => {
 		// @ts-ignore
 		chart._resizeCanvas()
 	})
+	it('get Colors', () => {
+		const chart = new Chart()
+
+		let colors = chart.generateColors(0)
+		expect(colors.backgroundColor.length).toEqual(0)
+		expect(colors.borderColor.length).toEqual(0)
+
+		colors = chart.generateColors(1)
+		expect(colors.backgroundColor.length).toEqual(1)
+		expect(colors.borderColor.length).toEqual(1)
+
+		colors = chart.generateColors(null)
+		expect(colors.backgroundColor.length).toEqual(0)
+		expect(colors.borderColor.length).toEqual(0)
+	})
 })
