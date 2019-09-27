@@ -1,15 +1,15 @@
 export class GridDemo extends HTMLElement {
-  init (context) {
-    this.type = context['type'] || 'ark'
-    return this
-  }
+	init (context) {
+		this.type = context['type'] || 'ark'
+		return this
+	}
 
-  connectedCallback () {
-    this.render()
-  }
+	connectedCallback () {
+		this.render()
+	}
 
-  render () {
-    this.innerHTML = /* html */`
+	render () {
+		this.innerHTML = /* html */`
       <div>
         <p>MOBILE (360px).</p>
         <hr align="left" width="360px"/>
@@ -46,17 +46,17 @@ export class GridDemo extends HTMLElement {
 
       <!-- DOCUMENTATION -->
     `
-    this._setup()
-  }
+		this._setup()
+	}
 
-  _setup () {
-    this._setupFrame('[data-mobile]')
-    this._setupFrame('[data-tablet]')
-    this._setupFrame('[data-desktop]')
-  }
+	_setup () {
+		this._setupFrame('[data-mobile]')
+		this._setupFrame('[data-tablet]')
+		this._setupFrame('[data-desktop]')
+	}
 
-  _setupContent () {
-    return /* html */`
+	_setupContent () {
+		return /* html */`
       <style>
         ark-grid-item {
           text-align: center;
@@ -67,6 +67,10 @@ export class GridDemo extends HTMLElement {
       <div>
         <p>This is a Layout Grid.</p>
         <hr/>
+
+        <ark-grid cols="1" gap="10px">
+          <ark-grid-item cols="1">Prueba</ark-grid-item>
+        </ark-grid>
 
         <ark-grid cols="3" gap="15px">
           <ark-grid-item cols="3">header</ark-grid-item>
@@ -109,20 +113,20 @@ export class GridDemo extends HTMLElement {
 
       </div>
     `
-  }
+	}
 
-  _setupFrame (frameName) {
-    const content = this._setupContent()
-    const frame = this.querySelector(frameName)
-    frame.onload = () => {
-      const frameBody = frame.contentDocument.querySelector('body')
-      const app = frameBody.querySelector('app-showcase-ark')
-      const main = document.createElement('main')
-      main.innerHTML = content
+	_setupFrame (frameName) {
+		const content = this._setupContent()
+		const frame = this.querySelector(frameName)
+		frame.onload = () => {
+			const frameBody = frame.contentDocument.querySelector('body')
+			const app = frameBody.querySelector('app-showcase-ark')
+			const main = document.createElement('main')
+			main.innerHTML = content
 
-      app.parentNode.removeChild(app)
-      frameBody.prepend(main)
-    }
-  }
+			app.parentNode.removeChild(app)
+			frameBody.prepend(main)
+		}
+	}
 }
 customElements.define('demo-grid', GridDemo)
