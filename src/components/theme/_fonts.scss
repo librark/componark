@@ -1,0 +1,10 @@
+html {
+  font-size: calc(1em + 1vmin);
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+@media only screen and (min-width: $tablet) {
+  html {
+    font-size: calc(.9em + .2vmin);
+  }
+}
