@@ -13,7 +13,7 @@ export class RootComponent extends Component {
 	/** @param {{ path: string }} context */
 	init (context) {
 		this.path = context['path']
-		this.urlActual = window.location
+		this.currentLocation = window.location
 
 		return super.init()
 	}
@@ -26,13 +26,13 @@ export class RootComponent extends Component {
             <ark-button listen on-click='_onOpenSidebar'>
               <ark-icon name='fas fa-bars'></ark-icon>
             </ark-button>
-            <span class='font-size' data-title>Componark</span>
+            <span class='font-size' data-page-name>Componark</span>
           </div>
         </ark-nav>
       </ark-navbar>
 
       <ark-sidebar data-sidebar>
-        <div slot='header' listen on-click='_onDashboard'>
+        <div slot='header'>
           <strong>Componark</strong>
           <br/>
           <small>Versión: ${version}</small>
@@ -50,7 +50,56 @@ export class RootComponent extends Component {
 
 	async load () {
 		this._renderMenuList()
+		this._updatePageName()
 		return super.load()
+	}
+
+	/** @param {Component} component */
+	setContentComponent (component) {
+		const contentElement = super.select('[data-root]')
+		while (contentElement.firstChild) contentElement.firstChild.remove()
+
+		if (!component) return
+
+		contentElement.appendChild(component)
+	}
+
+	// ---------------------------------------------------------------------------
+	_renderMenuList () {
+		const menuList = /** @type {List} */ (this.select('[data-sidebar-list]'))
+
+		const template = item => /* html */ `
+      <span>${item['name']}</span>
+    `
+
+		menuList.init({ source: this.locations, template: template }).render()
+	}
+
+	_updatePageName () {
+		const name = this.querySelector('[data-page-name]')
+		const pathname = this.currentLocation.pathname
+		const location = this.locations.find(location => location.path === pathname)
+
+		if (location) name.textContent = location.name
+	}
+
+	_closeSidebar () {
+		this.sidebar.close()
+	}
+
+	_onOpenSidebar () {
+		this.sidebar.open()
+	}
+
+	/** @param {Event} event */
+	_onListItemSelected (event) {
+		this.dispatchEvent(new CustomEvent('navigate', {
+			bubbles: true,
+			detail: { path: event['detail']['data']['path'] }
+		}))
+
+		this._closeSidebar()
+		this._updatePageName()
 	}
 
 	// ---------------------------------------------------------------------------
@@ -78,17 +127,8 @@ export class RootComponent extends Component {
     `
 	}
 
-	// ---------------------------------------------------------------------------
-	_onOpenSidebar () {
-		this.sidebar.open()
-	}
-
-	_closeSidebar () {
-		this.sidebar.close()
-	}
-
-	async _renderMenuList () {
-		const source = [
+	get locations () {
+		return [
 			{
 				name: 'Accordion',
 				path: `/base/accordion`
@@ -170,59 +210,6 @@ export class RootComponent extends Component {
 				path: `/base/zone`
 			}
 		]
-
-		this._updateLocation(source)
-
-		const template = item => /* html */ `
-      <span>${item['name']}</span>
-    `
-
-		const menuList = /** @type {List} */ (document.querySelector(
-			'[data-sidebar-list]'
-		))
-
-		await menuList.init({ source: source, template: template }).render()
-	}
-
-	_updateLocation (source) {
-		for (const p in source) {
-			if (this.urlActual.pathname === source[p].path) {
-				this.select('[data-title]').innerHTML = /* html */`
-          ${source[p].name}
-        `
-			}
-		}
-	}
-
-	_onDashboard () {
-		this.select('[data-title]').innerHTML = /* html */`Componark`
-		this._closeSidebar()
-		return this.dispatchEvent(new CustomEvent('navigate', {
-			bubbles: true,
-			detail: { path: '/base/dashboard' }
-		}))
-	}
-
-	/** @param {Event} event */
-	_onListItemSelected (event) {
-		this.select('[data-title]').innerHTML = /* html */`
-      ${event['detail']['data']['name']}
-    `
-		this._closeSidebar()
-		return this.dispatchEvent(new CustomEvent('navigate', {
-			bubbles: true,
-			detail: { path: event['detail']['data']['path'] }
-		}))
-	}
-
-	/** @param {Component} component */
-	setContentComponent (component) {
-		const contentElement = super.select('[data-root]')
-		while (contentElement.firstChild) contentElement.firstChild.remove()
-
-		if (!component) return
-
-		contentElement.appendChild(component)
 	}
 }
 customElements.define('app-root', RootComponent)
