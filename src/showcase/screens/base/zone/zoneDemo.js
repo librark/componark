@@ -1,6 +1,6 @@
 import {
 	Component
-} from '../loader'
+} from '../../loader'
 
 export class ZoneDemo extends Component {
 	init (context) {
@@ -9,8 +9,7 @@ export class ZoneDemo extends Component {
 	}
 
 	render () {
-		this.innerHTML = /* html */ `<!--  -->
-
+		this.innerHTML = /* html */ `${this.styles}
       <ark-zone
         listen
         on-zone:alter="_onZoneAlter"
@@ -43,26 +42,6 @@ export class ZoneDemo extends Component {
                 </ark-grid>
               </ark-zone-drop>
             </ark-grid-item>
-
-            <ark-grid-item cols="4">
-              <ark-zone-drop cols="5" value="Drop B" class="white">
-                <ark-grid cols="5" gap="5px">
-
-                  <ark-zone-drop value="Drop B 01"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 02"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 03"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 04"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 05"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 06"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 07"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 08"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 09"></ark-zone-drop>
-                  <ark-zone-drop value="Drop B 010"></ark-zone-drop>
-
-                </ark-grid>
-              </ark-zone-drop>
-            </ark-grid-item>
-
 
             <ark-grid-item cols="2">
               <ark-zone-drop cols="2" value="Drop C" class="white">
@@ -100,8 +79,6 @@ export class ZoneDemo extends Component {
         Elementos Seleccionado: <span data-detail></span>
       </p>
     `
-
-		this._appendStyle()
 		return super.render()
 	}
 
@@ -121,25 +98,25 @@ export class ZoneDemo extends Component {
 		this.select('[data-detail]').innerHTML = event['detail']['value']
 	}
 
-	_appendStyle () {
-		const style = document.createElement('style')
-		style.innerHTML = /* css */ `
-        demo-zone{
-          height: 80vh;
+	get styles () {
+		return /* html */ `
+      <style>
+        demo-zone demo-zone{
+          height: initial;
           display: block;
         }
 
-        ark-grid ark-grid-item{
+        demo-zone ark-grid ark-grid-item{
           background: #E5E5FF;
         }
 
-        ark-zone-drag{
+        demo-zone ark-zone-drag{
           min-height: 100px;
           min-width: 100px;
           border: 1px solid;
         }
 
-        ark-zone-drop{
+        demo-zone ark-zone-drop{
           background: #E5E5FF;
         }
 
@@ -148,12 +125,11 @@ export class ZoneDemo extends Component {
           outline: 1px solid;
         }
 
-        ark-zone[selected]{
+        demo-zone ark-zone[selected]{
           background: blue;
         }
-      `
-
-		this.appendChild(style)
+      </style>
+    `
 	}
 
 	_getDoc () {

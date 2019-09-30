@@ -1,4 +1,4 @@
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class CheckboxDemo extends Component {
 	init (context) {

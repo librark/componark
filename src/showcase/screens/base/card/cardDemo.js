@@ -1,4 +1,4 @@
-import { Component } from '../loader'
+import { Component } from '../../loader'
 // @ts-ignore
 import Image from './assets/building.jpg'
 

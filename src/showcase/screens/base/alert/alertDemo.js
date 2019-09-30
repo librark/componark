@@ -1,4 +1,4 @@
-import { Alert, Component } from '../loader'
+import { Alert, Component } from '../../loader'
 
 export class AlertDemo extends Component {
 	init (context) {

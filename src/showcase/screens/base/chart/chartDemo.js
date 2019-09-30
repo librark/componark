@@ -1,5 +1,5 @@
-import { Component } from '../loader'
-/** @typedef {import('../loader').Chart} Chart */
+import { Component } from '../../loader'
+/** @typedef {import('../../loader').Chart} Chart */
 
 export class ChartDemo extends Component {
 	init (context) {

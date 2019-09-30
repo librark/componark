@@ -1,5 +1,5 @@
-/** @typedef {import('../loader').Input} Input */
-import { Component } from '../loader'
+/** @typedef {import('../../loader').Input} Input */
+import { Component } from '../../loader'
 
 export class InputDemo extends Component {
 	init (context) {

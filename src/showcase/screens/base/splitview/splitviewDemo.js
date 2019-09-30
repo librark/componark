@@ -1,11 +1,11 @@
 /**
- * @typedef {import('../loader').Splitview} Splitview
- * @typedef {import('../loader').List} List
+ * @typedef {import('../../loader').Splitview} Splitview
+ * @typedef {import('../../loader').List} List
  **/
 
 import './detail.example'
 
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class SplitviewDemo extends Component {
 	init (context) {

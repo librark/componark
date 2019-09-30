@@ -1,4 +1,4 @@
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class IconDemo extends Component {
 	init (context) {

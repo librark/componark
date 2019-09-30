@@ -1,7 +1,7 @@
 /**
- * @typedef {import('../loader').List} List
+ * @typedef {import('../../loader').List} List
  */
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class ListDemo extends Component {
 	init (context) {

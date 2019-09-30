@@ -1,4 +1,4 @@
-import { Component } from '../../../../components/component'
+import { Component } from '../../loader'
 
 export class AccordionDemo extends Component {
 	init (context) {

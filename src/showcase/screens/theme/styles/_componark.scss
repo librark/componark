@@ -7,6 +7,7 @@
 @import "../../../../components/button/main";
 @import "../../../../components/card/main";
 @import "../../../../components/chart/main";
+@import "../../../../components/checkbox/main";
 @import "../../../../components/grid/main";
 @import "../../../../components/icon/main";
 @import "../../../../components/input/main";
@@ -14,9 +15,11 @@
 @import "../../../../components/modal/main";
 @import "../../../../components/navbar/main";
 @import "../../../../components/paginator/main";
+@import "../../../../components/radio/main";
 @import "../../../../components/select/main";
 @import "../../../../components/sidebar/main";
 @import "../../../../components/splitview/main";
+@import "../../../../components/table/main";
 @import "../../../../components/tabs/main";
 @import "../../../../components/zone/main";
 
@@ -26,6 +29,7 @@
   @include button($type);
   @include card($type);
   @include chart($type);
+  @include checkbox($type);
   @include grid($type);
   @include icon($type);
   @include input($type);
@@ -33,9 +37,11 @@
   @include modal($type);
   @include navbar($type);
   @include paginator($type);
+  @include radio($type);
   @include select($type);
   @include sidebar($type);
   @include splitview($type);
+  @include table($type);
   @include tabs($type);
   @include zone($type);
 }

@@ -1,7 +1,7 @@
 /**
- * @typedef {import('../loader').Table} Table
+ * @typedef {import('../../loader').Table} Table
  **/
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class TabsDemo extends Component {
 	init (context) {

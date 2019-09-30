@@ -1,7 +1,7 @@
 /**
- * @typedef {import('../loader').Sidebar} Sidebar
+ * @typedef {import('../../loader').Sidebar} Sidebar
  **/
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class SidebarDemo extends Component {
 	init (context) {

@@ -1,7 +1,7 @@
 /**
- * @typedef {import('../loader').Modal} Modal
+ * @typedef {import('../../loader').Modal} Modal
  */
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class ModalDemo extends Component {
 	init (context) {

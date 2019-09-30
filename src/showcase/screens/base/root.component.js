@@ -1,8 +1,10 @@
-import { Component } from './loader'
+import './root.content.component'
+
+import { Component } from '../loader'
 
 /**
- * @typedef {import('./loader').List} List
- * @typedef {import('./loader').Sidebar} Sidebar
+ * @typedef {import('../loader').List} List
+ * @typedef {import('../loader').Sidebar} Sidebar
  * */
 
 // @ts-ignore
@@ -43,12 +45,14 @@ export class RootComponent extends Component {
         <!-- <div slot='footer'></div> -->
       </ark-sidebar>
 
-      <div class='root-content' data-root></div>
+      <div class='root-content' data-root>
+        <app-root-container data-root-container></app-root-container>
+      </div>
     `
 		return super.render()
 	}
 
-	async load () {
+	load () {
 		this._renderMenuList()
 		this._updatePageName()
 		return super.load()
@@ -56,12 +60,9 @@ export class RootComponent extends Component {
 
 	/** @param {Component} component */
 	setContentComponent (component) {
-		const contentElement = super.select('[data-root]')
-		while (contentElement.firstChild) contentElement.firstChild.remove()
-
 		if (!component) return
-
-		contentElement.appendChild(component)
+		const container = this.select('[data-root-container]')
+		container.init({ component: component }).render().load()
 	}
 
 	// ---------------------------------------------------------------------------

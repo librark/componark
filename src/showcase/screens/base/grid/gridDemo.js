@@ -1,4 +1,4 @@
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class GridDemo extends Component {
 	init (context) {
@@ -7,14 +7,7 @@ export class GridDemo extends Component {
 	}
 
 	render () {
-		this.innerHTML = /* html */`
-      <style>
-        ark-grid-item {
-          text-align: center;
-          background: rgba(0, 0, 255, 0.3) !important;
-        }
-      </style>
-
+		this.innerHTML = /* html */`${this.styles}
       <div>
         <p>This is a Layout Grid.</p>
         <hr/>
@@ -62,6 +55,17 @@ export class GridDemo extends Component {
     `
 
 		return super.render()
+	}
+
+	get styles () {
+		return /* html */`
+      <style>
+        demo-grid ark-grid-item {
+          text-align: center;
+          background: rgba(0, 0, 255, 0.3) !important;
+        }
+      </style>
+    `
 	}
 }
 customElements.define('demo-grid', GridDemo)

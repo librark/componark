@@ -1,9 +1,9 @@
 /**
- * @typedef {import('../loader').List} List
- * @typedef {import('../loader').Paginator} Paginator
+ * @typedef {import('../../loader').List} List
+ * @typedef {import('../../loader').Paginator} Paginator
  **/
 
-import { Component } from '../loader'
+import { Component } from '../../loader'
 
 export class PaginatorDemo extends Component {
 	init (context) {
