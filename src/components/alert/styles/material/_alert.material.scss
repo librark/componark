@@ -1,16 +1,9 @@
 @import "@material/button/mdc-button.scss";
 @import "@material/fab/mdc-fab";
 @import "@material/dialog/mdc-dialog.scss";
-// @import "../../../../theme/_variables.scss";
 
 @mixin alert_material_() {
   $component: "ark-alert";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
-  $background: rgba($color: #ffff,
-      $alpha: 1) !important;
-  $color: rgba(0, 0, 0, 0.87) !important;
 
   #{$component} {
 
@@ -36,31 +29,7 @@
 
   .#{$component} {
     &__body {
-      min-width: calc(#{$mobile} - (12px * 2));
+      border-radius: 5px;
     }
-
-    &__content {
-      padding: 24px 12px 12px;
-    }
-
-    &__title {
-      margin-top: 0;
-      padding-top: 0;
-    }
-
-    &__actions {
-      padding: 12px;
-
-      display: flex;
-      align-items: normal;
-      justify-content: flex-end;
-      flex-flow: wrap;
-
-      :not(:last-child()) {
-        margin-right: 8px;
-      }
-    }
-
-    &__scrim {}
   }
 }

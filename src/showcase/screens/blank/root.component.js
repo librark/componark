@@ -6,11 +6,25 @@ export class RootComponent extends Component {
 	}
 
 	render () {
+		this.innerHTML = /* html */`
+      ${this.styles}
+    `
+
 		return super.render()
 	}
 
 	load () {
 		return super.load()
+	}
+
+	get styles () {
+		return /* html */`
+      <style>
+        app-root{
+          background: red;
+        }
+      </style>
+    `
 	}
 }
 customElements.define('app-root', RootComponent)

@@ -26,6 +26,9 @@ export class AlertDemo extends Component {
         </ul>
       </div>
     `
+
+		this._onClick()
+
 		return super.render()
 	}
 
@@ -39,8 +42,8 @@ export class AlertDemo extends Component {
 			showCancelButton: true,
 			cancelButtonText: 'Cerrar',
 			cancelButtonBackground: 'dark',
-			horizontal: 'start',
-			vertical: 'start'
+			horizontal: 'end',
+			vertical: 'end'
 		}, this)
 	}
 }
