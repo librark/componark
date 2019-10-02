@@ -98,9 +98,13 @@ export class RootContainerComponent extends Component {
           align-items: baseline;
         }
         app-root-container ark-grid [data-component] > *{
-          width: 100%;
-          height: 100%;
-          display: contents;
+          display: block;
+
+          width: inherit;
+          height: inherit;
+
+          max-width: -webkit-fill-available;
+          max-height: -webkit-fill-available;
         }
       </style>
     `

@@ -1,31 +1,36 @@
 @mixin accordion_material_() {
   $component: "ark-accordion";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
-  $margin: 16px;
+  $margin: 1rem;
 
   #{$component} {
-    width: 100%;
+    border-radius: 5px;
 
     &-tab {
-      max-width: -webkit-fill-available !important;
-    }
-  }
-
-  .#{$component} {
-    &-tab--show {
-      margin-top: $margin;
-      margin-bottom: $margin;
-
       &:first-child {
-        margin-top: 0px;
-        margin-bottom: $margin;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
       }
 
       &:last-child {
-        margin-top: $margin;
-        margin-bottom: 0;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+      }
+
+      &[active] {
+        margin-bottom: $margin;
+
+        &~& {
+          margin-top: 0 !important;
+        }
+      }
+
+      &[active]~&:not([active]) {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+      }
+
+      &:not([active])~&[active] {
+        margin-top: $margin !important;
       }
     }
   }

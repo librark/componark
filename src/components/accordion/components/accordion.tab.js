@@ -1,17 +1,21 @@
 import { Component } from '../../component'
 
 export class AccordionTab extends Component {
+	/**
+   *  @param {{header: string} | {}} context
+   * */
 	init (context = {}) {
 		this.header = context['header']
-		this.tabIndex = context['tabIndex']
 
 		// local variables
 		this.defaultContent = this.defaultContent || this.innerHTML
+		this.index = this.index
+
 		return super.init()
 	}
 
 	reflectedProperties () {
-		return ['header', 'tabIndex']
+		return ['header', 'index']
 	}
 
 	render () {
@@ -21,10 +25,10 @@ export class AccordionTab extends Component {
 		}
 
 		this.innerHTML = /* html */ `
-      <button class="ark-accordion-tab__btn-header" listen on-click="toggle">
-        <span data-accordion-tab-header>${this.header}</span>
-      </button>
-      <div id="ark-accordion-tab__content">
+      <div class="ark-accordion-tab__btn-header" listen on-click="toggle">
+        <small data-accordion-tab-header>${this.header}</small>
+      </div>
+      <div class="ark-accordion-tab__content">
         ${this.defaultContent}
       </div>
     `
@@ -33,12 +37,10 @@ export class AccordionTab extends Component {
 	}
 
 	open () {
-		this.classList.add(`ark-accordion-tab--show`)
-		this.setAttribute('active', '')
+		this.setAttribute('active', 'true')
 	}
 
 	close () {
-		this.classList.remove(`ark-accordion-tab--show`)
 		this.removeAttribute('active')
 	}
 
@@ -50,8 +52,10 @@ export class AccordionTab extends Component {
 
 		this.dispatchEvent(
 			new CustomEvent('accordiontab:click', {
+				bubbles: true,
 				detail: {
-					tabIndex: this.tabIndex,
+					index: this.index,
+					active: this.hasAttribute('active'),
 					origin: event
 				}
 			})
