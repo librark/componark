@@ -73,8 +73,8 @@ export class Alert extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `
-      <div class="ark-alert__body">
-        <div class="ark-alert__content">
+      <div class="ark-alert__content">
+        <div class="ark-alert__header">
           ${this._renderTitle()}
           <br/>
           ${this._renderText()}

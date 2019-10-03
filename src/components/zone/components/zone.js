@@ -172,7 +172,7 @@ export class Zone extends Component {
 			})
 		}
 
-		if (!event.ctrlKey) return
+		if (!event.ctrlKey || !this._getSelectedDrags().length) return
 
 		const keyCode = String.fromCharCode(event.keyCode).toLowerCase()
 
@@ -202,7 +202,7 @@ export class Zone extends Component {
 		event.stopImmediatePropagation()
 		if (!event.shiftKey) return
 
-		const drop = this._getParentDrop(/** @type {HTMLElement} */ (event.target))
+		const drop = this._getParentDrop(/** @type {HTMLElement} */(event.target))
 
 		if (!drop || !drop.fixed) return
 
@@ -235,17 +235,17 @@ export class Zone extends Component {
 	}
 
 	/** @param {DropZone} drop @param {DragZone[]} drags */
-	_moveSelectedDrags (type, drop, drags, action) {
+	_moveSelectedDrags (action, drop, drags, process) {
 		const parentDrop = drop.getParentDrop()
 
 		if (!parentDrop.isDestinationValid(drop, drags)) return
 
 		const difference = parentDrop.getDifferenceDropsPositions(drop, drags[0])
-		const dragDropped = new EventAlterZone(type)
+		const dragDropped = new EventAlterZone(action)
 
 		for (const drag of drags) {
 			const relativeDrop = parentDrop.getRelativeDrop(drag, difference)
-			const targetDrag = action(drag, relativeDrop)
+			const targetDrag = process(drag, relativeDrop)
 			dragDropped.setItem(relativeDrop, targetDrag)
 		}
 
@@ -255,7 +255,7 @@ export class Zone extends Component {
 
 	/** @param {DropZone} drop @param {DragZone[]} drags */
 	_copyDrags (drop, drags) {
-		const action = (drag, relativeDrop) => {
+		const process = (drag, relativeDrop) => {
 			drag.selected = false
 
 			const clone = /** @type {DragZone} */ (drag.cloneNode(true))
@@ -267,12 +267,12 @@ export class Zone extends Component {
 			return clone
 		}
 
-		this._moveSelectedDrags('COPY', drop, drags, action)
+		this._moveSelectedDrags('COPY', drop, drags, process)
 	}
 
 	/** @param {DropZone} drop @param {DragZone[]} drags */
 	_cutDrags (drop, drags) {
-		const action = (drag, relativeDrop) => {
+		const process = (drag, relativeDrop) => {
 			relativeDrop.appendChild(drag)
 			drag.setPosition()
 			drag.selected = false
@@ -280,7 +280,7 @@ export class Zone extends Component {
 			return drag
 		}
 
-		this._moveSelectedDrags('MOVE', drop, drags, action)
+		this._moveSelectedDrags('MOVE', drop, drags, process)
 	}
 
 	_showMultipleSelection () {
@@ -395,10 +395,10 @@ export class Zone extends Component {
 customElements.define('ark-zone', Zone)
 
 export class EventAlterZone {
-	/** @param {string} type */
-	constructor (type) {
+	/** @param {string} action */
+	constructor (action) {
 		this.detail = new Map()
-		this.type = type
+		this.action = action
 	}
 
 	setItem (drop, drag) {
@@ -433,7 +433,7 @@ export class EventAlterZone {
 			new CustomEvent('zone:alter', {
 				detail: {
 					value: value,
-					type: this.type
+					action: this.action
 				}
 			})
 		)

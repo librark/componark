@@ -16,9 +16,9 @@ export class ModalDemo extends Component {
         <button btn-open>open</button>
         <button btn-toggle>toggle</button>
       </div>
-      <ark-modal title="My Title" subtitle="My Subtitle" lg>
 
-      <div>
+      <ark-modal title="My Title" subtitle="My Subtitle">
+        <div>
           <p>Contenido Parrafo 1</p>
           <p>Contenido Parrafo 2</p>
           <p>Contenido Parrafo 3</p>
@@ -63,7 +63,7 @@ export class ModalDemo extends Component {
 
 	/** @returns {Modal} */
 	get modal () {
-		return this.querySelector('ark-modal')
+		return /** @type {Modal} */ (this.select('ark-modal'))
 	}
 }
 customElements.define('demo-modal', ModalDemo)
