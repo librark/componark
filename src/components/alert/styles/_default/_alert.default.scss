@@ -1,21 +1,17 @@
 @mixin alert_default() {
   $component: "ark-alert";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
 
   #{$component} {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 
-    max-width: 100vw;
-    max-height: 100vh;
-
-    display: flex;
-    position: fixed;
-    overflow: hidden;
+    position: absolute;
     top: 0;
     left: 0;
+
+    z-index: 4096;
+
+    display: flex;
 
     // ----------------------------------------
     // hidden
@@ -56,30 +52,46 @@
   }
 
   .#{$component} {
-    &__body {
-      position: fixed;
-      z-index: 1024;
-      background: #fff;
+    &__content {
+      z-index: inherit;
+      background: $background;
 
-      max-width: 90%;
-      max-height: 90%;
+      width: fit-content;
+      height: fit-content;
 
-      overflow: auto;
+      padding: 1rem;
+      margin: .5rem;
 
-      margin: 10px;
+      max-width: calc(100vw - 3rem);
+      max-height: calc(100vh - 3rem);
+
+      overflow: hidden;
+    }
+
+    &__header {
+      overflow: hidden;
+    }
+
+    &__actions {
+      display: flex;
+      flex-flow: wrap;
+      justify-content: flex-end;
+
+      margin-top: .5rem;
+
+      &>* {
+        margin-top: .3rem;
+        margin-left: .3rem;
+      }
     }
 
     &__scrim {
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-    }
-
-    &__title {
-      font-size: x-large;
-      padding: 0;
-      margin-bottom: 15px;
-      font-weight: bold;
+      background: rgba($color: $dark, $alpha: .5);
+      width: inherit;
+      height: inherit;
+      position: inherit;
+      top: inherit;
+      left: inherit;
     }
   }
 }

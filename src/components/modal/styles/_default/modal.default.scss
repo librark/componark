@@ -1,0 +1,141 @@
+@mixin modal_default_() {
+  $component: "ark-modal";
+
+  #{$component} {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: 1028;
+
+    display: none;
+
+    // ----------------------------------------
+    // show
+    // ----------------------------------------
+    &[show] {
+      display: flex;
+    }
+
+    // ----------------------------------------
+    // horizontal
+    // ----------------------------------------
+    &[horizontal~="center"] {
+      justify-content: center;
+    }
+
+    &[horizontal~="start"] {
+      justify-content: start;
+    }
+
+    &[horizontal~="end"] {
+      justify-content: flex-end;
+    }
+
+    // ----------------------------------------
+    // vertical
+    // ----------------------------------------
+    &[vertical~="center"] {
+      align-items: center;
+    }
+
+    &[vertical~="start"] {
+      align-items: start;
+    }
+
+    &[vertical~="end"] {
+      align-items: flex-end;
+    }
+  }
+
+  .#{$component} {
+    &__content {
+      z-index: inherit;
+      background: $background;
+
+      width: fit-content;
+      height: fit-content;
+
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      margin: .5rem;
+
+      max-width: calc(100vw - 3rem) !important;
+      max-height: calc(100vh - 3rem) !important;
+
+      overflow: hidden;
+
+      &>* {
+        width: 100%;
+        max-width: inherit;
+      }
+    }
+
+    &__header {
+      overflow: hidden;
+    }
+
+    &__icon-close {
+      $size: 30px;
+
+      position: fixed;
+      top: 0;
+      right: 0;
+
+      width: $size;
+      height: $size;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        background: none;
+        border: 0;
+
+        width: inherit;
+        height: inherit;
+
+        margin: 0;
+        padding: 0;
+
+        font-size: 28px;
+        opacity: 0.5;
+
+        cursor: pointer !important;
+      }
+    }
+
+    &__body {
+      // overflow: auto;
+    }
+
+    &__actions {
+      display: flex;
+      flex-flow: wrap;
+      justify-content: flex-end;
+
+      margin-top: .5rem;
+
+      padding: 0 1rem;
+      width: -webkit-fill-available;
+
+      &>* {
+        margin-top: .3rem;
+        margin-left: .3rem;
+      }
+    }
+
+    &__scrim {
+      background: rgba($color: $dark, $alpha: .5);
+      width: inherit;
+      height: inherit;
+      position: inherit;
+      top: inherit;
+      left: inherit;
+    }
+  }
+}

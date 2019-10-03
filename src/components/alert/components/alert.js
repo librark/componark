@@ -73,9 +73,10 @@ export class Alert extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `
-      <div class="ark-alert__body">
-        <div class="ark-alert__content">
+      <div class="ark-alert__content">
+        <div class="ark-alert__header">
           ${this._renderTitle()}
+          <br/>
           ${this._renderText()}
         </div>
         <div class="ark-alert__actions" data-alert-actions></div>
@@ -91,6 +92,7 @@ export class Alert extends Component {
 		this.querySelectorAll('[close]').forEach(element =>
 			element.addEventListener('click', _ => this.close())
 		)
+
 		return super.load()
 	}
 
@@ -128,12 +130,21 @@ export class Alert extends Component {
 
 	_renderTitle () {
 		return this.title.length
-			? /* html */ `<h4 class="ark-alert__title">${this.title}</h4>`
-			: ''
+			? /* html */ `
+        <div>
+          <strong class="ark-alert__title">
+            ${this.title}
+          </strong>
+        </div>
+      ` : ''
 	}
 
 	_renderText () {
-		return this.text.length ? /* html */ `<p>${this.text}</p>` : ''
+		return this.text.length ? /* html */ `
+      <div>
+        <span>${this.text}</span>
+      </div>
+    ` : ''
 	}
 
 	_appendDefaultButtons () {

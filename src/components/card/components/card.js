@@ -40,7 +40,7 @@ export class Card extends Component {
 	}
 
 	_renderHeader () {
-		const title = this._generateContent(this.title, 'title', 'h3')
+		const title = this._generateContent(this.title, 'title', 'h4')
 		const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
 
 		return title === '' && subtitle === ''

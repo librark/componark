@@ -18,7 +18,6 @@ export class Modal extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `
-      <div class="ark-modal__scrim" listen on-click="close"></div>
       <div class="ark-modal__content">
         <div class="ark-modal__header">
           ${this._renderHeader()}
@@ -26,12 +25,11 @@ export class Modal extends Component {
             <button close>&times;</button>
           </div>
         </div>
-
         <div class="ark-modal__body" data-body></div>
-
         <div class="ark-modal__actions" data-actions></div>
-
       </div>
+
+      <div class="ark-modal__scrim" listen on-click="close"></div>
     `
 
 		this._appendSlots()
@@ -47,17 +45,17 @@ export class Modal extends Component {
 	}
 
 	open () {
-		this.setAttribute('open', '')
+		this.setAttribute('show', '')
 	}
 
 	close () {
-		this.removeAttribute('open')
+		this.removeAttribute('show')
 	}
 
 	toggle () {
-		this.hasAttribute('open')
-			? this.removeAttribute('open')
-			: this.setAttribute('open', '')
+		this.hasAttribute('show')
+			? this.close()
+			: this.open()
 	}
 
 	// ---------------------------------------------------------------------------
@@ -90,13 +88,12 @@ export class Modal extends Component {
 		const title = this._generateContent(this.title, 'title', 'h3')
 		const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
 
-		return title.length && subtitle.length
-			? /* html */ `
+		return /* html */ `
         <div class="ark-modal__title">
             ${title}
             ${subtitle}
         </div>
-      ` : ''
+      `
 	}
 
 	_generateContent (content, className, type = 'div') {

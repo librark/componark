@@ -18,6 +18,14 @@ update:
 	ncu -u
 	npm i
 
-production:
+pull:
+	make clean
+	make clean-git
+	git pull --all
+	make build
+
+build:
+	make clean
+	npm i
 	rm -rf ./dist
 	npm run build

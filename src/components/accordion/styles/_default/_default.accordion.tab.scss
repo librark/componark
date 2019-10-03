@@ -1,0 +1,30 @@
+@mixin accordion_tab_default_() {
+  $component: "ark-accordion-tab";
+
+  #{$component} {
+    background: $background;
+  }
+
+  .#{$component} {
+    &__btn-header {
+      width: auto;
+      height: 2.5rem;
+
+      text-align: left;
+      padding-left: 10px;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+    }
+
+    &__content {
+      display: none;
+    }
+
+    [active] &__content {
+      display: block;
+    }
+  }
+}
