@@ -13,11 +13,17 @@
     align-items: center;
     text-align: center;
 
+    color: inherit !important;
+    background: inherit !important;
+
     button,
     a {
       all: unset;
       padding: 0rem .8rem;
       margin: 0 !important;
+
+      color: inherit;
+      background: inherit;
     }
 
     &:hover,

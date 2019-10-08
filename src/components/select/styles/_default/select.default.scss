@@ -6,6 +6,9 @@
     display: inline-grid;
     min-height: 2rem;
 
+    color: inherit !important;
+    background: inherit !important;
+
     select {
       height: 1.2rem;
       width: 8.5rem;
@@ -14,13 +17,17 @@
       border-bottom: 1px solid;
       outline: 0;
 
-      background: initial;
-
       font-size: initial;
 
       cursor: pointer;
 
       color: inherit;
+      background: inherit;
+
+      * {
+        color: $color !important;
+        margin: .1rem .5rem;
+      }
     }
 
     &::before,
@@ -43,7 +50,6 @@
 
   .#{$component} {
     &--label {
-      color: $muted;
       font-size: small;
       margin: .1rem;
     }
