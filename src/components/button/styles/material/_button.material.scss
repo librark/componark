@@ -6,16 +6,14 @@
 
   #{$component} {
     // width: inherit;
-    height: 36px;
-    color: inherit;
+    // height: 36px;
+    // color: inherit;
+    border-radius: 5px;
 
-    button,
-    a {
-      @extend .mdc-button;
-      @extend .mdc-button__label;
-      padding: 0 8px;
+    @extend .mdc-button__label;
+    @extend .mdc-button;
 
-    }
+    text-transform: initial;
 
     &[fab] {
       @extend .mdc-fab;

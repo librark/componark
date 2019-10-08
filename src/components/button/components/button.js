@@ -52,7 +52,6 @@ export class Button extends Component {
 	_defaultAttributes () {
 		return [
 			'autofocus',
-			'disabled',
 			'download',
 			'form',
 			'formaction',

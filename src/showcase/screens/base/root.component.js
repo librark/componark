@@ -25,7 +25,7 @@ export class RootComponent extends Component {
       <ark-navbar justify='between' fixed-top>
         <ark-nav>
           <div>
-            <ark-button listen on-click='_onOpenSidebar'>
+            <ark-button listen on-click='_onOpenSidebar' color="white">
               <ark-icon name='fas fa-bars'></ark-icon>
             </ark-button>
             <span class='font-size' data-page-name>Componark</span>

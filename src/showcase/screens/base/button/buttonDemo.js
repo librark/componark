@@ -12,7 +12,7 @@ export class ButtonDemo extends Component {
       <div class="demo-button">
         <p>This is a button</p>
 
-        <ark-button background="disabled" disabled>disabled</ark-button>
+        <ark-button background="disabled" disabled>DISABLED</ark-button>
         <ark-button background="primary">primary</ark-button>
         <ark-button background="secondary">secondary</ark-button>
         <ark-button background="success">success</ark-button>
@@ -33,7 +33,7 @@ export class ButtonDemo extends Component {
       <div class="demo-button">
         <p>This is a outline button</p>
 
-        <ark-button outline="disabled" disabled>disabled</ark-button>
+        <ark-button outline="disabled" disabled>Disabled</ark-button>
         <ark-button outline="primary">primary</ark-button>
         <ark-button outline="secondary">secondary</ark-button>
         <ark-button outline="success">success</ark-button>
