@@ -1,0 +1,51 @@
+@mixin select_default() {
+  $component: "ark-select";
+
+  #{$component} {
+
+    display: inline-grid;
+    min-height: 2rem;
+
+    select {
+      height: 1.2rem;
+      width: 8.5rem;
+
+      border: 0;
+      border-bottom: 1px solid;
+      outline: 0;
+
+      background: initial;
+
+      font-size: initial;
+
+      cursor: pointer;
+
+      color: inherit;
+    }
+
+    &::before,
+    &::after {
+      all: unset;
+    }
+
+    &[disabled] {
+      pointer-events: none !important;
+      cursor: default !important;
+
+      color: $muted !important;
+      background: rgba($color: $muted, $alpha: 0.1) !important;
+
+      &:hover {
+        background: none !important;
+      }
+    }
+  }
+
+  .#{$component} {
+    &--label {
+      color: $muted;
+      font-size: small;
+      margin: .1rem;
+    }
+  }
+}

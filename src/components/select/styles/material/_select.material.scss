@@ -2,20 +2,12 @@
 
 @mixin select-material_() {
   $component: "ark-select";
-  $desktop: "960px";
 
   #{$component} {
-    @extend .mdc-select;
-
-    label {
-      @extend .mdc-floating-label;
-
-      top: 4px;
-      font-size: 15px;
-    }
+    // @extend .mdc-select;
 
     select {
-      @extend .mdc-select__native-control;
+      // @extend .mdc-select__native-control;
     }
   }
 }

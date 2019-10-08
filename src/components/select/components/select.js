@@ -15,10 +15,10 @@ export class Select extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `
-        ${this._getLabel()}
-        <select data-select listen on-change="_change">
-          ${this.defaultContent}
-        </select>
+      ${this._getLabel()}
+      <select data-select listen on-change="_change">
+        ${this.defaultContent}
+      </select>
     `
 
 		this._moveAttributes()
@@ -46,11 +46,9 @@ export class Select extends Component {
 	}
 
 	_getLabel () {
-		return this.label
-			? /* html */ `
-      <label>${this.label}</label>
-    `
-			: ''
+		return this.label ? /* html */ `
+      <label class="ark-select--label">${this.label}</label>
+    ` : ''
 	}
 
 	_moveAttributes () {
@@ -69,7 +67,7 @@ export class Select extends Component {
 	_defaultAttributes () {
 		return [
 			'autofocus',
-			'disabled',
+			// 'disabled',
 			'form',
 			'multiple',
 			'name',
