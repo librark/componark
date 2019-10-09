@@ -96,6 +96,7 @@ export class RootContainerComponent extends Component {
           height: 80vh;
           display: flex;
           align-items: baseline;
+          overflow: auto;
         }
         app-root-container ark-grid [data-component] > *{
           display: block;

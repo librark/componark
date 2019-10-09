@@ -108,13 +108,16 @@ export class DragZone extends Component {
 		event.stopImmediatePropagation()
 		const origin = new MouseEvent(event.type, event)
 
+		this.selected = !this.selected
+
 		this.dispatchEvent(
 			new CustomEvent('drag:clicked', {
 				bubbles: true,
 				detail: {
 					id: this.id,
 					value: this.value,
-					origin: origin
+					origin: origin,
+					selected: this.selected
 				}
 			})
 		)

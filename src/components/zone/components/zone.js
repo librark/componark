@@ -69,26 +69,28 @@ export class Zone extends Component {
 		drop.appendChild(drag)
 	}
 
-	/** @param {event} event */
+	/** @param {CustomEvent} event */
 	onDropClicked (event) {
-		const ctrlKey = event['detail'].origin.ctrlKey
+		const detail = event.detail
+		const ctrlKey = detail.origin.ctrlKey
 
 		const drop = /** @type {DropZone} */ (event.target)
-		const selected = drop ? drop.selected : false
+		const drops = this._getSelectedDrops()
+
+		const selected = detail.selected
 
 		if (!ctrlKey) {
 			this._cleanSelectedDrops()
 		}
 
-		drop.selected = !selected
-
-		if (!drop.selected && ctrlKey) {
-			drop.cleanSelectedDrags()
-		} else if (drop.selected && ctrlKey) {
-			drop.setSelectedDrags(true)
+		if (drops.length && !selected && ctrlKey) {
+			drop.selected = false
+		} else {
+			drop.selected = !!drops.length || selected
 		}
 
 		if (ctrlKey) {
+			drop.setSelectedDrags(selected)
 			this._dispatchSelectedDrags()
 		}
 	}
@@ -129,9 +131,7 @@ export class Zone extends Component {
 
 		const newDrag = selectedDrags.length ? selectedDrags[0] : null
 
-		if (existingDrag === newDrag) {
-			return
-		}
+		if (existingDrag === newDrag) return
 
 		drop.insertBefore(newDrag, existingDrag)
 	}
@@ -151,16 +151,15 @@ export class Zone extends Component {
 
 	/** @param {event} event */
 	onDragClicked (event) {
-		const target = /** @type {DragZone} */ (event.target)
-		const selected = !(target ? target.selected : false)
+		const drag = /** @type {DragZone} */ (event.target)
+		const selected = event['detail'].selected
+		const drags = this.getSelectedDrags()
 
-		if (event['detail'].origin.ctrlKey) {
-			target.selected = selected
-		} else {
+		if (!event['detail'].origin.ctrlKey) {
 			this._cleanSelectedDrags()
 			this._cleanSelectedDrops()
 
-			target.selected = selected
+			drag.selected = !!drags.length || selected
 		}
 
 		this._dispatchSelectedDrags()
@@ -180,7 +179,7 @@ export class Zone extends Component {
 
 		if (!event.ctrlKey || !this.getSelectedDrags().length) return
 
-		const keyCode = String.fromCharCode(event.keyCode).toLowerCase()
+		const keyCode = event.key.toLowerCase()
 
 		if (keyCode === 'c') {
 			this.keyboardAction = 'copy'
@@ -224,7 +223,7 @@ export class Zone extends Component {
 
 	setSelectedDrags (query, selected) {
 		const drags = /** @type {DragZone[]} */([
-			...this.selectAll(`ark-zone-drag ${query}`)
+			...this.selectAll(`ark-zone-drag${query}`)
 		])
 
 		drags.forEach(drag => { drag.selected = selected })

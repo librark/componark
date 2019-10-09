@@ -26,13 +26,13 @@
     }
 
     &[selected] {
-      background: gray;
+      background: rgba($color: $muted, $alpha: .3);
     }
   }
 
   .#{$component} {
     &--hover {
-      background: rgba($color: $muted, $alpha: .2);
+      background: rgba($color: $muted, $alpha: .3);
     }
 
     &--hover_disabled {

@@ -82,13 +82,16 @@ export class DropZone extends Component {
 		if (!this.fixed) return
 		const origin = new MouseEvent(event.type, event)
 
+		this.selected = !this.selected
+
 		this.dispatchEvent(
 			new CustomEvent('drop:clicked', {
 				bubbles: true,
 				detail: {
 					id: this.id,
 					value: this.value,
-					origin: origin
+					origin: origin,
+					selected: this.selected
 				}
 			})
 		)
@@ -106,7 +109,8 @@ export class DropZone extends Component {
 				detail: {
 					id: this.id,
 					value: true,
-					origin: event
+					origin: event,
+					selected: this.selected
 				}
 			})
 		)
