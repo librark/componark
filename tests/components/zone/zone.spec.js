@@ -108,10 +108,10 @@ describe('Zone', () => {
 		zone.appendChild(drag3)
 		zone.appendChild(drag4)
 
-		expect(zone._getSelectedDrags().length).toBeTruthy()
+		expect(zone.getSelectedDrags().length).toBeTruthy()
 
 		zone._cleanSelectedDrags()
 
-		expect(!zone._getSelectedDrags().length).toBeTruthy()
+		expect(!zone.getSelectedDrags().length).toBeTruthy()
 	})
 })

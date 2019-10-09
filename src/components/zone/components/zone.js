@@ -87,6 +87,10 @@ export class Zone extends Component {
 		} else if (drop.selected && ctrlKey) {
 			drop.setSelectedDrags(true)
 		}
+
+		if (ctrlKey) {
+			this._dispatchSelectedDrags()
+		}
 	}
 
 	/** @param {event} event */
@@ -121,7 +125,7 @@ export class Zone extends Component {
 		const existingDrag = /** @type {DragZone} */ (event.target)
 		const drop = existingDrag.getParentDrop()
 
-		const selectedDrags = this._getSelectedDrags()
+		const selectedDrags = this.getSelectedDrags()
 
 		const newDrag = selectedDrags.length ? selectedDrags[0] : null
 
@@ -158,6 +162,8 @@ export class Zone extends Component {
 
 			target.selected = selected
 		}
+
+		this._dispatchSelectedDrags()
 	}
 
 	// ---------------------------------------------------------------------------
@@ -172,7 +178,7 @@ export class Zone extends Component {
 			})
 		}
 
-		if (!event.ctrlKey || !this._getSelectedDrags().length) return
+		if (!event.ctrlKey || !this.getSelectedDrags().length) return
 
 		const keyCode = String.fromCharCode(event.keyCode).toLowerCase()
 
@@ -216,13 +222,36 @@ export class Zone extends Component {
 		this._cleanDropStartDropEnd()
 	}
 
+	setSelectedDrags (query, selected) {
+		const drags = /** @type {DragZone[]} */([
+			...this.selectAll(`ark-zone-drag ${query}`)
+		])
+
+		drags.forEach(drag => { drag.selected = selected })
+	}
+
+	/** @returns {DragZone[]} */
+	getSelectedDrags () {
+		return /** @type {DragZone[]} */ ([
+			...this.selectAll('ark-zone-drag[selected]')
+		])
+	}
+
 	// ---------------------------------------------------------------------------
+	_dispatchSelectedDrags () {
+		const drags = this.getSelectedDrags()
+
+		this.dispatchEvent(new CustomEvent('zone:selecteddrags', {
+			detail: drags
+		}))
+	}
+
 	/** @param {string} keyboardAction */
 	_pasteOption (keyboardAction) {
 		if (!keyboardAction) return
 
 		const drops = this._getSelectedDrops()
-		const drags = this._getSelectedDrags()
+		const drags = this.getSelectedDrags()
 
 		if (!drops.length || !drags.length) return
 		const selectedDrop = drops[0]
@@ -310,6 +339,8 @@ export class Zone extends Component {
 				drop.setSelectedDrags(true)
 			}
 		}
+
+		this._dispatchSelectedDrags()
 	}
 
 	/**
@@ -349,13 +380,6 @@ export class Zone extends Component {
 		])
 	}
 
-	/** @returns {DragZone[]} */
-	_getSelectedDrags () {
-		return /** @type {DragZone[]} */ ([
-			...this.selectAll('ark-zone-drag[selected]')
-		])
-	}
-
 	_cleanSelectedDrops () {
 		this._getSelectedDrops().forEach(drop => {
 			drop.selected = false
@@ -363,7 +387,7 @@ export class Zone extends Component {
 	}
 
 	_cleanSelectedDrags () {
-		this._getSelectedDrags().forEach(drag => {
+		this.getSelectedDrags().forEach(drag => {
 			drag.selected = false
 		})
 	}
