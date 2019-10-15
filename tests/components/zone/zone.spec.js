@@ -14,6 +14,7 @@ describe('Zone', () => {
 	it('can calculate the absolute position', () => {
 		const zone = new Zone()
 		zone.init().render().load()
+		zone.disconnectedCallback()
 	})
 
 	it('EventAlterZone', () => {
@@ -409,6 +410,7 @@ describe('Zone', () => {
 
 		// -------------------------------------------------------------------------
 		zone._pasteOption(null)
+
 		zone._pasteOption('copy')
 		expect(zone.selectAll('ark-zone-drag').length).toEqual(2)
 
@@ -428,10 +430,56 @@ describe('Zone', () => {
 
 		expect(!drop8.selectAll('ark-zone-drag').length).toBeTruthy()
 
+		zone._pasteOption('test')
 		zone._pasteOption('cut')
 
 		expect(drop8.selectAll('ark-zone-drag').length).toEqual(1)
 		expect(zone.selectAll('ark-zone-drag').length).toEqual(3)
+	})
+
+	it('can copy and cut', () => {
+		const zone = new Zone()
+
+		const drop0 = new DropZone()
+		drop0.cols = 1
+
+		const drop1 = new DropZone()
+
+		const drag1 = new DragZone()
+		const drag2 = new DragZone()
+
+		// ----------------------------------------
+
+		zone.appendChild(drop0)
+
+		drop0.appendChild(drop1)
+		// drop1.appendChild(drag1)
+		// drop1.appendChild(drag2)
+
+		// ----------------------------------------
+
+		drop0.init().render().load()
+		drop1.init().render().load()
+
+		drag1.init().render().load()
+		drag2.init().render().load()
+
+		zone.init().render().load()
+
+		// ----------------------------------------
+		expect(drop1.selectAll('ark-zone-drag').length).toEqual(0)
+
+		drag1.selected = true
+		drag1.x = 0
+		drag1.y = 0
+
+		drag2.selected = true
+		drag2.x = 1
+		drag2.y = 0
+
+		zone._cutDrags(drop1, zone.getSelectedDrags())
+
+		expect(drop1.selectAll('ark-zone-drag').length).toEqual(0)
 	})
 
 	it('onMouseDown', () => {
@@ -454,6 +502,22 @@ describe('Zone', () => {
 		zone.init().render().load()
 
 		// -------------------------------------------------------------------------
+		drag1.dispatchEvent(new MouseEvent('mousedown', {
+			shiftKey: false,
+			bubbles: true
+		}))
+
+		// -------------------------------------------------------------------------
+		drop1.fixed = false
+		drag1.dispatchEvent(new MouseEvent('mousedown', {
+			shiftKey: true,
+			bubbles: true
+		}))
+		expect(zone.dropStart && zone.dropEnd).toEqual(undefined)
+
+		// -------------------------------------------------------------------------
+		drop1.fixed = true
+
 		drag1.dispatchEvent(new MouseEvent('mousedown', {
 			shiftKey: true,
 			bubbles: true
@@ -480,6 +544,9 @@ describe('Zone', () => {
 		drag1.init().render().load()
 
 		zone.init().render().load()
+
+		// -------------------------------------------------------------------------
+		zone.onKeyUp(new KeyboardEvent('', { key: 'x' }))
 
 		// -------------------------------------------------------------------------
 		zone.onKeyUp(new KeyboardEvent('', { key: 'Shift' }))
@@ -531,6 +598,7 @@ describe('Zone', () => {
 		drag1.selected = true
 		drop2.selected = true
 
+		zone.onkeyDown(new KeyboardEvent('keydown', { ctrlKey: true, key: 'a' }))
 		zone.onkeyDown(new KeyboardEvent('keydown', { ctrlKey: true, key: 'X' }))
 		zone.onkeyDown(new KeyboardEvent('keydown', { ctrlKey: true, key: 'V' }))
 
@@ -591,6 +659,8 @@ describe('Zone', () => {
 
 		drag1.click()
 		expect(!drag1.selected).toBeTruthy()
+
+		drag1.dispatchEvent(new MouseEvent('click', { ctrlKey: true }))
 	})
 
 	it('onDragDragend', () => {
@@ -695,6 +765,9 @@ describe('Zone', () => {
 		drags = drop1.selectAll('ark-zone-drag')
 		expect(drag2.id).toEqual(drags[0].id)
 		expect(drag1.id).toEqual(drags[1].id)
+
+		drag2.selected = false
+		drag1.onDraggableEnter(new Event(''))
 	})
 
 	it('onDragDragstart', () => {
@@ -781,6 +854,9 @@ describe('Zone', () => {
 		zone.init().render().load()
 
 		// -------------------------------------------------------------------------
+		drop1.onMouseOver(new MouseEvent('', { shiftKey: true }))
+
+		// -------------------------------------------------------------------------
 		zone.dropStart = drop1
 		drop1.onMouseOver(new MouseEvent('', { shiftKey: true }))
 
@@ -789,5 +865,118 @@ describe('Zone', () => {
 		drop1.onMouseOver(new MouseEvent('', { shiftKey: true }))
 
 		expect(zone.dropEnd).toEqual(drop1)
+	})
+
+	it('onDropClicked', () => {
+		const zone = new Zone()
+
+		const drop0 = new DropZone()
+		drop0.cols = 3
+
+		const drop1 = new DropZone()
+		const drop2 = new DropZone()
+		const drop3 = new DropZone()
+
+		// ----------------------------------------
+
+		zone.appendChild(drop0)
+
+		drop0.appendChild(drop1)
+		drop0.appendChild(drop2)
+		drop0.appendChild(drop3)
+
+		// ----------------------------------------
+
+		drop0.init().render().load()
+		drop1.init().render().load()
+		drop2.init().render().load()
+		drop3.init().render().load()
+
+		zone.init().render().load()
+
+		// -------------------------------------------------------------------------
+		expect(!drop1.selected).toBeTruthy()
+
+		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
+		expect(drop1.selected).toBeTruthy()
+
+		// ----------------------------------------
+
+		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
+		expect(!drop1.selected).toBeTruthy()
+
+		// ----------------------------------------
+
+		drop2.selected = true
+		drop3.selected = true
+
+		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
+		expect(drop1.selected).toBeTruthy()
+		expect(drop2.selected).toBeTruthy()
+		expect(drop3.selected).toBeTruthy()
+
+		// ----------------------------------------
+
+		drop1.onClick(new MouseEvent('click'))
+		expect(drop1.selected).toBeTruthy()
+		expect(!drop2.selected).toBeTruthy()
+		expect(!drop3.selected).toBeTruthy()
+
+		// ----------------------------------------
+		drop1.selected = true
+		drop2.selected = true
+		drop3.selected = true
+
+		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
+		expect(!drop1.selected).toBeTruthy()
+		expect(drop2.selected).toBeTruthy()
+		expect(drop3.selected).toBeTruthy()
+	})
+
+	it('onDropDragenter', () => {
+		const zone = new Zone()
+
+		const drop0 = new DropZone()
+		drop0.cols = 3
+
+		const drop1 = new DropZone()
+		const drop2 = new DropZone()
+		const drop3 = new DropZone()
+
+		const drag1 = new DragZone()
+		const drag2 = new DragZone()
+
+		// ----------------------------------------
+
+		zone.appendChild(drop0)
+
+		drop0.appendChild(drop1)
+		drop0.appendChild(drop2)
+		drop0.appendChild(drop3)
+
+		drop1.appendChild(drag1)
+		drop1.appendChild(drag2)
+
+		// ----------------------------------------
+
+		drop0.init().render().load()
+		drop1.init().render().load()
+		drop2.init().render().load()
+		drop3.init().render().load()
+
+		drag1.init().render().load()
+		drag2.init().render().load()
+
+		zone.init().render().load()
+
+		// -------------------------------------------------------------------------
+		drag1.selected = true
+
+		expect(drop1.selectAll('ark-zone-drag').length).toEqual(2)
+		expect(drop2.selectAll('ark-zone-drag').length).toEqual(0)
+
+		drop2.onDragenter(new CustomEvent(''))
+
+		expect(drop2.selectAll('ark-zone-drag').length).toEqual(1)
 	})
 })
