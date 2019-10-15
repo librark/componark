@@ -73,11 +73,10 @@ export class Zone extends Component {
 	onDropClicked (event) {
 		const detail = event.detail
 		const ctrlKey = detail.origin.ctrlKey
+		const selected = detail.selected
 
 		const drop = /** @type {DropZone} */ (event.target)
 		const drops = this._getSelectedDrops()
-
-		const selected = detail.selected
 
 		if (!ctrlKey) {
 			this._cleanSelectedDrops()
@@ -129,9 +128,9 @@ export class Zone extends Component {
 
 		const selectedDrags = this.getSelectedDrags()
 
-		const newDrag = selectedDrags.length ? selectedDrags[0] : null
+		const newDrag = selectedDrags[0] || null
 
-		if (existingDrag === newDrag) return
+		if (!newDrag) return
 
 		drop.insertBefore(newDrag, existingDrag)
 	}
@@ -149,13 +148,14 @@ export class Zone extends Component {
 		dragDropped.dispatch(this)
 	}
 
-	/** @param {event} event */
+	/** @param {CustomEvent} event */
 	onDragClicked (event) {
 		const drag = /** @type {DragZone} */ (event.target)
-		const selected = event['detail'].selected
+		const selected = event.detail.selected
+		const origin = event.detail.origin
 		const drags = this.getSelectedDrags()
 
-		if (!event['detail'].origin.ctrlKey) {
+		if (!origin.ctrlKey) {
 			this._cleanSelectedDrags()
 			this._cleanSelectedDrops()
 
