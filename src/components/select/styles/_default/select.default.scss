@@ -1,57 +1,56 @@
 @mixin select_default() {
-  $component: "ark-select";
+	$component: 'ark-select';
 
-  #{$component} {
+	#{$component} {
+		display: inline-grid;
+		min-height: 2rem;
 
-    display: inline-grid;
-    min-height: 2rem;
+		color: inherit !important;
+		background: inherit !important;
 
-    color: inherit !important;
-    background: inherit !important;
+		select {
+			height: 1.2rem;
+			width: 100%;
 
-    select {
-      height: 1.2rem;
-      width: 8.5rem;
+			border: 0;
+			border-bottom: 1px solid;
+			outline: 0;
 
-      border: 0;
-      border-bottom: 1px solid;
-      outline: 0;
+			font-size: initial;
 
-      font-size: initial;
+			cursor: pointer;
 
-      cursor: pointer;
+			color: inherit;
+			background: inherit;
 
-      color: inherit;
-      background: inherit;
+			* {
+				color: $color !important;
+				margin: 0.1rem 0.5rem;
+			}
+		}
 
-      * {
-        color: $color !important;
-        margin: .1rem .5rem;
-      }
-    }
+		&::before,
+		&::after {
+			all: unset;
+		}
 
-    &::before,
-    &::after {
-      all: unset;
-    }
+		&[disabled] {
+			pointer-events: none !important;
+			cursor: default !important;
 
-    &[disabled] {
-      pointer-events: none !important;
-      cursor: default !important;
+			color: $muted !important;
+			background: rgba($color: $muted, $alpha: 0.1) !important;
 
-      color: $muted !important;
-      background: rgba($color: $muted, $alpha: 0.1) !important;
+			&:hover {
+				background: none !important;
+			}
+		}
+	}
 
-      &:hover {
-        background: none !important;
-      }
-    }
-  }
-
-  .#{$component} {
-    &--label {
-      font-size: small;
-      margin: .1rem;
-    }
-  }
+	.#{$component} {
+		&--label {
+			font-size: small;
+			margin: 0.1rem;
+		}
+	}
 }

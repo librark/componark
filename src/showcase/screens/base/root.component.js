@@ -13,14 +13,14 @@ export const version = VERSION
 
 export class RootComponent extends Component {
 	/** @param {{ path: string }} context */
-	init (context) {
+	init(context) {
 		this.path = context['path']
 		this.currentLocation = window.location
 
 		return super.init()
 	}
 
-	render () {
+	render() {
 		this.innerHTML = /* html */ `${this.styles}
       <ark-navbar justify='between' fixed-top>
         <ark-nav>
@@ -52,21 +52,24 @@ export class RootComponent extends Component {
 		return super.render()
 	}
 
-	load () {
+	load() {
 		this._renderMenuList()
 		this._updatePageName()
 		return super.load()
 	}
 
 	/** @param {Component} component */
-	setContentComponent (component) {
+	setContentComponent(component) {
 		if (!component) return
 		const container = this.select('[data-root-container]')
-		container.init({ component: component }).render().load()
+		container
+			.init({ component: component })
+			.render()
+			.load()
 	}
 
 	// ---------------------------------------------------------------------------
-	_renderMenuList () {
+	_renderMenuList() {
 		const menuList = /** @type {List} */ (this.select('[data-sidebar-list]'))
 
 		const template = item => /* html */ `
@@ -76,7 +79,7 @@ export class RootComponent extends Component {
 		menuList.init({ source: this.locations, template: template }).render()
 	}
 
-	_updatePageName () {
+	_updatePageName() {
 		const name = this.querySelector('[data-page-name]')
 		const pathname = this.currentLocation.pathname
 		const location = this.locations.find(location => location.path === pathname)
@@ -84,32 +87,34 @@ export class RootComponent extends Component {
 		if (location) name.textContent = location.name
 	}
 
-	_closeSidebar () {
+	_closeSidebar() {
 		this.sidebar.close()
 	}
 
-	_onOpenSidebar () {
+	_onOpenSidebar() {
 		this.sidebar.open()
 	}
 
 	/** @param {Event} event */
-	_onListItemSelected (event) {
-		this.dispatchEvent(new CustomEvent('navigate', {
-			bubbles: true,
-			detail: { path: event['detail']['data']['path'] }
-		}))
+	_onListItemSelected(event) {
+		this.dispatchEvent(
+			new CustomEvent('navigate', {
+				bubbles: true,
+				detail: { path: event['detail']['data']['path'] },
+			}),
+		)
 
 		this._closeSidebar()
 		this._updatePageName()
 	}
 
 	// ---------------------------------------------------------------------------
-	get sidebar () {
+	get sidebar() {
 		return /** @type {Sidebar} */ (this.select('[data-sidebar]'))
 	}
 
-	get styles () {
-		return /* html */`
+	get styles() {
+		return /* html */ `
       <style>
         app-root{
           display: block;
@@ -128,88 +133,92 @@ export class RootComponent extends Component {
     `
 	}
 
-	get locations () {
+	get locations() {
 		return [
 			{
 				name: 'Accordion',
-				path: `/base/accordion`
+				path: `/base/accordion`,
 			},
 			{
 				name: 'Alert',
-				path: `/base/alert`
+				path: `/base/alert`,
 			},
 			{
 				name: 'Button',
-				path: `/base/button`
+				path: `/base/button`,
 			},
 			{
 				name: 'Card',
-				path: `/base/card`
+				path: `/base/card`,
 			},
 			{
 				name: 'Chart',
-				path: `/base/chart`
+				path: `/base/chart`,
 			},
 			{
 				name: 'Checkbox',
-				path: `/base/checkbox`
+				path: `/base/checkbox`,
 			},
 			{
 				name: 'Grid',
-				path: `/base/grid`
+				path: `/base/grid`,
 			},
 			{
 				name: 'Icon',
-				path: `/base/icon`
+				path: `/base/icon`,
 			},
 			{
 				name: 'Input',
-				path: `/base/input`
+				path: `/base/input`,
 			},
 			{
 				name: 'List',
-				path: `/base/list`
+				path: `/base/list`,
 			},
 			{
 				name: 'Modal',
-				path: `/base/modal`
+				path: `/base/modal`,
+			},
+			{
+				name: 'Multiselect',
+				path: `/base/multiselect`,
 			},
 			{
 				name: 'Navbar',
-				path: `/base/navbar`
+				path: `/base/navbar`,
 			},
 			{
 				name: 'Paginator',
-				path: `/base/paginator`
+				path: `/base/paginator`,
 			},
 			{
 				name: 'Radio',
-				path: `/base/radio`
+				path: `/base/radio`,
 			},
 			{
 				name: 'Select',
-				path: `/base/select`
+				path: `/base/select`,
 			},
 			{
 				name: 'Sidebar',
-				path: `/base/sidebar`
+				path: `/base/sidebar`,
 			},
 			{
 				name: 'Splitview',
-				path: `/base/splitview`
+				path: `/base/splitview`,
 			},
 			{
 				name: 'Table',
-				path: `/base/table`
+				path: `/base/table`,
 			},
 			{
 				name: 'Tabs',
-				path: `/base/tabs`
+				path: `/base/tabs`,
 			},
 			{
 				name: 'Zone',
-				path: `/base/zone`
-			}
+				path: `/base/zone`,
+			},
 		]
 	}
 }

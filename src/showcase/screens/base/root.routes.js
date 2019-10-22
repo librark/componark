@@ -1,12 +1,12 @@
-export function setRoutes (resolver, rootComponent, prefix) {
+export function setRoutes(resolver, rootComponent, prefix) {
 	/** @param {string} path @returns {{path, action}} */
-	function setContentComponent (path) {
+	function setContentComponent(path) {
 		return {
 			path: path,
 			action: async () => {
 				const module = await import(`./${path}`)
 				rootComponent.setContentComponent(module.hub(resolver))
-			}
+			},
 		}
 	}
 
@@ -23,6 +23,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
 		setContentComponent('input'),
 		setContentComponent('list'),
 		setContentComponent('modal'),
+		setContentComponent('multiselect'),
 		setContentComponent('navbar'),
 		setContentComponent('paginator'),
 		setContentComponent('radio'),
@@ -31,6 +32,6 @@ export function setRoutes (resolver, rootComponent, prefix) {
 		setContentComponent('splitview'),
 		setContentComponent('table'),
 		setContentComponent('tabs'),
-		setContentComponent('zone')
+		setContentComponent('zone'),
 	])
 }

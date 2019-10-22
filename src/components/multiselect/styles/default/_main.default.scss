@@ -1,0 +1,5 @@
+@import './multiselect.default';
+
+@mixin multiselect_default() {
+	@include multiselect_default_();
+}
