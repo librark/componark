@@ -1,0 +1,46 @@
+@mixin multiselect_item_default_() {
+	$component: 'ark-multiselect-item';
+
+	#{$component} {
+		background: rgba($color: $primary, $alpha: 0.5);
+
+		padding-top: 0.1rem;
+		padding-bottom: 0.1rem;
+
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: fit-content;
+
+		border-radius: 5px;
+
+		user-select: none;
+
+		cursor: pointer;
+
+		[remove] {
+			background: rgba($color: $color, $alpha: 0.2);
+			color: rgba($color: $color, $alpha: 0.8);
+			font-weight: bold;
+
+			border-radius: 50%;
+			outline: 0px;
+			border: 0px;
+
+			margin-left: 0.2rem;
+			cursor: pointer;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&:hover {
+				background: rgba($color: $color, $alpha: 0.3);
+				color: rgba($color: $color, $alpha: 0.9);
+			}
+		}
+	}
+}

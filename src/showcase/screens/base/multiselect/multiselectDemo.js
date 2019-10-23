@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('../../loader').Multiselect} Multiselect
+ **/
 import { Component } from '../../loader'
 
 export class MultiselectDemo extends Component {
@@ -9,8 +12,47 @@ export class MultiselectDemo extends Component {
 	render() {
 		this.innerHTML = /* html */ `${this.styles}
 			<ark-multiselect></ark-multiselect>
-    `
+
+			<span>Hello World</span>
+		`
+		this.renderMultiselect()
 		return super.render()
+	}
+
+	load() {
+		return super.load()
+	}
+
+	renderMultiselect() {
+		const multiselect = /** @type {Multiselect} */ (this.select(
+			'ark-multiselect'
+		))
+
+		if (!multiselect) return
+
+		multiselect.init({
+			items: [
+				'01 display',
+				'02 max-width',
+				'03 max-height',
+				'04 width',
+				'05 height',
+				'06 margin',
+				'07 padding',
+				'08 background',
+				'09 color',
+				'10 font-weight',
+				'11 border-radius',
+				'12 outline',
+				'13 border',
+				'14 margin-left',
+				'15 cursor',
+				'16 justify-content',
+				'17 align-items'
+			]
+		})
+
+		multiselect.render()
 	}
 
 	get styles() {

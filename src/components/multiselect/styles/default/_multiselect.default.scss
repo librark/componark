@@ -2,5 +2,107 @@
 	$component: 'ark-multiselect';
 
 	#{$component} {
+		position: relative;
+		width: 100%;
+
+		display: block;
+	}
+
+	.#{$component} {
+		&__label {
+		}
+
+		&__body {
+			display: flex;
+			align-items: center;
+		}
+
+		&__input {
+			display: flex;
+			flex-flow: wrap;
+
+			width: 100%;
+
+			margin: 0 0.2rem;
+
+			cursor: text;
+
+			& > * {
+				margin: 0.1rem;
+			}
+
+			input {
+				border: 0;
+				outline: 0;
+
+				background: none;
+			}
+		}
+
+		&__actions {
+			margin: 0.2rem;
+		}
+
+		&__remove-all {
+			margin: 0;
+			padding: 0;
+
+			width: 1.2rem;
+			height: 1.2rem;
+
+			background: none;
+			color: rgba($color: $color, $alpha: 0.8);
+
+			font-weight: bolder;
+
+			border: 0;
+			outline: 0;
+
+			cursor: pointer;
+
+			&:hover {
+				background: rgba($color: $color, $alpha: 0.1);
+			}
+		}
+
+		&__items {
+			display: none;
+
+			background: $white;
+			user-select: none;
+			border: 1px solid rgba($color: $color, $alpha: 0.3);
+
+			position: absolute;
+
+			width: 100%;
+			max-width: -webkit-fill-available;
+			max-height: 14.5rem;
+
+			overflow-y: scroll;
+
+			ul {
+				margin: 0;
+				padding: 0.2rem 0;
+
+				:not(:first-child) {
+					border-top: 1px solid rgba($color: $color, $alpha: 0.3);
+				}
+			}
+
+			li {
+				padding: 0.2rem 0.5rem;
+				cursor: pointer;
+
+				&:hover {
+					background: rgba($color: $primary, $alpha: 0.1);
+				}
+			}
+		}
+
+		&__no-options {
+			margin: 0.2rem;
+			color: $muted;
+			display: block;
+		}
 	}
 }

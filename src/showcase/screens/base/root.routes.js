@@ -6,7 +6,7 @@ export function setRoutes(resolver, rootComponent, prefix) {
 			action: async () => {
 				const module = await import(`./${path}`)
 				rootComponent.setContentComponent(module.hub(resolver))
-			},
+			}
 		}
 	}
 
@@ -32,6 +32,6 @@ export function setRoutes(resolver, rootComponent, prefix) {
 		setContentComponent('splitview'),
 		setContentComponent('table'),
 		setContentComponent('tabs'),
-		setContentComponent('zone'),
+		setContentComponent('zone')
 	])
 }

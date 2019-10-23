@@ -2,7 +2,7 @@ import { Component } from '../loader'
 
 export class RootContainerComponent extends Component {
 	/** @param {{ component: Component }} context */
-	init (context) {
+	init(context) {
 		this.component = context['component']
 
 		// -------------------------------------------------------------------------
@@ -17,7 +17,7 @@ export class RootContainerComponent extends Component {
 		return super.init()
 	}
 
-	render () {
+	render() {
 		this.innerHTML = /* html */ `${this.styles}
       <ark-grid class="container" gap="1rem">
         <ark-grid-item data-component></ark-grid-item>
@@ -39,7 +39,7 @@ export class RootContainerComponent extends Component {
 		return super.render()
 	}
 
-	load () {
+	load() {
 		this.container = this.querySelector('[data-component]')
 		if (this.container) this.container.append(this.component)
 
@@ -48,17 +48,24 @@ export class RootContainerComponent extends Component {
 		return super.load()
 	}
 
-	_loadComponent () {
-		const mobile = this.querySelector('[data-mobile]')
-		const tablet = this.querySelector('[data-tablet]')
-		const desktop = this.querySelector('[data-desktop]')
+	_loadComponent() {
+		const mobile = /** @type {HTMLIFrameElement} */ (this.querySelector(
+			'[data-mobile]'
+		))
+		const tablet = /** @type {HTMLIFrameElement} */ (this.querySelector(
+			'[data-tablet]'
+		))
+		const desktop = /** @type {HTMLIFrameElement} */ (this.querySelector(
+			'[data-desktop]'
+		))
 
 		this._setupFrame(mobile, this.mobileWidth)
 		this._setupFrame(tablet, this.tabletWidth)
 		this._setupFrame(desktop, this.desktopWidth)
 	}
 
-	_setupFrame (iframe, width) {
+	/** @param {HTMLIFrameElement} iframe */
+	_setupFrame(iframe, width) {
 		iframe.setAttribute('frameborder', `1`)
 		iframe.setAttribute('src', `${this.currentLocation.origin}/blank`)
 		iframe.setAttribute('width', width)
@@ -66,15 +73,17 @@ export class RootContainerComponent extends Component {
 
 		iframe.onload = () => {
 			const content = iframe.contentWindow.document
-			const body = content.querySelector('body')
 
-			body.prepend(this.component.cloneNode(true))
+			content.addEventListener('blank:load', _ => {
+				const body = content.querySelector('body')
+				body.prepend(this.component.cloneNode(true))
+			})
 		}
 	}
 
 	// ---------------------------------------------------------------------------
-	get styles () {
-		return /* html */`
+	get styles() {
+		return /* html */ `
       <style>
         app-root-container .container{
           padding: 1rem;
