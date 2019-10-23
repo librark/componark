@@ -25,6 +25,8 @@ export class MultiselectItem extends Component {
 		return super.load()
 	}
 
+	// ---------------------------------------------------------------------------
+
 	/** @param {event} event */
 	_onRemove(event) {
 		event.stopImmediatePropagation()

@@ -30,7 +30,7 @@ export class Multiselect extends Component {
 			</div>
 			<div listen on-click="onSelectInput" class="ark-multiselect__body">
 				<div class="ark-multiselect__input" data-input-content>
-					<input data-input type="text"/>
+					<input data-input type="text" listen on-keydown="search"/>
 				</div>
 				<div class="ark-multiselect__actions">
 					<button class="ark-multiselect__remove-all"
@@ -42,7 +42,7 @@ export class Multiselect extends Component {
 			</div>
 		`
 
-		this.renderSelectedList()
+		this._renderSelectedList()
 		return super.render()
 	}
 
@@ -55,23 +55,24 @@ export class Multiselect extends Component {
 		return super.load()
 	}
 
-	renderSelectedList() {
-		const body = this.querySelector('[data-input-content]')
-		const items = this.selectedItems
+	// ---------------------------------------------------------------------------
 
-		if (!body || !items.length) return
+	/** @param {event} event */
+	onSelectedItem(event) {
+		event.stopImmediatePropagation()
 
-		items.forEach((item, index) => {
-			const multiselectItem = new MultiselectItem()
+		const target = /** @type {MultiselectItem} */ (event.target)
+		const item = this.items[parseInt(target.id)]
+		this.selectedItems.unshift(item)
+		this.render()
+	}
 
-			multiselectItem.init({
-				index: index,
-				data: item,
-				template: this.template
-			})
+	/** @param {event} event */
+	onRemoveAll(event) {
+		event.stopImmediatePropagation()
+		this.selectedItems = []
 
-			body.prepend(multiselectItem)
-		})
+		this.render()
 	}
 
 	/** @param {CustomEvent} event */
@@ -92,11 +93,19 @@ export class Multiselect extends Component {
 			'[data-input]'
 		))
 
+		this._selectedItem(!input.hasAttribute('selected'))
+	}
+
+	_selectedItem(selected) {
+		const input = /** @type {HTMLInputElement} */ (this.querySelector(
+			'[data-input]'
+		))
+
 		const items = /** @type {HTMLDivElement} */ (this.querySelector(
 			'[data-items]'
 		))
 
-		if (!input.hasAttribute('selected')) {
+		if (selected) {
 			input.setAttribute('selected', 'true')
 			input.focus()
 			items.style.display = 'block'
@@ -106,6 +115,23 @@ export class Multiselect extends Component {
 			items.style.display = 'none'
 		}
 	}
+
+	// ---------------------------------------------------------------------------
+	/** @param {KeyboardEvent} event */
+	search(event) {
+		event.stopImmediatePropagation()
+
+		const input = /** @type {HTMLInputElement} */ (event.target)
+		const value = input.value
+
+		if (!value.length && event.key === 'Backspace') {
+			this.selectedItems.shift()
+			this.render()
+			this._selectedItem(true)
+		}
+	}
+
+	// ---------------------------------------------------------------------------
 
 	/** @returns {string} */
 	_getListItems() {
@@ -142,22 +168,23 @@ export class Multiselect extends Component {
 		return false
 	}
 
-	/** @param {event} event */
-	onSelectedItem(event) {
-		event.stopImmediatePropagation()
+	_renderSelectedList() {
+		const body = this.querySelector('[data-input-content]')
+		const items = this.selectedItems
 
-		const target = /** @type {MultiselectItem} */ (event.target)
-		const item = this.items[parseInt(target.id)]
-		this.selectedItems.unshift(item)
-		this.render()
-	}
+		if (!body || !items.length) return
 
-	/** @param {event} event */
-	onRemoveAll(event) {
-		event.stopImmediatePropagation()
-		this.selectedItems = []
+		items.forEach((item, index) => {
+			const multiselectItem = new MultiselectItem()
 
-		this.render()
+			multiselectItem.init({
+				index: index,
+				data: item,
+				template: this.template
+			})
+
+			body.prepend(multiselectItem)
+		})
 	}
 }
 customElements.define('ark-multiselect', Multiselect)
