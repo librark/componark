@@ -21,6 +21,10 @@
 
 		cursor: pointer;
 
+		[selected] {
+			display: none;
+		}
+
 		[remove] {
 			background: rgba($color: $color, $alpha: 0.2);
 			color: rgba($color: $color, $alpha: 0.8);

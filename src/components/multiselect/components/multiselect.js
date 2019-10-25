@@ -1,7 +1,13 @@
-/** @typedef {import('./multiselect.item').MultiselectItem} MultiselectItem */
+/**
+ * @typedef {import('./multiselect.input').MultiselectInput} MultiselectInput
+ * @typedef {import('./multiselect.item').MultiselectItem} MultiselectItem
+ * @typedef {import('./multiselect.list').MultiselectList} MultiselectList
+ *  */
 
 import { Component } from '../../component'
-import { MultiselectItem } from './multiselect.item'
+
+import { MultiselectList } from './multiselect.list'
+import { MultiselectInput } from './multiselect.input'
 
 export class Multiselect extends Component {
 	/**
@@ -12,13 +18,9 @@ export class Multiselect extends Component {
 	 * } | {}} context
 	 */
 	init(context = {}) {
-		this.items = context['items'] || this.items || []
 		this.label = context['label'] || this.label || 'label'
+		this.items = context['items'] || this.items || []
 		this.template = context['template'] || (data => `${data}`)
-
-		// -------------------------------------------------------------------------
-		/** @type {Array} */
-		this.selectedItems = this.selectedItems || []
 
 		return super.init()
 	}
@@ -28,28 +30,48 @@ export class Multiselect extends Component {
 			<div class="ark-multiselect__label">
 				<small>${this.label}</small>
 			</div>
-			<div listen on-click="onSelectInput" class="ark-multiselect__body">
-				<div class="ark-multiselect__input" data-input-content>
-					<input data-input type="text" listen on-keydown="search"/>
-				</div>
+			<div class="ark-multiselect__body">
+				<ark-multiselect-input></ark-multiselect-input>
 				<div class="ark-multiselect__actions">
 					<button class="ark-multiselect__remove-all"
 					 listen on-click="onRemoveAll">&times;</button>
 				</div>
 			</div>
-			<div data-items class="ark-multiselect__items">
-				${this._getListItems()}
-			</div>
+
+			<ark-multiselect-list></ark-multiselect-list>
 		`
 
-		this._renderSelectedList()
+		this.multiselectList
+			.init({
+				items: this._getSelectionList(this.input.items),
+				template: this.template
+			})
+			.render()
+
+		this.input
+			.init({
+				items: [],
+				template: this.template
+			})
+			.render()
+
 		return super.render()
 	}
 
 	load() {
 		this.addEventListener(
-			'multiselect-item:remove',
-			this.onRemoveItem.bind(this)
+			'multiselect-list:selected',
+			this.onMultiselectListSelected.bind(this)
+		)
+
+		this.addEventListener(
+			'multiselect-input:selected',
+			this.onMultiselectInputSelected.bind(this)
+		)
+
+		this.addEventListener(
+			'multiselect-input:update-items',
+			this.onMultiselectInputUpdateItems.bind(this)
 		)
 
 		return super.load()
@@ -58,133 +80,74 @@ export class Multiselect extends Component {
 	// ---------------------------------------------------------------------------
 
 	/** @param {event} event */
-	onSelectedItem(event) {
-		event.stopImmediatePropagation()
-
-		const target = /** @type {MultiselectItem} */ (event.target)
-		const item = this.items[parseInt(target.id)]
-		this.selectedItems.unshift(item)
-		this.render()
-	}
-
-	/** @param {event} event */
 	onRemoveAll(event) {
 		event.stopImmediatePropagation()
-		this.selectedItems = []
-
-		this.render()
+		this.input.items = []
 	}
 
 	/** @param {CustomEvent} event */
-	onRemoveItem(event) {
-		event.stopImmediatePropagation()
-		const index = event.detail.index
-
-		this.selectedItems.splice(index, 1)
-
-		this.render()
-	}
-
-	/** @param {event} event */
-	onSelectInput(event) {
+	onMultiselectListSelected(event) {
 		event.stopImmediatePropagation()
 
-		const input = /** @type {HTMLInputElement} */ (this.querySelector(
-			'[data-input]'
-		))
+		const item = event.detail.item
 
-		this._selectedItem(!input.hasAttribute('selected'))
+		if (item) this.input.addItem(item)
 	}
 
-	_selectedItem(selected) {
-		const input = /** @type {HTMLInputElement} */ (this.querySelector(
-			'[data-input]'
-		))
-
-		const items = /** @type {HTMLDivElement} */ (this.querySelector(
-			'[data-items]'
-		))
+	/** @param {CustomEvent} event */
+	onMultiselectInputSelected(event) {
+		event.stopImmediatePropagation()
+		const selected = event.detail.selected
 
 		if (selected) {
-			input.setAttribute('selected', 'true')
-			input.focus()
-			items.style.display = 'block'
+			this.multiselectList.open()
 		} else {
-			input.removeAttribute('selected')
-			input.blur()
-			items.style.display = 'none'
+			this.multiselectList.close()
 		}
 	}
 
-	// ---------------------------------------------------------------------------
-	/** @param {KeyboardEvent} event */
-	search(event) {
+	/** @param {CustomEvent} event */
+	onMultiselectInputUpdateItems(event) {
 		event.stopImmediatePropagation()
 
-		const input = /** @type {HTMLInputElement} */ (event.target)
-		const value = input.value
+		if (!this.multiselectList.innerHTML.length) return
 
-		if (!value.length && event.key === 'Backspace') {
-			this.selectedItems.shift()
-			this.render()
-			this._selectedItem(true)
-		}
+		this.multiselectList
+			.init({
+				items: this._getSelectionList(this.input.items),
+				template: this.template
+			})
+			.render()
 	}
 
 	// ---------------------------------------------------------------------------
 
-	/** @returns {string} */
-	_getListItems() {
-		let items = ''
-
-		this.items.forEach((item, index) => {
-			if (!this._isSelected(item)) {
-				items += /* html */ `
-					<li listen on-click="onSelectedItem" id="${index}" type="none">
-						${this.template(item)}
-					</li>
-				`
-			}
-		})
-
-		if (!items.length) {
-			return /* html */ `
-				<span class="ark-multiselect__no-options">Sin Opciones</span>
-			`
-		}
-
-		return /* html */ `
-			<ul>
-				${items}
-			</ul>
-		`
+	/** @returns {MultiselectList} */
+	get multiselectList() {
+		return /** @type {MultiselectList} */ (this.select('ark-multiselect-list'))
 	}
 
-	_isSelected(item) {
-		for (const selectedItem of this.selectedItems) {
-			if (JSON.stringify(selectedItem) === JSON.stringify(item)) return true
-		}
-
-		return false
+	/** @returns {MultiselectInput} */
+	get input() {
+		return /** @type {MultiselectInput} */ (this.select(
+			'ark-multiselect-input'
+		))
 	}
 
-	_renderSelectedList() {
-		const body = this.querySelector('[data-input-content]')
-		const items = this.selectedItems
+	// ---------------------------------------------------------------------------
 
-		if (!body || !items.length) return
+	_getSelectionList(inputItems) {
+		const currentList = []
 
-		items.forEach((item, index) => {
-			const multiselectItem = new MultiselectItem()
-
-			multiselectItem.init({
-				index: index,
-				data: item,
-				template: this.template
+		this.items.forEach(item => {
+			const selectedItem = inputItems.find(selectedItem => {
+				if (JSON.stringify(selectedItem) === JSON.stringify(item)) return true
 			})
 
-			body.prepend(multiselectItem)
+			if (!selectedItem) currentList.push(item)
 		})
+
+		return currentList
 	}
 }
 customElements.define('ark-multiselect', Multiselect)

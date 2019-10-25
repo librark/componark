@@ -5,7 +5,6 @@ export class MultiselectItem extends Component {
 	 * @param {{index, data,	template?}} context
 	 */
 	init(context) {
-		this.index = context['index'] || null
 		this.data = context['data'] || null
 		this.template = context['template'] || (data => `${data}`)
 
@@ -25,6 +24,15 @@ export class MultiselectItem extends Component {
 		return super.load()
 	}
 
+	/** @param {boolean} select */
+	selected(select) {
+		if (select) {
+			this.setAttribute('selected', 'selected')
+		} else {
+			this.removeAttribute('selected')
+		}
+	}
+
 	// ---------------------------------------------------------------------------
 
 	/** @param {event} event */
@@ -33,7 +41,9 @@ export class MultiselectItem extends Component {
 		this.dispatchEvent(
 			new CustomEvent('multiselect-item:remove', {
 				bubbles: true,
-				detail: { index: this.index }
+				detail: {
+					data: this.data
+				}
 			})
 		)
 	}
