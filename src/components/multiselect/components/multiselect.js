@@ -74,6 +74,11 @@ export class Multiselect extends Component {
 			this.onMultiselectInputUpdateItems.bind(this)
 		)
 
+		this.addEventListener(
+			'multiselect-input:keydown',
+			this.onMultiselectInputKeydown.bind(this)
+		)
+
 		return super.load()
 	}
 
@@ -118,6 +123,21 @@ export class Multiselect extends Component {
 				template: this.template
 			})
 			.render()
+	}
+
+	/** @param {CustomEvent} event */
+	onMultiselectInputKeydown(event) {
+		event.stopImmediatePropagation()
+
+		const key = event.detail.origin.key
+
+		if (key === 'ArrowUp') {
+			this.multiselectList.itemPosition--
+		} else if (key === 'ArrowDown') {
+			this.multiselectList.itemPosition++
+		} else if (key === 'Enter') {
+			this.multiselectList.selectActiveItem()
+		}
 	}
 
 	// ---------------------------------------------------------------------------

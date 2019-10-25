@@ -18,7 +18,8 @@ export class MultiselectInput extends Component {
 
 	render() {
 		this.innerHTML = /* html */ `
-			<input data-input type="text" listen on-keydown="onkeyDown"/>
+			<input listen on-keydown="onkeyDown" on-blur="onBlur" data-input
+			 type="text"/>
 		`
 
 		this.items = this.items
@@ -41,24 +42,7 @@ export class MultiselectInput extends Component {
 	onClick(event) {
 		event.stopImmediatePropagation()
 
-		const selected = this.input.hasAttribute('selected')
-
-		if (selected) {
-			this.input.removeAttribute('selected')
-			this.input.blur()
-		} else {
-			this.input.setAttribute('selected', 'true')
-			this.input.focus()
-		}
-
-		this.dispatchEvent(
-			new CustomEvent('multiselect-input:selected', {
-				bubbles: true,
-				detail: {
-					selected: !selected
-				}
-			})
-		)
+		this.selected = !this.selected
 	}
 
 	/** @param {CustomEvent} event */
@@ -74,6 +58,7 @@ export class MultiselectInput extends Component {
 			1
 		)
 
+		this.selected = true
 		this.items = this.items
 	}
 
@@ -88,9 +73,51 @@ export class MultiselectInput extends Component {
 			this.items.shift()
 			this.items = this.items
 		}
+
+		this.dispatchEvent(
+			new CustomEvent('multiselect-input:keydown', {
+				bubbles: true,
+				detail: {
+					input: this.input.value,
+					origin: event
+				}
+			})
+		)
+	}
+
+	/** @param {CustomEvent} event */
+	onBlur(event) {
+		event.stopImmediatePropagation()
+		this.selected = false
 	}
 
 	// ---------------------------------------------------------------------------
+	/** @param {boolean} select */
+	set selected(select) {
+		if (select) {
+			this.setAttribute('selected', 'true')
+			this.input.setAttribute('selected', 'true')
+			this.input.focus()
+		} else {
+			this.removeAttribute('selected')
+			this.input.removeAttribute('selected')
+		}
+
+		this.dispatchEvent(
+			new CustomEvent('multiselect-input:selected', {
+				bubbles: true,
+				detail: {
+					selected: this.selected
+				}
+			})
+		)
+	}
+
+	/** @return {boolean} */
+	get selected() {
+		return this.hasAttribute('selected')
+	}
+
 	/** @return {HTMLInputElement} */
 	get input() {
 		return /** @type {HTMLInputElement} */ (this.querySelector(
@@ -135,6 +162,7 @@ export class MultiselectInput extends Component {
 	addItem(item) {
 		this.items.unshift(item)
 		this.items = this.items
+		this.selected = true
 	}
 
 	// ---------------------------------------------------------------------------

@@ -28,17 +28,24 @@ export class MultiselectList extends Component {
 	/** @param {MouseEvent} event */
 	onClick(event) {
 		event.stopImmediatePropagation()
-
 		const target = /** @type {HTMLElement} */ (event.target)
-		const item = this.items[parseInt(target.id)]
+
+		const id = parseInt(target.id)
+		const item = this.items[id]
 		this._dispatchEventSelected(item)
+
+		this.itemPosition = -1
 	}
 
 	selectActiveItem() {
 		const target = this.querySelector('[active]')
 		if (!target) return
 
-		const item = this.items[parseInt(target.id)]
+		const id = parseInt(target.id)
+		const item = this.items[id]
+
+		this.itemPosition = id - 1
+
 		this._dispatchEventSelected(item)
 	}
 
@@ -54,7 +61,9 @@ export class MultiselectList extends Component {
 
 	/** @param {number} value */
 	set itemPosition(value) {
-		if (value == this.items.length) {
+		if (value == -1) {
+			this._itemPosition = value
+		} else if (value == this.items.length) {
 			this._itemPosition = 0
 		} else if (value < 0) {
 			this._itemPosition = this.items.length - 1
@@ -123,6 +132,7 @@ export class MultiselectList extends Component {
 		if (!item) return
 
 		item.setAttribute('active', 'active')
+		item.scrollIntoView(false)
 	}
 
 	_removeActiveItems() {
