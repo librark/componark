@@ -1,0 +1,18 @@
+@import '@material/floating-label/mdc-floating-label.scss';
+
+@mixin multiselect_material_() {
+	$component: 'ark-multiselect';
+
+	#{$component} {
+		border-bottom: 1px solid rgba($color: $color, $alpha: 0.4);
+	}
+
+	.#{$component} {
+		&__label {
+			@extend .mdc-floating-label;
+
+			color: $muted;
+			position: initial;
+		}
+	}
+}

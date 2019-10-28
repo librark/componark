@@ -14,7 +14,7 @@ export class MultiselectItem extends Component {
 
 	render() {
 		this.innerHTML = /* html */ `
-			${this.template(this.data)}
+			<div>${this.template(this.data)}</div>
 			<button listen listen on-click="_onRemove" remove>&times;</button>
 		`
 		return super.render()
