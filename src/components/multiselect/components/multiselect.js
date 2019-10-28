@@ -41,16 +41,16 @@ export class Multiselect extends Component {
 			<ark-multiselect-list></ark-multiselect-list>
 		`
 
-		this.multiselectList
+		this.input
 			.init({
-				items: this._getSelectionList(this.input.items),
+				items: [],
 				template: this.template
 			})
 			.render()
 
-		this.input
+		this.multiselectList
 			.init({
-				items: [],
+				items: this._getSelectionList(this.input.items),
 				template: this.template
 			})
 			.render()
@@ -65,11 +65,6 @@ export class Multiselect extends Component {
 		)
 
 		this.addEventListener(
-			'multiselect-input:selected',
-			this.onMultiselectInputSelected.bind(this)
-		)
-
-		this.addEventListener(
 			'multiselect-input:update-items',
 			this.onMultiselectInputUpdateItems.bind(this)
 		)
@@ -77,6 +72,26 @@ export class Multiselect extends Component {
 		this.addEventListener(
 			'multiselect-input:keydown',
 			this.onMultiselectInputKeydown.bind(this)
+		)
+
+		this.addEventListener(
+			'multiselect-input:focus',
+			this.onMultiselectInputFocus.bind(this)
+		)
+
+		this.addEventListener(
+			'multiselect-input:blur',
+			this.onMultiselectInputBlur.bind(this)
+		)
+
+		this.addEventListener(
+			'multiselect-input:alter',
+			this.onMultiselectInputAlter.bind(this)
+		)
+
+		this.addEventListener(
+			'multiselect-input:input',
+			this.onMultiselectInputInput.bind(this)
 		)
 
 		return super.load()
@@ -87,7 +102,7 @@ export class Multiselect extends Component {
 	/** @param {event} event */
 	onRemoveAll(event) {
 		event.stopImmediatePropagation()
-		this.input.items = []
+		this.input.clean()
 	}
 
 	/** @param {CustomEvent} event */
@@ -97,18 +112,6 @@ export class Multiselect extends Component {
 		const item = event.detail.item
 
 		if (item) this.input.addItem(item)
-	}
-
-	/** @param {CustomEvent} event */
-	onMultiselectInputSelected(event) {
-		event.stopImmediatePropagation()
-		const selected = event.detail.selected
-
-		if (selected) {
-			this.multiselectList.open()
-		} else {
-			this.multiselectList.close()
-		}
 	}
 
 	/** @param {CustomEvent} event */
@@ -132,12 +135,44 @@ export class Multiselect extends Component {
 		const key = event.detail.origin.key
 
 		if (key === 'ArrowUp') {
+			this.multiselectList.open()
 			this.multiselectList.itemPosition--
 		} else if (key === 'ArrowDown') {
+			this.multiselectList.open()
 			this.multiselectList.itemPosition++
 		} else if (key === 'Enter') {
 			this.multiselectList.selectActiveItem()
 		}
+	}
+
+	onMultiselectInputFocus(event) {
+		event.stopImmediatePropagation()
+		this.multiselectList.toggle()
+	}
+
+	onMultiselectInputBlur(event) {
+		event.stopImmediatePropagation()
+
+		if (!this.multiselectList.hasAttribute('selected')) {
+			this.multiselectList.close()
+		}
+	}
+
+	/** @param {CustomEvent} event */
+	onMultiselectInputAlter(event) {
+		event.stopImmediatePropagation()
+		this._alter(event.detail)
+	}
+
+	/** @param {CustomEvent} event */
+	onMultiselectInputInput(event) {
+		event.stopImmediatePropagation()
+
+		this.multiselectList.init({
+			items: this._getSelectionList(this.input.items, event.detail)
+		})
+
+		this.multiselectList.open()
 	}
 
 	// ---------------------------------------------------------------------------
@@ -154,17 +189,40 @@ export class Multiselect extends Component {
 		))
 	}
 
-	// ---------------------------------------------------------------------------
+	get value() {
+		return this.input.value
+	}
 
-	_getSelectionList(inputItems) {
+	// ---------------------------------------------------------------------------
+	_alter(value) {
+		this.dispatchEvent(
+			new CustomEvent('ark-multiselect:alter', {
+				bubbles: true,
+				detail: value
+			})
+		)
+	}
+
+	_getSelectionList(inputItems, value = '') {
 		const currentList = []
+
+		value = value.trim().toLowerCase()
 
 		this.items.forEach(item => {
 			const selectedItem = inputItems.find(selectedItem => {
 				if (JSON.stringify(selectedItem) === JSON.stringify(item)) return true
 			})
 
-			if (!selectedItem) currentList.push(item)
+			const title = this.template(item)
+				.trim()
+				.toLowerCase()
+
+			if (
+				(value.length && title.indexOf(value) > -1 && !selectedItem) ||
+				(!value.length && !selectedItem)
+			) {
+				currentList.push(item)
+			}
 		})
 
 		return currentList

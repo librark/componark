@@ -21,10 +21,26 @@ export class MultiselectList extends Component {
 	}
 
 	load() {
+		this.addEventListener('mouseenter', this.onMouseEnter.bind(this))
+
+		this.addEventListener('mouseleave', this.onMouseleave.bind(this))
+
 		return super.load()
 	}
 
 	// ---------------------------------------------------------------------------
+	/** @param {MouseEvent} event */
+	onMouseEnter(event) {
+		event.stopImmediatePropagation()
+		this.setAttribute('selected', 'true')
+	}
+
+	/** @param {MouseEvent} event */
+	onMouseleave(event) {
+		event.stopImmediatePropagation()
+		this.removeAttribute('selected')
+	}
+
 	/** @param {MouseEvent} event */
 	onClick(event) {
 		event.stopImmediatePropagation()
@@ -55,6 +71,15 @@ export class MultiselectList extends Component {
 
 	close() {
 		this.removeAttribute('show')
+		this.itemPosition = -1
+	}
+
+	toggle() {
+		if (this.hasAttribute('show')) {
+			this.close()
+		} else {
+			this.open()
+		}
 	}
 
 	// ---------------------------------------------------------------------------
@@ -114,6 +139,8 @@ export class MultiselectList extends Component {
 
 	_dispatchEventSelected(item) {
 		if (!item) return
+
+		this.close()
 
 		this.dispatchEvent(
 			new CustomEvent('multiselect-list:selected', {

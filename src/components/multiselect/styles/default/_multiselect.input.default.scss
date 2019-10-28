@@ -20,6 +20,14 @@
 			outline: 0;
 
 			background: none;
+
+			flex-basis: auto;
+			flex-grow: 1;
+		}
+
+		ark-multiselect-item {
+			flex-grow: 1;
+			flex-basis: auto;
 		}
 	}
 }

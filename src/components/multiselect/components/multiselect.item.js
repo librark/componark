@@ -2,10 +2,11 @@ import { Component } from '../../component'
 
 export class MultiselectItem extends Component {
 	/**
-	 * @param {{index, data,	template?}} context
+	 * @param {{id, data,	template?}} context
 	 */
 	init(context) {
 		this.data = context['data'] || null
+		this.id = context['id'] || this.id
 		this.template = context['template'] || (data => `${data}`)
 
 		return super.init()
@@ -16,21 +17,31 @@ export class MultiselectItem extends Component {
 			${this.template(this.data)}
 			<button listen listen on-click="_onRemove" remove>&times;</button>
 		`
-
 		return super.render()
+	}
+
+	reflectedProperties() {
+		return ['id']
 	}
 
 	load() {
 		return super.load()
 	}
 
-	/** @param {boolean} select */
-	selected(select) {
-		if (select) {
-			this.setAttribute('selected', 'selected')
+	// ---------------------------------------------------------------------------
+
+	/** @param {boolean} value */
+	set selected(value) {
+		if (value) {
+			this.setAttribute('selected', 'true')
 		} else {
 			this.removeAttribute('selected')
 		}
+	}
+
+	/** @return {boolean} */
+	get selected() {
+		return this.hasAttribute('selected')
 	}
 
 	// ---------------------------------------------------------------------------

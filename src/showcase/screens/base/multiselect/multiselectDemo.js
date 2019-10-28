@@ -14,12 +14,22 @@ export class MultiselectDemo extends Component {
 			<ark-multiselect></ark-multiselect>
 
 			<span>Hello World</span>
+
+			<br/>
+
+			<p data-input-value style="padding-top: 15rem;"></p>
 		`
 		this.renderMultiselect()
 		return super.render()
 	}
 
 	load() {
+		this.addEventListener('ark-multiselect:alter', event => {
+			this.querySelector('[data-input-value]').innerHTML = JSON.stringify(
+				event.detail
+			)
+		})
+
 		return super.load()
 	}
 

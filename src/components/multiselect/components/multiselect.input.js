@@ -18,8 +18,8 @@ export class MultiselectInput extends Component {
 
 	render() {
 		this.innerHTML = /* html */ `
-			<input listen on-keydown="onkeyDown" on-blur="onBlur" data-input
-			 type="text"/>
+			<input listen on-keydown="onkeyDown" on-blur="onBlur" on-focus="onFocus"
+				on-input="onInput" data-input type="text"/>
 		`
 
 		this.items = this.items
@@ -28,11 +28,12 @@ export class MultiselectInput extends Component {
 	}
 
 	load() {
-		this.addEventListener('click', this.onClick.bind(this))
 		this.addEventListener(
 			'multiselect-item:remove',
 			this.onMultiselectItemRemove.bind(this)
 		)
+
+		this.addEventListener('click', this.onClick.bind(this))
 
 		return super.load()
 	}
@@ -42,7 +43,44 @@ export class MultiselectInput extends Component {
 	onClick(event) {
 		event.stopImmediatePropagation()
 
-		this.selected = !this.selected
+		this.input.focus()
+	}
+
+	/** @param {event} event */
+	onFocus(event) {
+		event.stopImmediatePropagation()
+
+		this.focused = true
+
+		this.dispatchEvent(
+			new CustomEvent('multiselect-input:focus', {
+				bubbles: true
+			})
+		)
+	}
+
+	/** @param {event} event */
+	onBlur(event) {
+		event.stopImmediatePropagation()
+
+		this.focused = false
+
+		this.dispatchEvent(
+			new CustomEvent('multiselect-input:blur', {
+				bubbles: true
+			})
+		)
+	}
+
+	/** @param {event} event */
+	onInput(event) {
+		event.stopImmediatePropagation()
+		this.dispatchEvent(
+			new CustomEvent('multiselect-input:input', {
+				bubbles: true,
+				detail: this.input.value
+			})
+		)
 	}
 
 	/** @param {CustomEvent} event */
@@ -50,28 +88,36 @@ export class MultiselectInput extends Component {
 		event.stopImmediatePropagation()
 
 		const data = event.detail.data
-
-		this.items.splice(
-			this.items.findIndex(
-				item => JSON.stringify(item) === JSON.stringify(data)
-			),
-			1
-		)
-
-		this.selected = true
-		this.items = this.items
+		this.removeItem(data)
 	}
 
 	/** @param {KeyboardEvent} event */
 	onkeyDown(event) {
 		event.stopImmediatePropagation()
 
-		const input = /** @type {HTMLInputElement} */ (event.target)
-		const value = input.value
+		const key = event.key
 
-		if (!value.length && event.key === 'Backspace') {
-			this.items.shift()
-			this.items = this.items
+		if (!this.input.value.length && key === 'Backspace') {
+			this.shiftItem()
+		} else if (
+			key === 'ArrowLeft' &&
+			(!this.focused || !this.input.value.length)
+		) {
+			this.itemPosition++
+			this._selectedItemById(this.itemPosition)
+		} else if (
+			key === 'ArrowRight' &&
+			(!this.focused || !this.input.value.length)
+		) {
+			this.itemPosition--
+			this._selectedItemById(this.itemPosition)
+		} else if (
+			key === 'Delete' &&
+			(!this.focused || !this.input.value.length)
+		) {
+			const item = this._getSelectedItem()
+			if (!item) return
+			this.removeItem(item.data)
 		}
 
 		this.dispatchEvent(
@@ -85,38 +131,7 @@ export class MultiselectInput extends Component {
 		)
 	}
 
-	/** @param {CustomEvent} event */
-	onBlur(event) {
-		event.stopImmediatePropagation()
-		this.selected = false
-	}
-
 	// ---------------------------------------------------------------------------
-	/** @param {boolean} select */
-	set selected(select) {
-		if (select) {
-			this.setAttribute('selected', 'true')
-			this.input.setAttribute('selected', 'true')
-			this.input.focus()
-		} else {
-			this.removeAttribute('selected')
-			this.input.removeAttribute('selected')
-		}
-
-		this.dispatchEvent(
-			new CustomEvent('multiselect-input:selected', {
-				bubbles: true,
-				detail: {
-					selected: this.selected
-				}
-			})
-		)
-	}
-
-	/** @return {boolean} */
-	get selected() {
-		return this.hasAttribute('selected')
-	}
 
 	/** @return {HTMLInputElement} */
 	get input() {
@@ -130,11 +145,13 @@ export class MultiselectInput extends Component {
 		this._removeItems()
 		this._items = value
 
+		this.itemPosition = -1
+
 		this.items.forEach((item, index) => {
 			const multiselectItem = new MultiselectItem()
 
 			multiselectItem.init({
-				index: index,
+				id: index.toString(),
 				data: item,
 				template: this.template
 			})
@@ -157,19 +174,108 @@ export class MultiselectInput extends Component {
 		return this._items || []
 	}
 
+	/** @param {number} value */
+	set itemPosition(value) {
+		if (value >= -1 && value < this.items.length) {
+			this._itemPosition = value
+		}
+	}
+
+	/** @returns {number} */
+	get itemPosition() {
+		return this._itemPosition
+	}
+
+	/** @param {boolean} value */
+	set focused(value) {
+		if (value) {
+			this.input.setAttribute('focused', 'true')
+		} else {
+			this.input.removeAttribute('focused')
+		}
+	}
+
+	get focused() {
+		return this.input.hasAttribute('focused')
+	}
+
+	get value() {
+		return this.items
+	}
+
 	// ---------------------------------------------------------------------------
 
 	addItem(item) {
 		this.items.unshift(item)
 		this.items = this.items
-		this.selected = true
+
+		this._alter()
+	}
+
+	shiftItem() {
+		this.items.shift()
+		this.items = this.items
+		this._alter()
+	}
+
+	removeItem(data) {
+		this.items.splice(
+			this.items.findIndex(
+				item => JSON.stringify(item) === JSON.stringify(data)
+			),
+			1
+		)
+
+		this._alter()
+
+		this.items = this.items
+	}
+
+	clean() {
+		this.items = []
+		this.input.value = ''
+		this._alter()
 	}
 
 	// ---------------------------------------------------------------------------
+	_alter() {
+		this.dispatchEvent(
+			new CustomEvent('multiselect-input:alter', {
+				bubbles: true,
+				detail: this.value
+			})
+		)
+	}
+
 	_removeItems() {
 		this.selectAll('ark-multiselect-item').forEach(item => {
 			item.remove()
 		})
+	}
+
+	/** @param {number} id */
+	_selectedItemById(id) {
+		const items = /** @type {MultiselectItem[]} */ ([
+			...this.selectAll('ark-multiselect-item[selected]')
+		])
+
+		items.forEach(item => {
+			item.selected = false
+		})
+
+		const item = /** @type {MultiselectItem} */ (this.select(
+			`ark-multiselect-item[id="${id}"]`
+		))
+
+		if (item) item.selected = true
+
+		return item
+	}
+
+	_getSelectedItem() {
+		return /** @type {MultiselectItem} */ (this.select(
+			'ark-multiselect-item[selected]'
+		))
 	}
 }
 customElements.define('ark-multiselect-input', MultiselectInput)
