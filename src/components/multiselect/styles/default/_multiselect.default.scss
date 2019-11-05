@@ -2,9 +2,8 @@
   $component: "ark-multiselect";
 
   #{$component} {
+    margin: 0 0.1rem;
     position: relative;
-    width: 100%;
-
     display: block;
   }
 
@@ -22,7 +21,7 @@
     }
 
     &__actions {
-      margin: 0.2rem;
+      // margin: 0.2rem;
     }
 
     &__remove-all {
