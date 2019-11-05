@@ -1,18 +1,22 @@
-@import '@material/floating-label/mdc-floating-label.scss';
+@import "@material/floating-label/mdc-floating-label.scss";
 
 @mixin multiselect_material_() {
-	$component: 'ark-multiselect';
+  $component: "ark-multiselect";
 
-	#{$component} {
-		border-bottom: 1px solid rgba($color: $color, $alpha: 0.4);
-	}
+  #{$component} {
+    border-bottom: 1px solid;
+  }
 
-	.#{$component} {
-		&__label {
-			@extend .mdc-floating-label;
+  .#{$component} {
+    &__label {
+      @extend .mdc-floating-label;
 
-			color: $muted;
-			position: initial;
-		}
-	}
+      color: inherit;
+      position: initial;
+    }
+
+    &__body {
+      height: 1.2rem;
+    }
+  }
 }

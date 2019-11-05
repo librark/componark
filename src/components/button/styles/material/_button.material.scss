@@ -5,15 +5,14 @@
   $component: "ark-button";
 
   #{$component} {
-    // width: inherit;
-    // height: 36px;
-    // color: inherit;
     border-radius: 5px;
 
     @extend .mdc-button__label;
     @extend .mdc-button;
 
     text-transform: initial;
+
+    position: unset;
 
     &[fab] {
       @extend .mdc-fab;

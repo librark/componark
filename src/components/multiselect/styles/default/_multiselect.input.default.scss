@@ -1,33 +1,35 @@
 @mixin multiselect_input_default_() {
-	$component: 'ark-multiselect-input';
+  $component: "ark-multiselect-input";
 
-	#{$component} {
-		display: flex;
-		flex-flow: wrap;
+  #{$component} {
+    display: flex;
+    flex-flow: wrap;
 
-		width: 100%;
+    width: 100%;
 
-		margin: 0 0.2rem;
+    margin: 0 0.2rem;
 
-		cursor: text;
+    cursor: text;
 
-		& > * {
-			margin: 0.1rem;
-		}
+    & > * {
+      margin: 0.1rem;
+    }
 
-		input {
-			border: 0;
-			outline: 0;
+    input {
+      border: 0;
+      outline: 0;
 
-			background: none;
+      background: none;
 
-			flex-basis: auto;
-			flex-grow: 1;
-		}
+      flex-basis: auto;
+      flex-grow: 1;
 
-		ark-multiselect-item {
-			flex-grow: 1;
-			flex-basis: auto;
-		}
-	}
+      color: inherit;
+    }
+
+    ark-multiselect-item {
+      flex-grow: 1;
+      flex-basis: auto;
+    }
+  }
 }

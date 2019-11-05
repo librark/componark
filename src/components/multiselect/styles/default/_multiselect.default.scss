@@ -1,46 +1,50 @@
 @mixin multiselect_default_() {
-	$component: 'ark-multiselect';
+  $component: "ark-multiselect";
 
-	#{$component} {
-		position: relative;
-		width: 100%;
+  #{$component} {
+    position: relative;
+    width: 100%;
 
-		display: block;
-	}
+    display: block;
+  }
 
-	.#{$component} {
-		&__label {
-		}
+  .#{$component} {
+    &__label {
+      color: inherit;
+      font-size: small;
+      margin-bottom: 0.1rem;
+      height: 0.9rem;
+    }
 
-		&__body {
-			display: flex;
-			align-items: center;
-		}
+    &__body {
+      display: flex;
+      align-items: center;
+    }
 
-		&__actions {
-			margin: 0.2rem;
-		}
+    &__actions {
+      margin: 0.2rem;
+    }
 
-		&__remove-all {
-			margin: 0;
-			padding: 0;
+    &__remove-all {
+      margin: 0;
+      padding: 0;
 
-			width: 1.2rem;
-			height: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
 
-			background: none;
-			color: rgba($color: $color, $alpha: 0.8);
+      background: none;
+      color: inherit;
 
-			font-weight: bolder;
+      font-weight: bolder;
 
-			border: 0;
-			outline: 0;
+      border: 0;
+      outline: 0;
 
-			cursor: pointer;
+      cursor: pointer;
 
-			&:hover {
-				background: rgba($color: $color, $alpha: 0.1);
-			}
-		}
-	}
+      &:hover {
+        background: rgba($color: $color, $alpha: 0.1);
+      }
+    }
+  }
 }

@@ -4,7 +4,7 @@
 
   #{$component} {
     padding: 0;
-    margin: .1rem;
+    margin: 0.1rem;
 
     cursor: pointer;
 
@@ -16,10 +16,12 @@
     color: inherit !important;
     background: inherit !important;
 
+    min-width: max-content;
+
     button,
     a {
       all: unset;
-      padding: 0rem .8rem;
+      padding: 0rem 0.8rem;
       margin: 0 !important;
 
       color: inherit;
@@ -41,7 +43,7 @@
       width: $fab-size !important;
       height: $fab-size !important;
 
-      padding: .2rem !important;
+      padding: 0.2rem !important;
       margin: 0 !important;
 
       z-index: 1024;
@@ -84,7 +86,6 @@
     // ----------------------------------------
     //  Disabled
     // ----------------------------------------
-
 
     &[disabled] {
       pointer-events: none !important;
