@@ -16,6 +16,8 @@
 
     overflow-y: auto;
 
+    z-index: 1024;
+
     &[show] {
       display: block;
     }
