@@ -86,3 +86,7 @@ typings/
 dist
 
 .directory
+
+.directory
+
+./package-lock.json
