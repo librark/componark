@@ -4,26 +4,17 @@
 import { Component } from '../../loader'
 
 export class MultiselectDemo extends Component {
-  init(context) {
+  init (context) {
     this.type = context['type'] || 'ark'
     return super.init(context)
   }
 
-  render() {
+  render () {
     this.innerHTML = /* html */ `${this.styles}
 
 			<ark-multiselect></ark-multiselect>
-      <ark-input type="email" label="email"></ark-input>
-      <ark-select listen on-alter="selectEventListener" label="my select">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </ark-select>
 
-			<span>Hello World</span>
-
-			<br/>
+      <br/>
 
 			<p data-input-value style="padding-top: 15rem;"></p>
 		`
@@ -31,7 +22,7 @@ export class MultiselectDemo extends Component {
     return super.render()
   }
 
-  load() {
+  load () {
     this.addEventListener('ark-multiselect:alter', event => {
       this.querySelector('[data-input-value]').innerHTML = JSON.stringify(
         event.detail
@@ -41,7 +32,7 @@ export class MultiselectDemo extends Component {
     return super.load()
   }
 
-  renderMultiselect() {
+  renderMultiselect () {
     const multiselect = /** @type {Multiselect} */ (this.select(
       'ark-multiselect'
     ))
@@ -73,7 +64,7 @@ export class MultiselectDemo extends Component {
     multiselect.render()
   }
 
-  get styles() {
+  get styles () {
     return /* html */ `
       <style>
       </style>

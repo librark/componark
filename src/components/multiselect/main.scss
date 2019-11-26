@@ -1,17 +1,17 @@
 // -------------------------------------------
 // Theme
 // -------------------------------------------
-@import '../theme/main';
+@import "../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import './styles/default/main.default';
+@import "./styles/default/main.default";
 // -------------------------------------------
-@import './styles/material/main.material';
+@import "./styles/material/main.material";
 
 @mixin multiselect($theme: ark) {
-	@include multiselect_default();
+  @include multiselect_default();
 
-	@if $theme==material {
-		@include multiselect_material();
-	}
+  @if $theme==material {
+    @include multiselect_material();
+  }
 }

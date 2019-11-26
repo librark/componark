@@ -4,7 +4,7 @@ export class MultiselectItem extends Component {
 	/**
 	 * @param {{id, data,	template?}} context
 	 */
-  init(context) {
+  init (context) {
     this.data = context['data'] || null
     this.id = context['id'] || this.id
     this.template = context['template'] || (data => `${data}`)
@@ -12,7 +12,7 @@ export class MultiselectItem extends Component {
     return super.init()
   }
 
-  render() {
+  render () {
     this.innerHTML = /* html */ `
 			<small>${this.template(this.data)}</small>
 			<button listen listen on-click="_onRemove" remove>&times;</button>
@@ -20,18 +20,18 @@ export class MultiselectItem extends Component {
     return super.render()
   }
 
-  reflectedProperties() {
+  reflectedProperties () {
     return ['id']
   }
 
-  load() {
+  load () {
     return super.load()
   }
 
   // ---------------------------------------------------------------------------
 
   /** @param {boolean} value */
-  set selected(value) {
+  set selected (value) {
     if (value) {
       this.setAttribute('selected', 'true')
     } else {
@@ -40,14 +40,14 @@ export class MultiselectItem extends Component {
   }
 
   /** @return {boolean} */
-  get selected() {
+  get selected () {
     return this.hasAttribute('selected')
   }
 
   // ---------------------------------------------------------------------------
 
   /** @param {event} event */
-  _onRemove(event) {
+  _onRemove (event) {
     event.stopImmediatePropagation()
     this.dispatchEvent(
       new CustomEvent('multiselect-item:remove', {

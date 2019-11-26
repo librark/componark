@@ -2,11 +2,9 @@
  * @typedef {import('./multiselect.input').MultiselectInput} MultiselectInput
  * @typedef {import('./multiselect.item').MultiselectItem} MultiselectItem
  * @typedef {import('./multiselect.list').MultiselectList} MultiselectList
- *  */
+ * */
 
 import { Component } from '../../component'
-import { MultiselectInput } from './multiselect.input'
-import { MultiselectList } from './multiselect.list'
 
 export class Multiselect extends Component {
 	/**
@@ -16,7 +14,7 @@ export class Multiselect extends Component {
 	 * 	template: void
 	 * } | {}} context
 	 */
-  init(context = {}) {
+  init (context = {}) {
     this.label = context['label'] || this.label || 'label'
     this.items = context['items'] || this.items || []
     this.template = context['template'] || (data => `${data}`)
@@ -24,7 +22,7 @@ export class Multiselect extends Component {
     return super.init()
   }
 
-  render() {
+  render () {
     this.innerHTML = /* html */ `
 			<div class="ark-multiselect__label">
 				<label>${this.label}</label>
@@ -57,7 +55,7 @@ export class Multiselect extends Component {
     return super.render()
   }
 
-  load() {
+  load () {
     this.addEventListener(
       'multiselect-list:selected',
       this.onMultiselectListSelected.bind(this)
@@ -99,22 +97,25 @@ export class Multiselect extends Component {
   // ---------------------------------------------------------------------------
 
   /** @param {event} event */
-  onRemoveAll(event) {
+  onRemoveAll (event) {
     event.stopImmediatePropagation()
     this.input.clean()
   }
 
   /** @param {CustomEvent} event */
-  onMultiselectListSelected(event) {
+  onMultiselectListSelected (event) {
     event.stopImmediatePropagation()
 
     const item = event.detail.item
 
-    if (item) this.input.addItem(item)
+    if (!item) return
+
+    this.input.addItem(item)
+    this.input.cleanInput()
   }
 
   /** @param {CustomEvent} event */
-  onMultiselectInputUpdateItems(event) {
+  onMultiselectInputUpdateItems (event) {
     event.stopImmediatePropagation()
 
     if (!this.multiselectList.innerHTML.length) return
@@ -128,7 +129,7 @@ export class Multiselect extends Component {
   }
 
   /** @param {CustomEvent} event */
-  onMultiselectInputKeydown(event) {
+  onMultiselectInputKeydown (event) {
     event.stopImmediatePropagation()
 
     const key = event.detail.origin.key
@@ -144,12 +145,12 @@ export class Multiselect extends Component {
     }
   }
 
-  onMultiselectInputFocus(event) {
+  onMultiselectInputFocus (event) {
     event.stopImmediatePropagation()
     this.multiselectList.toggle()
   }
 
-  onMultiselectInputBlur(event) {
+  onMultiselectInputBlur (event) {
     event.stopImmediatePropagation()
 
     if (!this.multiselectList.hasAttribute('selected')) {
@@ -158,18 +159,18 @@ export class Multiselect extends Component {
   }
 
   /** @param {CustomEvent} event */
-  onMultiselectInputAlter(event) {
+  onMultiselectInputAlter (event) {
     event.stopImmediatePropagation()
     this._alter(event.detail)
   }
 
   /** @param {CustomEvent} event */
-  onMultiselectInputInput(event) {
+  onMultiselectInputInput (event) {
     event.stopImmediatePropagation()
 
     this.multiselectList.init({
       items: this._getSelectionList(this.input.items, event.detail)
-    })
+    }).render()
 
     this.multiselectList.open()
   }
@@ -177,23 +178,23 @@ export class Multiselect extends Component {
   // ---------------------------------------------------------------------------
 
   /** @returns {MultiselectList} */
-  get multiselectList() {
+  get multiselectList () {
     return /** @type {MultiselectList} */ (this.select('ark-multiselect-list'))
   }
 
   /** @returns {MultiselectInput} */
-  get input() {
+  get input () {
     return /** @type {MultiselectInput} */ (this.select(
       'ark-multiselect-input'
     ))
   }
 
-  get value() {
+  get value () {
     return this.input.value
   }
 
   // ---------------------------------------------------------------------------
-  _alter(value) {
+  _alter (value) {
     this.dispatchEvent(
       new CustomEvent('ark-multiselect:alter', {
         bubbles: true,
@@ -202,7 +203,7 @@ export class Multiselect extends Component {
     )
   }
 
-  _getSelectionList(inputItems, value = '') {
+  _getSelectionList (inputItems, value = '') {
     const currentList = []
 
     value = value.trim().toLowerCase()
@@ -212,9 +213,7 @@ export class Multiselect extends Component {
         if (JSON.stringify(selectedItem) === JSON.stringify(item)) return true
       })
 
-      const title = this.template(item)
-        .trim()
-        .toLowerCase()
+      const title = this.template(item).trim().toLowerCase()
 
       if (
         (value.length && title.indexOf(value) > -1 && !selectedItem) ||
