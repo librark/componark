@@ -1,131 +1,104 @@
-/** @typedef {import('../../../src/components').Modal} Modal */
-import '../../../src/components/modal'
+import { Modal } from '../../../src/components/modal/components/modal';
 
 describe('Modal', () => {
-	it('can be instantiated', () => {
-		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-		expect(modal).toBeTruthy()
-
-		var init = modal.init()
-		expect(modal === init).toBeTruthy()
-	})
-
-	it('can be rendered with slots', function () {
-		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-		modal.innerHTML = /* HTML */ `
+  it('can be rendered with slots', function () {
+    const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
+    modal.innerHTML = /* HTML */ `
       <div>Menu</div>
       <div slot="action">action</div>
     `
-		modal.init({})
-		modal.connectedCallback()
+    modal.init({})
+    modal.connectedCallback()
 
-		const content = modal.querySelector('.ark-modal__actions')
-		expect(content.childElementCount).toBeTruthy()
-	})
+    const content = modal.querySelector('.ark-modal__actions')
+    expect(content.childElementCount).toBeTruthy()
+  })
 
-	it('can be open', function () {
-		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-		modal.connectedCallback()
-		modal.open()
+  it('can be open', function () {
+    const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
+    modal.connectedCallback()
+    modal.open()
 
-		const btn = modal.querySelector('[close]')
-		// @ts-ignore
-		btn.click()
+    const btn = modal.querySelector('[close]')
+    // @ts-ignore
+    btn.click()
 
-		expect(!modal.hasAttribute('open')).toBeTruthy()
-	})
+    expect(!modal.hasAttribute('open')).toBeTruthy()
+  })
 
-	it('can be open', function () {
-		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-		modal.connectedCallback()
-		modal.open()
+  it('can be toggle', function () {
+    const modal = new Modal()
+    modal.init().render().load()
 
-		const btn = modal.querySelector('.ark-modal__scrim')
-		// @ts-ignore
-		btn.click()
+    expect(!modal.hasAttribute('show')).toBeTruthy()
 
-		expect(!modal.hasAttribute('open')).toBeTruthy()
-	})
+    modal.open()
+    expect(modal.hasAttribute('show')).toBeTruthy()
 
-	it('can be open by method', function () {
-		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-		modal.connectedCallback()
-		modal.open()
+    modal.close()
+    expect(!modal.hasAttribute('show')).toBeTruthy()
 
-		expect(modal.hasAttribute('open')).toBeTruthy()
-	})
+    modal.toggle()
+    expect(modal.hasAttribute('show')).toBeTruthy()
 
-	it('can be open by toggle method', function () {
-		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-		modal.connectedCallback()
+    modal.toggle()
+    expect(!modal.hasAttribute('show')).toBeTruthy()
+  })
 
-		modal.open()
-		expect(modal.hasAttribute('open')).toBeTruthy()
+  it('can be open', function () {
+    const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
+    modal.connectedCallback()
+    modal.open()
 
-		modal.toggle()
-		expect(!modal.hasAttribute('open')).toBeTruthy()
+    const btn = modal.querySelector('.ark-modal__scrim')
+    // @ts-ignore
+    btn.click()
 
-		modal.toggle()
-		expect(modal.hasAttribute('open')).toBeTruthy()
-	})
+    expect(!modal.hasAttribute('open')).toBeTruthy()
+  })
 
-	it('can remove attributes', function () {
-		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+  it('can remove attributes', function () {
+    const item = /** @type {Modal} */ (document.createElement('ark-modal'))
 
-		item.setAttribute('name', 'my-item')
-		item.setAttribute('id', 'it-1')
-		item.setAttribute('title', 'my-title')
+    item.setAttribute('name', 'my-item')
+    item.setAttribute('id', 'it-1')
+    item.setAttribute('title', 'my-title')
 
-		item.setAttributeNode(document.createAttribute('open'))
+    item.setAttributeNode(document.createAttribute('open'))
 
-		item.innerHTML = /* HTML */ ``
-		item.connectedCallback()
+    item.innerHTML = /* HTML */ ``
+    item.connectedCallback()
 
-		expect(!item.getAttribute('open')).toBeTruthy()
-	})
+    expect(!item.getAttribute('open')).toBeTruthy()
+  })
 
-	it('can render content null', function () {
-		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
-		// @ts-ignore
-		expect(item._generateContent(null)).toEqual('')
-	})
+  it('can render content null', function () {
+    const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+    // @ts-ignore
+    expect(item._generateContent(null)).toEqual('')
+  })
 
-	it('can render header', function () {
-		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+  it('can set slots', function () {
+    const item = /** @type {Modal} */ (document.createElement('ark-modal'))
 
-		// @ts-ignore
-		expect(item._renderHeader()).toEqual('')
+    item['slots'] = undefined
+    // @ts-ignore
+    item._appendSlots()
 
-		// @ts-ignore
-		item.title = 'title'
-		// @ts-ignore
-		item.subtitle = 'subtitle'
+    expect(item['slots']).toEqual({})
 
-		// @ts-ignore
-		expect(item._renderHeader().length).toBeTruthy()
-	})
+    item['slots'] = {}
 
-	it('can set slots', function () {
-		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+    expect(item['slots']).toEqual({})
 
-		item['slots'] = undefined
-		// @ts-ignore
-		item._appendSlots()
+    item['slots'] = { abc: true }
 
-		expect(item['slots']).toEqual({})
+    expect(item['slots']).toEqual({ abc: true })
 
-		item['slots'] = {}
+    item['slots'] = undefined
 
-		expect(item['slots']).toEqual({})
-
-		item['slots'] = { abc: true }
-
-		expect(item['slots']).toEqual({ abc: true })
-
-		item['slots'] = undefined
-
-		expect(item['slots']).toEqual({ abc: true })
-		// @ts-ignore
-		item._appendSlots()
-	})
+    expect(item['slots']).toEqual({ abc: true })
+    // @ts-ignore
+    item._appendSlots()
+  })
 })
