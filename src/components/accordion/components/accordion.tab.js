@@ -4,62 +4,61 @@ export class AccordionTab extends Component {
 	/**
    *  @param {{header: string} | {}} context
    * */
-	init (context = {}) {
-		this.header = context['header']
+  init (context = {}) {
+    this.header = context['header']
 
-		// local variables
-		this.defaultContent = this.defaultContent || this.innerHTML
-		this.index = this.index
+    // local variables
+    this.defaultContent = this.defaultContent || this.innerHTML
+    this.index = this.index
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	reflectedProperties () {
-		return ['header', 'index']
-	}
+  reflectedProperties () {
+    return ['header', 'index']
+  }
 
-	render () {
-		if (!this.header) {
-			this.innerHTML = ''
-			return
-		}
+  render () {
+    if (this.header) {
+      this.innerHTML = /* html */ `
+        <div class="ark-accordion-tab__btn-header" listen on-click="toggle">
+          <small data-accordion-tab-header>${this.header}</small>
+        </div>
+        <div class="ark-accordion-tab__content">
+          ${this.defaultContent}
+        </div>
+      `
+    } else {
+      this.innerHTML = ''
+    }
 
-		this.innerHTML = /* html */ `
-      <div class="ark-accordion-tab__btn-header" listen on-click="toggle">
-        <small data-accordion-tab-header>${this.header}</small>
-      </div>
-      <div class="ark-accordion-tab__content">
-        ${this.defaultContent}
-      </div>
-    `
+    return super.render()
+  }
 
-		return super.render()
-	}
+  open () {
+    this.setAttribute('active', 'true')
+  }
 
-	open () {
-		this.setAttribute('active', 'true')
-	}
+  close () {
+    this.removeAttribute('active')
+  }
 
-	close () {
-		this.removeAttribute('active')
-	}
+  /** @param {Event} event */
+  toggle (event) {
+    event.stopImmediatePropagation()
 
-	/** @param {Event} event */
-	toggle (event) {
-		event.stopImmediatePropagation()
+    this.hasAttribute('active') ? this.close() : this.open()
 
-		this.hasAttribute('active') ? this.close() : this.open()
-
-		this.dispatchEvent(
-			new CustomEvent('accordiontab:click', {
-				bubbles: true,
-				detail: {
-					index: this.index,
-					active: this.hasAttribute('active'),
-					origin: event
-				}
-			})
-		)
-	}
+    this.dispatchEvent(
+      new CustomEvent('accordiontab:click', {
+        bubbles: true,
+        detail: {
+          index: this.index,
+          active: this.hasAttribute('active'),
+          origin: event
+        }
+      })
+    )
+  }
 }
 customElements.define('ark-accordion-tab', AccordionTab)
