@@ -7,6 +7,7 @@
     "noEmit": true,
     "noImplicitThis": false,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "baseUrl": "./src",
     "lib": [
       "es6",
@@ -14,8 +15,10 @@
       "dom",
       "dom.iterable"
     ],
-    "plugins": [{
-      "name": "typescript-tslint-plugin"
-    }]
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ]
   }
 }
