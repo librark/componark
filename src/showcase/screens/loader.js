@@ -22,6 +22,7 @@ import '../../components/sidebar'
 import '../../components/splitview'
 import '../../components/table'
 import '../../components/tabs'
+import '../../components/treetable'
 import '../../components/zone'
 
 // -----------------------------------------------------------------------------
@@ -48,4 +49,5 @@ export * from '../../components/sidebar'
 export * from '../../components/splitview'
 export * from '../../components/table'
 export * from '../../components/tabs'
+export * from '../../components/treetable'
 export * from '../../components/zone'

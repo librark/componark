@@ -1,0 +1,5 @@
+@import "./treetable.default";
+
+@mixin treetable_default() {
+  @include treetable_default_();
+}
