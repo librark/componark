@@ -31,6 +31,8 @@ export class TreetableDemo extends Component {
     ]
 
     this.treetable.init({
+      cols: "values",
+      rows: "children",
       data: data,
       headers: headers
     }).render()

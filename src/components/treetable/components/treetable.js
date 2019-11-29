@@ -2,19 +2,10 @@ import { Component } from '../../component'
 
 export class Treetable extends Component {
   init (context = {}) {
-    this.data = context['data']
+    this.cols = context['cols']
+    this.rows = context['rows']
     this.headers = context['headers']
-
-    // this.headers = [
-    //   { header: 'Name', key: 'expander' },
-    //   { header: 'Balance', key: 'balance' },
-    //   { header: 'Balance Init', key: 'balance_init' },
-    //   { header: 'Credit', key: 'credit' },
-    //   { header: 'Debit', key: 'debit' },
-    // ]
-
-    this.rows = "children"
-    this.cols = "values"
+    this.data = context['data']
 
     return super.init()
   }
@@ -27,19 +18,21 @@ export class Treetable extends Component {
 
       <table>
         <thead data-thead class="treetable-thead">
-          ${this.getHeader()}
+          ${this._getHeader()}
         </thead>
         <tbody data-tbody class="treetable-tbody"></tbody>
       </table>
     `
 
-    this.mainRows(this.data)
+    this.buildTable(this.data)
 
     return super.render()
   }
 
+  // ---------------------------------------------------------------------------
+
   /** @param {Object} data */
-  mainRows (data, indent = -1) {
+  buildTable (data, indent = -1) {
     if (!data) return
     indent++
 
@@ -48,13 +41,13 @@ export class Treetable extends Component {
       const rows = current[this.rows]
       const cols = current[this.cols]
 
-      this.appendItem(key, indent, cols)
+      this.addRow(key, indent, cols)
 
-      this.mainRows(rows, indent)
+      this.buildTable(rows, indent)
     })
   }
 
-  appendItem (key, indent, cols) {
+  addRow (key, indent, cols) {
     indent = indent <= 1 ? 0 : indent - 1
 
     let cells = ''
@@ -76,8 +69,19 @@ export class Treetable extends Component {
     `)
   }
 
+  /** @returns {HTMLElement} */
+  get tablaBody () {
+    return this.querySelector('[data-tbody]')
+  }
+
+  /** @returns {HTMLElement} */
+  get tablaHead () {
+    return this.querySelector('[data-thead]')
+  }
+
+  // ---------------------------------------------------------------------------
   /** @returns {string} */
-  getHeader () {
+  _getHeader () {
     let headers = ''
 
     this.headers.forEach(header => {
@@ -87,16 +91,6 @@ export class Treetable extends Component {
     })
 
     return /* html */ `<tr>${headers}</tr>`
-  }
-
-  /** @returns {HTMLElement} */
-  get tablaBody () {
-    return this.querySelector('[data-tbody]')
-  }
-
-  /** @returns {HTMLElement} */
-  get tablaHead () {
-    return this.querySelector('[data-thead]')
   }
 
 }
