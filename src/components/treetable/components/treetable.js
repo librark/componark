@@ -68,8 +68,30 @@ export class Treetable extends Component {
     })
 
     this.tablaBody.insertAdjacentHTML('beforeend', /* html */`
-      <tr id="${id}" tabindex="0" >${cells}</tr>
+      <tr id="${id}" tabindex="0" listen on-click="open" >
+        ${cells}
+      </tr>
     `)
+  }
+
+  /** @param {event} event */
+  open (event) {
+    event.stopImmediatePropagation()
+    const parent = /** @type {HTMLElement} */ (event.target).parentElement
+    const indent = parent.id.split(".").length + 1
+
+    this.querySelectorAll(`[id^="${parent.id}"]`).forEach(
+      (/** @type {HTMLElement}*/ item) => {
+        if (item.id.split(".").length === indent) {
+          if (item.hasAttribute('active')) {
+            this.querySelectorAll(`[id^="${item.id}"]`).forEach(child => {
+              child.removeAttribute('active')
+            })
+          } else {
+            item.setAttribute('active', '')
+          }
+        }
+      })
   }
 
   /** @returns {HTMLElement} */
@@ -109,6 +131,5 @@ export class Treetable extends Component {
 
     return /* html */ `<tr>${headers}</tr>`
   }
-
 }
 customElements.define('ark-treetable', Treetable)

@@ -6,6 +6,24 @@
 
     table {
       width: 100%;
+
+      tbody {
+        cursor: pointer;
+
+        tr {
+          &[active] {
+            display: table-row !important;
+          }
+
+          &:not(:first-child) {
+            display: none;
+          }
+
+          &:hover {
+            background: rgba($color: $primary, $alpha: 0.3);
+          }
+        }
+      }
     }
   }
 }
