@@ -32,22 +32,25 @@ export class Treetable extends Component {
   // ---------------------------------------------------------------------------
 
   /** @param {Object} data */
-  buildTable (data, indent = -1) {
+  buildTable (data, id = "", indent = -1) {
     if (!data) return
     indent++
+
+    id = this._setRowId(id, indent)
 
     Object.keys(data).forEach(key => {
       const current = data[key]
       const rows = current[this.rows]
       const cols = current[this.cols]
 
-      this.addRow(key, indent, cols)
+      id = this._setRowId(id, indent)
 
-      this.buildTable(rows, indent)
+      this.addRow(id, indent, key, cols)
+      this.buildTable(rows, id, indent)
     })
   }
 
-  addRow (key, indent, cols) {
+  addRow (id, indent, key, cols) {
     indent = indent <= 1 ? 0 : indent - 1
 
     let cells = ''
@@ -65,7 +68,7 @@ export class Treetable extends Component {
     })
 
     this.tablaBody.insertAdjacentHTML('beforeend', /* html */`
-      <tr tabindex="0" >${cells}</tr>
+      <tr id="${id}" tabindex="0" >${cells}</tr>
     `)
   }
 
@@ -80,6 +83,20 @@ export class Treetable extends Component {
   }
 
   // ---------------------------------------------------------------------------
+  /**
+   * @param {string} id
+   * @param {number} indent
+   */
+  _setRowId (id, indent) {
+    let currentId = ""
+    id.split('.').forEach((n, index) => {
+      const item = indent === index ? parseInt(n) + 1 || 0 : n
+      currentId += item !== '' ? `${item}.` : ''
+    })
+
+    return currentId
+  }
+
   /** @returns {string} */
   _getHeader () {
     let headers = ''
