@@ -14,8 +14,6 @@ export class Treetable extends Component {
     if (!this.data) return
 
     this.innerHTML = /* html */`
-      <h1>Treetable</h1>
-
       <table>
         <thead data-thead class="treetable-thead">
           ${this._getHeader()}
@@ -97,11 +95,6 @@ export class Treetable extends Component {
   /** @returns {HTMLElement} */
   get tablaBody () {
     return this.querySelector('[data-tbody]')
-  }
-
-  /** @returns {HTMLElement} */
-  get tablaHead () {
-    return this.querySelector('[data-thead]')
   }
 
   // ---------------------------------------------------------------------------
