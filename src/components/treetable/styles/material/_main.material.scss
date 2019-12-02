@@ -1,0 +1,5 @@
+@import "./treetable.material";
+
+@mixin treetable_material() {
+  @include treetable_material_();
+}
