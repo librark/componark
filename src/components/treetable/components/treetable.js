@@ -56,7 +56,10 @@ export class Treetable extends Component {
     this.headers.forEach(header => {
       if (header.key === 'expander') {
         cells += /* html */`
-          <td style="padding-left: ${indent}rem">${key}</td>
+          <td style="padding-left: ${indent}rem">
+            <span data-item-actions style="padding-left: .1rem">+</span>
+            ${key}
+          </td>
         `
       } else {
         cells += /* html */`
@@ -78,12 +81,22 @@ export class Treetable extends Component {
     const parent = /** @type {HTMLElement} */ (event.target).parentElement
     const indent = parent.id.split(".").length + 1
 
+    if (parent.hasAttribute('show')) {
+      parent.querySelector('[data-item-actions]').innerHTML = '+'
+      parent.removeAttribute('show')
+    } else {
+      parent.querySelector('[data-item-actions]').innerHTML = '-'
+      parent.setAttribute('show', '')
+    }
+
     this.querySelectorAll(`[id^="${parent.id}"]`).forEach(
       (/** @type {HTMLElement}*/ item) => {
         if (item.id.split(".").length === indent) {
           if (item.hasAttribute('active')) {
             this.querySelectorAll(`[id^="${item.id}"]`).forEach(child => {
               child.removeAttribute('active')
+              child.removeAttribute('show')
+              child.querySelector('[data-item-actions]').innerHTML = '+'
             })
           } else {
             item.setAttribute('active', '')
