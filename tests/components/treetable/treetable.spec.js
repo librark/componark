@@ -48,7 +48,15 @@ describe('TreeTable', () => {
                     col1: "row211, Col 1",
                     col2: "row211, Col 2",
                   },
-                  children: {}
+                  children: {
+                    row212: {
+                      values: {
+                        col1: "row212, Col 1",
+                        col2: "row212, Col 2",
+                      },
+                      children: {}
+                    }
+                  }
                 }
               }
             }
@@ -64,7 +72,7 @@ describe('TreeTable', () => {
     { header: 'Col 2', key: 'col2' },
   ]
 
-  it('can be set row id', () => {
+  it('can be open row', () => {
     const treetable = new Treetable()
     treetable.init({
       rows: 'children',
@@ -76,12 +84,17 @@ describe('TreeTable', () => {
     treetable.load()
 
     const item = treetable.querySelector('[id="1.2.1."]')
+    const children = treetable.querySelector('[id="1.2.1.1."]')
 
-    expect(!item.hasAttribute('active')).toBeTruthy()
+    expect(!children.hasAttribute('active')).toBeTruthy()
     item.firstElementChild.click()
-    expect(item.hasAttribute('active')).toBeTruthy()
+    expect(children.hasAttribute('active')).toBeTruthy()
     item.firstElementChild.click()
-    expect(!item.hasAttribute('active')).toBeTruthy()
+    expect(!children.hasAttribute('active')).toBeTruthy()
+
+    treetable.buildTable(null)
+    treetable.data = null
+    treetable.init().render()
   })
 
   it('can be set row id', () => {
