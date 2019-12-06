@@ -22,6 +22,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     setContentComponent('icon'),
     setContentComponent('input'),
     setContentComponent('list'),
+    setContentComponent('map'),
     setContentComponent('modal'),
     setContentComponent('multiselect'),
     setContentComponent('navbar'),

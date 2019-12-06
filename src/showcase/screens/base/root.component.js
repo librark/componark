@@ -176,6 +176,10 @@ export class RootComponent extends Component {
         path: `/base/list`,
       },
       {
+        name: 'Map',
+        path: `/base/map`,
+      },
+      {
         name: 'Modal',
         path: `/base/modal`,
       },
