@@ -4,6 +4,10 @@ import 'leaflet/dist/leaflet.css'
 import * as L from 'leaflet'
 
 import { Component } from '../../component'
+// @ts-ignore
+import icon from 'leaflet/dist/images/marker-icon.png'
+// @ts-ignore
+import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 
 export class Map extends Component {
   init (context = {}) {
@@ -24,7 +28,9 @@ export class Map extends Component {
       `?access_token=${this._getAccessToken()}`
     ).addTo(this.map)
 
-    this.api.control.scale().addTo(this.map);
+    this.api.control.scale().addTo(this.map)
+
+    this._defaultMarkerIconUrl()
 
     return super.render()
   }
@@ -49,6 +55,15 @@ export class Map extends Component {
     token += '.DPOHXK2aObjNChVAZ4_CMQ'
 
     return token
+  }
+
+  _defaultMarkerIconUrl () {
+    const defaultIcon = L.icon({
+      iconUrl: icon,
+      shadowUrl: iconShadow
+    });
+
+    this.api.Marker.prototype.options.icon = defaultIcon
   }
 }
 customElements.define('ark-map', Map)
