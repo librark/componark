@@ -1,24 +1,24 @@
 import { Component } from '../loader'
 
 export class RootContainerComponent extends Component {
-	/** @param {{ component: Component }} context */
-	init(context) {
-		this.component = context['component']
+  /** @param {{ component: Component }} context */
+  init (context) {
+    this.component = context['component']
 
-		// -------------------------------------------------------------------------
-		// Local
-		// -------------------------------------------------------------------------
-		this.currentLocation = window.location
+    // -------------------------------------------------------------------------
+    // Local
+    // -------------------------------------------------------------------------
+    this.currentLocation = window.location
 
-		this.mobileWidth = '360px'
-		this.tabletWidth = '768px'
-		this.desktopWidth = '960px'
+    this.mobileWidth = '360px'
+    this.tabletWidth = '768px'
+    this.desktopWidth = '960px'
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	render() {
-		this.innerHTML = /* html */ `${this.styles}
+  render () {
+    this.innerHTML = /* html */ `${this.styles}
       <ark-grid class="container" gap="1rem">
         <ark-grid-item data-component></ark-grid-item>
         <ark-grid-item>
@@ -36,54 +36,54 @@ export class RootContainerComponent extends Component {
       </ark-grid>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	load() {
-		this.container = this.querySelector('[data-component]')
-		if (this.container) this.container.append(this.component)
+  load () {
+    this.container = this.querySelector('[data-component]')
+    if (this.container) this.container.append(this.component)
 
-		this._loadComponent()
+    this._loadComponent()
 
-		return super.load()
-	}
+    return super.load()
+  }
 
-	_loadComponent() {
-		const mobile = /** @type {HTMLIFrameElement} */ (this.querySelector(
-			'[data-mobile]'
-		))
-		const tablet = /** @type {HTMLIFrameElement} */ (this.querySelector(
-			'[data-tablet]'
-		))
-		const desktop = /** @type {HTMLIFrameElement} */ (this.querySelector(
-			'[data-desktop]'
-		))
+  _loadComponent () {
+    const mobile = /** @type {HTMLIFrameElement} */ (this.querySelector(
+      '[data-mobile]'
+    ))
+    const tablet = /** @type {HTMLIFrameElement} */ (this.querySelector(
+      '[data-tablet]'
+    ))
+    const desktop = /** @type {HTMLIFrameElement} */ (this.querySelector(
+      '[data-desktop]'
+    ))
 
-		this._setupFrame(mobile, this.mobileWidth)
-		this._setupFrame(tablet, this.tabletWidth)
-		this._setupFrame(desktop, this.desktopWidth)
-	}
+    this._setupFrame(mobile, this.mobileWidth)
+    this._setupFrame(tablet, this.tabletWidth)
+    this._setupFrame(desktop, this.desktopWidth)
+  }
 
-	/** @param {HTMLIFrameElement} iframe */
-	_setupFrame(iframe, width) {
-		iframe.setAttribute('frameborder', `1`)
-		iframe.setAttribute('src', `${this.currentLocation.origin}/blank`)
-		iframe.setAttribute('width', width)
-		iframe.setAttribute('height', '568px')
+  /** @param {HTMLIFrameElement} iframe */
+  _setupFrame (iframe, width) {
+    iframe.setAttribute('frameborder', `1`)
+    iframe.setAttribute('src', `${this.currentLocation.origin}/blank`)
+    iframe.setAttribute('width', width)
+    iframe.setAttribute('height', '568px')
 
-		iframe.onload = () => {
-			const content = iframe.contentWindow.document
+    iframe.onload = () => {
+      const content = iframe.contentWindow.document
 
-			content.addEventListener('blank:load', _ => {
-				const body = content.querySelector('body')
-				body.prepend(this.component.cloneNode(true))
-			})
-		}
-	}
+      content.addEventListener('blank:load', _ => {
+        const body = content.querySelector('body')
+        body.prepend(this.component.cloneNode(false))
+      })
+    }
+  }
 
-	// ---------------------------------------------------------------------------
-	get styles() {
-		return /* html */ `
+  // ---------------------------------------------------------------------------
+  get styles () {
+    return /* html */ `
       <style>
         app-root-container .container{
           padding: 1rem;
@@ -118,6 +118,6 @@ export class RootContainerComponent extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('app-root-container', RootContainerComponent)

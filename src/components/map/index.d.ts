@@ -1,4 +1,9 @@
 import { Component } from "../component";
+import * as L from 'leaflet'
 
-export class MapItem extends Component { }
-export class Map extends Component { }
+export class Map extends Component {
+
+  map: L.map
+  api: L
+
+}

@@ -2,5 +2,16 @@
   $component: "ark-map";
 
   #{$component} {
+    display: block;
+
+    width: inherit;
+    height: inherit;
+
+    #map-container {
+      background: rgba($color: $muted, $alpha: 0.1);
+
+      width: 100%;
+      height: 100%;
+    }
   }
 }
