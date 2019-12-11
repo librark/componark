@@ -1,14 +1,15 @@
 import { Component } from '../loader'
 
 export class RootContainerComponent extends Component {
-  /** @param {{ component: Component }} context */
+  /** @param {{ component: Component; currentStyle: String }} context */
   init (context) {
     this.component = context['component']
+    this.currentStyle = context['currentStyle'] || 'material'
 
     // -------------------------------------------------------------------------
     // Local
     // -------------------------------------------------------------------------
-    this.currentLocation = window.location
+    this.windowLocation = window.location
 
     this.mobileWidth = '360px'
     this.tabletWidth = '768px'
@@ -67,7 +68,7 @@ export class RootContainerComponent extends Component {
   /** @param {HTMLIFrameElement} iframe */
   _setupFrame (iframe, width) {
     iframe.setAttribute('frameborder', `1`)
-    iframe.setAttribute('src', `${this.currentLocation.origin}/blank`)
+    iframe.setAttribute('src', `${this.windowLocation.origin}/blank`)
     iframe.setAttribute('width', width)
     iframe.setAttribute('height', '568px')
 
@@ -76,7 +77,11 @@ export class RootContainerComponent extends Component {
 
       content.addEventListener('blank:load', _ => {
         const body = content.querySelector('body')
-        body.prepend(this.component.cloneNode(false))
+        const appRoot = body.querySelector('app-root')
+        appRoot.append(this.component.cloneNode(false))
+
+        // @ts-ignore
+        appRoot.getStyleLink(this.currentStyle)
       })
     }
   }

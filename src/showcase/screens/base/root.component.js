@@ -12,9 +12,14 @@ import { Component } from '../loader'
 export const version = VERSION
 
 export class RootComponent extends Component {
-  /** @param {{ path: string }} context */
+  /** @param {{ path: String, currentStyle: String }} context */
   init (context) {
     this.path = context['path']
+    this.currentStyle = context['currentStyle'] || 'material'
+
+    // -------------------------------------------------------------------------
+    // Local
+    // -------------------------------------------------------------------------
     this.currentLocation = window.location
 
     return super.init()
@@ -61,11 +66,12 @@ export class RootComponent extends Component {
   /** @param {Component} component */
   setContentComponent (component) {
     if (!component) return
+
     const container = this.select('[data-root-container]')
-    container
-      .init({ component: component })
-      .render()
-      .load()
+
+    container.init({ component: component, currentStyle: this.currentStyle })
+
+    container.render().load()
   }
 
   // ---------------------------------------------------------------------------
@@ -113,7 +119,19 @@ export class RootComponent extends Component {
     return /** @type {Sidebar} */ (this.select('[data-sidebar]'))
   }
 
+  getStyleLink () {
+    if (this.currentStyle === 'material') {
+      // @ts-ignore
+      return require('../theme/styles/main-material.scss')
+    } else {
+      // @ts-ignore
+      return require('../theme/styles/main-ark.scss')
+    }
+  }
+
   get styles () {
+    this.getStyleLink()
+
     return /* html */ `
       <style>
         app-root{
