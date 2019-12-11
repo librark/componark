@@ -1,6 +1,7 @@
 import './root.content.component'
 
 import { Component } from '../loader'
+import { importStyles } from '../theme'
 
 /**
  * @typedef {import('../loader').List} List
@@ -119,18 +120,8 @@ export class RootComponent extends Component {
     return /** @type {Sidebar} */ (this.select('[data-sidebar]'))
   }
 
-  getStyleLink () {
-    if (this.currentStyle === 'material') {
-      // @ts-ignore
-      return require('../theme/styles/main-material.scss')
-    } else {
-      // @ts-ignore
-      return require('../theme/styles/main-ark.scss')
-    }
-  }
-
   get styles () {
-    this.getStyleLink()
+    importStyles(this.currentStyle)
 
     return /* html */ `
       <style>

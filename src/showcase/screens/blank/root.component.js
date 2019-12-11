@@ -1,4 +1,5 @@
 import { Component } from '../loader'
+import { importStyles } from '../theme'
 
 export class RootComponent extends Component {
   init (context) {
@@ -22,13 +23,7 @@ export class RootComponent extends Component {
   }
 
   getStyleLink (currentStyle) {
-    if (currentStyle === 'material') {
-      // @ts-ignore
-      require('../theme/styles/main-material.scss')
-    } else {
-      // @ts-ignore
-      require('../theme/styles/main-ark.scss')
-    }
+    importStyles(currentStyle)
   }
 }
 customElements.define('app-root', RootComponent)
