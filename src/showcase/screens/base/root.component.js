@@ -1,7 +1,7 @@
 import './root.content.component'
 
 import { Component } from '../loader'
-import { importStyles } from '../theme'
+import { ThemeService } from '../theme/theme.service'
 
 /**
  * @typedef {import('../loader').List} List
@@ -13,15 +13,15 @@ import { importStyles } from '../theme'
 export const version = VERSION
 
 export class RootComponent extends Component {
-  /** @param {{ path: String, currentStyle: String }} context */
+  /** @param {{ path: String }} context */
   init (context) {
     this.path = context['path']
-    this.currentStyle = context['currentStyle'] || 'material'
 
     // -------------------------------------------------------------------------
     // Local
     // -------------------------------------------------------------------------
     this.currentLocation = window.location
+    this.themeService = new ThemeService()
 
     return super.init()
   }
@@ -70,7 +70,10 @@ export class RootComponent extends Component {
 
     const container = this.select('[data-root-container]')
 
-    container.init({ component: component, currentStyle: this.currentStyle })
+    container.init({
+      component: component,
+      currentStyle: this.themeService.currentStyle()
+    })
 
     container.render().load()
   }
@@ -121,8 +124,6 @@ export class RootComponent extends Component {
   }
 
   get styles () {
-    importStyles(this.currentStyle)
-
     return /* html */ `
       <style>
         app-root{

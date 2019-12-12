@@ -4,7 +4,7 @@ export class RootContainerComponent extends Component {
   /** @param {{ component: Component; currentStyle: String }} context */
   init (context) {
     this.component = context['component']
-    this.currentStyle = context['currentStyle'] || 'material'
+    this.currentStyle = context['currentStyle']
 
     // -------------------------------------------------------------------------
     // Local
@@ -81,7 +81,7 @@ export class RootContainerComponent extends Component {
         appRoot.append(this.component.cloneNode(false))
 
         // @ts-ignore
-        appRoot.getStyleLink(this.currentStyle)
+        appRoot.getStyle(this.currentStyle)
       })
     }
   }
