@@ -37,6 +37,16 @@ export class RootComponent extends Component {
             <span class='font-size' data-page-name>Componark</span>
           </div>
         </ark-nav>
+        <ark-nav>
+          <ark-select listen on-alter="selectEventListener" label="Estilo:">
+            <option value="material" ${
+      this.themeService.currentStyle() === "material" ? 'selected' : ''
+      }>Material</option>
+            <option value="ark" ${
+      this.themeService.currentStyle() === "ark" ? 'selected' : ''
+      }>ark</option>
+          </ark-select>
+        </ark-nav>
       </ark-navbar>
 
       <ark-sidebar data-sidebar>
@@ -76,6 +86,15 @@ export class RootComponent extends Component {
     })
 
     container.render().load()
+  }
+
+  /** @param {CustomEvent} event */
+  selectEventListener (event) {
+    event.stopImmediatePropagation()
+    const style = event.detail.value
+
+    this.themeService.set('style', style)
+    this.themeService.reload()
   }
 
   // ---------------------------------------------------------------------------
