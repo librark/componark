@@ -1,5 +1,5 @@
-@import "./default.nav";
-@import "./default.navbar";
+@import "./nav.default";
+@import "./navbar.default";
 
 @mixin navbar_default() {
   @include nav_default_();
