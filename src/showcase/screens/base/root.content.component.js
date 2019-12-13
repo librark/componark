@@ -81,7 +81,7 @@ export class RootContainerComponent extends Component {
         appRoot.append(this.component.cloneNode(false))
 
         // @ts-ignore
-        appRoot.getStyle(this.currentStyle)
+        appRoot.themeService(this.currentStyle)
       })
     }
   }

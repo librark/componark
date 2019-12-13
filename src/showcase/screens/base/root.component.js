@@ -147,17 +147,19 @@ export class RootComponent extends Component {
     return /* html */ `
       <style>
         app-root{
-          display: block;
+          display: grid;
+          grid: auto 1fr / 1fr;
+
+          max-width: 100vw;
+          width: 100%;
+
+          max-height: 100vh;
           height: 100vh;
         }
         app-root .root-content {
-          height: calc(100vh - 64px);
+          width: 100%;
+          height: 100%;
           overflow: auto;
-        }
-        app-root .root-content > * {
-          display: block;
-          padding: 0;
-          margin: 0;
         }
       </style>
     `

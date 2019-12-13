@@ -23,7 +23,7 @@ export class RootComponent extends Component {
     return super.load()
   }
 
-  getStyle (style) {
+  themeService (style) {
     new ThemeService(style)
   }
 }
