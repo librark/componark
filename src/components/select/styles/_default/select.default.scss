@@ -1,4 +1,4 @@
-@mixin select_default() {
+@mixin select_default_() {
   $component: "ark-select";
 
   #{$component} {

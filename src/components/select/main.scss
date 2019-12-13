@@ -3,12 +3,12 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
-@import "./styles/_default/select.default";
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/ark/main.ark";
-@import "./styles/material/main.material";
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
-@mixin select($type:ark) {
+@mixin select($type: ark) {
   @include select_default();
 
   @if $type==ark {
