@@ -1,0 +1,6 @@
+@mixin table_default_() {
+  $component: "ark-table";
+
+  #{$component} {
+  }
+}
