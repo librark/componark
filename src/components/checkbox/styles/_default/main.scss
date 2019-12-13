@@ -1,0 +1,5 @@
+@import "./checkbox.default.scss";
+
+@mixin checkbox_default() {
+  @include checkbox_default_();
+}

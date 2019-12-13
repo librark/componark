@@ -4,7 +4,9 @@
   $tablet: 768px;
   $desktop: 960px;
 
-  #{$component} {}
+  #{$component} {
+  }
 
-  .#{$component} {}
+  .#{$component} {
+  }
 }
