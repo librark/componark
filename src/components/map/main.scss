@@ -3,8 +3,8 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/default/map.default.scss";
 
 @mixin map($type: ark) {
   @include map_default();

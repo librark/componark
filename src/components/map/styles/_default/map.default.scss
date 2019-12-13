@@ -1,4 +1,4 @@
-@mixin map_default() {
+@mixin map_default_() {
   $component: "ark-map";
 
   #{$component} {

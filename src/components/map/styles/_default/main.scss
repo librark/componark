@@ -1,0 +1,5 @@
+@import "./map.default.scss";
+
+@mixin map_default() {
+  @include map_default_();
+}
