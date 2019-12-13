@@ -1,0 +1,5 @@
+@import "./card.material.scss";
+
+@mixin card_material() {
+  @include card_material_();
+}

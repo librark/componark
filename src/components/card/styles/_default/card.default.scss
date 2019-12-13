@@ -1,0 +1,6 @@
+@mixin card_default_() {
+  $component: "ark-card";
+
+  #{$component} {
+  }
+}

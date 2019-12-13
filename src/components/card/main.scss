@@ -3,16 +3,19 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/_default/main";
 // -------------------------------------------
-@import './styles/ark/main.ark';
-@import './styles/material/main.material';
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
 @mixin card($theme: ark) {
-    @if $theme==ark {
-        @include card_ark();
-    }
+  @include card_default();
 
-    @if $theme==material {
-        @include card_material();
-    }
+  @if $theme==ark {
+    @include card_ark();
+  }
+
+  @if $theme==material {
+    @include card_material();
+  }
 }
