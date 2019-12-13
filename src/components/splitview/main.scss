@@ -3,19 +3,19 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
-@import "./styles/_default/main.defaul";
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/ark/main.ark";
-@import "./styles/material/main.material";
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
 @mixin splitview($theme: ark) {
-    @include splitview_defaul();
+  @include splitview_defaul();
 
-    @if $theme==ark {
-        @include splitview_ark();
-    }
+  @if $theme==ark {
+    @include splitview_ark();
+  }
 
-    @if $theme==material {
-        @include splitview_material();
-    }
+  @if $theme==material {
+    @include splitview_material();
+  }
 }
