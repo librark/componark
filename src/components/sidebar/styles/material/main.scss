@@ -1,5 +1,5 @@
-@import "./sidebar";
+@import "./sidebar.material";
 
 @mixin sidebar_material() {
-    @include sidebar_();
+  @include sidebar_material_();
 }

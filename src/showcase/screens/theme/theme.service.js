@@ -45,6 +45,9 @@ export class ThemeService {
     if (currentStyle === 'material') {
       // @ts-ignore
       require('./styles/main-material.scss')
+    } else if (currentStyle === 'bootstrap') {
+      // @ts-ignore
+      require('./styles/main-bootstrap.scss')
     } else {
       // @ts-ignore
       require('./styles/main-ark.scss')

@@ -1,5 +1,5 @@
-@mixin sidebar_() {
-  $component: 'ark-sidebar';
+@mixin sidebar_ark_() {
+  $component: "ark-sidebar";
 
   $border: 1px solid rgba(0, 0, 0, 0.2);
 
@@ -23,12 +23,11 @@
       width: 304px;
       min-width: 304px;
       height: 100vh;
-
     }
 
     &__header,
     &__footer {
-      padding: 15px
+      padding: 15px;
     }
 
     &__header {

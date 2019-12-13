@@ -1,0 +1,5 @@
+@import "./sidebar.default";
+
+@mixin sidebar_default() {
+  @include sidebar_default_();
+}
