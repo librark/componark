@@ -5,15 +5,11 @@
 
   #{$component} {
     input {
-      // @extend .mdc-text-field__input;
-
       margin: 0;
       padding: 0.3rem;
 
       flex-basis: auto;
       flex-grow: 1;
-
-      // width: auto;
     }
   }
 }

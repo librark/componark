@@ -3,10 +3,9 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/default/main.default";
-// -------------------------------------------
-@import "./styles/material/main.material";
+@import "./styles/material/main";
 
 @mixin multiselect($theme: ark) {
   @include multiselect_default();
