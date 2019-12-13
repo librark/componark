@@ -3,9 +3,8 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/_default/main";
 // -------------------------------------------
-// -------------------------------------------
-@import "./styles/default/main.default";
 
 @mixin zone($theme: ark) {
   @include zone_default();
