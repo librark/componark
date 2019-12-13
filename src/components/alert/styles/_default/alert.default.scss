@@ -1,4 +1,4 @@
-@mixin alert_default() {
+@mixin alert_default_() {
   $component: "ark-alert";
 
   #{$component} {
@@ -60,7 +60,7 @@
       height: fit-content;
 
       padding: 1rem;
-      margin: .5rem;
+      margin: 0.5rem;
 
       max-width: calc(100vw - 3rem);
       max-height: calc(100vh - 3rem);
@@ -77,16 +77,16 @@
       flex-flow: wrap;
       justify-content: flex-end;
 
-      margin-top: .5rem;
+      margin-top: 0.5rem;
 
-      &>* {
-        margin-top: .3rem;
-        margin-left: .3rem;
+      & > * {
+        margin-top: 0.3rem;
+        margin-left: 0.3rem;
       }
     }
 
     &__scrim {
-      background: rgba($color: $dark, $alpha: .5);
+      background: rgba($color: $dark, $alpha: 0.5);
       width: inherit;
       height: inherit;
       position: inherit;
