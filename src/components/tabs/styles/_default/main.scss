@@ -1,0 +1,7 @@
+@import "./tabs.default";
+@import "./tabs.item.default";
+
+@mixin tabs_default() {
+  @include tabs_default_();
+  @include tabs-item_default_();
+}

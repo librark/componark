@@ -10,7 +10,6 @@
   $desktop: "960px";
 
   #{$component} {
-
     width: 100%;
 
     button,
@@ -18,12 +17,12 @@
       @extend .mdc-tab;
       width: 100%;
 
-      &>:not(:first-child) {
+      & > :not(:first-child) {
         margin-left: 5px;
       }
 
       &:hover {
-        background: rgba($color: $muted, $alpha: .2);
+        background: rgba($color: $muted, $alpha: 0.2);
         border-bottom: 3px solid rgba(0, 0, 0, 0.5);
       }
     }
@@ -32,7 +31,7 @@
       font-size: 24px;
     }
 
-    &[active]>* {
+    &[active] > * {
       color: $primary !important;
       border-bottom: 3px solid $primary;
     }

@@ -3,11 +3,14 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/material/main.material";
-@import "./styles/ark/main.ark";
+@import "./styles/material/main";
+@import "./styles/ark/main";
 
-@mixin tabs($type:ark) {
+@mixin tabs($type: ark) {
+  @include tabs_default();
+
   @if $type==ark {
     @include tabs_ark();
   }
