@@ -3,9 +3,9 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/_default/main";
 // -------------------------------------------
-@import './styles/ark/main';
 
 @mixin icon($theme: ark) {
-    @include icon_ark();
+  @include icon_default();
 }
