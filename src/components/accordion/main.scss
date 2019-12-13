@@ -4,10 +4,10 @@
 @import "../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import "./styles/_default/main.default";
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/ark/main.ark";
-@import "./styles/material/main.material";
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
 @mixin accordion($theme: ark) {
   @include accordion_default();
