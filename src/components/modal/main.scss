@@ -1,21 +1,21 @@
 // -------------------------------------------
 // Theme
 // -------------------------------------------
-@import '../theme/main';
+@import "../theme/main";
 // -------------------------------------------
-@import './styles/_default/modal.default';
+@import "./styles/_default/main";
 // -------------------------------------------
-@import './styles/ark/main.ark';
-@import './styles/material/main.material';
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
 @mixin modal($theme: ark) {
-	@include modal_default_();
+  @include modal_default();
 
-	@if $theme==ark {
-		@include modal_ark();
-	}
+  @if $theme==ark {
+    @include modal_ark();
+  }
 
-	@if $theme==material {
-		@include modal_material();
-	}
+  @if $theme==material {
+    @include modal_material();
+  }
 }
