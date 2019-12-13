@@ -28,16 +28,16 @@ export class RootComponent extends Component {
 
   render () {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-navbar justify='between' fixed-top>
-        <ark-nav>
-          <div>
-            <ark-button listen on-click='_onOpenSidebar' color="white">
-              <ark-icon name='fas fa-bars'></ark-icon>
-            </ark-button>
-            <span class='font-size' data-page-name>Componark</span>
-          </div>
+      <ark-navbar justify='between' background="primary" color="white">
+
+        <ark-nav brand>
+          <ark-button listen on-click='_onOpenSidebar'>
+            <ark-icon name='fas fa-bars'></ark-icon>
+          </ark-button>
+          <span class='font-size' data-page-name>Componark</span>
         </ark-nav>
-        <ark-nav>
+
+        <ark-nav toggler>
           <ark-select listen on-alter="selectEventListener" label="Estilo:">
             <option value="material" ${
       this.themeService.currentStyle() === "material" ? 'selected' : ''
@@ -47,6 +47,7 @@ export class RootComponent extends Component {
       }>ark</option>
           </ark-select>
         </ark-nav>
+
       </ark-navbar>
 
       <ark-sidebar data-sidebar>

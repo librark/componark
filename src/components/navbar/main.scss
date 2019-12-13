@@ -3,16 +3,19 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
+@import "./styles/_default/main.default";
 // -------------------------------------------
-@import './styles/ark/main.ark';
-@import './styles/material/main.material';
+@import "./styles/ark/main.ark";
+@import "./styles/material/main.material";
 
-@mixin navbar($theme:ark) {
-    @if $theme==ark {
-        @include navbar_ark();
-    }
+@mixin navbar($theme: ark) {
+  @include navbar_default();
 
-    @if $theme==material {
-        @include navbar_material();
-    }
+  @if $theme==ark {
+    @include navbar_ark();
+  }
+
+  @if $theme==material {
+    @include navbar_material();
+  }
 }

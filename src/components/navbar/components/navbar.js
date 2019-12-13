@@ -1,32 +1,29 @@
+/** @typedef {import('./nav').Nav} Nav */
 import { Component } from '../../component'
 
 export class Navbar extends Component {
-	init (context = {}) {
-		// local variables
-		this.defaultContent = this.defaultContent || this.innerHTML
-		return super.init()
-	}
+  init (context = {}) {
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = /* html */ `
-      <div class="ark-navbar__content">
-        ${this.defaultContent}
-      </div>
-    `
-		return super.render()
-	}
+  render () {
+    return super.render()
+  }
 
-	load () {
-		const navbar = this.querySelector('[ark-navbar-toggle]')
-		if (navbar) {
-			navbar.addEventListener('click', () => this.toggleContent())
-		}
+  load () {
+    this.querySelectorAll('[navbar-toggler]').forEach(toggler => {
+      toggler.addEventListener('click', this.onToggleContent.bind(this))
+    })
 
-		return super.load()
-	}
+    return super.load()
+  }
 
-	toggleContent () {
-		this.classList.toggle('ark-navbar--show')
-	}
+  /** @param {event} event */
+  onToggleContent (event) {
+    event.stopImmediatePropagation()
+    this.selectAll('ark-nav[collapse]').forEach((/** @type {Nav} */ nav) => {
+      nav.toggleHide()
+    })
+  }
 }
 customElements.define('ark-navbar', Navbar)

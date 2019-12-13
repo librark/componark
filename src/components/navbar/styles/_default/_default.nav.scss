@@ -1,0 +1,14 @@
+@mixin nav_default_() {
+  $component: "ark-nav";
+
+  #{$component} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+
+    & > * {
+      padding: 0 0.2rem;
+    }
+  }
+}

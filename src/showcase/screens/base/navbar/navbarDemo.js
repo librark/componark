@@ -1,44 +1,41 @@
 import { Component } from '../../loader'
 
 export class NavbarDemo extends Component {
-	init (context) {
-		this.type = context['type'] || 'ark'
-		return super.init(context)
-	}
+  init (context) {
+    this.type = context['type'] || 'ark'
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */ `
+  render () {
+    this.innerHTML = /* html */ `
+      <ark-navbar background="dark" color="danger" justify="between">
 
-      <ark-navbar fixed-top>
-        <ark-nav justify="between">
-          <div>
-            <ark-button>
-                <ark-icon name="fas fa-bars"></ark-icon>
-            </ark-button>
-            <ark-button>x_Item 1-1</ark-button>
-          </div>
-          <div>
-            <ark-button ark-navbar-hide-large>
-              |CUENTA ABC|
-            </ark-button>
-            <ark-button ark-navbar-toggle>
-              <ark-icon name="fas fa-caret-down"></ark-icon>
-            </ark-button>
-          </div>
-        </ark-nav>
-
-        <ark-nav justify="center">
-          <ark-button>x_Item 2-4</ark-button>
-          <ark-button>x_Item 2-4</ark-button>
-        </ark-nav>
-
-        <ark-nav justify="end">
-          <ark-button ark-navbar-hide-small>
-              |CUENTA 123|
+        <ark-nav brand>
+          <ark-button>
+            <ark-icon name='fas fa-bars'></ark-icon>
           </ark-button>
-          <ark-button>x_Item 3-8</ark-button>
-          <ark-button>x_Item 3-9</ark-button>
+          <span>Componark</span>
         </ark-nav>
+
+        <ark-nav>
+          <span>Element 1</span>
+          <span>Element 2</span>
+          <span>Element 3</span>
+        </ark-nav>
+
+        <ark-nav>
+          <span>Element A</span>
+          <span>Element B</span>
+          <span>Element C</span>
+        </ark-nav>
+
+        <ark-nav toggler>
+          <span>User</span>
+          <ark-button navbar-toggler>
+            <ark-icon name='fas fa-ellipsis-v'></ark-icon>
+          </ark-button>
+        </ark-nav>
+
       </ark-navbar>
 
       <!-- DOCUMENTATION -->
@@ -60,7 +57,7 @@ export class NavbarDemo extends Component {
       </div>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 }
 customElements.define('demo-navbar', NavbarDemo)
