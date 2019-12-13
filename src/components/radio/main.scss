@@ -3,19 +3,19 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
-@import "./styles/_default/_default.radio-button";
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/ark/main.ark";
-@import "./styles/material/main.material";
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
 @mixin radio($theme: ark) {
-    @include radio-button_default();
+  @include radio-button_default();
 
-    @if $theme==ark {
-        @include radio-group_ark();
-    }
+  @if $theme==ark {
+    @include radio-group_ark();
+  }
 
-    @if $theme==material {
-        @include radio-group_material();
-    }
+  @if $theme==material {
+    @include radio-group_material();
+  }
 }

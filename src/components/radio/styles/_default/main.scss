@@ -1,0 +1,5 @@
+@import "./radio-button.default.scss";
+
+@mixin radio-button_default() {
+  @include radio-button_default_();
+}
