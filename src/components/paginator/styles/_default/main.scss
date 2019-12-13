@@ -1,4 +1,4 @@
-@import "./default.paginator";
+@import "./paginator.default.scss";
 
 @mixin paginator_defaul() {
   @include paginator_default_();
