@@ -4,9 +4,9 @@
 @import "../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import "./styles/default/main.default";
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/material/main.material";
+@import "./styles/material/main";
 // -------------------------------------------
 
 @mixin treetable($theme: ark) {
