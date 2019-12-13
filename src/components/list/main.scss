@@ -3,12 +3,12 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
-@import "./styles/default/main.default";
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/ark/main.ark";
-@import "./styles/material/main.material";
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
-@mixin list($theme:material) {
+@mixin list($theme: material) {
   @include list_default();
 
   @if $theme==ark {
