@@ -4,19 +4,19 @@
 @import "../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import "./styles/_default/_default.input";
+@import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/ark/main.ark";
-@import "./styles/material/main.material";
+@import "./styles/ark/main";
+@import "./styles/material/main";
 
 @mixin input($theme: ark) {
-    @include input_default();
+  @include input_default();
 
-    @if $theme==ark {
-        @include input_ark();
-    }
+  @if $theme==ark {
+    @include input_ark();
+  }
 
-    @if $theme==material {
-        @include input_material();
-    }
+  @if $theme==material {
+    @include input_material();
+  }
 }

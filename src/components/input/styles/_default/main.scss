@@ -1,0 +1,5 @@
+@import "./input.default.scss";
+
+@mixin input_default() {
+  @include input_default_();
+}

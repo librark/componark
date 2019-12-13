@@ -4,14 +4,15 @@
   $tablet: 768px;
   $desktop: 960px;
 
-  #{$component} {}
+  #{$component} {
+  }
 
   .#{$component} {
     &__label {
       display: grid;
 
       font-weight: bold;
-      color: rgba($color: #000000, $alpha: .7);
+      color: rgba($color: #000000, $alpha: 0.7);
 
       [required] {
         color: rgba($color: #000000, $alpha: 1);
@@ -24,7 +25,7 @@
         padding: 12px 20px;
         margin: 0;
         box-sizing: border-box;
-        border: 1px solid rgba($color: #555, $alpha: .5);
+        border: 1px solid rgba($color: #555, $alpha: 0.5);
         -webkit-transition: 0.5s;
         transition: 0.5s;
         outline: none;
@@ -34,7 +35,7 @@
         }
 
         &[required] {
-          border: 1px solid rgba($color: #555, $alpha: .8);
+          border: 1px solid rgba($color: #555, $alpha: 0.8);
         }
       }
     }
@@ -47,7 +48,7 @@
         margin-top: 5px !important;
         padding: 0 !important;
 
-        color: rgba($color: #000000, $alpha: .7);
+        color: rgba($color: #000000, $alpha: 0.7);
       }
     }
   }
