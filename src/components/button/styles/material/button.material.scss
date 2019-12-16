@@ -5,8 +5,6 @@
   $component: "ark-button";
 
   #{$component} {
-    border-radius: 5px;
-
     @extend .mdc-button__label;
     @extend .mdc-button;
 
@@ -16,6 +14,11 @@
 
     &[fab] {
       @extend .mdc-fab;
+    }
+
+    button,
+    a {
+      padding: 0 0.5rem;
     }
   }
 }

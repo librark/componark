@@ -1,9 +1,14 @@
-@import "@material/button/mdc-button.scss";
-@import "@material/fab/mdc-fab";
+@import "~bootstrap/scss/bootstrap.scss";
 
 @mixin button_bootstrap_() {
   $component: "ark-button";
 
   #{$component} {
+    @extend .btn;
+
+    button,
+    a {
+      padding: 2px 10px;
+    }
   }
 }
