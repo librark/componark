@@ -1,0 +1,9 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@mixin accordion_bootstrap_() {
+  $component: "ark-accordion";
+
+  #{$component} {
+    @extend .accordion;
+  }
+}

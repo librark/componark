@@ -2,11 +2,12 @@
   $component: "ark-accordion-tab";
 
   #{$component} {
-    background: $background;
   }
 
   .#{$component} {
     &__btn-header {
+      background: $background;
+
       width: auto;
       height: 2.5rem;
 

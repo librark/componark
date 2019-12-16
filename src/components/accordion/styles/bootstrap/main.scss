@@ -1,0 +1,7 @@
+@import "./accordion.bootstrap";
+@import "./accordion.tab.bootstrap";
+
+@mixin accordion_bootstrap() {
+  @include accordion_bootstrap_();
+  @include accordion_tab_bootstrap_();
+}
