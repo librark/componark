@@ -1,0 +1,8 @@
+// @import "../../../../theme/_variables.scss";
+
+@mixin list_item_ark_() {
+  $component: "ark-list-item";
+
+  #{$component} {
+  }
+}

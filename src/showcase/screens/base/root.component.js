@@ -60,7 +60,7 @@ export class RootComponent extends Component {
           <small>Versión: ${version}</small>
         </div>
         <ark-list listen on-list:selected='_onListItemSelected'
-          data-sidebar-list default>
+          data-sidebar-list action default>
         </ark-list>
         <!-- <div slot='footer'></div> -->
       </ark-sidebar>

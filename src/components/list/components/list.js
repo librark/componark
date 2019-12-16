@@ -1,65 +1,74 @@
-/** @typedef {import('./item').ListItem} ListItem */
 import { Component } from '../../component'
-import { ListItem } from './item.js'
+import { ListItem } from './list.item'
 
 export class List extends Component {
-	/** @param {Object} context */
-	init (context = {}) {
-		this.source = /** @type {Array} */ (context['source']) || []
-		this.template = context['template'] || (data => `${data}`)
+  /** @param {Object} context */
+  init (context = {}) {
+    this.source = /** @type {Array} */ (context['source']) || []
+    this.template = context['template'] || (data => `${data}`)
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = /* html */ ``
-		this.source.forEach((data, index) => {
-			const item = new ListItem()
+  render () {
+    this.innerHTML = ""
 
-			if (this.hasAttribute('click-disabled')) {
-				item.setAttribute('click-disabled', '')
-			}
+    this.source.forEach((data, index) => {
+      const item = new ListItem()
 
-			item
-				.init({ data: data, template: this.template, index: index })
-				.render()
-				.load()
+      if (this.hasAttribute('click-disabled')) {
+        item.setAttribute('click-disabled', '')
+      }
 
-			item.addEventListener('list-item:selected', this._onSelected.bind(this))
+      item
+        .init({ data: data, template: this.template, index: index })
+        .render()
+        .load()
 
-			this.appendChild(item)
-		})
-		return super.render()
-	}
+      this.appendChild(item)
+    })
 
-	/** @param {number} start @param {number?} deleteCount  */
-	delete (start, deleteCount = 1) {
-		this.source.splice(start, deleteCount)
+    return super.render()
+  }
 
-		for (let i = start; i < deleteCount + start; i++) {
-			this.select(`[index="${i}"]`).remove()
-		}
+  load () {
+    this.addEventListener('list-item:selected', this._onSelected.bind(this))
 
-		this.render()
-	}
+    return super.load()
+  }
 
-	/** @param {Event} event */
-	_onSelected (event) {
-		event.stopImmediatePropagation()
-		if (this.hasAttribute('click-disabled')) return
+  // ---------------------------------------------------------------------------
 
-		const detail = event['detail']
+  /** @param {number} start @param {number?} deleteCount  */
+  delete (start, deleteCount = 1) {
+    this.source.splice(start, deleteCount)
 
-		this.dispatchEvent(
-			new CustomEvent('list:selected', {
-				bubbles: true,
-				detail: {
-					data: detail.data,
-					index: detail.index,
-					origin: detail.origin
-				}
-			})
-		)
-	}
+    for (let i = start; i < deleteCount + start; i++) {
+      this.select(`[index="${i}"]`).remove()
+    }
+
+    this.render()
+  }
+
+  // ---------------------------------------------------------------------------
+
+  /** @param {Event} event */
+  _onSelected (event) {
+    event.stopImmediatePropagation()
+    if (this.hasAttribute('click-disabled')) return
+
+    const detail = event['detail']
+
+    this.dispatchEvent(
+      new CustomEvent('list:selected', {
+        bubbles: true,
+        detail: {
+          data: detail.data,
+          index: detail.index,
+          origin: detail.origin
+        }
+      })
+    )
+  }
 }
 customElements.define('ark-list', List)

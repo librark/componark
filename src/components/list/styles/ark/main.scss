@@ -1,7 +1,7 @@
 @import "./list.ark";
-@import "./item.ark";
+@import "./list.item.ark";
 
 @mixin list_ark() {
   @include list_ark_();
-  @include item_ark_();
+  @include list_item_ark_();
 }

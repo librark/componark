@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@mixin list_item_bootstrap_() {
+  $component: "ark-list-item";
+
+  #{$component} {
+    @extend .list-group-item;
+    background: inherit;
+  }
+}
