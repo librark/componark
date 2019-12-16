@@ -20,8 +20,35 @@
 
   .#{$component} {
     &__menu {
+      width: 85%;
+      height: 100%;
+
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
+
+      position: absolute;
+      top: 0;
+
+      background: $background;
+
+      @media only screen and (min-width: $mobile) {
+        & {
+          width: 85%;
+        }
+      }
+
+      @media only screen and (min-width: $tablet) {
+        & {
+          width: 45%;
+        }
+      }
+
+      @media only screen and (min-width: $desktop) {
+        & {
+          width: 25%;
+        }
+      }
     }
 
     &__header,
@@ -42,6 +69,8 @@
       width: 100%;
       height: 100%;
       display: block;
+
+      background: rgba(0, 0, 0, 0.3);
     }
 
     &--opened {
