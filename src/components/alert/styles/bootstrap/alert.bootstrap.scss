@@ -1,0 +1,11 @@
+@mixin alert_bootstrap_() {
+  $component: "ark-alert";
+
+  #{$component} {
+  }
+
+  .#{$component} {
+    &__content {
+    }
+  }
+}

@@ -14,7 +14,7 @@ export class MapDemo extends Component {
       ${this.getStyle()}
 
       <div class="map-container">
-        <ark-map></ark-map>
+        <ark-map token="${this.token}"></ark-map>
       </div>
 
       <!------------------------------------>
@@ -36,6 +36,12 @@ export class MapDemo extends Component {
   /** @returns {Map} */
   get arkMap () {
     return /** @type {Map} */ (this.select('ark-map'))
+  }
+
+  get token () {
+    return 'pk' +
+      '.eyJ1IjoiaXRudWJhcmsiLCJhIjoiY2pzdWsyYXo0MmY4dTQzcnI0Y2ZxMGt3aCJ9' +
+      '.DPOHXK2aObjNChVAZ4_CMQ'
   }
 
   // ---------------------------------------------------------------------------

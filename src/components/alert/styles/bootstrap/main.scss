@@ -1,0 +1,5 @@
+@import "./alert.bootstrap";
+
+@mixin alert_bootstrap() {
+  @include alert_bootstrap_();
+}

@@ -2,15 +2,9 @@
   $component: "ark-button";
 
   #{$component} {
-    margin: 2px 0;
-    display: inline-block;
-    width: inherit;
-
     button,
     a {
-      padding: 10px 15px;
-      border: 0;
-      border-radius: inherit;
+      padding: 2px 12px;
     }
   }
 }

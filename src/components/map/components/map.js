@@ -12,8 +12,13 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 export class Map extends Component {
   init (context = {}) {
     this.center = context['center'] || [2.44073, -76.602349]
+    this.token = context['token'] || this.token
 
     return super.init()
+  }
+
+  reflectedProperties () {
+    return ['token']
   }
 
   render () {
@@ -25,7 +30,7 @@ export class Map extends Component {
 
     this.api.tileLayer(
       "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" +
-      `?access_token=${this._getAccessToken()}`
+      `?access_token=${this.token}`
     ).addTo(this.map)
 
     this.api.control.scale().addTo(this.map)
@@ -46,16 +51,6 @@ export class Map extends Component {
   }
 
   // ---------------------------------------------------------------------------
-
-  _getAccessToken () {
-    let token = ""
-
-    token += 'pk'
-    token += '.eyJ1IjoiaXRudWJhcmsiLCJhIjoiY2pzdWsyYXo0MmY4dTQzcnI0Y2ZxMGt3aCJ9'
-    token += '.DPOHXK2aObjNChVAZ4_CMQ'
-
-    return token
-  }
 
   _defaultMarkerIconUrl () {
     const defaultIcon = L.icon({
