@@ -77,11 +77,8 @@
       flex-flow: wrap;
       justify-content: flex-end;
 
-      margin-top: 0.5rem;
-
       & > * {
-        margin-top: 0.3rem;
-        margin-left: 0.3rem;
+        margin: 0.3rem;
       }
     }
 

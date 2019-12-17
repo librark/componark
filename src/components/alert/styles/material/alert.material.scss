@@ -27,8 +27,21 @@
   }
 
   .#{$component} {
+    &__header {
+    }
+
+    &__title {
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
     &__content {
       border-radius: 5px;
+      padding-bottom: 0.5rem;
+    }
+
+    &__actions {
+      margin-top: 0.5rem;
     }
   }
 }

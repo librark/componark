@@ -1,85 +1,29 @@
+@import "../../../button/main.scss";
+
 @mixin alert_ark_() {
   $component: "ark-alert";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
-  $background: rgba($color: #ffff, $alpha: 1) !important;
-  $color: rgba(0, 0, 0, 0.87) !important;
 
   #{$component} {
-
-    button,
-    a {
-      display: inline-block;
-
-      background: none;
-      font-size: unset;
-      border: 0px solid;
-
-      padding: 10px 15px;
-      color: inherit;
-
-      width: inherit;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &[disabled] {
-        cursor: default !important;
-        color: gray !important;
-        background: none !important;
-
-        &:hover {
-          background: none !important;
-        }
-      }
-
-      &>:not(:first-child) {
-        margin-left: 5px;
-      }
-    }
-
-    a {
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &[disabled] {
-        text-decoration: none;
-      }
-    }
   }
 
   .#{$component} {
-    &__body {
-      min-width: calc(#{$mobile} - (12px * 2));
-    }
-
-    &__content {
-      padding: 24px 12px 12px;
+    &__header {
+      margin-bottom: 0.5rem;
     }
 
     &__title {
-      margin-top: 0;
-      padding-top: 0;
+      margin-bottom: 0.5rem;
     }
 
     &__actions {
-      padding: 12px;
+      @extend ark-button;
 
       display: flex;
-      align-items: normal;
       justify-content: flex-end;
-      flex-flow: wrap;
 
-      :not(:last-child()) {
-        margin-right: 8px;
+      button {
+        margin: 0.1rem !important;
       }
     }
-
-    &__scrim {}
   }
 }
