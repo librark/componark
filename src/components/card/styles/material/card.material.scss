@@ -1,41 +1,14 @@
 @import "@material/card/mdc-card";
-// @import "../../../../theme/_variables.scss";
+@import "@material/button/mdc-button.scss";
 
 @mixin card_material_() {
   $component: "ark-card";
 
   #{$component} {
     @extend .mdc-card;
-    margin: 10px;
-
-    &>* {
-      padding: 10px;
-    }
   }
 
   .#{$component} {
-    &__media {
-      @extend .mdc-card__media;
-
-      padding: 0 !important;
-      overflow: hidden;
-
-      max-height: 20rem;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 100%;
-      }
-    }
-
-    &__title {
-      margin: 0;
-      padding: 0;
-    }
-
     &__actions {
       @extend .mdc-card__actions;
 

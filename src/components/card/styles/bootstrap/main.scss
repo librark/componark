@@ -1,0 +1,5 @@
+@import "./card.bootstrap.scss";
+
+@mixin card_bootstrap() {
+  @include card_bootstrap_();
+}
