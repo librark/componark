@@ -20,13 +20,11 @@ export class Checkbox extends Component {
 
   render() {
     this.innerHTML = /* html */ `
-      <div class="ark-checkbox__body" listen on-click="_change">
-        <div class="ark-checkbox__input">
-          <input data-input type="checkbox">
-        </div>
-        <div class="ark-checkbox__label">
-          <small>${this.defaultContent}</small>
-        </div>
+      <div class="ark-checkbox__input">
+        <input data-input type="checkbox">
+      </div>
+      <div class="ark-checkbox__label">
+        <small>${this.defaultContent}</small>
       </div>
     `
 
@@ -35,8 +33,12 @@ export class Checkbox extends Component {
   }
 
   load() {
+    this.addEventListener("click", this.onAlter.bind(this))
+
     return super.load()
   }
+
+  // ---------------------------------------------------------------------------
 
   check() {
     this.checked = true
@@ -72,15 +74,14 @@ export class Checkbox extends Component {
     }
   }
 
-  // ---------------------------------------------------------------------------
-
   /** @param {Event} event */
-  _change(event) {
+  onAlter(event) {
     event.stopImmediatePropagation()
 
     this.toggle()
+
     this.dispatchEvent(
-      new CustomEvent("alter", {
+      new CustomEvent("checkbox:alter", {
         bubbles: true,
         detail: {
           value: this.value,
@@ -90,6 +91,8 @@ export class Checkbox extends Component {
       })
     )
   }
+
+  // ---------------------------------------------------------------------------
 
   _moveAttributes() {
     this.checked = this.hasAttribute("checked")

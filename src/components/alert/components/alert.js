@@ -1,21 +1,21 @@
-import { Component } from '../../component'
+import { Component } from "../../component"
 
 export class Alert extends Component {
-  init (context = {}) {
-    this.title = this._defaultvalue(this.title, context['title'])
-    this.text = this._defaultvalue(this.text, context['text'])
+  init(context = {}) {
+    this.title = this._defaultvalue(this.title, context["title"])
+    this.text = this._defaultvalue(this.text, context["text"])
 
     this.horizontal = this._defaultvalue(
       this.horizontal,
-      context['horizontal'] || 'center'
+      context["horizontal"] || "center"
     )
 
     this.vertical = this._defaultvalue(
       this.vertical,
-      context['vertical'] || 'center'
+      context["vertical"] || "center"
     )
 
-    let showConfirmButton = context['showConfirmButton']
+    let showConfirmButton = context["showConfirmButton"]
     showConfirmButton =
       showConfirmButton === undefined ? true : showConfirmButton
 
@@ -26,15 +26,15 @@ export class Alert extends Component {
 
     this.confirmButtonText = this._defaultvalue(
       this.confirmButtonText,
-      context['confirmButtonText'] || 'Aceptar'
+      context["confirmButtonText"] || "Aceptar"
     )
 
     this.confirmButtonBackground = this._defaultvalue(
       this.confirmButtonBackground,
-      context['confirmButtonBackground'] || 'primary'
+      context["confirmButtonBackground"] || "primary"
     )
 
-    let showCancelButton = context['showCancelButton']
+    let showCancelButton = context["showCancelButton"]
     showCancelButton = showCancelButton === undefined ? true : showCancelButton
 
     this.showCancelButton = this._defaultvalue(
@@ -44,12 +44,12 @@ export class Alert extends Component {
 
     this.cancelButtonText = this._defaultvalue(
       this.cancelButtonText,
-      context['cancelButtonText'] || 'Cancelar'
+      context["cancelButtonText"] || "Cancelar"
     )
 
     this.cancelButtonBackground = this._defaultvalue(
       this.cancelButtonBackground,
-      context['cancelButtonBackground'] || 'light'
+      context["cancelButtonBackground"] || "light"
     )
 
     // local variables
@@ -58,20 +58,20 @@ export class Alert extends Component {
     return super.init()
   }
 
-  reflectedProperties () {
+  reflectedProperties() {
     return [
-      'title',
-      'text',
-      'horizontal',
-      'vertical',
-      'confirmButtonText',
-      'confirmButtonBackground',
-      'cancelButtonText',
-      'cancelButtonBackground'
+      "title",
+      "text",
+      "horizontal",
+      "vertical",
+      "confirmButtonText",
+      "confirmButtonBackground",
+      "cancelButtonText",
+      "cancelButtonBackground"
     ]
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `
       <div class="ark-alert__content">
         <div class="ark-alert__header">
@@ -87,16 +87,16 @@ export class Alert extends Component {
     return super.render()
   }
 
-  load () {
-    this.querySelectorAll('[close]').forEach(element =>
-      element.addEventListener('click', _ => this.close())
+  load() {
+    this.querySelectorAll("[close]").forEach(element =>
+      element.addEventListener("click", _ => this.close())
     )
 
     return super.load()
   }
 
   /** @param {Object} context @param {HTMLElement=} parent @return {Alert} */
-  static launch (context, parent = document.body) {
+  static launch(context, parent = document.body) {
     /** @type {Alert} */
     const alert = new Alert()
     alert.init(context)
@@ -104,30 +104,30 @@ export class Alert extends Component {
     return alert
   }
 
-  close () {
+  close() {
     this.remove()
   }
 
-  show () {
-    this.removeAttribute('hidden')
+  show() {
+    this.removeAttribute("hidden")
   }
 
-  hide () {
-    this.setAttribute('hidden', '')
+  hide() {
+    this.setAttribute("hidden", "")
   }
 
-  toggle () {
-    this.hasAttribute('hidden') ? this.show() : this.hide()
+  toggle() {
+    this.hasAttribute("hidden") ? this.show() : this.hide()
   }
 
   // ---------------------------------------------------------------------------
   // renders
   // ---------------------------------------------------------------------------
-  _defaultvalue (currentValue, newValue) {
+  _defaultvalue(currentValue, newValue) {
     return newValue === undefined ? currentValue : newValue
   }
 
-  _renderTitle () {
+  _renderTitle() {
     return this.title.length
       ? /* html */ `
         <div>
@@ -135,19 +135,22 @@ export class Alert extends Component {
             ${this.title}
           </strong>
         </div>
-      ` : ''
+      `
+      : ""
   }
 
-  _renderText () {
-    return this.text.length ? /* html */ `
+  _renderText() {
+    return this.text.length
+      ? /* html */ `
       <div>
         <span>${this.text}</span>
       </div>
-    ` : ''
+    `
+      : ""
   }
 
-  _appendDefaultButtons () {
-    const content = this.querySelector('[data-alert-actions]')
+  _appendDefaultButtons() {
+    const content = this.querySelector("[data-alert-actions]")
 
     const confirmButton = this._createConfirmButton()
     if (confirmButton) content.append(confirmButton)
@@ -157,7 +160,7 @@ export class Alert extends Component {
   }
 
   /** @returns {HTMLElement} */
-  _createConfirmButton (show, text) {
+  _createConfirmButton(show, text) {
     if (
       !this._parseBooleanValue(this.showConfirmButton) ||
       (this._parseBooleanValue(this.showConfirmButton) &&
@@ -166,22 +169,22 @@ export class Alert extends Component {
       return null
     }
 
-    const button = this.global.createElement('button')
-    button.setAttribute('listen', '')
-    button.setAttribute('on-click', '_clickConfirmButton')
-    button.setAttribute('alert-confirm-button', '')
-    button.setAttribute('background', this.confirmButtonBackground)
-    button.setAttribute('close', '')
+    const button = this.global.createElement("button")
+    button.setAttribute("listen", "")
+    button.setAttribute("on-click", "_clickConfirmButton")
+    button.setAttribute("alert-confirm-button", "")
+    button.setAttribute("background", this.confirmButtonBackground)
+    button.setAttribute("close", "")
     button.textContent = this.confirmButtonText
 
     return button
   }
 
   /** @param {Event} event */
-  _clickConfirmButton (event) {
+  _clickConfirmButton(event) {
     event.stopPropagation()
     this.dispatchEvent(
-      new CustomEvent('alert:confirm-button', {
+      new CustomEvent("alert:confirm-button", {
         detail: {
           origin: event
         }
@@ -190,7 +193,7 @@ export class Alert extends Component {
   }
 
   /** @returns {HTMLElement} */
-  _createCancelButton () {
+  _createCancelButton() {
     if (
       !this._parseBooleanValue(this.showCancelButton) ||
       (this._parseBooleanValue(this.showCancelButton) &&
@@ -199,22 +202,22 @@ export class Alert extends Component {
       return null
     }
 
-    const button = this.global.createElement('button')
-    button.setAttribute('listen', '')
-    button.setAttribute('on-click', '_clickCancelButton')
-    button.setAttribute('alert-cancel-button', '')
-    button.setAttribute('background', this.cancelButtonBackground)
-    button.setAttribute('close', '')
+    const button = this.global.createElement("button")
+    button.setAttribute("listen", "")
+    button.setAttribute("on-click", "_clickCancelButton")
+    button.setAttribute("alert-cancel-button", "")
+    button.setAttribute("background", this.cancelButtonBackground)
+    button.setAttribute("close", "")
     button.textContent = this.cancelButtonText
 
     return button
   }
 
   /** @param {Event} event */
-  _clickCancelButton (event) {
+  _clickCancelButton(event) {
     event.stopPropagation()
     this.dispatchEvent(
-      new CustomEvent('alert:cancel-button', {
+      new CustomEvent("alert:cancel-button", {
         detail: {
           origin: event
         }
@@ -222,12 +225,12 @@ export class Alert extends Component {
     )
   }
 
-  _parseBooleanValue (value) {
-    if (value === true || value === 'true' || value === '') {
+  _parseBooleanValue(value) {
+    if (value === true || value === "true" || value === "") {
       return true
     } else {
       return false
     }
   }
 }
-customElements.define('ark-alert', Alert)
+customElements.define("ark-alert", Alert)
