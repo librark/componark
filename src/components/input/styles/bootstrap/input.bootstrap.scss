@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@mixin input_bootstrap_() {
+  $component: "ark-input";
+
+  #{$component} {
+    @extend .form-group;
+  }
+
+  .#{$component} {
+    &__label {
+      padding-bottom: 0.1rem;
+    }
+
+    &__input {
+      input {
+        @extend .form-control;
+      }
+    }
+  }
+}

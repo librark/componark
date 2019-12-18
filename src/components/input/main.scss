@@ -7,6 +7,7 @@
 @import "./styles/_default/main";
 // -------------------------------------------
 @import "./styles/ark/main";
+@import "./styles/bootstrap/main";
 @import "./styles/material/main";
 
 @mixin input($theme: ark) {
@@ -14,6 +15,10 @@
 
   @if $theme==ark {
     @include input_ark();
+  }
+
+  @if $theme==bootstrap {
+    @include input_bootstrap();
   }
 
   @if $theme==material {

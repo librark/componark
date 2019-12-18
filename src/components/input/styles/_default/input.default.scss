@@ -1,25 +1,25 @@
 @mixin input_default_() {
   $component: "ark-input";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
 
   #{$component} {
     display: block;
-
-    > div {
-      display: block;
-      margin: 5px 0;
-    }
+    height: fit-content;
   }
 
   .#{$component} {
-    &__type-hidden {
-      display: none;
+    &__label {
+      font-weight: bold;
+      color: $muted;
+
+      &[required] {
+        color: rgba($color: $color, $alpha: 1);
+      }
     }
 
-    &__label {
-      height: 0.9rem;
+    &__input {
+      input {
+        width: 100%;
+      }
     }
   }
 }
