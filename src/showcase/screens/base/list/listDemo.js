@@ -23,8 +23,6 @@ export class ListDemo extends Component {
       <p>Atributos:</p>
       <ul>
         <li>action</li>
-        <li>default</li>
-        <li>no-borders</li>
       </ul>
     `
 

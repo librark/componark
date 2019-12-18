@@ -1,37 +1,6 @@
-@import "@material/list/mdc-list.scss";
-
 @mixin list_material_() {
   $component: "ark-list";
 
   #{$component} {
-    @extend .mdc-list;
-
-    display: flex;
-    flex-direction: column;
-
-    &[default] {
-      ark-list-item {
-        display: inline-flex;
-        justify-content: space-between;
-
-        &>:not(:first-child) {
-          margin-left: 5px;
-        }
-      }
-    }
-
-    &[no-borders] {
-      ark-list-item {
-        margin: 0;
-        padding: 0;
-      }
-    }
-
-    &[grid] {
-      display: flex;
-      flex-direction: column;
-      flex-flow: wrap;
-      justify-content: space-around;
-    }
   }
 }
