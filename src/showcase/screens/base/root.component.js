@@ -1,7 +1,7 @@
-import './root.content.component'
+import "./root.content.component"
 
-import { Component } from '../loader'
-import { ThemeService } from '../theme/theme.service'
+import { Component } from "../loader"
+import { ThemeService } from "../theme/theme.service"
 
 /**
  * @typedef {import('../loader').List} List
@@ -14,8 +14,8 @@ export const version = VERSION
 
 export class RootComponent extends Component {
   /** @param {{ path: String }} context */
-  init (context) {
-    this.path = context['path']
+  init(context) {
+    this.path = context["path"]
 
     // -------------------------------------------------------------------------
     // Local
@@ -26,7 +26,7 @@ export class RootComponent extends Component {
     return super.init()
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `${this.styles}
       <ark-navbar justify='between' background="primary" color="white">
 
@@ -40,14 +40,14 @@ export class RootComponent extends Component {
         <ark-nav toggler>
           <ark-select listen on-alter="selectEventListener" label="Estilo:">
             <option value="material" ${
-      this.themeService.currentStyle() === "material" ? 'selected' : ''
-      }>Material</option>
+              this.themeService.currentStyle() === "material" ? "selected" : ""
+            }>Material</option>
             <option value="bootstrap" ${
-      this.themeService.currentStyle() === "bootstrap" ? 'selected' : ''
-      }>bootstrap</option>
+              this.themeService.currentStyle() === "bootstrap" ? "selected" : ""
+            }>bootstrap</option>
             <option value="ark" ${
-      this.themeService.currentStyle() === "ark" ? 'selected' : ''
-      }>ark</option>
+              this.themeService.currentStyle() === "ark" ? "selected" : ""
+            }>ark</option>
           </ark-select>
         </ark-nav>
 
@@ -72,17 +72,17 @@ export class RootComponent extends Component {
     return super.render()
   }
 
-  load () {
+  load() {
     this._renderMenuList()
     this._updatePageName()
     return super.load()
   }
 
   /** @param {Component} component */
-  setContentComponent (component) {
+  setContentComponent(component) {
     if (!component) return
 
-    const container = this.select('[data-root-container]')
+    const container = this.select("[data-root-container]")
 
     container.init({
       component: component,
@@ -93,48 +93,48 @@ export class RootComponent extends Component {
   }
 
   /** @param {CustomEvent} event */
-  selectEventListener (event) {
+  selectEventListener(event) {
     event.stopImmediatePropagation()
     const style = event.detail.value
 
-    this.themeService.set('style', style)
+    this.themeService.set("style", style)
     this.themeService.reload()
   }
 
   // ---------------------------------------------------------------------------
-  _renderMenuList () {
-    const menuList = /** @type {List} */ (this.select('[data-sidebar-list]'))
+  _renderMenuList() {
+    const menuList = /** @type {List} */ (this.select("[data-sidebar-list]"))
 
     const template = item => /* html */ `
-      <span>${item['name']}</span>
+      <span>${item["name"]}</span>
     `
 
     menuList.init({ source: this.locations, template: template }).render()
   }
 
-  _updatePageName () {
-    const name = this.querySelector('[data-page-name]')
+  _updatePageName() {
+    const name = this.querySelector("[data-page-name]")
     const pathname = this.currentLocation.pathname
     const location = this.locations.find(location => location.path === pathname)
 
     if (location) name.textContent = location.name
   }
 
-  _closeSidebar () {
+  _closeSidebar() {
     this.sidebar.close()
   }
 
-  _onOpenSidebar () {
+  _onOpenSidebar() {
     this.sidebar.open()
   }
 
   /** @param {Event} event */
-  _onListItemSelected (event) {
+  _onListItemSelected(event) {
     this.dispatchEvent(
-      new CustomEvent('navigate', {
+      new CustomEvent("navigate", {
         bubbles: true,
-        detail: { path: event['detail']['data']['path'] },
-      }),
+        detail: { path: event["detail"]["data"]["path"] }
+      })
     )
 
     this._closeSidebar()
@@ -142,11 +142,11 @@ export class RootComponent extends Component {
   }
 
   // ---------------------------------------------------------------------------
-  get sidebar () {
-    return /** @type {Sidebar} */ (this.select('[data-sidebar]'))
+  get sidebar() {
+    return /** @type {Sidebar} */ (this.select("[data-sidebar]"))
   }
 
-  get styles () {
+  get styles() {
     return /* html */ `
       <style>
         app-root{
@@ -168,101 +168,101 @@ export class RootComponent extends Component {
     `
   }
 
-  get locations () {
+  get locations() {
     return [
       {
-        name: 'Accordion',
-        path: `/base/accordion`,
+        name: "Accordion",
+        path: `/base/accordion`
       },
       {
-        name: 'Alert',
-        path: `/base/alert`,
+        name: "Alert",
+        path: `/base/alert`
       },
       {
-        name: 'Button',
-        path: `/base/button`,
+        name: "Button",
+        path: `/base/button`
       },
       {
-        name: 'Card',
-        path: `/base/card`,
+        name: "Card",
+        path: `/base/card`
       },
       {
-        name: 'Chart',
-        path: `/base/chart`,
+        name: "Chart",
+        path: `/base/chart`
       },
       {
-        name: 'Checkbox',
-        path: `/base/checkbox`,
+        name: "Checkbox",
+        path: `/base/checkbox`
       },
       {
-        name: 'Grid',
-        path: `/base/grid`,
+        name: "Grid",
+        path: `/base/grid`
       },
       {
-        name: 'Icon',
-        path: `/base/icon`,
+        name: "Icon",
+        path: `/base/icon`
       },
       {
-        name: 'Input',
-        path: `/base/input`,
+        name: "Input",
+        path: `/base/input`
       },
       {
-        name: 'List',
-        path: `/base/list`,
+        name: "List",
+        path: `/base/list`
       },
       {
-        name: 'Map',
-        path: `/base/map`,
+        name: "Map",
+        path: `/base/map`
       },
       {
-        name: 'Modal',
-        path: `/base/modal`,
+        name: "Modal",
+        path: `/base/modal`
       },
       {
-        name: 'Multiselect',
-        path: `/base/multiselect`,
+        name: "Multiselect",
+        path: `/base/multiselect`
       },
       {
-        name: 'Navbar',
-        path: `/base/navbar`,
+        name: "Navbar",
+        path: `/base/navbar`
       },
       {
-        name: 'Paginator',
-        path: `/base/paginator`,
+        name: "Paginator",
+        path: `/base/paginator`
       },
       {
-        name: 'Radio',
-        path: `/base/radio`,
+        name: "Radio",
+        path: `/base/radio`
       },
       {
-        name: 'Select',
-        path: `/base/select`,
+        name: "Select",
+        path: `/base/select`
       },
       {
-        name: 'Sidebar',
-        path: `/base/sidebar`,
+        name: "Sidebar",
+        path: `/base/sidebar`
       },
       {
-        name: 'Splitview',
-        path: `/base/splitview`,
+        name: "Splitview",
+        path: `/base/splitview`
       },
       {
-        name: 'Table',
-        path: `/base/table`,
+        name: "Table",
+        path: `/base/table`
       },
       {
-        name: 'Tabs',
-        path: `/base/tabs`,
+        name: "Tabs",
+        path: `/base/tabs`
       },
       {
-        name: 'TreeTable',
-        path: `/base/treetable`,
+        name: "TreeTable",
+        path: `/base/treetable`
       },
       {
-        name: 'Zone',
-        path: `/base/zone`,
-      },
+        name: "Zone",
+        path: `/base/zone`
+      }
     ]
   }
 }
-customElements.define('app-root', RootComponent)
+customElements.define("app-root", RootComponent)

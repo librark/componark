@@ -1,4 +1,4 @@
-import { Component } from "../component";
+import { Component } from "../component"
 
-export class TabsItem extends Component { }
-export class Tabs extends Component { }
+export class TabsItem extends Component {}
+export class Tabs extends Component {}

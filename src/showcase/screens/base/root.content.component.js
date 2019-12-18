@@ -1,24 +1,24 @@
-import { Component } from '../loader'
+import { Component } from "../loader"
 
 export class RootContainerComponent extends Component {
   /** @param {{ component: Component; currentStyle: String }} context */
-  init (context) {
-    this.component = context['component']
-    this.currentStyle = context['currentStyle']
+  init(context) {
+    this.component = context["component"]
+    this.currentStyle = context["currentStyle"]
 
     // -------------------------------------------------------------------------
     // Local
     // -------------------------------------------------------------------------
     this.windowLocation = window.location
 
-    this.mobileWidth = '360px'
-    this.tabletWidth = '768px'
-    this.desktopWidth = '960px'
+    this.mobileWidth = "360px"
+    this.tabletWidth = "768px"
+    this.desktopWidth = "960px"
 
     return super.init()
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `${this.styles}
       <ark-grid class="container" gap="1rem">
         <ark-grid-item data-component></ark-grid-item>
@@ -40,8 +40,8 @@ export class RootContainerComponent extends Component {
     return super.render()
   }
 
-  load () {
-    this.container = this.querySelector('[data-component]')
+  load() {
+    this.container = this.querySelector("[data-component]")
     if (this.container) this.container.append(this.component)
 
     this._loadComponent()
@@ -49,15 +49,15 @@ export class RootContainerComponent extends Component {
     return super.load()
   }
 
-  _loadComponent () {
+  _loadComponent() {
     const mobile = /** @type {HTMLIFrameElement} */ (this.querySelector(
-      '[data-mobile]'
+      "[data-mobile]"
     ))
     const tablet = /** @type {HTMLIFrameElement} */ (this.querySelector(
-      '[data-tablet]'
+      "[data-tablet]"
     ))
     const desktop = /** @type {HTMLIFrameElement} */ (this.querySelector(
-      '[data-desktop]'
+      "[data-desktop]"
     ))
 
     this._setupFrame(mobile, this.mobileWidth)
@@ -66,18 +66,18 @@ export class RootContainerComponent extends Component {
   }
 
   /** @param {HTMLIFrameElement} iframe */
-  _setupFrame (iframe, width) {
-    iframe.setAttribute('frameborder', `1`)
-    iframe.setAttribute('src', `${this.windowLocation.origin}/blank`)
-    iframe.setAttribute('width', width)
-    iframe.setAttribute('height', '568px')
+  _setupFrame(iframe, width) {
+    iframe.setAttribute("frameborder", `1`)
+    iframe.setAttribute("src", `${this.windowLocation.origin}/blank`)
+    iframe.setAttribute("width", width)
+    iframe.setAttribute("height", "568px")
 
     iframe.onload = () => {
       const content = iframe.contentWindow.document
 
-      content.addEventListener('blank:load', _ => {
-        const body = content.querySelector('body')
-        const appRoot = body.querySelector('app-root')
+      content.addEventListener("blank:load", _ => {
+        const body = content.querySelector("body")
+        const appRoot = body.querySelector("app-root")
         appRoot.append(this.component.cloneNode(false))
 
         // @ts-ignore
@@ -87,7 +87,7 @@ export class RootContainerComponent extends Component {
   }
 
   // ---------------------------------------------------------------------------
-  get styles () {
+  get styles() {
     return /* html */ `
       <style>
         app-root-container .container{
@@ -125,4 +125,4 @@ export class RootContainerComponent extends Component {
     `
   }
 }
-customElements.define('app-root-container', RootContainerComponent)
+customElements.define("app-root-container", RootContainerComponent)

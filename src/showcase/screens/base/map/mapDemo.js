@@ -1,15 +1,15 @@
 /**
  * @typedef {import('../../loader').Map} Map
  */
-import { Component } from '../../loader'
+import { Component } from "../../loader"
 
 export class MapDemo extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
+  init(context) {
+    this.type = context["type"] || "ark"
     return super.init({})
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `
       ${this.getStyle()}
 
@@ -27,26 +27,28 @@ export class MapDemo extends Component {
     return super.render()
   }
 
-  load () {
+  load() {
     this.arkMap.api.marker([2.44073, -76.602349]).addTo(this.arkMap.map)
 
     return super.load()
   }
 
   /** @returns {Map} */
-  get arkMap () {
-    return /** @type {Map} */ (this.select('ark-map'))
+  get arkMap() {
+    return /** @type {Map} */ (this.select("ark-map"))
   }
 
-  get token () {
-    return 'pk' +
-      '.eyJ1IjoiaXRudWJhcmsiLCJhIjoiY2pzdWsyYXo0MmY4dTQzcnI0Y2ZxMGt3aCJ9' +
-      '.DPOHXK2aObjNChVAZ4_CMQ'
+  get token() {
+    return (
+      "pk" +
+      ".eyJ1IjoiaXRudWJhcmsiLCJhIjoiY2pzdWsyYXo0MmY4dTQzcnI0Y2ZxMGt3aCJ9" +
+      ".DPOHXK2aObjNChVAZ4_CMQ"
+    )
   }
 
   // ---------------------------------------------------------------------------
-  getStyle () {
-    return /* html */`
+  getStyle() {
+    return /* html */ `
       <style>
         .map-container{
           height: 100%;
@@ -64,4 +66,4 @@ export class MapDemo extends Component {
     `
   }
 }
-customElements.define('demo-map', MapDemo)
+customElements.define("demo-map", MapDemo)

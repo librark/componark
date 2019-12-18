@@ -1,4 +1,4 @@
-import { Component } from "../component";
+import { Component } from "../component"
 
 export class Checkbox extends Component {
   value: string

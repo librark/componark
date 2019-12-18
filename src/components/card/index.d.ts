@@ -1,3 +1,3 @@
-import { Component } from "../component";
+import { Component } from "../component"
 
-export class Card extends Component { }
+export class Card extends Component {}

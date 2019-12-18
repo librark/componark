@@ -1,10 +1,10 @@
-import { Component } from "../component";
+import { Component } from "../component"
 
 export class Treetable extends Component {
-  init (context?: {
-    rows: string,
-    cols: string,
-    headers: { header: string, key: string }[],
-    data: Object,
+  init(context?: {
+    rows: string
+    cols: string
+    headers: { header: string; key: string }[]
+    data: Object
   }): Treetable
 }

@@ -1,15 +1,15 @@
 /**
  * @typedef {import('../../loader').List} List
  */
-import { Component } from '../../loader'
+import { Component } from "../../loader"
 
 export class ListDemo extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
+  init(context) {
+    this.type = context["type"] || "ark"
     return super.init({})
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `${this.styles}
       <h1>Default List</h1>
 
@@ -31,12 +31,12 @@ export class ListDemo extends Component {
     return super.render()
   }
 
-  load () {
-    const sourceDefault = ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+  load() {
+    const sourceDefault = ["Colombia", "Uruguay", "Brasil", "Perú"]
 
     // DEFAULT LIST
 
-    const defaultList = this.select('[data-default-list]')
+    const defaultList = this.select("[data-default-list]")
     defaultList
       .init({
         source: sourceDefault
@@ -46,10 +46,10 @@ export class ListDemo extends Component {
     // TEMPLATE LIST
 
     const sourceTemplate = [
-      { first: 'Colombia', second: 'Argentina', year: 2016 },
-      { first: 'Uruguay', second: 'Colombia', year: 2017 },
-      { first: 'Brasil', second: 'Argentina', year: 2018 },
-      { first: 'Perú', second: 'Bolivia', year: 2019 }
+      { first: "Colombia", second: "Argentina", year: 2016 },
+      { first: "Uruguay", second: "Colombia", year: 2017 },
+      { first: "Brasil", second: "Argentina", year: 2018 },
+      { first: "Perú", second: "Bolivia", year: 2019 }
     ]
 
     const template = item => /* html */ `
@@ -60,7 +60,7 @@ export class ListDemo extends Component {
     `
 
     const templateList = /** @type {List} */ (this.select(
-      '[data-template-list]'
+      "[data-template-list]"
     ))
     templateList
       .init({
@@ -72,19 +72,19 @@ export class ListDemo extends Component {
     return super.load()
   }
 
-  onTemplateListSelected (event) {
-    const detail = event['detail']
+  onTemplateListSelected(event) {
+    const detail = event["detail"]
 
     const index = detail.index
     const data = detail.data
 
-    this.select('[data-template-selected]').innerText = `
+    this.select("[data-template-selected]").innerText = `
       [${index}]    ${data.year} - ${data.first}
     `.trim()
   }
 
-  get styles () {
-    return /* html */`
+  get styles() {
+    return /* html */ `
       <style>
         demo-list ark-list{
           margin: 1rem;
@@ -93,4 +93,4 @@ export class ListDemo extends Component {
     `
   }
 }
-customElements.define('demo-list', ListDemo)
+customElements.define("demo-list", ListDemo)

@@ -1,3 +1,3 @@
-import { Component } from "../component";
+import { Component } from "../component"
 
-export class Table extends Component { }
+export class Table extends Component {}

@@ -1,23 +1,23 @@
-import { Component } from '../../component'
-import { ListItem } from './list.item'
+import { Component } from "../../component"
+import { ListItem } from "./list.item"
 
 export class List extends Component {
   /** @param {Object} context */
-  init (context = {}) {
-    this.source = /** @type {Array} */ (context['source']) || []
-    this.template = context['template'] || (data => `${data}`)
+  init(context = {}) {
+    this.source = /** @type {Array} */ (context["source"]) || []
+    this.template = context["template"] || (data => `${data}`)
 
     return super.init()
   }
 
-  render () {
+  render() {
     this.innerHTML = ""
 
     this.source.forEach((data, index) => {
       const item = new ListItem()
 
-      if (this.hasAttribute('click-disabled')) {
-        item.setAttribute('click-disabled', '')
+      if (this.hasAttribute("click-disabled")) {
+        item.setAttribute("click-disabled", "")
       }
 
       item
@@ -31,8 +31,8 @@ export class List extends Component {
     return super.render()
   }
 
-  load () {
-    this.addEventListener('list-item:selected', this._onSelected.bind(this))
+  load() {
+    this.addEventListener("list-item:selected", this._onSelected.bind(this))
 
     return super.load()
   }
@@ -40,7 +40,7 @@ export class List extends Component {
   // ---------------------------------------------------------------------------
 
   /** @param {number} start @param {number?} deleteCount  */
-  delete (start, deleteCount = 1) {
+  delete(start, deleteCount = 1) {
     this.source.splice(start, deleteCount)
 
     for (let i = start; i < deleteCount + start; i++) {
@@ -53,14 +53,14 @@ export class List extends Component {
   // ---------------------------------------------------------------------------
 
   /** @param {Event} event */
-  _onSelected (event) {
+  _onSelected(event) {
     event.stopImmediatePropagation()
-    if (this.hasAttribute('click-disabled')) return
+    if (this.hasAttribute("click-disabled")) return
 
-    const detail = event['detail']
+    const detail = event["detail"]
 
     this.dispatchEvent(
-      new CustomEvent('list:selected', {
+      new CustomEvent("list:selected", {
         bubbles: true,
         detail: {
           data: detail.data,
@@ -71,4 +71,4 @@ export class List extends Component {
     )
   }
 }
-customElements.define('ark-list', List)
+customElements.define("ark-list", List)

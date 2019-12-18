@@ -3,18 +3,16 @@
  * @typedef {import(
  * '../../../../components/zone/components/drag').DragZone} DragZone
  * */
-import {
-	Component
-} from '../../loader'
+import { Component } from "../../loader"
 
 export class ZoneDemo extends Component {
-	init (context) {
-		this.type = context['type'] || 'ark'
-		return super.init()
-	}
+  init(context) {
+    this.type = context["type"] || "ark"
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render() {
+    this.innerHTML = /* html */ `${this.styles}
       <ark-zone
         listen
         on-zone:alter="_onZoneAlter"
@@ -92,48 +90,48 @@ export class ZoneDemo extends Component {
         Total Elementos Seleccionado: <span data-total-selected></span>
       </p>
     `
-		return super.render()
-	}
+    return super.render()
+  }
 
-	/** @param {event} event */
-	_onZoneAlter (event) {
-		const value = event['detail']['value']
-		this.select('[data-drags]').innerHTML = JSON.stringify(value)
-	}
+  /** @param {event} event */
+  _onZoneAlter(event) {
+    const value = event["detail"]["value"]
+    this.select("[data-drags]").innerHTML = JSON.stringify(value)
+  }
 
-	/** @param {event} event */
-	_onZoneSelectedDrags (event) {
-		const drags = /** @type {DragZone[]} */(event['detail'])
-		this.select('[data-total-selected]').innerHTML = `${drags.length}`
-	}
+  /** @param {event} event */
+  _onZoneSelectedDrags(event) {
+    const drags = /** @type {DragZone[]} */ (event["detail"])
+    this.select("[data-total-selected]").innerHTML = `${drags.length}`
+  }
 
-	/** @param {event} event */
-	_onDropClicked (event) {
-		this.select('[data-detail]').innerHTML = event['detail']['value']
-	}
+  /** @param {event} event */
+  _onDropClicked(event) {
+    this.select("[data-detail]").innerHTML = event["detail"]["value"]
+  }
 
-	/** @param {event} event */
-	_onDragClicked (event) {
-		this.select('[data-detail]').innerHTML = event['detail']['value']
-	}
+  /** @param {event} event */
+  _onDragClicked(event) {
+    this.select("[data-detail]").innerHTML = event["detail"]["value"]
+  }
 
-	_selectAll () {
-		const zone = /** @type {Zone} */ (this.select('ark-zone'))
-		zone.setSelectedDrags('', true)
+  _selectAll() {
+    const zone = /** @type {Zone} */ (this.select("ark-zone"))
+    zone.setSelectedDrags("", true)
 
-		const drags = zone.getSelectedDrags()
+    const drags = zone.getSelectedDrags()
 
-		this.select('[data-total-selected]').innerHTML = `
+    this.select("[data-total-selected]").innerHTML = `
       ${drags.length}
     `
 
-		this.select('[data-detail]').innerHTML = `
+    this.select("[data-detail]").innerHTML = `
       ${drags.map(drag => drag.value)}
     `
-	}
+  }
 
-	get styles () {
-		return /* html */ `
+  get styles() {
+    return /* html */ `
       <style>
         demo-zone demo-zone{
           height: initial;
@@ -164,10 +162,10 @@ export class ZoneDemo extends Component {
         }
       </style>
     `
-	}
+  }
 
-	_getDoc () {
-		return /* html */ `
+  _getDoc() {
+    return /* html */ `
       <h4>default</h4>
       <ul>
         <li>[draggable] ark-zone-drop</li>
@@ -180,6 +178,6 @@ export class ZoneDemo extends Component {
         <li>[direction]: column || row </li>
       </ul>
     `
-	}
+  }
 }
-customElements.define('demo-zone', ZoneDemo)
+customElements.define("demo-zone", ZoneDemo)

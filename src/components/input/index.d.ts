@@ -1,5 +1,5 @@
-import { Component } from "../component";
+import { Component } from "../component"
 
 export class Input extends Component {
-    value: string
+  value: string
 }

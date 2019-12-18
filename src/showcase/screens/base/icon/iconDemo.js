@@ -1,13 +1,13 @@
-import { Component } from '../../loader'
+import { Component } from "../../loader"
 
 export class IconDemo extends Component {
-	init (context) {
-		this.type = context['type'] || 'ark'
-		return super.init(context)
-	}
+  init(context) {
+    this.type = context["type"] || "ark"
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */`
+  render() {
+    this.innerHTML = /* html */ `
       <p>Icon:</p>
       <hr/><br/>
       <div>
@@ -24,7 +24,7 @@ export class IconDemo extends Component {
       </div>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 }
-customElements.define('demo-icon', IconDemo)
+customElements.define("demo-icon", IconDemo)

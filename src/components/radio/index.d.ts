@@ -1,4 +1,4 @@
-import { Component } from "../component";
+import { Component } from "../component"
 
 export class RadioButton extends Component {
   value: string
@@ -12,5 +12,3 @@ export class RadioButton extends Component {
 export class RadioGroup extends Component {
   value: string
 }
-
-
