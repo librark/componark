@@ -59,19 +59,13 @@
       width: fit-content;
       height: fit-content;
 
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      margin: 0.5rem;
+      padding: 0;
+      margin: 0;
 
       max-width: calc(100vw - 3rem) !important;
       max-height: calc(100vh - 3rem) !important;
 
       overflow: hidden;
-
-      & > * {
-        width: 100%;
-        max-width: inherit;
-      }
     }
 
     &__header {
@@ -118,14 +112,8 @@
       flex-flow: wrap;
       justify-content: flex-end;
 
-      margin-top: 0.5rem;
-
-      padding: 0 1rem;
-      width: -webkit-fill-available;
-
       & > * {
-        margin-top: 0.3rem;
-        margin-left: 0.3rem;
+        margin: 0.1rem;
       }
     }
 

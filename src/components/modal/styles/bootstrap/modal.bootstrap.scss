@@ -1,0 +1,26 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@mixin modal_bootstrap_() {
+  $component: "ark-modal";
+
+  #{$component} {
+  }
+
+  .#{$component} {
+    &__content {
+      @extend .modal-content;
+    }
+
+    &__header {
+      @extend .modal-header;
+    }
+
+    &__body {
+      @extend .modal-body;
+    }
+
+    &__actions {
+      @extend .modal-footer;
+    }
+  }
+}

@@ -22,11 +22,16 @@
     a {
       all: unset;
 
-      height: auto;
-      width: auto;
+      height: inherit !important;
+      width: inherit !important;
 
       color: inherit;
       background: inherit;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     &:hover,

@@ -6,46 +6,26 @@
   #{$component} {
     @extend .mdc-dialog;
     @extend .mdc-dialog--open;
-    @extend .mdc-dialog--scrollable;
   }
 
   .#{$component} {
     &__content {
-
       @extend .mdc-dialog__container;
       @extend .mdc-dialog__surface;
-    }
 
-    &__header {
-      @extend .mdc-dialog__title;
-      // width: 100%;
-      // max-width: -webkit-fill-available;
-      // overflow: hidden;
-      // padding: 10px 15px;
-
-      &::before {
-        content: initial !important;
+      & > * {
+        width: 100%;
+        padding: 1rem;
       }
     }
 
-    &__title {
-      // padding-bottom: 0;
-      // width: 100%;
-      // display: block;
-
-      // h3 {
-      //   margin-bottom: 0;
-      // }
+    &__header {
     }
 
     &__body {
-      @extend .mdc-dialog__content;
-      // width: 100%;
-      // height: auto;
     }
 
-    &__scrim {
-      @extend .mdc-dialog__scrim;
+    &__actions {
     }
   }
 }

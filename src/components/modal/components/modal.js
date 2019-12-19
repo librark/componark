@@ -21,9 +21,6 @@ export class Modal extends Component {
       <div class="ark-modal__content">
         <div class="ark-modal__header">
           ${this._renderHeader()}
-          <div class="ark-modal__icon-close">
-            <button close>&times;</button>
-          </div>
         </div>
         <div class="ark-modal__body" data-body></div>
         <div class="ark-modal__actions" data-actions></div>
@@ -72,11 +69,12 @@ export class Modal extends Component {
     if (!Object.keys(this._slots || {}).length) return
 
     const general = this.slots["general"] || []
+    const action = this.slots["action"] || []
+
     general.forEach(slot => {
       this.querySelector("[data-body]").appendChild(slot)
     })
 
-    const action = this.slots["action"] || []
     action.forEach(slot => {
       this.querySelector("[data-actions]").appendChild(slot)
     })
@@ -87,11 +85,11 @@ export class Modal extends Component {
     const subtitle = this._generateContent(this.subtitle, "subtitle", "span")
 
     return /* html */ `
-        <div class="ark-modal__title">
-            ${title}
-            ${subtitle}
-        </div>
-      `
+      <div class="ark-modal__title">
+        ${title}
+        ${subtitle}
+      </div>
+    `
   }
 
   _generateContent(content, className, type = "div") {

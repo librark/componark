@@ -1,75 +1,35 @@
 @mixin modal_ark_() {
   $component: "ark-modal";
-  $mobile: 360px;
-  $desktop: 960px;
 
-  $border: 1px solid rgba($color: #000, $alpha: 0.3);
+  $border: 1px solid
+    rgba(
+      $color: #000,
+      $alpha: 0.3
+    );
 
   #{$component} {
-    display: block;
   }
 
   .#{$component} {
     &__content {
-      $margin: 15px;
-      $width: calc(#{$mobile} - (#{$margin} * 2));
-
-      width: $width;
-      position: fixed;
-      left: calc(50% - (#{$mobile} / 2)) !important;
-      top: 0;
-
-      background: rgba($color: #ffff, $alpha: 1);
-      border: $border;
-
-      margin: 15px;
-      overflow: hidden;
-
-      &>* {
-        padding: 15px;
+      & > :not(:first-child) {
+        border-top: 0px;
       }
-
-      > :not(:last-child) {
-        border-bottom: $border;
-      }
-
-
     }
 
     &__header {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    &__title {
-      h3 {
-        margin-bottom: 5px;
-      }
+      padding: 0.5rem;
+      border: $border;
     }
 
     &__body {
-      display: block;
-      width: 100%;
-      overflow: hidden;
+      padding: 0.5rem;
+      border: $border;
     }
 
     &__actions {
-      display: flex;
-      justify-content: flex-end;
-      padding: 0 15px;
-
-      &> :not(:last-child) {
-        margin-right: 10px;
-      }
-    }
-
-    &__scrim {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.4);
+      padding: 0.5rem;
+      border: $border;
     }
   }
 }

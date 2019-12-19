@@ -1,0 +1,5 @@
+@import "./modal.bootstrap";
+
+@mixin modal_bootstrap() {
+  @include modal_bootstrap_();
+}
