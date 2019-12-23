@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
-@mixin input_bootstrap_() {
-  $component: "ark-input";
+@mixin multiselect_bootstrap_() {
+  $component: "ark-multiselect";
 
   #{$component} {
     @extend .form-group;
@@ -21,10 +21,14 @@
       }
     }
 
-    &__input {
-      input {
-        @extend .form-control;
-      }
+    &__body {
+      @extend .form-control;
+    }
+
+    &__actions {
+    }
+
+    &__remove-all {
     }
   }
 }

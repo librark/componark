@@ -5,6 +5,7 @@
 // -------------------------------------------
 @import "./styles/_default/main";
 // -------------------------------------------
+@import "./styles/bootstrap/main";
 @import "./styles/material/main";
 
 @mixin multiselect($theme: ark) {
@@ -12,5 +13,9 @@
 
   @if $theme==material {
     @include multiselect_material();
+  }
+
+  @if $theme==bootstrap {
+    @include multiselect_bootstrap();
   }
 }

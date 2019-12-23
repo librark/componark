@@ -17,7 +17,7 @@ export class Input extends Component {
   render() {
     this.innerHTML = /* html */ `
       <div class="ark-input__label" ${this._isRequired()}>
-        <small>${this.label}</small>
+        <label>${this.label}</label>
       </div>
 
       <div class="ark-input__input">

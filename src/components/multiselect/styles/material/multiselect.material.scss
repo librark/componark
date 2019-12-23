@@ -10,9 +10,14 @@
   .#{$component} {
     &__label {
       @extend .mdc-floating-label;
-
-      color: inherit;
       position: initial;
+
+      label {
+        font-size: small;
+        font-weight: 400;
+
+        position: relative;
+      }
     }
 
     &__body {
