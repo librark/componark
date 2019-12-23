@@ -1,66 +1,103 @@
 @mixin paginator_default_() {
   $component: "ark-paginator";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
 
   #{$component} {
-    padding: 20px 10px;
+    width: 100%;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
     flex-direction: column;
 
-    button {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 0;
-      background: initial;
-      cursor: pointer;
-      font-weight: bold;
-      text-align: center;
-
-      margin: 1px;
-
-      &:hover {
-        background: rgba($color: $primary, $alpha: .5);
-        color: initial;
-      }
-    }
+    padding: 1rem 0;
   }
 
   .#{$component} {
     &__body {
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0.5rem 0;
     }
 
-    &__default-buttons {
-      button {
-        background: initial;
-        color: $muted;
-        font-weight: initial;
-
-        &:hover {
-          background: rgba($color: $muted, $alpha: .5);
-          color: initial;
-        }
-      }
+    &__default-buttons,
+    &__button-list {
+      display: flex;
     }
 
     &__button-list {
       [active] {
-        background: $primary;
-        color: $white;
+        background: $primary !important;
+        color: $white !important;
       }
     }
 
     &__footer {
-      margin-top: 5px;
-      color: $muted;
     }
   }
+
+  //   padding: 20px 10px;
+
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   flex-direction: column;
+
+  //   button {
+  //     width: 38px;
+  //     height: 38px;
+
+  //     margin: 1px;
+
+  //     border-radius: 50%;
+  //     border: 0;
+  //     background: initial;
+
+  //     text-align: center;
+
+  //     font-size: medium;
+  //     font-weight: bold;
+
+  //     cursor: pointer;
+
+  //     &:hover {
+  //       background: rgba($color: $primary, $alpha: 0.5);
+  //       color: initial;
+  //     }
+  //   }
+  // }
+
+  // .#{$component} {
+  //   &__body {
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //   }
+
+  //   &__default-buttons {
+  //     button {
+  //       background: initial;
+  //       color: $muted;
+  //       font-weight: initial;
+
+  //       &:hover {
+  //         background: rgba($color: $muted, $alpha: 0.5);
+  //         color: initial;
+  //       }
+  //     }
+  //   }
+
+  //   &__button-list {
+  //     [active] {
+  //       background: $primary;
+  //       color: $white;
+  //     }
+  //   }
+
+  //   &__footer {
+  //     margin-top: 5px;
+  //     color: $muted;
+  //   }
 }

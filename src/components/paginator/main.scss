@@ -5,7 +5,22 @@
 // -------------------------------------------
 @import "./styles/_default/main";
 // -------------------------------------------
+@import "./styles/ark/main";
+@import "./styles/bootstrap/main";
+@import "./styles/material/main";
 
 @mixin paginator($theme: ark) {
-  @include paginator_defaul();
+  @include paginator_default();
+
+  @if $theme==ark {
+    @include paginator_ark();
+  }
+
+  @if $theme==bootstrap {
+    @include paginator_bootstrap();
+  }
+
+  @if $theme==material {
+    @include paginator_material();
+  }
 }

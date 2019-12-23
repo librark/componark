@@ -19,7 +19,9 @@ export class Paginator extends Component {
           <button listen on-click="_prev"><</button>
           <button listen on-click="_first"><<</button>
         </div>
+
         <div class="ark-paginator__button-list" data-button-list></div>
+
         <div class="ark-paginator__default-buttons">
           <button listen on-click="_last">>></button>
           <button listen on-click="_next">></button>
