@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@mixin select-bootstrap_() {
+  $component: "ark-select";
+
+  #{$component} {
+    margin-bottom: 0.5rem;
+
+    &,
+    * {
+      color: inherit !important;
+      background: inherit !important;
+      border-color: initial !important;
+    }
+
+    select {
+      @extend .form-control;
+    }
+  }
+
+  .#{$component} {
+    &--label {
+      margin: 0;
+      padding: 0;
+      padding-bottom: 0.1rem;
+    }
+  }
+}

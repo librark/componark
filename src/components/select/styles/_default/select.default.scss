@@ -2,30 +2,36 @@
   $component: "ark-select";
 
   #{$component} {
-    display: inline-grid;
-    min-height: 2rem;
-
-    color: inherit !important;
-    background: inherit !important;
+    display: flex;
+    flex-direction: column;
+    height: auto;
 
     select {
-      height: 1.2rem;
-      width: 100%;
-
-      border: 0;
-      border-bottom: 1px solid;
-      outline: 0;
-
       font-size: initial;
 
       cursor: pointer;
 
       color: inherit;
       background: inherit;
+      border-color: initial;
+
+      width: 100%;
 
       * {
         color: $color !important;
-        margin: 0.1rem 0.5rem;
+        background: $background !important;
+      }
+
+      &[disabled] {
+        pointer-events: none !important;
+        cursor: default !important;
+
+        color: $muted !important;
+        background: rgba($color: $muted, $alpha: 0.1) !important;
+
+        &:hover {
+          background: none !important;
+        }
       }
     }
 
@@ -33,25 +39,15 @@
     &::after {
       all: unset;
     }
-
-    &[disabled] {
-      pointer-events: none !important;
-      cursor: default !important;
-
-      color: $muted !important;
-      background: rgba($color: $muted, $alpha: 0.1) !important;
-
-      &:hover {
-        background: none !important;
-      }
-    }
   }
 
   .#{$component} {
     &--label {
       font-size: small;
-      margin-bottom: 0.1rem;
-      height: 0.9rem;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      display: block;
     }
   }
 }

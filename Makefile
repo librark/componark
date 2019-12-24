@@ -10,6 +10,17 @@ clean-git:
 	git reset --hard
 	git clean -xdf
 
+build:
+	make install
+	rm -rf ./dist
+	npm run build
+
+install:
+	make clean
+	npm install -g browser-sync
+	npm install -g http-server
+	npm i
+
 update:
 	make clean
 
@@ -24,8 +35,5 @@ pull:
 	git pull --all
 	make build
 
-build:
-	make clean
-	npm i
-	rm -rf ./dist
-	npm run build
+http:
+	http-server -p 8080 -c-1 dist

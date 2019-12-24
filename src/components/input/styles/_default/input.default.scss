@@ -4,6 +4,12 @@
   #{$component} {
     display: block;
     height: fit-content;
+
+    &,
+    * {
+      color: inherit;
+      background: inherit;
+    }
   }
 
   .#{$component} {
