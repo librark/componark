@@ -1,6 +1,5 @@
 @mixin table_ark_() {
   $component: "ark-table";
-  $desktop: "960px";
 
   #{$component} {
     display: block;

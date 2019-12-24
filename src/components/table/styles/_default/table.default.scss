@@ -2,5 +2,12 @@
   $component: "ark-table";
 
   #{$component} {
+    width: 100%;
+    height: auto;
+    display: block;
+
+    table {
+      width: 100%;
+    }
   }
 }

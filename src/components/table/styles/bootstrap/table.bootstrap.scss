@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@mixin table_bootstrap_() {
+  $component: "ark-table";
+
+  #{$component} {
+    table {
+      @extend .table;
+    }
+  }
+}

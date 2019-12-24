@@ -1,0 +1,5 @@
+@import "./table.bootstrap";
+
+@mixin table_bootstrap() {
+  @include table_bootstrap_();
+}
