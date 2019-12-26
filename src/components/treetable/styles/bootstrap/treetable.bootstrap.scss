@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+@mixin treetable_bootstrap_() {
+  $component: "ark-treetable";
+
+  #{$component} {
+    table {
+      @extend .table;
+    }
+  }
+}

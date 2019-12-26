@@ -1,0 +1,5 @@
+@import "./treetable.bootstrap";
+
+@mixin treetable_bootstrap() {
+  @include treetable_bootstrap_();
+}
