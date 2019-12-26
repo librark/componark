@@ -2,5 +2,9 @@
   $component: "ark-tabs";
 
   #{$component} {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
   }
 }

@@ -3,23 +3,19 @@
 @import "@material/tab-indicator/mdc-tab-indicator";
 @import "@material/tab/mdc-tab";
 
-// @import '../../../../theme/_variables.scss';
-
 @mixin tabs-item_material_() {
   $component: "ark-tabs-item";
-  $desktop: "960px";
 
   #{$component} {
-    width: 100%;
+    @extend .mdc-tab;
+
+    margin: 0;
+    padding: 0;
 
     button,
     a {
-      @extend .mdc-tab;
       width: 100%;
-
-      & > :not(:first-child) {
-        margin-left: 5px;
-      }
+      outline: 0;
 
       &:hover {
         background: rgba($color: $muted, $alpha: 0.2);
@@ -27,13 +23,9 @@
       }
     }
 
-    ark-icon {
-      font-size: 24px;
-    }
-
     &[active] > * {
       color: $primary !important;
-      border-bottom: 3px solid $primary;
+      border-bottom: 3px solid $primary !important;
     }
   }
 }

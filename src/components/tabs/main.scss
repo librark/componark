@@ -5,14 +5,19 @@
 // -------------------------------------------
 @import "./styles/_default/main";
 // -------------------------------------------
-@import "./styles/material/main";
 @import "./styles/ark/main";
+@import "./styles/bootstrap/main";
+@import "./styles/material/main";
 
 @mixin tabs($type: ark) {
   @include tabs_default();
 
   @if $type==ark {
     @include tabs_ark();
+  }
+
+  @if $type==bootstrap {
+    @include tabs_bootstrap();
   }
 
   @if $type==material {

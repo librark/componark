@@ -1,0 +1,7 @@
+@import "./tabs.bootstrap";
+@import "./tabs.item.bootstrap";
+
+@mixin tabs_bootstrap() {
+  @include tabs_bootstrap_();
+  @include tabs-item_bootstrap_();
+}
