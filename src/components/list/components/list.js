@@ -52,12 +52,12 @@ export class List extends Component {
 
   // ---------------------------------------------------------------------------
 
-  /** @param {Event} event */
+  /** @param {CustomEvent} event */
   _onSelected(event) {
     event.stopImmediatePropagation()
     if (this.hasAttribute("click-disabled")) return
 
-    const detail = event["detail"]
+    const detail = event.detail || {}
 
     this.dispatchEvent(
       new CustomEvent("list:selected", {

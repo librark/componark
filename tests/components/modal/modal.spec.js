@@ -1,4 +1,4 @@
-import { Modal } from '../../../src/components/modal/components/modal';
+import { Modal } from '../../../src/components/modal/components/modal'
 
 describe('Modal', () => {
   it('can be rendered with slots', function () {
@@ -12,18 +12,6 @@ describe('Modal', () => {
 
     const content = modal.querySelector('.ark-modal__actions')
     expect(content.childElementCount).toBeTruthy()
-  })
-
-  it('can be open', function () {
-    const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-    modal.connectedCallback()
-    modal.open()
-
-    const btn = modal.querySelector('[close]')
-    // @ts-ignore
-    btn.click()
-
-    expect(!modal.hasAttribute('open')).toBeTruthy()
   })
 
   it('can be toggle', function () {
@@ -46,8 +34,9 @@ describe('Modal', () => {
   })
 
   it('can be open', function () {
-    const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-    modal.connectedCallback()
+    const modal = new Modal()
+    modal.init({}).render().load()
+
     modal.open()
 
     const btn = modal.querySelector('.ark-modal__scrim')
@@ -55,6 +44,11 @@ describe('Modal', () => {
     btn.click()
 
     expect(!modal.hasAttribute('open')).toBeTruthy()
+
+    modal.innerHTML = /* html */`
+      <button close>close</button>
+    `
+    modal.load()
   })
 
   it('can remove attributes', function () {

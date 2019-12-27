@@ -1,126 +1,81 @@
-/**
- * @typedef {import('../../../src/components').RadioGroup} RadioGroup
- * @typedef {import('../../../src/components').RadioButton} RadioButton
- */
 import { RadioButton, RadioGroup } from '../../../src/components/radio'
 
 describe('RadioGroup', () => {
-	it('can be instantiated', () => {
-		const radio1 = /** @type {RadioButton} */ (
-			document.createElement('ark-radio-button')
-		) // new RadioButton()
-		radio1.connectedCallback()
-		radio1.innerHTML = 'op1'
-		radio1.init().render()
+  it('can be instantiated', () => {
+    const radio1 = /** @type {RadioButton} */ (
+      document.createElement('ark-radio-button')
+    ) // new RadioButton()
+    radio1.connectedCallback()
+    radio1.innerHTML = 'op1'
+    radio1.init().render()
 
-		const radio2 = /** @type {RadioButton} */ (
-			document.createElement('ark-radio-button')
-		) // new RadioButton()
-		radio2.connectedCallback()
-		radio2.innerHTML = 'op2'
-		radio2.init().render()
+    const radio2 = /** @type {RadioButton} */ (
+      document.createElement('ark-radio-button')
+    ) // new RadioButton()
+    radio2.connectedCallback()
+    radio2.innerHTML = 'op2'
+    radio2.init().render()
 
-		const radio3 = /** @type {RadioButton} */ (
-			document.createElement('ark-radio-button')
-		) // new RadioButton()
-		radio3.connectedCallback()
-		radio3.innerHTML = 'op3'
-		radio3.init().render()
+    const radio3 = /** @type {RadioButton} */ (
+      document.createElement('ark-radio-button')
+    ) // new RadioButton()
+    radio3.connectedCallback()
+    radio3.innerHTML = 'op3'
+    radio3.init().render()
 
-		const group = /** @type {RadioGroup} */ (
-			document.createElement('ark-radio-group')
-		)
-		group.innerHTML = ''
-		group.appendChild(radio1)
-		group.appendChild(radio2)
-		group.appendChild(radio3)
-		group.init().render().load()
+    const group = /** @type {RadioGroup} */ (
+      document.createElement('ark-radio-group')
+    )
+    group.innerHTML = ''
+    group.appendChild(radio1)
+    group.appendChild(radio2)
+    group.appendChild(radio3)
+    group.init().render().load()
 
-		radio1.click()
-	})
+    radio1.click()
+  })
 
-	// it('can be instantiated', () => {
-	// 	const element = /** @type {RadioGroup} */ (
-	// 		document.createElement('ark-radio-group'))
-	// 	expect(element).toBeTruthy()
+  it('can be instantiated', () => {
+    const element = /** @type {RadioGroup} */ (
+      document.createElement('ark-radio-group'))
+    expect(element).toBeTruthy()
 
-	// 	var init = element.init({})
-	// 	expect(element === init).toBeTruthy()
-	// })
+    var init = element.init({})
+    expect(element === init).toBeTruthy()
+  })
 
-	// it('can be instantiated', () => {
-	// 	const element = new RadioGroup()
-	// 	element.setAttribute('label', 'my group')
-	// 	element.connectedCallback()
+  it('can be instantiated', () => {
+    const element = new RadioGroup()
+    element.setAttribute('label', 'my group')
+    element.connectedCallback()
 
-	// 	const label = element.querySelector('[data-radio-group-label]')
-	// 	expect(label.textContent.trim()).toEqual('my group')
-	// })
+    const label = element.querySelector('[data-radio-group-label]')
+    expect(label.textContent.trim()).toEqual('my group')
+    expect(!element.value.trim().length).toBeTruthy()
+  })
 
-	// it('returns selected values', () => {
-	// 	const group = new RadioGroup()
+  it('returns selected values', () => {
+    const group = new RadioGroup()
 
-	// 	const radio1 = new RadioButton()
-	// 	radio1.value = 'op1'
-	// 	radio1.render()
+    const radio1 = new RadioButton()
+    radio1.value = 'op1'
+    radio1.init().render().load()
 
-	// 	const radio2 = new RadioButton()
-	// 	radio2.value = 'op2'
-	// 	radio2.render()
+    const radio2 = new RadioButton()
+    radio2.value = 'op2'
+    radio2.init().render().load()
 
-	// 	group.appendChild(radio1)
-	// 	group.appendChild(radio2)
+    group['defaultContent'] = null
+    group.appendChild(radio1)
+    group.appendChild(radio2)
+    group.load()
 
-	// 	group['defaultContent'] = null
-	// 	group.connectedCallback()
+    expect(!group.value.trim().length).toBeTruthy()
 
-	// 	// group._change(new CustomEvent('click'))
+    group._checkButtons('op1')
+    expect(group.value).toEqual('op1')
 
-	// 	// radio1.checked()
-
-	// 	// radio1.addEventListener('click', event => {
-	// 	// 	// @ts-ignore
-	// 	// 	group._change(event)
-	// 	// })
-	// 	// radio1.click()
-
-	// 	// expect(group.value).toEqual('op1')
-	// })
-
-	// it('returns selected values', () => {
-	// 	const element = new RadioGroup()
-	// 	element.innerHTML = /* html */`
-	//     <span slot="alert">Error</span>
-	//   `
-	// 	element.init({})
-	// 	element.render()
-
-	// 	expect(
-	// 		element.querySelector('[slot="alert"]').textContent.trim()
-	// 	).toEqual('Error')
-	// })
-
-	// it('can it initialize without content', () => {
-	// 	const group = new RadioGroup()
-
-	// 	const radio1 = new RadioButton()
-	// 	radio1.value = 'op1'
-	// 	radio1.render()
-	// 	radio1.checked()
-
-	// 	const radio2 = new RadioButton()
-	// 	radio2.value = 'op2'
-	// 	radio2.render()
-
-	// 	group.appendChild(radio1)
-	// 	group.appendChild(radio2)
-
-	// 	group.render()
-	// 	group.innerHTML = /* html */``
-
-	// 	// @ts-ignore
-	// 	group._renderRadioButtonList()
-
-	// 	expect(group.innerHTML.trim()).toEqual('')
-	// })
+    radio2.click()
+    expect(group.value).toEqual('op2')
+  })
 })

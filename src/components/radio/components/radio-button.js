@@ -4,126 +4,136 @@ export class RadioButton extends Component {
 	/**
    * @param {{ value:string, checked:boolean } | {}} context?
    */
-	init (context = {}) {
-		this.value = context['value']
-		this.checked = context['checked']
+  init(context = {}) {
+    this.name = context['name']
+    this.value = context['value']
+    this.checked = context['checked']
 
-		// local variables
-		this.defaultContent = this.defaultContent || this.innerHTML
+    // local variables
+    this.defaultContent = this.defaultContent || this.innerHTML
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	reflectedProperties () {
-		return ['value']
-	}
+  reflectedProperties() {
+    return ['name', 'value']
+  }
 
-	render () {
-		this.innerHTML = /* html */ `
-      <div class="ark-radio-button__body" listen on-click="_change">
-        <div class="ark-radio-button__button">
-          <input data-input type="radio">
-        </div>
-        <div class="ark-radio-button__label">
-          <small>${this.defaultContent}</small>
-        </div>
+  render() {
+    this.innerHTML = /* html */ `
+      <div class="ark-radio-button__button">
+        <input data-input type="radio">
+      </div>
+      <div class="ark-radio-button__label">
+        <small>${this.defaultContent}</small>
       </div>
     `
 
-		this._moveAttributes()
-		return super.render()
-	}
+    this._moveAttributes()
+    return super.render()
+  }
 
-	check () {
-		this.checked = true
-	}
+  load() {
+    this.addEventListener('click', this.onClick.bind(this))
 
-	uncheck () {
-		this.checked = false
-	}
+    return super.load()
+  }
 
-	toggle () {
-		this.checked = !this.checked
-	}
+  // ---------------------------------------------------------------------------
 
-	// ---------------------------------------------------------------------------
-	/** @returns {Boolean} */
-	get checked () {
-		return this.hasAttribute('checked')
-	}
+  check() {
+    this.checked = true
+  }
 
-	/** @param {Boolean} value */
-	set checked (value) {
-		const input = this.querySelector('[data-input]')
-		if (!input) return
+  uncheck() {
+    this.checked = false
+  }
 
-		input['checked'] = value
+  toggle() {
+    this.checked = !this.checked
+  }
 
-		if (value) {
-			this.setAttribute('checked', '')
-			input.setAttribute('checked', 'checked')
-		} else {
-			this.removeAttribute('checked')
-			input.removeAttribute('checked')
-		}
-	}
+  // ---------------------------------------------------------------------------
+  /** @returns {Boolean} */
+  get checked() {
+    return this.hasAttribute('checked')
+  }
 
-	// ---------------------------------------------------------------------------
-	/** @param {Event} event */
-	_change (event) {
-		event.stopPropagation()
-		this.toggle()
+  /** @param {Boolean} value */
+  set checked(value) {
+    const input = this.querySelector('[data-input]')
+    if (!input) return
 
-		this.dispatchEvent(
-			new CustomEvent('alter', {
-				detail: {
-					value: this.value,
-					origin: event
-				}
-			})
-		)
-	}
+    input['checked'] = value
 
-	_moveAttributes () {
-		this.checked = this.hasAttribute('checked')
-		const element = this.querySelector('[data-input]')
-		const attributes = Array.from(this.attributes)
+    if (value) {
+      this.setAttribute('checked', '')
+      input.setAttribute('checked', 'checked')
+    } else {
+      this.removeAttribute('checked')
+      input.removeAttribute('checked')
+    }
+  }
 
-		attributes.forEach(attribute => {
-			if (this._defaultAttributes().find(item => item === attribute.name)) {
-				element.setAttribute(attribute.name, attribute.value)
-				this.removeAttribute(attribute.name)
-			}
-		})
-	}
+  // ---------------------------------------------------------------------------
+  /** @param {Event} event */
+  onClick(event) {
+    event.stopImmediatePropagation()
 
-	/** @return {Array<string>} */
-	_defaultAttributes () {
-		return [
-			'accept',
-			'alt',
-			'autocomplete',
-			'autofocus',
-			'dirname',
-			'disabled',
-			'form',
-			'formaction',
-			'formenctype',
-			'formmethod',
-			'formnovalidate',
-			'formtarget',
-			'list',
-			'min',
-			'multiple',
-			'name',
-			'pattern',
-			'placeholder',
-			'readonly',
-			'required',
-			'size',
-			'src',
-			'step'
-		]
-	}
+    this.toggle()
+
+    this.dispatchEvent(
+      new CustomEvent('radio-button:alter', {
+        bubbles: true,
+        detail: {
+          checked: this.checked,
+          value: this.value,
+          origin: event
+        }
+      })
+    )
+  }
+
+  _moveAttributes() {
+    this.checked = this.hasAttribute('checked')
+    const element = this.querySelector('[data-input]')
+    const attributes = Array.from(this.attributes)
+
+    attributes.forEach(attribute => {
+      if (this._defaultAttributes().find(item => item === attribute.name)) {
+        element.setAttribute(attribute.name, attribute.value)
+        this.removeAttribute(attribute.name)
+      }
+    })
+  }
+
+  /** @return {Array<string>} */
+  _defaultAttributes() {
+    return [
+      'accept',
+      'alt',
+      'autocomplete',
+      'autofocus',
+      'dirname',
+      'disabled',
+      'form',
+      'formaction',
+      'formenctype',
+      'formmethod',
+      'formnovalidate',
+      'formtarget',
+      'list',
+      'min',
+      'multiple',
+      'name',
+      'pattern',
+      'placeholder',
+      'readonly',
+      'required',
+      'size',
+      'src',
+      'step'
+    ]
+  }
 }
 customElements.define('ark-radio-button', RadioButton)
