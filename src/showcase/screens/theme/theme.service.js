@@ -16,7 +16,7 @@ export class ThemeService {
       return this.set('style', 'material')
     }
 
-    this.importStyle()
+    this.styleImport()
   }
 
   /**
@@ -32,26 +32,26 @@ export class ThemeService {
   set(key, value) {
     this.localStorage[`local:${key}`] = value
 
-    this.importStyle()
+    this.styleImport()
   }
 
   currentStyle() {
     return this.get('style')
   }
 
-  importStyle() {
+  styleImport() {
     const currentStyle = this.get('style')
 
-    // if (currentStyle === 'material') {
-    // @ts-ignore
-    require('./styles/main-material.scss')
-    // } else if (currentStyle === 'bootstrap') {
-    // // @ts-ignore
-    // require('./styles/main-bootstrap.scss')
-    // } else {
-    // //@ts-ignore
-    // require('./styles/main-ark.scss')
-    // }
+    if (currentStyle === 'material') {
+      // @ts-ignore
+      import('./styles/main-material.scss')
+    } else if (currentStyle === 'bootstrap') {
+      // @ts-ignore
+      import('./styles/main-bootstrap.scss')
+    } else {
+      //@ts-ignore
+      import('./styles/main-ark.scss')
+    }
 
     return this
   }
