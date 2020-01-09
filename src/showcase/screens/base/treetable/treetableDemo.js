@@ -5,13 +5,11 @@ import { Component } from '../../loader'
 import data from './assets/diccionario.json'
 
 export class TreetableDemo extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
-
+  init(context) {
     return super.init(context)
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */`
       <div>
         <ark-Treetable></ark-Treetable>
@@ -21,7 +19,7 @@ export class TreetableDemo extends Component {
     return super.render()
   }
 
-  load () {
+  load() {
     const headers = [
       { header: 'Name', key: 'expander' },
       { header: 'Balance', key: 'balance' },
@@ -41,7 +39,7 @@ export class TreetableDemo extends Component {
   }
 
   /** @returns {Treetable} */
-  get treetable () {
+  get treetable() {
     return this.select('ark-Treetable')
   }
 }

@@ -9,18 +9,14 @@
 @import "./styles/bootstrap/main";
 @import "./styles/material/main";
 
-@mixin table($type: ark) {
+@mixin table($theme) {
   @include table_default();
 
-  @if $type==ark {
-    @include table_ark();
-  }
-
-  @if $type==bootstrap {
-    @include table_bootstrap();
-  }
-
-  @if $type==material {
+  @if $theme == material {
     @include table_material();
+  } @else if $theme == bootstrap {
+    @include table_bootstrap();
+  } @else {
+    @include table_ark();
   }
 }

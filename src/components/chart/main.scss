@@ -4,8 +4,8 @@
 @import "../theme/main";
 // -------------------------------------------
 // -------------------------------------------
-@import './styles/default/chart.default';
+@import "./styles/default/chart.default";
 
-@mixin chart($theme: ark) {
-    @include chart_default();
+@mixin chart($theme) {
+  @include chart_default();
 }

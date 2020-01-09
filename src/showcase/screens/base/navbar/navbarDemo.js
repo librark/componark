@@ -1,12 +1,11 @@
 import { Component } from '../../loader'
 
 export class NavbarDemo extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
+  init(context) {
     return super.init(context)
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `
       <ark-navbar background="dark" color="danger" justify="between">
 

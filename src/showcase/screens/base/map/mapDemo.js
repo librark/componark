@@ -5,7 +5,6 @@ import { Component } from "../../loader"
 
 export class MapDemo extends Component {
   init(context) {
-    this.type = context["type"] || "ark"
     return super.init({})
   }
 

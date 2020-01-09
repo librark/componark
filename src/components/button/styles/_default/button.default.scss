@@ -44,19 +44,21 @@
     // // Fab
     // // ----------------------------------------
     &[fab] {
-      border-radius: 50%;
+      &,
+      & > * {
+        border-radius: 50%;
+        width: $fab-size !important;
+        height: $fab-size !important;
 
-      width: $fab-size !important;
-      height: $fab-size !important;
+        padding: 0.2rem !important;
+        margin: 0 !important;
 
-      padding: 0.2rem !important;
-      margin: 0 !important;
+        z-index: 1024;
+        position: fixed !important;
 
-      z-index: 1024;
-      position: fixed !important;
-
-      min-width: $fab-size !important;
-      min-height: $fab-size !important;
+        min-width: $fab-size !important;
+        min-height: $fab-size !important;
+      }
     }
 
     // ----------------------------------------

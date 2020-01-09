@@ -8,14 +8,14 @@
 @import "./styles/bootstrap/main";
 @import "./styles/material/main";
 
-@mixin multiselect($theme: ark) {
+@mixin multiselect($theme) {
   @include multiselect_default();
 
-  @if $theme==material {
+  @if $theme == material {
     @include multiselect_material();
-  }
-
-  @if $theme==bootstrap {
+  } @else if $theme == bootstrap {
     @include multiselect_bootstrap();
+  } @else {
+    // @include multiselect_ark();
   }
 }

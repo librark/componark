@@ -9,18 +9,14 @@
 @import "./styles/bootstrap/main";
 @import "./styles/material/main";
 
-@mixin tabs($type: ark) {
+@mixin tabs($theme) {
   @include tabs_default();
 
-  @if $type==ark {
-    @include tabs_ark();
-  }
-
-  @if $type==bootstrap {
-    @include tabs_bootstrap();
-  }
-
-  @if $type==material {
+  @if $theme == material {
     @include tabs_material();
+  } @else if $theme == bootstrap {
+    @include tabs_bootstrap();
+  } @else {
+    @include tabs_ark();
   }
 }

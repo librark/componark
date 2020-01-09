@@ -6,6 +6,6 @@
 @import "./styles/_default/main";
 // -------------------------------------------
 
-@mixin icon($theme: ark) {
+@mixin icon($theme) {
   @include icon_default();
 }

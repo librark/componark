@@ -8,14 +8,14 @@
 @import "./styles/ark/main";
 @import "./styles/material/main";
 
-@mixin checkbox($theme: ark) {
+@mixin checkbox($theme) {
   @include checkbox_default();
 
-  @if $theme==ark {
-    @include checkbox_ark();
-  }
-
-  @if $theme==material {
+  @if $theme == material {
     @include checkbox_material();
+  } @else if $theme == bootstrap {
+    // @include checkbox_bootstrap();
+  } @else {
+    @include checkbox_ark();
   }
 }

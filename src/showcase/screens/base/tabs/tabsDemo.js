@@ -4,13 +4,12 @@
 import { Component } from '../../loader'
 
 export class TabsDemo extends Component {
-	init (context) {
-		this.type = context['type'] || 'ark'
-		return super.init(context)
-	}
+  init(context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */`
+  render() {
+    this.innerHTML = /* html */`
       <div>
         <p>This is a tabs.</p>
       </div>
@@ -37,7 +36,7 @@ export class TabsDemo extends Component {
       </ark-tabs>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 }
 customElements.define('demo-tabs', TabsDemo)

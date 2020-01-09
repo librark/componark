@@ -9,18 +9,14 @@
 @import "./styles/bootstrap/main";
 @import "./styles/material/main";
 
-@mixin select($type: ark) {
+@mixin select($theme) {
   @include select_default();
 
-  @if $type==ark {
-    @include select_ark();
-  }
-
-  @if $type==bootstrap {
-    @include select_bootstrap();
-  }
-
-  @if $type==material {
+  @if $theme == material {
     @include select_material();
+  } @else if $theme == bootstrap {
+    @include select_bootstrap();
+  } @else {
+    @include select_ark();
   }
 }

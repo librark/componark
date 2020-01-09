@@ -29,28 +29,28 @@
 @import "../../../../components/treetable/main";
 @import "../../../../components/zone/main";
 
-@mixin componark($type) {
-  @include accordion($type);
-  @include alert($type);
-  @include button($type);
-  @include card($type);
-  @include chart($type);
-  @include checkbox($type);
-  @include grid($type);
-  @include icon($type);
-  @include input($type);
-  @include list($type);
-  @include map($type);
-  @include modal($type);
-  @include multiselect($type);
-  @include navbar($type);
-  @include paginator($type);
-  @include radio($type);
-  @include select($type);
-  @include sidebar($type);
-  @include splitview($type);
-  @include table($type);
-  @include tabs($type);
-  @include treetable($type);
-  @include zone($type);
+@mixin componark($theme) {
+  @include accordion($theme);
+  @include alert($theme);
+  @include button($theme);
+  @include card($theme);
+  @include chart($theme);
+  @include checkbox($theme);
+  @include grid($theme);
+  @include icon($theme);
+  @include input($theme);
+  @include list($theme);
+  @include map($theme);
+  @include modal($theme);
+  @include multiselect($theme);
+  @include navbar($theme);
+  @include paginator($theme);
+  @include radio($theme);
+  @include select($theme);
+  @include sidebar($theme);
+  @include splitview($theme);
+  @include table($theme);
+  @include tabs($theme);
+  @include treetable($theme);
+  @include zone($theme);
 }

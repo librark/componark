@@ -8,14 +8,14 @@
 @import "./styles/ark/main";
 @import "./styles/material/main";
 
-@mixin splitview($theme: ark) {
+@mixin splitview($theme) {
   @include splitview_defaul();
 
-  @if $theme==ark {
-    @include splitview_ark();
-  }
-
-  @if $theme==material {
+  @if $theme == material {
     @include splitview_material();
+  } @else if $theme == bootstrap {
+    // @include splitview_bootstrap();
+  } @else {
+    @include splitview_ark();
   }
 }

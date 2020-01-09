@@ -12,15 +12,11 @@
 @mixin list($theme: material) {
   @include list_default();
 
-  @if $theme==ark {
-    @include list_ark();
-  }
-
-  @if $theme==bootstrap {
-    @include list_bootstrap();
-  }
-
-  @if $theme==material {
+  @if $theme == material {
     @include list_material();
+  } @else if $theme == bootstrap {
+    @include list_bootstrap();
+  } @else {
+    @include list_ark();
   }
 }

@@ -11,7 +11,7 @@ clean-git:
 	git clean -xdf
 
 build:
-	make install
+	# make install
 	rm -rf ./dist
 	npm run build
 

@@ -8,14 +8,14 @@
 @import "./styles/ark/main";
 @import "./styles/material/main";
 
-@mixin radio($theme: ark) {
+@mixin radio($theme) {
   @include radio-button_default();
 
-  @if $theme==ark {
-    @include radio-group_ark();
-  }
-
-  @if $theme==material {
+  @if $theme == material {
     @include radio-group_material();
+  } @else if $theme == bootstrap {
+    // @include radio-group_bootstrap();
+  } @else {
+    @include radio-group_ark();
   }
 }

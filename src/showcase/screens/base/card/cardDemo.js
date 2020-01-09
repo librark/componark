@@ -3,12 +3,11 @@ import { Component } from '../../loader'
 import Image from './assets/building.jpg'
 
 export class CardDemo extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
+  init(context) {
     return super.init(context)
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `${this.styles}
     <ark-card title="titulo" subtitle="subtitle [Hello World]">
         <img slot="media" src="${Image}" alt="" />
@@ -24,7 +23,7 @@ export class CardDemo extends Component {
     return super.render()
   }
 
-  get styles () {
+  get styles() {
     return /* html */`
       <style>
         demo-card{

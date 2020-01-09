@@ -40,14 +40,14 @@ export class RootComponent extends Component {
         <ark-nav toggler>
           <ark-select listen on-alter="selectEventListener" label="Estilo:">
             <option value="material" ${
-              this.themeService.currentStyle() === "material" ? "selected" : ""
-            }>Material</option>
+      this.themeService.currentStyle() === "material" ? "selected" : ""
+      }>Material</option>
             <option value="bootstrap" ${
-              this.themeService.currentStyle() === "bootstrap" ? "selected" : ""
-            }>bootstrap</option>
+      this.themeService.currentStyle() === "bootstrap" ? "selected" : ""
+      }>bootstrap</option>
             <option value="ark" ${
-              this.themeService.currentStyle() === "ark" ? "selected" : ""
-            }>ark</option>
+      this.themeService.currentStyle() === "ark" ? "selected" : ""
+      }>ark</option>
           </ark-select>
         </ark-nav>
 

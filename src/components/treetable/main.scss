@@ -10,14 +10,14 @@
 @import "./styles/bootstrap/main";
 // -------------------------------------------
 
-@mixin treetable($theme: ark) {
+@mixin treetable($theme) {
   @include treetable_default();
 
-  @if $theme==bootstrap {
-    @include treetable_bootstrap();
-  }
-
-  @if $theme==material {
+  @if $theme == material {
     @include treetable_material();
+  } @else if $theme == bootstrap {
+    @include treetable_bootstrap();
+  } @else {
+    // @include treetable_ark();
   }
 }

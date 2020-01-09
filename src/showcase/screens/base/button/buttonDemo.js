@@ -1,14 +1,12 @@
 import { Component } from '../../loader'
 
 export class ButtonDemo extends Component {
-	init (context) {
-		this.type = context['type'] || 'ark'
+  init(context) {
+    return super.init(context)
+  }
 
-		return super.init(context)
-	}
-
-	render () {
-		this.innerHTML = /* html */ `
+  render() {
+    this.innerHTML = /* html */ `
       <div class="demo-button">
         <p>This is a button</p>
 
@@ -113,7 +111,7 @@ export class ButtonDemo extends Component {
       </div>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 }
 customElements.define('demo-button', ButtonDemo)

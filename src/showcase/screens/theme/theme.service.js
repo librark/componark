@@ -11,7 +11,7 @@ export class ThemeService {
     }
   }
 
-  _setup () {
+  _setup() {
     if (!this.get('style').length) {
       return this.set('style', 'material')
     }
@@ -22,41 +22,41 @@ export class ThemeService {
   /**
    * @param {string} key
    * @return {string} */
-  get (key) {
+  get(key) {
     return this.localStorage[`local:${key}`] || ''
   }
 
   /**
    * @param {string} key
    * @param {string} value */
-  set (key, value) {
+  set(key, value) {
     this.localStorage[`local:${key}`] = value
 
     this.importStyle()
   }
 
-  currentStyle () {
+  currentStyle() {
     return this.get('style')
   }
 
-  importStyle () {
+  importStyle() {
     const currentStyle = this.get('style')
 
-    if (currentStyle === 'material') {
-      // @ts-ignore
-      require('./styles/main-material.scss')
-    } else if (currentStyle === 'bootstrap') {
-      // @ts-ignore
-      require('./styles/main-bootstrap.scss')
-    } else {
-      // @ts-ignore
-      require('./styles/main-ark.scss')
-    }
+    // if (currentStyle === 'material') {
+    // @ts-ignore
+    require('./styles/main-material.scss')
+    // } else if (currentStyle === 'bootstrap') {
+    // // @ts-ignore
+    // require('./styles/main-bootstrap.scss')
+    // } else {
+    // //@ts-ignore
+    // require('./styles/main-ark.scss')
+    // }
 
     return this
   }
 
-  reload () {
+  reload() {
     location.reload()
   }
 }

@@ -2,7 +2,6 @@ import { Component } from "../../loader"
 
 export class IconDemo extends Component {
   init(context) {
-    this.type = context["type"] || "ark"
     return super.init(context)
   }
 

@@ -1,12 +1,11 @@
 import { Alert, Component } from '../../loader'
 
 export class AlertDemo extends Component {
-  init (context) {
-    this.type = context['type'] || 'ark'
+  init(context) {
     return super.init(context)
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `
       <div>
         <p>This is a alert.</p>
@@ -32,7 +31,7 @@ export class AlertDemo extends Component {
     return super.render()
   }
 
-  _onClick (event) {
+  _onClick(event) {
     Alert.launch({
       title: 'Title....',
       text: 'Text ....',
