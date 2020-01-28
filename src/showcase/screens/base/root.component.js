@@ -146,6 +146,35 @@ export class RootComponent extends Component {
     return /** @type {Sidebar} */ (this.select("[data-sidebar]"))
   }
 
+  get locations() {
+    return [
+      { name: "Accordion", path: `/base/accordion` },
+      { name: "Alert", path: `/base/alert` },
+      { name: "Button", path: `/base/button` },
+      { name: "Card", path: `/base/card` },
+      { name: "Chart", path: `/base/chart` },
+      { name: "Checkbox", path: `/base/checkbox` },
+      { name: "Grid", path: `/base/grid` },
+      { name: "Icon", path: `/base/icon` },
+      { name: "Input", path: `/base/input` },
+      { name: "List", path: `/base/list` },
+      { name: "Map", path: `/base/map` },
+      { name: "Modal", path: `/base/modal` },
+      { name: "Multiselect", path: `/base/multiselect` },
+      { name: "Navbar", path: `/base/navbar` },
+      { name: "Paginator", path: `/base/paginator` },
+      { name: "Radio", path: `/base/radio` },
+      { name: "Select", path: `/base/select` },
+      { name: "Sidebar", path: `/base/sidebar` },
+      { name: "Spinner", path: `/base/spinner` },
+      { name: "Splitview", path: `/base/splitview` },
+      { name: "Table", path: `/base/table` },
+      { name: "Tabs", path: `/base/tabs` },
+      { name: "TreeTable", path: `/base/treetable` },
+      { name: "Zone", path: `/base/zone` }
+    ]
+  }
+
   get styles() {
     return /* html */ `
       <style>
@@ -166,103 +195,6 @@ export class RootComponent extends Component {
         }
       </style>
     `
-  }
-
-  get locations() {
-    return [
-      {
-        name: "Accordion",
-        path: `/base/accordion`
-      },
-      {
-        name: "Alert",
-        path: `/base/alert`
-      },
-      {
-        name: "Button",
-        path: `/base/button`
-      },
-      {
-        name: "Card",
-        path: `/base/card`
-      },
-      {
-        name: "Chart",
-        path: `/base/chart`
-      },
-      {
-        name: "Checkbox",
-        path: `/base/checkbox`
-      },
-      {
-        name: "Grid",
-        path: `/base/grid`
-      },
-      {
-        name: "Icon",
-        path: `/base/icon`
-      },
-      {
-        name: "Input",
-        path: `/base/input`
-      },
-      {
-        name: "List",
-        path: `/base/list`
-      },
-      {
-        name: "Map",
-        path: `/base/map`
-      },
-      {
-        name: "Modal",
-        path: `/base/modal`
-      },
-      {
-        name: "Multiselect",
-        path: `/base/multiselect`
-      },
-      {
-        name: "Navbar",
-        path: `/base/navbar`
-      },
-      {
-        name: "Paginator",
-        path: `/base/paginator`
-      },
-      {
-        name: "Radio",
-        path: `/base/radio`
-      },
-      {
-        name: "Select",
-        path: `/base/select`
-      },
-      {
-        name: "Sidebar",
-        path: `/base/sidebar`
-      },
-      {
-        name: "Splitview",
-        path: `/base/splitview`
-      },
-      {
-        name: "Table",
-        path: `/base/table`
-      },
-      {
-        name: "Tabs",
-        path: `/base/tabs`
-      },
-      {
-        name: "TreeTable",
-        path: `/base/treetable`
-      },
-      {
-        name: "Zone",
-        path: `/base/zone`
-      }
-    ]
   }
 }
 customElements.define("app-root", RootComponent)

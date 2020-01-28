@@ -83,6 +83,8 @@ export class RootContainerComponent extends Component {
         // @ts-ignore
         appRoot.themeService(this.currentStyle)
       })
+
+      content.body.style.background = 'rgba(0, 0, 0, .1)'
     }
   }
 
@@ -94,7 +96,6 @@ export class RootContainerComponent extends Component {
           padding: 1rem;
         }
 
-        app-root-container .container iframe,
         app-root-container .container [data-component] {
           background: rgba(0, 0, 0, .1);
         }

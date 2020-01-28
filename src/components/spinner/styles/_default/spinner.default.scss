@@ -1,0 +1,32 @@
+@mixin spinner_default_() {
+  $component: "ark-spinner";
+
+  #{$component} {
+    [data-loader] {
+      $border: 0.3rem solid;
+      $circle: 5rem;
+
+      width: $circle;
+      height: $circle;
+
+      border: $border;
+      border-color: $white !important;
+
+      border-top: $border;
+      border-top-color: $primary !important;
+
+      border-radius: 50%;
+
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
