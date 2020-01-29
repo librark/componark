@@ -60,9 +60,9 @@ export class RootContainerComponent extends Component {
       "[data-desktop]"
     ))
 
-    this._setupFrame(mobile, this.mobileWidth)
-    this._setupFrame(tablet, this.tabletWidth)
-    this._setupFrame(desktop, this.desktopWidth)
+    // this._setupFrame(mobile, this.mobileWidth)
+    // this._setupFrame(tablet, this.tabletWidth)
+    // this._setupFrame(desktop, this.desktopWidth)
   }
 
   /** @param {HTMLIFrameElement} iframe */

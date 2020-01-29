@@ -34,6 +34,7 @@ export function setRoutes(resolver, rootComponent, prefix) {
     setContentComponent('splitview'),
     setContentComponent('table'),
     setContentComponent('tabs'),
+    setContentComponent('tooltip'),
     setContentComponent('treetable'),
     setContentComponent('zone')
   ])

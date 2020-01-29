@@ -27,6 +27,7 @@
 @import "../../../../components/splitview/main";
 @import "../../../../components/table/main";
 @import "../../../../components/tabs/main";
+@import "../../../../components/tooltip/main";
 @import "../../../../components/treetable/main";
 @import "../../../../components/zone/main";
 
@@ -53,6 +54,7 @@
   @include splitview($theme);
   @include table($theme);
   @include tabs($theme);
+  @include tooltip($theme);
   @include treetable($theme);
   @include zone($theme);
 }
