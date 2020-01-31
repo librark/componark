@@ -1,8 +1,9 @@
-// Components
 export * from './accordion'
 export * from './alert'
 export * from './button'
+export * from './camera'
 export * from './card'
+export * from './chart'
 export * from './checkbox'
 export * from './component'
 export * from './grid'

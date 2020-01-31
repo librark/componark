@@ -15,6 +15,7 @@ export function setRoutes(resolver, rootComponent, prefix) {
     setContentComponent('accordion'),
     setContentComponent('alert'),
     setContentComponent('button'),
+    setContentComponent('camera'),
     setContentComponent('card'),
     setContentComponent('chart'),
     setContentComponent('checkbox'),

@@ -151,6 +151,7 @@ export class RootComponent extends Component {
       { name: "Accordion", path: `/base/accordion` },
       { name: "Alert", path: `/base/alert` },
       { name: "Button", path: `/base/button` },
+      { name: "Camera", path: `/base/camera` },
       { name: "Card", path: `/base/card` },
       { name: "Chart", path: `/base/chart` },
       { name: "Checkbox", path: `/base/checkbox` },
