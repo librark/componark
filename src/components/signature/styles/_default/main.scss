@@ -1,0 +1,5 @@
+@import "./signature.default";
+
+@mixin signature_default() {
+  @include signature_default_();
+}

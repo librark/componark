@@ -30,6 +30,7 @@ export function setRoutes(resolver, rootComponent, prefix) {
     setContentComponent('radio'),
     setContentComponent('select'),
     setContentComponent('sidebar'),
+    setContentComponent('signature'),
     setContentComponent('spinner'),
     setContentComponent('splitview'),
     setContentComponent('table'),

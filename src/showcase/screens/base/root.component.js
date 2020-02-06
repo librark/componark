@@ -166,6 +166,7 @@ export class RootComponent extends Component {
       { name: "Radio", path: `/base/radio` },
       { name: "Select", path: `/base/select` },
       { name: "Sidebar", path: `/base/sidebar` },
+      { name: "Signature", path: `/base/signature` },
       { name: "Spinner", path: `/base/spinner` },
       { name: "Splitview", path: `/base/splitview` },
       { name: "Table", path: `/base/table` },
