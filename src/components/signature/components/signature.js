@@ -1,6 +1,5 @@
-import * as SignaturePad from 'signature_pad/dist/signature_pad'
-
 import { Component } from '../../component'
+import SignaturePad from 'signature_pad/dist/signature_pad'
 
 export class Signature extends Component {
   init(context = {}) {
