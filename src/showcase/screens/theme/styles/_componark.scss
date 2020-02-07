@@ -8,6 +8,7 @@
 @import "../../../../components/accordion/main";
 @import "../../../../components/alert/main";
 @import "../../../../components/button/main";
+@import "../../../../components/camera/main";
 @import "../../../../components/card/main";
 @import "../../../../components/chart/main";
 @import "../../../../components/checkbox/main";
@@ -36,6 +37,7 @@
   @include accordion($theme);
   @include alert($theme);
   @include button($theme);
+  @include camera($theme);
   @include card($theme);
   @include chart($theme);
   @include checkbox($theme);
