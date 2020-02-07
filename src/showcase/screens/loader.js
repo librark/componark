@@ -1,35 +1,4 @@
 // -----------------------------------------------------------------------------
-// Imports
-// -----------------------------------------------------------------------------
-import '../../components/accordion'
-import '../../components/alert'
-import '../../components/button'
-import '../../components/camera'
-import '../../components/card'
-import '../../components/chart'
-import '../../components/checkbox'
-import '../../components/component'
-import '../../components/grid'
-import '../../components/icon'
-import '../../components/input'
-import '../../components/list'
-import '../../components/map'
-import '../../components/modal'
-import '../../components/multiselect'
-import '../../components/navbar'
-import '../../components/paginator'
-import '../../components/radio'
-import '../../components/select'
-import '../../components/sidebar'
-import '../../components/spinner'
-import '../../components/splitview'
-import '../../components/table'
-import '../../components/tabs'
-import '../../components/tooltip'
-import '../../components/treetable'
-import '../../components/zone'
-
-// -----------------------------------------------------------------------------
 // Exports
 // -----------------------------------------------------------------------------
 export * from '../../components/accordion'
@@ -52,6 +21,7 @@ export * from '../../components/paginator'
 export * from '../../components/radio'
 export * from '../../components/select'
 export * from '../../components/sidebar'
+export * from '../../components/signature'
 export * from '../../components/spinner'
 export * from '../../components/splitview'
 export * from '../../components/table'

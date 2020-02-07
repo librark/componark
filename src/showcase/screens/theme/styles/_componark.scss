@@ -23,6 +23,7 @@
 @import "../../../../components/radio/main";
 @import "../../../../components/select/main";
 @import "../../../../components/sidebar/main";
+@import "../../../../components/signature/main";
 @import "../../../../components/spinner/main";
 @import "../../../../components/splitview/main";
 @import "../../../../components/table/main";
@@ -50,6 +51,7 @@
   @include radio($theme);
   @include select($theme);
   @include sidebar($theme);
+  @include signature($theme);
   @include spinner($theme);
   @include splitview($theme);
   @include table($theme);

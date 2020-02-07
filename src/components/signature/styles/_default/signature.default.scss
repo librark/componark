@@ -1,0 +1,13 @@
+@mixin signature_default_() {
+  $component: "ark-signature";
+
+  #{$component} {
+    display: block !important;
+  }
+
+  .#{$component} {
+    &--pad {
+      display: block;
+    }
+  }
+}
