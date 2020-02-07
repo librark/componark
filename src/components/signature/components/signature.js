@@ -3,29 +3,47 @@ import * as SignaturePad from 'signature_pad/dist/signature_pad'
 import { Component } from '../../component'
 
 export class Signature extends Component {
-  init() {
+  init(context = {}) {
+    this.width = this.width || context['width'] || 400
+    this.height = this.height || context['height'] || 200
+
     return super.init()
+  }
+
+  reflectedProperties() {
+    return ['width', 'height']
   }
 
   render() {
     this.innerHTML = /* html */`
-      <canvas data-signature-pad class="ark-signature--pad"
-        width=400 height=200></canvas>
+      <canvas data-signature-pad
+        width="${this.width}"
+        height="${this.height}"
+        class="ark-signature--pad"></canvas>
     `
 
     this.signaturePad = new SignaturePad(this.canvas, {
       backgroundColor: 'rgba(255, 255, 255, 1)',
-      penColor: 'rgb(0, 0, 0)'
+      penColor: 'rgb(0, 0, 0)',
     })
 
     return super.render()
   }
 
-  load() {
-    return super.load()
+  // ---------------------------------------------------------------------------
+
+  /** @returns {string} */
+  getSrc() {
+    return this.signaturePad.toDataURL("image/jpeg")
   }
 
-  /** @returns {HTMLElement} */
+  clear() {
+    this.signaturePad.clear()
+  }
+
+  // ---------------------------------------------------------------------------
+
+  /** @returns {HTMLCanvasElement} */
   get canvas() {
     return this.querySelector("[data-signature-pad]")
   }

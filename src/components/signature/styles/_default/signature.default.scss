@@ -2,15 +2,12 @@
   $component: "ark-signature";
 
   #{$component} {
+    display: block !important;
   }
 
   .#{$component} {
-    // &--pad {
-    //   position: absolute;
-    //   left: 0;
-    //   top: 0;
-    //   width: 400px;
-    //   height: 200px;
-    // }
+    &--pad {
+      display: block;
+    }
   }
 }
