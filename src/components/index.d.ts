@@ -1,5 +1,6 @@
 export * from './accordion'
 export * from './alert'
+export * from './audio'
 export * from './button'
 export * from './camera'
 export * from './card'

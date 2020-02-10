@@ -150,6 +150,7 @@ export class RootComponent extends Component {
     return [
       { name: "Accordion", path: `/base/accordion` },
       { name: "Alert", path: `/base/alert` },
+      { name: "Audio", path: `/base/audio` },
       { name: "Button", path: `/base/button` },
       { name: "Camera", path: `/base/camera` },
       { name: "Card", path: `/base/card` },

@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------------
 export * from '../../components/accordion'
 export * from '../../components/alert'
+export * from '../../components/audio'
 export * from '../../components/button'
 export * from '../../components/camera'
 export * from '../../components/card'

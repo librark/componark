@@ -7,6 +7,7 @@
 // Componark Components
 @import "../../../../components/accordion/main";
 @import "../../../../components/alert/main";
+@import "../../../../components/audio/main";
 @import "../../../../components/button/main";
 @import "../../../../components/camera/main";
 @import "../../../../components/card/main";
@@ -36,6 +37,7 @@
 @mixin componark($theme) {
   @include accordion($theme);
   @include alert($theme);
+  @include audio($theme);
   @include button($theme);
   @include camera($theme);
   @include card($theme);
