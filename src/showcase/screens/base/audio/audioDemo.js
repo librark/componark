@@ -8,6 +8,7 @@ export class AudioDemo extends Component {
   render() {
     this.innerHTML = /* html */ `${this.styles}
       <ark-Audio></ark-Audio>
+      <ark-Audio toggle></ark-Audio>
     `
     return super.render()
   }
