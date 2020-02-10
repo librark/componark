@@ -5,6 +5,9 @@ export class Camera extends Component {
     this.width = this.width || context['width'] || 320
     this.height = this.height || context['height'] || 320
 
+    // -------------------------------------------------------------------------
+    this.stream = null
+
     return super.init()
   }
 
@@ -17,7 +20,6 @@ export class Camera extends Component {
       <canvas data-canvas></canvas>
       <video data-video playsinline autoplay></video>
     `
-    this._initWebcam()
     return super.render()
   }
 
@@ -46,7 +48,7 @@ export class Camera extends Component {
 
   // ---------------------------------------------------------------------------
 
-  _initWebcam() {
+  start() {
     navigator.getMedia = (
       navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
@@ -54,7 +56,7 @@ export class Camera extends Component {
       navigator.msGetUserMedia
     )
 
-    navigator.mediaDevices.getUserMedia({
+    this.stream = navigator.mediaDevices.getUserMedia({
       video: {
         width: this.width,
         height: this.height
@@ -64,6 +66,12 @@ export class Camera extends Component {
       this.video.srcObject = stream
     }).catch(e => console.error(e))
   }
+
+  stop() {
+    if (!this.stream) return
+    this.stream.getTracks().forEach(track => track.stop())
+  }
+
   // ---------------------------------------------------------------------------
 
   /** @returns {HTMLVideoElement} */
