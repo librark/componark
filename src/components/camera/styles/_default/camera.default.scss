@@ -2,5 +2,12 @@
   $component: "ark-camera";
 
   #{$component} {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+
+    [data-canvas] {
+      display: none;
+    }
   }
 }

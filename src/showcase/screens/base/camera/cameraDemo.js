@@ -1,22 +1,37 @@
-import { Component } from "../../loader"
+import { Component } from '../../loader'
 
 export class CameraDemo extends Component {
-  init(context) {
-    return super.init(context)
-  }
+	init (context) {
+		return super.init(context)
+	}
 
-  render() {
-    this.innerHTML = /* html */ `${this.styles}
+	render () {
+		this.innerHTML = /* html */ `${this.styles}
       <ark-Camera></ark-Camera>
+      <button listen on-click="takepicture">Take photo</button>
+      <img data-photo>
     `
-    return super.render()
-  }
+		return super.render()
+	}
 
-  get styles() {
-    return /* html */ `
+	takepicture () {
+		this.photo.setAttribute('src', this.camera.dataURL)
+	}
+
+	get camera () {
+		return this.select('ark-Camera')
+	}
+
+	/** @returns {HTMLImageElement} */
+	get photo () {
+		return this.querySelector('[data-photo]')
+	}
+
+	get styles () {
+		return /* html */ `
       <style>
       </style>
     `
-  }
+	}
 }
-customElements.define("demo-camera", CameraDemo)
+customElements.define('demo-camera', CameraDemo)
