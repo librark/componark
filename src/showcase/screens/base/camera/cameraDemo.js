@@ -7,8 +7,10 @@ export class CameraDemo extends Component {
 
 	render () {
 		this.innerHTML = /* html */ `${this.styles}
-      <ark-Camera></ark-Camera>
-      <button listen on-click="takepicture">Take photo</button>
+      <div class="camera-container">
+        <ark-Camera></ark-Camera>
+        <button listen on-click="takepicture">Take photo</button>
+      </div>
       <img data-photo>
     `
 		return super.render()
@@ -30,6 +32,22 @@ export class CameraDemo extends Component {
 	get styles () {
 		return /* html */ `
       <style>
+        demo-camera{
+          display: flex;
+          flex-direction: column;
+        }
+
+        ark-Camera, img{
+          border-radius: 5px;
+        }
+
+        .camera-container{
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          padding: 1rem;
+          width: 100%;
+        }
       </style>
     `
 	}
