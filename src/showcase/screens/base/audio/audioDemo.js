@@ -7,8 +7,19 @@ export class AudioDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-Audio></ark-Audio>
-      <ark-Audio toggle></ark-Audio>
+      <ark-Audio>
+        <ark-icon slot="microphone" name="fas fa-microphone"></ark-icon>
+        <ark-icon slot="start" name="fas fa-play"></ark-icon>
+        <ark-icon slot="stop" name="fas fa-stop"></ark-icon>
+      </ark-Audio>
+
+      <hr/>
+
+      <ark-Audio toggle>
+        <ark-icon slot="microphone" name="fas fa-microphone"></ark-icon>
+        <ark-icon slot="start" name="fas fa-play"></ark-icon>
+        <ark-icon slot="stop" name="fas fa-stop"></ark-icon>
+      </ark-Audio>
     `
     return super.render()
   }
@@ -16,6 +27,9 @@ export class AudioDemo extends Component {
   get styles() {
     return /* html */ `
       <style>
+        demo-audio{
+          padding: 1rem;
+        }
       </style>
     `
   }

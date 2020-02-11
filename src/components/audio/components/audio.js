@@ -1,9 +1,13 @@
 import { Component } from '../../component'
+import { getSlots } from '../../../utils'
 
 export class Audio extends Component {
   init(context = {}) {
     // -------------------------------------------------------------------------
+    // local variables
+    // -------------------------------------------------------------------------
     this.interval
+    this.slots = this.slots || getSlots(this)
 
     return super.init()
   }
@@ -14,7 +18,11 @@ export class Audio extends Component {
 
   render() {
     this.innerHTML = /* html */`
-      <label data-recording-time></label>
+      <div class="ark-audio__recording-time">
+        ${this._getSlots('microphone')}
+        <label data-recording-time></label>
+      </div>
+
       ${
       this.isToggle() ?
         this._toggleTemplate() :
@@ -34,10 +42,12 @@ export class Audio extends Component {
   start() {
     this.stop()
     this._initInterval()
+    this._changeIcons('start')
   }
 
   stop() {
     clearInterval(this.interval)
+    this._changeIcons('stop')
   }
 
   // ---------------------------------------------------------------------------
@@ -46,7 +56,8 @@ export class Audio extends Component {
   _toggleTemplate() {
     return /* html */`
       <button data-toggle-button listen on-mousedown="start" on-mouseup="stop">
-        btn
+        <div data-toggle-icon-start>${this._getSlots('start')}</div>
+        <div data-toggle-icon-stop>${this._getSlots('stop')}</div>
       </button>
     `
   }
@@ -56,10 +67,10 @@ export class Audio extends Component {
     return /* html */`
       <div>
         <button data-toggle-button listen on-click="start">
-          start
+          ${this._getSlots('start')}
         </button>
         <button data-toggle-button listen on-click="stop">
-          stop
+          ${this._getSlots('stop')}
         </button>
       </div>
     `
@@ -97,6 +108,32 @@ export class Audio extends Component {
     timeLabel += seconds < 10 ? `0${seconds}` : seconds
 
     this.recordingTimeLabel.innerText = timeLabel
+  }
+
+  _changeIcons(type) {
+    /** @type {HTMLDivElement} */
+    const iconStart = this.querySelector('[data-toggle-icon-start]')
+
+    /** @type {HTMLDivElement} */
+    const iconStop = this.querySelector('[data-toggle-icon-stop]')
+
+    if (!iconStart || !iconStop) return
+
+    if (type === 'start') {
+      iconStart.style.display = 'none'
+      iconStop.style.display = 'block'
+    } else {
+      iconStart.style.display = 'block'
+      iconStop.style.display = 'none'
+    }
+  }
+
+  _getSlots(key) {
+    if (!this.slots || !this.slots[key]) return ''
+
+    return /* html */ `
+        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
+      `.trim()
   }
 
   // ---------------------------------------------------------------------------
