@@ -1,0 +1,5 @@
+@import "./location.default";
+
+@mixin location_default() {
+  @include location_default_();
+}

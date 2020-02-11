@@ -17,6 +17,7 @@
 @import "../../../../components/icon/main";
 @import "../../../../components/input/main";
 @import "../../../../components/list/main";
+@import "../../../../components/location/main";
 @import "../../../../components/map/main";
 @import "../../../../components/modal/main";
 @import "../../../../components/multiselect/main";
@@ -47,6 +48,7 @@
   @include icon($theme);
   @include input($theme);
   @include list($theme);
+  @include location($theme);
   @include map($theme);
   @include modal($theme);
   @include multiselect($theme);

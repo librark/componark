@@ -24,6 +24,7 @@ export function setRoutes(resolver, rootComponent, prefix) {
     setContentComponent('icon'),
     setContentComponent('input'),
     setContentComponent('list'),
+    setContentComponent('location'),
     setContentComponent('map'),
     setContentComponent('modal'),
     setContentComponent('multiselect'),
