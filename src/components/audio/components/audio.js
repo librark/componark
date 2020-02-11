@@ -24,7 +24,7 @@ export class Audio extends Component {
       </div>
 
       ${
-      this.isToggle() ?
+      this._isToggle() ?
         this._toggleTemplate() :
         this._individualButtonsTemplate()
       }
@@ -40,17 +40,57 @@ export class Audio extends Component {
   // ---------------------------------------------------------------------------
 
   start() {
-    this.stop()
-    this._initInterval()
-    this._changeIcons('start')
+    navigator.mediaDevices.getUserMedia({
+      audio: true
+    }).then(stream => {
+      // @ts-ignore
+      this.mediaRecorder = new MediaRecorder(stream)
+
+      this.mediaRecorder.ondataavailable = (event) => {
+        this._setAudioURL(event.data)
+      }
+
+      this.mediaRecorder.onstop = (event) => {
+        const tracks = stream ? stream.getTracks() : []
+        tracks.forEach(track => track.stop())
+
+        clearInterval(this.interval)
+        this._changeStyle('stop')
+      }
+
+      this.mediaRecorder.onstart = (event) => {
+        this._initInterval()
+        this._changeStyle('start')
+      }
+
+      this.mediaRecorder.start()
+    }).catch(e => console.error(e))
   }
 
   stop() {
-    clearInterval(this.interval)
-    this._changeIcons('stop')
+    if (this.mediaRecorder) this.mediaRecorder.stop()
+  }
+
+  dataURL() {
+    return this.audioURL
   }
 
   // ---------------------------------------------------------------------------
+  _setAudioURL(blob) {
+    const reader = new FileReader()
+    reader.readAsDataURL(blob)
+    reader.onloadend = () => {
+      this.audioURL = reader.result
+
+      this.dispatchEvent(new CustomEvent('onStopAudio', {
+        bubbles: true,
+        detail: {
+          dataURL: this.audioURL,
+          origin: event
+        }
+      }))
+    }
+  }
 
   /** @returns {string} */
   _toggleTemplate() {
@@ -76,9 +116,8 @@ export class Audio extends Component {
     `
   }
 
-
   /** @returns {Boolean} */
-  isToggle() {
+  _isToggle() {
     return this.hasAttribute('toggle')
   }
 
@@ -110,12 +149,18 @@ export class Audio extends Component {
     this.recordingTimeLabel.innerText = timeLabel
   }
 
-  _changeIcons(type) {
+  _changeStyle(type) {
     /** @type {HTMLDivElement} */
     const iconStart = this.querySelector('[data-toggle-icon-start]')
 
     /** @type {HTMLDivElement} */
     const iconStop = this.querySelector('[data-toggle-icon-stop]')
+
+    if (type === 'start') {
+      this.classList.add("ark-audio--play")
+    } else {
+      this.classList.remove("ark-audio--play")
+    }
 
     if (!iconStart || !iconStop) return
 
