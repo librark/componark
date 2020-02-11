@@ -1,9 +1,9 @@
 import { Component } from "../component"
 
 export class Camera extends Component {
-  dataURL: string
-
   start ()
   stop ()
+  setCameraOrientation (facingMode: string)
+  dataURL (width?, height?): string
 }
 

@@ -4,12 +4,13 @@ export class Camera extends Component {
   init(context = {}) {
     this.width = this.width || context['width'] || 320
     this.height = this.height || context['height'] || 320
+    this.facingMode = this.facingMode || context['facingMode'] || 'user'
 
     return super.init()
   }
 
   reflectedProperties() {
-    return ['width', 'height']
+    return ['width', 'height', 'facingMode']
   }
 
   render() {
@@ -34,13 +35,19 @@ export class Camera extends Component {
   // ---------------------------------------------------------------------------
 
   /** @returns {string} */
-  get dataURL() {
-    this.canvas.width = this.width
-    this.canvas.height = this.height
-    this.canvas.getContext('2d').drawImage(
-      this.video, 0, 0, this.width, this.height
+  dataURL(width = this.width, height = this.height) {
+    /** @type {HTMLCanvasElement} */
+    const dupCanvas = (this.canvas.cloneNode(true))
+
+    dupCanvas.width = this.width
+    dupCanvas.height = this.height
+    dupCanvas.getContext('2d').drawImage(
+      this.video,
+      0, 0, this.width, this.height,
+      0, 0, width, height
     )
-    return this.canvas.toDataURL('image/jpg')
+
+    return dupCanvas.toDataURL('image/jpg')
   }
 
   // ---------------------------------------------------------------------------
@@ -56,7 +63,8 @@ export class Camera extends Component {
     navigator.mediaDevices.getUserMedia({
       video: {
         width: this.width,
-        height: this.height
+        height: this.height,
+        facingMode: this.facingMode
       },
       audio: false
     }).then(stream => {
@@ -68,6 +76,12 @@ export class Camera extends Component {
     // @ts-ignore
     const tracks = this.video.srcObject ? this.video.srcObject.getTracks() : []
     tracks.forEach(track => track.stop())
+  }
+
+  setCameraOrientation(facingMode) {
+    this.stop()
+    this.facingMode = facingMode
+    this.stop()
   }
 
   // ---------------------------------------------------------------------------

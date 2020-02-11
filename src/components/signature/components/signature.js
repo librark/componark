@@ -32,8 +32,19 @@ export class Signature extends Component {
   // ---------------------------------------------------------------------------
 
   /** @returns {string} */
-  getSrc() {
-    return this.signaturePad.toDataURL("image/jpeg")
+  dataURL(width = this.width, height = this.height) {
+    /** @type {HTMLCanvasElement} */
+    const dupCanvas = (this.canvas.cloneNode(true))
+
+    dupCanvas.width = width
+    dupCanvas.height = height
+    dupCanvas.getContext('2d').drawImage(
+      this.canvas,
+      0, 0, this.width, this.height,
+      0, 0, width, height
+    )
+
+    return dupCanvas.toDataURL('image/jpg')
   }
 
   clear() {

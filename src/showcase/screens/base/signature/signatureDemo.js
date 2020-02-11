@@ -19,15 +19,22 @@ export class SignatureDemo extends Component {
         <ark-button background="primary" listen on-click="_onClear">
           Borra
         </ark-button>
+        <ark-button background="primary" listen on-click="_onShowImage">
+          Mostrar imagen
+        </ark-button>
+        <img data-img/>
       </div>
     `
     return super.render()
   }
 
   // ---------------------------------------------------------------------------
+  _onShowImage() {
+    this.img.src = this.signature.dataURL(100, 100)
+  }
 
   _onSave() {
-    const src = this.signature.getSrc()
+    const src = this.signature.dataURL()
     const fileName = uuidv4()
     const link = document.createElement('a')
     link.download = fileName + '.jpg'
@@ -44,6 +51,11 @@ export class SignatureDemo extends Component {
   /** @returns {Signature} */
   get signature() {
     return /** @type {Signature} */ (this.select('ark-signature'))
+  }
+
+  /** @returns {HTMLImageElement} */
+  get img() {
+    return /** @type {HTMLImageElement} */ (this.querySelector('[data-img]'))
   }
 
   // ---------------------------------------------------------------------------

@@ -1,45 +1,51 @@
 import { Camera, Component } from '../../loader'
 
 export class CameraDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init(context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render() {
+    this.innerHTML = /* html */ `${this.styles}
       <div class="camera-container">
         <ark-Camera></ark-Camera>
-        <button listen on-click="takepicture">Take photo</button>
-        <button listen on-click="stopCamera">stop</button>
+        <ark-button listen on-click="takepicture">Take photo</ark-button>
+        <ark-button listen on-click="startCamera">Start</ark-button>
+        <ark-button listen on-click="stopCamera">stop</ark-button>
       </div>
+
       <img data-photo>
     `
 
-		this.camera.start()
+    this.camera.start()
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	takepicture () {
-		this.photo.setAttribute('src', this.camera.dataURL)
-	}
+  takepicture() {
+    this.photo.setAttribute('src', this.camera.dataURL(200, 200))
+  }
 
-	stopCamera () {
-		this.camera.stop()
-	}
+  startCamera() {
+    this.camera.start()
+  }
 
-	/** @return {Camera} */
-	get camera () {
-		return /** @type {Camera} */ (this.select('ark-Camera'))
-	}
+  stopCamera() {
+    this.camera.stop()
+  }
 
-	/** @returns {HTMLImageElement} */
-	get photo () {
-		return this.querySelector('[data-photo]')
-	}
+  /** @return {Camera} */
+  get camera() {
+    return /** @type {Camera} */ (this.select('ark-Camera'))
+  }
 
-	get styles () {
-		return /* html */ `
+  /** @returns {HTMLImageElement} */
+  get photo() {
+    return this.querySelector('[data-photo]')
+  }
+
+  get styles() {
+    return /* html */ `
       <style>
         demo-camera{
           display: flex;
@@ -59,6 +65,6 @@ export class CameraDemo extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-camera', CameraDemo)
