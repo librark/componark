@@ -6,24 +6,32 @@ export class IconDemo extends Component {
   }
 
   render() {
-    this.innerHTML = /* html */ `
+    this.innerHTML = /* html */ `${this.styles}
       <p>Icon:</p>
       <hr/><br/>
-      <div>
-        <span>fas fa-address-book</span>
-        <p style="font-size: 100px; margin: 10px auto;" >
-          <ark-icon name="fas fa-address-book"></ark-icon>
-        </p>
-      </div>
-      <div>
-        <span>far fa-address-book</span>
-        <p style="font-size: 100px; margin: 10px auto;" >
-          <ark-icon name="far fa-address-book"></ark-icon>
-        </p>
-      </div>
+
+      <h1>Fontawesome</h1>
+
+      <ark-icon name="fas fa-address-book"></ark-icon>
+      <ark-icon name="far fa-address-book"></ark-icon>
+
+      <hr/>
+
+      <h1>Material</h1>
+      <ark-icon type="mat" name="face"></ark-icon>
     `
 
     return super.render()
+  }
+
+  get styles() {
+    return /* html */ `
+      <style>
+        demo-icon ark-icon{
+          font-size: 5rem;
+        }
+      </style>
+    `
   }
 }
 customElements.define("demo-icon", IconDemo)

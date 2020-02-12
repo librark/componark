@@ -1,5 +1,4 @@
 import "leaflet/dist/leaflet.js"
-import "leaflet/dist/leaflet.css"
 
 import * as L from "leaflet"
 
@@ -31,18 +30,19 @@ export class Map extends Component {
     this.api
       .tileLayer(
         "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" +
-          `?access_token=${this.token}`
+        `?access_token=${this.token}`
       )
       .addTo(this.map)
 
     this.api.control.scale().addTo(this.map)
-
     this._defaultMarkerIconUrl()
 
     return super.render()
   }
 
   load() {
+    setTimeout(function () { this.map.invalidateSize() }, 400)
+
     return super.load()
   }
 

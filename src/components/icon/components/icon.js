@@ -1,23 +1,33 @@
 import { Component } from '../../component'
 
 export class Icon extends Component {
-  init (context = {}) {
+  init(context = {}) {
+    this.type = this.type || 'awe'
+    this.name = this.name || 'fas cloud'
+
     return super.init()
   }
 
-  render () {
-    this.type = this.getAttribute('type') || 'aws'
-    this.name = this.getAttribute('name') || 'fas cloud'
+  reflectedProperties() {
+    return ['type', 'name']
+  }
 
-    if (this.type === 'aws') {
+  render() {
+    if (this.type === 'mat') {
+      this.innerHTML = this._renderMaterial()
+    } else {
       this.innerHTML = this._renderFontawesome()
     }
 
     return super.render()
   }
 
-  _renderFontawesome () {
+  _renderFontawesome() {
     return /* html */ `<i class="${this.name}"></i>`
+  }
+
+  _renderMaterial() {
+    return /* html */ `<i class="material-icons">${this.name}</i>`
   }
 }
 customElements.define('ark-icon', Icon)

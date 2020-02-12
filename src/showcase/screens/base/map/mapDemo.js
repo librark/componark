@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Map} Map
- */
-import { Component } from "../../loader"
+import { Component, Map } from "../../loader"
 
 export class MapDemo extends Component {
   init(context) {
@@ -9,12 +6,9 @@ export class MapDemo extends Component {
   }
 
   render() {
-    this.innerHTML = /* html */ `
-      ${this.getStyle()}
+    this.innerHTML = /* html */ `${this.styles}
 
-      <div class="map-container">
-        <ark-map token="${this.token}"></ark-map>
-      </div>
+      <ark-map token="${this.token}"></ark-map>
 
       <!------------------------------------>
 
@@ -46,21 +40,9 @@ export class MapDemo extends Component {
   }
 
   // ---------------------------------------------------------------------------
-  getStyle() {
+  get styles() {
     return /* html */ `
       <style>
-        .map-container{
-          height: 100%;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        ark-map{
-          height: 90%;
-          width: 90%;
-        }
       </style>
     `
   }

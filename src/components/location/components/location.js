@@ -5,14 +5,54 @@ export class Location extends Component {
     return super.init()
   }
 
-  render() {
-    this.innerHTML = "[[[[location]]]]"
+  start() {
+    const target = {
+      latitude: 0,
+      longitude: 0,
+    }
 
-    return super.render()
+    this.watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        this.position = position
+        const coords = position.coords
+
+        if (
+          target.latitude === coords.latitude &&
+          target.longitude === coords.longitude
+        ) {
+          this.stop()
+          return
+        }
+
+        this.onCurrentPosition()
+      },
+      (err) => {
+        console.warn('ERROR(' + err.code + '): ' + err.message)
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 5000,
+        maximumAge: 0
+      }
+    )
   }
 
-  load() {
-    return super.load()
+  stop() {
+    if (!this.watchId) return
+    navigator.geolocation.clearWatch(this.watchId)
+  }
+
+  getCurrentPosition() {
+    return this.position
+  }
+
+  onCurrentPosition() {
+    this.dispatchEvent(new CustomEvent('onCurrentPosition', {
+      bubbles: true,
+      detail: {
+        currentPosition: this.position
+      }
+    }))
   }
 }
 customElements.define('ark-location', Location)

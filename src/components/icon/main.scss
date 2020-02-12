@@ -3,7 +3,9 @@
 // -------------------------------------------
 @import "../theme/main";
 // -------------------------------------------
-@import "./styles/_default/main";
+@import "./styles/icon.default";
+@import "./styles/icon.fontawesome";
+@import "./styles/icon.material";
 // -------------------------------------------
 
 @mixin icon($theme) {
