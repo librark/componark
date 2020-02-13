@@ -1,12 +1,10 @@
-import "leaflet/dist/leaflet.js"
+import * as ol from 'ol'
 
-import * as L from "leaflet"
+import { Map as MapOL, View } from 'ol'
+import { OSM, TileDebug, XYZ } from 'ol/source'
 
 import { Component } from "../../component"
-// @ts-ignore
-import icon from "leaflet/dist/images/marker-icon.png"
-// @ts-ignore
-import iconShadow from "leaflet/dist/images/marker-shadow.png"
+import TileLayer from 'ol/layer/Tile'
 
 export class Map extends Component {
   init(context = {}) {
@@ -22,45 +20,33 @@ export class Map extends Component {
 
   render() {
     this.innerHTML = /* html */ `
-      <div id="map-container"></div>
+      <div id="map" class="map"></div>
     `
-
-    this.map = this.api.map("map-container").setView(this.center, 15)
-
-    this.api
-      .tileLayer(
-        "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" +
-        `?access_token=${this.token}`
-      )
-      .addTo(this.map)
-
-    this.api.control.scale().addTo(this.map)
-    this._defaultMarkerIconUrl()
 
     return super.render()
   }
 
   load() {
-    setTimeout(function () { this.map.invalidateSize() }, 400)
+    this.map = new MapOL({
+      target: 'map',
+      layers: [
+        new TileLayer({
+          source: new XYZ({
+            url:
+              'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg'
+          })
+        })
+      ],
+      view: new View({
+        center: [0, 0],
+        zoom: 2
+      })
+    })
+    this.map.renderSync()
 
     return super.load()
   }
 
   // ---------------------------------------------------------------------------
-
-  get api() {
-    return L
-  }
-
-  // ---------------------------------------------------------------------------
-
-  _defaultMarkerIconUrl() {
-    const defaultIcon = L.icon({
-      iconUrl: icon,
-      shadowUrl: iconShadow
-    })
-
-    this.api.Marker.prototype.options.icon = defaultIcon
-  }
 }
 customElements.define("ark-map", Map)

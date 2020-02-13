@@ -21,9 +21,9 @@ export class LocationDemo extends Component {
     ) => {
       event.stopImmediatePropagation()
       const coords = event.detail.currentPosition.coords
-      this.arkMap.api.marker([
-        coords.latitude, coords.longitude
-      ]).addTo(this.arkMap.map)
+      // this.arkMap.api.marker([
+      //   coords.latitude, coords.longitude
+      // ]).addTo(this.arkMap.map)
     })
 
     return super.load()

@@ -21,7 +21,7 @@ export class MapDemo extends Component {
   }
 
   load() {
-    this.arkMap.api.marker([2.44073, -76.602349]).addTo(this.arkMap.map)
+    // this.arkMap.api.marker([2.44073, -76.602349]).addTo(this.arkMap.map)
 
     return super.load()
   }

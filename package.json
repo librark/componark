@@ -116,6 +116,7 @@
     "@material/snackbar": "^3.2.0",
     "@material/tab-bar": "^3.2.0",
     "@material/toolbar": "^2.3.0",
+    "@types/ol": "^6.1.0",
     "bootstrap": "^4.4.0",
     "chart.js": "^2.9.3",
     "google-palette": "^1.1.0",
@@ -123,6 +124,7 @@
     "leaflet": "^1.6.0",
     "material-components-web": "^3.2.0",
     "material-design-icons": "^3.0.1",
+    "ol": "^6.2.0",
     "popper.js": "^1.16.0",
     "signature_pad": "^3.0.0-beta.3"
   }
