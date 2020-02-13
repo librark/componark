@@ -1,9 +1,14 @@
-import { Map as MapOL, View } from 'ol'
+import { Feature, Map as MapOL, View } from 'ol'
+import { Icon, Style } from 'ol/style'
+import { Vector as VectorSource, XYZ } from 'ol/source'
 
 import { Component } from "../../component"
+import { Point } from 'ol/geom'
 import TileLayer from 'ol/layer/Tile'
-import { XYZ } from 'ol/source'
+import { Vector as VectorLayer } from 'ol/layer'
 import { fromLonLat } from 'ol/proj'
+// @ts-ignore
+import icon from '../assets/icons/marker-icon.png'
 
 export class Map extends Component {
   init(context = {}) {
@@ -27,6 +32,7 @@ export class Map extends Component {
   }
 
   load() {
+    /** @type {MapOL} */
     this.map = new MapOL({
       target: 'map',
       layers: [
@@ -46,7 +52,31 @@ export class Map extends Component {
   }
 
   updateSize() {
+    this.map.renderSync()
     this.map.updateSize()
+  }
+
+  addMarker(lat, lon) {
+    var iconFeature = new Feature({
+      geometry: new Point(fromLonLat([lon, lat])),
+    })
+
+    iconFeature.setStyle(new Style({
+      image: new Icon({
+        anchor: [0.5, 1],
+        src: icon
+      })
+    }))
+
+    var vectorLayer = new VectorLayer({
+      source: new VectorSource({
+        features: [iconFeature]
+      })
+    })
+
+    this.map.addLayer(vectorLayer)
+
+    this.updateSize()
   }
 
   // ---------------------------------------------------------------------------

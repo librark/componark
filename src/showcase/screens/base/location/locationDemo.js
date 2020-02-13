@@ -21,8 +21,7 @@ export class LocationDemo extends Component {
     ) => {
       event.stopImmediatePropagation()
       const coords = event.detail.currentPosition.coords
-
-
+      this.map.addMarker(coords.latitude, coords.longitude)
     })
 
     return super.load()
@@ -40,7 +39,7 @@ export class LocationDemo extends Component {
   }
 
   /** @returns {Map} */
-  get arkMap() {
+  get map() {
     return /** @type {Map} */ (this.select("ark-map"))
   }
 
