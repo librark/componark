@@ -6,7 +6,8 @@ import { XYZ } from 'ol/source'
 
 export class Map extends Component {
   init(context = {}) {
-    this.center = context["center"] || [2.44073, -76.602349]
+    this.center = context["center"] || this.center || [2.44073, -76.602349]
+    this.zoom = context["zoom"] || this.zoom || 13
     this.token = context["token"] || this.token
 
     return super.init()
@@ -34,8 +35,8 @@ export class Map extends Component {
         })
       ],
       view: new View({
-        center: [0, 0],
-        zoom: 2
+        center: this.center,
+        zoom: this.zoom
       })
     })
 
