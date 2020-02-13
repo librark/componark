@@ -2,12 +2,11 @@
   $component: "ark-map";
 
   #{$component} {
-    display: grid;
-    height: 400px;
-    width: 400px;
+    display: block;
+    height: 100%;
+    width: 100%;
 
     .map {
-      display: grid;
       height: 100%;
       width: 100%;
     }

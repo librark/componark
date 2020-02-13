@@ -13,8 +13,8 @@ export class ArkDetailExample extends Component {
 
   render() {
     if (this.first) {
-      this.innerHTML = /* html */ `
-        <ark-map></ark-map>
+      this.innerHTML = /* html */ `${this.styles}
+        <ark-map token="${this.token}"></ark-map>
         <h1>${this.year}</h1>
         <p>
           <span data-first>FIRST: ${this.first}</span>
@@ -29,6 +29,22 @@ export class ArkDetailExample extends Component {
     }
 
     return super.render()
+  }
+
+  get token() {
+    return 'pk.' +
+      'eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.' +
+      'zA2W0IkI0c6KaAhJfk9bWg'
+  }
+
+  get styles() {
+    return /* html */`
+      <style>
+        ark-detail-example ark-map{
+          height: 400px;
+        }
+      </style>
+    `
   }
 }
 customElements.define('ark-detail-example', ArkDetailExample)

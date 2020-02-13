@@ -8,7 +8,7 @@ export class LocationDemo extends Component {
   render() {
     this.innerHTML = /* html */ `${this.styles}
       <ark-location></ark-location>
-      <ark-map></ark-map>
+      <ark-map token="${this.token}"></ark-map>
     `
 
     this.location.start()
@@ -21,9 +21,8 @@ export class LocationDemo extends Component {
     ) => {
       event.stopImmediatePropagation()
       const coords = event.detail.currentPosition.coords
-      // this.arkMap.api.marker([
-      //   coords.latitude, coords.longitude
-      // ]).addTo(this.arkMap.map)
+
+
     })
 
     return super.load()
@@ -43,6 +42,12 @@ export class LocationDemo extends Component {
   /** @returns {Map} */
   get arkMap() {
     return /** @type {Map} */ (this.select("ark-map"))
+  }
+
+  get token() {
+    return 'pk.' +
+      'eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.' +
+      'zA2W0IkI0c6KaAhJfk9bWg'
   }
 
   // ---------------------------------------------------------------------------

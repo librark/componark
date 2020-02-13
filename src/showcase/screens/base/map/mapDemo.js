@@ -7,14 +7,13 @@ export class MapDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-map token="${this.token}"></ark-map>
+      <ark-map token="${this.token}" zoom="3"></ark-map>
     `
 
     return super.render()
   }
 
   load() {
-    // this.arkMap.api.marker([2.44073, -76.602349]).addTo(this.arkMap.map)
     return super.load()
   }
 

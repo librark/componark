@@ -3,18 +3,20 @@ import { Map as MapOL, View } from 'ol'
 import { Component } from "../../component"
 import TileLayer from 'ol/layer/Tile'
 import { XYZ } from 'ol/source'
+import { fromLonLat } from 'ol/proj'
 
 export class Map extends Component {
   init(context = {}) {
-    this.center = context["center"] || this.center || [2.44073, -76.602349]
-    this.zoom = context["zoom"] || this.zoom || 13
+    this.lat = parseFloat(context["lat"] || this.lat || 2.44073)
+    this.lon = parseFloat(context["lon"] || this.lon || -76.602349)
+    this.zoom = parseInt(context["zoom"] || this.zoom || 13)
     this.token = context["token"] || this.token
 
     return super.init()
   }
 
   reflectedProperties() {
-    return ["token"]
+    return ["token", "zoom", "lat", "lon"]
   }
 
   render() {
@@ -35,7 +37,7 @@ export class Map extends Component {
         })
       ],
       view: new View({
-        center: this.center,
+        center: fromLonLat([this.lon, this.lat]),
         zoom: this.zoom
       })
     })
