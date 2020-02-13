@@ -44,7 +44,7 @@ export class RootContainerComponent extends Component {
     this.container = this.querySelector("[data-component]")
     if (this.container) this.container.append(this.component)
 
-    this._loadComponent()
+    // this._loadComponent()
 
     return super.load()
   }

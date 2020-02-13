@@ -1,5 +1,3 @@
-// @import "../../../../theme/_variables.scss";
-
 @mixin splitview_detail_default() {
   $component: "ark-splitview-detail";
   $mobile: 360px;
@@ -28,7 +26,8 @@
     max-height: -webkit-fill-available;
 
     &[hidden] {
-      display: none !important;
+      display: block !important;
+      visibility: hidden !important;
     }
   }
 
@@ -117,6 +116,7 @@
 
       &[hidden] {
         display: block !important;
+        visibility: visible !important;
       }
     }
 

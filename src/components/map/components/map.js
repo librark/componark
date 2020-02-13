@@ -1,10 +1,8 @@
-import * as ol from 'ol'
-
 import { Map as MapOL, View } from 'ol'
-import { OSM, TileDebug, XYZ } from 'ol/source'
 
 import { Component } from "../../component"
 import TileLayer from 'ol/layer/Tile'
+import { XYZ } from 'ol/source'
 
 export class Map extends Component {
   init(context = {}) {
@@ -22,7 +20,6 @@ export class Map extends Component {
     this.innerHTML = /* html */ `
       <div id="map" class="map"></div>
     `
-
     return super.render()
   }
 
@@ -32,8 +29,7 @@ export class Map extends Component {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url:
-              'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg'
+            url: this._getUrl()
           })
         })
       ],
@@ -42,11 +38,19 @@ export class Map extends Component {
         zoom: 2
       })
     })
-    this.map.renderSync()
 
     return super.load()
   }
 
+  updateSize() {
+    this.map.updateSize()
+  }
+
   // ---------------------------------------------------------------------------
+
+  _getUrl() {
+    return 'https://api.mapbox.com/styles/v1/mapbox/' +
+      `streets-v11/tiles/256/{z}/{x}/{y}?access_token=${this.token}`
+  }
 }
 customElements.define("ark-map", Map)

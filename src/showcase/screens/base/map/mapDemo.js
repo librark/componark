@@ -7,14 +7,7 @@ export class MapDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `${this.styles}
-
       <ark-map token="${this.token}"></ark-map>
-
-      <!------------------------------------>
-
-      <hr/>
-
-      <a href="https://leafletjs.com/">leafletjs</a>
     `
 
     return super.render()
@@ -22,9 +15,10 @@ export class MapDemo extends Component {
 
   load() {
     // this.arkMap.api.marker([2.44073, -76.602349]).addTo(this.arkMap.map)
-
     return super.load()
   }
+
+  // ---------------------------------------------------------------------------
 
   /** @returns {Map} */
   get arkMap() {
@@ -32,17 +26,16 @@ export class MapDemo extends Component {
   }
 
   get token() {
-    return (
-      "pk" +
-      ".eyJ1IjoiaXRudWJhcmsiLCJhIjoiY2pzdWsyYXo0MmY4dTQzcnI0Y2ZxMGt3aCJ9" +
-      ".DPOHXK2aObjNChVAZ4_CMQ"
-    )
+    return 'pk.' +
+      'eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.' +
+      'zA2W0IkI0c6KaAhJfk9bWg'
   }
 
   // ---------------------------------------------------------------------------
   get styles() {
     return /* html */ `
       <style>
+        demo-map { }
       </style>
     `
   }
