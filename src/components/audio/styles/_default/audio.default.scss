@@ -14,10 +14,13 @@
     border-radius: 5px;
 
     padding: 0 0.5rem;
+    user-select: none;
+
     background: $background;
+    color: $muted;
 
     * {
-      color: $muted;
+      color: inherit;
     }
 
     [data-toggle-icon-stop] {
@@ -49,16 +52,38 @@
 
       label {
         margin: 0;
-        margin-left: 0.5rem;
+        margin-left: 1rem;
         padding: 0;
       }
     }
 
     &--play {
-      background: $success;
-      * {
-        color: $white !important;
+      background: $success !important;
+      color: $white !important;
+
+      [slot="microphone"] {
+        animation: zoom 1s both infinite;
       }
+    }
+  }
+
+  @keyframes zoom {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    10% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+    }
+    51% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
     }
   }
 }

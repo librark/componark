@@ -7,7 +7,7 @@ export class AudioDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-Audio>
+      <ark-Audio background="dark" color="danger">
         <ark-icon slot="microphone" name="fas fa-microphone"></ark-icon>
         <ark-icon slot="start" name="fas fa-play"></ark-icon>
         <ark-icon slot="stop" name="fas fa-stop"></ark-icon>

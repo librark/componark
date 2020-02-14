@@ -9,6 +9,7 @@ export class Audio extends Component {
     this.interval
     this.slots = this.slots || getSlots(this)
     this.stream = null
+    this.global = context['global'] || window
 
     return super.init()
   }
@@ -35,16 +36,21 @@ export class Audio extends Component {
   }
 
   load() {
+    this.global.addEventListener("mouseup", _ => this.stop())
+
     return super.load()
   }
 
   disconnectedCallback() {
+    this.global.removeEventListener("mouseup", _ => this.stop())
     this.stop()
   }
 
   // ---------------------------------------------------------------------------
 
   start() {
+    this.stop()
+
     navigator.mediaDevices.getUserMedia({
       audio: true
     }).then(stream => {
@@ -69,10 +75,15 @@ export class Audio extends Component {
 
   stop() {
     if (!this.mediaRecorder) return
+
     const tracks = this.stream ? this.stream.getTracks() : []
     tracks.forEach(track => track.stop())
-    clearInterval(this.interval)
     this.mediaRecorder.stop()
+
+    this.mediaRecorder = null
+    this.stream = null
+    this.global.clearInterval(this.interval)
+    this.interval = null
   }
 
   dataURL() {
