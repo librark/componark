@@ -8,6 +8,7 @@ export class Audio extends Component {
     // -------------------------------------------------------------------------
     this.interval
     this.slots = this.slots || getSlots(this)
+    this.stream = null
 
     return super.init()
   }
@@ -37,38 +38,41 @@ export class Audio extends Component {
     return super.load()
   }
 
+  disconnectedCallback() {
+    this.stop()
+  }
+
   // ---------------------------------------------------------------------------
 
   start() {
     navigator.mediaDevices.getUserMedia({
       audio: true
     }).then(stream => {
+      this.stream = stream
       // @ts-ignore
-      this.mediaRecorder = new MediaRecorder(stream)
+      this.mediaRecorder = new MediaRecorder(this.stream)
 
-      this.mediaRecorder.ondataavailable = (event) => {
+      this.mediaRecorder.ondataavailable = (event => {
         this._setAudioURL(event.data)
-      }
+      })
 
-      this.mediaRecorder.onstop = (event) => {
-        const tracks = stream ? stream.getTracks() : []
-        tracks.forEach(track => track.stop())
+      this.mediaRecorder.onstop = (_ => this._changeStyle('stop'))
 
-        clearInterval(this.interval)
-        this._changeStyle('stop')
-      }
-
-      this.mediaRecorder.onstart = (event) => {
+      this.mediaRecorder.onstart = (_ => {
         this._initInterval()
         this._changeStyle('start')
-      }
+      })
 
       this.mediaRecorder.start()
     }).catch(e => console.error(e))
   }
 
   stop() {
-    if (this.mediaRecorder) this.mediaRecorder.stop()
+    if (!this.mediaRecorder) return
+    const tracks = this.stream ? this.stream.getTracks() : []
+    tracks.forEach(track => track.stop())
+    clearInterval(this.interval)
+    this.mediaRecorder.stop()
   }
 
   dataURL() {
