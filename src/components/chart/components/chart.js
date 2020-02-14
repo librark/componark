@@ -4,17 +4,18 @@ import { Component } from "../../component"
 export class Chart extends Component {
   init(context = {}) {
     this.details = context["details"]
+    this.global = context['global'] || window
 
     return super.init()
   }
 
   connectedCallback() {
     super.connectedCallback()
-    window.addEventListener("resize", this._resizeCanvas.bind(this))
+    this.global.addEventListener("resize", this._resizeCanvas.bind(this))
   }
 
   disconnectedCallback() {
-    window.removeEventListener("resize", this._resizeCanvas.bind(this))
+    this.global.removeEventListener("resize", this._resizeCanvas.bind(this))
   }
 
   render() {

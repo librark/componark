@@ -95,7 +95,9 @@ export class Audio extends Component {
   /** @returns {string} */
   _toggleTemplate() {
     return /* html */`
-      <button data-toggle-button listen on-mousedown="start" on-mouseup="stop">
+      <button data-toggle-button listen on-mousedown="start" on-mouseup="stop"
+      on-touchstart="start" on-touchend="stop"
+      >
         <div data-toggle-icon-start>${this._getSlots('start')}</div>
         <div data-toggle-icon-stop>${this._getSlots('stop')}</div>
       </button>

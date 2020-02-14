@@ -5,6 +5,7 @@ export class Signature extends Component {
   init(context = {}) {
     this.width = this.width || context['width'] || 400
     this.height = this.height || context['height'] || 200
+    this.global = context['global'] || window
 
     return super.init()
   }
@@ -18,7 +19,8 @@ export class Signature extends Component {
       <canvas data-signature-pad
         width="${this.width}"
         height="${this.height}"
-        class="ark-signature--pad"></canvas>
+        class="ark-signature--pad">
+      </canvas>
     `
 
     this.signaturePad = new SignaturePad(this.canvas, {
@@ -27,6 +29,16 @@ export class Signature extends Component {
     })
 
     return super.render()
+  }
+
+  load() {
+    this.global.addEventListener("resize", this.resizeCanvas.bind(this))
+    setTimeout(_ => { this.resizeCanvas() }, 800)
+    return super.load()
+  }
+
+  disconnectedCallback() {
+    this.global.removeEventListener("resize", this.resizeCanvas.bind(this))
   }
 
   // ---------------------------------------------------------------------------
@@ -40,7 +52,7 @@ export class Signature extends Component {
     dupCanvas.height = height
     dupCanvas.getContext('2d').drawImage(
       this.canvas,
-      0, 0, this.width, this.height,
+      0, 0, this.offsetWidth, this.offsetHeight,
       0, 0, width, height
     )
 
@@ -49,6 +61,14 @@ export class Signature extends Component {
 
   clear() {
     this.signaturePad.clear()
+  }
+
+  resizeCanvas() {
+    const ratio = Math.max(this.global.devicePixelRatio || 1, 1)
+    this.canvas.width = this.offsetWidth * ratio
+    this.canvas.height = this.offsetHeight * ratio
+    this.canvas.getContext("2d").scale(ratio, ratio)
+    this.clear()
   }
 
   // ---------------------------------------------------------------------------

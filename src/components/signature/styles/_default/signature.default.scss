@@ -3,11 +3,15 @@
 
   #{$component} {
     display: block !important;
+    height: 100%;
+    width: 100%;
   }
 
   .#{$component} {
     &--pad {
       display: block;
+      height: 100%;
+      width: 100%;
     }
   }
 }

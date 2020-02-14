@@ -7,9 +7,7 @@ import { uuidv4 } from "../../../utils"
 
 export class Zone extends Component {
   init(context = {}) {
-    /** @type {HTMLElement} */
-    const parent = /** @type {unknown} */ (window.document)
-    this.parent = /** @type {HTMLElement} */ (parent)
+    this.global = context['global'] || window
 
     return super.init()
   }
@@ -38,17 +36,17 @@ export class Zone extends Component {
     // zone
     // -------------------------------------------------------------------------
     this.addEventListener("mousedown", this.onMouseDown.bind(this))
-    this.parent.addEventListener("keydown", this.onkeyDown.bind(this))
-    this.parent.addEventListener("keyup", this.onKeyUp.bind(this))
-    this.parent.addEventListener("mouseup", this.onMouseUp.bind(this))
+    this.global.addEventListener("keydown", this.onkeyDown.bind(this))
+    this.global.addEventListener("keyup", this.onKeyUp.bind(this))
+    this.global.addEventListener("mouseup", this.onMouseUp.bind(this))
 
     return super.load()
   }
 
   disconnectedCallback() {
-    this.parent.removeEventListener("keydown", this.onkeyDown.bind(this))
-    this.parent.removeEventListener("keyup", this.onKeyUp.bind(this))
-    this.parent.removeEventListener("mouseup", this.onMouseUp.bind(this))
+    this.global.removeEventListener("keydown", this.onkeyDown.bind(this))
+    this.global.removeEventListener("keyup", this.onKeyUp.bind(this))
+    this.global.removeEventListener("mouseup", this.onMouseUp.bind(this))
   }
 
   // ---------------------------------------------------------------------------
@@ -203,7 +201,7 @@ export class Zone extends Component {
     event.stopImmediatePropagation()
     if (!event.shiftKey) return
 
-    const drop = this._getParentDrop(/** @type {HTMLElement} */ (event.target))
+    const drop = this._getParentDrop(/** @type {HTMLElement} */(event.target))
 
     if (!drop || !drop.fixed) return
 

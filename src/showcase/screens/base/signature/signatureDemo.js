@@ -10,7 +10,7 @@ export class SignatureDemo extends Component {
   render() {
     this.innerHTML = /* html */ `${this.styles}
       <div class="signature-container">
-        <ark-signature width="300" height="300"></ark-signature>
+        <ark-signature></ark-signature>
       </div>
       <div>
         <ark-button background="primary" listen on-click="_onSave">
@@ -26,6 +26,10 @@ export class SignatureDemo extends Component {
       </div>
     `
     return super.render()
+  }
+
+  load() {
+    return super.load()
   }
 
   // ---------------------------------------------------------------------------
@@ -69,9 +73,9 @@ export class SignatureDemo extends Component {
           align-items: center;
           padding: 1rem;
         }
+
         .signature-container ark-signature{
           border: 1px solid;
-          background: red;
         }
       </style>
     `
