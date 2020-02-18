@@ -7,8 +7,11 @@ export class LocationDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-location></ark-location>
-      <ark-map token="${this.token}"></ark-map>
+      <ark-button listen on-click="getCurrentPosition">Current position</ark-button>
+      <div class="location-container">
+        <ark-location></ark-location>
+        <ark-map token="${this.token}"></ark-map>
+      </div>
     `
 
     this.location.start()
@@ -32,6 +35,10 @@ export class LocationDemo extends Component {
   }
 
   // ---------------------------------------------------------------------------
+  async getCurrentPosition() {
+    const position = await this.location.getCurrentPosition()
+    console.log(position)
+  }
 
   /** @return {Location} */
   get location() {
@@ -54,6 +61,11 @@ export class LocationDemo extends Component {
   get styles() {
     return /* html */ `
       <style>
+        demo-location .location-container{
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
       </style>
     `
   }

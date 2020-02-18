@@ -43,7 +43,13 @@ export class Location extends Component {
   }
 
   getCurrentPosition() {
-    return this.position
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      })
+    })
   }
 
   onCurrentPosition() {

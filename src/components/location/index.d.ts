@@ -3,7 +3,7 @@ import { Component } from "../component"
 export class Location extends Component {
   start ()
   stop ()
-  getCurrentPosition (): {
+  getCurrentPosition (): Promise<{
     coords: {
       latitude,
       longitude,
@@ -14,6 +14,6 @@ export class Location extends Component {
       speed
     },
     timestamp
-  }
+  }>
 }
 
