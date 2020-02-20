@@ -4,7 +4,7 @@ import SignaturePad from 'signature_pad/dist/signature_pad'
 export class Signature extends Component {
   init(context = {}) {
     this.width = this.width || context['width'] || 400
-    this.height = this.height || context['height'] || 200
+    this.height = this.height || context['height'] || 300
     this.global = context['global'] || window
 
     return super.init()
@@ -52,7 +52,7 @@ export class Signature extends Component {
     dupCanvas.height = height
     dupCanvas.getContext('2d').drawImage(
       this.canvas,
-      0, 0, this.offsetWidth, this.offsetHeight,
+      0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight,
       0, 0, width, height
     )
 
