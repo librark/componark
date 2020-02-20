@@ -53,7 +53,7 @@ export class Signature extends Component {
     dupCanvas.getContext('2d').drawImage(
       this.canvas,
       0, 0, width, height,
-      0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight
+      0, 0, this.canvas.width, this.canvas.height
     )
 
     return dupCanvas.toDataURL('image/jpg')
