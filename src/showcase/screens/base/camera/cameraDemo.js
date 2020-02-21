@@ -22,6 +22,10 @@ export class CameraDemo extends Component {
     return super.render()
   }
 
+  disconnectedCallback() {
+    this.camera.stop()
+  }
+
   takepicture() {
     this.photo.setAttribute('src', this.camera.dataURL(200, 200))
   }
