@@ -10,7 +10,7 @@ export class SignatureDemo extends Component {
   render() {
     this.innerHTML = /* html */ `${this.styles}
       <div class="signature-container">
-        <ark-signature></ark-signature>
+        <ark-signature listen on-signature:dirty="_onDirty"></ark-signature>
       </div>
       <div>
         <ark-button background="primary" listen on-click="_onSave">
@@ -23,16 +23,25 @@ export class SignatureDemo extends Component {
           Mostrar imagen
         </ark-button>
         <img data-img/>
+        <hr/>
+        <p>Dirty: <strong data-dirty></strong></p>
       </div>
     `
     return super.render()
   }
 
   load() {
+    this.dirty.innerText = String(this.signature.dirty)
     return super.load()
   }
 
   // ---------------------------------------------------------------------------
+  /** @param {CustomEvent} event */
+  _onDirty(event) {
+    event.stopImmediatePropagation()
+    this.dirty.innerText = String(this.signature.dirty)
+  }
+
   _onShowImage() {
     this.img.src = this.signature.dataURL(100, 100)
   }
@@ -55,6 +64,11 @@ export class SignatureDemo extends Component {
   /** @returns {Signature} */
   get signature() {
     return /** @type {Signature} */ (this.select('ark-signature'))
+  }
+
+  /** @returns {HTMLElement} */
+  get dirty() {
+    return /** @type {HTMLElement} */ (this.querySelector('[data-dirty]'))
   }
 
   /** @returns {HTMLImageElement} */

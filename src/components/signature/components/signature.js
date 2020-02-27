@@ -5,7 +5,12 @@ export class Signature extends Component {
   init(context = {}) {
     this.width = this.width || context['width'] || 400
     this.height = this.height || context['height'] || 300
+
+    // -------------------------------------------------------------------------
+    // Local
+    // -------------------------------------------------------------------------
     this.global = context['global'] || window
+    this._dirty = false
 
     return super.init()
   }
@@ -33,6 +38,11 @@ export class Signature extends Component {
 
   load() {
     this.global.addEventListener("resize", this.resizeCanvas.bind(this))
+    this.canvas.addEventListener("mousedown", _ => {
+      this._dirty = true
+      this.dispatchDirtyEvent()
+    })
+
     setTimeout(_ => { this.resizeCanvas() }, 800)
     return super.load()
   }
@@ -61,6 +71,8 @@ export class Signature extends Component {
 
   clear() {
     this.signaturePad.clear()
+    this._dirty = false
+    this.dispatchDirtyEvent()
   }
 
   resizeCanvas() {
@@ -72,6 +84,21 @@ export class Signature extends Component {
   }
 
   // ---------------------------------------------------------------------------
+  /** @returns {boolean} */
+  get dirty() {
+    return this._dirty
+  }
+
+  dispatchDirtyEvent() {
+    this.dispatchEvent(
+      new CustomEvent('signature:dirty', {
+        bubbles: true,
+        detail: {
+          dirty: this.dirty
+        }
+      })
+    )
+  }
 
   /** @returns {HTMLCanvasElement} */
   get canvas() {
