@@ -5,7 +5,7 @@
     width: 100vw;
     height: 100vh;
 
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -62,14 +62,15 @@
       padding: 0;
       margin: 0;
 
-      max-width: calc(100vw - 3rem) !important;
-      max-height: calc(100vh - 3rem) !important;
+      max-width: calc(100vw - 3vmin) !important;
+      max-height: calc(100vh - 3vmin) !important;
 
       overflow: hidden;
     }
 
     &__header {
       overflow: hidden;
+      padding: 0.3rem;
     }
 
     &__icon-close {
@@ -104,13 +105,15 @@
     }
 
     &__body {
-      // overflow: auto;
+      padding: 0;
     }
 
     &__actions {
       display: flex;
       flex-flow: wrap;
       justify-content: flex-end;
+
+      padding: 0.3rem;
 
       & > * {
         margin: 0.1rem;

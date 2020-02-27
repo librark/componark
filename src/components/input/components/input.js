@@ -69,6 +69,7 @@ export class Input extends Component {
   _defaultAttributes() {
     return [
       "accept",
+      "align",
       "alt",
       "autocomplete",
       "autofocus",
