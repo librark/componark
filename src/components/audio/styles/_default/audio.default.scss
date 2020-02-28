@@ -64,11 +64,27 @@
       [slot="microphone"] {
         animation: zoom 1s both infinite;
       }
+
+      .ark-audio--button-start {
+        display: none;
+      }
+
+      .ark-audio--button-stop {
+        display: block;
+      }
     }
 
     &--buttons {
       display: flex;
       flex-direction: row;
+    }
+
+    &--button-start {
+      display: block;
+    }
+
+    &--button-stop {
+      display: none;
     }
   }
 

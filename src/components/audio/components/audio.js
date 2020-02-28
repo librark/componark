@@ -14,10 +14,6 @@ export class Audio extends Component {
     return super.init()
   }
 
-  reflectedProperties() {
-    return ['toggle']
-  }
-
   render() {
     this.innerHTML = /* html */`
       <div class="ark-audio__recording-time">
@@ -25,24 +21,24 @@ export class Audio extends Component {
         <label data-recording-time></label>
       </div>
 
-      ${
-      this._isToggle() ?
-        this._toggleTemplate() :
-        this._individualButtonsTemplate()
-      }
+      <div class="ark-audio--buttons">
+        <button class="ark-audio--button-start" listen on-click="start">
+          ${this._getSlots('start')}
+        </button>
+        <button class="ark-audio--button-stop" listen on-click="stop">
+          ${this._getSlots('stop')}
+        </button>
+      </div>
     `
 
     return super.render()
   }
 
   load() {
-    // this.global.addEventListener("mouseup", _ => this.stop())
-
     return super.load()
   }
 
   disconnectedCallback() {
-    // this.global.removeEventListener("mouseup", _ => this.stop())
     this.stop()
   }
 
@@ -83,16 +79,16 @@ export class Audio extends Component {
   }
 
   stop() {
+    this.global.clearInterval(this.interval)
+    this.interval = null
+
     if (!this.mediaRecorder) return
 
     const tracks = this.stream ? this.stream.getTracks() : []
     tracks.forEach(track => track.stop())
     this.mediaRecorder.stop()
-
     this.mediaRecorder = null
     this.stream = null
-    this.global.clearInterval(this.interval)
-    this.interval = null
   }
 
   dataURL() {
@@ -114,37 +110,6 @@ export class Audio extends Component {
         }
       }))
     }
-  }
-
-  /** @returns {string} */
-  _toggleTemplate() {
-    return /* html */`
-      <button data-toggle-button listen on-mousedown="start" on-mouseup="stop"
-      on-touchstart="start" on-touchend="stop"
-      >
-        <div data-toggle-icon-start>${this._getSlots('start')}</div>
-        <div data-toggle-icon-stop>${this._getSlots('stop')}</div>
-      </button>
-    `
-  }
-
-  /** @returns {string} */
-  _individualButtonsTemplate() {
-    return /* html */`
-      <div class="ark-audio--buttons">
-        <button data-toggle-button listen on-click="start">
-          ${this._getSlots('start')}
-        </button>
-        <button data-toggle-button listen on-click="stop">
-          ${this._getSlots('stop')}
-        </button>
-      </div>
-    `
-  }
-
-  /** @returns {Boolean} */
-  _isToggle() {
-    return this.hasAttribute('toggle')
   }
 
   _initInterval() {
@@ -212,11 +177,6 @@ export class Audio extends Component {
   /** @returns {HTMLLabelElement} */
   get recordingTimeLabel() {
     return this.querySelector('[data-recording-time]')
-  }
-
-  /** @returns {HTMLButtonElement} */
-  get toggleButton() {
-    return this.querySelector('[data-toggle-button]')
   }
 }
 customElements.define('ark-audio', Audio)
