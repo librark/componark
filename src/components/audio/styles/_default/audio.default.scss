@@ -65,6 +65,11 @@
         animation: zoom 1s both infinite;
       }
     }
+
+    &--buttons {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   @keyframes zoom {

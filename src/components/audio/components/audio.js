@@ -36,13 +36,13 @@ export class Audio extends Component {
   }
 
   load() {
-    this.global.addEventListener("mouseup", _ => this.stop())
+    // this.global.addEventListener("mouseup", _ => this.stop())
 
     return super.load()
   }
 
   disconnectedCallback() {
-    this.global.removeEventListener("mouseup", _ => this.stop())
+    // this.global.removeEventListener("mouseup", _ => this.stop())
     this.stop()
   }
 
@@ -50,6 +50,15 @@ export class Audio extends Component {
 
   start() {
     this.stop()
+
+    navigator.getMedia = (
+      navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia
+    )
+
+    if (!navigator.mediaDevices.getUserMedia) return
 
     navigator.mediaDevices.getUserMedia({
       audio: true
@@ -122,7 +131,7 @@ export class Audio extends Component {
   /** @returns {string} */
   _individualButtonsTemplate() {
     return /* html */`
-      <div>
+      <div class="ark-audio--buttons">
         <button data-toggle-button listen on-click="start">
           ${this._getSlots('start')}
         </button>
@@ -157,8 +166,8 @@ export class Audio extends Component {
   _setRecordingTimeLabel(hours = 0, minutes = 0, seconds = 0) {
     let timeLabel = ''
 
-    timeLabel += hours < 10 ? `0${hours}` : hours
-    timeLabel += ':'
+    // timeLabel += hours < 10 ? `0${hours}` : hours
+    // timeLabel += ':'
     timeLabel += minutes < 10 ? `0${minutes}` : minutes
     timeLabel += ':'
     timeLabel += seconds < 10 ? `0${seconds}` : seconds

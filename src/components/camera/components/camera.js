@@ -60,6 +60,8 @@ export class Camera extends Component {
       navigator.msGetUserMedia
     )
 
+    if (!navigator.mediaDevices.getUserMedia) return
+
     navigator.mediaDevices.getUserMedia({
       video: {
         width: this.width,

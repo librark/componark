@@ -10,7 +10,10 @@ export class SignatureDemo extends Component {
   render() {
     this.innerHTML = /* html */ `${this.styles}
       <div class="signature-container">
-        <ark-signature listen on-signature:dirty="_onDirty"></ark-signature>
+
+        <ark-signature listen on-signature:dirty="_onDirty" height="50vh">
+        </ark-signature>
+
       </div>
       <div>
         <ark-button background="primary" listen on-click="_onSave">
@@ -43,7 +46,7 @@ export class SignatureDemo extends Component {
   }
 
   _onShowImage() {
-    this.img.src = this.signature.dataURL(100, 100)
+    this.img.src = this.signature.dataURL(300, 300)
   }
 
   _onSave() {

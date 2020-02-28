@@ -2,7 +2,7 @@
   $component: "ark-signature";
 
   #{$component} {
-    display: block !important;
+    display: table;
     height: 100%;
     width: 100%;
   }
@@ -10,8 +10,8 @@
   .#{$component} {
     &--pad {
       display: block;
-      height: 100%;
-      width: 100%;
+      height: inherit;
+      width: inherit;
     }
   }
 }

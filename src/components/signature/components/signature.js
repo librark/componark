@@ -3,8 +3,8 @@ import SignaturePad from 'signature_pad/dist/signature_pad'
 
 export class Signature extends Component {
   init(context = {}) {
-    this.width = this.width || context['width'] || 400
-    this.height = this.height || context['height'] || 300
+    this.width = this.width || context['width']
+    this.height = this.height || context['height']
 
     // -------------------------------------------------------------------------
     // Local
@@ -21,11 +21,7 @@ export class Signature extends Component {
 
   render() {
     this.innerHTML = /* html */`
-      <canvas data-signature-pad
-        width="${this.width}"
-        height="${this.height}"
-        class="ark-signature--pad">
-      </canvas>
+      <canvas data-signature-pad class="ark-signature--pad"></canvas>
     `
 
     this.signaturePad = new SignaturePad(this.canvas, {
@@ -33,17 +29,29 @@ export class Signature extends Component {
       penColor: 'rgb(0, 0, 0)',
     })
 
+    if (this.width) this.style.width = this.width
+    if (this.height) this.style.height = this.height
+
     return super.render()
   }
 
   load() {
     this.global.addEventListener("resize", this.resizeCanvas.bind(this))
-    this.canvas.addEventListener("mousedown", _ => {
+
+    this.canvas.addEventListener("mouseup", _ => {
       this._dirty = true
       this.dispatchDirtyEvent()
     })
 
-    setTimeout(_ => { this.resizeCanvas() }, 800)
+    this.canvas.addEventListener("touchend", _ => {
+      this._dirty = true
+      this.dispatchDirtyEvent()
+    })
+
+    setTimeout(_ => {
+      this.resizeCanvas()
+    }, 800)
+
     return super.load()
   }
 
@@ -54,7 +62,7 @@ export class Signature extends Component {
   // ---------------------------------------------------------------------------
 
   /** @returns {string} */
-  dataURL(width = this.width, height = this.height) {
+  dataURL(width = this.offsetWidth, height = this.offsetHeight) {
     /** @type {HTMLCanvasElement} */
     const dupCanvas = (this.canvas.cloneNode(true))
 
@@ -62,8 +70,8 @@ export class Signature extends Component {
     dupCanvas.height = height
     dupCanvas.getContext('2d').drawImage(
       this.canvas,
-      0, 0, width, height,
-      0, 0, this.canvas.width, this.canvas.height
+      0, 0, this.canvas.width, this.canvas.height,
+      0, 0, width, height
     )
 
     return dupCanvas.toDataURL('image/jpg')
@@ -77,8 +85,8 @@ export class Signature extends Component {
 
   resizeCanvas() {
     const ratio = Math.max(this.global.devicePixelRatio || 1, 1)
-    this.width = this.canvas.width = this.offsetWidth * ratio
-    this.height = this.canvas.height = this.offsetHeight * ratio
+    this.canvas.width = this.offsetWidth * ratio
+    this.canvas.height = this.offsetHeight * ratio
     this.canvas.getContext("2d").scale(ratio, ratio)
     this.clear()
   }

@@ -41,4 +41,4 @@ http:
 	http-server -p 8080 -c-1 dist
 
 browser-sync:
-	browser-sync start --proxy "localhost:7890" --files "./src/*" --https
+	browser-sync start --proxy "localhost:7890" --files "*" --https
