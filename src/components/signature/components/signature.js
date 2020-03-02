@@ -36,7 +36,7 @@ export class Signature extends Component {
   }
 
   load() {
-    this.global.addEventListener("resize", this.resizeCanvas.bind(this))
+    this.global.addEventListener("resize", _ => this.resizeCanvas())
 
     this.canvas.addEventListener("mouseup", _ => {
       this._dirty = true
@@ -49,14 +49,14 @@ export class Signature extends Component {
     })
 
     setTimeout(_ => {
-      this.resizeCanvas()
+      this.resizeCanvas(true)
     }, 800)
 
     return super.load()
   }
 
   disconnectedCallback() {
-    this.global.removeEventListener("resize", this.resizeCanvas.bind(this))
+    this.global.removeEventListener("resize", _ => this.resizeCanvas())
   }
 
   // ---------------------------------------------------------------------------
@@ -77,13 +77,15 @@ export class Signature extends Component {
     return dupCanvas.toDataURL('image/jpg')
   }
 
-  clear() {
+  clear(dirty = false) {
     this.signaturePad.clear()
-    this._dirty = false
+    this._dirty = dirty
     this.dispatchDirtyEvent()
   }
 
-  resizeCanvas() {
+  resizeCanvas(isResponsive = this._isResponsive) {
+    if (!isResponsive) return
+
     const ratio = Math.max(this.global.devicePixelRatio || 1, 1)
     const width = this.offsetWidth * ratio
     const height = this.offsetHeight * ratio
@@ -92,7 +94,7 @@ export class Signature extends Component {
     this.canvas.width = width
     this.canvas.height = height
     this.canvas.getContext("2d").scale(ratio, ratio)
-    this.clear()
+    this.clear(this.dirty)
 
     this.signaturePad.fromDataURL(dataURL)
   }
@@ -101,6 +103,11 @@ export class Signature extends Component {
   /** @returns {boolean} */
   get dirty() {
     return this._dirty
+  }
+
+  /** @returns {boolean} */
+  get _isResponsive() {
+    return this.hasAttribute('responsive')
   }
 
   dispatchDirtyEvent() {

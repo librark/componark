@@ -10,10 +10,9 @@ export class SignatureDemo extends Component {
   render() {
     this.innerHTML = /* html */ `${this.styles}
       <div class="signature-container">
-
-        <ark-signature listen on-signature:dirty="_onDirty" height="50vh">
+        <ark-signature listen on-signature:dirty="_onDirty"
+           width="300px" height="300px">
         </ark-signature>
-
       </div>
       <div>
         <ark-button background="primary" listen on-click="_onSave">
@@ -89,6 +88,7 @@ export class SignatureDemo extends Component {
           justify-content: center;
           align-items: center;
           padding: 1rem;
+          flex-direction: column;
         }
 
         .signature-container ark-signature{
