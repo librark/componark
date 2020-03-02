@@ -85,10 +85,16 @@ export class Signature extends Component {
 
   resizeCanvas() {
     const ratio = Math.max(this.global.devicePixelRatio || 1, 1)
-    this.canvas.width = this.offsetWidth * ratio
-    this.canvas.height = this.offsetHeight * ratio
+    const width = this.offsetWidth * ratio
+    const height = this.offsetHeight * ratio
+    const dataURL = this.dataURL(width, height)
+
+    this.canvas.width = width
+    this.canvas.height = height
     this.canvas.getContext("2d").scale(ratio, ratio)
     this.clear()
+
+    this.signaturePad.fromDataURL(dataURL)
   }
 
   // ---------------------------------------------------------------------------
