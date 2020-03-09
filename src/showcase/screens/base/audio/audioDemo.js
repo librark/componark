@@ -47,7 +47,6 @@ export class AudioDemo extends Component {
 		this.addEventListener('onStopAudio', (
 			/** @type {CustomEvent} */ event) => {
 			event.stopImmediatePropagation()
-			console.log('Se detuvo en : ', event.detail.totalSeconds)
 		})
 
 		return super.load()
