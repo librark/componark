@@ -1,4 +1,7 @@
-import { Audio, Component } from '../../loader'
+import { Component } from '../../loader'
+/**
+ * @typedef {import('../../loader').Audio} Audio
+ */
 
 export class AudioDemo extends Component {
 	init (context) {
@@ -33,12 +36,18 @@ export class AudioDemo extends Component {
 			this.audio.src = event.detail.dataURL
 		})
 
-		this.addEventListener('onSecondsAudio', (
+		this.addEventListener('onStartAudio', (
 			/** @type {CustomEvent} */ event) => {
 			event.stopImmediatePropagation()
 			console.log(event.detail.totalSeconds)
 
 			if (event.detail.totalSeconds >= 10) this.arkAudio.stop()
+		})
+
+		this.addEventListener('onStopAudio', (
+			/** @type {CustomEvent} */ event) => {
+			event.stopImmediatePropagation()
+			console.log('Se detuvo en : ', event.detail.totalSeconds)
 		})
 
 		return super.load()
@@ -49,7 +58,7 @@ export class AudioDemo extends Component {
 		return this.querySelector('[data-audio]')
 	}
 
-	/** @returns {HTMLAudioElement} */
+	/** @returns {Audio} */
 	get arkAudio () {
 		return this.querySelector('[data-ark-audio]')
 	}
