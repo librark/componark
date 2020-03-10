@@ -1,15 +1,15 @@
 /**
  * @typedef {import('../../loader').Modal} Modal
  */
-import { Component } from "../../loader"
+import { Component } from '../../loader'
 
 export class ModalDemo extends Component {
-  init(context) {
-    return super.init(context)
-  }
+	init (context) {
+		return super.init(context)
+	}
 
-  render() {
-    this.innerHTML = /* html */ `${this.styles}
+	render () {
+		this.innerHTML = /* html */ `${this.styles}
       <div>
         <p>This is a modal.</p>
         <button btn-open>open</button>
@@ -18,18 +18,65 @@ export class ModalDemo extends Component {
 
       <ark-modal title="My Title" subtitle="My Subtitle" horizontal="center"
         vertical="center">
+        <div style="margin: 1rem;">
 
-        <div>
-          <p>Contenido Parrafo 1</p>
-          <p>Contenido Parrafo 2</p>
-          <p>Contenido Parrafo 3</p>
+          <div>
+            <p>Contenido Párrafo A-1</p>
+            <p>Contenido Párrafo A-2</p>
+            <p>Contenido Párrafo A-3</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo A-4</p>
+            <p>Contenido Párrafo A-5</p>
+            <p>Contenido Párrafo A-6</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo A-7</p>
+            <p>Contenido Párrafo A-8</p>
+            <p>Contenido Párrafo A-9</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo B-1</p>
+            <p>Contenido Párrafo B-2</p>
+            <p>Contenido Párrafo B-3</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo B-4</p>
+            <p>Contenido Párrafo B-5</p>
+            <p>Contenido Párrafo B-6</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo B-7</p>
+            <p>Contenido Párrafo B-8</p>
+            <p>Contenido Párrafo B-9</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo C-1</p>
+            <p>Contenido Párrafo C-2</p>
+            <p>Contenido Párrafo C-3</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo C-4</p>
+            <p>Contenido Párrafo C-5</p>
+            <p>Contenido Párrafo C-6</p>
+          </div>
+
+          <div>
+            <p>Contenido Párrafo C-7</p>
+            <p>Contenido Párrafo C-8</p>
+            <p>Contenido Párrafo C-9</p>
+          </div>
+
         </div>
 
-        <div>
-          <p>Contenido2 Parrafo 1</p>
-          <p>Contenido2 Parrafo 2</p>
-          <p>Contenido2 Parrafo 3</p>
-        </div>
+
 
         <ark-button slot="action">Aceptar</ark-button>
         <ark-button slot="action" close>Cerrar</ark-button>
@@ -49,32 +96,32 @@ export class ModalDemo extends Component {
       </div>
     `
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  load() {
-    const open = this.querySelector("[btn-open]")
-    open.addEventListener("click", _ => this.modal.open())
+	load () {
+		const open = this.querySelector('[btn-open]')
+		open.addEventListener('click', _ => this.modal.open())
 
-    const toggle = this.querySelector("[btn-toggle]")
-    toggle.addEventListener("click", _ => this.modal.toggle())
+		const toggle = this.querySelector('[btn-toggle]')
+		toggle.addEventListener('click', _ => this.modal.toggle())
 
-    return super.load()
-  }
+		return super.load()
+	}
 
-  /** @returns {Modal} */
-  get modal() {
-    return /** @type {Modal} */ (this.select("ark-modal"))
-  }
+	/** @returns {Modal} */
+	get modal () {
+		return /** @type {Modal} */ (this.select('ark-modal'))
+	}
 
-  get styles() {
-    return /* html */ `
+	get styles () {
+		return /* html */ `
       <style>
         demo-modal ark-modal p{
           margin: 0;
         }
       </style>
     `
-  }
+	}
 }
-customElements.define("demo-modal", ModalDemo)
+customElements.define('demo-modal', ModalDemo)
