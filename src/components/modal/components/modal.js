@@ -43,10 +43,12 @@ export class Modal extends Component {
 
 	open () {
 		this.setAttribute('show', '')
+		this._onHiddenEvent()
 	}
 
 	close () {
 		this.removeAttribute('show')
+		this._onHiddenEvent()
 	}
 
 	toggle () {
@@ -91,6 +93,17 @@ export class Modal extends Component {
       </div>
     `
 	}
+
+	// ---------------------------------------------------------------------------
+	_onHiddenEvent () {
+		this.dispatchEvent(new CustomEvent('onHiddenModal', {
+			bubbles: true,
+			detail: {
+				hidden: !this.hasAttribute('show')
+			}
+		}))
+	}
+	// ---------------------------------------------------------------------------
 
 	_generateContent (content, className, type = 'div') {
 		return content

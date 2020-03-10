@@ -88,6 +88,11 @@ export class ModalDemo extends Component {
         <h3>ark-button</h3>
         <small>Attributes:</small>
         <hr />
+        <p>Modal show: </p>
+          <ul>
+            <li>onHiddenModal:<span data-hidden> hidden: false</span></li>
+          </ul>
+
         <p>Size of a new modal window</p>
         <ul>
           <li>360px [default]</li>
@@ -95,6 +100,13 @@ export class ModalDemo extends Component {
         </ul>
       </div>
     `
+
+		this.addEventListener('onHiddenModal', (/** @type {Event} */ event) => {
+			event.stopImmediatePropagation()
+			this.select('[data-hidden]').innerHTML = /* html */` hidden:
+        ${event['detail'].hidden}
+      `
+		})
 
 		return super.render()
 	}

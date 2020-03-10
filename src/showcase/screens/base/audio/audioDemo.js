@@ -39,7 +39,6 @@ export class AudioDemo extends Component {
 		this.addEventListener('onStartAudio', (
 			/** @type {CustomEvent} */ event) => {
 			event.stopImmediatePropagation()
-			console.log(event.detail.totalSeconds)
 
 			if (event.detail.totalSeconds >= 10) this.arkAudio.stop()
 		})
