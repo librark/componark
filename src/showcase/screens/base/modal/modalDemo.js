@@ -4,12 +4,12 @@
 import { Component } from '../../loader'
 
 export class ModalDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init(context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render() {
+    this.innerHTML = /* html */ `${this.styles}
       <div>
         <p>This is a modal.</p>
         <button btn-open>open</button>
@@ -101,39 +101,39 @@ export class ModalDemo extends Component {
       </div>
     `
 
-		this.addEventListener('onHiddenModal', (/** @type {Event} */ event) => {
-			event.stopImmediatePropagation()
-			this.select('[data-hidden]').innerHTML = /* html */` hidden:
-        ${event['detail'].hidden}
+    return super.render()
+  }
+
+  load() {
+    this.addEventListener('onHiddenModal', (/** @type {CustomEvent} */ event) => {
+      event.stopImmediatePropagation()
+      this.select('[data-hidden]').innerHTML = /* html */`
+        hidden: ${event.detail.hidden}
       `
-		})
+    })
 
-		return super.render()
-	}
+    const open = this.querySelector('[btn-open]')
+    open.addEventListener('click', _ => this.modal.open())
 
-	load () {
-		const open = this.querySelector('[btn-open]')
-		open.addEventListener('click', _ => this.modal.open())
+    const toggle = this.querySelector('[btn-toggle]')
+    toggle.addEventListener('click', _ => this.modal.toggle())
 
-		const toggle = this.querySelector('[btn-toggle]')
-		toggle.addEventListener('click', _ => this.modal.toggle())
+    return super.load()
+  }
 
-		return super.load()
-	}
+  /** @returns {Modal} */
+  get modal() {
+    return /** @type {Modal} */ (this.select('ark-modal'))
+  }
 
-	/** @returns {Modal} */
-	get modal () {
-		return /** @type {Modal} */ (this.select('ark-modal'))
-	}
-
-	get styles () {
-		return /* html */ `
+  get styles() {
+    return /* html */ `
       <style>
         demo-modal ark-modal p{
           margin: 0;
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-modal', ModalDemo)
