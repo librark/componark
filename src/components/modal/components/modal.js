@@ -26,7 +26,7 @@ export class Modal extends Component {
         <div class="ark-modal__actions" data-actions></div>
       </div>
 
-      <div class="ark-modal__scrim" listen on-click="close"></div>
+      <div data-scrim class="ark-modal__scrim"></div>
     `
 
 		this._appendSlots()
@@ -34,6 +34,10 @@ export class Modal extends Component {
 	}
 
 	load () {
+		if (!this._isBlockedScrim()) {
+			this.scrim.addEventListener('click', _ => this.close())
+		}
+
 		this.querySelectorAll('[close]').forEach(button =>
 			button.addEventListener('click', _ => this.close())
 		)
@@ -64,6 +68,11 @@ export class Modal extends Component {
 	/** @param {Object} value */
 	set slots (value) {
 		this._slots = Object.keys(this._slots || {}).length ? this._slots : value
+	}
+
+	/** @return {HTMLDivElement} */
+	get scrim () {
+		return this.querySelector('[data-scrim]')
 	}
 
 	// ---------------------------------------------------------------------------
@@ -113,6 +122,11 @@ export class Modal extends Component {
       </${type}>
     `
 			: ''
+	}
+
+	/** @return {boolean} */
+	_isBlockedScrim () {
+		return this.hasAttribute('block-scrim')
 	}
 }
 customElements.define('ark-modal', Modal)
