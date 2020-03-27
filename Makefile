@@ -1,5 +1,9 @@
 # Makefile
 
+update:
+	git pull --all
+	git reset --hard
+
 build:
 	make install
 	rm -rf ./dist
@@ -7,25 +11,22 @@ build:
 
 # ------------------------------------------------------------------------------
 
+install:
+	npm install -g browser-sync
+	npm install -g http-server
+	npm i
+
 clean:
 	npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm
 	npm cache clean --force
 	rm -rf node_modules
 	# killall -9 node
 
-install:
-	make clean
-	npm install -g browser-sync
-	npm install -g http-server
-	npm i
-
 clean-git:
 	git reset --hard
 	git clean -xdf
 
-update:
-	make clean
-
+npm-update:
 	npm install -g npm
 	npm install -g npm-check-updates
 	ncu -u
