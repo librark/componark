@@ -12,5 +12,12 @@
         }
       }
     }
+
+    &[grid] {
+      display: flex;
+      flex-direction: column;
+      flex-flow: wrap;
+      justify-content: space-around;
+    }
   }
 }
