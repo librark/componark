@@ -1,13 +1,14 @@
 @mixin splitview_master_default() {
   $component: "ark-splitview-master";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
 
   #{$component} {
     display: block;
-    width: auto;
+    width: 50%;
     overflow: auto;
     height: inherit;
+
+    &[resize] {
+      resize: horizontal;
+    }
   }
 }

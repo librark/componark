@@ -1,7 +1,8 @@
 import { Component } from '../../component'
 
-export class SplitviewMaster extends Component {
+export class SplitViewMaster extends Component {
 	init (context = {}) {
+		// eslint-disable-next-line no-self-assign
 		this.masterEvent = this.masterEvent
 		return super.init()
 	}
@@ -26,4 +27,4 @@ export class SplitviewMaster extends Component {
 		this.dispatchEvent(new CustomEvent('master:change', event))
 	}
 }
-customElements.define('ark-splitview-master', SplitviewMaster)
+customElements.define('ark-splitview-master', SplitViewMaster)

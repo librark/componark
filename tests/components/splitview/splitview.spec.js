@@ -4,7 +4,7 @@
 
 import {
 	Splitview
-} from '../../../src/components/splitview/components/splitview'
+} from '../../../src/components/splitview/components/splitView'
 import {
 	SplitviewDetail
 } from '../../../src/components/splitview/components/detail'

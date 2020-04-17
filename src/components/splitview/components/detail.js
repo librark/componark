@@ -1,6 +1,6 @@
 import { Component } from '../../component'
 
-export class SplitviewDetail extends Component {
+export class SplitViewDetail extends Component {
 	init (context = {}) {
 		this.title = context['title'] || this.title || ' '
 		this.backButtonIcon = context['backButtonIcon'] || this.backButtonIcon
@@ -61,4 +61,4 @@ export class SplitviewDetail extends Component {
 		return this.backButtonIcon ? this.backButtonIcon() : '&times;'
 	}
 }
-customElements.define('ark-splitview-detail', SplitviewDetail)
+customElements.define('ark-splitview-detail', SplitViewDetail)

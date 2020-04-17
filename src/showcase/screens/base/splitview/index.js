@@ -1,16 +1,16 @@
-import { SplitviewDemo } from './splitviewDemo'
+import { SplitViewDemo } from './splitViewDemo'
 
 export function hub (parentResolver) {
 	const resolver = parentResolver.forge({
 		strategy: {
-			SplitviewDemo: {
+			SplitViewDemo: {
 				method: 'component'
 			}
 		},
 		factory: new ComponentFactory()
 	})
 
-	return resolver.resolve('SplitviewDemo')
+	return resolver.resolve('SplitViewDemo')
 }
 
 export class ComponentFactory {
@@ -24,6 +24,6 @@ export class ComponentFactory {
 	}
 
 	_component () {
-		return new SplitviewDemo()
+		return new SplitViewDemo()
 	}
 }

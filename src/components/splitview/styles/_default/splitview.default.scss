@@ -1,8 +1,5 @@
 @mixin splitview_default_() {
   $component: "ark-splitview";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
 
   #{$component} {
     display: flex;
@@ -12,18 +9,6 @@
 
     z-index: auto;
     background: $background;
-
-    &[resize] {
-      ark-splitview-master {
-        resize: horizontal;
-      }
-    }
-  }
-
-  @media only screen and (min-width: $tablet) {
-    #{$component} {
-      width: -webkit-fill-available;
-    }
   }
 
   @media only screen and (max-width: $tablet) {
