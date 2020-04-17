@@ -14,7 +14,7 @@ export class SplitviewDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `
-      <ark-splitview detail-percentage="10" resize>
+      <ark-splitview detail-percentage="70" resize>
 
         <ark-splitview-master master-event="list:selected">
           <ark-list></ark-list>
