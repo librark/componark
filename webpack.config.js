@@ -1,91 +1,102 @@
-const path = require('path')
-const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const autoprefixer = require('autoprefixer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
 
 // @ts-ignore
 module.exports = (env, argv) => {
-  const devMode = argv.mode === 'development'
-  const target = env.TARGET
+	const devMode = argv.mode === 'development'
+	const target = env.TARGET
 
-  const config = {
-    mode: argv.mode,
-    entry: {
-      app: './src/showcase/index.js'
-    },
-    output: {
-      publicPath: '/',
-      filename: '[name].[contenthash].js',
-      path: path.join(__dirname, '/dist')
-    },
-    optimization: {
-      runtimeChunk: 'single'
-    },
-    plugins: [
-      new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        chunks: ['app', 'runtime'],
-        title: 'componark',
-        template: './src/showcase/index.html'
-      }),
-      new MiniCssExtractPlugin({
-        filename: devMode ? '[name].css' : '[name].[hash].css',
-        chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-      }),
-      new webpack.DefinePlugin({
-        PRODUCTION: !devMode,
-        // @ts-ignore
-        VERSION: JSON.stringify(require('./package.json').version),
-        TARGET: JSON.stringify(target)
-      }),
-      new webpack.HashedModuleIdsPlugin(),
-      new CopyWebpackPlugin(['src/assets/config/.htaccess'])
-    ],
-    module: {
-      rules: [
-        {
-          test: /\.(sa|sc|c)ss$/,
-          use: [
-            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: ['./node_modules']
-              }
-            }
-          ]
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: ['file-loader']
-        },
-        {
-          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[name].[ext]',
-                outputPath: 'fonts/'
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
+	const config = {
+		mode: argv.mode,
+		entry: {
+			app: './src/showcase/index.js'
+		},
+		output: {
+			publicPath: '/',
+			filename: '[name].[contenthash].js',
+			path: path.join(__dirname, '/dist')
+		},
+		optimization: {
+			runtimeChunk: 'single'
+		},
+		plugins: [
+			new CleanWebpackPlugin(),
+			new HtmlWebpackPlugin({
+				chunks: ['app', 'runtime'],
+				title: 'componark',
+				template: './src/showcase/index.html'
+			}),
+			new MiniCssExtractPlugin({
+				filename: devMode ? '[name].css' : '[name].[hash].css',
+				chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+			}),
+			new webpack.DefinePlugin({
+				PRODUCTION: !devMode,
+				// @ts-ignore
+				VERSION: JSON.stringify(require('./package.json').version),
+				TARGET: JSON.stringify(target)
+			}),
+			new webpack.HashedModuleIdsPlugin(),
+			new CopyWebpackPlugin(['src/assets/config/.htaccess'])
+		],
+		module: {
+			rules: [
+				{
+					test: /\.(sa|sc|c)ss$/,
+					use: [
+						(devMode ? 'style-loader' : MiniCssExtractPlugin.loader),
+						{ loader: 'css-loader', options: { importLoaders: 1 } },
+						{
+							loader: 'postcss-loader',
+							options: {
+								plugins: () => [autoprefixer()]
+							}
+						},
+						{
+							loader: 'sass-loader',
+							options: {
+								implementation: require('sass'),
+								sassOptions: {
+									includePaths: ['./node_modules'],
+									fiber: false
+								}
+							}
+						}
+					]
+				},
+				{
+					test: /\.(png|svg|jpg|gif)$/,
+					use: ['file-loader']
+				},
+				{
+					test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+					use: [
+						{
+							loader: 'file-loader',
+							options: {
+								name: '[name].[ext]',
+								outputPath: 'fonts/'
+							}
+						}
+					]
+				}
+			]
+		}
+	}
 
-  if (devMode) {
-    // @ts-ignore
-    config.devServer = {
-      contentBase: './dist',
-      historyApiFallback: true,
-      port: 7890
-    }
-  }
+	if (devMode) {
+		// @ts-ignore
+		config.devServer = {
+			contentBase: './dist',
+			historyApiFallback: true,
+			port: 7890
+		}
+	}
 
-  return config
+	return config
 }

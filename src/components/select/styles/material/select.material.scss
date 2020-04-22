@@ -16,7 +16,7 @@
     @extend .mdc-select;
 
     select {
-      @extend .mdc-select__native-control;
+      // @extend .mdc-select__native-control;
 
       position: initial;
       height: initial;

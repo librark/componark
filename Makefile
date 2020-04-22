@@ -27,10 +27,12 @@ clean-git:
 	git clean -xdf
 
 npm-update:
-	npm install -g npm
-	npm install -g npm-check-updates
-	ncu -u
+	npm i -g npm
+	npm i -g npm-check-updates
+	ncu -u --timeout 600000
 	npm i
+	npm audit fix
+	npm rebuild node-sass --force
 
 pull:
 	make clean
