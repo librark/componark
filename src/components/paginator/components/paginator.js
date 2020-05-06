@@ -56,7 +56,9 @@ export class Paginator extends Component {
 			button.innerText = index.toString()
 			button.id = index.toString()
 			button.addEventListener('click', event => {
-				this._setCurrentPage(parseInt(event.target.id))
+				/** @type {HTMLElement} */
+				const target = (/** @type {HTMLElement} */ event.target)
+				this._setCurrentPage(parseInt(target.id))
 			})
 			if (index === this.currentPage) button.setAttribute('active', '')
 
