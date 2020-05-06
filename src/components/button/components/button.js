@@ -18,15 +18,15 @@ export class Button extends Component {
 		return super.render()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	_isFab () {
-		if (this.hasAttribute('fab')) {
-			if (!this.hasAttribute('horizontal')) {
-				this.setAttribute('horizontal', 'end')
-			}
-			if (!this.hasAttribute('vertical')) {
-				this.setAttribute('vertical', 'end')
-			}
+		if (!this.hasAttribute('fab')) return
+
+		if (!this.hasAttribute('horizontal')) {
+			this.setAttribute('horizontal', 'end')
+		}
+		if (!this.hasAttribute('vertical')) {
+			this.setAttribute('vertical', 'end')
 		}
 	}
 

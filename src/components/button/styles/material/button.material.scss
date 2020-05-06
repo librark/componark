@@ -1,24 +1,13 @@
-@import "@material/button/mdc-button.scss";
-@import "@material/fab/mdc-fab";
-
 @mixin button_material_() {
   $component: "ark-button";
 
   #{$component} {
-    @extend .mdc-button__label;
-    @extend .mdc-button;
-
-    text-transform: initial;
-
-    position: unset;
-
-    &[fab] {
-      @extend .mdc-fab;
-    }
+    border-radius: 4px;
 
     button,
     a {
-      padding: 0 0.5rem;
+      min-width: 64px;
+      padding: 4px 16px;
     }
   }
 }

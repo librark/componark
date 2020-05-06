@@ -18,6 +18,8 @@
 
     min-width: max-content;
 
+    overflow: hidden;
+
     button,
     a {
       all: unset;
@@ -32,33 +34,39 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-    }
 
-    &:hover,
-    &:active,
-    &:focus {
-      filter: brightness(110%);
-    }
+      margin: 0;
+      padding: 0;
 
-    // //----------------------------------------
-    // // Fab
-    // // ----------------------------------------
-    &[fab] {
-      &,
-      & > * {
-        border-radius: 50%;
-        width: $fab-size !important;
-        height: $fab-size !important;
+      border-radius: inherit;
 
-        padding: 0.2rem !important;
-        margin: 0 !important;
-
-        z-index: 1024;
-        position: fixed !important;
-
-        min-width: $fab-size !important;
-        min-height: $fab-size !important;
+      &:hover {
+        filter: brightness(110%);
+        color: inherit;
+        background: inherit;
       }
+
+      &:focus {
+        outline: 1px solid rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    //----------------------------------------
+    // Fab
+    // ----------------------------------------
+    &[fab] {
+      border-radius: 50%;
+      width: $fab-size !important;
+      height: $fab-size !important;
+
+      padding: 0.2rem !important;
+      margin: 0 !important;
+
+      z-index: 1024;
+      position: fixed !important;
+
+      min-width: $fab-size !important;
+      min-height: $fab-size !important;
     }
 
     // ----------------------------------------
