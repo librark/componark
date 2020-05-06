@@ -3,8 +3,9 @@
 
   #{$component} {
     display: block;
-    border: 1px solid rgba($color: $muted, $alpha: 0.3);
+    border: 1px solid rgba($color: $muted, $alpha: 0.2);
     background: $background;
+    overflow: hidden;
   }
 
   .#{$component} {
@@ -14,20 +15,25 @@
       max-height: 20rem;
 
       img {
-        max-width: 100%;
+        width: 100%;
       }
     }
 
-    &__header {
+    &__header,
+    &__body,
+    &__actions {
       padding: 0.5rem;
+    }
+
+    &__header {
     }
 
     &__body {
-      padding: 0.5rem;
     }
 
     &__actions {
-      padding: 0.5rem;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

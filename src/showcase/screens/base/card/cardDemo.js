@@ -3,13 +3,13 @@ import { Component } from '../../loader'
 import Image from './assets/building.jpg'
 
 export class CardDemo extends Component {
-  init(context) {
-    return super.init(context)
-  }
+	init (context) {
+		return super.init(context)
+	}
 
-  render() {
-    this.innerHTML = /* html */ `${this.styles}
-    <ark-card title="titulo" subtitle="subtitle [Hello World]">
+	render () {
+		this.innerHTML = /* html */ `${this.styles}
+      <ark-card title="titulo" subtitle="subtitle [Hello World]">
         <img slot="media" src="${Image}" alt="" />
 
         <div>
@@ -20,17 +20,18 @@ export class CardDemo extends Component {
         <ark-button slot="action">btn 2</ark-button>
       </ark-card>
     `
-    return super.render()
-  }
+		return super.render()
+	}
 
-  get styles() {
-    return /* html */`
+	get styles () {
+		return /* html */`
       <style>
         demo-card{
-          padding: .5rem;
+          display: block;
+          padding: 15px;
         }
       </style>
     `
-  }
+	}
 }
 customElements.define('demo-card', CardDemo)

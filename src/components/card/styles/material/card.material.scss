@@ -1,21 +1,17 @@
-@import "@material/card/mdc-card";
-@import "@material/button/mdc-button.scss";
-
 @mixin card_material_() {
   $component: "ark-card";
 
   #{$component} {
-    @extend .mdc-card;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px;
   }
 
   .#{$component} {
+    &__header,
+    &__body,
     &__actions {
-      @extend .mdc-card__actions;
-
-      ark-button {
-        @extend .mdc-card__action;
-        @extend .mdc-card__action--button;
-      }
+      padding: 8px 16px;
     }
   }
 }

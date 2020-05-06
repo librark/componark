@@ -3,8 +3,8 @@ import { getSlots } from '../../../utils'
 
 export class Card extends Component {
 	init (context = {}) {
-		this.title = context['title']
-		this.subtitle = context['subtitle']
+		this.title = context.title
+		this.subtitle = context.subtitle
 
 		// local variables
 		this.slots = this.slots || getSlots(this)
