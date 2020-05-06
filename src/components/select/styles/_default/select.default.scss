@@ -5,11 +5,22 @@
     display: flex;
     flex-direction: column;
     height: auto;
+    margin: 0.1rem;
+
+    &[disabled] {
+      pointer-events: none !important;
+      cursor: default !important;
+
+      color: $muted !important;
+      background: rgba($color: $muted, $alpha: 0.1) !important;
+
+      &:hover {
+        background: none !important;
+      }
+    }
 
     select {
       font-size: initial;
-
-      cursor: pointer;
 
       color: inherit;
       background: inherit;
@@ -22,17 +33,14 @@
         background: $background !important;
       }
 
-      &[disabled] {
-        pointer-events: none !important;
-        cursor: default !important;
-
-        color: $muted !important;
-        background: rgba($color: $muted, $alpha: 0.1) !important;
-
-        &:hover {
-          background: none !important;
-        }
+      &:focus {
+        outline: 1px solid rgba(0, 0, 0, 0.5);
       }
+    }
+
+    select,
+    option {
+      cursor: pointer;
     }
 
     &::before,

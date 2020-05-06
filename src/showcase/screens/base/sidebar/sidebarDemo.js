@@ -4,15 +4,17 @@
 import { Component } from '../../loader'
 
 export class SidebarDemo extends Component {
-  init(context) {
-    return super.init(context)
-  }
+	init (context) {
+		return super.init(context)
+	}
 
-  render() {
-    this.innerHTML = /* html */`
+	render () {
+		this.innerHTML = /* html */`
       <div>
         <p>This is a sidebar.</p>
-        <button listen on-click="_onClick">OPEN!</button>
+        <ark-button listen on-click="_onClick" background="primary">
+          OPEN
+        </ark-button>
       </div>
 
 
@@ -23,12 +25,12 @@ export class SidebarDemo extends Component {
       </ark-sidebar>
     `
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  _onClick() {
-    const sidebar = /** @type {Sidebar} */ (this.querySelector('ark-sidebar'))
-    sidebar.open()
-  }
+	_onClick () {
+		const sidebar = /** @type {Sidebar} */ (this.querySelector('ark-sidebar'))
+		sidebar.open()
+	}
 }
 customElements.define('demo-sidebar', SidebarDemo)
