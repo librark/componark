@@ -7,7 +7,7 @@ import { uuidv4 } from '../../../utils'
 
 export class Zone extends Component {
 	init (context = {}) {
-		this.global = context['global'] || window
+		this.global = context.global || window
 
 		return super.init()
 	}
@@ -187,30 +187,13 @@ export class Zone extends Component {
 
 	/** @param {KeyboardEvent} event */
 	onKeyUp (event) {
-		if (event.key !== 'Shift' && event.key !== 'Delete') return
-
 		if (event.key === 'Shift') {
 			this.selectAll('ark-zone-drag').forEach(drag => {
 				drag.setAttribute('draggable', 'true')
 			})
-
 			this._cleanDropStartDropEnd()
-		}
-
-		if (event.key === 'Delete') {
-			const drags = this.getSelectedDrags()
-
-			if (!drags.length) return
-
-			const dragDropped = new EventAlterZone('DELETE')
-
-			// delete drags
-			drags.forEach(drag => {
-				dragDropped.setItem(drag.getParentDrop(), drag)
-				drag.remove()
-			})
-
-			dragDropped.dispatch(this)
+		} else if (event.key === 'Delete') {
+			this._removeDrags()
 		}
 	}
 
@@ -325,6 +308,21 @@ export class Zone extends Component {
 		}
 
 		this._moveSelectedDrags('MOVE', drop, drags, process)
+	}
+
+	_removeDrags () {
+		const drags = this.getSelectedDrags()
+		if (!drags.length) return
+
+		const dragDropped = new EventAlterZone('DELETE')
+
+		// delete drags
+		drags.forEach(drag => {
+			dragDropped.setItem(drag.getParentDrop(), drag)
+			drag.remove()
+		})
+
+		dragDropped.dispatch(this)
 	}
 
 	_showMultipleSelection () {
