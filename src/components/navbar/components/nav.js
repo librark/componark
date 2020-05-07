@@ -1,26 +1,26 @@
 import { Component } from '../../component'
 
 export class Nav extends Component {
-  init (context = {}) {
-    return super.init()
-  }
+	init (context = {}) {
+		return super.init()
+	}
 
-  render () {
-    if (!(this.hasAttribute('brand') || this.hasAttribute('toggler'))) {
-      this.setAttribute('collapse', 'true')
-    }
+	render () {
+		if (!(this.hasAttribute('brand') || this.hasAttribute('toggler'))) {
+			this.setAttribute('collapse', 'true')
+		}
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  toggleHide () {
-    if (!this.hasAttribute('collapse')) return
+	toggleHide () {
+		if (!this.hasAttribute('collapse')) return
 
-    if (this.style.display === 'none' || this.style.display === '') {
-      this.style.display = 'flex'
-    } else {
-      this.style.display = 'none'
-    }
-  }
+		if (this.style.display === 'none' || this.style.display === '') {
+			this.style.display = 'flex'
+		} else {
+			this.style.display = 'none'
+		}
+	}
 }
 customElements.define('ark-nav', Nav)

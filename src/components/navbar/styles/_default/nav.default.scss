@@ -5,11 +5,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: wrap;
+
     height: 3rem;
+    min-height: 3rem;
+
     overflow: hidden;
 
     & > * {
-      margin: 0 0.1rem;
+      margin: 0.1rem;
     }
   }
 }

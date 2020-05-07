@@ -2,28 +2,28 @@
 import { Component } from '../../component'
 
 export class Navbar extends Component {
-  init (context = {}) {
-    return super.init()
-  }
+	init (context = {}) {
+		return super.init()
+	}
 
-  render () {
-    return super.render()
-  }
+	render () {
+		return super.render()
+	}
 
-  load () {
-    this.querySelectorAll('[navbar-toggler]').forEach(toggler => {
-      toggler.addEventListener('click', this.onToggleContent.bind(this))
-    })
+	load () {
+		this.querySelectorAll('[navbar-toggler]').forEach(toggler => {
+			toggler.addEventListener('click', this.onToggleContent.bind(this))
+		})
 
-    return super.load()
-  }
+		return super.load()
+	}
 
-  /** @param {event} event */
-  onToggleContent (event) {
-    event.stopImmediatePropagation()
-    this.selectAll('ark-nav[collapse]').forEach((/** @type {Nav} */ nav) => {
-      nav.toggleHide()
-    })
-  }
+	/** @param {event} event */
+	onToggleContent (event) {
+		event.stopImmediatePropagation()
+		this.selectAll('ark-nav[collapse]').forEach((/** @type {Nav} */ nav) => {
+			nav.toggleHide()
+		})
+	}
 }
 customElements.define('ark-navbar', Navbar)
