@@ -1,5 +1,4 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const autoprefixer = require('autoprefixer')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -50,20 +49,12 @@ module.exports = (env, argv) => {
 					test: /\.(sa|sc|c)ss$/,
 					use: [
 						(devMode ? 'style-loader' : MiniCssExtractPlugin.loader),
-						{ loader: 'css-loader', options: { importLoaders: 1 } },
-						{
-							loader: 'postcss-loader',
-							options: {
-								plugins: () => [autoprefixer()]
-							}
-						},
+						'css-loader',
 						{
 							loader: 'sass-loader',
 							options: {
-								implementation: require('sass'),
 								sassOptions: {
-									includePaths: ['./node_modules'],
-									fiber: false
+									includePaths: ['./node_modules']
 								}
 							}
 						}
