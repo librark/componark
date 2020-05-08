@@ -1,41 +1,19 @@
-@import "@material/floating-label/mdc-floating-label.scss";
-@import "@material/form-field/mdc-form-field.scss";
-@import "@material/textfield/mdc-text-field.scss";
-
 @mixin input_material_() {
-  @include mdc-form-field-core-styles;
   $component: "ark-input";
 
   #{$component} {
-    @extend .mdc-text-field;
-
-    padding-bottom: 0.3rem;
+    border-bottom: 1px solid;
+    border-color: inherit;
   }
 
   .#{$component} {
-    &__label {
-      @extend .mdc-floating-label;
-      position: initial;
-
-      label {
-        font-size: small;
-        font-weight: 400;
-
-        position: relative;
-        bottom: 0;
-        margin: 0;
-      }
-    }
-
     &__input {
       input {
-        @extend .mdc-text-field__input;
+        border: 0px;
 
-        position: initial;
-
-        padding: 0;
-        padding-bottom: 0.1rem;
-        margin: 0;
+        &:focus {
+          outline: 0;
+        }
       }
     }
   }

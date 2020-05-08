@@ -1,21 +1,21 @@
-import { Component } from "../../component"
+import { Component } from '../../component'
 
 export class Input extends Component {
-  init(context = {}) {
-    this.label = context["label"] || this.label
-    this.value = context["value"] || this.value || ""
+	init (context = {}) {
+		this.label = context.label || this.label
+		this.value = context.value || this.value || ''
 
-    // local variables
-    this.defaultContent = this.defaultContent || this.innerHTML
-    return super.init()
-  }
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
+		return super.init()
+	}
 
-  reflectedProperties() {
-    return ["label", "value"]
-  }
+	reflectedProperties () {
+		return ['label', 'value']
+	}
 
-  render() {
-    this.innerHTML = /* html */ `
+	render () {
+		this.innerHTML = /* html */ `
       <div class="ark-input__label" ${this._isRequired()}>
         <label>${this.label}</label>
       </div>
@@ -29,72 +29,77 @@ export class Input extends Component {
       </div>
     `
 
-    this._moveAttributes()
-    return super.render()
-  }
+		this._moveAttributes()
+		return super.render()
+	}
 
-  // ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
+	/** @return {HTMLInputElement} */
+	get input () {
+		return this.querySelector('[data-input]')
+	}
 
-  /** @param {Event} event */
-  _change(event) {
-    event.stopImmediatePropagation()
-    this.value = this.select("[data-input]")["value"]
-    this.dispatchEvent(
-      new CustomEvent("alter", {
-        detail: {
-          value: this.value,
-          origin: event
-        }
-      })
-    )
-  }
+	// --------------------------------------------------------------------------
 
-  _isRequired() {
-    return this.hasAttribute("required") ? "required" : ""
-  }
+	/** @param {Event} event */
+	_change (event) {
+		event.stopImmediatePropagation()
+		this.value = this.input.value
+		this.dispatchEvent(
+			new CustomEvent('alter', {
+				detail: {
+					value: this.value,
+					origin: event
+				}
+			})
+		)
+	}
 
-  _moveAttributes() {
-    const element = this.querySelector("[data-input]")
-    const attributes = Array.from(this.attributes)
+	_isRequired () {
+		return this.hasAttribute('required') ? 'required' : ''
+	}
 
-    attributes.forEach(attribute => {
-      if (this._defaultAttributes().find(item => item === attribute.name)) {
-        element.setAttribute(attribute.name, attribute.value)
-        this.removeAttribute(attribute.name)
-      }
-    })
-  }
+	_moveAttributes () {
+		const element = this.querySelector('[data-input]')
+		const attributes = Array.from(this.attributes)
 
-  /** @return {Array<string>} */
-  _defaultAttributes() {
-    return [
-      "accept",
-      "align",
-      "alt",
-      "autocomplete",
-      "autofocus",
-      "checked",
-      "dirname",
-      "disabled",
-      "form",
-      "formaction",
-      "formenctype",
-      "formmethod",
-      "formnovalidate",
-      "formtarget",
-      "list",
-      "min",
-      "multiple",
-      "name",
-      "pattern",
-      "placeholder",
-      "readonly",
-      "required",
-      "size",
-      "src",
-      "step",
-      "type"
-    ]
-  }
+		attributes.forEach(attribute => {
+			if (this._defaultAttributes().find(item => item === attribute.name)) {
+				element.setAttribute(attribute.name, attribute.value)
+				this.removeAttribute(attribute.name)
+			}
+		})
+	}
+
+	/** @return {Array<string>} */
+	_defaultAttributes () {
+		return [
+			'accept',
+			'align',
+			'alt',
+			'autocomplete',
+			'autofocus',
+			'checked',
+			'dirname',
+			'form',
+			'formaction',
+			'formenctype',
+			'formmethod',
+			'formnovalidate',
+			'formtarget',
+			'list',
+			'min',
+			'multiple',
+			'name',
+			'pattern',
+			'placeholder',
+			'readonly',
+			'required',
+			'size',
+			'src',
+			'step',
+			'type'
+		]
+	}
 }
-customElements.define("ark-input", Input)
+customElements.define('ark-input', Input)

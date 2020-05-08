@@ -2,29 +2,58 @@
   $component: "ark-input";
 
   #{$component} {
-    display: block;
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 0.1rem;
 
-    &,
-    * {
-      color: inherit;
-      background: inherit;
+    &[disabled] {
+      pointer-events: none !important;
+      cursor: default !important;
+
+      color: $muted !important;
+      background: rgba($color: $muted, $alpha: 0.1) !important;
+
+      &:hover {
+        background: none !important;
+      }
+    }
+
+    &::before,
+    &::after {
+      all: unset;
     }
   }
 
   .#{$component} {
     &__label {
-      font-weight: bold;
-      color: $muted;
-
-      &[required] {
-        color: rgba($color: $color, $alpha: 1);
+      & > * {
+        font-size: small;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: block;
       }
     }
 
     &__input {
       input {
+        font-size: initial;
+
+        color: inherit;
+        background: inherit;
+        border-color: initial;
+
         width: 100%;
+
+        * {
+          color: $color !important;
+          background: $background !important;
+        }
+
+        &:focus {
+          outline: 1px solid rgba(0, 0, 0, 0.5);
+        }
       }
     }
   }
