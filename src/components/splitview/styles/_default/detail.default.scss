@@ -6,8 +6,9 @@
 
   // ---------------------------------------------------------------------------
   #{$component} {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid: auto 1fr / 1fr;
+
     background: $background;
     flex: 1;
 
@@ -17,15 +18,17 @@
     top: 0;
     left: 0;
 
-    padding-top: $headerHeight;
-
     width: auto;
     height: 100vh;
-    max-height: -webkit-fill-available;
+    max-height: 100%;
 
     &[hidden] {
       display: block !important;
       visibility: hidden !important;
+    }
+
+    & > * {
+      overflow: auto;
     }
   }
 
@@ -35,12 +38,8 @@
       color: $light;
 
       display: flex;
-      position: fixed;
       width: 100%;
-
-      top: 0;
-
-      z-index: inherit;
+      height: fit-content;
 
       &,
       * {
