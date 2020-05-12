@@ -5,6 +5,13 @@
     display: flex;
     width: 100%;
     height: auto;
-    // flex-wrap: wrap;
+
+    overflow-x: scroll;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
