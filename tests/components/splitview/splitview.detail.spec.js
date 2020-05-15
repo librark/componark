@@ -1,18 +1,18 @@
 import { Button } from '../../../src/components/button'
 import {
-	SplitviewDetail
+	SplitViewDetail
 } from '../../../src/components/splitview/components/detail'
 
-describe('SplitviewDetail', () => {
+describe('SplitViewDetail', () => {
 	it('can be instantiated', () => {
-		const detail = new SplitviewDetail()
+		const detail = new SplitViewDetail()
 		detail.init()
 		detail.connectedCallback()
 		expect(detail.outerHTML.trim().length).toBeTruthy()
 	})
 
 	it('can be instantiated with elements', () => {
-		const detail = new SplitviewDetail()
+		const detail = new SplitViewDetail()
 
 		const button = new Button()
 		button.connectedCallback()
@@ -22,7 +22,7 @@ describe('SplitviewDetail', () => {
 	})
 
 	it('can be remove the hidden attribute', () => {
-		const detail = new SplitviewDetail()
+		const detail = new SplitViewDetail()
 		detail.init({})
 		detail.connectedCallback()
 
@@ -40,10 +40,10 @@ describe('SplitviewDetail', () => {
 	})
 
 	it('can be instantiated with attribute', () => {
-		const detail = new SplitviewDetail().init({
+		const detail = new SplitViewDetail().init({
 			title: 'my title',
 			data: 'ok',
-			backButtonIcon: () => /* html */ `<span data-button>icon</span>`
+			backButtonIcon: () => /* html */ '<span data-button>icon</span>'
 		})
 		detail.render()
 
