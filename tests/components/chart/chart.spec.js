@@ -6,7 +6,7 @@ describe('Chart', () => {
 		const element = /** @type {Chart} */ (document.createElement('ark-chart'))
 		expect(element).toBeTruthy()
 
-		var init = element.init()
+		const init = element.init()
 		expect(element === init).toBeTruthy()
 
 		element.disconnectedCallback()

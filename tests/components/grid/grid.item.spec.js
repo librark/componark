@@ -8,7 +8,7 @@ describe('Grid Item', () => {
 		expect(grid).toBeTruthy()
 
 		if (grid) {
-			var init = grid.init()
+			const init = grid.init()
 			expect(grid === init).toBeTruthy()
 		}
 	})

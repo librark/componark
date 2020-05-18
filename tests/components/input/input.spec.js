@@ -7,7 +7,7 @@ describe('Input', () => {
 
 		expect(item).toBeTruthy()
 
-		var init = item.init()
+		const init = item.init()
 		expect(item === init).toBeTruthy()
 	})
 
@@ -33,13 +33,11 @@ describe('Input', () => {
 	it('can be rendered with label', function () {
 		const item = new Input()
 		const att = document.createAttribute('label')
-		att.value = 'date'
+		att.value = 'Date'
 		item.setAttributeNode(att)
-
 		item.connectedCallback()
-
 		// @ts-ignore
-		expect(item.label).toEqual('date')
+		expect(item.label).toEqual('Date')
 	})
 
 	it('can be rendered with required', function () {

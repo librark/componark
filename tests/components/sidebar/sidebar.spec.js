@@ -6,18 +6,18 @@ describe('Sidebar', () => {
 		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
 		expect(item).toBeTruthy()
 
-		var init = item.init()
+		const init = item.init()
 		expect(item === init).toBeTruthy()
 	})
 
 	it('can be rendered with content', function () {
 		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
-		item.innerHTML = /* HTML */`
+		item.innerHTML = /* html */`
       <div slot="header">Menu</div>
       <div>body</div>
       <div slot="footer">footer</div>
     `
-		item.init({})
+		item.init()
 		item.connectedCallback()
 	})
 
@@ -37,10 +37,10 @@ describe('Sidebar', () => {
 		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
 		const att = document.createAttribute('opened')
 		item.setAttributeNode(att)
-		item.init({})
+		item.init()
 		item.connectedCallback()
 
-		item['slots'] = {}
+		item.slots = {}
 
 		let isClass = Array.from(item.classList).filter(l =>
 			l === 'ark-sidebar--opened').length
@@ -58,7 +58,7 @@ describe('Sidebar', () => {
 		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
 		const att = document.createAttribute('opened')
 		item.setAttributeNode(att)
-		item.init({})
+		item.init()
 		item.connectedCallback()
 
 		let isClass = Array.from(item.classList).filter(l =>

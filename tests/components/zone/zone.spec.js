@@ -25,8 +25,8 @@ describe('Zone', () => {
 		zone.addEventListener('zone:alter', event => {
 			const detail = event.detail
 
-			expect(!detail['value'].length).toBeTruthy()
-			expect(detail['action']).toEqual('MOVE')
+			expect(!detail.value.length).toBeTruthy()
+			expect(detail.action).toEqual('MOVE')
 		})
 
 		eventAlterZone.dispatch(zone)
@@ -40,10 +40,10 @@ describe('Zone', () => {
 		zone.addEventListener('zone:alter', event => {
 			const detail = event.detail
 
-			expect(detail['action']).toEqual('MOVE')
-			expect(detail['value'].length).toBeTruthy()
-			expect(detail['value'][0].drags.length).toEqual(3)
-			expect(detail['value'][1].drags.length).toEqual(1)
+			expect(detail.action).toEqual('MOVE')
+			expect(detail.value.length).toBeTruthy()
+			expect(detail.value[0].drags.length).toEqual(3)
+			expect(detail.value[1].drags.length).toEqual(1)
 		})
 
 		const drop1 = new DropZone()
@@ -699,7 +699,7 @@ describe('Zone', () => {
 		// -------------------------------------------------------------------------
 
 		zone.addEventListener('zone:alter', event => {
-			const value = event['detail'].value
+			const value = event.detail.value
 
 			expect(value.length).toEqual(1)
 

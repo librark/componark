@@ -3,6 +3,9 @@ import { RadioButton, RadioGroup } from '../../../src/components/radio'
 describe('RadioGroup', () => {
 	it('can be instantiated', () => {
 		const radio1 = new RadioButton()
+
+		expect(radio1).toBeTruthy()
+
 		radio1.connectedCallback()
 		radio1.innerHTML = 'op1'
 		radio1.init().render()
@@ -22,54 +25,53 @@ describe('RadioGroup', () => {
 		group.appendChild(radio1)
 		group.appendChild(radio2)
 		group.appendChild(radio3)
-		// group.init().render().load()
+		group.init().render().load()
 
 		radio1.click()
 	})
 
-	// it('can be instantiated', () => {
-	// 	const element = /** @type {RadioGroup} */ (
-	// 		document.createElement('ark-radio-group'))
-	// 	expect(element).toBeTruthy()
+	it('can be instantiated', () => {
+		const element = new RadioGroup()
+		expect(element).toBeTruthy()
 
-	// 	// var init = element.init({})
-	// 	// expect(element === init).toBeTruthy()
-	// })
+		const init = element.init({})
+		expect(element === init).toBeTruthy()
+	})
 
-	// it('can be instantiated', () => {
-	// 	const element = new RadioGroup()
-	// 	element.setAttribute('label', 'my group')
-	// 	element.connectedCallback()
+	it('can be instantiated', () => {
+		const element = new RadioGroup()
+		element.setAttribute('label', 'my group')
+		element.connectedCallback()
 
-	// 	const label = element.querySelector('[data-radio-group-label]')
-	// 	expect(label.textContent.trim()).toEqual('my group')
-	// 	expect(!element.value.trim().length).toBeTruthy()
-	// })
+		const label = element.querySelector('[data-radio-group-label]')
+		expect(label.textContent.trim()).toEqual('my group')
+		expect(!element.value.trim().length).toBeTruthy()
+	})
 
-	// it('returns selected values', () => {
-	// 	const group = new RadioGroup()
+	it('returns selected values', () => {
+		const group = new RadioGroup()
 
-	// 	const radio1 = new RadioButton()
-	// 	radio1.value = 'op1'
-	// 	radio1.init().render().load()
+		const radio1 = new RadioButton()
+		radio1.value = 'op1'
+		radio1.init().render().load()
 
-	// 	const radio2 = new RadioButton()
-	// 	radio2.value = 'op2'
-	// 	radio2.init().render().load()
+		const radio2 = new RadioButton()
+		radio2.value = 'op2'
+		radio2.init().render().load()
 
-	// 	// @ts-ignore
-	// 	group.defaultContent = null
-	// 	group.appendChild(radio1)
-	// 	group.appendChild(radio2)
-	// 	group.load()
+		// @ts-ignore
+		group.defaultContent = null
+		group.appendChild(radio1)
+		group.appendChild(radio2)
+		group.load()
 
-	// 	expect(!group.value.trim().length).toBeTruthy()
+		expect(!group.value.trim().length).toBeTruthy()
 
-	// 	// @ts-ignore
-	// 	group._checkButtons('op1')
-	// 	expect(group.value).toEqual('op1')
+		// @ts-ignore
+		group._checkButtons('op1')
+		expect(group.value).toEqual('op1')
 
-	// 	radio2.click()
-	// 	expect(group.value).toEqual('op2')
-	// })
+		radio2.click()
+		expect(group.value).toEqual('op2')
+	})
 })

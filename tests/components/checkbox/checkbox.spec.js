@@ -8,7 +8,7 @@ describe('Checkbox', () => {
 
 		element.connectedCallback()
 
-		var init = element.init()
+		const init = element.init()
 		expect(element === init).toBeTruthy()
 	})
 

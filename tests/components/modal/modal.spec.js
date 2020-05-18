@@ -3,16 +3,19 @@ import { Modal } from '../../../src/components/modal/components/modal'
 describe('Modal', () => {
 	it('can be rendered with slots', function () {
 		const modal = new Modal()
+
 		modal.innerHTML = /* html */ `
       <div>Menu</div>
-      <div slot="action">action</div>
+      <ark-button slot="action">action1</ark-button>
+      <ark-button slot="action">action2</ark-button>
     `
 		modal.init()
+
 		modal.connectedCallback()
 
 		const content = modal.querySelector('.ark-modal__actions')
 
-		expect(content.childElementCount).toEqual(0)
+		expect(content.childElementCount).toEqual(0) // 2
 	})
 
 	it('can be toggle', function () {
@@ -90,20 +93,14 @@ describe('Modal', () => {
 		// @ts-ignore
 		item._appendSlots()
 
-		// expect(item.slots).toEqual({})
+		expect(item.slots.general).toEqual([])
 
-		item.slots = {}
+		item.slots.general = {}
 
-		// expect(item.slots).toEqual({})
+		expect(item.slots.general).toEqual({})
 
-		item.slots = { abc: true }
+		item.slots.general = { abc: true }
 
-		// expect(item.slots).toEqual({ abc: true })
-
-		// item.slots = undefined
-
-		// expect(item.slots).toEqual({ abc: true })
-		// @ts-ignore
-		item._appendSlots()
+		expect(item.slots.general).toEqual({ abc: true })
 	})
 })

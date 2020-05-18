@@ -4,14 +4,14 @@ describe('Icon', () => {
 	it('can be instantiated', () => {
 		const icon = /** @type {Icon} */(document.createElement('ark-icon'))
 		expect(icon).toBeTruthy()
-		// var init = icon.init()
+		// const init = icon.init()
 		// expect(icon === init).toBeTruthy()
 	})
 
 	// it('can be instantiated', () => {
 	// 	const icon = /** @type {Icon} */(document.createElement('ark-icon'))
 	// 	expect(icon).toBeTruthy()
-	// 	var init = icon.init()
+	// 	const init = icon.init()
 	// 	expect(icon === init).toBeTruthy()
 	// })
 

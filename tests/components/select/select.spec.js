@@ -6,7 +6,7 @@ describe('Select', () => {
 		const item = /** @type {Select} */(document.createElement('ark-select'))
 		expect(item).toBeTruthy()
 
-		var init = item.init()
+		const init = item.init()
 		expect(item === init).toBeTruthy()
 	})
 
