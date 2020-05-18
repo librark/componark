@@ -1,17 +1,9 @@
-/** @typedef {import('../../../src/components').Grid} Grid */
+import { Grid } from '../../../src/components/grid/'
 
 describe('Grid', () => {
 	it('can be instantiated', () => {
-		const grid = /** @type {Grid} */(document.createElement('ark-grid'))
+		const grid = new Grid()
+		grid.init().render()
 		expect(grid).toBeTruthy()
-
-		// const init = grid.init({})
-		const init = grid
-		expect(grid === init).toBeTruthy()
 	})
-
-	// it('can be rendered without content', function () {
-	// 	const grid = /** @type {Grid} */(document.createElement('ark-grid'))
-	// 	grid.connectedCallback()
-	// })
 })

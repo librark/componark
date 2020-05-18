@@ -3,8 +3,8 @@ import { getSlots } from '../../../utils'
 
 export class Modal extends Component {
 	init (context = {}) {
-		this.title = context['title']
-		this.subtitle = context['subtitle']
+		this.title = context.title
+		this.subtitle = context.subtitle
 
 		// local variables
 		this.slots = getSlots(this)
@@ -79,8 +79,8 @@ export class Modal extends Component {
 	_appendSlots () {
 		if (!Object.keys(this._slots || {}).length) return
 
-		const general = this.slots['general'] || []
-		const action = this.slots['action'] || []
+		const general = this.slots.general || []
+		const action = this.slots.action || []
 
 		general.forEach(slot => {
 			this.querySelector('[data-body]').appendChild(slot)

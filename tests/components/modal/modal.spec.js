@@ -2,12 +2,12 @@ import { Modal } from '../../../src/components/modal/components/modal'
 
 describe('Modal', () => {
 	it('can be rendered with slots', function () {
-		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
+		const modal = new Modal()
 		modal.innerHTML = /* html */ `
       <div>Menu</div>
       <div slot="action">action</div>
     `
-		modal.init({})
+		modal.init()
 		modal.connectedCallback()
 
 		const content = modal.querySelector('.ark-modal__actions')
@@ -34,26 +34,34 @@ describe('Modal', () => {
 		expect(!modal.hasAttribute('show')).toBeTruthy()
 	})
 
-	// it('can be open', function () {
-	// 	const modal = new Modal()
-	// 	modal.init({}).render().load()
+	it('can be open', function () {
+		const modal = new Modal()
+		modal.init().render().load()
 
-	// 	modal.open()
+		modal.open()
 
-	// 	const btn = modal.querySelector('.ark-modal__scrim')
-	// 	// @ts-ignore
-	// 	btn.click()
+		const btn = modal.querySelector('.ark-modal__scrim')
+		// @ts-ignore
+		btn.click()
 
-	// 	expect(!modal.hasAttribute('open')).toBeTruthy()
+		expect(!modal.hasAttribute('open')).toBeTruthy()
+	})
 
-	// 	modal.innerHTML = /* html */`
-	//     <button close>close</button>
-	//   `
-	// 	modal.load()
-	// })
+	it('can be close', function () {
+		const modal = new Modal()
+		modal.init().render().load()
+
+		modal.close()
+
+		const btn = modal.querySelector('.ark-modal__scrim')
+		// @ts-ignore
+		btn.click()
+
+		expect(!modal.hasAttribute('close')).toBeTruthy()
+	})
 
 	it('can remove attributes', function () {
-		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+		const item = new Modal()
 
 		item.setAttribute('name', 'my-item')
 		item.setAttribute('id', 'it-1')
@@ -68,13 +76,13 @@ describe('Modal', () => {
 	})
 
 	it('can render content null', function () {
-		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+		const item = new Modal()
 		// @ts-ignore
 		expect(item._generateContent(null)).toEqual('')
 	})
 
 	it('can set slots', function () {
-		const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+		const item = new Modal()
 
 		expect(item).toBeTruthy()
 

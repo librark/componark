@@ -2,8 +2,8 @@ import { Component } from '../../component'
 
 export class Grid extends Component {
 	init (context = {}) {
-		this.cols = context['cols'] || this.cols || 0
-		this.gap = context['gap'] || this.gap || '0px'
+		this.cols = context.cols || this.cols || 0
+		this.gap = context.gap || this.gap || '0px'
 		return super.init()
 	}
 
@@ -20,7 +20,7 @@ export class Grid extends Component {
 		this.style.display = 'grid'
 
 		this.style.gridTemplateColumns = `repeat(${this.cols}, 1fr)`
-		this.style.gridTemplateRows = `auto`
+		this.style.gridTemplateRows = 'auto'
 
 		this.style.gridGap = `${this.gap}`
 	}
