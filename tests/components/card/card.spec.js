@@ -26,7 +26,7 @@ describe('Card', () => {
 		element.init({})
 		element.render()
 
-		// expect(element.querySelector('div.ark-card__media [slot="media"]'))
-		// 	.toBeTruthy()
+		expect(element.slots).toBeTruthy()
+		// expect(element.querySelector('div.ark-card__media [slot="media"]')).toBeTruthy()
 	})
 })

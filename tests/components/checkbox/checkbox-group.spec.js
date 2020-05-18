@@ -1,5 +1,3 @@
-/** @typedef {import('../../../src/components').CheckboxGroup} CheckboxGroup */
-/** @typedef {import('../../../src/components').Checkbox} Checkbox */
 import { Checkbox, CheckboxGroup } from '../../../src/components/checkbox'
 
 describe('Checkbox', () => {
@@ -8,7 +6,7 @@ describe('Checkbox', () => {
 			document.createElement('ark-checkbox-group'))
 		expect(element).toBeTruthy()
 
-		var init = element.init()
+		const init = element.init()
 		expect(element === init).toBeTruthy()
 
 		const checkboxGroup = new CheckboxGroup()
@@ -23,13 +21,13 @@ describe('Checkbox', () => {
 		expect(label.textContent.trim()).toEqual('my group')
 	})
 
-	it('returns selected values', () => {
+	it('returns selected values Group', () => {
 		const element = new CheckboxGroup()
 
 		const checkbox1 = new Checkbox()
 		checkbox1.value = 'op1'
+		checkbox1.checked = true
 		checkbox1.render()
-		checkbox1.check()
 
 		const checkbox2 = new Checkbox()
 		checkbox2.value = 'op2'
@@ -45,10 +43,11 @@ describe('Checkbox', () => {
 		element.onAlter(event)
 
 		expect(element).toBeTruthy()
-		// expect(element.value.length).toEqual(1)
+
+		expect(element.value.length).toEqual(0)
 	})
 
-	it('returns selected values', () => {
+	it('returns selected values Slots', () => {
 		const element = new CheckboxGroup()
 		element.innerHTML = /* html */`
       <span slot="alert">Error</span>

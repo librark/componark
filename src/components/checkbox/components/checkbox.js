@@ -1,25 +1,25 @@
-import { Component } from "../../component"
+import { Component } from '../../component'
 
 export class Checkbox extends Component {
-  /**
+	/**
    * @param {{ value:string, checked:boolean } | {}} context?
    */
-  init(context = {}) {
-    this.value = context["value"]
-    this.checked = context["checked"]
+	init (context = {}) {
+		this.value = context.value
+		this.checked = context.checked
 
-    // local variables
-    this.defaultContent = this.defaultContent || this.innerHTML
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 
-    return super.init()
-  }
+		return super.init()
+	}
 
-  reflectedProperties() {
-    return ["value"]
-  }
+	reflectedProperties () {
+		return ['value']
+	}
 
-  render() {
-    this.innerHTML = /* html */ `
+	render () {
+		this.innerHTML = /* html */ `
       <div class="ark-checkbox__input">
         <input data-input type="checkbox">
       </div>
@@ -28,114 +28,116 @@ export class Checkbox extends Component {
       </div>
     `
 
-    this._moveAttributes()
-    return super.render()
-  }
+		this._moveAttributes()
+		return super.render()
+	}
 
-  load() {
-    this.addEventListener("click", this.onAlter.bind(this))
+	load () {
+		this.addEventListener('click', this.onAlter.bind(this))
 
-    return super.load()
-  }
+		return super.load()
+	}
 
-  // ---------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
 
-  check() {
-    this.checked = true
-  }
+	check () {
+		console.log('Checked')
 
-  uncheck() {
-    this.checked = false
-  }
+		this.checked = true
+	}
 
-  toggle() {
-    this.checked = !this.checked
-  }
+	uncheck () {
+		this.checked = false
+	}
 
-  // ---------------------------------------------------------------------------
-  /** @returns {Boolean} */
-  get checked() {
-    return this.hasAttribute("checked")
-  }
+	toggle () {
+		this.checked = !this.checked
+	}
 
-  /** @param {Boolean} value */
-  set checked(value) {
-    const input = this.querySelector("[data-input]")
-    if (!input) return
+	// ---------------------------------------------------------------------------
+	/** @returns {Boolean} */
+	get checked () {
+		return this.hasAttribute('checked')
+	}
 
-    input["checked"] = value
+	/** @param {Boolean} value */
+	set checked (value) {
+		const input = this.querySelector('[data-input]')
+		if (!input) return
 
-    if (value) {
-      this.setAttribute("checked", "")
-      input.setAttribute("checked", "checked")
-    } else {
-      this.removeAttribute("checked")
-      input.removeAttribute("checked")
-    }
-  }
+		input.checked = value
 
-  /** @param {Event} event */
-  onAlter(event) {
-    event.stopImmediatePropagation()
+		if (value) {
+			this.setAttribute('checked', '')
+			input.setAttribute('checked', 'checked')
+		} else {
+			this.removeAttribute('checked')
+			input.removeAttribute('checked')
+		}
+	}
 
-    this.toggle()
+	/** @param {Event} event */
+	onAlter (event) {
+		event.stopImmediatePropagation()
 
-    this.dispatchEvent(
-      new CustomEvent("checkbox:alter", {
-        bubbles: true,
-        detail: {
-          value: this.value,
-          checked: this.checked,
-          origin: event
-        }
-      })
-    )
-  }
+		this.toggle()
 
-  // ---------------------------------------------------------------------------
+		this.dispatchEvent(
+			new CustomEvent('checkbox:alter', {
+				bubbles: true,
+				detail: {
+					value: this.value,
+					checked: this.checked,
+					origin: event
+				}
+			})
+		)
+	}
 
-  _moveAttributes() {
-    this.checked = this.hasAttribute("checked")
-    const element = this.querySelector("[data-input]")
-    const attributes = Array.from(this.attributes)
+	// ---------------------------------------------------------------------------
 
-    attributes.forEach(attribute => {
-      if (this._defaultAttributes().find(item => item === attribute.name)) {
-        element.setAttribute(attribute.name, attribute.value)
-        this.removeAttribute(attribute.name)
-      }
-    })
-  }
+	_moveAttributes () {
+		this.checked = this.hasAttribute('checked')
+		const element = this.querySelector('[data-input]')
+		const attributes = Array.from(this.attributes)
 
-  /** @return {Array<string>} */
-  _defaultAttributes() {
-    return [
-      "accept",
-      "alt",
-      "autocomplete",
-      "autofocus",
-      "dirname",
-      "disabled",
-      "form",
-      "formaction",
-      "formenctype",
-      "formmethod",
-      "formnovalidate",
-      "formtarget",
-      "height",
-      "list",
-      "min",
-      "multiple",
-      "name",
-      "pattern",
-      "placeholder",
-      "readonly",
-      "required",
-      "size",
-      "src",
-      "step",
-      "width"
-    ]
-  }
+		attributes.forEach(attribute => {
+			if (this._defaultAttributes().find(item => item === attribute.name)) {
+				element.setAttribute(attribute.name, attribute.value)
+				this.removeAttribute(attribute.name)
+			}
+		})
+	}
+
+	/** @return {Array<string>} */
+	_defaultAttributes () {
+		return [
+			'accept',
+			'alt',
+			'autocomplete',
+			'autofocus',
+			'dirname',
+			'disabled',
+			'form',
+			'formaction',
+			'formenctype',
+			'formmethod',
+			'formnovalidate',
+			'formtarget',
+			'height',
+			'list',
+			'min',
+			'multiple',
+			'name',
+			'pattern',
+			'placeholder',
+			'readonly',
+			'required',
+			'size',
+			'src',
+			'step',
+			'width'
+		]
+	}
 }
-customElements.define("ark-checkbox", Checkbox)
+customElements.define('ark-checkbox', Checkbox)

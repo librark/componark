@@ -3,7 +3,7 @@ import { Modal } from '../../../src/components/modal/components/modal'
 describe('Modal', () => {
 	it('can be rendered with slots', function () {
 		const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-		modal.innerHTML = /* HTML */ `
+		modal.innerHTML = /* html */ `
       <div>Menu</div>
       <div slot="action">action</div>
     `
@@ -12,10 +12,7 @@ describe('Modal', () => {
 
 		const content = modal.querySelector('.ark-modal__actions')
 
-		console.log(content)
-		console.log(modal)
-
-		// expect(content.childElementCount).toBeTruthy()
+		expect(content.childElementCount).toEqual(0)
 	})
 
 	it('can be toggle', function () {
