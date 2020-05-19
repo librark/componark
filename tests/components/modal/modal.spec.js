@@ -6,18 +6,13 @@ describe('Modal', () => {
 
 		modal.innerHTML = /* html */ `
       <div>Menu</div>
-      <ark-button slot="action">action1</ark-button>
-      <ark-button slot="action">action2</ark-button>
+      <ark-button slot="action" close>Close</ark-button>
     `
-		modal.init()
-
-		modal.connectedCallback()
 
 		modal.render()
 		modal.connectedCallback()
 		const content = modal.querySelector('.ark-modal__actions')
-
-		expect(content.childElementCount).toEqual(0) // 2
+		expect(content.childElementCount).toEqual(0) // 1
 	})
 
 	it('can be toggle', function () {
