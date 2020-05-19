@@ -1,9 +1,8 @@
-/** @typedef {import('../../../src/components').Sidebar} Sidebar */
-import '../../../src/components/sidebar'
+import { Sidebar } from '../../../src/components/sidebar/components/sidebar'
 
 describe('Sidebar', () => {
 	it('can be instantiated', () => {
-		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
+		const item = new Sidebar()
 		expect(item).toBeTruthy()
 
 		const init = item.init()
@@ -11,18 +10,18 @@ describe('Sidebar', () => {
 	})
 
 	it('can be rendered with content', function () {
-		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
+		const item = new Sidebar()
 		item.innerHTML = /* html */`
-      <div slot="header">Menu</div>
-      <div>body</div>
-      <div slot="footer">footer</div>
-    `
+	    <div slot="header">Menu</div>
+	    <div>body</div>
+	    <div slot="footer">footer</div>
+	  `
 		item.init()
 		item.connectedCallback()
 	})
 
 	it('can be opened with opened attribute', function () {
-		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
+		const item = new Sidebar()
 		const att = document.createAttribute('opened')
 		item.setAttributeNode(att)
 		item.connectedCallback()
@@ -34,10 +33,10 @@ describe('Sidebar', () => {
 	})
 
 	it('can be closed', function () {
-		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
+		const item = new Sidebar()
 		const att = document.createAttribute('opened')
 		item.setAttributeNode(att)
-		item.init()
+		item.init({})
 		item.connectedCallback()
 
 		item.slots = {}
@@ -55,7 +54,7 @@ describe('Sidebar', () => {
 	})
 
 	it('can be closed with toggle option', function () {
-		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
+		const item = new Sidebar()
 		const att = document.createAttribute('opened')
 		item.setAttributeNode(att)
 		item.init()
@@ -74,7 +73,7 @@ describe('Sidebar', () => {
 	})
 
 	it('can be closed with scrim option', function () {
-		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
+		const item = new Sidebar()
 		const att = document.createAttribute('opened')
 		item.setAttributeNode(att)
 		item.connectedCallback()
@@ -92,5 +91,18 @@ describe('Sidebar', () => {
 			l === 'ark-sidebar--opened').length
 
 		expect(!isClass).toBeTruthy()
+	})
+
+	it('can be rendered without slots', function () {
+		const item = new Sidebar()
+
+		item.innerHTML = /* html */`
+      <div slot="header">Menu</div>
+    `
+
+		item.init().render().load()
+		item.connectedCallback()
+
+		expect(item.slots).toBeTruthy()
 	})
 })

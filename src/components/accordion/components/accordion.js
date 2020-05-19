@@ -3,51 +3,51 @@
 import { Component } from '../../component'
 
 export class Accordion extends Component {
-  init () {
-    return super.init()
-  }
+	init () {
+		return super.init()
+	}
 
-  render () {
-    this.tabs.forEach((tab, index) => {
-      tab.setAttribute('index', index.toString())
-    })
+	render () {
+		this.tabs.forEach((tab, index) => {
+			tab.setAttribute('index', index.toString())
+		})
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  load () {
-    this.addEventListener('accordiontab:click',
-      this.onAccordiontabClick.bind(this)
-    )
+	load () {
+		this.addEventListener('accordiontab:click',
+			this.onAccordiontabClick.bind(this)
+		)
 
-    return super.load()
-  }
+		return super.load()
+	}
 
-  /** @param {CustomEvent} event */
-  onAccordiontabClick (event) {
-    event.stopImmediatePropagation()
+	/** @param {CustomEvent} event */
+	onAccordiontabClick (event) {
+		event.stopImmediatePropagation()
 
-    if (!this.multiple) return
+		if (!this.multiple) return
 
-    const tab = /** @type {AccordionTab} */ (event.target)
-    const detail = event.detail
+		const tab = /** @type {AccordionTab} */ (event.target)
+		const detail = event.detail
 
-    this.tabs.forEach(tab => { tab.close() })
+		this.tabs.forEach(tab => { tab.close() })
 
-    if (detail.active) tab.open()
-  }
+		if (detail.active) tab.open()
+	}
 
-  // ---------------------------------------------------------------------------
-  /** @returns {boolean} */
-  get multiple () {
-    return this.hasAttribute('multiple')
-  }
+	// ---------------------------------------------------------------------------
+	/** @returns {boolean} */
+	get multiple () {
+		return this.hasAttribute('multiple')
+	}
 
-  /** @returns {AccordionTab[]} */
-  get tabs () {
-    return /** @type {Array<AccordionTab>} */ ([
-      ...this.selectAll('ark-accordion-tab')
-    ])
-  }
+	/** @returns {AccordionTab[]} */
+	get tabs () {
+		return /** @type {Array<AccordionTab>} */ ([
+			...this.selectAll('ark-accordion-tab')
+		])
+	}
 }
 customElements.define('ark-accordion', Accordion)

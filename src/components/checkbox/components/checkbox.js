@@ -41,8 +41,6 @@ export class Checkbox extends Component {
 	// ---------------------------------------------------------------------------
 
 	check () {
-		console.log('Checked')
-
 		this.checked = true
 	}
 
