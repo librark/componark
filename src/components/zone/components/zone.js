@@ -316,6 +316,8 @@ export class Zone extends Component {
 
 		const dragDropped = new EventAlterZone('DELETE')
 
+		console.log(drags)
+
 		// delete drags
 		drags.forEach(drag => {
 			dragDropped.setItem(drag.getParentDrop(), drag)

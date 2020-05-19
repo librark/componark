@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components').Table} Table */
 import { Table } from '../../../src/components/table'
 
 describe('Table', () => {
