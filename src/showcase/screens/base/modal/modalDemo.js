@@ -76,8 +76,6 @@ export class ModalDemo extends Component {
 
         </div>
 
-
-
         <ark-button slot="action">Aceptar</ark-button>
         <ark-button slot="action" close>Cerrar</ark-button>
       </ark-modal>
@@ -105,12 +103,13 @@ export class ModalDemo extends Component {
 	}
 
 	load () {
-		this.addEventListener('onHiddenModal', (/** @type {CustomEvent} */ event) => {
-			event.stopImmediatePropagation()
-			this.select('[data-hidden]').innerHTML = /* html */`
+		this.addEventListener('onHiddenModal',
+			(/** @type {CustomEvent} */ event) => {
+				event.stopImmediatePropagation()
+				this.select('[data-hidden]').innerHTML = /* html */`
         hidden: ${event.detail.hidden}
       `
-		})
+			})
 
 		const open = this.querySelector('[btn-open]')
 		open.addEventListener('click', _ => this.modal.open())

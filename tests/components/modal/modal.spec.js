@@ -6,29 +6,19 @@ describe('Modal', () => {
 
 		modal.innerHTML = /* html */ `
       <div>Menu</div>
-      <ark-button slot="action">action1</ark-button>
-      <ark-button slot="action">action2</ark-button>
+      <ark-button slot="action" close>Close</ark-button>
     `
-		modal.init()
 
+		modal.render()
 		modal.connectedCallback()
-
 		const content = modal.querySelector('.ark-modal__actions')
-
-		expect(content.childElementCount).toEqual(0) // 2
+		expect(content.childElementCount).toEqual(0) // 1
 	})
 
 	it('can be toggle', function () {
 		const modal = new Modal()
-		modal.init().render().load()
-
-		expect(!modal.hasAttribute('show')).toBeTruthy()
-
-		modal.open()
-		expect(modal.hasAttribute('show')).toBeTruthy()
-
-		modal.close()
-		expect(!modal.hasAttribute('show')).toBeTruthy()
+		modal.init()
+		modal.render()
 
 		modal.toggle()
 		expect(modal.hasAttribute('show')).toBeTruthy()
@@ -39,28 +29,27 @@ describe('Modal', () => {
 
 	it('can be open', function () {
 		const modal = new Modal()
-		modal.init().render().load()
-
+		modal.init().render()
 		modal.open()
-
-		const btn = modal.querySelector('.ark-modal__scrim')
-		// @ts-ignore
-		btn.click()
-
-		expect(!modal.hasAttribute('open')).toBeTruthy()
+		expect(modal.hasAttribute('show')).toBeTruthy()
 	})
 
 	it('can be close', function () {
 		const modal = new Modal()
-		modal.init().render().load()
-
+		modal.init().render()
 		modal.close()
+		expect(!modal.hasAttribute('show')).toBeTruthy()
+	})
 
-		const btn = modal.querySelector('.ark-modal__scrim')
-		// @ts-ignore
-		btn.click()
+	it('can be attribute block-scrim', function () {
+		const modal = new Modal()
+		modal.init().render()
 
-		expect(!modal.hasAttribute('close')).toBeTruthy()
+		modal.setAttribute('block-scrim', '')
+
+		modal.load()
+
+		expect(modal.hasAttribute('block-scrim')).toBeTruthy()
 	})
 
 	it('can remove attributes', function () {
@@ -87,7 +76,14 @@ describe('Modal', () => {
 	it('can set slots', function () {
 		const item = new Modal()
 
+		item.innerHTML = /* html */ `
+      <div>Menu</div>
+      <ark-button slot="action" close>Cerrar</ark-button>
+    `
+
 		expect(item).toBeTruthy()
+
+		item.init({}).render().load()
 
 		item.slots = undefined
 		// @ts-ignore
