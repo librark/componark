@@ -53,6 +53,7 @@ export class Signature extends Component {
 	}
 
 	// --------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
 
 	/** @returns {string} */
 	dataURL (width = this.offsetWidth, height = this.offsetHeight) {
@@ -98,6 +99,7 @@ export class Signature extends Component {
 	}
 
 	// --------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
 	/** @returns {boolean} */
 	get dirty () {
 		return this._dirty

@@ -10,12 +10,12 @@ describe('Sidebar', () => {
 	})
 
 	it('can be rendered with content', function () {
-		const item = /** @type {Sidebar} */(document.createElement('ark-sidebar'))
+		const item = new Sidebar()
 		item.innerHTML = /* html */`
-      <div slot="header">Menu</div>
-      <div>body</div>
-      <div slot="footer">footer</div>
-    `
+	    <div slot="header">Menu</div>
+	    <div>body</div>
+	    <div slot="footer">footer</div>
+	  `
 		item.init()
 		item.connectedCallback()
 	})
@@ -36,7 +36,7 @@ describe('Sidebar', () => {
 		const item = new Sidebar()
 		const att = document.createAttribute('opened')
 		item.setAttributeNode(att)
-		item.init()
+		item.init({})
 		item.connectedCallback()
 
 		item.slots = {}
