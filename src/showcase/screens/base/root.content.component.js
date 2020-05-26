@@ -1,7 +1,7 @@
 import { Component } from '../loader'
 
 export class RootContainerComponent extends Component {
-	/** @param {{ component: Component; currentStyle: String }} context */
+	/** @param {Object} context */
 	init (context) {
 		this.component = context.component
 		this.currentStyle = context.currentStyle

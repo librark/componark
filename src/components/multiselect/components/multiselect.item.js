@@ -1,9 +1,7 @@
 import { Component } from '../../component'
 
 export class MultiselectItem extends Component {
-	/**
-   * @param {{id, data,	template?}} context
-   */
+	/** @param {Object} context */
 	init (context) {
 		this.data = context.data || null
 		this.id = context.id || this.id

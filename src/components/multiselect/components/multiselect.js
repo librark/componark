@@ -7,13 +7,7 @@
 import { Component } from '../../component'
 
 export class Multiselect extends Component {
-	/**
-   * @param {{
-   * 	items: any[],
-   * 	label: string,
-   * 	template: void
-   * } | {}} context
-   */
+	/** @param {Object} context */
 	init (context = {}) {
 		this.label = context.label || this.label || 'label'
 		this.items = context.items || this.items || []

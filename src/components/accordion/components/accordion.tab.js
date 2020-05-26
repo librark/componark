@@ -1,9 +1,7 @@
 import { Component } from '../../component'
 
 export class AccordionTab extends Component {
-	/**
-   *  @param {{header: string} | {}} context
-   * */
+	/** @param {Object} context */
 	init (context = {}) {
 		this.header = context.header
 

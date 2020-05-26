@@ -1,9 +1,7 @@
 import { Component } from '../../component'
 
 export class RadioButton extends Component {
-	/**
-   * @param {{ value:string, checked:boolean } | {}} context?
-   */
+	/** @param {Object} context? */
 	init (context = {}) {
 		this.name = context.name
 		this.value = context.value

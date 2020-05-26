@@ -13,7 +13,7 @@ import { ThemeService } from '../theme/theme.service'
 export const version = VERSION
 
 export class RootComponent extends Component {
-	/** @param {{ path: String }} context */
+	/** @param {Object} context */
 	init (context) {
 		this.path = context.path
 

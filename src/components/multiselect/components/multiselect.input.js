@@ -2,12 +2,7 @@ import { Component } from '../../component'
 import { MultiselectItem } from './multiselect.item'
 
 export class MultiselectInput extends Component {
-	/**
-	 * @param {{
-	 * 	items: any[],
-	 * 	template: void
-	 * } | {}} context
-	 */
+	/** @param {Object} context */
 	init (context = {}) {
 		this.items = context.items || this.items || []
 		this.template = context.template || (data => `${data}`)
