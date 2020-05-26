@@ -2,8 +2,8 @@ import { Component } from '../../component'
 
 export class Spinner extends Component {
 	init (context = {}) {
-		this.size = context['size'] || this.size || '1.5rem'
-		this.border = context['border'] || this.border || '.2rem'
+		this.size = context.size || this.size || '1.5rem'
+		this.border = context.border || this.border || '.2rem'
 
 		return super.init()
 	}

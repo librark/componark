@@ -10,7 +10,7 @@ export class Audio extends Component {
 		this.totalSeconds = 0
 		this.slots = this.slots || getSlots(this)
 		this.stream = null
-		this.global = context['global'] || window
+		this.global = context.global || window
 
 		return super.init()
 	}

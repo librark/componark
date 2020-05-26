@@ -38,9 +38,9 @@ export class Modal extends Component {
 			this.scrim.addEventListener('click', _ => this.close())
 		}
 
-    this.querySelectorAll('[close]').forEach(
-      button => button.addEventListener('click', _ => this.close())
-    )
+		this.querySelectorAll('[close]').forEach(
+			button => button.addEventListener('click', _ => this.close())
+		)
 
 		return super.load()
 	}
@@ -83,12 +83,12 @@ export class Modal extends Component {
 		const action = this.slots.action || []
 
 		general.forEach(
-      slot => this.querySelector('[data-body]').appendChild(slot)
-    )
+			slot => this.querySelector('[data-body]').appendChild(slot)
+		)
 
 		action.forEach(
-      slot => this.querySelector('[data-actions]').appendChild(slot)
-    )
+			slot => this.querySelector('[data-actions]').appendChild(slot)
+		)
 	}
 
 	_renderHeader () {

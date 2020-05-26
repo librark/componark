@@ -2,8 +2,8 @@ import { Component } from '../../component'
 
 export class Table extends Component {
 	init (context = {}) {
-		this.headers = context['headers'] || this.headers || {}
-		this.data = context['data'] || this.data || []
+		this.headers = context.headers || this.headers || {}
+		this.data = context.data || this.data || []
 
 		return super.init()
 	}
@@ -21,7 +21,7 @@ export class Table extends Component {
 	_renderHeaders () {
 		var headers = ''
 
-		if (this.hasAttribute('position')) headers += /* html */ `<th>No.</th>`
+		if (this.hasAttribute('position')) headers += /* html */ '<th>No.</th>'
 
 		Object.keys(this.headers).forEach(key => {
 			headers += /* html */ `<th>${this.headers[key]}</th>`

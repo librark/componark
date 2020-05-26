@@ -1,12 +1,12 @@
 import { Alert, Component } from '../../loader'
 
 export class AlertDemo extends Component {
-  init(context) {
-    return super.init(context)
-  }
+	init (context) {
+		return super.init(context)
+	}
 
-  render() {
-    this.innerHTML = /* html */ `
+	render () {
+		this.innerHTML = /* html */ `
       <div>
         <p>This is a alert.</p>
         <button listen on-click="_onClick">open</button>
@@ -26,24 +26,24 @@ export class AlertDemo extends Component {
       </div>
     `
 
-    this._onClick()
+		this._onClick()
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  _onClick(event) {
-    Alert.launch({
-      title: 'Title....',
-      text: 'Text ....',
-      showConfirmButton: true,
-      confirmButtonText: 'Confirm',
-      confirmButtonBackground: 'info',
-      showCancelButton: true,
-      cancelButtonText: 'Cerrar',
-      cancelButtonBackground: 'dark',
-      horizontal: 'end',
-      vertical: 'end'
-    }, this)
-  }
+	_onClick (event) {
+		Alert.launch({
+			title: 'Title....',
+			text: 'Text ....',
+			showConfirmButton: true,
+			confirmButtonText: 'Confirm',
+			confirmButtonBackground: 'info',
+			showCancelButton: true,
+			cancelButtonText: 'Cerrar',
+			cancelButtonBackground: 'dark',
+			horizontal: 'end',
+			vertical: 'end'
+		}, this)
+	}
 }
 customElements.define('demo-alert', AlertDemo)

@@ -94,24 +94,24 @@ export class ZoneDemo extends Component {
 
 	/** @param {event} event */
 	_onZoneAlter (event) {
-		const value = event['detail']['value']
+		const value = event.detail.value
 		this.select('[data-drags]').innerHTML = JSON.stringify(value)
 	}
 
 	/** @param {event} event */
 	_onZoneSelectedDrags (event) {
-		const drags = /** @type {DragZone[]} */ (event['detail'])
+		const drags = /** @type {DragZone[]} */ (event.detail)
 		this.select('[data-total-selected]').innerHTML = `${drags.length}`
 	}
 
 	/** @param {event} event */
 	_onDropClicked (event) {
-		this.select('[data-detail]').innerHTML = event['detail']['value']
+		this.select('[data-detail]').innerHTML = event.detail.value
 	}
 
 	/** @param {event} event */
 	_onDragClicked (event) {
-		this.select('[data-detail]').innerHTML = event['detail']['value']
+		this.select('[data-detail]').innerHTML = event.detail.value
 	}
 
 	_selectAll () {

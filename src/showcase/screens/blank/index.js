@@ -22,9 +22,9 @@ export function hub (parentResolver, prefix) {
 export class RootFactory {
 	/** @param {string} prefix */
 	constructor (prefix) {
-		RootFactory['prefix'] = prefix
-		this._rootComponent['prefix'] = prefix
-		this._rootComponent['dependencies'] = []
+		RootFactory.prefix = prefix
+		this._rootComponent.prefix = prefix
+		this._rootComponent.dependencies = []
 	}
 
 	/** @param {string} method */
@@ -35,6 +35,6 @@ export class RootFactory {
 	_rootComponent () {
 		const rootComponent = /** @type {RootComponent} */
       (document.createElement('app-root'))
-		return rootComponent.init({ path: RootFactory['prefix'] })
+		return rootComponent.init({ path: RootFactory.prefix })
 	}
 }

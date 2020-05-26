@@ -1,12 +1,12 @@
-import { Component } from "../../loader"
+import { Component } from '../../loader'
 
 export class IconDemo extends Component {
-  init(context) {
-    return super.init(context)
-  }
+	init (context) {
+		return super.init(context)
+	}
 
-  render() {
-    this.innerHTML = /* html */ `${this.styles}
+	render () {
+		this.innerHTML = /* html */ `${this.styles}
       <p>Icon:</p>
       <hr/><br/>
 
@@ -21,17 +21,17 @@ export class IconDemo extends Component {
       <ark-icon type="mat" name="face"></ark-icon>
     `
 
-    return super.render()
-  }
+		return super.render()
+	}
 
-  get styles() {
-    return /* html */ `
+	get styles () {
+		return /* html */ `
       <style>
         demo-icon ark-icon{
           font-size: 5rem;
         }
       </style>
     `
-  }
+	}
 }
-customElements.define("demo-icon", IconDemo)
+customElements.define('demo-icon', IconDemo)

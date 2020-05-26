@@ -16,7 +16,8 @@ export class Accordion extends Component {
 	}
 
 	load () {
-		this.addEventListener('accordionTab:click',
+		this.addEventListener(
+			'accordionTab:click',
 			this.onAccordionTabClick.bind(this)
 		)
 
@@ -32,7 +33,9 @@ export class Accordion extends Component {
 		const tab = /** @type {AccordionTab} */ (event.target)
 		const detail = event.detail
 
-		this.tabs.forEach(tab => { tab.close() })
+		this.tabs.forEach((tab) => {
+			tab.close()
+		})
 
 		if (detail.active) tab.open()
 	}

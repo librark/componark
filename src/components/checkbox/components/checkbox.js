@@ -5,8 +5,8 @@ export class Checkbox extends Component {
    * @param {{ value:string, checked:boolean } | {}} context?
    */
 	init (context = {}) {
-		this.value = context['value']
-		this.checked = context['checked']
+		this.value = context.value
+		this.checked = context.checked
 
 		// local variables
 		this.defaultContent = this.defaultContent || this.innerHTML
@@ -60,7 +60,7 @@ export class Checkbox extends Component {
 
 	/** @param {Boolean} value */
 	set checked (value) {
-    if(!this.input) return
+		if (!this.input) return
 
 		this.input.checked = value
 
@@ -71,12 +71,12 @@ export class Checkbox extends Component {
 			this.removeAttribute('checked')
 			this.input.removeAttribute('checked')
 		}
-  }
+	}
 
 	/** @returns {HTMLInputElement} */
-  get input(){
-    return this.querySelector('[data-input]')
-  }
+	get input () {
+		return this.querySelector('[data-input]')
+	}
 
 	/** @param {Event} event */
 	onAlter (event) {

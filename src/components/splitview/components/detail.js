@@ -2,8 +2,8 @@ import { Component } from '../../component'
 
 export class SplitViewDetail extends Component {
 	init (context = {}) {
-		this.title = context['title'] || this.title || ' '
-		this.backButtonIcon = context['backButtonIcon'] || this.backButtonIcon
+		this.title = context.title || this.title || ' '
+		this.backButtonIcon = context.backButtonIcon || this.backButtonIcon
 
 		// -------------------------------------------------------------------------
 		// local variables

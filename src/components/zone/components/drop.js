@@ -11,7 +11,7 @@ import {
 
 export class DropZone extends Component {
 	init (context = {}) {
-		this.value = this.value || context['value']
+		this.value = this.value || context.value
 
 		// ------------------------------------------------------------------------
 		// Local
@@ -240,8 +240,8 @@ export class DropZone extends Component {
 
 	// --------------------------------------------------------------------------
 	_droppableRemoveStyle () {
-		this.classList.remove(`ark-zone-drop--hover`)
-		this.classList.remove(`ark-zone-drop--hover_disabled`)
+		this.classList.remove('ark-zone-drop--hover')
+		this.classList.remove('ark-zone-drop--hover_disabled')
 	}
 
 	/** @param {DropZone} parent */

@@ -15,7 +15,7 @@ export const version = VERSION
 export class RootComponent extends Component {
 	/** @param {{ path: String }} context */
 	init (context) {
-		this.path = context['path']
+		this.path = context.path
 
 		// ------------------------------------------------------------------------
 		// Local
@@ -106,7 +106,7 @@ export class RootComponent extends Component {
 		const menuList = /** @type {List} */ (this.select('[data-sidebar-list]'))
 
 		const template = item => /* html */ `
-      <span>${item['name']}</span>
+      <span>${item.name}</span>
     `
 
 		menuList.init({ source: this.locations, template: template }).render()
@@ -133,7 +133,7 @@ export class RootComponent extends Component {
 		this.dispatchEvent(
 			new CustomEvent('navigate', {
 				bubbles: true,
-				detail: { path: event['detail']['data']['path'] }
+				detail: { path: event.detail.data.path }
 			})
 		)
 
@@ -148,35 +148,35 @@ export class RootComponent extends Component {
 
 	get locations () {
 		return [
-			{ name: 'Accordion', path: `/base/accordion` },
-			{ name: 'Alert', path: `/base/alert` },
-			{ name: 'Audio', path: `/base/audio` },
-			{ name: 'Button', path: `/base/button` },
-			{ name: 'Camera', path: `/base/camera` },
-			{ name: 'Card', path: `/base/card` },
-			{ name: 'Chart', path: `/base/chart` },
-			{ name: 'Checkbox', path: `/base/checkbox` },
-			{ name: 'Grid', path: `/base/grid` },
-			{ name: 'Icon', path: `/base/icon` },
-			{ name: 'Input', path: `/base/input` },
-			{ name: 'List', path: `/base/list` },
-			{ name: 'Location', path: `/base/location` },
-			{ name: 'Map', path: `/base/map` },
-			{ name: 'Modal', path: `/base/modal` },
-			{ name: 'Multiselect', path: `/base/multiselect` },
-			{ name: 'Navbar', path: `/base/navbar` },
-			{ name: 'Paginator', path: `/base/paginator` },
-			{ name: 'Radio', path: `/base/radio` },
-			{ name: 'Select', path: `/base/select` },
-			{ name: 'Sidebar', path: `/base/sidebar` },
-			{ name: 'Signature', path: `/base/signature` },
-			{ name: 'Spinner', path: `/base/spinner` },
-			{ name: 'SplitView', path: `/base/splitview` },
-			{ name: 'Table', path: `/base/table` },
-			{ name: 'Tabs', path: `/base/tabs` },
-			{ name: 'Tooltip', path: `/base/tooltip` },
-			{ name: 'TreeTable', path: `/base/treetable` },
-			{ name: 'Zone', path: `/base/zone` }
+			{ name: 'Accordion', path: '/base/accordion' },
+			{ name: 'Alert', path: '/base/alert' },
+			{ name: 'Audio', path: '/base/audio' },
+			{ name: 'Button', path: '/base/button' },
+			{ name: 'Camera', path: '/base/camera' },
+			{ name: 'Card', path: '/base/card' },
+			{ name: 'Chart', path: '/base/chart' },
+			{ name: 'Checkbox', path: '/base/checkbox' },
+			{ name: 'Grid', path: '/base/grid' },
+			{ name: 'Icon', path: '/base/icon' },
+			{ name: 'Input', path: '/base/input' },
+			{ name: 'List', path: '/base/list' },
+			{ name: 'Location', path: '/base/location' },
+			{ name: 'Map', path: '/base/map' },
+			{ name: 'Modal', path: '/base/modal' },
+			{ name: 'Multiselect', path: '/base/multiselect' },
+			{ name: 'Navbar', path: '/base/navbar' },
+			{ name: 'Paginator', path: '/base/paginator' },
+			{ name: 'Radio', path: '/base/radio' },
+			{ name: 'Select', path: '/base/select' },
+			{ name: 'Sidebar', path: '/base/sidebar' },
+			{ name: 'Signature', path: '/base/signature' },
+			{ name: 'Spinner', path: '/base/spinner' },
+			{ name: 'SplitView', path: '/base/splitview' },
+			{ name: 'Table', path: '/base/table' },
+			{ name: 'Tabs', path: '/base/tabs' },
+			{ name: 'Tooltip', path: '/base/tooltip' },
+			{ name: 'TreeTable', path: '/base/treetable' },
+			{ name: 'Zone', path: '/base/zone' }
 		]
 	}
 
