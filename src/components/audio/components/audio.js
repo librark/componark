@@ -48,12 +48,7 @@ export class Audio extends Component {
 	start () {
 		this.stop()
 
-		navigator.getMedia = (
-			navigator.getUserMedia ||
-      navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia ||
-      navigator.msGetUserMedia
-		)
+		navigator.getMedia = navigator.getUserMedia
 
 		if (!navigator.mediaDevices.getUserMedia) return
 
