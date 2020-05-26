@@ -53,12 +53,7 @@ export class Camera extends Component {
 	// ---------------------------------------------------------------------------
 
 	start () {
-		navigator.getMedia = (
-			navigator.getUserMedia ||
-      navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia ||
-      navigator.msGetUserMedia
-		)
+		navigator.getMedia = navigator.getUserMedia
 
 		if (!navigator.mediaDevices.getUserMedia) return
 
