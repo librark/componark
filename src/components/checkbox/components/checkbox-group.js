@@ -37,7 +37,7 @@ export class CheckboxGroup extends Component {
 		return super.load()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	get value () {
 		const values = []
@@ -64,7 +64,7 @@ export class CheckboxGroup extends Component {
 		)
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	_renderCheckboxList () {
 		const container = this.querySelector('[data-checkbox-list]')

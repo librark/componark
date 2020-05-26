@@ -32,7 +32,7 @@ export class Camera extends Component {
 		return super.load()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @returns {string} */
 	dataURL (width = this.width, height = this.height) {
@@ -50,7 +50,7 @@ export class Camera extends Component {
 		return dupCanvas.toDataURL('image/jpg')
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	start () {
 		navigator.getMedia = navigator.getUserMedia
@@ -81,7 +81,7 @@ export class Camera extends Component {
 		this.stop()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @returns {HTMLVideoElement} */
 	get video () {

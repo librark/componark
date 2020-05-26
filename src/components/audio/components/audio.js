@@ -43,7 +43,7 @@ export class Audio extends Component {
 		this.stop()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	start () {
 		this.stop()
@@ -93,7 +93,7 @@ export class Audio extends Component {
 		return this.audioURL
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	_setAudioURL (blob) {
 		const reader = new FileReader()
 		reader.readAsDataURL(blob)
@@ -126,7 +126,7 @@ export class Audio extends Component {
 		}, 1000)
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	_onStartEvent () {
 		this.dispatchEvent(new CustomEvent('onStartAudio', {
 			bubbles: true,
@@ -145,7 +145,7 @@ export class Audio extends Component {
 		}))
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	_setRecordingTimeLabel (hours = 0, minutes = 0, seconds = 0) {
 		let timeLabel = ''
 
@@ -190,7 +190,7 @@ export class Audio extends Component {
       `.trim()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @returns {HTMLLabelElement} */
 	get recordingTimeLabel () {

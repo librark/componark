@@ -52,7 +52,7 @@ export class Signature extends Component {
 		this.global.removeEventListener('resize', _ => this.resizeCanvas())
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @returns {string} */
 	dataURL (width = this.offsetWidth, height = this.offsetHeight) {
@@ -97,7 +97,7 @@ export class Signature extends Component {
 		this.signaturePad.fromDataURL(dataURL)
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	/** @returns {boolean} */
 	get dirty () {
 		return this._dirty

@@ -94,7 +94,7 @@ export class Multiselect extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @param {event} event */
   onRemoveAll(event) {
@@ -177,7 +177,7 @@ export class Multiselect extends Component {
     this.multiselectList.open()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @returns {MultiselectList} */
   get multiselectList() {
@@ -195,7 +195,7 @@ export class Multiselect extends Component {
     return this.input.value
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   _alter(value) {
     this.dispatchEvent(
       new CustomEvent("ark-multiselect:alter", {

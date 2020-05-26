@@ -16,13 +16,13 @@ export class Icon extends Component {
     if (this.type === 'mat') {
       this.innerHTML = this._renderMaterial()
     } else {
-      this.innerHTML = this._renderFontawesome()
+      this.innerHTML = this._renderFontAwesome()
     }
 
     return super.render()
   }
 
-  _renderFontawesome() {
+  _renderFontAwesome() {
     return /* html */ `<i class="${this.name}"></i>`
   }
 

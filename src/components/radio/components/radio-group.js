@@ -41,7 +41,7 @@ export class RadioGroup extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   /** @param {CustomEvent} event */
   onAlter(event) {
     event.stopImmediatePropagation()
@@ -60,7 +60,7 @@ export class RadioGroup extends Component {
     )
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   _checkButtons(value) {
     this.selectAll('ark-radio-button').forEach(
@@ -84,7 +84,7 @@ export class RadioGroup extends Component {
     })
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   get value() {
     const button = /** @type {RadioButton} */ (

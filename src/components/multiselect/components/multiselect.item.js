@@ -30,7 +30,7 @@ export class MultiselectItem extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @param {boolean} value */
   set selected(value) {
@@ -46,7 +46,7 @@ export class MultiselectItem extends Component {
     return this.hasAttribute("selected")
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @param {event} event */
   _onRemove(event) {

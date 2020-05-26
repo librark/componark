@@ -37,7 +37,7 @@ export class List extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @param {number} start @param {number?} deleteCount  */
   delete(start, deleteCount = 1) {
@@ -50,7 +50,7 @@ export class List extends Component {
     this.render()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @param {CustomEvent} event */
   _onSelected(event) {

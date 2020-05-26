@@ -56,7 +56,7 @@ export class SplitViewDetail extends Component {
 		this.hasAttribute('hidden') ? this.show() : this.hide()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	_renderBackButtonIcon () {
 		return this.backButtonIcon ? this.backButtonIcon() : '&times;'
 	}

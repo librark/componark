@@ -8,7 +8,7 @@ export class MultiselectList extends Component {
     this.items = this.items = context['items'] || []
     this.template = context['template'] || (data => `${data}`)
 
-    // -------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     this.itemPosition = -1
 
     return super.init()
@@ -47,7 +47,7 @@ export class MultiselectList extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   /** @param {MouseEvent} event */
   onMouseEnter (event) {
     event.stopImmediatePropagation()
@@ -101,7 +101,7 @@ export class MultiselectList extends Component {
     }
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @param {number} value */
   set itemPosition (value) {
@@ -123,7 +123,7 @@ export class MultiselectList extends Component {
     return this._itemPosition
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   _dispatchEventSelected (item) {
     if (!item) return

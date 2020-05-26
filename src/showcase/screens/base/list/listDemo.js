@@ -16,7 +16,7 @@ export class ListDemo extends Component {
 
       <h1>Template List <span data-template-selected></span></h1>
 
-      <ark-list data-template-list action default 
+      <ark-list data-template-list action default
         listen on-list:selected="onTemplateListSelected"></ark-list>
 
       <p>Atributos:</p>

@@ -30,7 +30,7 @@ export class SplitView extends Component {
 		return super.load()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @return {SplitViewMaster} */
 	get master () {
@@ -42,7 +42,7 @@ export class SplitView extends Component {
 		return /** @type {SplitViewDetail} */ (this.select('ark-splitview-detail'))
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @param {CustomEvent} event */
 	_onMasterChange (event) {
