@@ -122,7 +122,7 @@ export class Alert extends Component {
 
   // --------------------------------------------------------------------------
   // renders
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   _defaultValue(currentValue, newValue) {
     return newValue === undefined ? currentValue : newValue
   }
