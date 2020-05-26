@@ -16,15 +16,15 @@ export class Accordion extends Component {
 	}
 
 	load () {
-		this.addEventListener('accordiontab:click',
-			this.onAccordiontabClick.bind(this)
+		this.addEventListener('accordionTab:click',
+			this.onAccordionTabClick.bind(this)
 		)
 
 		return super.load()
 	}
 
 	/** @param {CustomEvent} event */
-	onAccordiontabClick (event) {
+	onAccordionTabClick (event) {
 		event.stopImmediatePropagation()
 
 		if (!this.multiple) return

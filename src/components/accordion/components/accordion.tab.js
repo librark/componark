@@ -50,7 +50,7 @@ export class AccordionTab extends Component {
     this.hasAttribute('active') ? this.close() : this.open()
 
     this.dispatchEvent(
-      new CustomEvent('accordiontab:click', {
+      new CustomEvent('accordionTab:click', {
         bubbles: true,
         detail: {
           index: this.index,
