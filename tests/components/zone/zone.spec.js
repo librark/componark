@@ -1,14 +1,8 @@
-import {
-	EventAlterZone,
-	Zone
-} from '../../../src/components/zone/components/zone'
+import { EventAlterZone, Zone }
+	from '../../../src/components/zone/components/zone'
 
-import {
-	DragZone
-} from '../../../src/components/zone/components/drag'
-import {
-	DropZone
-} from '../../../src/components/zone/components/drop'
+import { DragZone } from '../../../src/components/zone/components/drag'
+import { DropZone } from '../../../src/components/zone/components/drop'
 
 describe('Zone', () => {
 	it('can calculate the absolute position', () => {
@@ -25,8 +19,8 @@ describe('Zone', () => {
 		zone.addEventListener('zone:alter', event => {
 			const detail = event.detail
 
-			expect(!detail['value'].length).toBeTruthy()
-			expect(detail['action']).toEqual('MOVE')
+			expect(!detail.value.length).toBeTruthy()
+			expect(detail.action).toEqual('MOVE')
 		})
 
 		eventAlterZone.dispatch(zone)
@@ -40,10 +34,10 @@ describe('Zone', () => {
 		zone.addEventListener('zone:alter', event => {
 			const detail = event.detail
 
-			expect(detail['action']).toEqual('MOVE')
-			expect(detail['value'].length).toBeTruthy()
-			expect(detail['value'][0].drags.length).toEqual(3)
-			expect(detail['value'][1].drags.length).toEqual(1)
+			expect(detail.action).toEqual('MOVE')
+			expect(detail.value.length).toBeTruthy()
+			expect(detail.value[0].drags.length).toEqual(3)
+			expect(detail.value[1].drags.length).toEqual(1)
 		})
 
 		const drop1 = new DropZone()
@@ -554,6 +548,58 @@ describe('Zone', () => {
 		expect(drag1.hasAttribute('draggable')).toBeTruthy()
 	})
 
+	it('remove drags', () => {
+		const zone = new Zone()
+
+		const drop0 = new DropZone()
+
+		const drag1 = new DragZone()
+		drag1.selected = true
+
+		const drag2 = new DragZone()
+		drag2.selected = true
+
+		const drag3 = new DragZone()
+		drag3.selected = true
+
+		const drag4 = new DragZone()
+
+		drop0.appendChild(drag1)
+		drop0.appendChild(drag2)
+		drop0.appendChild(drag3)
+		drop0.appendChild(drag4)
+
+		zone.appendChild(drop0)
+
+		zone.init().render().load()
+
+		expect(zone.getSelectedDrags().length).toBeTruthy()
+
+		zone.onKeyUp(new KeyboardEvent('', { key: 'Delete' }))
+
+		expect(!zone.getSelectedDrags().length).toBeTruthy()
+	})
+
+	it('remove drags without drags selected', () => {
+		const zone = new Zone()
+
+		const drop0 = new DropZone()
+
+		const drag1 = new DragZone()
+
+		const drag2 = new DragZone()
+
+		drop0.appendChild(drag1)
+		drop0.appendChild(drag2)
+		zone.appendChild(drop0)
+
+		zone.init().render().load()
+
+		expect(!zone.getSelectedDrags().length).toBeTruthy()
+
+		zone.onKeyUp(new KeyboardEvent('', { key: 'Delete' }))
+	})
+
 	it('onkeyDown', () => {
 		const zone = new Zone()
 
@@ -699,7 +745,7 @@ describe('Zone', () => {
 		// -------------------------------------------------------------------------
 
 		zone.addEventListener('zone:alter', event => {
-			const value = event['detail'].value
+			const value = event.detail.value
 
 			expect(value.length).toEqual(1)
 

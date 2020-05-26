@@ -37,7 +37,7 @@ export class MultiselectInput extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   /** @param {MouseEvent} event */
   onClick (event) {
     event.stopImmediatePropagation()
@@ -130,7 +130,7 @@ export class MultiselectInput extends Component {
     )
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @return {HTMLInputElement} */
   get input () {
@@ -202,7 +202,7 @@ export class MultiselectInput extends Component {
     return this.items
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   addItem (item) {
     this.items.unshift(item)
@@ -240,7 +240,7 @@ export class MultiselectInput extends Component {
     this.input.value = ''
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   _alter () {
     this.dispatchEvent(
       new CustomEvent('multiselect-input:alter', {

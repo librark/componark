@@ -34,17 +34,12 @@ export class Input extends Component {
 	}
 
 	// --------------------------------------------------------------------------
-	/** @return {HTMLInputElement} */
-	get input () {
-		return this.querySelector('[data-input]')
-	}
-
-	// --------------------------------------------------------------------------
 
 	/** @param {Event} event */
 	_change (event) {
 		event.stopImmediatePropagation()
-		this.value = this.input.value
+		// @ts-ignore
+		this.value = this.select('[data-input]').value
 		this.dispatchEvent(
 			new CustomEvent('alter', {
 				detail: {
@@ -81,6 +76,7 @@ export class Input extends Component {
 			'autofocus',
 			'checked',
 			'dirname',
+			'disabled',
 			'form',
 			'formaction',
 			'formenctype',

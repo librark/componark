@@ -6,7 +6,7 @@ describe('Tabs Item', () => {
 		const item = /** @type {Tabs} */ (document.createElement('ark-tabs-item'))
 		expect(item).toBeTruthy()
 
-		var init = item.init()
+		const init = item.init()
 		expect(item === init).toBeTruthy()
 	})
 

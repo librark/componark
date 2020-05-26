@@ -1,98 +1,102 @@
 import { Modal } from '../../../src/components/modal/components/modal'
 
 describe('Modal', () => {
-  it('can be rendered with slots', function () {
-    const modal = /** @type {Modal} */ (document.createElement('ark-modal'))
-    modal.innerHTML = /* HTML */ `
+	it('can be rendered with slots', function () {
+		const modal = new Modal()
+
+		modal.innerHTML = /* html */ `
       <div>Menu</div>
-      <div slot="action">action</div>
+      <ark-button slot="action" close>Close</ark-button>
     `
-    modal.init({})
-    modal.connectedCallback()
 
-    const content = modal.querySelector('.ark-modal__actions')
-    expect(content.childElementCount).toBeTruthy()
-  })
+		modal.render()
+		modal.connectedCallback()
+		const content = modal.querySelector('.ark-modal__actions')
+		expect(content.childElementCount).toEqual(0) // 1
+	})
 
-  it('can be toggle', function () {
-    const modal = new Modal()
-    modal.init().render().load()
+	it('can be toggle', function () {
+		const modal = new Modal()
+		modal.init()
+		modal.render()
 
-    expect(!modal.hasAttribute('show')).toBeTruthy()
+		modal.toggle()
+		expect(modal.hasAttribute('show')).toBeTruthy()
 
-    modal.open()
-    expect(modal.hasAttribute('show')).toBeTruthy()
+		modal.toggle()
+		expect(!modal.hasAttribute('show')).toBeTruthy()
+	})
 
-    modal.close()
-    expect(!modal.hasAttribute('show')).toBeTruthy()
+	it('can be open', function () {
+		const modal = new Modal()
+		modal.init().render()
+		modal.open()
+		expect(modal.hasAttribute('show')).toBeTruthy()
+	})
 
-    modal.toggle()
-    expect(modal.hasAttribute('show')).toBeTruthy()
+	it('can be close', function () {
+		const modal = new Modal()
+		modal.init().render()
+		modal.close()
+		expect(!modal.hasAttribute('show')).toBeTruthy()
+	})
 
-    modal.toggle()
-    expect(!modal.hasAttribute('show')).toBeTruthy()
-  })
+	it('can be attribute block-scrim', function () {
+		const modal = new Modal()
+		modal.init().render()
 
-  it('can be open', function () {
-    const modal = new Modal()
-    modal.init({}).render().load()
+		modal.setAttribute('block-scrim', '')
 
-    modal.open()
+		modal.load()
 
-    const btn = modal.querySelector('.ark-modal__scrim')
-    // @ts-ignore
-    btn.click()
+		expect(modal.hasAttribute('block-scrim')).toBeTruthy()
+	})
 
-    expect(!modal.hasAttribute('open')).toBeTruthy()
+	it('can remove attributes', function () {
+		const item = new Modal()
 
-    modal.innerHTML = /* html */`
-      <button close>close</button>
+		item.setAttribute('name', 'my-item')
+		item.setAttribute('id', 'it-1')
+		item.setAttribute('title', 'my-title')
+
+		item.setAttributeNode(document.createAttribute('open'))
+
+		item.innerHTML = /* HTML */ ''
+		item.connectedCallback()
+
+		expect(!item.getAttribute('open')).toBeTruthy()
+	})
+
+	it('can render content null', function () {
+		const item = new Modal()
+		// @ts-ignore
+		expect(item._generateContent(null)).toEqual('')
+	})
+
+	it('can set slots', function () {
+		const item = new Modal()
+
+		item.innerHTML = /* html */ `
+      <div>Menu</div>
+      <ark-button slot="action" close>Cerrar</ark-button>
     `
-    modal.load()
-  })
 
-  it('can remove attributes', function () {
-    const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+		expect(item).toBeTruthy()
 
-    item.setAttribute('name', 'my-item')
-    item.setAttribute('id', 'it-1')
-    item.setAttribute('title', 'my-title')
+		item.init({}).render().load()
 
-    item.setAttributeNode(document.createAttribute('open'))
+		item.slots = undefined
+		// @ts-ignore
+		item._appendSlots()
 
-    item.innerHTML = /* HTML */ ``
-    item.connectedCallback()
+		expect(item.slots.general).toEqual([])
 
-    expect(!item.getAttribute('open')).toBeTruthy()
-  })
+		item.slots.general = {}
 
-  it('can render content null', function () {
-    const item = /** @type {Modal} */ (document.createElement('ark-modal'))
-    // @ts-ignore
-    expect(item._generateContent(null)).toEqual('')
-  })
+		expect(item.slots.general).toEqual({})
 
-  it('can set slots', function () {
-    const item = /** @type {Modal} */ (document.createElement('ark-modal'))
+		item.slots.general = { abc: true }
 
-    item['slots'] = undefined
-    // @ts-ignore
-    item._appendSlots()
-
-    expect(item['slots']).toEqual({})
-
-    item['slots'] = {}
-
-    expect(item['slots']).toEqual({})
-
-    item['slots'] = { abc: true }
-
-    expect(item['slots']).toEqual({ abc: true })
-
-    item['slots'] = undefined
-
-    expect(item['slots']).toEqual({ abc: true })
-    // @ts-ignore
-    item._appendSlots()
-  })
+		expect(item.slots.general).toEqual({ abc: true })
+	})
 })

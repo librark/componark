@@ -39,7 +39,7 @@ export class RadioButton extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   check() {
     this.checked = true
@@ -53,7 +53,7 @@ export class RadioButton extends Component {
     this.checked = !this.checked
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   /** @returns {Boolean} */
   get checked() {
     return this.hasAttribute('checked')
@@ -75,7 +75,7 @@ export class RadioButton extends Component {
     }
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   /** @param {Event} event */
   onClick(event) {
     event.stopImmediatePropagation()

@@ -37,7 +37,7 @@ export class SignatureDemo extends Component {
     return super.load()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   /** @param {CustomEvent} event */
   _onDirty(event) {
     event.stopImmediatePropagation()
@@ -61,7 +61,7 @@ export class SignatureDemo extends Component {
     this.signature.clear()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   /** @returns {Signature} */
   get signature() {
@@ -78,7 +78,7 @@ export class SignatureDemo extends Component {
     return /** @type {HTMLImageElement} */ (this.querySelector('[data-img]'))
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   get styles() {
     return /* html */ `

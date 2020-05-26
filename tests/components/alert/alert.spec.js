@@ -7,7 +7,7 @@ describe('Alert', () => {
 		alert.init()
 		expect(alert).toBeTruthy()
 
-		var init = alert.init({})
+		const init = alert.init({})
 		expect(alert === init).toBeTruthy()
 
 		expect(!alert['title']).toBeTruthy()

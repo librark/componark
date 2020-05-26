@@ -3,8 +3,8 @@ import { getSlots } from '../../../utils'
 
 export class Modal extends Component {
 	init (context = {}) {
-		this.title = context['title']
-		this.subtitle = context['subtitle']
+		this.title = context.title
+		this.subtitle = context.subtitle
 
 		// local variables
 		this.slots = getSlots(this)
@@ -38,9 +38,9 @@ export class Modal extends Component {
 			this.scrim.addEventListener('click', _ => this.close())
 		}
 
-		this.querySelectorAll('[close]').forEach(button =>
-			button.addEventListener('click', _ => this.close())
-		)
+    this.querySelectorAll('[close]').forEach(
+      button => button.addEventListener('click', _ => this.close())
+    )
 
 		return super.load()
 	}
@@ -59,7 +59,7 @@ export class Modal extends Component {
 		this.hasAttribute('show') ? this.close() : this.open()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	/** @returns {Object} */
 	get slots () {
 		return this._slots || {}
@@ -75,20 +75,20 @@ export class Modal extends Component {
 		return this.querySelector('[data-scrim]')
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	_appendSlots () {
 		if (!Object.keys(this._slots || {}).length) return
 
-		const general = this.slots['general'] || []
-		const action = this.slots['action'] || []
+		const general = this.slots.general || []
+		const action = this.slots.action || []
 
-		general.forEach(slot => {
-			this.querySelector('[data-body]').appendChild(slot)
-		})
+		general.forEach(
+      slot => this.querySelector('[data-body]').appendChild(slot)
+    )
 
-		action.forEach(slot => {
-			this.querySelector('[data-actions]').appendChild(slot)
-		})
+		action.forEach(
+      slot => this.querySelector('[data-actions]').appendChild(slot)
+    )
 	}
 
 	_renderHeader () {
@@ -103,7 +103,7 @@ export class Modal extends Component {
     `
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	_onHiddenEvent () {
 		this.dispatchEvent(new CustomEvent('onHiddenModal', {
 			bubbles: true,
@@ -112,7 +112,7 @@ export class Modal extends Component {
 			}
 		}))
 	}
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	_generateContent (content, className, type = 'div') {
 		return content

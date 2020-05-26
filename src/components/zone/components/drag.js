@@ -9,11 +9,12 @@ import {
 
 export class DragZone extends Component {
 	init (context = {}) {
-		this.value = this.value || context['value']
+		this.value = this.value || context.value
 
-		// -------------------------------------------------------------------------
+		// ------------------------------------------------------------------------
 		// Local
-		// -------------------------------------------------------------------------
+		// ------------------------------------------------------------------------
+
 		this.x = this.x
 		this.y = this.y
 		this.id = uuidv4()
@@ -53,7 +54,7 @@ export class DragZone extends Component {
 		return super.load()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @param {event} event */
 	onDraggableStart (event) {
@@ -64,8 +65,8 @@ export class DragZone extends Component {
 
 		this.selected = true
 
-		this.classList.add(`ark-zone-drag--dragging`)
-		setTimeout(_ => this.classList.add(`ark-zone-drag--hidden`))
+		this.classList.add('ark-zone-drag--dragging')
+		setTimeout(_ => this.classList.add('ark-zone-drag--hidden'))
 	}
 
 	/** @param {event} event */
@@ -77,8 +78,8 @@ export class DragZone extends Component {
 		this.render()
 		this.selected = false
 
-		this.classList.remove(`ark-zone-drag--dragging`)
-		setTimeout(_ => this.classList.remove(`ark-zone-drag--hidden`))
+		this.classList.remove('ark-zone-drag--dragging')
+		setTimeout(_ => this.classList.remove('ark-zone-drag--hidden'))
 
 		this.dispatchEvent(new CustomEvent('drag:dragend', {
 			bubbles: true
@@ -123,7 +124,7 @@ export class DragZone extends Component {
 		)
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	/** @return {boolean} */
 	get selected () {
 		return this.hasAttribute('selected')
@@ -138,7 +139,7 @@ export class DragZone extends Component {
 		}
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 	toggleSelected () {
 		this.selected = !this.selected
 	}
@@ -164,11 +165,11 @@ export class DragZone extends Component {
 		this.y = parent.y
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	_draggableRemoveStyle () {
-		this.classList.remove(`ark-zone-drag--enter`)
-		this.classList.remove(`ark-zone-drag--enter_disabled`)
+		this.classList.remove('ark-zone-drag--enter')
+		this.classList.remove('ark-zone-drag--enter_disabled')
 	}
 }
 customElements.define('ark-zone-drag', DragZone)

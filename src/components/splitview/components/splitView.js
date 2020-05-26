@@ -7,9 +7,9 @@ import { Component } from '../../component'
 
 export class SplitView extends Component {
 	init (context = {}) {
-		this.detailTitle = context['title'] || this.detailTitle
+		this.detailTitle = context.title || this.detailTitle
 
-		this.detailBackButtonIcon = context['backButtonIcon'] ||
+		this.detailBackButtonIcon = context.backButtonIcon ||
      this.detailBackButtonIcon
 
 		return super.init()
@@ -30,7 +30,7 @@ export class SplitView extends Component {
 		return super.load()
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @return {SplitViewMaster} */
 	get master () {
@@ -42,7 +42,7 @@ export class SplitView extends Component {
 		return /** @type {SplitViewDetail} */ (this.select('ark-splitview-detail'))
 	}
 
-	// ---------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	/** @param {CustomEvent} event */
 	_onMasterChange (event) {
@@ -56,10 +56,11 @@ export class SplitView extends Component {
 
 	/** @param {Object} context */
 	_renderDetail (context) {
-		if (!this.detail && !this.detail.init) return
+		// if (!this.detail && !this.detail.init) return
+		if (!this.detail || !this.detail.init) return
 
-		context['title'] = context['title'] || this.detailTitle
-		context['backButtonIcon'] = context['backButtonIcon'] ||
+		context.title = context.title || this.detailTitle
+		context.backButtonIcon = context.backButtonIcon ||
      this.detailBackButtonIcon
 
 		this.detail.init(context).render()

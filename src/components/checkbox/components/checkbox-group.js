@@ -1,22 +1,22 @@
 /** @typedef {import('./checkbox').Checkbox} Checkbox */
-import { Component } from "../../component"
+import { Component } from '../../component'
 
 export class CheckboxGroup extends Component {
-  init(context = {}) {
-    this.label = context["label"]
+	init (context = {}) {
+		this.label = context.label
 
-    // local variables
-    this.defaultContent = this.defaultContent || this.innerHTML
+		// local variables
+		this.defaultContent = this.defaultContent || this.innerHTML
 
-    return super.init()
-  }
+		return super.init()
+	}
 
-  reflectedProperties() {
-    return ["label"]
-  }
+	reflectedProperties () {
+		return ['label']
+	}
 
-  render() {
-    this.innerHTML = /* html */ `
+	render () {
+		this.innerHTML = /* html */ `
       <div class="ark-checkbox-group__label">
         <small data-checkbox-group-label>${this.label}</small>
       </div>
@@ -28,53 +28,51 @@ export class CheckboxGroup extends Component {
       </div>
     `
 
-    this._renderCheckboxList()
-    return super.render()
-  }
+		this._renderCheckboxList()
+		return super.render()
+	}
 
-  load() {
-    this.addEventListener("checkbox:alter", this.onAlter.bind(this))
+	load () {
+		this.addEventListener('checkbox:alter', this.onAlter.bind(this))
+		return super.load()
+	}
 
-    return super.load()
-  }
+	// --------------------------------------------------------------------------
 
-  // ---------------------------------------------------------------------------
+	get value () {
+		const values = []
+		this.selectAll('ark-checkbox[checked]').forEach((
+			/** @type {Checkbox} */ checkbox
+		) => {
+			values.push(checkbox.value)
+		})
 
-  get value() {
-    const values = []
+		return values
+	}
 
-    this.selectAll("ark-checkbox[checked]").forEach((
-      /** @type {Checkbox} */ checkbox
-    ) => {
-      values.push(checkbox.value)
-    })
+	/** @param {CustomEvent} event */
+	onAlter (event) {
+		event.stopImmediatePropagation()
 
-    return values
-  }
+		this.dispatchEvent(
+			new CustomEvent('alter', {
+				detail: {
+					value: this.value,
+					origin: event
+				}
+			})
+		)
+	}
 
-  /** @param {CustomEvent} event */
-  onAlter(event) {
-    event.stopImmediatePropagation()
+	// --------------------------------------------------------------------------
 
-    this.dispatchEvent(
-      new CustomEvent("alter", {
-        detail: {
-          value: this.value,
-          origin: event
-        }
-      })
-    )
-  }
+	_renderCheckboxList () {
+		const container = this.querySelector('[data-checkbox-list]')
+		const checkboxList = this.selectAll('ark-checkbox')
 
-  // ---------------------------------------------------------------------------
-
-  _renderCheckboxList() {
-    const container = this.querySelector("[data-checkbox-list]")
-    const checkboxList = this.selectAll("ark-checkbox")
-
-    checkboxList.forEach(checkbox => {
-      container.appendChild(checkbox)
-    })
-  }
+		checkboxList.forEach(checkbox => {
+			container.appendChild(checkbox)
+		})
+	}
 }
-customElements.define("ark-checkbox-group", CheckboxGroup)
+customElements.define('ark-checkbox-group', CheckboxGroup)

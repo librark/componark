@@ -2,6 +2,7 @@
   $component: "ark-accordion-tab";
 
   #{$component} {
+    user-select: none;
   }
 
   .#{$component} {

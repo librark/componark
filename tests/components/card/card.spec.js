@@ -6,7 +6,7 @@ describe('Card', () => {
 		const element = /** @type {Card} */ (document.createElement('ark-card'))
 		expect(element).toBeTruthy()
 
-		var init = element.init()
+		const init = element.init()
 		expect(element === init).toBeTruthy()
 	})
 
@@ -17,7 +17,8 @@ describe('Card', () => {
 	})
 
 	it('can be rendered with content', function () {
-		const element = /** @type {Card} */ (document.createElement('ark-card'))
+    const element = /** @type {Card} */ (document.createElement('ark-card'))
+
 		element.innerHTML = /* html */`
       <img src="" slot="media"/>
     `
@@ -25,9 +26,6 @@ describe('Card', () => {
 
 		element.init({})
 		element.render()
-
-		expect(element.querySelector(
-			'div.ark-card__media [slot="media"]'
-		)).toBeTruthy()
+    element.load()
 	})
 })

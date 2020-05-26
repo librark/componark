@@ -1,35 +1,35 @@
-/**
- * @typedef {import('../../../src/components').Splitview} Splitview
- **/
+import { SplitView }
+	from '../../../src/components/splitview/components/splitView'
+import { SplitViewDetail }
+	from '../../../src/components/splitview/components/detail'
+import { SplitViewMaster }
+	from '../../../src/components/splitview/components/master'
 
-import {
-	Splitview
-} from '../../../src/components/splitview/components/splitView'
-import {
-	SplitviewDetail
-} from '../../../src/components/splitview/components/detail'
-import {
-	SplitviewMaster
-} from '../../../src/components/splitview/components/master'
-
-describe('Splitview', () => {
+describe('SplitView', () => {
 	it('can be instantiated without elements', () => {
-		const splitview = new Splitview()
-		splitview.init()
-		splitview.connectedCallback()
-		splitview._onMasterChange(new CustomEvent(''))
-		expect(!splitview.innerHTML.trim().length).toBeTruthy()
+		const splitview = new SplitView()
+		splitview.init().render().load()
+
+		// @ts-ignore
+		splitview._renderDetail()
+
+		expect(splitview).toBeTruthy()
 	})
 
 	it('can be instantiated with elements', () => {
-		const splitview = new Splitview()
-		const master = new SplitviewMaster()
-		const detail = new SplitviewDetail()
+		const splitview = new SplitView()
+		const master = new SplitViewMaster()
+		const detail = new SplitViewDetail()
 
-		splitview.append(master)
-		splitview.append(detail)
+		master.render()
+		detail.render()
 
-		splitview.render().load()
+		splitview.appendChild(master)
+		splitview.appendChild(detail)
+
+		splitview.init().render().load()
+
+		splitview._renderDetail({})
 
 		splitview.addEventListener('test', event => {
 			expect(event.detail.data).toBeTruthy()
@@ -39,7 +39,5 @@ describe('Splitview', () => {
 		splitview._onMasterChange(event)
 
 		splitview._onMasterChange(new CustomEvent(''))
-
-		splitview._renderDetail({})
 	})
 })

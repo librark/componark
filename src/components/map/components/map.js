@@ -79,7 +79,7 @@ export class Map extends Component {
     this.updateSize()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
   _getUrl() {
     return 'https://api.mapbox.com/styles/v1/mapbox/' +

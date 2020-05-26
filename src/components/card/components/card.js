@@ -30,12 +30,13 @@ export class Card extends Component {
 		if (!this.slots || !this.slots[key]) return ''
 
 		return /* html */ `
-        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
-      `.trim()
+      ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
+    `.trim()
 	}
 
 	_renderMedia () {
 		const content = this._getSlots('media')
+
 		return this._generateContent(content, 'media')
 	}
 

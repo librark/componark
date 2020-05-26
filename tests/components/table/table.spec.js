@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components').Table} Table */
 import { Table } from '../../../src/components/table'
 
 describe('Table', () => {
@@ -6,7 +5,7 @@ describe('Table', () => {
 		const table = /** @type {Table} */(document.createElement('ark-table'))
 		expect(table).toBeTruthy()
 
-		var init = table.init()
+		const init = table.init()
 		expect(table === init).toBeTruthy()
 	})
 

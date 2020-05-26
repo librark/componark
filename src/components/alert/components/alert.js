@@ -2,15 +2,15 @@ import { Component } from "../../component"
 
 export class Alert extends Component {
   init(context = {}) {
-    this.title = this._defaultvalue(this.title, context["title"])
-    this.text = this._defaultvalue(this.text, context["text"])
+    this.title = this._defaultValue(this.title, context["title"])
+    this.text = this._defaultValue(this.text, context["text"])
 
-    this.horizontal = this._defaultvalue(
+    this.horizontal = this._defaultValue(
       this.horizontal,
       context["horizontal"] || "center"
     )
 
-    this.vertical = this._defaultvalue(
+    this.vertical = this._defaultValue(
       this.vertical,
       context["vertical"] || "center"
     )
@@ -19,17 +19,17 @@ export class Alert extends Component {
     showConfirmButton =
       showConfirmButton === undefined ? true : showConfirmButton
 
-    this.showConfirmButton = this._defaultvalue(
+    this.showConfirmButton = this._defaultValue(
       this.showConfirmButton,
       showConfirmButton
     )
 
-    this.confirmButtonText = this._defaultvalue(
+    this.confirmButtonText = this._defaultValue(
       this.confirmButtonText,
       context["confirmButtonText"] || "Aceptar"
     )
 
-    this.confirmButtonBackground = this._defaultvalue(
+    this.confirmButtonBackground = this._defaultValue(
       this.confirmButtonBackground,
       context["confirmButtonBackground"] || "primary"
     )
@@ -37,17 +37,17 @@ export class Alert extends Component {
     let showCancelButton = context["showCancelButton"]
     showCancelButton = showCancelButton === undefined ? true : showCancelButton
 
-    this.showCancelButton = this._defaultvalue(
+    this.showCancelButton = this._defaultValue(
       this.showCancelButton,
       showCancelButton
     )
 
-    this.cancelButtonText = this._defaultvalue(
+    this.cancelButtonText = this._defaultValue(
       this.cancelButtonText,
       context["cancelButtonText"] || "Cancelar"
     )
 
-    this.cancelButtonBackground = this._defaultvalue(
+    this.cancelButtonBackground = this._defaultValue(
       this.cancelButtonBackground,
       context["cancelButtonBackground"] || "light"
     )
@@ -120,10 +120,10 @@ export class Alert extends Component {
     this.hasAttribute("hidden") ? this.show() : this.hide()
   }
 
-  // ---------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   // renders
-  // ---------------------------------------------------------------------------
-  _defaultvalue(currentValue, newValue) {
+  // --------------------------------------------------------------------------
+  _defaultValue(currentValue, newValue) {
     return newValue === undefined ? currentValue : newValue
   }
 
