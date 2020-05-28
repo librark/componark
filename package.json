@@ -129,6 +129,7 @@
     "material-design-icons": "^3.0.1",
     "ol": "^6.3.1",
     "popper.js": "^1.16.1",
-    "signature_pad": "^3.0.0-beta.3"
+    "signature_pad": "^3.0.0-beta.3",
+    "typescript": "^3.9.3"
   }
 }
