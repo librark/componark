@@ -105,7 +105,7 @@ describe('Paginator', () => {
 
 		// @ts-ignore
 		paginator._setCurrentPage(12)
-		expect(paginator['currentPage']).toBe(1)
+		expect(paginator.currentPage).toBe(1)
 
 		let buttons = paginator.querySelectorAll('[data-button-list] button')
 		expect(buttons[0].id).toBe('1')

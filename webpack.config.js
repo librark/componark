@@ -4,9 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const webpack = require('webpack')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin()
 
 // @ts-ignore
-module.exports = (env, argv) => {
+module.exports = smp.wrap((env, argv) => {
 	const devMode = argv.mode === 'development'
 	const target = env.TARGET
 
@@ -90,4 +92,4 @@ module.exports = (env, argv) => {
 	}
 
 	return config
-}
+})

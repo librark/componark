@@ -12,7 +12,7 @@ describe('Select', () => {
 
 	it('can be rendered with content', function () {
 		const item = /** @type {Select} */(document.createElement('ark-select'))
-		item['defaultContent'] = /* HTML */`
+		item.defaultContent = /* HTML */`
       <option>myOption</option>
     `
 		item.connectedCallback()
@@ -26,7 +26,7 @@ describe('Select', () => {
 		att.value = 'placeholder'
 		item.setAttributeNode(att)
 
-		item['defaultContent'] = /* HTML */`
+		item.defaultContent = /* HTML */`
       <option>myOption</option>
     `
 		item.connectedCallback()

@@ -4,7 +4,7 @@ describe('Slots', () => {
 	it('can be rendered without content', () => {
 		const item = document.createElement('div')
 		const slots = getSlots(item)
-		expect(!slots['general'].length).toBeTruthy()
+		expect(!slots.general.length).toBeTruthy()
 	})
 
 	it('can be rendered with content', () => {
@@ -14,7 +14,7 @@ describe('Slots', () => {
 
 		item.appendChild(obj)
 		const slots = getSlots(item)
-		expect(slots['general'].length).toBeTruthy()
+		expect(slots.general.length).toBeTruthy()
 	})
 
 	it('can be rendered with value slot', () => {
@@ -27,7 +27,7 @@ describe('Slots', () => {
 
 		item.appendChild(obj)
 		const slots = getSlots(item)
-		expect(slots['mySlot'].length).toBeTruthy()
+		expect(slots.mySlot.length).toBeTruthy()
 	})
 
 	it('can be rendered with multiple values slot', () => {
@@ -47,6 +47,6 @@ describe('Slots', () => {
 
 		item.appendChild(obj2)
 		const slots = getSlots(item)
-		expect(slots['mySlot'].length).toBeTruthy()
+		expect(slots.mySlot.length).toBeTruthy()
 	})
 })
