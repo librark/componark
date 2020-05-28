@@ -44,13 +44,16 @@ export class ThemeService {
 
 		if (currentStyle === 'material') {
 			// @ts-ignore
-			import('./styles/main-material.scss')
+			require('styles/main-material.scss')
+			// import('./styles/main-material.scss')
 		} else if (currentStyle === 'bootstrap') {
 			// @ts-ignore
-			import('./styles/main-bootstrap.scss')
+			require('styles/main-bootstrap.scss')
+			// import('./styles/main-bootstrap.scss')
 		} else {
 			// @ts-ignore
-			import('./styles/main-ark.scss')
+			require('styles/main-ark.scss')
+			// import('./styles/main-ark.scss')
 		}
 
 		return this

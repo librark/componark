@@ -43,6 +43,11 @@ module.exports = (env, argv) => {
 			new webpack.HashedModuleIdsPlugin(),
 			new CopyWebpackPlugin(['src/assets/config/.htaccess'])
 		],
+		resolve: {
+			alias: {
+				styles: path.resolve(__dirname, 'src/showcase/screens/theme/styles/')
+			}
+		},
 		module: {
 			rules: [
 				{
