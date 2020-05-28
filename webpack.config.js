@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const webpack = require('webpack')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 
 // @ts-ignore
 module.exports = (env, argv) => {
@@ -25,7 +24,6 @@ module.exports = (env, argv) => {
 			runtimeChunk: 'single'
 		},
 		plugins: [
-			new HardSourceWebpackPlugin(),
 			new CleanWebpackPlugin(),
 			new HtmlWebpackPlugin({
 				chunks: ['app', 'runtime'],

@@ -124,7 +124,6 @@
     "chart.js": "^2.9.3",
     "fibers": "^5.0.0",
     "google-palette": "^1.1.0",
-    "hard-source-webpack-plugin": "^0.13.1",
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
     "material-components-web": "^6.0.0",
