@@ -33,8 +33,6 @@ export class RadioButton extends Component {
 
 	load () {
 		this.addEventListener('click', this.onClick.bind(this))
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

@@ -1,62 +1,62 @@
 export class ThemeService {
-  /** @param {String} style? */
-  constructor(style = "") {
-    this.localStorage = window.localStorage
+	/** @param {String} style? */
+	constructor (style = '') {
+		this.localStorage = window.localStorage
 
-    // -------------------------------------------------------------------------
-    if (style.length) {
-      this.set('style', style)
-    } else {
-      this._setup()
-    }
-  }
+		// -------------------------------------------------------------------------
+		if (style.length) {
+			this.set('style', style)
+		} else {
+			this._setup()
+		}
+	}
 
-  _setup() {
-    if (!this.get('style').length) {
-      return this.set('style', 'material')
-    }
+	_setup () {
+		if (!this.get('style').length) {
+			return this.set('style', 'material')
+		}
 
-    this.styleImport()
-  }
+		this.styleImport()
+	}
 
-  /**
+	/**
    * @param {string} key
    * @return {string} */
-  get(key) {
-    return this.localStorage[`local:${key}`] || ''
-  }
+	get (key) {
+		return this.localStorage[`local:${key}`] || ''
+	}
 
-  /**
+	/**
    * @param {string} key
    * @param {string} value */
-  set(key, value) {
-    this.localStorage[`local:${key}`] = value
+	set (key, value) {
+		this.localStorage[`local:${key}`] = value
 
-    this.styleImport()
-  }
+		this.styleImport()
+	}
 
-  currentStyle() {
-    return this.get('style')
-  }
+	currentStyle () {
+		return this.get('style')
+	}
 
-  styleImport() {
-    const currentStyle = this.get('style')
+	styleImport () {
+		const currentStyle = this.get('style')
 
-    if (currentStyle === 'material') {
-      // @ts-ignore
-      import('./styles/main-material.scss')
-    } else if (currentStyle === 'bootstrap') {
-      // @ts-ignore
-      import('./styles/main-bootstrap.scss')
-    } else {
-      //@ts-ignore
-      import('./styles/main-ark.scss')
-    }
+		if (currentStyle === 'material') {
+			// @ts-ignore
+			import('./styles/main-material.scss')
+		} else if (currentStyle === 'bootstrap') {
+			// @ts-ignore
+			import('./styles/main-bootstrap.scss')
+		} else {
+			// @ts-ignore
+			import('./styles/main-ark.scss')
+		}
 
-    return this
-  }
+		return this
+	}
 
-  reload() {
-    location.reload()
-  }
+	reload () {
+		location.reload()
+	}
 }

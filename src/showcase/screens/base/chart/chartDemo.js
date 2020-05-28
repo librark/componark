@@ -11,7 +11,9 @@ export class ChartDemo extends Component {
     <!-- DOCUMENTATION -->
       <p>
         <a href="https://www.chartjs.org">ChartJs</a>
-        <a href="https://github.com/google/palette.js/tree/master">paletteJs</a>
+        <a href="https://github.com/google/palette.js/tree/master">
+          paletteJs
+        </a>
       </p>
 
       <p>This is a Chart.</p>

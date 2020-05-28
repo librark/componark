@@ -44,8 +44,6 @@ export class Signature extends Component {
 		this.canvas.addEventListener('mouseup', _ => this.isDirty())
 
 		setTimeout(_ => { this.resizeCanvas(true) }, 800)
-
-		return super.load()
 	}
 
 	disconnectedCallback () {

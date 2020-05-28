@@ -35,9 +35,7 @@ export class Audio extends Component {
 		return super.render()
 	}
 
-	load () {
-		return super.load()
-	}
+	load () {	}
 
 	disconnectedCallback () {
 		this.stop()

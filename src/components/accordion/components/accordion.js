@@ -20,8 +20,6 @@ export class Accordion extends Component {
 			'accordionTab:click',
 			this.onAccordionTabClick.bind(this)
 		)
-
-		return super.load()
 	}
 
 	/** @param {CustomEvent} event */

@@ -84,8 +84,6 @@ export class Multiselect extends Component {
 			'multiselect-input:input',
 			this.onMultiselectInputInput.bind(this)
 		)
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

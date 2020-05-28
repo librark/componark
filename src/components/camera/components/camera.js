@@ -28,8 +28,6 @@ export class Camera extends Component {
 			this.canvas.setAttribute('width', `${this.width}px`)
 			this.canvas.setAttribute('height', `${this.height}px`)
 		}, false)
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

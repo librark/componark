@@ -40,8 +40,6 @@ export class MultiselectList extends Component {
 		this.addEventListener('mouseenter', this.onMouseEnter.bind(this))
 
 		this.addEventListener('mouseleave', this.onMouseleave.bind(this))
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

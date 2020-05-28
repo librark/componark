@@ -3,7 +3,7 @@ export class Component extends HTMLElement {
 
   render (): this
 
-  load (): this | Promise<this>
+  load ()
 
   reflectedProperties (): string[]
 

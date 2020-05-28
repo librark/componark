@@ -47,8 +47,6 @@ export class Map extends Component {
 				zoom: this.zoom
 			})
 		})
-
-		return super.load()
 	}
 
 	updateSize () {

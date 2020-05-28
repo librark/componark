@@ -30,9 +30,7 @@ export class Spinner extends Component {
 		return super.render()
 	}
 
-	load () {
-		return super.load()
-	}
+	load () {	}
 
 	// --------------------------------------------------------------------------
 

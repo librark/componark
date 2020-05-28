@@ -1,8 +1,8 @@
 import { Component } from "../component"
 
 export class Audio extends Component {
-  start()
-  stop()
+  start ()
+  stop ()
   dataURL: string
 }
 

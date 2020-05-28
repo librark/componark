@@ -30,10 +30,7 @@ export class Component extends HTMLElement {
 		return this
 	}
 
-	/** @return {Component | Promise<Component>} */
-	load () {
-		return this
-	}
+	load () { }
 
 	/**
    * @param {string} selectors

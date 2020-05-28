@@ -28,8 +28,6 @@ export class MultiselectInput extends Component {
 		)
 
 		this.addEventListener('click', this.onClick.bind(this))
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

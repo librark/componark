@@ -37,8 +37,6 @@ export class RadioGroup extends Component {
 
 	load () {
 		this.addEventListener('radio-button:alter', this.onAlter.bind(this))
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

@@ -32,8 +32,6 @@ export class Checkbox extends Component {
 
 	load () {
 		this.addEventListener('click', this.onAlter.bind(this))
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

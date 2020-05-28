@@ -9,8 +9,8 @@ export class InputDemo extends Component {
 	render () {
 		this.innerHTML = /* html */ `${this.styles}
       <div class="container">
-        <ark-input data-input-text type="text" label="Repite como loro" required
-        listen on-alter="inputText"></ark-input>
+        <ark-input data-input-text type="text" label="Repite como loro"
+        required listen on-alter="inputText"></ark-input>
 
         <p>:: <span data-input-value></span></p>
 

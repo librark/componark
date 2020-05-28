@@ -14,8 +14,6 @@ export class Navbar extends Component {
 		this.querySelectorAll('[navbar-toggler]').forEach(toggler => {
 			toggler.addEventListener('click', this.onToggleContent.bind(this))
 		})
-
-		return super.load()
 	}
 
 	/** @param {event} event */

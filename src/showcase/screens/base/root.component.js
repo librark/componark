@@ -115,7 +115,9 @@ export class RootComponent extends Component {
 	_updatePageName () {
 		const name = this.querySelector('[data-page-name]')
 		const pathname = this.currentLocation.pathname
-		const location = this.locations.find(location => location.path === pathname)
+		const location = this.locations.find(
+			location => location.path === pathname
+		)
 
 		if (location) name.textContent = location.name
 	}
@@ -128,7 +130,7 @@ export class RootComponent extends Component {
 		this.sidebar.open()
 	}
 
-	/** @param {Event} event */
+	/** @param {CustomEvent} event */
 	_onListItemSelected (event) {
 		this.dispatchEvent(
 			new CustomEvent('navigate', {

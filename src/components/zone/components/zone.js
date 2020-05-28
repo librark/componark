@@ -39,8 +39,6 @@ export class Zone extends Component {
 		this.global.addEventListener('keydown', this.onkeyDown.bind(this))
 		this.global.addEventListener('keyup', this.onKeyUp.bind(this))
 		this.global.addEventListener('mouseup', this.onMouseUp.bind(this))
-
-		return super.load()
 	}
 
 	disconnectedCallback () {

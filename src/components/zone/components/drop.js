@@ -50,8 +50,6 @@ export class DropZone extends Component {
 
 		// ------------------------------------------------------------------------
 		this._setPosition(this.getParentDrop())
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

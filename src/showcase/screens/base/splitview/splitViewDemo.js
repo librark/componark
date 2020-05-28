@@ -42,7 +42,9 @@ export class SplitViewDemo extends Component {
 		this.splitview.init({
 			title: 'Resultados',
 			backButtonIcon: () => {
-				return /* html */ `<ark-icon name='fas fa-ad'></ark-icon>`
+				return /* html */ `
+          <ark-icon name='fas fa-ad'></ark-icon>
+        `
 			}
 		}).render()
 	}

@@ -26,8 +26,6 @@ export class SplitView extends Component {
 				this._onMasterChange.bind(this)
 			)
 		}
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

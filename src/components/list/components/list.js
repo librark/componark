@@ -33,8 +33,6 @@ export class List extends Component {
 
 	load () {
 		this.addEventListener('list-item:selected', this._onSelected.bind(this))
-
-		return super.load()
 	}
 
 	// --------------------------------------------------------------------------

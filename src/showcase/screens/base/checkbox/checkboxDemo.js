@@ -1,3 +1,4 @@
+/** @typedef {import('../../loader').CheckboxGroup} CheckboxGroup */
 import { Component } from '../../loader'
 
 export class CheckboxDemo extends Component {
@@ -19,16 +20,24 @@ export class CheckboxDemo extends Component {
 	}
 
 	load () {
-		this.querySelector('[data-checkbox-value]').innerHTML = this.querySelector(
-			'ark-checkbox-group'
-		).value
+		if (this.checkbox) {
+			this.querySelector('[data-checkbox-value]').innerHTML = /** html */`
+        ${this.checkbox.value}
+      `
+		}
 
 		return super.load()
 	}
 
 	checkboxGroup (event) {
-		this.querySelector('[data-checkbox-value]').innerHTML =
-      event.detail.value || ''
+		this.querySelector(
+			'[data-checkbox-value]'
+		).innerHTML = event.detail.value || ''
+	}
+
+	/** @returns {CheckboxGroup} */
+	get checkbox () {
+		return this.querySelector('ark-checkbox-group')
 	}
 }
 customElements.define('demo-checkbox', CheckboxDemo)

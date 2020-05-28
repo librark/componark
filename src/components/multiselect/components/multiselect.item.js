@@ -25,7 +25,7 @@ export class MultiselectItem extends Component {
 	}
 
 	load () {
-		return super.load()
+
 	}
 
 	// --------------------------------------------------------------------------

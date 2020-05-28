@@ -91,8 +91,6 @@ export class Alert extends Component {
 		this.querySelectorAll('[close]').forEach(element =>
 			element.addEventListener('click', _ => this.close())
 		)
-
-		return super.load()
 	}
 
 	/** @param {Object} context @param {HTMLElement=} parent @return {Alert} */
