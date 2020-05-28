@@ -54,6 +54,7 @@ module.exports = (env, argv) => {
 							loader: 'sass-loader',
 							options: {
 								sassOptions: {
+									sourceMap: true,
 									outputStyle: 'compressed',
 									includePaths: ['./node_modules']
 								}
