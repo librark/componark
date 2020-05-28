@@ -4,11 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const webpack = require('webpack')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
-const smp = new SpeedMeasurePlugin()
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 
 // @ts-ignore
-module.exports = smp.wrap((env, argv) => {
+module.exports = (env, argv) => {
 	const devMode = argv.mode === 'development'
 	const target = env.TARGET
 
@@ -26,6 +25,7 @@ module.exports = smp.wrap((env, argv) => {
 			runtimeChunk: 'single'
 		},
 		plugins: [
+			new HardSourceWebpackPlugin(),
 			new CleanWebpackPlugin(),
 			new HtmlWebpackPlugin({
 				chunks: ['app', 'runtime'],
@@ -92,4 +92,4 @@ module.exports = smp.wrap((env, argv) => {
 	}
 
 	return config
-})
+}
