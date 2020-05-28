@@ -1,5 +1,5 @@
 export class Component extends HTMLElement {
-  init(context?): this
+  init(context?: object): this
 
   render(): this
 
