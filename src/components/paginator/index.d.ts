@@ -6,6 +6,6 @@ export class Paginator extends Component {
     collectionSize: number,
     pageSize?: number,
     currentPage?: number,
-  }): Paginator
+  }): this
 }
 

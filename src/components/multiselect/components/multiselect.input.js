@@ -16,7 +16,7 @@ export class MultiselectInput extends Component {
 				on-input="onInput" data-input type="text"/>
 		`
 
-		this.items = this.items
+		this.items = this.items || null
 
 		return super.render()
 	}
@@ -199,14 +199,14 @@ export class MultiselectInput extends Component {
 
 	addItem (item) {
 		this.items.unshift(item)
-		this.items = this.items
+		this.items = this.items || null
 
 		this._alter()
 	}
 
 	shiftItem () {
 		this.items.shift()
-		this.items = this.items
+		this.items = this.items || null
 		this._alter()
 	}
 
@@ -220,7 +220,7 @@ export class MultiselectInput extends Component {
 
 		this._alter()
 
-		this.items = this.items
+		this.items = this.items || null
 	}
 
 	clean () {

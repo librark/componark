@@ -7,7 +7,7 @@ export class AccordionTab extends Component {
 
 		// local variables
 		this.defaultContent = this.defaultContent || this.innerHTML
-		this.index = this.index
+		this.index = this.index || null
 
 		return super.init()
 	}

@@ -6,5 +6,5 @@ export class Treetable extends Component {
     cols: string
     headers: { header: string; key: string }[]
     data: Object
-  }): Treetable
+  }): this
 }

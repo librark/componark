@@ -46,6 +46,7 @@ export class Audio extends Component {
 	start () {
 		this.stop()
 
+		// @ts-ignore
 		navigator.getMedia = navigator.getUserMedia
 
 		if (!navigator.mediaDevices.getUserMedia) return

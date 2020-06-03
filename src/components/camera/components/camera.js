@@ -51,6 +51,7 @@ export class Camera extends Component {
 	// --------------------------------------------------------------------------
 
 	start () {
+		// @ts-ignore
 		navigator.getMedia = navigator.getUserMedia
 
 		if (!navigator.mediaDevices.getUserMedia) return

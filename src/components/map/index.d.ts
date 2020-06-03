@@ -6,7 +6,7 @@ export class Map extends Component {
     lon?,
     zoom?,
     token?,
-  }): Map
+  }): this
 
   addMarker (lat, lon)
   updateSize ()
