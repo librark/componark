@@ -1,8 +1,8 @@
-import '../../../src/components/tabs'
+import { Tabs } from '../../../src/components/tabs'
 
 describe('Tabs', () => {
 	it('can be instantiated', () => {
-		const item = document.createElement('ark-tabs')
+		const item = new Tabs()
 		expect(item).toBeTruthy()
 
 		const init = item.init()
@@ -10,7 +10,7 @@ describe('Tabs', () => {
 	})
 
 	it('can be rendered without active attribute', function () {
-		const item = document.createElement('ark-tabs')
+		const item = new Tabs()
 		item.innerHTML = /* HTML */ `
       <ark-tabs-item id="t-1">
         <ark-icon name="far fa-address-book"></ark-icon>
@@ -28,7 +28,7 @@ describe('Tabs', () => {
 	})
 
 	it('can be rendered with active attribute', function () {
-		const item = document.createElement('ark-tabs')
+		const item = new Tabs()
 		item.innerHTML = /* HTML */ `
       <ark-tabs-item id="t-1">
         <ark-icon name="far fa-address-book"></ark-icon>
@@ -46,7 +46,7 @@ describe('Tabs', () => {
 	})
 
 	it('can be rendered replace active attribute', function () {
-		const item = document.createElement('ark-tabs')
+		const item = new Tabs()
 		item.innerHTML = /* HTML */ `
       <ark-tabs-item id="t-1">
         <ark-icon name="far fa-address-book"></ark-icon>
@@ -60,6 +60,7 @@ describe('Tabs', () => {
 		item.connectedCallback()
 
 		const element = item.querySelector('[id="t-1"]')
+		// @ts-ignore
 		element.click()
 
 		const element2 = item.querySelector('[id="t-2"]')

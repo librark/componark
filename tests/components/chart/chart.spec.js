@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components/chart').Chart} Chart */
 import { Chart } from '../../../src/components/chart'
 
 describe('Chart', () => {

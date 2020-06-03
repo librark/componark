@@ -1,9 +1,8 @@
-/** @typedef {import('../../../src/components').Button} Button */
 import { Button } from '../../../src/components/button'
 
 describe('Button', () => {
 	it('can be instantiated', () => {
-		const button = /** @type {Button} */ (document.createElement('ark-button'))
+		const button = new Button()
 		expect(button).toBeTruthy()
 
 		const init = button.init()
@@ -11,14 +10,14 @@ describe('Button', () => {
 	})
 
 	it('can be rendered without content', function () {
-		const button = /** @type {Button} */ (document.createElement('ark-button'))
+		const button = new Button()
 		button.connectedCallback()
 		const buttonElement = button.querySelector('button')
 		expect(buttonElement).toBeTruthy()
 	})
 
 	it('can be rendered with attribute value', function () {
-		const button = /** @type {Button} */ (document.createElement('ark-button'))
+		const button = new Button()
 		button.setAttribute('myAttr', 'ok')
 		button.connectedCallback()
 
@@ -27,7 +26,7 @@ describe('Button', () => {
 	})
 
 	it('can be rendered with tag <a>', function () {
-		const button = /** @type {Button} */ (document.createElement('ark-button'))
+		const button = new Button()
 		const attr = document.createAttribute('href')
 		attr.value = '#'
 		button.setAttributeNode(attr)
@@ -38,7 +37,7 @@ describe('Button', () => {
 	})
 
 	it('can be rendered Fab button', function () {
-		const button = /** @type {Button} */ (document.createElement('ark-button'))
+		const button = new Button()
 		button.setAttribute('fab', '')
 
 		button.connectedCallback()
@@ -48,7 +47,7 @@ describe('Button', () => {
 	})
 
 	it('can be rendered Fab button horizontal, vertical center', function () {
-		const button = /** @type {Button} */ (document.createElement('ark-button'))
+		const button = new Button()
 		button.setAttribute('fab', '')
 		button.setAttribute('horizontal', 'center')
 		button.setAttribute('vertical', 'center')

@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components').Alert} Alert */
 import { Alert } from '../../../src/components/alert'
 
 describe('Alert', () => {
@@ -101,7 +100,9 @@ describe('Alert', () => {
 		const cancel = alert.querySelector('[alert-cancel-button]')
 		const confirm = alert.querySelector('[alert-confirm-button]')
 
+		// @ts-ignore
 		cancel.click()
+		// @ts-ignore
 		confirm.click()
 	})
 

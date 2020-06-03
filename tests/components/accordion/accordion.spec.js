@@ -46,6 +46,7 @@ describe('Accordion', () => {
 
 		accordion.init().render().load()
 
+		// @ts-ignore
 		expect(accordion.multiple).toBeTruthy()
 
 		const eventClick = new Event('click')

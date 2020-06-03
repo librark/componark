@@ -1,9 +1,5 @@
 import { Paginator } from '../../../src/components/paginator'
 
-/**
- * @typedef {import('../../../src/components').Paginator} Paginator
- **/
-
 describe('Paginator', () => {
 	it('get collection Length', () => {
 		const paginator = new Paginator()

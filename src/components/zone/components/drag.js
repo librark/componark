@@ -15,8 +15,8 @@ export class DragZone extends Component {
 		// Local
 		// ------------------------------------------------------------------------
 
-		this.x = this.x || null
-		this.y = this.y || null
+		this.x = this.x || undefined
+		this.y = this.y || undefined
 		this.id = uuidv4()
 		this.selected = false
 

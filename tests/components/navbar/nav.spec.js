@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components').Nav} Nav */
 import { Nav } from '../../../src/components/navbar'
 
 describe('Nav', () => {

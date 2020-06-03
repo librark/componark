@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components').Select} Select */
 import { Select } from '../../../src/components/select'
 
 describe('Select', () => {
@@ -12,6 +11,7 @@ describe('Select', () => {
 
 	it('can be rendered with content', function () {
 		const item = /** @type {Select} */(document.createElement('ark-select'))
+		// @ts-ignore
 		item.defaultContent = /* HTML */`
       <option>myOption</option>
     `
@@ -26,6 +26,7 @@ describe('Select', () => {
 		att.value = 'placeholder'
 		item.setAttributeNode(att)
 
+		// @ts-ignore
 		item.defaultContent = /* HTML */`
       <option>myOption</option>
     `

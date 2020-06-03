@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components').List} List */
 import { List } from '../../../src/components/list'
 
 describe('List', () => {

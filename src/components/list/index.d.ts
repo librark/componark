@@ -11,5 +11,5 @@ export class List extends Component {
 export class ListItem extends Component {
   index: string
 
-  init (context?: { value: any; template?: () => void }): this
+  init (context?: { data: any; template?: () => void }): this
 }

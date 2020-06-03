@@ -1,4 +1,3 @@
-/** @typedef {import('../../../src/components').Navbar} Navbar */
 import { Nav, Navbar } from '../../../src/components/navbar'
 
 describe('Navbar', () => {
@@ -32,6 +31,7 @@ describe('Navbar', () => {
 
 		navbar.init().render().load()
 
+		// @ts-ignore
 		navbar.onToggleContent(new Event('click'))
 
 		expect(!nav1.hasAttribute('collapse')).toBeTruthy()

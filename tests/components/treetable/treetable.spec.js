@@ -87,25 +87,37 @@ describe('TreeTable', () => {
 		const children = treetable.querySelector('[id="1.2.1.1."]')
 
 		expect(!children.hasAttribute('active')).toBeTruthy()
+		// @ts-ignore
 		item.firstElementChild.click()
 		expect(children.hasAttribute('active')).toBeTruthy()
+		// @ts-ignore
 		item.firstElementChild.click()
 		expect(!children.hasAttribute('active')).toBeTruthy()
 
+		// @ts-ignore
 		treetable.buildTable(null)
+		// @ts-ignore
 		treetable.data = null
 		treetable.init().render()
 	})
 
 	it('can be set row id', () => {
 		const treetable = new Treetable()
+		// @ts-ignore
 		expect(treetable._setRowId('', 0)).toEqual('0.')
+		// @ts-ignore
 		expect(treetable._setRowId('0', 0)).toEqual('1.')
+		// @ts-ignore
 		expect(treetable._setRowId('0.', 0)).toEqual('1.')
+		// @ts-ignore
 		expect(treetable._setRowId('1.', 0)).toEqual('2.')
+		// @ts-ignore
 		expect(treetable._setRowId('1.', 1)).toEqual('1.0.')
+		// @ts-ignore
 		expect(treetable._setRowId('1.0.', 1)).toEqual('1.1.')
+		// @ts-ignore
 		expect(treetable._setRowId('1.1.2.', 2)).toEqual('1.1.3.')
+		// @ts-ignore
 		expect(treetable._setRowId('0.0.1.', 2)).toEqual('0.0.2.')
 	})
 })

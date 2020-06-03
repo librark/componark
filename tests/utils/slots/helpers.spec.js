@@ -59,7 +59,8 @@ describe('Helpers', () => {
 		element.innerHTML = /* html */`
 	    <button listen on-click="myMethod"></button>
 	  `
-		element['myMethod'] = function () {
+		// @ts-ignore
+		element.myMethod = function () {
 			element.setAttribute('clicked-element', '')
 		}
 
@@ -78,9 +79,11 @@ describe('Helpers', () => {
 
 		reflect(element, properties)
 
-		element['myProperty'] = 'value'
+		// @ts-ignore
+		element.myProperty = 'value'
 
-		expect(element['myProperty']).toBe('value')
+		// @ts-ignore
+		expect(element.myProperty).toBe('value')
 		expect(element.hasAttribute('my-property')).toBeTruthy()
 	})
 
@@ -90,9 +93,11 @@ describe('Helpers', () => {
 
 		reflect(element, properties)
 
-		element['myProperty'] = undefined
+		// @ts-ignore
+		element.myProperty = undefined
 
-		expect(element['myProperty']).toBe('')
+		// @ts-ignore
+		expect(element.myProperty).toBe('')
 		expect(!element.hasAttribute('my-property')).toBeTruthy()
 	})
 })

@@ -17,8 +17,8 @@ export class DropZone extends Component {
 		// Local
 		// ------------------------------------------------------------------------
 
-		this.x = this.x || null
-		this.y = this.y || null
+		this.x = this.x || undefined
+		this.y = this.y || undefined
 		this.id = uuidv4()
 		this.cols = this.cols || 1
 		this.sequence = 0
