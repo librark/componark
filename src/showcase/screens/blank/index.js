@@ -23,7 +23,9 @@ export class RootFactory {
 	/** @param {string} prefix */
 	constructor (prefix) {
 		RootFactory.prefix = prefix
+		// @ts-ignore
 		this._rootComponent.prefix = prefix
+		// @ts-ignore
 		this._rootComponent.dependencies = []
 	}
 
@@ -32,9 +34,14 @@ export class RootFactory {
 		return this[`_${method}`]
 	}
 
+	/** @returns {RootComponent} */
 	_rootComponent () {
-		const rootComponent = /** @type {RootComponent} */
-      (document.createElement('app-root'))
+		const rootComponent = /** @type {RootComponent} */ (
+			document.createElement('app-root')
+		)
+
 		return rootComponent.init({ path: RootFactory.prefix })
 	}
 }
+RootFactory.prefix = undefined
+RootFactory.dependencies = undefined

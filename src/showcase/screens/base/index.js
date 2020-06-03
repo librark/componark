@@ -23,7 +23,9 @@ export class RootFactory {
 	/** @param {string} prefix */
 	constructor (prefix) {
 		RootFactory.prefix = prefix
+		// @ts-ignore
 		this._rootComponent.prefix = prefix
+		// @ts-ignore
 		this._rootComponent.dependencies = []
 	}
 
@@ -38,3 +40,4 @@ export class RootFactory {
 		return rootComponent.init({ path: RootFactory.prefix })
 	}
 }
+RootFactory.prefix = undefined

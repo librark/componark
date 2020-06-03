@@ -1,5 +1,5 @@
-import { Component, Signature } from '../../loader'
-
+/** @typedef {import('components').Signature} Signature */
+import { Component } from '../../loader'
 import { uuidv4 } from '../../../../utils'
 
 export class SignatureDemo extends Component {

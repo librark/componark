@@ -31,7 +31,7 @@ export class PaginatorDemo extends Component {
 		paginato.init({ collectionSize: this.list.length, pageSize: 1 }).render()
 	}
 
-	/** @param {Event} event */
+	/** @param {CustomEvent} event */
 	updateList (event) {
 		event.stopImmediatePropagation()
 		const offset = event.detail ? event.detail.offset : 0

@@ -1,4 +1,6 @@
-import { Component, Location, Map } from '../../loader'
+/** @typedef {import('components').Location} Location */
+/** @typedef {import('components').Map} Map */
+import { Component } from '../../loader'
 
 export class LocationDemo extends Component {
 	init (context) {

@@ -14,10 +14,6 @@ export function hub (parentResolver) {
 }
 
 export class ComponentFactory {
-	constructor () {
-		this._component.dependencies = []
-	}
-
 	/** @param {string} method */
 	extract (method) {
 		return this[`_${method}`]

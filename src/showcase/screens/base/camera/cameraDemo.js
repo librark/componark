@@ -1,4 +1,5 @@
-import { Camera, Component } from '../../loader'
+/** @typedef {import('components').Camera} Camera */
+import { Component } from '../../loader'
 
 export class CameraDemo extends Component {
 	init (context) {

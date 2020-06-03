@@ -3,7 +3,6 @@ import { ThemeService } from '../theme/theme.service'
 
 export class RootComponent extends Component {
 	init (context) {
-		// -------------------------------------------------------------------------
 		return super.init()
 	}
 
@@ -24,7 +23,7 @@ export class RootComponent extends Component {
 	}
 
 	themeService (style) {
-		new ThemeService(style)
+		return new ThemeService(style)
 	}
 }
 customElements.define('app-root', RootComponent)

@@ -16,15 +16,15 @@ install:
 	npm install -g http-server
 	npm i
 
-clean:
+clean-git:
+	git reset --hard
+	git clean -xdf
+
+npm-clean:
 	npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm
 	npm cache clean --force
 	rm -rf node_modules
 	# killall -9 node
-
-clean-git:
-	git reset --hard
-	git clean -xdf
 
 npm-update:
 	npm i -g npm

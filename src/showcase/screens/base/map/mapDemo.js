@@ -1,4 +1,5 @@
-import { Component, Map } from '../../loader'
+/** @typedef {import('components').Map} Map */
+import { Component } from '../../loader'
 
 export class MapDemo extends Component {
 	init (context) {
