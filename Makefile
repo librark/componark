@@ -32,7 +32,6 @@ npm-update:
 	ncu -u --timeout 600000
 	npm i
 	npm audit fix
-	npm rebuild node-sass --force
 
 pull:
 	make clean
