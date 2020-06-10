@@ -22,8 +22,6 @@ export class MapDemo extends Component {
 		return super.load()
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @returns {Map} */
 	get map () {
 		return /** @type {Map} */ (this.select('ark-map'))
@@ -35,7 +33,6 @@ export class MapDemo extends Component {
       'zA2W0IkI0c6KaAhJfk9bWg'
 	}
 
-	// --------------------------------------------------------------------------
 	get styles () {
 		return /* html */ `
       <style>

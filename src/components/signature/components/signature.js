@@ -6,10 +6,7 @@ export class Signature extends Component {
 		this.width = this.width || context.width
 		this.height = this.height || context.height
 
-		// -------------------------------------------------------------------------
 		// Local
-		// -------------------------------------------------------------------------
-
 		this.global = context.global || window
 		this._dirty = false
 
@@ -49,8 +46,6 @@ export class Signature extends Component {
 	disconnectedCallback () {
 		this.global.removeEventListener('resize', _ => this.resizeCanvas())
 	}
-
-	// --------------------------------------------------------------------------
 
 	/** @returns {string} */
 	dataURL (width = this.offsetWidth, height = this.offsetHeight) {
@@ -95,7 +90,6 @@ export class Signature extends Component {
 		this.signaturePad.fromDataURL(dataURL)
 	}
 
-	// --------------------------------------------------------------------------
 	/** @returns {boolean} */
 	get dirty () {
 		return this._dirty

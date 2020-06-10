@@ -16,8 +16,12 @@ describe('Sidebar', () => {
 	    <div>body</div>
 	    <div slot="footer">footer</div>
 	  `
-		item.init()
-		item.connectedCallback()
+		console.log(item.outerHTML)
+
+		item.init().render().load()
+
+		console.log(item.outerHTML)
+		console.log(item.slots)
 	})
 
 	it('can be opened with opened attribute', function () {

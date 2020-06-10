@@ -33,8 +33,6 @@ export class Input extends Component {
 		return super.render()
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @param {Event} event */
 	_change (event) {
 		event.stopImmediatePropagation()

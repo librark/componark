@@ -77,8 +77,6 @@ export class Map extends Component {
 		this.updateSize()
 	}
 
-	// --------------------------------------------------------------------------
-
 	_getUrl () {
 		return 'https://api.mapbox.com/styles/v1/mapbox/' +
       `streets-v11/tiles/256/{z}/{x}/{y}?access_token=${this.token}`

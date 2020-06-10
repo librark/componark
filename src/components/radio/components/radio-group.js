@@ -39,7 +39,6 @@ export class RadioGroup extends Component {
 		this.addEventListener('radio-button:alter', this.onAlter.bind(this))
 	}
 
-	// --------------------------------------------------------------------------
 	/** @param {CustomEvent} event */
 	onAlter (event) {
 		event.stopImmediatePropagation()
@@ -57,8 +56,6 @@ export class RadioGroup extends Component {
 			})
 		)
 	}
-
-	// --------------------------------------------------------------------------
 
 	_checkButtons (value) {
 		this.selectAll('ark-radio-button').forEach(
@@ -81,8 +78,6 @@ export class RadioGroup extends Component {
 			container.appendChild(button)
 		})
 	}
-
-	// --------------------------------------------------------------------------
 
 	get value () {
 		const button = /** @type {RadioButton} */ (

@@ -30,8 +30,6 @@ export class Camera extends Component {
 		}, false)
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @returns {string} */
 	dataURL (width = this.width, height = this.height) {
 		/** @type {HTMLCanvasElement} */
@@ -47,8 +45,6 @@ export class Camera extends Component {
 
 		return dupCanvas.toDataURL('image/jpg')
 	}
-
-	// --------------------------------------------------------------------------
 
 	start () {
 		// @ts-ignore
@@ -79,8 +75,6 @@ export class Camera extends Component {
 		this.facingMode = facingMode
 		this.stop()
 	}
-
-	// --------------------------------------------------------------------------
 
 	/** @returns {HTMLVideoElement} */
 	get video () {

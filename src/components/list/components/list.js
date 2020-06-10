@@ -35,8 +35,6 @@ export class List extends Component {
 		this.addEventListener('list-item:selected', this._onSelected.bind(this))
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @param {number} start @param {number?} deleteCount  */
 	delete (start, deleteCount = 1) {
 		this.source.splice(start, deleteCount)
@@ -47,8 +45,6 @@ export class List extends Component {
 
 		this.render()
 	}
-
-	// --------------------------------------------------------------------------
 
 	/** @param {CustomEvent} event */
 	_onSelected (event) {

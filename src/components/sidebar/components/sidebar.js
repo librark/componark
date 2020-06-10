@@ -47,7 +47,6 @@ export class Sidebar extends Component {
 		this.classList.toggle('ark-sidebar--opened')
 	}
 
-	// --------------------------------------------------------------------------
 	/** @returns {Object} */
 	get slots () {
 		return this._slots || {}
@@ -57,8 +56,6 @@ export class Sidebar extends Component {
 	set slots (value) {
 		this._slots = Object.keys(this._slots || {}).length ? this._slots : value
 	}
-
-	// --------------------------------------------------------------------------
 
 	_getContent (key, className) {
 		const slots = this._getSlots(key)

@@ -26,8 +26,6 @@ export class Card extends Component {
 		return super.render()
 	}
 
-	// --------------------------------------------------------------------------
-
 	_getSlots (key) {
 		if (!this.slots || !this.slots[key]) return ''
 

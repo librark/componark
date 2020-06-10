@@ -3,9 +3,7 @@ $component: "ark-grid";
 #{$component},
 #{$component}-item {
 
-    // ----------------------------------------
     // horizontal
-    // ----------------------------------------
     &[horizontal~="center"] {
         justify-self: center;
         justify-items: center;
@@ -21,9 +19,7 @@ $component: "ark-grid";
         justify-items: end;
     }
 
-    // ----------------------------------------
     // vertical
-    // ----------------------------------------
     &[vertical~="center"] {
         align-self: center;
         align-items: center;

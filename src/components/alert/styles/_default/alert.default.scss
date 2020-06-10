@@ -13,16 +13,12 @@
 
     display: flex;
 
-    // ----------------------------------------
     // hidden
-    // ----------------------------------------
     &[hidden] {
       display: none !important;
     }
 
-    // ----------------------------------------
     // horizontal
-    // ----------------------------------------
     &[horizontal~="center"] {
       justify-content: center;
     }
@@ -35,9 +31,7 @@
       justify-content: flex-end;
     }
 
-    // ----------------------------------------
     // vertical
-    // ----------------------------------------
     &[vertical~="center"] {
       align-items: center;
     }

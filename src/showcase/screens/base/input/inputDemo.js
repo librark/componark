@@ -57,8 +57,6 @@ export class InputDemo extends Component {
 		input.render()
 	}
 
-	// --------------------------------------------------------------------------
-
 	get styles () {
 		return /* html */ `
       <style>

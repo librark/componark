@@ -27,8 +27,6 @@ export class Treetable extends Component {
 		return super.render()
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @param {Object} data */
 	buildTable (data, id = '', indent = -1) {
 		if (!data) return
@@ -110,7 +108,6 @@ export class Treetable extends Component {
 		return this.querySelector('[data-tbody]')
 	}
 
-	// --------------------------------------------------------------------------
 	/**
    * @param {string} id
    * @param {number} indent

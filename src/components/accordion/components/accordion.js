@@ -38,7 +38,6 @@ export class Accordion extends Component {
 		if (detail.active) tab.open()
 	}
 
-	// --------------------------------------------------------------------------
 	/** @returns {boolean} */
 	get multiple () {
 		return this.hasAttribute('multiple')

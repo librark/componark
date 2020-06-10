@@ -3,9 +3,7 @@ import { getSlots } from '../../../utils'
 
 export class Audio extends Component {
 	init (context = {}) {
-		// -------------------------------------------------------------------------
 		// local variables
-		// -------------------------------------------------------------------------
 		this.interval = null
 		this.totalSeconds = 0
 		this.slots = this.slots || getSlots(this)
@@ -40,8 +38,6 @@ export class Audio extends Component {
 	disconnectedCallback () {
 		this.stop()
 	}
-
-	// --------------------------------------------------------------------------
 
 	start () {
 		this.stop()
@@ -92,7 +88,6 @@ export class Audio extends Component {
 		return this.audioURL
 	}
 
-	// --------------------------------------------------------------------------
 	_setAudioURL (blob) {
 		const reader = new FileReader()
 		reader.readAsDataURL(blob)
@@ -125,7 +120,6 @@ export class Audio extends Component {
 		}, 1000)
 	}
 
-	// --------------------------------------------------------------------------
 	_onStartEvent () {
 		this.dispatchEvent(new CustomEvent('onStartAudio', {
 			bubbles: true,
@@ -144,7 +138,6 @@ export class Audio extends Component {
 		}))
 	}
 
-	// --------------------------------------------------------------------------
 	_setRecordingTimeLabel (hours = 0, minutes = 0, seconds = 0) {
 		let timeLabel = ''
 
@@ -188,8 +181,6 @@ export class Audio extends Component {
         ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
       `.trim()
 	}
-
-	// --------------------------------------------------------------------------
 
 	/** @returns {HTMLLabelElement} */
 	get recordingTimeLabel () {

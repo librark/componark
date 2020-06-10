@@ -36,8 +36,6 @@ export class CheckboxGroup extends Component {
 		this.addEventListener('checkbox:alter', this.onAlter.bind(this))
 	}
 
-	// --------------------------------------------------------------------------
-
 	get value () {
 		const values = []
 		this.selectAll('ark-checkbox[checked]').forEach((
@@ -62,8 +60,6 @@ export class CheckboxGroup extends Component {
 			})
 		)
 	}
-
-	// --------------------------------------------------------------------------
 
 	_renderCheckboxList () {
 		const container = this.querySelector('[data-checkbox-list]')

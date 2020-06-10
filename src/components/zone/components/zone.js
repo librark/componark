@@ -17,24 +17,18 @@ export class Zone extends Component {
 	}
 
 	load () {
-		// ------------------------------------------------------------------------
 		// drop
-		// ------------------------------------------------------------------------
 		this.addEventListener('drop:dragenter', this.onDropDragenter.bind(this))
 		this.addEventListener('drop:clicked', this.onDropClicked.bind(this))
 		this.addEventListener('drop:mouseover', this.onDropMouseover.bind(this))
 
-		// ------------------------------------------------------------------------
 		// drag
-		// ------------------------------------------------------------------------
 		this.addEventListener('drag:dragstart', this.onDragDragstart.bind(this))
 		this.addEventListener('drag:dragenter', this.onDragDragenter.bind(this))
 		this.addEventListener('drag:dragend', this.onDragDragend.bind(this))
 		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 
-		// ------------------------------------------------------------------------
 		// zone
-		// ------------------------------------------------------------------------
 		this.addEventListener('mousedown', this.onMouseDown.bind(this))
 		this.global.addEventListener('keydown', this.onkeyDown.bind(this))
 		this.global.addEventListener('keyup', this.onKeyUp.bind(this))
@@ -47,10 +41,7 @@ export class Zone extends Component {
 		this.global.removeEventListener('mouseup', this.onMouseUp.bind(this))
 	}
 
-	// --------------------------------------------------------------------------
 	// Drop
-	// --------------------------------------------------------------------------
-
 	/** @param {event} event */
 	onDropDragenter (event) {
 		event.stopImmediatePropagation()
@@ -101,9 +92,7 @@ export class Zone extends Component {
 		this._showMultipleSelection()
 	}
 
-	// --------------------------------------------------------------------------
 	// Drag
-	// --------------------------------------------------------------------------
 	/** @param {event} event */
 	onDragDragstart (event) {
 		event.stopImmediatePropagation()
@@ -157,10 +146,7 @@ export class Zone extends Component {
 		this._dispatchSelectedDrags()
 	}
 
-	// --------------------------------------------------------------------------
 	// zone
-	// --------------------------------------------------------------------------
-
 	/** @param {KeyboardEvent} event */
 	onkeyDown (event) {
 		if (event.shiftKey) {
@@ -231,7 +217,6 @@ export class Zone extends Component {
 		])
 	}
 
-	// --------------------------------------------------------------------------
 	_dispatchSelectedDrags () {
 		const drags = this.getSelectedDrags()
 

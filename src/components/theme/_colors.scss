@@ -1,8 +1,6 @@
 @import "./variables";
 
-// -----------------------------------
 // Background
-// -----------------------------------
 @mixin arkBackground($type, $background, $color: $light) {
   $alpha: 0.6;
 
@@ -95,9 +93,7 @@
 @include arkBackgroundLight("light", $light);
 @include arkBackgroundLight("white", $white);
 
-// -----------------------------------
 // Color
-// -----------------------------------
 @mixin arkColor($type, $color) {
 
   [color~="#{$type}"],

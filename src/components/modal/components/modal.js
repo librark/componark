@@ -57,7 +57,6 @@ export class Modal extends Component {
 		this.hasAttribute('show') ? this.close() : this.open()
 	}
 
-	// --------------------------------------------------------------------------
 	/** @returns {Object} */
 	get slots () {
 		return this._slots || {}
@@ -73,7 +72,6 @@ export class Modal extends Component {
 		return this.querySelector('[data-scrim]')
 	}
 
-	// --------------------------------------------------------------------------
 	_appendSlots () {
 		if (!Object.keys(this._slots || {}).length) return
 
@@ -101,7 +99,6 @@ export class Modal extends Component {
     `
 	}
 
-	// --------------------------------------------------------------------------
 	_onHiddenEvent () {
 		this.dispatchEvent(new CustomEvent('onHiddenModal', {
 			bubbles: true,
@@ -110,7 +107,6 @@ export class Modal extends Component {
 			}
 		}))
 	}
-	// --------------------------------------------------------------------------
 
 	_generateContent (content, className, type = 'div') {
 		return content

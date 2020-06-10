@@ -17,9 +17,7 @@ export class RootComponent extends Component {
 	init (context) {
 		this.path = context.path
 
-		// ------------------------------------------------------------------------
 		// Local
-		// ------------------------------------------------------------------------
 		this.currentLocation = window.location
 		this.themeService = new ThemeService()
 
@@ -101,7 +99,6 @@ export class RootComponent extends Component {
 		this.themeService.reload()
 	}
 
-	// --------------------------------------------------------------------------
 	_renderMenuList () {
 		const menuList = /** @type {List} */ (this.select('[data-sidebar-list]'))
 
@@ -143,7 +140,6 @@ export class RootComponent extends Component {
 		this._updatePageName()
 	}
 
-	// --------------------------------------------------------------------------
 	get sidebar () {
 		return /** @type {Sidebar} */ (this.select('[data-sidebar]'))
 	}

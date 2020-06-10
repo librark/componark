@@ -30,8 +30,6 @@ export class Select extends Component {
 		return select ? select.value : ''
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @param {Event} event */
 	_change (event) {
 		event.stopPropagation()

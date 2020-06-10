@@ -32,8 +32,6 @@ export class Spinner extends Component {
 
 	load () {	}
 
-	// --------------------------------------------------------------------------
-
 	/** @returns {HTMLElement} */
 	get loader () {
 		return this.querySelector('[data-loader]')

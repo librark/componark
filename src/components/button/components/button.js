@@ -18,7 +18,6 @@ export class Button extends Component {
 		return super.render()
 	}
 
-	// --------------------------------------------------------------------------
 	_isFab () {
 		if (!this.hasAttribute('fab')) return
 

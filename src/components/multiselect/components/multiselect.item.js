@@ -28,8 +28,6 @@ export class MultiselectItem extends Component {
 
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @param {boolean} value */
 	set selected (value) {
 		if (value) {
@@ -43,8 +41,6 @@ export class MultiselectItem extends Component {
 	get selected () {
 		return this.hasAttribute('selected')
 	}
-
-	// --------------------------------------------------------------------------
 
 	/** @param {event} event */
 	_onRemove (event) {

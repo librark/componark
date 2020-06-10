@@ -35,8 +35,6 @@ export class RadioButton extends Component {
 		this.addEventListener('click', this.onClick.bind(this))
 	}
 
-	// --------------------------------------------------------------------------
-
 	check () {
 		this.checked = true
 	}
@@ -49,7 +47,6 @@ export class RadioButton extends Component {
 		this.checked = !this.checked
 	}
 
-	// --------------------------------------------------------------------------
 	/** @returns {Boolean} */
 	get checked () {
 		return this.hasAttribute('checked')
@@ -75,7 +72,6 @@ export class RadioButton extends Component {
 		return this.querySelector('[data-input]')
 	}
 
-	// --------------------------------------------------------------------------
 	/** @param {Event} event */
 	onClick (event) {
 		event.stopImmediatePropagation()

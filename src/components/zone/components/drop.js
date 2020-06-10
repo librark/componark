@@ -13,10 +13,7 @@ export class DropZone extends Component {
 	init (context = {}) {
 		this.value = this.value || context.value
 
-		// ------------------------------------------------------------------------
 		// Local
-		// ------------------------------------------------------------------------
-
 		this.x = this.x || undefined
 		this.y = this.y || undefined
 		this.id = uuidv4()
@@ -36,23 +33,17 @@ export class DropZone extends Component {
 	}
 
 	load () {
-		// ------------------------------------------------------------------------
 		// drag
-		// ------------------------------------------------------------------------
 		this.addEventListener('dragenter', this.onDragenter.bind(this))
 		this.addEventListener('dragleave', this.onDragleave.bind(this))
 
-		// ------------------------------------------------------------------------
 		// click
-		// ------------------------------------------------------------------------
 		this.addEventListener('click', this.onClick.bind(this))
 		this.addEventListener('mouseover', this.onMouseOver.bind(this))
 
-		// ------------------------------------------------------------------------
 		this._setPosition(this.getParentDrop())
 	}
 
-	// --------------------------------------------------------------------------
 	/** @param {event} event */
 	onDragenter (event) {
 		event.stopImmediatePropagation()
@@ -113,8 +104,6 @@ export class DropZone extends Component {
 			})
 		)
 	}
-
-	// --------------------------------------------------------------------------
 
 	/** @returns {DropZone} */
 	getParentDrop () {
@@ -204,7 +193,6 @@ export class DropZone extends Component {
 		return this.selectDropByPosition(x.toString(), y.toString())
 	}
 
-	// --------------------------------------------------------------------------
 	get fixed () {
 		return this.hasAttribute('fixed')
 	}
@@ -236,7 +224,6 @@ export class DropZone extends Component {
 		this.selected = !this.selected
 	}
 
-	// --------------------------------------------------------------------------
 	_droppableRemoveStyle () {
 		this.classList.remove('ark-zone-drop--hover')
 		this.classList.remove('ark-zone-drop--hover_disabled')

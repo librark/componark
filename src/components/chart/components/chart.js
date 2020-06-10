@@ -56,7 +56,6 @@ export class Chart extends Component {
 		return this._chart || null
 	}
 
-	// ------------------------------------------------------------------------
 	_containsData () {
 		return Boolean(this.details && Object.keys(this.details).length)
 	}

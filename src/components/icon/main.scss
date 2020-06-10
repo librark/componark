@@ -1,7 +1,6 @@
 @import "./styles/icon.default";
 @import "./styles/icon.fontawesome";
 @import "./styles/icon.material";
-// -------------------------------------------
 
 @mixin icon($theme) {
   @include icon_default();

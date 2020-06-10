@@ -30,7 +30,6 @@ export class MultiselectInput extends Component {
 		this.addEventListener('click', this.onClick.bind(this))
 	}
 
-	// --------------------------------------------------------------------------
 	/** @param {MouseEvent} event */
 	onClick (event) {
 		event.stopImmediatePropagation()
@@ -123,8 +122,6 @@ export class MultiselectInput extends Component {
 		)
 	}
 
-	// --------------------------------------------------------------------------
-
 	/** @return {HTMLInputElement} */
 	get input () {
 		return /** @type {HTMLInputElement} */ (this.querySelector(
@@ -195,8 +192,6 @@ export class MultiselectInput extends Component {
 		return this.items
 	}
 
-	// --------------------------------------------------------------------------
-
 	addItem (item) {
 		this.items.unshift(item)
 		this.items = this.items || null
@@ -233,7 +228,6 @@ export class MultiselectInput extends Component {
 		this.input.value = ''
 	}
 
-	// --------------------------------------------------------------------------
 	_alter () {
 		this.dispatchEvent(
 			new CustomEvent('multiselect-input:alter', {

@@ -183,8 +183,6 @@ describe('Drop Zone', () => {
 		let relativeDrop = parent.getRelativeDrop(drag, difference)
 		expect(relativeDrop.id).toEqual(drop1.id)
 
-		// ------------------------------------------------------------------------
-
 		difference = parent.getDifferenceDropsPositions(drop5, drag)
 
 		expect(difference.x).toEqual(1)
@@ -193,8 +191,6 @@ describe('Drop Zone', () => {
 		relativeDrop = parent.getRelativeDrop(drag, difference)
 		expect(relativeDrop.id).toEqual(drop5.id)
 
-		// ------------------------------------------------------------------------
-
 		difference = parent.getDifferenceDropsPositions(drop9, drag)
 
 		expect(difference.x).toEqual(2)
@@ -202,8 +198,6 @@ describe('Drop Zone', () => {
 
 		relativeDrop = parent.getRelativeDrop(drag, difference)
 		expect(relativeDrop.id).toEqual(drop9.id)
-
-		// ------------------------------------------------------------------------
 
 		drag.x = 5
 		drag.y = 0
@@ -216,7 +210,6 @@ describe('Drop Zone', () => {
 		relativeDrop = parent.getRelativeDrop(drag, difference)
 		expect(relativeDrop.id).toEqual(drop1.id)
 
-		// ------------------------------------------------------------------------
 		expect(parent.isDestinationValid(drop1, [drag])).toBeTruthy()
 
 		drag.x = null
@@ -316,13 +309,10 @@ describe('Drop Zone', () => {
 		parent.onDragenter(dragenter)
 		expect(parent.classList.contains('ark-zone-drop--hover')).toBeTruthy()
 
-		// ----------------------------------------------------------------------
-
 		const dragleave = new CustomEvent('dragleave')
 		parent.onDragleave(dragleave)
 		expect(!parent.classList.contains('ark-zone-drop--hover')).toBeTruthy()
 
-		// ----------------------------------------------------------------------
 		parent.fixed = false
 		parent.onDragenter(dragenter)
 	})

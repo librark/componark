@@ -41,7 +41,6 @@ export class LocationDemo extends Component {
 		this.location.stop()
 	}
 
-	// --------------------------------------------------------------------------
 	async getCurrentPosition () {
 		const position = await this.location.getCurrentPosition()
 
@@ -66,8 +65,6 @@ export class LocationDemo extends Component {
       'eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.' +
       'zA2W0IkI0c6KaAhJfk9bWg'
 	}
-
-	// --------------------------------------------------------------------------
 
 	get styles () {
 		return /* html */ `

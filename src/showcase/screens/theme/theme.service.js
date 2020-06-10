@@ -3,7 +3,6 @@ export class ThemeService {
 	constructor (style = '') {
 		this.localStorage = window.localStorage
 
-		// -------------------------------------------------------------------------
 		if (style.length) {
 			this.set('style', style)
 		} else {

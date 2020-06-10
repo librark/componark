@@ -5,9 +5,7 @@ export class Tooltip extends Component {
 		this.position = context.position || this.position || 'bottom'
 		this.text = context.text || this.text
 
-		// -------------------------------------------------------------------------
 		// local
-		// -------------------------------------------------------------------------
 		this.defaultContent = this.defaultContent || this.innerHTML
 
 		return super.init()

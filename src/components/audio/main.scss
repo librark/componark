@@ -1,6 +1,4 @@
-// -------------------------------------------
 @import "./styles/_default/main";
-// -------------------------------------------
 
 @mixin audio($theme) {
   @include audio_default();

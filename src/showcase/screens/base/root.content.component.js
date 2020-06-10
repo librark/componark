@@ -6,9 +6,7 @@ export class RootContainerComponent extends Component {
 		this.component = context.component
 		this.currentStyle = context.currentStyle
 
-		// -------------------------------------------------------------------------
 		// Local
-		// -------------------------------------------------------------------------
 		this.windowLocation = window.location
 
 		this.mobileWidth = '360px'
@@ -88,7 +86,6 @@ export class RootContainerComponent extends Component {
 		}
 	}
 
-	// --------------------------------------------------------------------------
 	get styles () {
 		return /* html */ `
       <style>

@@ -34,8 +34,6 @@ export class Checkbox extends Component {
 		this.addEventListener('click', this.onAlter.bind(this))
 	}
 
-	// --------------------------------------------------------------------------
-
 	check () {
 		this.checked = true
 	}
@@ -48,7 +46,6 @@ export class Checkbox extends Component {
 		this.checked = !this.checked
 	}
 
-	// --------------------------------------------------------------------------
 	/** @returns {Boolean} */
 	get checked () {
 		return this.hasAttribute('checked')
@@ -91,8 +88,6 @@ export class Checkbox extends Component {
 			})
 		)
 	}
-
-	// --------------------------------------------------------------------------
 
 	_moveAttributes () {
 		this.checked = this.hasAttribute('checked')

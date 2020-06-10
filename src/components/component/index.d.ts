@@ -1,25 +1,25 @@
 export class Component extends HTMLElement {
-  init(context?: object): this
+  init (context?: object): this
 
-  render(): this
+  render (): this
 
-  load(): void
+  load (): void
 
-  reflectedProperties(): string[]
+  reflectedProperties (): string[]
 
-  connectedCallback(): void
+  connectedCallback (): void
 
-  disconnectedCallback(): void
+  disconnectedCallback (): void
 
-  attributeChangedCallback(
+  attributeChangedCallback (
     name: string,
     oldValue: string,
     newValue: string,
   ): void
 
-  adoptedCallback(): void
+  adoptedCallback (): void
 
-  select(selectors: string): Component
+  select (selectors: string): Component
 
-  selectAll(selectors: string): NodeListOf<Component>
+  selectAll (selectors: string): NodeListOf<Component>
 }

@@ -203,10 +203,8 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		zone._showMultipleSelection()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop1
 		zone.dropEnd = drop6
 
@@ -222,7 +220,6 @@ describe('Zone', () => {
 		expect(drops.find(drop => drop === drop5)).toBeTruthy()
 		expect(drops.find(drop => drop === drop6)).toBeTruthy()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop6
 		zone.dropEnd = drop1
 
@@ -238,7 +235,6 @@ describe('Zone', () => {
 		expect(drops.find(drop => drop === drop5)).toBeTruthy()
 		expect(drops.find(drop => drop === drop6)).toBeTruthy()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop3
 		zone.dropEnd = drop7
 
@@ -257,7 +253,6 @@ describe('Zone', () => {
 		expect(drops.find(drop => drop === drop8)).toBeTruthy()
 		expect(drops.find(drop => drop === drop9)).toBeTruthy()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop7
 		zone.dropEnd = drop3
 
@@ -276,7 +271,6 @@ describe('Zone', () => {
 		expect(drops.find(drop => drop === drop8)).toBeTruthy()
 		expect(drops.find(drop => drop === drop9)).toBeTruthy()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop2
 		zone.dropEnd = drop8
 
@@ -289,7 +283,6 @@ describe('Zone', () => {
 		expect(drops.find(drop => drop === drop5)).toBeTruthy()
 		expect(drops.find(drop => drop === drop8)).toBeTruthy()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop8
 		zone.dropEnd = drop2
 
@@ -302,7 +295,6 @@ describe('Zone', () => {
 		expect(drops.find(drop => drop === drop5)).toBeTruthy()
 		expect(drops.find(drop => drop === drop8)).toBeTruthy()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop4
 		zone.dropEnd = drop6
 
@@ -315,7 +307,6 @@ describe('Zone', () => {
 		expect(drops.find(drop => drop === drop5)).toBeTruthy()
 		expect(drops.find(drop => drop === drop6)).toBeTruthy()
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop6
 		zone.dropEnd = drop4
 
@@ -349,8 +340,6 @@ describe('Zone', () => {
 
 		const drag1 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -367,8 +356,6 @@ describe('Zone', () => {
 
 		drop1.appendChild(drag1)
 
-		// ----------------------------------------
-
 		drop0.init().render().load()
 		drop1.init().render().load()
 		drop2.init().render().load()
@@ -384,15 +371,11 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
-
 		expect(!drop3.selectAll('ark-zone-drag').length).toBeTruthy()
 
 		zone._cutDrags(drop3, [drag1])
 
 		expect(drop3.selectAll('ark-zone-drag').length).toEqual(1)
-
-		// -------------------------------------------------------------------------
 
 		expect(!drop1.selectAll('ark-zone-drag').length).toBeTruthy()
 
@@ -402,7 +385,6 @@ describe('Zone', () => {
 
 		expect(zone.selectAll('ark-zone-drag').length).toEqual(2)
 
-		// -------------------------------------------------------------------------
 		zone._pasteOption(null)
 
 		zone._pasteOption('copy')
@@ -418,7 +400,6 @@ describe('Zone', () => {
 		expect(drop5.selectAll('ark-zone-drag').length).toEqual(1)
 		expect(drop1.selectAll('ark-zone-drag').length).toEqual(1)
 
-		// -------------------------------------------------------------------------
 		drag1.selected = true
 		drop8.selected = true
 
@@ -442,15 +423,9 @@ describe('Zone', () => {
 		const drag1 = new DragZone()
 		const drag2 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
-		// drop1.appendChild(drag1)
-		// drop1.appendChild(drag2)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -460,7 +435,6 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// ----------------------------------------
 		expect(drop1.selectAll('ark-zone-drag').length).toEqual(0)
 
 		drag1.selected = true
@@ -495,13 +469,11 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		drag1.dispatchEvent(new MouseEvent('mousedown', {
 			shiftKey: false,
 			bubbles: true
 		}))
 
-		// -------------------------------------------------------------------------
 		drop1.fixed = false
 		drag1.dispatchEvent(new MouseEvent('mousedown', {
 			shiftKey: true,
@@ -509,7 +481,6 @@ describe('Zone', () => {
 		}))
 		expect(zone.dropStart && zone.dropEnd).toEqual(undefined)
 
-		// -------------------------------------------------------------------------
 		drop1.fixed = true
 
 		drag1.dispatchEvent(new MouseEvent('mousedown', {
@@ -539,10 +510,7 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		zone.onKeyUp(new KeyboardEvent('', { key: 'x' }))
-
-		// -------------------------------------------------------------------------
 		zone.onKeyUp(new KeyboardEvent('', { key: 'Shift' }))
 
 		expect(drag1.hasAttribute('draggable')).toBeTruthy()
@@ -612,8 +580,6 @@ describe('Zone', () => {
 
 		const drag1 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -621,8 +587,6 @@ describe('Zone', () => {
 		drop0.appendChild(drop3)
 
 		drop1.appendChild(drag1)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -633,11 +597,9 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		zone.onkeyDown(new KeyboardEvent('', { key: 'Shift', shiftKey: true }))
 
 		expect(!drag1.hasAttribute('draggable')).toBeTruthy()
-		// -------------------------------------------------------------------------
 
 		expect(!drop2.selectAll('ark-zone-drag').length).toBeTruthy()
 
@@ -651,7 +613,6 @@ describe('Zone', () => {
 		expect(drop2.selectAll('ark-zone-drag').length).toEqual(1)
 		expect(zone.selectAll('ark-zone-drag').length).toEqual(1)
 
-		// -------------------------------------------------------------------------
 		drag1.selected = true
 		drop3.selected = true
 
@@ -678,8 +639,6 @@ describe('Zone', () => {
 
 		const drag1 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -687,8 +646,6 @@ describe('Zone', () => {
 		drop0.appendChild(drop3)
 
 		drop1.appendChild(drag1)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -699,7 +656,6 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		drag1.click()
 		expect(drag1.selected).toBeTruthy()
 
@@ -721,8 +677,6 @@ describe('Zone', () => {
 
 		const drag1 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -730,8 +684,6 @@ describe('Zone', () => {
 		drop0.appendChild(drop3)
 
 		drop1.appendChild(drag1)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -741,8 +693,6 @@ describe('Zone', () => {
 		drag1.init().render().load()
 
 		zone.init().render().load()
-
-		// -------------------------------------------------------------------------
 
 		zone.addEventListener('zone:alter', event => {
 			const value = event.detail.value
@@ -776,8 +726,6 @@ describe('Zone', () => {
 		const drag1 = new DragZone()
 		const drag2 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -786,8 +734,6 @@ describe('Zone', () => {
 
 		drop1.appendChild(drag1)
 		drop1.appendChild(drag2)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -799,7 +745,6 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		let drags = drop1.selectAll('ark-zone-drag')
 
 		expect(drag1.id).toEqual(drags[0].id)
@@ -829,8 +774,6 @@ describe('Zone', () => {
 		const drag1 = new DragZone()
 		const drag2 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -839,8 +782,6 @@ describe('Zone', () => {
 
 		drop1.appendChild(drag1)
 		drop1.appendChild(drag2)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -852,7 +793,6 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		drag1.selected = true
 		drag2.selected = true
 
@@ -876,8 +816,6 @@ describe('Zone', () => {
 		const drag1 = new DragZone()
 		const drag2 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -886,8 +824,6 @@ describe('Zone', () => {
 
 		drop1.appendChild(drag1)
 		drop1.appendChild(drag2)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -899,14 +835,11 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		drop1.onMouseOver(new MouseEvent('', { shiftKey: true }))
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop1
 		drop1.onMouseOver(new MouseEvent('', { shiftKey: true }))
 
-		// -------------------------------------------------------------------------
 		zone.dropStart = drop2
 		drop1.onMouseOver(new MouseEvent('', { shiftKey: true }))
 
@@ -923,15 +856,11 @@ describe('Zone', () => {
 		const drop2 = new DropZone()
 		const drop3 = new DropZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
 		drop0.appendChild(drop2)
 		drop0.appendChild(drop3)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -940,18 +869,13 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		expect(!drop1.selected).toBeTruthy()
 
 		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
 		expect(drop1.selected).toBeTruthy()
 
-		// ----------------------------------------
-
 		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
 		expect(!drop1.selected).toBeTruthy()
-
-		// ----------------------------------------
 
 		drop2.selected = true
 		drop3.selected = true
@@ -961,14 +885,11 @@ describe('Zone', () => {
 		expect(drop2.selected).toBeTruthy()
 		expect(drop3.selected).toBeTruthy()
 
-		// ----------------------------------------
-
 		drop1.onClick(new MouseEvent('click'))
 		expect(drop1.selected).toBeTruthy()
 		expect(!drop2.selected).toBeTruthy()
 		expect(!drop3.selected).toBeTruthy()
 
-		// ----------------------------------------
 		drop1.selected = true
 		drop2.selected = true
 		drop3.selected = true
@@ -992,8 +913,6 @@ describe('Zone', () => {
 		const drag1 = new DragZone()
 		const drag2 = new DragZone()
 
-		// ----------------------------------------
-
 		zone.appendChild(drop0)
 
 		drop0.appendChild(drop1)
@@ -1002,8 +921,6 @@ describe('Zone', () => {
 
 		drop1.appendChild(drag1)
 		drop1.appendChild(drag2)
-
-		// ----------------------------------------
 
 		drop0.init().render().load()
 		drop1.init().render().load()
@@ -1015,7 +932,6 @@ describe('Zone', () => {
 
 		zone.init().render().load()
 
-		// -------------------------------------------------------------------------
 		drag1.selected = true
 
 		expect(drop1.selectAll('ark-zone-drag').length).toEqual(2)

@@ -11,10 +11,7 @@ export class DragZone extends Component {
 	init (context = {}) {
 		this.value = this.value || context.value
 
-		// ------------------------------------------------------------------------
 		// Local
-		// ------------------------------------------------------------------------
-
 		this.x = this.x || undefined
 		this.y = this.y || undefined
 		this.id = uuidv4()
@@ -34,25 +31,17 @@ export class DragZone extends Component {
 	}
 
 	load () {
-		// ------------------------------------------------------------------------
 		// drag
-		// ------------------------------------------------------------------------
 		this.addEventListener('dragstart', this.onDraggableStart.bind(this))
 		this.addEventListener('dragend', this.onDraggableEnd.bind(this))
 		this.addEventListener('dragenter', this.onDraggableEnter.bind(this))
 		this.addEventListener('dragleave', this.onDraggableLeave.bind(this))
 
-		// ------------------------------------------------------------------------
 		// click
-		// ------------------------------------------------------------------------
 		this.addEventListener('click', this.onClick.bind(this))
-
-		// ------------------------------------------------------------------------
 
 		this.setPosition()
 	}
-
-	// --------------------------------------------------------------------------
 
 	/** @param {event} event */
 	onDraggableStart (event) {
@@ -122,7 +111,6 @@ export class DragZone extends Component {
 		)
 	}
 
-	// --------------------------------------------------------------------------
 	/** @return {boolean} */
 	get selected () {
 		return this.hasAttribute('selected')
@@ -137,7 +125,6 @@ export class DragZone extends Component {
 		}
 	}
 
-	// --------------------------------------------------------------------------
 	toggleSelected () {
 		this.selected = !this.selected
 	}
@@ -162,8 +149,6 @@ export class DragZone extends Component {
 		this.x = parent.x
 		this.y = parent.y
 	}
-
-	// --------------------------------------------------------------------------
 
 	_draggableRemoveStyle () {
 		this.classList.remove('ark-zone-drag--enter')

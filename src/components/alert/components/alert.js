@@ -118,9 +118,6 @@ export class Alert extends Component {
 		this.hasAttribute('hidden') ? this.show() : this.hide()
 	}
 
-	// --------------------------------------------------------------------------
-	// renders
-	// --------------------------------------------------------------------------
 	_defaultValue (currentValue, newValue) {
 		return newValue === undefined ? currentValue : newValue
 	}
