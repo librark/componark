@@ -10,18 +10,21 @@ describe('Sidebar', () => {
 	})
 
 	it('can be rendered with content', function () {
-		const item = new Sidebar()
-		item.innerHTML = /* html */`
-	    <div slot="header">Menu</div>
-	    <div>body</div>
-	    <div slot="footer">footer</div>
-	  `
-		console.log(item.outerHTML)
+		const item = document.createElement('div')
+		item.innerHTML = /* html */ `
+      <ark-sidebar>
+        <div slot="header">Menu</div>
+        <div>body</div>
+        <div slot="footer">footer</div>
+      </ark-sidebar>
+    `
 
-		item.init().render().load()
+		const sidebar = /** @type {Sidebar} */ (item.querySelector('ark-sidebar'))
+		sidebar.init().render().load()
 
-		console.log(item.outerHTML)
-		console.log(item.slots)
+		expect(sidebar.slots.header.length).toBeTruthy()
+		expect(sidebar.slots.footer.length).toBeTruthy()
+		expect(sidebar.slots.general.length).toBeTruthy()
 	})
 
 	it('can be opened with opened attribute', function () {

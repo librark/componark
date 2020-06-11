@@ -1,10 +1,6 @@
-import { listen, reflect } from '../../../src/utils'
+import { listen, reflect } from '../../src/utils'
 
 describe('Helpers', () => {
-	/****************************************************************************
-   * listen
-   ***************************************************************************/
-
 	it('does not allow invalid attribute', () => {
 		const element = document.createElement('div')
 		element.innerHTML = /* html */`

@@ -1,4 +1,4 @@
-import { uuidv4 } from '../../../src/utils/uuidv4'
+import { uuidv4 } from '../../src/utils/uuidv4'
 
 describe('Slots', () => {
 	it('groups separated by dashes', () => {

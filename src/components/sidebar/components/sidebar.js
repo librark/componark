@@ -4,7 +4,8 @@ import { getSlots } from '../../../utils'
 export class Sidebar extends Component {
 	init (context = {}) {
 		// local variables
-		this.slots = getSlots(this)
+		this.slots = this.slots || getSlots(this)
+
 		return super.init()
 	}
 
@@ -47,16 +48,6 @@ export class Sidebar extends Component {
 		this.classList.toggle('ark-sidebar--opened')
 	}
 
-	/** @returns {Object} */
-	get slots () {
-		return this._slots || {}
-	}
-
-	/** @param {Object} value */
-	set slots (value) {
-		this._slots = Object.keys(this._slots || {}).length ? this._slots : value
-	}
-
 	_getContent (key, className) {
 		const slots = this._getSlots(key)
 
@@ -66,10 +57,11 @@ export class Sidebar extends Component {
 	}
 
 	_getSlots (key) {
-		if (!this.slots[key]) { return '' }
+		if (!this.slots || !this.slots[key]) return ''
 
-		return /* html */`${this.slots[key].map((element, index) => `${
-			element.outerHTML}`).join('')}`
+		return /* html */ `
+        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
+      `.trim()
 	}
 }
 customElements.define('ark-sidebar', Sidebar)

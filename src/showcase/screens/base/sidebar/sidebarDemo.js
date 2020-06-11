@@ -19,7 +19,7 @@ export class SidebarDemo extends Component {
 
 
       <ark-sidebar>
-        <div slot="header">Menu</div>
+        <div slot="header">My Menu</div>
         <div>body</div>
         <div slot="footer">footer</div>
       </ark-sidebar>

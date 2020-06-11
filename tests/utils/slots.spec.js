@@ -1,4 +1,4 @@
-import { getSlots } from '../../../src/utils/slots'
+import { getSlots } from '../../src/utils/slots'
 
 describe('Slots', () => {
 	it('can be rendered without content', () => {
