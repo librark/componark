@@ -38,11 +38,10 @@ export class CheckboxGroup extends Component {
 
 	get value () {
 		const values = []
+
 		this.selectAll('ark-checkbox[checked]').forEach((
 			/** @type {Checkbox} */ checkbox
-		) => {
-			values.push(checkbox.value)
-		})
+		) => values.push(checkbox.value))
 
 		return values
 	}

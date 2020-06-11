@@ -1,33 +1,42 @@
 import { Checkbox } from '../../../src/components/checkbox'
 
 describe('Checkbox', () => {
-	it('can be instantiated', () => {
-		const element = /** @type {Checkbox} */ (
-			document.createElement('ark-checkbox'))
-		expect(element).toBeTruthy()
+	it('can be instantiated.', () => {
+		const checkbox = new Checkbox()
+		checkbox.init().render().load()
 
-		element.connectedCallback()
+		expect(checkbox.value).toEqual('')
+		expect(checkbox.checked).toEqual(false)
 
-		const init = element.init()
-		expect(element === init).toBeTruthy()
-	})
+		checkbox.init({
+			value: '123',
+			checked: true
+		}).render().load()
 
-	it('can be instantiated', () => {
-		const element = new Checkbox()
-		element.value = 'op1'
-		element.connectedCallback()
+		expect(checkbox.value).toEqual('123')
+		expect(checkbox.checked).toEqual(true)
+		expect(checkbox.hasAttribute('checked')).toBeTruthy()
 
-		element.check()
-		expect(element.hasAttribute('checked')).toBeTruthy()
+		checkbox.init({
+			value: '456',
+			checked: false
+		}).render().load()
 
-		element.uncheck()
-		expect(!element.hasAttribute('checked')).toBeTruthy()
+		expect(checkbox.value).toEqual('456')
+		expect(checkbox.checked).toEqual(false)
+		expect(!checkbox.hasAttribute('checked')).toBeTruthy()
 
-		element.toggle()
-		expect(element.hasAttribute('checked')).toBeTruthy()
+		checkbox.check()
+		expect(checkbox.checked).toEqual(true)
 
-		element.toggle()
-		expect(!element.hasAttribute('checked')).toBeTruthy()
+		checkbox.uncheck()
+		expect(checkbox.checked).toEqual(false)
+
+		checkbox.toggle()
+		expect(checkbox.checked).toEqual(true)
+
+		checkbox.toggle()
+		expect(checkbox.checked).toEqual(false)
 	})
 
 	it('It does not allow changing the type of element.', () => {
@@ -49,11 +58,5 @@ describe('Checkbox', () => {
 
 		element.uncheck()
 		expect(!element.hasAttribute('checked')).toBeTruthy()
-	})
-
-	it('It does not allow changing the type of element.', () => {
-		const element = new Checkbox()
-		element.init({ value: 'op1' }).render()
-		expect(element.value).toEqual('op1')
 	})
 })
