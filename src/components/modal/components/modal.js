@@ -7,7 +7,7 @@ export class Modal extends Component {
 		this.subtitle = context.subtitle
 
 		// local variables
-		this.slots = getSlots(this)
+		this.slots = this.slots || getSlots(this)
 
 		return super.init()
 	}
@@ -57,23 +57,13 @@ export class Modal extends Component {
 		this.hasAttribute('show') ? this.close() : this.open()
 	}
 
-	/** @returns {Object} */
-	get slots () {
-		return this._slots || {}
-	}
-
-	/** @param {Object} value */
-	set slots (value) {
-		this._slots = Object.keys(this._slots || {}).length ? this._slots : value
-	}
-
 	/** @return {HTMLDivElement} */
 	get scrim () {
 		return this.querySelector('[data-scrim]')
 	}
 
 	_appendSlots () {
-		if (!Object.keys(this._slots || {}).length) return
+		if (!Object.keys(this.slots || {}).length) return
 
 		const general = this.slots.general || []
 		const action = this.slots.action || []
