@@ -44,12 +44,12 @@ export class Card extends Component {
 		const title = this._generateContent(this.title, 'title', 'h4')
 		const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
 
-		return title === '' && subtitle === ''
-			? ''
-			: /* html */ `
+		if (title === '' && subtitle === '') return ''
+
+		return /* html */ `
       <div class="ark-card__header">
-          ${title}
-          ${subtitle}
+        ${title}
+        ${subtitle}
       </div>
     `
 	}
