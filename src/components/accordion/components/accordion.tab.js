@@ -17,18 +17,14 @@ export class AccordionTab extends Component {
 	}
 
 	render () {
-		if (this.header) {
-			this.innerHTML = /* html */ `
-        <div class="ark-accordion-tab__btn-header" listen on-click="toggle">
-          <small data-accordion-tab-header>${this.header}</small>
-        </div>
-        <div class="ark-accordion-tab__content">
-          ${this.defaultContent}
-        </div>
-      `
-		} else {
-			this.innerHTML = ''
-		}
+		this.innerHTML = this.header ? this.innerHTML = /* html */ `
+      <div class="ark-accordion-tab__btn-header" listen on-click="toggle">
+        <small data-accordion-tab-header>${this.header}</small>
+      </div>
+      <div class="ark-accordion-tab__content">
+        ${this.defaultContent}
+      </div>
+    ` : ''
 
 		return super.render()
 	}

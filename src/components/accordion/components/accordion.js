@@ -16,8 +16,7 @@ export class Accordion extends Component {
 	}
 
 	load () {
-		this.addEventListener(
-			'accordionTab:click',
+		this.addEventListener('accordionTab:click',
 			this.onAccordionTabClick.bind(this)
 		)
 	}
