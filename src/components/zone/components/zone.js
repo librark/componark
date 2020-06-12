@@ -19,7 +19,7 @@ export class Zone extends Component {
 	load () {
 		// drop
 		this.addEventListener('drop:dragenter', this.onDropDragenter.bind(this))
-		this.addEventListener('drop:clicked', this.onDropClicked.bind(this))
+		// this.addEventListener('drop:clicked', this.onDropClicked.bind(this))
 		this.addEventListener('drop:mouseover', this.onDropMouseover.bind(this))
 
 		// drag
@@ -33,6 +33,15 @@ export class Zone extends Component {
 		this.global.addEventListener('keydown', this.onkeyDown.bind(this))
 		this.global.addEventListener('keyup', this.onKeyUp.bind(this))
 		this.global.addEventListener('mouseup', this.onMouseUp.bind(this))
+
+		// Test ----
+		this.addEventListener('click', event => {
+			const target = /** @type {HTMLElement} */(event.target)
+
+			if (target.tagName.toLowerCase() === 'ark-zone-drop') {
+				this.onDropClicked(event)
+			}
+		})
 	}
 
 	disconnectedCallback () {
@@ -52,27 +61,27 @@ export class Zone extends Component {
 		drop.appendChild(drag)
 	}
 
-	/** @param {CustomEvent} event */
+	/** @param {MouseEvent} event */
 	onDropClicked (event) {
-		const detail = event.detail
-		const ctrlKey = detail.origin.ctrlKey
-		const selected = detail.selected
+		event.stopImmediatePropagation()
 
 		const drop = /** @type {DropZone} */ (event.target)
+		if (!drop.fixed) return
+		drop.selected = !drop.selected
+
+		const ctrlKey = event.ctrlKey
 		const drops = this._getSelectedDrops()
 
-		if (!ctrlKey) {
-			this._cleanSelectedDrops()
-		}
+		if (!ctrlKey) this._cleanSelectedDrops()
 
-		if (drops.length && !selected && ctrlKey) {
+		if (drops.length && !drop.selected && ctrlKey) {
 			drop.selected = false
 		} else {
-			drop.selected = !!drops.length || selected
+			drop.selected = Boolean(drops.length) || drop.selected
 		}
 
 		if (ctrlKey) {
-			drop.setSelectedDrags(selected)
+			drop.setSelectedDrags(drop.selected)
 			this._dispatchSelectedDrags()
 		}
 	}

@@ -38,7 +38,7 @@ export class DropZone extends Component {
 		this.addEventListener('dragleave', this.onDragleave.bind(this))
 
 		// click
-		this.addEventListener('click', this.onClick.bind(this))
+		// this.addEventListener('click', this.onClick.bind(this))
 		this.addEventListener('mouseover', this.onMouseOver.bind(this))
 
 		this._setPosition(this.getParentDrop())
@@ -64,27 +64,27 @@ export class DropZone extends Component {
 		this._droppableRemoveStyle()
 	}
 
-	/** @param {event} event */
-	onClick (event) {
-		event.stopImmediatePropagation()
+	// /** @param {event} event */
+	// onClick (event) {
+	// 	// event.stopImmediatePropagation()
 
-		if (!this.fixed) return
-		const origin = new MouseEvent(event.type, event)
+	// 	if (!this.fixed) return
+	// 	const origin = new MouseEvent(event.type, event)
 
-		this.selected = !this.selected
+	// 	this.selected = !this.selected
 
-		this.dispatchEvent(
-			new CustomEvent('drop:clicked', {
-				bubbles: true,
-				detail: {
-					id: this.id,
-					value: this.value,
-					origin: origin,
-					selected: this.selected
-				}
-			})
-		)
-	}
+	// 	this.dispatchEvent(
+	// 		new CustomEvent('drop:clicked', {
+	// 			bubbles: true,
+	// 			detail: {
+	// 				id: this.id,
+	// 				value: this.value,
+	// 				origin: origin,
+	// 				selected: this.selected
+	// 			}
+	// 		})
+	// 	)
+	// }
 
 	/** @param {MouseEvent} event */
 	onMouseOver (event) {
