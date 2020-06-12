@@ -6,6 +6,12 @@
     border: 1px solid rgba($color: $muted, $alpha: 0.2);
     background: $background;
     overflow: hidden;
+
+    [no-border]{
+      border: 0;
+      border-radius: 0;
+      box-shadow: initial;
+    }
   }
 
   .#{$component} {
