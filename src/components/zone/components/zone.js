@@ -26,7 +26,7 @@ export class Zone extends Component {
 		this.addEventListener('drag:dragstart', this.onDragDragstart.bind(this))
 		this.addEventListener('drag:dragenter', this.onDragDragenter.bind(this))
 		this.addEventListener('drag:dragend', this.onDragDragend.bind(this))
-		this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
+		// this.addEventListener('drag:clicked', this.onDragClicked.bind(this))
 
 		// zone
 		this.addEventListener('mousedown', this.onMouseDown.bind(this))
@@ -40,6 +40,8 @@ export class Zone extends Component {
 
 			if (target.tagName.toLowerCase() === 'ark-zone-drop') {
 				this.onDropClicked(event)
+			} else if (target.tagName.toLowerCase() === 'ark-zone-drag') {
+				this.onDragClicked(event)
 			}
 		})
 	}
@@ -138,19 +140,16 @@ export class Zone extends Component {
 		dragDropped.dispatch(this)
 	}
 
-	/** @param {CustomEvent} event */
+	/** @param {MouseEvent} event */
 	onDragClicked (event) {
 		const drag = /** @type {DragZone} */ (event.target)
-		const selected = event.detail.selected
-		const origin = event.detail.origin
-		const drags = this.getSelectedDrags()
 
-		if (!origin.ctrlKey) {
+		if (!event.ctrlKey) {
 			this._cleanSelectedDrags()
 			this._cleanSelectedDrops()
-
-			drag.selected = !!drags.length || selected
 		}
+
+		drag.selected = !drag.selected
 
 		this._dispatchSelectedDrags()
 	}

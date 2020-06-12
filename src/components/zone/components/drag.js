@@ -38,7 +38,7 @@ export class DragZone extends Component {
 		this.addEventListener('dragleave', this.onDraggableLeave.bind(this))
 
 		// click
-		this.addEventListener('click', this.onClick.bind(this))
+		// this.addEventListener('click', this.onClick.bind(this))
 
 		this.setPosition()
 	}
@@ -91,25 +91,25 @@ export class DragZone extends Component {
 		this._draggableRemoveStyle()
 	}
 
-	/** @param {MouseEvent} event */
-	onClick (event) {
-		event.stopImmediatePropagation()
-		const origin = new MouseEvent(event.type, event)
+	// /** @param {MouseEvent} event */
+	// onClick (event) {
+	// 	event.stopImmediatePropagation()
+	// 	const origin = new MouseEvent(event.type, event)
 
-		this.selected = !this.selected
+	// 	this.selected = !this.selected
 
-		this.dispatchEvent(
-			new CustomEvent('drag:clicked', {
-				bubbles: true,
-				detail: {
-					id: this.id,
-					value: this.value,
-					origin: origin,
-					selected: this.selected
-				}
-			})
-		)
-	}
+	// 	this.dispatchEvent(
+	// 		new CustomEvent('drag:clicked', {
+	// 			bubbles: true,
+	// 			detail: {
+	// 				id: this.id,
+	// 				value: this.value,
+	// 				origin: origin,
+	// 				selected: this.selected
+	// 			}
+	// 		})
+	// 	)
+	// }
 
 	/** @return {boolean} */
 	get selected () {
