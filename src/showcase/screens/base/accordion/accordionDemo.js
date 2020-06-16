@@ -17,7 +17,7 @@ export class AccordionDemo extends Component {
         <ark-accordion-tab header="tab 3">
           <span>content tab 3</span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab 4">
+        <ark-accordion-tab header="tab 4" disabled>
           <span>content tab 4</span>
         </ark-accordion-tab>
       </ark-accordion>
@@ -34,7 +34,7 @@ export class AccordionDemo extends Component {
         <ark-accordion-tab header="tab 3">
           <span>content tab 3</span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab 4">
+        <ark-accordion-tab header="tab 4" disabled>
           <span>content tab 4</span>
         </ark-accordion-tab>
       </ark-accordion>

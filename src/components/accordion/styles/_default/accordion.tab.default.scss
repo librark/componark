@@ -3,6 +3,17 @@
 
   #{$component} {
     user-select: none;
+
+    &[disabled] {
+      pointer-events: none;
+
+      .#{$component} {
+        &__btn-header {
+          color: gray !important;
+          background: rgba($color: gray, $alpha: 0.1) !important;
+        }
+      }
+    }
   }
 
   .#{$component} {
