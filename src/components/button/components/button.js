@@ -24,6 +24,7 @@ export class Button extends Component {
 		if (!this.hasAttribute('horizontal')) {
 			this.setAttribute('horizontal', 'end')
 		}
+
 		if (!this.hasAttribute('vertical')) {
 			this.setAttribute('vertical', 'end')
 		}

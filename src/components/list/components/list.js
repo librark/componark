@@ -32,7 +32,7 @@ export class List extends Component {
 	}
 
 	load () {
-		this.addEventListener('list-item:selected', this._onSelected.bind(this))
+		this.addEventListener('click', this._onSelected.bind(this))
 	}
 
 	/** @param {number} start @param {number?} deleteCount  */
@@ -46,20 +46,22 @@ export class List extends Component {
 		this.render()
 	}
 
-	/** @param {CustomEvent} event */
+	/** @param {MouseEvent} event */
 	_onSelected (event) {
 		event.stopImmediatePropagation()
-		if (this.hasAttribute('click-disabled')) return
 
-		const detail = event.detail || {}
+		const element = /** @type {HTMLElement} */ (event.target)
+		const item = /** @type {ListItem} */ (element.closest('ark-list-item'))
+
+		if (item.hasAttribute('click-disabled') || !item) return
 
 		this.dispatchEvent(
 			new CustomEvent('list:selected', {
 				bubbles: true,
 				detail: {
-					data: detail.data,
-					index: detail.index,
-					origin: detail.origin
+					index: item.index,
+					data: item.data,
+					origin: event
 				}
 			})
 		)
