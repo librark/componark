@@ -33,7 +33,7 @@ export class CheckboxGroup extends Component {
 	}
 
 	load () {
-		this.addEventListener('checkbox:alter', this.onAlter.bind(this))
+		this.addEventListener('click', this.onAlter.bind(this))
 	}
 
 	get value () {
@@ -49,6 +49,13 @@ export class CheckboxGroup extends Component {
 	/** @param {CustomEvent} event */
 	onAlter (event) {
 		event.stopImmediatePropagation()
+
+		const target = /** @type {HTMLElement} */(event.target)
+		const checkbox = /** @type {Checkbox} */ (target.closest('ark-checkbox'))
+
+		if (!checkbox) return
+
+		checkbox.toggle()
 
 		this.dispatchEvent(
 			new CustomEvent('alter', {

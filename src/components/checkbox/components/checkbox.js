@@ -30,15 +30,11 @@ export class Checkbox extends Component {
 		return super.render()
 	}
 
-	load () {
-		this.addEventListener('click', this.onAlter.bind(this))
-	}
-
 	check () {
 		this.checked = true
 	}
 
-	uncheck () {
+	unCheck () {
 		this.checked = false
 	}
 
@@ -69,24 +65,6 @@ export class Checkbox extends Component {
 	/** @returns {HTMLInputElement} */
 	get input () {
 		return this.querySelector('[data-input]')
-	}
-
-	/** @param {Event} event */
-	onAlter (event) {
-		event.stopImmediatePropagation()
-
-		this.toggle()
-
-		this.dispatchEvent(
-			new CustomEvent('checkbox:alter', {
-				bubbles: true,
-				detail: {
-					value: this.value,
-					checked: this.checked,
-					origin: event
-				}
-			})
-		)
 	}
 
 	_moveAttributes () {
