@@ -53,7 +53,7 @@ export class List extends Component {
 		const target = /** @type {HTMLElement} */ (event.target)
 		const item = /** @type {ListItem} */ (target.closest('ark-list-item'))
 
-		if (item.hasAttribute('click-disabled') || !item) return
+		if (!item || item.hasAttribute('click-disabled')) return
 
 		this.dispatchEvent(
 			new CustomEvent('list:selected', {

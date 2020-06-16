@@ -2,12 +2,8 @@
  * @typedef {import('./drag').DragZone} DragZone
  * */
 
-import {
-	Component
-} from '../../component'
-import {
-	uuidv4
-} from '../../../utils'
+import {	Component } from '../../component'
+import {	uuid } from '../../../utils'
 
 export class DropZone extends Component {
 	init (context = {}) {
@@ -16,7 +12,7 @@ export class DropZone extends Component {
 		// Local
 		this.x = this.x || undefined
 		this.y = this.y || undefined
-		this.id = uuidv4()
+		this.id = uuid()
 		this.cols = this.cols || 1
 		this.sequence = 0
 		this.selected = false
@@ -63,28 +59,6 @@ export class DropZone extends Component {
 
 		this._droppableRemoveStyle()
 	}
-
-	// /** @param {event} event */
-	// onClick (event) {
-	// 	// event.stopImmediatePropagation()
-
-	// 	if (!this.fixed) return
-	// 	const origin = new MouseEvent(event.type, event)
-
-	// 	this.selected = !this.selected
-
-	// 	this.dispatchEvent(
-	// 		new CustomEvent('drop:clicked', {
-	// 			bubbles: true,
-	// 			detail: {
-	// 				id: this.id,
-	// 				value: this.value,
-	// 				origin: origin,
-	// 				selected: this.selected
-	// 			}
-	// 		})
-	// 	)
-	// }
 
 	/** @param {MouseEvent} event */
 	onMouseOver (event) {

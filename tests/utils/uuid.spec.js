@@ -1,16 +1,16 @@
-import { uuidv4 } from '../../src/utils/uuidv4'
+import { uuid } from '../../src/utils'
 
 describe('Slots', () => {
 	it('groups separated by dashes', () => {
-		const uuid = uuidv4()
-		expect(uuid.split('-').length === 5).toBeTruthy()
+		const id = uuid()
+		expect(id.split('-').length === 5).toBeTruthy()
 	})
 
 	it('total digits == 32', () => {
-		const uuid = uuidv4()
+		const id = uuid()
 
 		let digits = ''
-		uuid.split('-').forEach(element => {
+		id.split('-').forEach(element => {
 			digits += element
 		})
 

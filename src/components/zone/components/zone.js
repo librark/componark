@@ -3,7 +3,7 @@
  * @typedef {import('./drop').DropZone} DropZone
  * */
 import { Component } from '../../component'
-import { uuidv4 } from '../../../utils'
+import { uuid } from '../../../utils'
 
 export class Zone extends Component {
 	init (context = {}) {
@@ -295,7 +295,7 @@ export class Zone extends Component {
 			const clone = /** @type {DragZone} */ (drag.cloneNode(true))
 			relativeDrop.appendChild(clone)
 
-			clone.id = uuidv4()
+			clone.id = uuid()
 			clone.setPosition()
 
 			return clone

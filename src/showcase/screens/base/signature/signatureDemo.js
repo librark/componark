@@ -1,6 +1,6 @@
 /** @typedef {import('components').Signature} Signature */
 import { Component } from '../../loader'
-import { uuidv4 } from '../../../../utils'
+import { uuid } from '../../../../utils'
 
 export class SignatureDemo extends Component {
 	init (context) {
@@ -49,7 +49,7 @@ export class SignatureDemo extends Component {
 
 	_onSave () {
 		const src = this.signature.dataURL()
-		const fileName = uuidv4()
+		const fileName = uuid()
 		const link = document.createElement('a')
 		link.download = fileName + '.jpg'
 		link.href = src

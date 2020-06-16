@@ -2,12 +2,12 @@ import './radio-button'
 
 /** @typedef {import('./radio-button').RadioButton} RadioButton */
 import { Component } from '../../component'
-import { uuidv4 } from '../../../utils'
+import { uuid } from '../../../utils'
 
 export class RadioGroup extends Component {
 	init (context = {}) {
 		this.label = context.label || this.label || ''
-		this.name = context.name || this.name || uuidv4()
+		this.name = context.name || this.name || uuid()
 
 		// local variables
 		this.defaultContent = this.defaultContent || this.innerHTML
