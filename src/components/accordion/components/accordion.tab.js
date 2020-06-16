@@ -18,7 +18,7 @@ export class AccordionTab extends Component {
 
 	render () {
 		this.innerHTML = this.header ? this.innerHTML = /* html */ `
-      <div class="ark-accordion-tab__btn-header" listen on-click="toggle">
+      <div class="ark-accordion-tab__btn-header">
         <small data-accordion-tab-header>${this.header}</small>
       </div>
       <div class="ark-accordion-tab__content">
@@ -37,22 +37,8 @@ export class AccordionTab extends Component {
 		this.removeAttribute('active')
 	}
 
-	/** @param {Event} event */
-	toggle (event) {
-		event.stopImmediatePropagation()
-
+	toggle () {
 		this.hasAttribute('active') ? this.close() : this.open()
-
-		this.dispatchEvent(
-			new CustomEvent('accordionTab:click', {
-				bubbles: true,
-				detail: {
-					index: this.index,
-					active: this.hasAttribute('active'),
-					origin: event
-				}
-			})
-		)
 	}
 }
 customElements.define('ark-accordion-tab', AccordionTab)

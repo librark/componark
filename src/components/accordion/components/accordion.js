@@ -16,25 +16,29 @@ export class Accordion extends Component {
 	}
 
 	load () {
-		this.addEventListener('accordionTab:click',
-			this.onAccordionTabClick.bind(this)
-		)
+		this.addEventListener('click', this.onAccordionTabClick.bind(this))
 	}
 
-	/** @param {CustomEvent} event */
+	/** @param {MouseEvent} event */
 	onAccordionTabClick (event) {
 		event.stopImmediatePropagation()
 
+		const target = /** @type {HTMLElement} */ (event.target)
+		const header = target.closest('.ark-accordion-tab__btn-header')
+
+		if (!header) return
+
+		const tab = /** @type {AccordionTab} */ (
+			header.closest('ark-accordion-tab')
+		)
+
+		tab.toggle()
+
 		if (!this.multiple) return
 
-		const tab = /** @type {AccordionTab} */ (event.target)
-		const detail = event.detail
-
-		this.tabs.forEach((tab) => {
-			tab.close()
+		this.tabs.forEach(item => {
+			if (item.index !== tab.index) item.close()
 		})
-
-		if (detail.active) tab.open()
 	}
 
 	/** @returns {boolean} */
