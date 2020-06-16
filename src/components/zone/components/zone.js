@@ -52,7 +52,10 @@ export class Zone extends Component {
 		this.global.removeEventListener('mouseup', this.onMouseUp.bind(this))
 	}
 
-	// Drop
+	/**
+   *  Drop
+   */
+
 	/** @param {event} event */
 	onDropDragenter (event) {
 		event.stopImmediatePropagation()
@@ -67,8 +70,11 @@ export class Zone extends Component {
 	onDropClicked (event) {
 		event.stopImmediatePropagation()
 
-		const drop = /** @type {DropZone} */ (event.target)
-		if (!drop.fixed) return
+		const target = /** @type {DropZone} */ (event.target)
+		const drop = /** @type {DropZone} */ (target.closest('ark-zone-drop'))
+
+		if (!drop || !drop.fixed) return
+
 		drop.selected = !drop.selected
 
 		const ctrlKey = event.ctrlKey
@@ -103,10 +109,14 @@ export class Zone extends Component {
 		this._showMultipleSelection()
 	}
 
-	// Drag
+	/**
+   *  Drag
+   */
+
 	/** @param {event} event */
 	onDragDragstart (event) {
 		event.stopImmediatePropagation()
+
 		this._cleanSelectedDrags()
 		this._cleanSelectedDrops()
 	}
@@ -142,7 +152,10 @@ export class Zone extends Component {
 
 	/** @param {MouseEvent} event */
 	onDragClicked (event) {
-		const drag = /** @type {DragZone} */ (event.target)
+		event.stopImmediatePropagation()
+
+		const target = /** @type {DragZone} */ (event.target)
+		const drag = /** @type {DropZone} */ (target.closest('ark-zone-drag'))
 
 		if (!event.ctrlKey) {
 			this._cleanSelectedDrags()
@@ -154,7 +167,10 @@ export class Zone extends Component {
 		this._dispatchSelectedDrags()
 	}
 
-	// zone
+	/**
+   *  Zone
+   */
+
 	/** @param {KeyboardEvent} event */
 	onkeyDown (event) {
 		if (event.shiftKey) {

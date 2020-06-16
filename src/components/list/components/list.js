@@ -50,8 +50,8 @@ export class List extends Component {
 	_onSelected (event) {
 		event.stopImmediatePropagation()
 
-		const element = /** @type {HTMLElement} */ (event.target)
-		const item = /** @type {ListItem} */ (element.closest('ark-list-item'))
+		const target = /** @type {HTMLElement} */ (event.target)
+		const item = /** @type {ListItem} */ (target.closest('ark-list-item'))
 
 		if (item.hasAttribute('click-disabled') || !item) return
 
