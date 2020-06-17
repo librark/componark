@@ -31,15 +31,11 @@ export class RadioButton extends Component {
 		return super.render()
 	}
 
-	load () {
-		this.addEventListener('click', this.onClick.bind(this))
-	}
-
 	check () {
 		this.checked = true
 	}
 
-	uncheck () {
+	unCheck () {
 		this.checked = false
 	}
 
@@ -70,24 +66,6 @@ export class RadioButton extends Component {
 	/** @returns {HTMLInputElement} */
 	get input () {
 		return this.querySelector('[data-input]')
-	}
-
-	/** @param {Event} event */
-	onClick (event) {
-		event.stopImmediatePropagation()
-
-		this.toggle()
-
-		this.dispatchEvent(
-			new CustomEvent('radio-button:alter', {
-				bubbles: true,
-				detail: {
-					checked: this.checked,
-					value: this.value,
-					origin: event
-				}
-			})
-		)
 	}
 
 	_moveAttributes () {

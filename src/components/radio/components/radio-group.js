@@ -36,16 +36,23 @@ export class RadioGroup extends Component {
 	}
 
 	load () {
-		this.addEventListener('radio-button:alter', this.onAlter.bind(this))
+		this.addEventListener('click', this.onAlter.bind(this))
 	}
 
 	/** @param {CustomEvent} event */
 	onAlter (event) {
 		event.stopImmediatePropagation()
+		const target = /** @type {HTMLElement} */(event.target)
+		const button = /** @type {RadioButton} */(
+			target.closest('ark-radio-button')
+		)
 
-		const value = event.detail.value
+		if (!button) return
+		button.check()
 
-		this._checkButtons(value)
+		this.radioButtons.forEach(item => {
+			if (item.value !== button.value) item.unCheck()
+		})
 
 		this.dispatchEvent(
 			new CustomEvent('alter', {
@@ -57,26 +64,18 @@ export class RadioGroup extends Component {
 		)
 	}
 
-	_checkButtons (value) {
-		this.selectAll('ark-radio-button').forEach(
-			(/** @type {RadioButton} */ radio) => {
-				if (radio.value === value) {
-					radio.check()
-				} else {
-					radio.uncheck()
-				}
-			}
-		)
-	}
-
 	_renderRadioButtonList () {
 		const container = this.querySelector('[data-radiobutton-list]')
-		const radioButtonList = this.selectAll('ark-radio-button')
-
-		radioButtonList.forEach(button => {
+		this.radioButtons.forEach(button => {
 			button.setAttribute('name', this.name)
 			container.appendChild(button)
 		})
+	}
+
+	get radioButtons () {
+		return /** @type {NodeListOf<RadioButton>} */ (
+			this.selectAll('ark-radio-button')
+		)
 	}
 
 	get value () {
