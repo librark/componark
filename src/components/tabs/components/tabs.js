@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('./tabs.item').TabsItem} TabsItem
+ **/
 import { Component } from '../../component'
 
 export class Tabs extends Component {
@@ -6,32 +9,45 @@ export class Tabs extends Component {
 	}
 
 	render () {
-		this._autoActiveElement()
 		return super.render()
 	}
 
 	load () {
-		this.selectAll('ark-tabs-item').forEach(item =>
-			item.addEventListener('click', _ => this._activeElement(item))
-		)
+		if (!this.currentTab) {
+			const tab = /** @type {TabsItem} */(
+				this.tabs.length ? this.tabs[0] : null
+			)
+
+			if (tab) tab.setAttribute('active', '')
+		}
+
+		this.addEventListener('click', this.onAlterCurrentTab.bind(this))
 	}
 
-	_activeElement (element) {
-		this.selectAll('ark-tabs-item').forEach(item =>
-			item.removeAttribute('active')
-		)
+	/** @param {MouseEvent} event */
+	onAlterCurrentTab (event) {
+		const target = /** @type {HTMLElement} */(event.target)
+		const tab = /** @type {TabsItem} */ (target.closest('ark-tabs-item'))
+		if (!tab) return
 
-		element.setAttribute('active', '')
+		this.currentTab.removeAttribute('active')
+		tab.setAttribute('active', '')
+
+		this.dispatchEvent(new CustomEvent('tabs:selected', {
+			detail: {
+				data: tab,
+				origin: event
+			}
+		}))
 	}
 
-	_autoActiveElement () {
-		const items = Array.from(this.querySelectorAll('ark-tabs-item'))
-		var isActive = false
-		items.forEach(i => {
-			const att = Array.from(i.attributes).filter(a => a.name === 'active')
-			if (att.length) isActive = true
-		})
-		if (!isActive) this._activeElement(items[0])
+	/** @returns {TabsItem} */
+	get currentTab () {
+		return /** @type {TabsItem} */ (this.select('ark-tabs-item[active]'))
+	}
+
+	get tabs () {
+		return this.selectAll('ark-tabs-item')
 	}
 }
 customElements.define('ark-tabs', Tabs)

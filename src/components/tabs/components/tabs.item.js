@@ -10,7 +10,7 @@ export class TabsItem extends Component {
 	}
 
 	reflectedProperties () {
-		return ['title']
+		return ['title', 'tab']
 	}
 
 	render () {
