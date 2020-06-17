@@ -34,7 +34,7 @@ export class Accordion extends Component {
 
 		tab.toggle()
 
-		if (!this.multiple) return
+		if (this.multiple) return
 
 		this.tabs.forEach(item => {
 			if (item.index !== tab.index) item.close()
