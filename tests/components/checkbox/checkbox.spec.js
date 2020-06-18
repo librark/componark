@@ -29,7 +29,7 @@ describe('Checkbox', () => {
 		checkbox.check()
 		expect(checkbox.checked).toEqual(true)
 
-		checkbox.uncheck()
+		checkbox.unCheck()
 		expect(checkbox.checked).toEqual(false)
 
 		checkbox.toggle()
@@ -47,16 +47,8 @@ describe('Checkbox', () => {
 		element.setAttribute('autofocus', 'autofocus')
 		element.connectedCallback()
 
-		const event = new CustomEvent('click')
-
-		// @ts-ignore
-		element.onAlter(event)
-		expect(element.hasAttribute('checked')).toBeTruthy()
 		expect(element.hasAttribute('type')).toBeTruthy()
 		expect(element.hasAttribute('value')).toBeTruthy()
 		expect(!element.hasAttribute('autofocus')).toBeTruthy()
-
-		element.uncheck()
-		expect(!element.hasAttribute('checked')).toBeTruthy()
 	})
 })
