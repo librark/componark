@@ -18,7 +18,7 @@ describe('RadioButton', () => {
 		element.check()
 		expect(element.hasAttribute('checked')).toBeTruthy()
 
-		element.uncheck()
+		element.unCheck()
 		expect(!element.hasAttribute('checked')).toBeTruthy()
 
 		element.toggle()
@@ -36,16 +36,7 @@ describe('RadioButton', () => {
 		element.setAttribute('autofocus', 'autofocus')
 		element.connectedCallback()
 
-		const event = new CustomEvent('click')
-
-		// @ts-ignore
-		element.onClick(event)
-		expect(element.hasAttribute('checked')).toBeTruthy()
-		expect(element.hasAttribute('type')).toBeTruthy()
-		expect(element.hasAttribute('value')).toBeTruthy()
-		expect(!element.hasAttribute('autofocus')).toBeTruthy()
-
-		element.uncheck()
+		element.unCheck()
 		expect(!element.hasAttribute('checked')).toBeTruthy()
 	})
 

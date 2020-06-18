@@ -5,7 +5,7 @@ export class RadioButton extends Component {
   checked: boolean
 
   check (): void
-  uncheck (): void
+  unCheck (): void
   toggle (): void
 }
 

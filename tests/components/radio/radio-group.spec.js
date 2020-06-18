@@ -66,12 +66,48 @@ describe('RadioGroup', () => {
 		group.load()
 
 		expect(!group.value.trim().length).toBeTruthy()
+	})
 
-		// @ts-ignore
-		group._checkButtons('op1')
-		expect(group.value).toEqual('op1')
+	it('returns selected values Group', () => {
+		const element = /** @type {HTMLElement} */(document.createElement('div'))
+		element.innerHTML = /* html */`
+      <ark-radio-group listen on-alter="radioGroup" label="Radios">
+        <ark-radio-button value="op1">Opcion 1</ark-radio-button>
+        <ark-radio-button value="op2" checked>Opcion 2</ark-radio-button>
+        <ark-radio-button value="op3">Opcion 3</ark-radio-button>
+      </ark-radio-group>
+    `
 
+		const radioGroup = /** @type {RadioGroup} */ (
+			element.querySelector('ark-radio-group')
+		)
+
+		radioGroup.init().render().load()
+
+		radioGroup.selectAll('ark-radio-button').forEach(radio => {
+			radio.init().render().load()
+		})
+
+		const radio0 = /** @type {RadioButton} */ (
+			radioGroup.selectAll('ark-radio-button')[0]
+		)
+		const radio1 = /** @type {RadioButton} */ (
+			radioGroup.selectAll('ark-radio-button')[1]
+		)
+		const radio2 = /** @type {RadioButton} */ (
+			radioGroup.selectAll('ark-radio-button')[2]
+		)
+
+		expect(radioGroup.value).toEqual('op2')
+
+		radio1.click()
+		expect(radioGroup.value).toEqual('op2')
+
+		radio0.click()
+		radio1.click()
 		radio2.click()
-		expect(group.value).toEqual('op2')
+		expect(radioGroup.value).toEqual('op3')
+
+		radioGroup.click()
 	})
 })
