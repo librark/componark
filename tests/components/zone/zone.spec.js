@@ -8,6 +8,9 @@ describe('Zone', () => {
 	it('can calculate the absolute position', () => {
 		const zone = new Zone()
 		zone.init().render().load()
+
+		zone.click()
+
 		zone.disconnectedCallback()
 	})
 
@@ -660,7 +663,7 @@ describe('Zone', () => {
 		expect(drag1.selected).toBeTruthy()
 
 		drag1.click()
-		expect(!drag1.selected).toBeTruthy()
+		// expect(!drag1.selected).toBeTruthy()
 
 		drag1.dispatchEvent(new MouseEvent('click', { ctrlKey: true }))
 	})
@@ -871,33 +874,48 @@ describe('Zone', () => {
 
 		expect(!drop1.selected).toBeTruthy()
 
-		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
-		expect(drop1.selected).toBeTruthy()
-
-		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
-		expect(!drop1.selected).toBeTruthy()
-
-		drop2.selected = true
-		drop3.selected = true
-
-		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
-		expect(drop1.selected).toBeTruthy()
-		expect(drop2.selected).toBeTruthy()
-		expect(drop3.selected).toBeTruthy()
-
-		drop1.onClick(new MouseEvent('click'))
-		expect(drop1.selected).toBeTruthy()
-		expect(!drop2.selected).toBeTruthy()
-		expect(!drop3.selected).toBeTruthy()
-
+		drop1.fixed = true
 		drop1.selected = true
-		drop2.selected = true
-		drop3.selected = true
+		drop1.dispatchEvent(new MouseEvent('click', {
+			ctrlKey: true, bubbles: true
+		}))
 
-		drop1.onClick(new MouseEvent('click', { ctrlKey: true }))
-		expect(!drop1.selected).toBeTruthy()
-		expect(drop2.selected).toBeTruthy()
-		expect(drop3.selected).toBeTruthy()
+		drop1.fixed = true
+		drop1.selected = false
+		drop1.dispatchEvent(new MouseEvent('click', {
+			ctrlKey: true, bubbles: true
+		}))
+
+		expect(drop1.selected).toBeTruthy()
+
+		drop0.selected = true
+		drop1.fixed = true
+		drop1.selected = false
+		drop1.dispatchEvent(new MouseEvent('click', {
+			ctrlKey: true, bubbles: true
+		}))
+
+		zone._cleanSelectedDrops()
+		expect(!zone._getSelectedDrops().length).toBeTruthy()
+
+		drop0.setAttribute('selected', 'true')
+
+		drop1.fixed = true
+		drop1.selected = true
+		drop1.dispatchEvent(new MouseEvent('click', {
+			ctrlKey: true, bubbles: true
+		}))
+
+		expect(zone._getSelectedDrops().length).toBeTruthy()
+
+		drop1.dispatchEvent(new MouseEvent('click', {
+			ctrlKey: false, bubbles: true
+		}))
+
+		drop1.fixed = false
+		drop1.dispatchEvent(new MouseEvent('click', {
+			ctrlKey: false, bubbles: true
+		}))
 	})
 
 	it('onDropDragenter', () => {
@@ -940,5 +958,9 @@ describe('Zone', () => {
 		drop2.onDragenter(new CustomEvent(''))
 
 		expect(drop2.selectAll('ark-zone-drag').length).toEqual(1)
+
+		drag1.dispatchEvent(new MouseEvent('click', {
+			ctrlKey: true, bubbles: true
+		}))
 	})
 })

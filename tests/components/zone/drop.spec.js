@@ -294,10 +294,10 @@ describe('Drop Zone', () => {
 			expect(ev.detail.value).toEqual('123')
 		})
 
-		parent.onClick(event)
+		// parent.onClick(event)
 
-		parent.fixed = false
-		parent.onClick(event)
+		// parent.fixed = false
+		// parent.onClick(event)
 	})
 
 	it('on Dragenter, on Dragleave', () => {
