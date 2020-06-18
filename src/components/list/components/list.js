@@ -20,10 +20,12 @@ export class List extends Component {
 				item.setAttribute('click-disabled', '')
 			}
 
-			item
-				.init({ data: data, template: this.template, index: index })
-				.render()
-				.load()
+			item.init({
+				data: data,
+				template:
+         this.template,
+				index: index
+			}).render().load()
 
 			this.appendChild(item)
 		})

@@ -14,11 +14,11 @@ describe('List item', () => {
 
 		expect(item.innerHTML.trim()).toEqual('my data')
 
-		item.setAttribute('click-disabled', '')
+		// item.setAttribute('click-disabled', '')
 
-		const event = new CustomEvent('click')
-		// @ts-ignore
-		item._onSelected(event)
+		// const event = new CustomEvent('click')
+		// // @ts-ignore
+		// item._onSelected(event)
 	})
 	it('can be rendered with template', function () {
 		const item = new ListItem()

@@ -9,14 +9,7 @@ describe('List', () => {
 		list.init()
 		list.render()
 
-		const event = new CustomEvent('click')
-		// @ts-ignore
-		list._onSelected(event)
-
 		list.setAttribute('click-disabled', '')
-
-		// @ts-ignore
-		list._onSelected(event)
 	})
 
 	it('can be instantiated with items', async () => {
@@ -25,7 +18,7 @@ describe('List', () => {
 		}
 
 		const list = new List()
-		await list.init(context).render()
+		list.init(context).render().load()
 
 		const items = list.selectAll('ark-list-item')
 
@@ -34,6 +27,9 @@ describe('List', () => {
 		expect(items[1].textContent.trim()).toEqual('Uruguay')
 		expect(items[2].textContent.trim()).toEqual('Brasil')
 		expect(items[3].textContent.trim()).toEqual('Perú')
+
+		items[0].click()
+		list.click()
 	})
 
 	it('can be instantiated with items click-disabled', async () => {
