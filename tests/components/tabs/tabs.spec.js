@@ -7,6 +7,9 @@ describe('Tabs', () => {
 
 		const init = item.init()
 		expect(item === init).toBeTruthy()
+
+		item.init().render().load()
+		item.click()
 	})
 
 	it('can be rendered without active attribute', function () {
