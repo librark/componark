@@ -19,6 +19,7 @@
 
     &[selected] {
       background: $primary;
+      border: 1px solid rgba($color: $muted, $alpha: 0.5);
     }
   }
 

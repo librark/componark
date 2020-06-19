@@ -7,7 +7,7 @@
     background: $background;
     overflow: hidden;
 
-    [no-border]{
+    &[no-border] {
       border: 0;
       border-radius: 0;
       box-shadow: initial;
@@ -31,11 +31,9 @@
       padding: 0.5rem;
     }
 
-    &__header {
-    }
+    &__header {}
 
-    &__body {
-    }
+    &__body {}
 
     &__actions {
       display: flex;

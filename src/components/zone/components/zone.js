@@ -34,14 +34,13 @@ export class Zone extends Component {
 		this.global.addEventListener('keyup', this.onKeyUp.bind(this))
 		this.global.addEventListener('mouseup', this.onMouseUp.bind(this))
 
-		// Test ----
 		this.addEventListener('click', event => {
 			const target = /** @type {HTMLElement} */(event.target)
 
-			if (target.tagName.toLowerCase() === 'ark-zone-drop') {
-				this.onDropClicked(event)
-			} else if (target.tagName.toLowerCase() === 'ark-zone-drag') {
+			if (target.closest('ark-zone-drag')) {
 				this.onDragClicked(event)
+			} else if (target.closest('ark-zone-drop')) {
+				this.onDropClicked(event)
 			}
 		})
 	}

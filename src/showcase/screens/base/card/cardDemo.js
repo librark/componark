@@ -19,6 +19,21 @@ export class CardDemo extends Component {
         <ark-button slot="action">btn 1</ark-button>
         <ark-button slot="action">btn 2</ark-button>
       </ark-card>
+
+      <hr/>
+
+      <ark-card title="titulo" subtitle="subtitle [Hello World]" no-border>
+        <img slot="media" src="${Image}" alt="" />
+
+        <div>
+          body
+        </div>
+
+        <ark-button slot="action">btn 1</ark-button>
+        <ark-button slot="action">btn 2</ark-button>
+      </ark-card>
+
+      <br/>
     `
 		return super.render()
 	}
