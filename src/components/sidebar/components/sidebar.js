@@ -16,20 +16,19 @@ export class Sidebar extends Component {
 	render () {
 		this.innerHTML = /* html */`
       <div class="ark-sidebar__menu">
-
         <div>
-          ${this._getContent('header', 'ark-sidebar__header')}
-
-          <div class="ark-sidebar__body">
-            ${this._getSlots('general')}
-          </div>
+          <div class="ark-sidebar__header"></div>
+          <div class="ark-sidebar__body"></div>
         </div>
 
-        ${this._getContent('footer', 'ark-sidebar__footer')}
-
+        <div class="ark-sidebar__footer"></div>
       </div>
       <div class="ark-sidebar__scrim" listen on-click="close"></div>
     `
+
+		this._renderContent('header', '.ark-sidebar__header')
+		this._renderContent('general', '.ark-sidebar__body')
+		this._renderContent('footer', '.ark-sidebar__footer')
 
 		if (this.hasAttribute('opened')) this.open()
 
@@ -48,20 +47,16 @@ export class Sidebar extends Component {
 		this.classList.toggle('ark-sidebar--opened')
 	}
 
-	_getContent (key, className) {
-		const slots = this._getSlots(key)
+	_renderContent (slotKey, containerClass) {
+		const container = /** @type {HTMLEmbedElement} */(
+			this.querySelector(containerClass)
+		)
 
-		if (slots === '') { return '' }
+		const slots = /** @type {Array<HTMLElement>} */(this.slots[slotKey] || [])
 
-		return /* html */`<div class="${className}">${slots}</div>`
-	}
+		if (!slots.length) container.remove()
 
-	_getSlots (key) {
-		if (!this.slots || !this.slots[key]) return ''
-
-		return /* html */ `
-        ${this.slots[key].map(element => `${element.outerHTML}`).join('')}
-      `.trim()
+		slots.forEach(element => container.append(element))
 	}
 }
 customElements.define('ark-sidebar', Sidebar)
