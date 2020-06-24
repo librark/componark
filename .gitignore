@@ -90,3 +90,7 @@ dist
 .directory
 
 package-lock.json
+
+
+# Docs
+_docs/_build
