@@ -1,17 +1,13 @@
-/** @param {HTMLElement} container @return {Object<string,any>} */
+/**
+ * @param {HTMLElement} container
+ * @return {Object<string, Array<HTMLElement>>}
+ * */
 export function getSlots (container) {
-	const slots = {
-		general: []
-	}
+	const slots = { general: [] }
 
 	for (const element of container.children) {
-		let slot = element.getAttribute('slot')
-
-		if (!slot) {
-			slot = 'general'
-		} else if (!Object.keys(slots).includes(slot)) {
-			slots[slot] = []
-		}
+		const slot = element.getAttribute('slot') || 'general'
+		if (!Object.keys(slots).includes(slot)) slots[slot] = []
 
 		slots[slot].push(element)
 	}

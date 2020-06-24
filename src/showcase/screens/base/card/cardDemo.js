@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('../../loader').Card} Card
+ */
 import { Component } from '../../loader'
 // @ts-ignore
 import Image from './assets/building.jpg'
@@ -16,8 +19,8 @@ export class CardDemo extends Component {
           body
         </div>
 
-        <ark-button slot="action">btn 1</ark-button>
-        <ark-button slot="action">btn 2</ark-button>
+        <ark-button slot="actions">btn 1</ark-button>
+        <ark-button slot="actions">btn 2</ark-button>
       </ark-card>
 
       <hr/>
@@ -29,13 +32,22 @@ export class CardDemo extends Component {
           body
         </div>
 
-        <ark-button slot="action">btn 1</ark-button>
-        <ark-button slot="action">btn 2</ark-button>
+        <ark-button slot="actions">btn 1</ark-button>
+        <ark-button slot="actions">btn 2</ark-button>
       </ark-card>
 
       <br/>
     `
+
 		return super.render()
+	}
+
+	load () {
+		this.card.render().render()
+	}
+
+	get card () {
+		return /** @type {Card} */(this.select('ark-card'))
 	}
 
 	get styles () {

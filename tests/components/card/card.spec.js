@@ -21,7 +21,7 @@ describe('Card', () => {
       <ark-card title="Title" subtitle="Subtitle">
         <img slot="media"/>
         <div>body</div>
-        <div slot="action">action</div>
+        <div slot="actions">action</div>
       </ark-card>
     `
 
@@ -33,6 +33,26 @@ describe('Card', () => {
 		// @ts-ignore
 		expect(card.slots.media.length).toBeTruthy()
 		// @ts-ignore
-		expect(card.slots.action.length).toBeTruthy()
+		expect(card.slots.actions.length).toBeTruthy()
+	})
+
+	it('can be rendered with content', function () {
+		const item = document.createElement('div')
+		item.innerHTML = /* html */ `
+      <ark-card>
+        <div class="ark-card__body">
+          <div>body</div>
+        </div>
+        <div class="ark-card__media">
+          <div>body</div>
+        </div>
+      </ark-card>
+    `
+
+		const card = /** @type {Card} */ (item.querySelector('ark-card'))
+		card.init().render().load()
+
+		expect(card.querySelectorAll('.ark-card__body').length).toEqual(1)
+		expect(card.querySelectorAll('.ark-card__media').length).toEqual(0)
 	})
 })

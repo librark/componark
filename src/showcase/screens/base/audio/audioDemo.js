@@ -1,7 +1,7 @@
-import { Component } from '../../loader'
 /**
  * @typedef {import('../../loader').Audio} Audio
  */
+import { Component } from '../../loader'
 
 export class AudioDemo extends Component {
 	init (context) {

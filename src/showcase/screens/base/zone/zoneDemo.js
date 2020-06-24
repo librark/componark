@@ -27,15 +27,13 @@ export class ZoneDemo extends Component {
 
                   <ark-zone-drop value="Drop A 01">
                     <ark-zone-drag value="Drag A 01">
-                      <ark-card title="Drag 1" subtitle="Drag A 01" no-border>
-                      </ark-card>
+                      <ark-card title="Drag 1"></ark-card>
                     </ark-zone-drag>
                   </ark-zone-drop>
 
                   <ark-zone-drop value="Drop A 02">
                     <ark-zone-drag value="Drag A 02">
-                      <ark-card title="Drag 2" subtitle="Drag A 02" no-border>
-                      </ark-card>
+                      <ark-card title="Drag 2"></ark-card>
                     </ark-zone-drag>
                   </ark-zone-drop>
 
@@ -148,7 +146,8 @@ export class ZoneDemo extends Component {
         }
 
         demo-zone ark-zone-drag{
-          border: 1px solid;
+          margin: 5px;
+          /* border: 1px solid; */
           /* min-height: 100px;
           min-width: 100px;
           border: 1px solid; */
@@ -165,6 +164,10 @@ export class ZoneDemo extends Component {
 
         demo-zone ark-zone[selected]{
           background: blue;
+        }
+
+        demo-zone ark-card p{
+          margin: 0px;
         }
       </style>
     `
