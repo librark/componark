@@ -1,6 +1,6 @@
 {
   "name": "componark",
-  "version": "0.15.8",
+  "version": "0.15.9",
   "description": "Knowark's Web Components Library",
   "directories": {
     "test": "tests"
