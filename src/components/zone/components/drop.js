@@ -7,13 +7,13 @@ import {	uuid } from '../../../utils'
 
 export class DropZone extends Component {
 	init (context = {}) {
+		this.cols = context.cols || this.cols || 1
 		this.value = this.value || context.value
 
 		// Local
 		this.x = this.x || undefined
 		this.y = this.y || undefined
 		this.id = uuid()
-		this.cols = this.cols || 1
 		this.sequence = 0
 		this.selected = false
 

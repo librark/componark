@@ -11,6 +11,9 @@ describe('Drop Zone', () => {
 		drop.init().render().load()
 
 		expect(drop.cols).toEqual('1')
+
+		drop.init({ cols: 8 }).render().load()
+		expect(drop.cols).toEqual('8')
 	})
 
 	it('get Selected Drags', () => {
