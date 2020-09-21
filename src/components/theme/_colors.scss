@@ -81,15 +81,15 @@
   }
 }
 
+@include arkBackground("danger", $danger);
+@include arkBackground("dark", $dark);
+@include arkBackground("info", $info);
+@include arkBackground("muted", $muted);
 @include arkBackground("primary", $primary);
 @include arkBackground("secondary", $secondary);
 @include arkBackground("success", $success);
-@include arkBackground("danger", $danger);
-@include arkBackground("info", $info);
-@include arkBackground("dark", $dark);
-@include arkBackground("muted", $muted);
+@include arkBackground("warning", $warning);
 
-@include arkBackground("warning", $warning, $dark);
 @include arkBackgroundLight("light", $light);
 @include arkBackgroundLight("white", $white);
 
@@ -102,13 +102,13 @@
   }
 }
 
+@include arkColor("danger", $danger);
+@include arkColor("dark", $dark);
+@include arkColor("info", $info);
+@include arkColor("light", $light);
+@include arkColor("muted", $muted);
 @include arkColor("primary", $primary);
 @include arkColor("secondary", $secondary);
 @include arkColor("success", $success);
-@include arkColor("danger", $danger);
 @include arkColor("warning", $warning);
-@include arkColor("info", $info);
-@include arkColor("dark", $dark);
-@include arkColor("muted", $muted);
-@include arkColor("light", $light);
 @include arkColor("white", $white);
