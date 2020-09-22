@@ -5,7 +5,6 @@ update:
 	git reset --hard
 
 build:
-	make install
 	rm -rf ./dist
 	npm run build
 
