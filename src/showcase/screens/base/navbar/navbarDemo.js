@@ -1,12 +1,12 @@
 import { Component } from '../../loader'
 
 export class NavbarDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init (context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render () {
+    this.innerHTML = /* html */ `${this.styles}
       <ark-navbar background="dark" color="danger" justify="between">
 
         <ark-nav brand>
@@ -56,11 +56,11 @@ export class NavbarDemo extends Component {
       </div>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	get styles () {
-		return /* html */`
+  get styles () {
+    return /* html */`
       <style>
         demo-navbar{
           display: grid;
@@ -74,6 +74,6 @@ export class NavbarDemo extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-navbar', NavbarDemo)

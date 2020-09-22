@@ -8,8 +8,7 @@
   }
 
   .#{$component} {
-    &__media {
-    }
+    &__media {}
 
     &__header {
       @extend .card-body;

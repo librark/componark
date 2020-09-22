@@ -23,7 +23,7 @@
       }
     }
 
-    &[active] > * {
+    &[active]>* {
       color: $primary !important;
       border-bottom: 3px solid $primary !important;
     }

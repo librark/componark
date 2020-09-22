@@ -2,22 +2,22 @@ import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
 export class Modal extends Component {
-	init (context = {}) {
-		this.title = context.title
-		this.subtitle = context.subtitle
+  init (context = {}) {
+    this.title = context.title
+    this.subtitle = context.subtitle
 
-		// local variables
-		this.slots = this.slots || getSlots(this)
+    // local variables
+    this.slots = this.slots || getSlots(this)
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	reflectedProperties () {
-		return ['title', 'subtitle']
-	}
+  reflectedProperties () {
+    return ['title', 'subtitle']
+  }
 
-	render () {
-		this.innerHTML = /* html */ `
+  render () {
+    this.innerHTML = /* html */ `
       <div class="ark-modal__content">
         <div class="ark-modal__header">
           ${this._renderHeader()}
@@ -29,88 +29,88 @@ export class Modal extends Component {
       <div data-scrim class="ark-modal__scrim"></div>
     `
 
-		this._appendSlots()
-		return super.render()
-	}
+    this._appendSlots()
+    return super.render()
+  }
 
-	load () {
-		if (!this._isBlockedScrim()) {
-			this.scrim.addEventListener('click', _ => this.close())
-		}
+  load () {
+    if (!this._isBlockedScrim()) {
+      this.scrim.addEventListener('click', _ => this.close())
+    }
 
-		this.querySelectorAll('[close]').forEach(
-			button => button.addEventListener('click', _ => this.close())
-		)
-	}
+    this.querySelectorAll('[close]').forEach(
+      button => button.addEventListener('click', _ => this.close())
+    )
+  }
 
-	open () {
-		this.setAttribute('show', '')
-		this._onHiddenEvent()
-	}
+  open () {
+    this.setAttribute('show', '')
+    this._onHiddenEvent()
+  }
 
-	close () {
-		this.removeAttribute('show')
-		this._onHiddenEvent()
-	}
+  close () {
+    this.removeAttribute('show')
+    this._onHiddenEvent()
+  }
 
-	toggle () {
-		this.hasAttribute('show') ? this.close() : this.open()
-	}
+  toggle () {
+    this.hasAttribute('show') ? this.close() : this.open()
+  }
 
-	/** @return {HTMLDivElement} */
-	get scrim () {
-		return this.querySelector('[data-scrim]')
-	}
+  /** @return {HTMLDivElement} */
+  get scrim () {
+    return this.querySelector('[data-scrim]')
+  }
 
-	_appendSlots () {
-		if (!Object.keys(this.slots || {}).length) return
+  _appendSlots () {
+    if (!Object.keys(this.slots || {}).length) return
 
-		const general = this.slots.general || []
-		const action = this.slots.action || []
+    const general = this.slots.general || []
+    const action = this.slots.action || []
 
-		general.forEach(
-			slot => this.querySelector('[data-body]').appendChild(slot)
-		)
+    general.forEach(
+      slot => this.querySelector('[data-body]').appendChild(slot)
+    )
 
-		action.forEach(
-			slot => this.querySelector('[data-actions]').appendChild(slot)
-		)
-	}
+    action.forEach(
+      slot => this.querySelector('[data-actions]').appendChild(slot)
+    )
+  }
 
-	_renderHeader () {
-		const title = this._generateContent(this.title, 'title', 'h3')
-		const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
+  _renderHeader () {
+    const title = this._generateContent(this.title, 'title', 'h3')
+    const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
 
-		return /* html */ `
+    return /* html */ `
       <div class="ark-modal__title">
         ${title}
         ${subtitle}
       </div>
     `
-	}
+  }
 
-	_onHiddenEvent () {
-		this.dispatchEvent(new CustomEvent('onHiddenModal', {
-			bubbles: true,
-			detail: {
-				hidden: !this.hasAttribute('show')
-			}
-		}))
-	}
+  _onHiddenEvent () {
+    this.dispatchEvent(new CustomEvent('onHiddenModal', {
+      bubbles: true,
+      detail: {
+        hidden: !this.hasAttribute('show')
+      }
+    }))
+  }
 
-	_generateContent (content, className, type = 'div') {
-		return content
-			? /* html */ `
+  _generateContent (content, className, type = 'div') {
+    return content
+      ? /* html */ `
       <${type} class="ark-card__${className}">
         ${content}
       </${type}>
     `
-			: ''
-	}
+      : ''
+  }
 
-	/** @return {boolean} */
-	_isBlockedScrim () {
-		return this.hasAttribute('block-scrim')
-	}
+  /** @return {boolean} */
+  _isBlockedScrim () {
+    return this.hasAttribute('block-scrim')
+  }
 }
 customElements.define('ark-modal', Modal)

@@ -6,11 +6,15 @@
 @mixin radio($theme) {
   @include radio-button_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include radio-group_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     // @include radio-group_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include radio-group_ark();
   }
 }

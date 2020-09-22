@@ -7,11 +7,15 @@
 @mixin card($theme) {
   @include card_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include card_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include card_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include card_ark();
   }
 }

@@ -7,11 +7,15 @@
 @mixin modal($theme) {
   @include modal_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include modal_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include modal_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include modal_ark();
   }
 }

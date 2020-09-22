@@ -11,75 +11,75 @@ import { fromLonLat } from 'ol/proj'
 import icon from '../assets/icons/marker-icon.png'
 
 export class Map extends Component {
-	init (context = {}) {
-		this.lat = parseFloat(context.lat || this.lat || 2.44073)
-		this.lon = parseFloat(context.lon || this.lon || -76.602349)
-		this.zoom = parseInt(context.zoom || this.zoom || 13)
-		this.token = context.token || this.token
+  init (context = {}) {
+    this.lat = parseFloat(context.lat || this.lat || 2.44073)
+    this.lon = parseFloat(context.lon || this.lon || -76.602349)
+    this.zoom = parseInt(context.zoom || this.zoom || 13)
+    this.token = context.token || this.token
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	reflectedProperties () {
-		return ['token', 'zoom', 'lat', 'lon']
-	}
+  reflectedProperties () {
+    return ['token', 'zoom', 'lat', 'lon']
+  }
 
-	render () {
-		this.innerHTML = /* html */ `
+  render () {
+    this.innerHTML = /* html */ `
       <div id="map" class="map"></div>
     `
-		return super.render()
-	}
+    return super.render()
+  }
 
-	load () {
-		/** @type {MapOL} */
-		this.map = new MapOL({
-			target: 'map',
-			layers: [
-				new TileLayer({
-					source: new XYZ({
-						url: this._getUrl()
-					})
-				})
-			],
-			view: new View({
-				center: fromLonLat([this.lon, this.lat]),
-				zoom: this.zoom
-			})
-		})
-	}
+  load () {
+    /** @type {MapOL} */
+    this.map = new MapOL({
+      target: 'map',
+      layers: [
+        new TileLayer({
+          source: new XYZ({
+            url: this._getUrl()
+          })
+        })
+      ],
+      view: new View({
+        center: fromLonLat([this.lon, this.lat]),
+        zoom: this.zoom
+      })
+    })
+  }
 
-	updateSize () {
-		this.map.renderSync()
-		this.map.updateSize()
-	}
+  updateSize () {
+    this.map.renderSync()
+    this.map.updateSize()
+  }
 
-	addMarker (lat, lon) {
-		var iconFeature = new Feature({
-			geometry: new Point(fromLonLat([lon, lat]))
-		})
+  addMarker (lat, lon) {
+    var iconFeature = new Feature({
+      geometry: new Point(fromLonLat([lon, lat]))
+    })
 
-		iconFeature.setStyle(new Style({
-			image: new Icon({
-				anchor: [0.5, 1],
-				src: icon
-			})
-		}))
+    iconFeature.setStyle(new Style({
+      image: new Icon({
+        anchor: [0.5, 1],
+        src: icon
+      })
+    }))
 
-		var vectorLayer = new VectorLayer({
-			source: new VectorSource({
-				features: [iconFeature]
-			})
-		})
+    var vectorLayer = new VectorLayer({
+      source: new VectorSource({
+        features: [iconFeature]
+      })
+    })
 
-		this.map.addLayer(vectorLayer)
+    this.map.addLayer(vectorLayer)
 
-		this.updateSize()
-	}
+    this.updateSize()
+  }
 
-	_getUrl () {
-		return 'https://api.mapbox.com/styles/v1/mapbox/' +
+  _getUrl () {
+    return 'https://api.mapbox.com/styles/v1/mapbox/' +
       `streets-v11/tiles/256/{z}/{x}/{y}?access_token=${this.token}`
-	}
+  }
 }
 customElements.define('ark-map', Map)

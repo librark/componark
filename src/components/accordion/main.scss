@@ -7,11 +7,15 @@
 @mixin accordion($theme) {
   @include accordion_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include accordion_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include accordion_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include accordion_ark();
   }
 }

@@ -1,8 +1,7 @@
 @mixin accordion_tab_ark_() {
   $component: "ark-accordion-tab";
 
-  #{$component} {
-  }
+  #{$component} {}
 
   .#{$component} {
     &__content {

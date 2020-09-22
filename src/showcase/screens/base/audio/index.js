@@ -1,25 +1,25 @@
 import { AudioDemo } from './audioDemo'
 
 export function hub (parentResolver) {
-	const resolver = parentResolver.forge({
-		strategy: {
-			AudioDemo: {
-				method: 'component'
-			}
-		},
-		factory: new ComponentFactory()
-	})
+  const resolver = parentResolver.forge({
+    strategy: {
+      AudioDemo: {
+        method: 'component'
+      }
+    },
+    factory: new ComponentFactory()
+  })
 
-	return resolver.resolve('AudioDemo')
+  return resolver.resolve('AudioDemo')
 }
 
 export class ComponentFactory {
-	/** @param {string} method */
-	extract (method) {
-		return this[`_${method}`]
-	}
+  /** @param {string} method */
+  extract (method) {
+    return this[`_${method}`]
+  }
 
-	_component () {
-		return new AudioDemo()
-	}
+  _component () {
+    return new AudioDemo()
+  }
 }

@@ -7,11 +7,15 @@
 @mixin paginator($theme) {
   @include paginator_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include paginator_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include paginator_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include paginator_ark();
   }
 }

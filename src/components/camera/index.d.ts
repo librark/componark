@@ -6,4 +6,3 @@ export class Camera extends Component {
   setCameraOrientation (facingMode: string)
   dataURL (width?, height?): string
 }
-

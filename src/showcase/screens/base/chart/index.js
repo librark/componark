@@ -1,25 +1,25 @@
 import { ChartDemo } from './chartDemo'
 
 export function hub (parentResolver) {
-	const resolver = parentResolver.forge({
-		strategy: {
-			ChartDemo: {
-				method: 'component'
-			}
-		},
-		factory: new ComponentFactory()
-	})
+  const resolver = parentResolver.forge({
+    strategy: {
+      ChartDemo: {
+        method: 'component'
+      }
+    },
+    factory: new ComponentFactory()
+  })
 
-	return resolver.resolve('ChartDemo')
+  return resolver.resolve('ChartDemo')
 }
 
 export class ComponentFactory {
-	/** @param {string} method */
-	extract (method) {
-		return this[`_${method}`]
-	}
+  /** @param {string} method */
+  extract (method) {
+    return this[`_${method}`]
+  }
 
-	_component () {
-		return new ChartDemo()
-	}
+  _component () {
+    return new ChartDemo()
+  }
 }

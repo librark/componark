@@ -6,6 +6,7 @@
   $component: "ark-alert";
 
   #{$component} {
+
     button,
     a {
       @extend .mdc-button;
@@ -27,8 +28,7 @@
   }
 
   .#{$component} {
-    &__header {
-    }
+    &__header {}
 
     &__title {
       margin-bottom: 0.5rem;

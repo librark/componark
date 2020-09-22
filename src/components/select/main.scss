@@ -7,11 +7,15 @@
 @mixin select($theme) {
   @include select_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include select_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include select_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include select_ark();
   }
 }

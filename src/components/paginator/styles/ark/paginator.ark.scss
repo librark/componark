@@ -1,10 +1,10 @@
 @mixin paginator_ark_() {
   $component: "ark-paginator";
 
-  #{$component} {
-  }
+  #{$component} {}
 
   .#{$component} {
+
     &__default-buttons,
     &__button-list {
       & button {

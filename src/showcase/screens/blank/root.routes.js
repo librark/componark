@@ -1,7 +1,7 @@
-export function setRoutes(resolver, rootComponent, prefix) {
-	/** @param {string} path
+export function setRoutes (resolver, rootComponent, prefix) {
+  /** @param {string} path
    *  @returns {{path, action}} */
-  function setContentComponent(path) {
+  function setContentComponent (path) {
     return {
       path: path,
       action: async () => {

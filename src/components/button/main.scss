@@ -7,11 +7,15 @@
 @mixin button($theme) {
   @include button_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include button_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include button_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include button_ark();
   }
 }

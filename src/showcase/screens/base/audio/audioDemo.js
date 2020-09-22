@@ -4,12 +4,12 @@
 import { Component } from '../../loader'
 
 export class AudioDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init (context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render () {
+    this.innerHTML = /* html */ `${this.styles}
       <ark-Audio background="dark" color="danger" data-ark-audio>
         <ark-icon slot="microphone" name="fas fa-microphone"></ark-icon>
         <ark-icon slot="start" name="fas fa-play"></ark-icon>
@@ -26,43 +26,43 @@ export class AudioDemo extends Component {
 
       <audio data-audio controls></audio>
     `
-		return super.render()
-	}
+    return super.render()
+  }
 
-	load () {
-		this.addEventListener('onStopAudio', (
+  load () {
+    this.addEventListener('onStopAudio', (
 			/** @type {CustomEvent} */ event) => {
-			event.stopImmediatePropagation()
-			this.audio.src = event.detail.dataURL
-		})
+      event.stopImmediatePropagation()
+      this.audio.src = event.detail.dataURL
+    })
 
-		this.addEventListener('onStartAudio', (
+    this.addEventListener('onStartAudio', (
 			/** @type {CustomEvent} */ event) => {
-			event.stopImmediatePropagation()
+      event.stopImmediatePropagation()
 
-			if (event.detail.totalSeconds >= 10) this.arkAudio.stop()
-		})
+      if (event.detail.totalSeconds >= 10) this.arkAudio.stop()
+    })
 
-		this.addEventListener('onStopAudio', (
+    this.addEventListener('onStopAudio', (
 			/** @type {CustomEvent} */ event) => {
-			event.stopImmediatePropagation()
-		})
+      event.stopImmediatePropagation()
+    })
 
-		return super.load()
-	}
+    return super.load()
+  }
 
-	/** @returns {HTMLAudioElement} */
-	get audio () {
-		return this.querySelector('[data-audio]')
-	}
+  /** @returns {HTMLAudioElement} */
+  get audio () {
+    return this.querySelector('[data-audio]')
+  }
 
-	/** @returns {Audio} */
-	get arkAudio () {
-		return this.querySelector('[data-ark-audio]')
-	}
+  /** @returns {Audio} */
+  get arkAudio () {
+    return this.querySelector('[data-ark-audio]')
+  }
 
-	get styles () {
-		return /* html */ `
+  get styles () {
+    return /* html */ `
       <style>
         demo-audio{
           padding: 1rem;
@@ -73,6 +73,6 @@ export class AudioDemo extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-audio', AudioDemo)

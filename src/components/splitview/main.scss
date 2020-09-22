@@ -6,11 +6,15 @@
 @mixin splitview($theme) {
   @include splitview_defaul();
 
-  @if $theme == material {
+  @if $theme==material {
     @include splitview_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     // @include splitview_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include splitview_ark();
   }
 }

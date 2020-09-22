@@ -12,4 +12,3 @@ export class Paginator extends Component {
     currentPage?: number,
   }): this
 }
-

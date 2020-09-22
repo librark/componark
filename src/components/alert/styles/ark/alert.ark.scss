@@ -3,8 +3,7 @@
 @mixin alert_ark_() {
   $component: "ark-alert";
 
-  #{$component} {
-  }
+  #{$component} {}
 
   .#{$component} {
     &__header {

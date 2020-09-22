@@ -1,6 +1,5 @@
 @mixin multiselect_list_material_() {
-	$component: 'ark-multiselect-list';
+  $component: 'ark-multiselect-list';
 
-	#{$component} {
-	}
+  #{$component} {}
 }

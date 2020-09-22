@@ -5,4 +5,3 @@ export class Audio extends Component {
   stop ()
   dataURL: string
 }
-

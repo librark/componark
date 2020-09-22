@@ -1,12 +1,12 @@
 import { Component } from '../../loader'
 
 export class AccordionDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init (context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render () {
+    this.innerHTML = /* html */ `${this.styles}
       <ark-accordion>
         <ark-accordion-tab header="tab 1" >
           <span>content tab 1</span>
@@ -43,11 +43,11 @@ export class AccordionDemo extends Component {
       </ark-accordion>
 
     `
-		return super.render()
-	}
+    return super.render()
+  }
 
-	get styles () {
-		return /* html */ `
+  get styles () {
+    return /* html */ `
       <style>
         demo-accordion{
           padding: 1rem;
@@ -55,6 +55,6 @@ export class AccordionDemo extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-accordion', AccordionDemo)

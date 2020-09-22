@@ -3,8 +3,7 @@
 @mixin modal_bootstrap_() {
   $component: "ark-modal";
 
-  #{$component} {
-  }
+  #{$component} {}
 
   .#{$component} {
     &__content {

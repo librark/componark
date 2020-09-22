@@ -1,32 +1,32 @@
 import { Component } from '../../component'
 
 export class SplitViewDetail extends Component {
-	init (context = {}) {
-		this.title = context.title || this.title || ' '
-		this.backButtonIcon = context.backButtonIcon || this.backButtonIcon
+  init (context = {}) {
+    this.title = context.title || this.title || ' '
+    this.backButtonIcon = context.backButtonIcon || this.backButtonIcon
 
-		// local variables
-		this.global = document
+    // local variables
+    this.global = document
 
-		this.detail = this.detail || /** @type {Component} */ (
-			this.firstElementChild
-		)
+    this.detail = this.detail || /** @type {Component} */ (
+      this.firstElementChild
+    )
 
-		if (this.detail && this.detail.init) this.detail.init(context)
+    if (this.detail && this.detail.init) this.detail.init(context)
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	render () {
-		let header = this.querySelector('header')
+  render () {
+    let header = this.querySelector('header')
 
-		if (!header) {
-			header = this.global.createElement('header')
-			header.classList.add('ark-splitview-detail__header')
-			this.insertBefore(header, this.firstChild)
-		}
+    if (!header) {
+      header = this.global.createElement('header')
+      header.classList.add('ark-splitview-detail__header')
+      this.insertBefore(header, this.firstChild)
+    }
 
-		header.innerHTML = /* html */`
+    header.innerHTML = /* html */`
       <button listen on-click="hide"
         class="ark-splitview-detail__button--close">
         ${this._renderBackButtonIcon()}
@@ -36,26 +36,26 @@ export class SplitViewDetail extends Component {
       </div>
     `
 
-		if (this.detail && this.detail.render) this.detail.render()
+    if (this.detail && this.detail.render) this.detail.render()
 
-		this.hide()
-		return super.render()
-	}
+    this.hide()
+    return super.render()
+  }
 
-	show () {
-		this.removeAttribute('hidden')
-	}
+  show () {
+    this.removeAttribute('hidden')
+  }
 
-	hide () {
-		this.setAttribute('hidden', '')
-	}
+  hide () {
+    this.setAttribute('hidden', '')
+  }
 
-	toggle () {
-		this.hasAttribute('hidden') ? this.show() : this.hide()
-	}
+  toggle () {
+    this.hasAttribute('hidden') ? this.show() : this.hide()
+  }
 
-	_renderBackButtonIcon () {
-		return this.backButtonIcon ? this.backButtonIcon() : '&times;'
-	}
+  _renderBackButtonIcon () {
+    return this.backButtonIcon ? this.backButtonIcon() : '&times;'
+  }
 }
 customElements.define('ark-splitview-detail', SplitViewDetail)

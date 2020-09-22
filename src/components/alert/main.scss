@@ -7,11 +7,15 @@
 @mixin alert($theme) {
   @include alert_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include alert_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include alert_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include alert_ark();
   }
 }

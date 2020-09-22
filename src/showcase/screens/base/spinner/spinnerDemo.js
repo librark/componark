@@ -5,12 +5,12 @@
 import { Component } from '../../loader'
 
 export class SpinnerDemo extends Component {
-	init (context) {
-		return super.init()
-	}
+  init (context) {
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render () {
+    this.innerHTML = /* html */ `${this.styles}
       <h1>spinner</h1>
 
       <div class="spinner-container">
@@ -21,16 +21,16 @@ export class SpinnerDemo extends Component {
 
       ${this._getDoc()}
     `
-		return super.render()
-	}
+    return super.render()
+  }
 
-	_getDoc () {
-		return /* html */ `
+  _getDoc () {
+    return /* html */ `
     `
-	}
+  }
 
-	get styles () {
-		return /* html */`
+  get styles () {
+    return /* html */`
       <style>
         .spinner-container{
           display: flex;
@@ -44,6 +44,6 @@ export class SpinnerDemo extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-spinner', SpinnerDemo)

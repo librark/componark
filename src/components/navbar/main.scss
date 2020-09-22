@@ -6,11 +6,15 @@
 @mixin navbar($theme) {
   @include navbar_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include navbar_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     // @include navbar_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include navbar_ark();
   }
 }

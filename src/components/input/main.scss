@@ -7,11 +7,15 @@
 @mixin input($theme) {
   @include input_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include input_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include input_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include input_ark();
   }
 }

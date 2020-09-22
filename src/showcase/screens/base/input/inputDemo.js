@@ -2,12 +2,12 @@
 import { Component } from '../../loader'
 
 export class InputDemo extends Component {
-	init (context) {
-		return super.init()
-	}
+  init (context) {
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render () {
+    this.innerHTML = /* html */ `${this.styles}
       <div class="container">
         <ark-input data-input-text type="text" label="Repite como loro"
         required listen on-alter="inputText"></ark-input>
@@ -41,34 +41,34 @@ export class InputDemo extends Component {
       ${this.documentation}
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	inputText (event) {
-		const element = this.querySelector('[data-input-value]')
-		if (element) {
-			element.textContent = event.detail ? event.detail.value : ''
-		}
-	}
+  inputText (event) {
+    const element = this.querySelector('[data-input-value]')
+    if (element) {
+      element.textContent = event.detail ? event.detail.value : ''
+    }
+  }
 
-	defaultValue (event) {
-		const input = /** @type {Input} */ (this.select('[data-input-text]'))
-		input.value = 'Hello World'
-		input.render()
-	}
+  defaultValue (event) {
+    const input = /** @type {Input} */ (this.select('[data-input-text]'))
+    input.value = 'Hello World'
+    input.render()
+  }
 
-	get styles () {
-		return /* html */ `
+  get styles () {
+    return /* html */ `
       <style>
         demo-input .container{
           padding: 1rem;
         }
       </style>
     `
-	}
+  }
 
-	get documentation () {
-		return /* html */ `
+  get documentation () {
+    return /* html */ `
       <br/>
       <hr/>
       <p>supported types</p>
@@ -88,6 +88,6 @@ export class InputDemo extends Component {
         <li>week</li>
       </ul>
     `
-	}
+  }
 }
 customElements.define('demo-input', InputDemo)

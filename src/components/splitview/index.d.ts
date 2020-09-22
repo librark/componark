@@ -4,4 +4,3 @@ export class SplitView extends Component {
   master: Component
   detail: Component
 }
-

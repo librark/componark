@@ -2,28 +2,28 @@ import { Component } from '../loader'
 import { ThemeService } from '../theme/theme.service'
 
 export class RootComponent extends Component {
-	init (context) {
-		return super.init()
-	}
+  init (context) {
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = /* html */ ''
+  render () {
+    this.innerHTML = /* html */ ''
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	load () {
-		this.dispatchEvent(
-			new CustomEvent('blank:load', {
-				bubbles: true
-			})
-		)
+  load () {
+    this.dispatchEvent(
+      new CustomEvent('blank:load', {
+        bubbles: true
+      })
+    )
 
-		return super.load()
-	}
+    return super.load()
+  }
 
-	themeService (style) {
-		return new ThemeService(style)
-	}
+  themeService (style) {
+    return new ThemeService(style)
+  }
 }
 customElements.define('app-root', RootComponent)

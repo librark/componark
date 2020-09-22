@@ -1,12 +1,12 @@
 import { Component } from '../../loader'
 
 export class RadioDemo extends Component {
-	init (context) {
-		return super.init()
-	}
+  init (context) {
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = /* html */ `
+  render () {
+    this.innerHTML = /* html */ `
       <ark-radio-group listen on-alter="radioGroup" label="Radio Buttons">
         <ark-radio-button value="op1">Opcion 1</ark-radio-button>
         <ark-radio-button value="op2">Opcion 2</ark-radio-button>
@@ -15,12 +15,12 @@ export class RadioDemo extends Component {
 
       <p>Valor seleccionado: <span data-radio-button-value></span></p>
     `
-		return super.render()
-	}
+    return super.render()
+  }
 
-	radioGroup (event) {
-		this.querySelector('[data-radio-button-value]').innerHTML =
+  radioGroup (event) {
+    this.querySelector('[data-radio-button-value]').innerHTML =
       event.detail.value || ''
-	}
+  }
 }
 customElements.define('demo-radio', RadioDemo)

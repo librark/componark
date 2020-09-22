@@ -93,16 +93,20 @@
       opacity: 0;
       transform: scale(0);
     }
+
     10% {
       opacity: 1;
       transform: scale(1);
     }
+
     50% {
       opacity: 1;
     }
+
     51% {
       opacity: 0;
     }
+
     100% {
       opacity: 0;
     }

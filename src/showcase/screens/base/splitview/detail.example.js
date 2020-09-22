@@ -1,18 +1,18 @@
 import { Component } from '../../loader'
 
 export class ArkDetailExample extends Component {
-	init (context) {
-		const data = context.data || {}
+  init (context) {
+    const data = context.data || {}
 
-		this.first = data.first
-		this.second = data.second
-		this.year = data.year
+    this.first = data.first
+    this.second = data.second
+    this.year = data.year
 
-		return super.init()
-	}
+    return super.init()
+  }
 
-	render () {
-		this.innerHTML = this.first ? /* html */ `${this.styles}
+  render () {
+    this.innerHTML = this.first ? /* html */ `${this.styles}
         <h1>${this.year}</h1>
         <p>
           <span data-first>FIRST: ${this.first}</span>
@@ -23,13 +23,13 @@ export class ArkDetailExample extends Component {
         <h1>Ark Detail Example</h1>
       `
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	get styles () {
-		return /* html */`
+  get styles () {
+    return /* html */`
       <style></style>
     `
-	}
+  }
 }
 customElements.define('ark-detail-example', ArkDetailExample)

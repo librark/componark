@@ -1,9 +1,7 @@
 @mixin card_ark_() {
   $component: "ark-card";
 
-  #{$component} {
-  }
+  #{$component} {}
 
-  .#{$component} {
-  }
+  .#{$component} {}
 }

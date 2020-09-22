@@ -6,11 +6,15 @@
 @mixin sidebar($theme) {
   @include sidebar_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include sidebar_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     // @include sidebar_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include sidebar_ark();
   }
 }

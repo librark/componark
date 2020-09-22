@@ -4,6 +4,8 @@ export class Button extends Component {
   init (context = {}) {
     // local variables
     this.defaultContent = this.defaultContent || this.innerHTML
+    this.navigatorObject = navigator
+
     return super.init()
   }
 
@@ -15,12 +17,11 @@ export class Button extends Component {
     `
 
     this._moveAttributes()
+    this._setVibration()
     return super.render()
   }
 
-  load () {
-    this._setVibration()
-  }
+  load () { }
 
   _isFab () {
     if (!this.hasAttribute('fab')) return
@@ -49,7 +50,7 @@ export class Button extends Component {
     )
 
     this.addEventListener('click', () => {
-      navigator.vibrate(duration)
+      this.navigatorObject.vibrate(duration)
     })
   }
 

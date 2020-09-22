@@ -4,12 +4,12 @@
 import { Component } from '../../loader'
 
 export class TabsDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init (context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */`
+  render () {
+    this.innerHTML = /* html */`
       <div>
         <p>This is a tabs.</p>
       </div>
@@ -35,52 +35,52 @@ export class TabsDemo extends Component {
       <div tab-content></div>
     `
 
-		const currentTab = this.tabs.currentTab ? this.tabs.currentTab.tab : ''
-		this.updateContent(currentTab)
+    const currentTab = this.tabs.currentTab ? this.tabs.currentTab.tab : ''
+    this.updateContent(currentTab)
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	updateContent (tab) {
-		if (tab === 'example-1') {
-			this.tabContent.innerHTML = /* html */`
+  updateContent (tab) {
+    if (tab === 'example-1') {
+      this.tabContent.innerHTML = /* html */`
         <h1>Example 1</h1>
       `
-		} else if (tab === 'example-2') {
-			this.tabContent.innerHTML = /* html */`
+    } else if (tab === 'example-2') {
+      this.tabContent.innerHTML = /* html */`
         <h1>Example 2</h1>
       `
-		} else if (tab === 'example-3') {
-			this.tabContent.innerHTML = /* html */`
+    } else if (tab === 'example-3') {
+      this.tabContent.innerHTML = /* html */`
         <h1>Example 3</h1>
       `
-		} else if (tab === 'example-4') {
-			this.tabContent.innerHTML = /* html */`
+    } else if (tab === 'example-4') {
+      this.tabContent.innerHTML = /* html */`
         <h1>Example 4</h1>
       `
-		} else if (tab === 'example-5') {
-			this.tabContent.innerHTML = /* html */`
+    } else if (tab === 'example-5') {
+      this.tabContent.innerHTML = /* html */`
         <h1>Example 5</h1>
       `
-		}
-	}
+    }
+  }
 
-	/** @param {CustomEvent} event */
-	onSelectedTab (event) {
-		event.stopImmediatePropagation()
-		const tabItem = event.detail.data
+  /** @param {CustomEvent} event */
+  onSelectedTab (event) {
+    event.stopImmediatePropagation()
+    const tabItem = event.detail.data
 
-		this.updateContent(tabItem.tab)
-	}
+    this.updateContent(tabItem.tab)
+  }
 
-	/** @returns {Tabs} */
-	get tabs () {
-		return /** @type {Tabs} */(this.select('ark-tabs'))
-	}
+  /** @returns {Tabs} */
+  get tabs () {
+    return /** @type {Tabs} */(this.select('ark-tabs'))
+  }
 
-	/** @returns {HTMLElement} */
-	get tabContent () {
-		return this.querySelector('[tab-content]')
-	}
+  /** @returns {HTMLElement} */
+  get tabContent () {
+    return this.querySelector('[tab-content]')
+  }
 }
 customElements.define('demo-tabs', TabsDemo)

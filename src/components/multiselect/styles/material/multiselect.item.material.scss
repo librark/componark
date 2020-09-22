@@ -1,18 +1,18 @@
 @mixin multiselect_item_material_() {
-	$component: 'ark-multiselect-item';
+  $component: 'ark-multiselect-item';
 
-	#{$component} {
-		border-radius: 1rem;
+  #{$component} {
+    border-radius: 1rem;
 
-		padding: 0;
-		margin: 0.2rem 0.1rem;
+    padding: 0;
+    margin: 0.2rem 0.1rem;
 
-		:first-child() {
-			padding: 0.1rem 0.5rem;
-		}
+    :first-child() {
+      padding: 0.1rem 0.5rem;
+    }
 
-		[remove] {
-			margin: 0 5px 0 -6px;
-		}
-	}
+    [remove] {
+      margin: 0 5px 0 -6px;
+    }
+  }
 }

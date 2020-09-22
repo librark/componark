@@ -1,12 +1,12 @@
 import { Component } from '../../loader'
 
 export class TooltipDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init (context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */`${this.styles}
+  render () {
+    this.innerHTML = /* html */`${this.styles}
       <div class="demo-tooltip__content">
         <ark-tooltip position="top" text="tooltip Top">
           <span>Top</span>
@@ -26,15 +26,15 @@ export class TooltipDemo extends Component {
       </div>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	load () {
-		return super.load()
-	}
+  load () {
+    return super.load()
+  }
 
-	get styles () {
-		return /* html */`
+  get styles () {
+    return /* html */`
       <style>
         demo-tooltip{
           display: flex !important;
@@ -52,6 +52,6 @@ export class TooltipDemo extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-tooltip', TooltipDemo)

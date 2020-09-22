@@ -1,31 +1,31 @@
 export function setMainRoutes (mainComponent, resolver, prefix) {
-	const router = resolver.resolve('Router')
-	router.addRoutes(prefix, [
-		{
-			path: '',
-			action: async () => {
-				return router.navigate('/base/accordion')
-			}
-		},
-		{
-			path: 'base',
-			action: async () => {
-				const module = await import('./base/index.js')
-				const _prefix = prefix + 'base/'
-				setMainComponent(mainComponent, module.hub(resolver, _prefix))
-			}
-		},
-		{
-			path: 'blank',
-			action: async () => {
-				const module = await import('./blank/index.js')
-				const _prefix = prefix + 'blank/'
-				setMainComponent(mainComponent, module.hub(resolver, _prefix))
-			}
-		}
-	])
+  const router = resolver.resolve('Router')
+  router.addRoutes(prefix, [
+    {
+      path: '',
+      action: async () => {
+        return router.navigate('/base/accordion')
+      }
+    },
+    {
+      path: 'base',
+      action: async () => {
+        const module = await import('./base/index.js')
+        const _prefix = prefix + 'base/'
+        setMainComponent(mainComponent, module.hub(resolver, _prefix))
+      }
+    },
+    {
+      path: 'blank',
+      action: async () => {
+        const module = await import('./blank/index.js')
+        const _prefix = prefix + 'blank/'
+        setMainComponent(mainComponent, module.hub(resolver, _prefix))
+      }
+    }
+  ])
 }
 
 function setMainComponent (mainComponent, screenComponent) {
-	mainComponent.parentElement.replaceChild(screenComponent, mainComponent)
+  mainComponent.parentElement.replaceChild(screenComponent, mainComponent)
 }

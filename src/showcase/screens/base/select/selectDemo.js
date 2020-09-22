@@ -1,16 +1,16 @@
 import { Component } from '../../loader'
 
 export class SelectDemo extends Component {
-	init (context) {
-		return super.init()
-	}
+  init (context) {
+    return super.init()
+  }
 
-	connectedCallback () {
-		this.render()
-	}
+  connectedCallback () {
+    this.render()
+  }
 
-	render () {
-		this.innerHTML = /* html */`
+  render () {
+    this.innerHTML = /* html */`
       <div>
         <p>This is a select.</p>
       </div>
@@ -31,12 +31,12 @@ export class SelectDemo extends Component {
 
       <p>Elemento seleccionado: <span data-select-value></span></p>
     `
-		return super.render()
-	}
+    return super.render()
+  }
 
-	selectEventListener (event) {
-		const element = this.querySelector('[data-select-value]')
-		if (element) element.textContent = event.detail.value
-	}
+  selectEventListener (event) {
+    const element = this.querySelector('[data-select-value]')
+    if (element) element.textContent = event.detail.value
+  }
 }
 customElements.define('demo-select', SelectDemo)

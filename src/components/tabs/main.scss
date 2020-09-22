@@ -7,11 +7,15 @@
 @mixin tabs($theme) {
   @include tabs_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include tabs_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include tabs_bootstrap();
-  } @else {
+  }
+
+  @else {
     @include tabs_ark();
   }
 }

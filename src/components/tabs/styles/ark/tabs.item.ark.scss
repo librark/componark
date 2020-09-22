@@ -3,7 +3,7 @@
   $desktop: "960px";
 
   #{$component} {
-    &[active] > * {
+    &[active]>* {
       color: $primary !important;
       border: 3px solid $primary !important;
     }

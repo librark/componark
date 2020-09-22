@@ -6,12 +6,12 @@ import { Component } from '../../loader'
 import Image from './assets/building.jpg'
 
 export class CardDemo extends Component {
-	init (context) {
-		return super.init(context)
-	}
+  init (context) {
+    return super.init(context)
+  }
 
-	render () {
-		this.innerHTML = /* html */ `${this.styles}
+  render () {
+    this.innerHTML = /* html */ `${this.styles}
       <ark-card title="titulo" subtitle="subtitle [Hello World]">
         <img slot="media" src="${Image}" alt="" />
 
@@ -39,19 +39,19 @@ export class CardDemo extends Component {
       <br/>
     `
 
-		return super.render()
-	}
+    return super.render()
+  }
 
-	load () {
-		this.card.render().render()
-	}
+  load () {
+    this.card.render().render()
+  }
 
-	get card () {
-		return /** @type {Card} */(this.select('ark-card'))
-	}
+  get card () {
+    return /** @type {Card} */(this.select('ark-card'))
+  }
 
-	get styles () {
-		return /* html */`
+  get styles () {
+    return /* html */`
       <style>
         demo-card{
           display: block;
@@ -59,6 +59,6 @@ export class CardDemo extends Component {
         }
       </style>
     `
-	}
+  }
 }
 customElements.define('demo-card', CardDemo)

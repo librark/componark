@@ -4,50 +4,50 @@
 import { Component } from '../../component'
 
 export class Tabs extends Component {
-	init (context = {}) {
-		return super.init()
-	}
+  init (context = {}) {
+    return super.init()
+  }
 
-	render () {
-		return super.render()
-	}
+  render () {
+    return super.render()
+  }
 
-	load () {
-		if (!this.currentTab) {
-			const tab = /** @type {TabsItem} */(
-				this.tabs.length ? this.tabs[0] : null
-			)
+  load () {
+    if (!this.currentTab) {
+      const tab = /** @type {TabsItem} */(
+        this.tabs.length ? this.tabs[0] : null
+      )
 
-			if (tab) tab.setAttribute('active', '')
-		}
+      if (tab) tab.setAttribute('active', '')
+    }
 
-		this.addEventListener('click', this.onAlterCurrentTab.bind(this))
-	}
+    this.addEventListener('click', this.onAlterCurrentTab.bind(this))
+  }
 
-	/** @param {MouseEvent} event */
-	onAlterCurrentTab (event) {
-		const target = /** @type {HTMLElement} */(event.target)
-		const tab = /** @type {TabsItem} */ (target.closest('ark-tabs-item'))
-		if (!tab) return
+  /** @param {MouseEvent} event */
+  onAlterCurrentTab (event) {
+    const target = /** @type {HTMLElement} */(event.target)
+    const tab = /** @type {TabsItem} */ (target.closest('ark-tabs-item'))
+    if (!tab) return
 
-		this.currentTab.removeAttribute('active')
-		tab.setAttribute('active', '')
+    this.currentTab.removeAttribute('active')
+    tab.setAttribute('active', '')
 
-		this.dispatchEvent(new CustomEvent('tabs:selected', {
-			detail: {
-				data: tab,
-				origin: event
-			}
-		}))
-	}
+    this.dispatchEvent(new CustomEvent('tabs:selected', {
+      detail: {
+        data: tab,
+        origin: event
+      }
+    }))
+  }
 
-	/** @returns {TabsItem} */
-	get currentTab () {
-		return /** @type {TabsItem} */ (this.select('ark-tabs-item[active]'))
-	}
+  /** @returns {TabsItem} */
+  get currentTab () {
+    return /** @type {TabsItem} */ (this.select('ark-tabs-item[active]'))
+  }
 
-	get tabs () {
-		return this.selectAll('ark-tabs-item')
-	}
+  get tabs () {
+    return this.selectAll('ark-tabs-item')
+  }
 }
 customElements.define('ark-tabs', Tabs)

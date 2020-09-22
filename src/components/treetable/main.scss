@@ -6,11 +6,15 @@
 @mixin treetable($theme) {
   @include treetable_default();
 
-  @if $theme == material {
+  @if $theme==material {
     @include treetable_material();
-  } @else if $theme == bootstrap {
+  }
+
+  @else if $theme==bootstrap {
     @include treetable_bootstrap();
-  } @else {
+  }
+
+  @else {
     // @include treetable_ark();
   }
 }
