@@ -6,19 +6,13 @@
     "checkJs": true,
     "noEmit": true,
     "noImplicitThis": false,
+    "noImplicitAny": false,
     "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "baseUrl": "./src",
-    "lib": [
-      "es6",
-      "webworker",
-      "dom",
-      "dom.iterable"
-    ],
-    "plugins": [
-      {
-        "name": "typescript-tslint-plugin"
-      }
-    ]
+    "baseUrl": "src",
+    "paths": {
+      "*": [
+        "*"
+      ]
+    }
   }
 }

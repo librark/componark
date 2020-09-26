@@ -127,6 +127,8 @@
     "ol": "^6.3.1",
     "popper.js": "^1.16.1",
     "signature_pad": "^3.0.0-beta.3",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "webpack-pwa-manifest": "^4.2.0",
+    "workbox-webpack-plugin": "^5.1.4"
   }
 }
