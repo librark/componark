@@ -1,0 +1,9 @@
+@mixin form_default_() {
+  $component: "ark-form";
+
+  #{$component} {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+}

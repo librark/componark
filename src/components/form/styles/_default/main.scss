@@ -1,0 +1,5 @@
+@import "./form.default.scss";
+
+@mixin form_default() {
+  @include form_default_();
+}

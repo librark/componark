@@ -20,6 +20,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     setContentComponent('card'),
     setContentComponent('chart'),
     setContentComponent('checkbox'),
+    setContentComponent('form'),
     setContentComponent('grid'),
     setContentComponent('icon'),
     setContentComponent('input'),
