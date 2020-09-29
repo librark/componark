@@ -1,6 +1,6 @@
 /** @typedef {import('./accordion.tab.js').AccordionTab} AccordionTab */
 
-import { Component } from 'components/component'
+import { Component } from '../../component'
 
 export class Accordion extends Component {
   init () {

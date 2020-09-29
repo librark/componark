@@ -1,4 +1,4 @@
-import { Component } from 'components/component'
+import { Component } from '../../component'
 
 export class SplitViewMaster extends Component {
   init (context = {}) {

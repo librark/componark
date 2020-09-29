@@ -1,4 +1,4 @@
-import { Component } from 'components/component'
+import { Component } from '../../component'
 import { getSlots } from '../../../utils'
 
 export class Sidebar extends Component {

@@ -1,4 +1,4 @@
-import { Component } from 'components/component'
+import { Component } from '../../component'
 
 export class MultiselectList extends Component {
   /** @param {Object} context */
