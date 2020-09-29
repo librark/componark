@@ -10,7 +10,7 @@ export class Select extends Component {
   }
 
   reflectedProperties () {
-    return ['label']
+    return ['label', 'value']
   }
 
   render () {
