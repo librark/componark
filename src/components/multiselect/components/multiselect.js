@@ -4,7 +4,7 @@
  * @typedef {import('./multiselect.list').MultiselectList} MultiselectList
  * */
 
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class Multiselect extends Component {
   /** @param {Object} context */

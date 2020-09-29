@@ -2,7 +2,7 @@ import { Feature, Map as MapOL, View } from 'ol'
 import { Icon, Style } from 'ol/style'
 import { Vector as VectorSource, XYZ } from 'ol/source'
 
-import { Component } from '../../component'
+import { Component } from 'components/component'
 import { Point } from 'ol/geom'
 import TileLayer from 'ol/layer/Tile'
 import { Vector as VectorLayer } from 'ol/layer'

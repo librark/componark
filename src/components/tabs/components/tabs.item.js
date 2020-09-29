@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class TabsItem extends Component {
   init (context = {}) {

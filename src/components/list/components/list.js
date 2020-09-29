@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from 'components/component'
 import { ListItem } from './list.item'
 
 export class List extends Component {

@@ -1,7 +1,7 @@
 /**
  * @typedef {import('./tabs.item').TabsItem} TabsItem
  **/
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class Tabs extends Component {
   init (context = {}) {

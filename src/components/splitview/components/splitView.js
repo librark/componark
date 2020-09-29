@@ -3,7 +3,7 @@
  * @typedef {import('./master.js').SplitViewMaster} SplitViewMaster
  **/
 
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class SplitView extends Component {
   init (context = {}) {

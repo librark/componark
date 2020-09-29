@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from 'components/component'
 import SignaturePad from 'signature_pad/dist/signature_pad'
 
 export class Signature extends Component {

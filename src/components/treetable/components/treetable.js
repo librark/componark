@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class Treetable extends Component {
   init (context = {}) {

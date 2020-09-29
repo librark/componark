@@ -1,5 +1,5 @@
 /** @typedef {import('./checkbox').Checkbox} Checkbox */
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class CheckboxGroup extends Component {
   init (context = {}) {

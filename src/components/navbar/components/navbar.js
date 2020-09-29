@@ -1,5 +1,5 @@
 /** @typedef {import('./nav').Nav} Nav */
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class Navbar extends Component {
   init (context = {}) {

@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class RadioButton extends Component {
   /** @param {Object} context? */

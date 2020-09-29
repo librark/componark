@@ -1,8 +1,8 @@
 import './radio-button'
 
 /** @typedef {import('./radio-button').RadioButton} RadioButton */
-import { Component } from '../../component'
-import { uuid } from '../../../utils'
+import { Component } from 'components/component'
+import { uuid } from 'utils'
 
 export class RadioGroup extends Component {
   init (context = {}) {

@@ -1,5 +1,5 @@
-import { Component } from '../../component'
-import { getSlots } from '../../../utils'
+import { Component } from 'components/component'
+import { getSlots } from 'utils'
 
 export class Modal extends Component {
   init (context = {}) {

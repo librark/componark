@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from 'components/component'
 import { MultiselectItem } from './multiselect.item'
 
 export class MultiselectInput extends Component {

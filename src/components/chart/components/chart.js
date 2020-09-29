@@ -1,5 +1,5 @@
 import { Chart as ChartJs } from 'chart.js'
-import { Component } from '../../component'
+import { Component } from 'components/component'
 
 export class Chart extends Component {
   init (context = {}) {
