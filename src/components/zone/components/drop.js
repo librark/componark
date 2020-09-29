@@ -3,7 +3,7 @@
  * */
 
 import { Component } from 'components/component'
-import { uuid } from 'utils'
+import { uuid } from '../../../utils'
 
 export class DropZone extends Component {
   init (context = {}) {

@@ -1,5 +1,5 @@
 import { Component } from 'components/component'
-import { getSlots } from 'utils'
+import { getSlots } from '../../../utils'
 
 export class Card extends Component {
   init (context = {}) {

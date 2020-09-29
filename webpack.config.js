@@ -50,7 +50,6 @@ module.exports = (env, argv) => {
       alias: {
         styles: path.resolve(__dirname, 'src/showcase/screens/theme/styles/'),
         components: path.resolve(__dirname, './src/components/'),
-        utils: path.resolve(__dirname, './src/utils/'),
       }
     },
     module: {
