@@ -2,7 +2,8 @@ import { Component } from '../../component'
 
 export class Select extends Component {
   init (context = {}) {
-    this.label = context.label
+    this.label = context.label || this.label
+    this.value = context.value || this.value || ''
 
     // local variables
     this.defaultContent = this.defaultContent || this.innerHTML
@@ -10,7 +11,7 @@ export class Select extends Component {
   }
 
   reflectedProperties () {
-    return ['label', 'value']
+    return ['label']
   }
 
   render () {
@@ -25,9 +26,17 @@ export class Select extends Component {
     return super.render()
   }
 
+  get selectElement () {
+    return /** @type {HTMLSelectElement} */ (
+      this.querySelector('select[data-select]')
+    ) || {}
+  }
+
   get value () {
-    const select = /** @type {Select} */ (this.querySelector('[data-select]'))
-    return select ? select.value : ''
+    return this.selectElement['value'] || ''
+  }
+  set value (value) {
+    this.selectElement['value'] = value
   }
 
   /** @param {Event} event */
