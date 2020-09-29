@@ -16,6 +16,8 @@
     ark-splitview-master,
     ark-splitview-detail {
       width: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
     }
   }
 }
