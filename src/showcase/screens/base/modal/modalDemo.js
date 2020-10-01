@@ -16,10 +16,12 @@ export class ModalDemo extends Component {
         <button btn-toggle>toggle</button>
       </div>
 
-      <ark-modal title="My Title" subtitle="My Subtitle" horizontal="center"
-        vertical="center" block-scrim>
-        <div style="margin: 1rem;">
+      <ark-modal title="My Title" subtitle="My Subtitle"
+        horizontal="center" vertical="center"
+        width="80vw" height="30vh"
+        block-scrim>
 
+        <div style="margin: 1rem;">
           <div>
             <p>Contenido Párrafo A-1</p>
             <p>Contenido Párrafo A-2</p>
@@ -73,7 +75,6 @@ export class ModalDemo extends Component {
             <p>Contenido Párrafo C-8</p>
             <p>Contenido Párrafo C-9</p>
           </div>
-
         </div>
 
         <ark-button slot="action">Aceptar</ark-button>

@@ -8,17 +8,19 @@ export class Modal extends Component {
 
     // local variables
     this.slots = this.slots || getSlots(this)
+    this.width = this.width || ''
+    this.height = this.height || ''
 
     return super.init()
   }
 
   reflectedProperties () {
-    return ['title', 'subtitle']
+    return ['title', 'subtitle', 'width', 'height']
   }
 
   render () {
     this.innerHTML = /* html */ `
-      <div class="ark-modal__content">
+      <div class="ark-modal__content" ${this._getContentStyle()}>
         <div class="ark-modal__header">
           ${this._renderHeader()}
         </div>
@@ -60,6 +62,15 @@ export class Modal extends Component {
   /** @return {HTMLDivElement} */
   get scrim () {
     return this.querySelector('[data-scrim]')
+  }
+
+  _getContentStyle () {
+    const width = this.width ? `width: ${this.width};` : ''
+    const height = this.height ? `height: ${this.height};` : ''
+
+    return `
+      style="${width} ${height}"
+    `
   }
 
   _appendSlots () {
