@@ -65,7 +65,7 @@ export class Select extends Component {
     attributes.forEach(attribute => {
       if (this._defaultAttributes().find(item => item === attribute.name)) {
         element.setAttribute(attribute.name, attribute.value)
-        this.removeAttribute(attribute.name)
+        // this.removeAttribute(attribute.name)
       }
     })
   }
