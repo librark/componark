@@ -16,6 +16,7 @@ export class SplitView extends Component {
   }
 
   render () {
+    this.renderDetail()
     return super.render()
   }
 
