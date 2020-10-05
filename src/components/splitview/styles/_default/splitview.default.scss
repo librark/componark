@@ -11,6 +11,12 @@
     background: $background;
   }
 
+  .#{$component} {
+    &--actions {
+      display: none;
+    }
+  }
+
   @media only screen and (max-width: $tablet) {
 
     ark-splitview-master,
@@ -18,6 +24,12 @@
       width: 100% !important;
       max-width: 100% !important;
       min-width: 100% !important;
+    }
+
+    .#{$component} {
+      &--actions {
+        display: block;
+      }
     }
   }
 }
