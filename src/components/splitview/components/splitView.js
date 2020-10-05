@@ -29,13 +29,16 @@ export class SplitView extends Component {
   }
 
   /** @param {Object} context */
-  renderDetail (context) {
-    // if (!this.detail && !this.detail.init) return
+  renderDetail (context = {}) {
     if (!this.detail || !this.detail.init) return
 
-    context.title = this.detailTitle || context.title
-    context.backButtonIcon = this.detailBackButtonIcon ||
-      context.backButtonIcon
+    context['title'] = (
+      context.title || this.detailTitle
+    )
+
+    context['backButtonIcon'] = (
+      context.backButtonIcon || this.detailBackButtonIcon
+    )
 
     this.detail.init(context).render()
     this.detail.show()
