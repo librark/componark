@@ -16,6 +16,7 @@ export class SplitView extends Component {
   }
 
   render () {
+    this._renderDetail({})
     return super.render()
   }
 
@@ -53,9 +54,9 @@ export class SplitView extends Component {
     // if (!this.detail && !this.detail.init) return
     if (!this.detail || !this.detail.init) return
 
-    context.title = context.title || this.detailTitle
-    context.backButtonIcon = context.backButtonIcon ||
-      this.detailBackButtonIcon
+    context.title = this.detailTitle || context.title
+    context.backButtonIcon = this.detailBackButtonIcon ||
+      context.backButtonIcon
 
     this.detail.init(context).render()
     this.detail.show()
