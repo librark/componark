@@ -1,8 +1,8 @@
 import { Component } from '../component'
 
 export class SplitView extends Component {
-  master: Component
-  detail: Component
+  master: SplitViewMaster
+  detail: SplitViewDetail
 }
 
 export class SplitViewMaster extends Component { }
