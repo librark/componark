@@ -1,43 +1,43 @@
 import { SplitView }
-	from '../../../src/components/splitview/components/splitView'
+  from '../../../src/components/splitview/components/splitView'
 import { SplitViewDetail }
-	from '../../../src/components/splitview/components/detail'
+  from '../../../src/components/splitview/components/detail'
 import { SplitViewMaster }
-	from '../../../src/components/splitview/components/master'
+  from '../../../src/components/splitview/components/master'
 
 describe('SplitView', () => {
-	it('can be instantiated without elements', () => {
-		const splitview = new SplitView()
-		splitview.init().render().load()
+  it('can be instantiated without elements', () => {
+    const splitview = new SplitView()
+    splitview.init().render().load()
 
-		// @ts-ignore
-		splitview._renderDetail()
+    // @ts-ignore
+    splitview.renderDetail()
 
-		expect(splitview).toBeTruthy()
-	})
+    expect(splitview).toBeTruthy()
+  })
 
-	it('can be instantiated with elements', () => {
-		const splitview = new SplitView()
-		const master = new SplitViewMaster()
-		const detail = new SplitViewDetail()
+  it('can be instantiated with elements', () => {
+    const splitview = new SplitView()
+    const master = new SplitViewMaster()
+    const detail = new SplitViewDetail()
 
-		master.render()
-		detail.render()
+    master.render()
+    detail.render()
 
-		splitview.appendChild(master)
-		splitview.appendChild(detail)
+    splitview.appendChild(master)
+    splitview.appendChild(detail)
 
-		splitview.init().render().load()
+    splitview.init().render().load()
 
-		splitview._renderDetail({})
+    splitview.renderDetail({})
 
-		splitview.addEventListener('test', event => {
-			expect(event.detail.data).toBeTruthy()
-		})
+    splitview.addEventListener('test', event => {
+      expect(event.detail.data).toBeTruthy()
+    })
 
-		const event = new CustomEvent('test', { detail: { data: true } })
-		splitview._onMasterChange(event)
+    const event = new CustomEvent('test', { detail: { data: true } })
+    splitview._onMasterChange(event)
 
-		splitview._onMasterChange(new CustomEvent(''))
-	})
+    splitview._onMasterChange(new CustomEvent(''))
+  })
 })

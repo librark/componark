@@ -16,7 +16,6 @@ export class SplitView extends Component {
   }
 
   render () {
-    this._renderDetail({})
     return super.render()
   }
 
@@ -27,6 +26,19 @@ export class SplitView extends Component {
         this._onMasterChange.bind(this)
       )
     }
+  }
+
+  /** @param {Object} context */
+  renderDetail (context) {
+    // if (!this.detail && !this.detail.init) return
+    if (!this.detail || !this.detail.init) return
+
+    context.title = this.detailTitle || context.title
+    context.backButtonIcon = this.detailBackButtonIcon ||
+      context.backButtonIcon
+
+    this.detail.init(context).render()
+    this.detail.show()
   }
 
   /** @return {SplitViewMaster} */
@@ -44,22 +56,9 @@ export class SplitView extends Component {
     event.stopImmediatePropagation()
 
     const context = event.detail || {}
-    this._renderDetail(context)
+    this.renderDetail(context)
 
     this.dispatchEvent(new CustomEvent('detail:change', event))
-  }
-
-  /** @param {Object} context */
-  _renderDetail (context) {
-    // if (!this.detail && !this.detail.init) return
-    if (!this.detail || !this.detail.init) return
-
-    context.title = this.detailTitle || context.title
-    context.backButtonIcon = this.detailBackButtonIcon ||
-      context.backButtonIcon
-
-    this.detail.init(context).render()
-    this.detail.show()
   }
 }
 customElements.define('ark-splitview', SplitView)
