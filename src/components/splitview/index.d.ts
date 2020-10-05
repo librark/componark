@@ -4,7 +4,7 @@ export class SplitView extends Component {
   master: SplitViewMaster
   detail: SplitViewDetail
 
-  renderDetail ()
+  renderDetail (context: object)
 }
 
 export class SplitViewMaster extends Component { }
