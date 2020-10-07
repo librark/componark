@@ -3,7 +3,7 @@ import { Component } from "../component"
 export class List extends Component {
   selected?: Object
 
-  init (context?: { source: Array<any>; template?: () => void }): this
+  init (context?: { source: any[]; template?: () => void }): this
 
   delete (start: number, deleteCount?: number)
 }
