@@ -3,6 +3,7 @@
 
   #{$component} {
     user-select: none;
+    background: $background;
 
     &[disabled] {
       pointer-events: none;
@@ -18,8 +19,6 @@
 
   .#{$component} {
     &__btn-header {
-      background: $background;
-
       width: auto;
       height: 2.5rem;
 
