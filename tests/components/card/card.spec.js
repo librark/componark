@@ -10,7 +10,7 @@ describe('Card', () => {
   })
 
   it('can be rendered without content', function () {
-    const element = /** @type {Card} */ (document.createElement('ark-card'))
+    const element = new Card()
     element.connectedCallback()
     expect(!element.innerHTML.trim().length).toBeTruthy()
   })

@@ -2,8 +2,7 @@ import { RadioButton } from '../../../src/components/radio'
 
 describe('RadioButton', () => {
   it('can be instantiated', () => {
-    const element = /** @type {RadioButton} */ (
-      document.createElement('ark-radio-button'))
+    const element = new RadioButton()
     expect(element).toBeTruthy()
 
     const init = element.init({})

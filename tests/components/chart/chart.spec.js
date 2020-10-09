@@ -2,7 +2,7 @@ import { Chart } from '../../../src/components/chart'
 
 describe('Chart', () => {
   it('can be instantiated', () => {
-    const element = /** @type {Chart} */ (document.createElement('ark-chart'))
+    const element = new Chart()
     expect(element).toBeTruthy()
 
     const init = element.init()

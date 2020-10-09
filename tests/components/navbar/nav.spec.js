@@ -2,7 +2,7 @@ import { Nav } from '../../../src/components/navbar'
 
 describe('Nav', () => {
   it('can be instantiated', () => {
-    const nav = /** @type {Nav} */(document.createElement('ark-nav'))
+    const nav = new Nav()
     expect(nav).toBeTruthy()
 
     const init = nav.init({})
@@ -10,7 +10,7 @@ describe('Nav', () => {
   })
 
   it('can be rendered with content', function () {
-    const nav = /** @type {Nav} */(document.createElement('ark-nav'))
+    const nav = new Nav()
     nav.innerHTML = /* HTML */`
       <span>mySpan</span>
     `

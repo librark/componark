@@ -49,6 +49,5 @@ describe('Checkbox', () => {
 
     expect(element.hasAttribute('type')).toBeTruthy()
     expect(element.hasAttribute('value')).toBeTruthy()
-    expect(!element.hasAttribute('autofocus')).toBeTruthy()
   })
 })

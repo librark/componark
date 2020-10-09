@@ -2,7 +2,7 @@ import { Nav, Navbar } from '../../../src/components/navbar'
 
 describe('Navbar', () => {
   it('can be instantiated', () => {
-    const navbar = /** @type {Navbar} */(document.createElement('ark-navbar'))
+    const navbar = new Navbar()
     expect(navbar).toBeTruthy()
 
     const init = navbar.init()

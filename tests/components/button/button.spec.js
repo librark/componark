@@ -58,4 +58,15 @@ describe('Button', () => {
     expect(button.getAttribute('horizontal')).toEqual('center')
     expect(button.getAttribute('vertical')).toEqual('center')
   })
+  it('can be rendered setVibration', function () {
+    const button = new Button()
+    button.setAttribute('vibrate️', '')
+    button.init().render().load()
+    button['navigatorObject'].vibrate = () => { }
+    button.click()
+
+    button.setAttribute('vibrate️', '100,50')
+    button.init().render().load()
+    button.click()
+  })
 })

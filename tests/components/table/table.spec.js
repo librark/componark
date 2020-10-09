@@ -2,7 +2,7 @@ import { Table } from '../../../src/components/table'
 
 describe('Table', () => {
   it('can be instantiated', () => {
-    const table = /** @type {Table} */(document.createElement('ark-table'))
+    const table = new Table()
     expect(table).toBeTruthy()
 
     const init = table.init()
