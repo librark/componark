@@ -28,7 +28,7 @@ npm-clean:
 npm-update:
 	npm i -g npm
 	npm i -g npm-check-updates
-	ncu -u --timeout 600000
+	ncu -u --timeout 600000 --target minor
 	npm i
 	npm audit fix
 
