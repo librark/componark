@@ -44,7 +44,6 @@ module.exports = (env, argv) => {
       }),
       new HashedModuleIdsPlugin(),
       new CopyWebpackPlugin(['src/assets/config/.htaccess']),
-      new WorkboxPlugin.GenerateSW()
     ],
     resolve: {
       alias: {
