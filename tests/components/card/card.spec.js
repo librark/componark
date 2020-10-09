@@ -1,23 +1,23 @@
 import { Card } from '../../../src/components/card'
 
 describe('Card', () => {
-	it('can be instantiated', () => {
-		const element = new Card()
-		expect(element).toBeTruthy()
+  it('can be instantiated', () => {
+    const element = new Card()
+    expect(element).toBeTruthy()
 
-		const init = element.init()
-		expect(element === init).toBeTruthy()
-	})
+    const init = element.init()
+    expect(element === init).toBeTruthy()
+  })
 
-	it('can be rendered without content', function () {
-		const element = /** @type {Card} */ (document.createElement('ark-card'))
-		element.connectedCallback()
-		expect(!element.innerHTML.trim().length).toBeTruthy()
-	})
+  it('can be rendered without content', function () {
+    const element = /** @type {Card} */ (document.createElement('ark-card'))
+    element.connectedCallback()
+    expect(!element.innerHTML.trim().length).toBeTruthy()
+  })
 
-	it('can be rendered with content', function () {
-		const item = document.createElement('div')
-		item.innerHTML = /* html */ `
+  it('can be rendered with content', function () {
+    const item = document.createElement('div')
+    item.innerHTML = /* html */ `
       <ark-card title="Title" subtitle="Subtitle">
         <img slot="media"/>
         <div>body</div>
@@ -25,20 +25,20 @@ describe('Card', () => {
       </ark-card>
     `
 
-		const card = /** @type {Card} */ (item.querySelector('ark-card'))
-		card.init().render().load()
+    const card = /** @type {Card} */ (item.querySelector('ark-card'))
+    card.init().render().load()
 
-		// @ts-ignore
-		expect(card.slots.general.length).toBeTruthy()
-		// @ts-ignore
-		expect(card.slots.media.length).toBeTruthy()
-		// @ts-ignore
-		expect(card.slots.actions.length).toBeTruthy()
-	})
+    // @ts-ignore
+    expect(card.slots.general.length).toBeTruthy()
+    // @ts-ignore
+    expect(card.slots.media.length).toBeTruthy()
+    // @ts-ignore
+    expect(card.slots.actions.length).toBeTruthy()
+  })
 
-	it('can be rendered with content', function () {
-		const item = document.createElement('div')
-		item.innerHTML = /* html */ `
+  it('can be rendered with content', function () {
+    const item = document.createElement('div')
+    item.innerHTML = /* html */ `
       <ark-card>
         <div class="ark-card__body">
           <div>body</div>
@@ -49,10 +49,10 @@ describe('Card', () => {
       </ark-card>
     `
 
-		const card = /** @type {Card} */ (item.querySelector('ark-card'))
-		card.init().render().load()
+    const card = /** @type {Card} */ (item.querySelector('ark-card'))
+    card.init().render().load()
 
-		expect(card.querySelectorAll('.ark-card__body').length).toEqual(1)
-		expect(card.querySelectorAll('.ark-card__media').length).toEqual(0)
-	})
+    expect(card.querySelectorAll('.ark-card__body').length).toEqual(1)
+    expect(card.querySelectorAll('.ark-card__media').length).toEqual(0)
+  })
 })

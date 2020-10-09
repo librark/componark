@@ -32,7 +32,7 @@ describe('SplitView', () => {
     splitview.renderDetail({})
 
     splitview.addEventListener('test', event => {
-      expect(event.detail.data).toBeTruthy()
+      expect(event['detail'].data).toBeTruthy()
     })
 
     const event = new CustomEvent('test', { detail: { data: true } })
