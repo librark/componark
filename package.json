@@ -1,59 +1,13 @@
 {
   "name": "componark",
   "version": "0.16.20",
+  "author": "Nubark <it@nubark.com>",
   "description": "Knowark's Web Components Library",
-  "directories": {
-    "test": "tests"
-  },
+  "license": "ISC",
   "scripts": {
     "test": "jest --coverage",
     "dev": "webpack-dev-server --mode development --env.TARGET=development",
     "build": "webpack -p --mode production --env.TARGET=production --inline=false"
-  },
-  "types": "src/components/index",
-  "jest": {
-    "verbose": true,
-    "clearMocks": true,
-    "coverageDirectory": "coverage",
-    "testEnvironment": "jsdom",
-    "setupFiles": [
-      "jest-canvas-mock"
-    ],
-    "setupFilesAfterEnv": [
-      "./tests/setup.js"
-    ]
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ]
-  },
-  "eslintConfig": {
-    "extends": "standard",
-    "parser": "babel-eslint",
-    "env": {
-      "browser": true,
-      "jasmine": true,
-      "node": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 6
-    },
-    "rules": {
-      "max-len": [
-        "error",
-        80,
-        2
-      ],
-      "no-tabs": 0
-    }
   },
   "repository": {
     "type": "git",
@@ -63,8 +17,6 @@
     "web",
     "components"
   ],
-  "author": "Nubark <it@nubark.com>",
-  "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
@@ -130,5 +82,33 @@
     "typescript": "^3.9.7",
     "webpack-pwa-manifest": "^4.2.0",
     "workbox-webpack-plugin": "^5.1.4"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "types": "src/components/index",
+  "jest": {
+    "verbose": true,
+    "clearMocks": true,
+    "coverageDirectory": "coverage",
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "jest-canvas-mock"
+    ],
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
   }
 }
