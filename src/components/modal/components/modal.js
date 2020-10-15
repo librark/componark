@@ -89,15 +89,21 @@ export class Modal extends Component {
   }
 
   _renderHeader () {
-    const title = this._generateContent(this.title, 'title', 'h3')
-    const subtitle = this._generateContent(this.subtitle, 'subtitle', 'span')
+    let header = ''
 
-    return /* html */ `
-      <div class="ark-modal__title">
-        ${title}
-        ${subtitle}
-      </div>
-    `
+    if (this.title.length) {
+      header += /* html */`
+        <strong class="ark-card__title">${this.title}</strong>
+      `
+    }
+
+    if (this.subtitle.length) {
+      header += /* html */`
+        <span class="ark-card__subtitle">${this.subtitle}</span>
+      `
+    }
+
+    return header
   }
 
   _onHiddenEvent () {
@@ -107,16 +113,6 @@ export class Modal extends Component {
         hidden: !this.hasAttribute('show')
       }
     }))
-  }
-
-  _generateContent (content, className, type = 'div') {
-    return content
-      ? /* html */ `
-      <${type} class="ark-card__${className}">
-        ${content}
-      </${type}>
-    `
-      : ''
   }
 
   /** @return {boolean} */

@@ -63,9 +63,16 @@
     }
 
     &__header {
-      // overflow: hidden;
-      padding: 0.3rem;
-      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+
+      &>* {
+        padding: .5rem;
+      }
+
+      &>*:not(:first-child) {
+        padding-top: 0;
+      }
     }
 
     &__icon-close {
