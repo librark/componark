@@ -1,5 +1,18 @@
 @mixin icon_default() {
-  i {
+  $component: "ark-icon";
+
+  #{$component} {
     font-size: inherit !important;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+
+    i {
+      font-size: inherit !important;
+      display: block !important;
+      all: unset;
+    }
   }
 }
