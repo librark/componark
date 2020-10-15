@@ -9,6 +9,7 @@ import { Vector as VectorLayer } from 'ol/layer'
 import { fromLonLat } from 'ol/proj'
 // @ts-ignore
 import icon from '../assets/icons/marker-icon.png'
+import { uuid } from '../../../utils'
 
 export class Map extends Component {
   init (context = {}) {
@@ -17,6 +18,8 @@ export class Map extends Component {
     this.zoom = parseInt(context.zoom || this.zoom || 13)
     this.token = context.token || this.token
 
+    // Local
+    this.mapId = uuid()
     return super.init()
   }
 
@@ -26,7 +29,7 @@ export class Map extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <div id="map" class="map"></div>
+      <div id="${this.mapId}" class="map"></div>
     `
     return super.render()
   }
@@ -34,7 +37,7 @@ export class Map extends Component {
   load () {
     /** @type {MapOL} */
     this.map = new MapOL({
-      target: 'map',
+      target: this.mapId,
       layers: [
         new TileLayer({
           source: new XYZ({
