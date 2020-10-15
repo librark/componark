@@ -105,6 +105,8 @@
       border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
       height: initial;
 
+      display: block;
+
       padding-top: 0;
 
       &[hidden] {
