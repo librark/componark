@@ -1,15 +1,14 @@
 import { Feature, Map as MapOL, View } from 'ol'
 import { Icon, Style } from 'ol/style'
 import { Vector as VectorSource, XYZ } from 'ol/source'
-
-import { Component } from '../../component'
 import { Point } from 'ol/geom'
 import TileLayer from 'ol/layer/Tile'
 import { Vector as VectorLayer } from 'ol/layer'
 import { fromLonLat } from 'ol/proj'
+import { uuid } from '../../../utils'
+import { Component } from '../../component'
 // @ts-ignore
 import icon from '../assets/icons/marker-icon.png'
-import { uuid } from '../../../utils'
 
 export class Map extends Component {
   init (context = {}) {
