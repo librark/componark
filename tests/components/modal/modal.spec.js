@@ -106,8 +106,5 @@ describe('Modal', () => {
     item.setAttribute('width', '100px')
     item.setAttribute('height', '100px')
     item.init().render().load()
-
-    // @ts-ignore
-    expect(item._generateContent(null)).toEqual('')
   })
 })

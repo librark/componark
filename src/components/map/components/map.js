@@ -20,6 +20,10 @@ export class Map extends Component {
 
     // Local
     this.mapId = uuid()
+
+    /** @type {MapOL} */
+    this.map = this.map
+
     return super.init()
   }
 
@@ -35,7 +39,6 @@ export class Map extends Component {
   }
 
   load () {
-    /** @type {MapOL} */
     this.map = new MapOL({
       target: this.mapId,
       layers: [
