@@ -9,16 +9,13 @@ export class MapDemo extends Component {
   render () {
     this.innerHTML = /* html */ `${this.styles}
       <ark-map token="${this.token}" zoom="2"></ark-map>
-
       <a href="https://openlayers.org/">openlayers</a>
     `
-
     return super.render()
   }
 
   load () {
     setTimeout(_ => { this.map.updateSize() }, 800)
-
     return super.load()
   }
 

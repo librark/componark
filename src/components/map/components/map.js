@@ -22,7 +22,7 @@ export class Map extends Component {
     this.mapId = uuid()
 
     /** @type {MapOL} */
-    this.map = this.map
+    this.map = /** @type {MapOL} */(this.map)
 
     return super.init()
   }
@@ -35,10 +35,7 @@ export class Map extends Component {
     this.innerHTML = /* html */ `
       <div id="${this.mapId}" class="map"></div>
     `
-    return super.render()
-  }
 
-  load () {
     this.map = new MapOL({
       target: this.mapId,
       layers: [
@@ -53,6 +50,7 @@ export class Map extends Component {
         zoom: this.zoom
       })
     })
+    return super.render()
   }
 
   updateSize () {
