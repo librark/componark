@@ -8,8 +8,8 @@ export class MapDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-map token="${this.token}" zoom="2"></ark-map>
-      <a href="https://openlayers.org/">openlayers</a>
+      <ark-map token="${this.token}" zoom="8"></ark-map>
+      <a href="https://leafletjs.com//">leafletjs</a>
     `
     return super.render()
   }

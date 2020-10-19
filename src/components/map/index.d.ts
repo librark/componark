@@ -1,10 +1,9 @@
-import { Map as MapOL } from 'ol'
 import { Component } from "../component"
 
 export class Map extends Component {
 
-  /** @type {MapOL} */
-  public map: MapOL
+  public map
+  public mapLib
 
   init (context?: {
     lat?,

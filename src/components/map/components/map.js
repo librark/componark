@@ -1,12 +1,6 @@
-import { Feature, Map as MapOL, View } from 'ol'
-import { Icon, Style } from 'ol/style'
-import { Vector as VectorSource, XYZ } from 'ol/source'
-import { Point } from 'ol/geom'
-import TileLayer from 'ol/layer/Tile'
-import { Vector as VectorLayer } from 'ol/layer'
-import { fromLonLat } from 'ol/proj'
 import { uuid } from '../../../utils'
 import { Component } from '../../component'
+import * as leaflet from 'leaflet'
 // @ts-ignore
 import icon from '../assets/icons/marker-icon.png'
 
@@ -19,9 +13,8 @@ export class Map extends Component {
 
     // Local
     this.mapId = uuid()
-
-    /** @type {MapOL} */
-    this.map = /** @type {MapOL} */(this.map)
+    this.global = context.global || window
+    this.map = this.map
 
     return super.init()
   }
@@ -34,55 +27,62 @@ export class Map extends Component {
     this.innerHTML = /* html */ `
       <div id="${this.mapId}" class="map"></div>
     `
-
-    this.map = new MapOL({
-      target: this.mapId,
-      layers: [
-        new TileLayer({
-          source: new XYZ({
-            url: this._getUrl()
-          })
-        })
-      ],
-      view: new View({
-        center: fromLonLat([this.lon, this.lat]),
-        zoom: this.zoom
-      })
-    })
+    this.renderMap()
     return super.render()
   }
 
+  load () {
+    this.map.addEventListener('load', this.updateSize.bind(this))
+    this.map.addEventListener('resize', this.updateSize.bind(this))
+    this.global.addEventListener('resize', this.updateSize.bind(this))
+  }
+
+  disconnectedCallback () {
+    this.map.removeEventListener('load', this.updateSize())
+    this.map.removeEventListener('resize', this.updateSize())
+    this.global.removeEventListener('resize', _ => this.updateSize())
+  }
+
+  renderMap () {
+    this.map = this.mapLib.map(this.mapId)
+    this.mapLib.tileLayer(this.urlTemplate()).addTo(this.map)
+    this.map.setView([this.lat, this.lon], this.zoom)
+    this.updateSize()
+  }
+
   updateSize () {
-    this.map.renderSync()
-    this.map.updateSize()
+    const width = this.offsetWidth
+    const height = this.offsetHeight
+
+    this.mapContainer.style.width = `${width}px`
+    this.mapContainer.style.height = `${height}px`
+
+    this.map.invalidateSize()
   }
 
   addMarker (lat, lon) {
-    var iconFeature = new Feature({
-      geometry: new Point(fromLonLat([lon, lat]))
-    })
-
-    iconFeature.setStyle(new Style({
-      image: new Icon({
-        anchor: [0.5, 1],
-        src: icon
+    this.mapLib.marker([lat, lon], {
+      icon: this.mapLib.divIcon({
+        html: /* html */`<img src="${icon}"/>`,
       })
-    }))
-
-    var vectorLayer = new VectorLayer({
-      source: new VectorSource({
-        features: [iconFeature]
-      })
-    })
-
-    this.map.addLayer(vectorLayer)
+    }).addTo(this.map)
 
     this.updateSize()
   }
 
-  _getUrl () {
+  urlTemplate () {
     return 'https://api.mapbox.com/styles/v1/mapbox/' +
       `streets-v11/tiles/256/{z}/{x}/{y}?access_token=${this.token}`
+  }
+
+  get mapContainer () {
+    return /** @type {HTMLDivElement} */ (
+      this.querySelector(`[id="${this.mapId}"]`)
+    )
+  }
+
+  get mapLib () {
+    return leaflet
   }
 }
 customElements.define('ark-map', Map)
