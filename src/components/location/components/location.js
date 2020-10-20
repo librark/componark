@@ -28,7 +28,10 @@ export class Location extends Component {
         this.onCurrentPosition()
       },
       (err) => {
-        console.warn('ERROR(' + err.code + '): ' + err.message)
+        console.error(
+          `ERROR Location Component (${err.code}):\n${err.message}`
+        )
+        this.stop()
       },
       {
         enableHighAccuracy: false,
