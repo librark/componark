@@ -3,12 +3,8 @@
 
   #{$component} {
     display: flex;
-
     cursor: pointer;
     user-select: none;
-
-    margin: 5px 0;
-    padding: 5px 0;
   }
 
   .#{$component} {

@@ -27,6 +27,8 @@
 
   .#{$component} {
     &__label {
+      user-select: none;
+
       &>* {
         font-size: small;
         margin: 0;

@@ -6,6 +6,7 @@
     width: fit-content;
     height: fit-content;
     overflow: hidden;
+    user-select: none;
 
     [data-canvas] {
       display: none;

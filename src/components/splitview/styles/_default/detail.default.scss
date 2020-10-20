@@ -40,6 +40,8 @@
       height: fit-content;
       font-size: initial;
 
+      user-select: none;
+
       &,
       * {
         min-height: $headerHeight;
@@ -51,16 +53,11 @@
 
       padding: 0 19px;
       border: 0;
+      outline: 0 !important;
 
       background: inherit;
       color: inherit;
       cursor: pointer;
-
-      * {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
     }
 
     &__title {

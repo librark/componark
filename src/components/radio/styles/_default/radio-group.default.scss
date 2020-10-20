@@ -1,0 +1,7 @@
+@mixin radio-group_default_() {
+  $component: "ark-radio-group";
+
+  #{$component} {
+    user-select: none;
+  }
+}

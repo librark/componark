@@ -64,12 +64,14 @@
 
     &__header {
       overflow: hidden;
+      user-select: none;
     }
 
     &__actions {
       display: flex;
       flex-flow: wrap;
       justify-content: flex-end;
+      user-select: none;
 
       &>* {
         margin: 0.3rem;

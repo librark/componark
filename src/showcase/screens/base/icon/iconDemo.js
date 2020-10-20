@@ -19,6 +19,7 @@ export class IconDemo extends Component {
 
       <h1>Material</h1>
       <ark-icon type="mat" name="face"></ark-icon>
+      <ark-icon type="mat" name="face"></ark-icon>
     `
 
     return super.render()

@@ -43,7 +43,7 @@ export class SplitViewDemo extends Component {
       title: 'Resultados',
       backButtonIcon: () => {
         return /* html */ `
-          <ark-icon name='fas fa-ad'></ark-icon>
+          <ark-icon name='fas fa-chevron-left'></ark-icon>
         `
       }
     }).render()

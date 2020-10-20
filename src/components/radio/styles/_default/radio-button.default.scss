@@ -1,15 +1,10 @@
 @mixin radio-button_default_() {
   $component: "ark-radio-button";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
 
   #{$component} {
     cursor: pointer;
-    margin: 5px 0;
-    padding: 5px 0;
-
     display: flex;
+    user-select: none;
   }
 
   .#{$component} {

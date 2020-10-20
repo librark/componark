@@ -3,16 +3,31 @@
 
   #{$component} {
     font-size: inherit !important;
+
     display: inline-flex;
     justify-content: center;
     align-items: center;
+
     width: fit-content;
     height: fit-content;
 
+    user-select: none;
+
     i {
-      font-size: inherit !important;
-      display: block !important;
       all: unset;
+      font-size: inherit !important;
+
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+
+      width: fit-content;
+      height: fit-content;
+
+      &::before,
+      &::after {
+        all: unset;
+      }
     }
   }
 }
