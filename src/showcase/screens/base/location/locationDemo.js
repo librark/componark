@@ -42,9 +42,13 @@ export class LocationDemo extends Component {
   }
 
   async getCurrentPosition () {
-    const position = await this.location.getCurrentPosition()
-
     const span = this.querySelector('[data-position]')
+    span.innerHTML = ''
+
+    this.location.stop()
+    const position = await this.location.getCurrentPosition()
+    this.location.start()
+
     span.innerHTML = `
       Lat: ${position.coords.latitude} Lng: ${position.coords.longitude}
     `
