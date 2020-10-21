@@ -39,6 +39,8 @@
 
     &__content {
       display: none;
+      background: $white;
+      color: $dark;
     }
 
     [active] &__content {
