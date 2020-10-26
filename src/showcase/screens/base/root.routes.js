@@ -31,6 +31,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     setContentComponent('multiselect'),
     setContentComponent('navbar'),
     setContentComponent('paginator'),
+    setContentComponent('pivot'),
     setContentComponent('radio'),
     setContentComponent('select'),
     setContentComponent('sidebar'),
@@ -41,6 +42,6 @@ export function setRoutes (resolver, rootComponent, prefix) {
     setContentComponent('tabs'),
     setContentComponent('tooltip'),
     setContentComponent('treetable'),
-    setContentComponent('zone')
+    setContentComponent('zone'),
   ])
 }

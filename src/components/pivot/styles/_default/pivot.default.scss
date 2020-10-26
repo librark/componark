@@ -1,0 +1,7 @@
+@mixin pivot_default_() {
+  $component: "ark-pivot";
+
+  #{$component} {
+    display: flex;
+  }
+}

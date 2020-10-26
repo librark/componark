@@ -1,0 +1,5 @@
+@import "./pivot.ark";
+
+@mixin pivot_ark() {
+  @include pivot_ark_();
+}

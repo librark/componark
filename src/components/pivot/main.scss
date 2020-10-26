@@ -1,0 +1,21 @@
+@import "./styles/_default/main";
+
+@import "./styles/ark/main";
+@import "./styles/bootstrap/main";
+@import "./styles/material/main";
+
+@mixin pivot($theme) {
+  @include pivot_default();
+
+  @if $theme==material {
+    @include pivot_material();
+  }
+
+  @else if $theme==bootstrap {
+    @include pivot_bootstrap();
+  }
+
+  @else {
+    @include pivot_ark();
+  }
+}

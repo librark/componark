@@ -1,0 +1,5 @@
+@import "./pivot.bootstrap";
+
+@mixin pivot_bootstrap() {
+  @include pivot_bootstrap_();
+}

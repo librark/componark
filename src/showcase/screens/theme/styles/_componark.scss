@@ -23,6 +23,7 @@
 @import "../../../../components/multiselect/main";
 @import "../../../../components/navbar/main";
 @import "../../../../components/paginator/main";
+@import "../../../../components/pivot/main";
 @import "../../../../components/radio/main";
 @import "../../../../components/select/main";
 @import "../../../../components/sidebar/main";
@@ -54,6 +55,7 @@
   @include multiselect($theme);
   @include navbar($theme);
   @include paginator($theme);
+  @include pivot($theme);
   @include radio($theme);
   @include select($theme);
   @include sidebar($theme);

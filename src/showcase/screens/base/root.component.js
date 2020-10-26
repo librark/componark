@@ -162,6 +162,7 @@ export class RootComponent extends Component {
       { name: 'Multiselect', path: '/base/multiselect' },
       { name: 'Navbar', path: '/base/navbar' },
       { name: 'Paginator', path: '/base/paginator' },
+      { name: 'Pivot', path: '/base/pivot' },
       { name: 'Radio', path: '/base/radio' },
       { name: 'Select', path: '/base/select' },
       { name: 'Sidebar', path: '/base/sidebar' },
@@ -172,7 +173,7 @@ export class RootComponent extends Component {
       { name: 'Tabs', path: '/base/tabs' },
       { name: 'Tooltip', path: '/base/tooltip' },
       { name: 'TreeTable', path: '/base/treetable' },
-      { name: 'Zone', path: '/base/zone' }
+      { name: 'Zone', path: '/base/zone' },
     ]
   }
 
