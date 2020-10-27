@@ -1,6 +1,6 @@
 /**
- * @typedef {import('../../../../components/pivot/components/pivot').Pivot} Pivot
-  * */
+ * @typedef {import('../../loader').Pivot} Pivot
+ **/
 import { Component } from '../../loader'
 
 export class PivotDemo extends Component {
@@ -10,15 +10,33 @@ export class PivotDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-pivot></ark-pivot>
+      <h1>Pivot</h1>
+
+      <div class="demo-pivot--content">
+        <ark-pivot></ark-pivot>
+      </div>
     `
+
+    this.pivot.init({
+      dataSource: {
+        filename: "https://cdn.webdatarocks.com/data/data.csv"
+      }
+    }).render()
+
     return super.render()
+  }
+
+  get pivot () {
+    return /** @type {Pivot} */(this.select('ark-pivot'))
   }
 
   get styles () {
     return /* html */ `
       <style>
-        demo-pivot{ }
+        demo-pivot .demo-pivot--content{
+          display: flex;
+          padding: .5rem;
+        }
 
       </style>
     `

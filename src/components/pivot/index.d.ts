@@ -1,3 +1,5 @@
 import { Component } from "../component"
 
-export class Pivot extends Component { }
+export class Pivot extends Component {
+  public pivot
+}
