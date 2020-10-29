@@ -2,6 +2,8 @@
   $component: "ark-spinner";
 
   #{$component} {
+    overflow: hidden;
+
     [data-loader] {
       $border: 0.3rem solid;
       $circle: 5rem;
