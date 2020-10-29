@@ -9,6 +9,10 @@
 
     z-index: auto;
     background: $background;
+
+    &>*:first-child {
+      border-right: 2px solid rgba($color: $muted, $alpha: 0.3);
+    }
   }
 
   .#{$component} {
@@ -24,6 +28,7 @@
       width: 100% !important;
       max-width: 100% !important;
       min-width: 100% !important;
+      border: 0px !important;
     }
 
     .#{$component} {

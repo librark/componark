@@ -99,7 +99,7 @@
   @media only screen and (min-width: $tablet) {
     #{$component} {
       position: initial;
-      border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
+      // border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
       height: initial;
 
       display: block;
