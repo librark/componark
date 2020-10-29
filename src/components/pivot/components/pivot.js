@@ -1,26 +1,21 @@
 import { Component } from '../../component'
 import WebDataRocks from 'webdatarocks'
-import { uuid } from '../../../utils'
 
 export class Pivot extends Component {
   /**
    * @param {{
-   *  dataSource: object
+   *  dataSource?: object
    * }} [context]
    **/
-  init (context) {
+  init (context = {}) {
     this.dataSource = context.dataSource || {}
-
-    this.pivotId = uuid()
-    this.pivot = this.pivot
-
     return super.init()
   }
 
   render () {
     this.innerHTML = /* html */`
       <div class="ark-pivot--container">
-        <div id="${this.pivotId}"></div>
+        <div id="wdr-component"></div>
       </div>
     `
     this.renderPivot()
@@ -28,8 +23,10 @@ export class Pivot extends Component {
   }
 
   renderPivot () {
+    const container = this.pivotContainer.querySelector(`#wdr-component`)
+
     this.pivot = new WebDataRocks({
-      container: `#${this.pivotId}`,
+      container,
       toolbar: true,
       report: {
         dataSource: this.dataSource
