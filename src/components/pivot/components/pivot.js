@@ -5,10 +5,12 @@ export class Pivot extends Component {
   /**
    * @param {{
    *  dataSource?: object
+   *  options?: object
    * }} [context]
    **/
   init (context = {}) {
     this.dataSource = context.dataSource || {}
+    this.options = context.options || {}
     return super.init()
   }
 
@@ -29,7 +31,8 @@ export class Pivot extends Component {
       container,
       toolbar: true,
       report: {
-        dataSource: this.dataSource
+        dataSource: this.dataSource,
+        options: this.options
       },
       global: {
         localization: "https://cdn.webdatarocks.com/loc/es.json"
