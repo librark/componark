@@ -36,16 +36,6 @@ export class CheckboxGroup extends Component {
     this.addEventListener('click', this.onAlter.bind(this))
   }
 
-  get value () {
-    const values = []
-
-    this.selectAll('ark-checkbox[checked]').forEach((
-			/** @type {Checkbox} */ checkbox
-    ) => values.push(checkbox.value))
-
-    return values
-  }
-
   /** @param {CustomEvent} event */
   onAlter (event) {
     event.stopImmediatePropagation()
@@ -73,6 +63,31 @@ export class CheckboxGroup extends Component {
 
     checkboxList.forEach(checkbox => {
       container.appendChild(checkbox)
+    })
+  }
+
+  /** @returns {string[]} */
+  get value () {
+    const values = []
+
+    this.selectAll('ark-checkbox[checked]').forEach((
+			/** @type {Checkbox} */ checkbox
+    ) => values.push(checkbox.value))
+
+    return values
+  }
+
+  /** @param {string[]} values */
+  set value (values) {
+    values.forEach(value => {
+      const checkbox = /** @type {Checkbox} */(this.select(
+        `ark-checkbox[value="${value}"]`
+      ))
+
+      if (checkbox) {
+        checkbox.checked = true
+        checkbox.render()
+      }
     })
   }
 }
