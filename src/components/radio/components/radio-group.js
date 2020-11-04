@@ -78,12 +78,25 @@ export class RadioGroup extends Component {
     )
   }
 
+  /** @returns {string} */
   get value () {
     const button = /** @type {RadioButton} */ (
       this.select('ark-radio-button[checked]')
     )
 
     return button ? button.value : ''
+  }
+
+  /** @param {string} value */
+  set value (value) {
+    const button = /** @type {RadioButton} */ (
+      this.select(`ark-radio-button[value="${value}"]`)
+    )
+
+    if (!button) return
+
+    button.checked = true
+    button.render()
   }
 }
 customElements.define('ark-radio-group', RadioGroup)
