@@ -58,9 +58,9 @@ describe('Input', () => {
 
     const event = new CustomEvent('input')
     // @ts-ignore
-    input._change(event)
+    input._onChangeInput(event)
 
-    input.innerHTML = ''
+    input.value = ''
     expect(input.value === '').toBeTruthy()
   })
 

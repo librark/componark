@@ -1,6 +1,12 @@
 import { Component } from '../../component'
 
 export class Input extends Component {
+  /**
+   * @param {{
+   *  label?: string
+   *  value?: string
+   * }} context
+   */
   init (context = {}) {
     this.label = context.label || this.label
     this.value = context.value || this.value || ''
@@ -11,7 +17,7 @@ export class Input extends Component {
   }
 
   reflectedProperties () {
-    return ['label', 'value']
+    return ['label']
   }
 
   render () {
@@ -21,28 +27,28 @@ export class Input extends Component {
       </div>
 
       <div class="ark-input__input">
-        <input data-input listen on-input="_change" value="${this.value}">
+        <input data-input listen on-input="_onChangeInput">
       </div>
 
       <div class="ark-input__alert">
         ${this.defaultContent}
       </div>
     `
-
     this._moveAttributes()
     return super.render()
   }
 
   /** @param {Event} event */
-  _change (event) {
+  _onChangeInput (event) {
     event.stopImmediatePropagation()
-    // @ts-ignore
-    this.value = this.select('[data-input]').value
+    this.value = this.input.value
+  }
+
+  _dispatchAlterEvent () {
     this.dispatchEvent(
       new CustomEvent('alter', {
         detail: {
           value: this.value,
-          origin: event
         }
       })
     )
@@ -53,15 +59,25 @@ export class Input extends Component {
   }
 
   _moveAttributes () {
-    const element = this.querySelector('[data-input]')
-    const attributes = Array.from(this.attributes)
-
-    attributes.forEach(attribute => {
+    Array.from(this.attributes).forEach(attribute => {
       if (this._defaultAttributes().find(item => item === attribute.name)) {
-        element.setAttribute(attribute.name, attribute.value)
-        // this.removeAttribute(attribute.name)
+        this.input.setAttribute(attribute.name, attribute.value)
       }
     })
+  }
+
+  get input () {
+    return /** @type {HTMLInputElement} */(this.querySelector('[data-input]'))
+  }
+
+  get value () {
+    return /** @type {string} */(this.getAttribute('value'))
+  }
+
+  set value (value) {
+    this.setAttribute('value', value)
+    if (this.input) this.input.value = value
+    this._dispatchAlterEvent()
   }
 
   /** @return {Array<string>} */
