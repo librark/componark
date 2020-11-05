@@ -108,7 +108,8 @@ export class Input extends Component {
       'size',
       'src',
       'step',
-      'type'
+      'type',
+      'value',
     ]
   }
 }

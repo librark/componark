@@ -9,7 +9,5 @@ describe('pivot', () => {
     // const divContent = document.createElement('div')
     // divContent.appendChild(pivot)
     // pivot.init({ data: {} }).render().load()
-
-    console.log(pivot.innerHTML)
   })
 })

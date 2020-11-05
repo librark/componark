@@ -10,7 +10,14 @@ export class FormDemo extends Component {
     this.innerHTML = /* html */ `
       <ark-form>
         <ark-input form-item="test" type="text" label="Test"></ark-input>
-        <ark-input form-item="ip" type="number" label="IP"></ark-input>
+        <ark-input form-item="ip" type="text" label="IP"></ark-input>
+
+        <ark-radio-group form-item="port" label="Port">
+          <ark-radio-button value="1">1001</ark-radio-button>
+          <ark-radio-button value="2">1002</ark-radio-button>
+          <ark-radio-button value="3">1003</ark-radio-button>
+        </ark-radio-group>
+
       </ark-form>
 
       <ark-button listen on-click="getValues" background="primary">
@@ -24,6 +31,7 @@ export class FormDemo extends Component {
       values: {
         test: '123',
         ip: '192.168.1.1',
+        port: '2',
       }
     }).render()
 

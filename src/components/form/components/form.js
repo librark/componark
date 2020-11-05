@@ -28,7 +28,6 @@ export class Form extends Component {
     const item = this.getItem(key)
     if (!item) { return }
     item['value'] = value
-    item.render()
   }
 
   getItemValue (key) {

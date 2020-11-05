@@ -1,13 +1,18 @@
 import { Component } from '../../component'
 
 export class RadioButton extends Component {
-  /** @param {Object} context? */
-  init (context = {}) {
+  /**
+   * @param {{
+   *  name: string
+   *  checked?: boolean
+   * }} context?
+   **/
+  init (context) {
     this.name = context.name
-    this.value = context.value
     this.checked = context.checked
 
     // local variables
+    this.value = this.value
     this.defaultContent = this.defaultContent || this.innerHTML
 
     return super.init()
@@ -26,21 +31,8 @@ export class RadioButton extends Component {
         <small>${this.defaultContent}</small>
       </div>
     `
-
     this._moveAttributes()
     return super.render()
-  }
-
-  check () {
-    this.checked = true
-  }
-
-  unCheck () {
-    this.checked = false
-  }
-
-  toggle () {
-    this.checked = !this.checked
   }
 
   /** @returns {Boolean} */
@@ -50,33 +42,25 @@ export class RadioButton extends Component {
 
   /** @param {Boolean} value */
   set checked (value) {
-    if (!this.input) return
-
-    this.input.checked = value
-
     if (value) {
       this.setAttribute('checked', '')
-      this.input.setAttribute('checked', 'checked')
+      if (this.input) this.input['checked'] = true
     } else {
       this.removeAttribute('checked')
-      this.input.removeAttribute('checked')
+      if (this.input) this.input['checked'] = false
     }
   }
 
-  /** @returns {HTMLInputElement} */
   get input () {
-    return this.querySelector('[data-input]')
+    return /** @returns {HTMLInputElement} */(
+      this.querySelector('[data-input]')
+    )
   }
 
   _moveAttributes () {
-    this.checked = this.hasAttribute('checked')
-    const element = this.querySelector('[data-input]')
-    const attributes = Array.from(this.attributes)
-
-    attributes.forEach(attribute => {
+    Array.from(this.attributes).forEach(attribute => {
       if (this._defaultAttributes().find(item => item === attribute.name)) {
-        element.setAttribute(attribute.name, attribute.value)
-        // this.removeAttribute(attribute.name)
+        this.input.setAttribute(attribute.name, attribute.value)
       }
     })
   }
@@ -88,6 +72,7 @@ export class RadioButton extends Component {
       'alt',
       'autocomplete',
       'autofocus',
+      'checked',
       'dirname',
       'disabled',
       'form',
@@ -106,7 +91,8 @@ export class RadioButton extends Component {
       'required',
       'size',
       'src',
-      'step'
+      'step',
+      'value',
     ]
   }
 }

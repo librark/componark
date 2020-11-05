@@ -22,7 +22,7 @@ export class InputDemo extends Component {
 
         <br/>
 
-        <ark-input disabled label="disabled"></ark-input>
+        <ark-input disabled label="disabled" value=":: disabled"></ark-input>
         <ark-input type="date" label="date"></ark-input>
         <ark-input type="datetime-local" label="datetime-local"></ark-input>
         <ark-input type="email" label="email"></ark-input>
