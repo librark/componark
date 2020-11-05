@@ -1,4 +1,6 @@
 @mixin checkbox_material_() {
+  $component: "ark-checkbox";
+
   #{$component} {}
 
   .#{$component} {}
