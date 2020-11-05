@@ -22,11 +22,12 @@ export class MultiselectDemo extends Component {
   }
 
   load () {
-    this.addEventListener('ark-multiselect:alter', event => {
-      this.querySelector('[data-input-value]').innerHTML = JSON.stringify(
-        event.detail
-      )
-    })
+    this.addEventListener('ark-multiselect:alter',
+      (/**@type {CustomEvent} */event) => {
+        this.querySelector('[data-input-value]').innerHTML = JSON.stringify(
+          event.detail
+        )
+      })
 
     return super.load()
   }

@@ -10,7 +10,10 @@ export class FormDemo extends Component {
     this.innerHTML = /* html */ `${this.styles}
       <ark-form>
         <ark-input form-item="test" type="text" label="Test"></ark-input>
+
         <ark-input form-item="ip" type="text" label="IP"></ark-input>
+
+        <ark-multiselect></ark-multiselect>
 
         <ark-radio-group form-item="port" label="Port">
           <ark-radio-button value="1">1001</ark-radio-button>
@@ -23,7 +26,6 @@ export class FormDemo extends Component {
           <ark-checkbox value="WPA">WPA</ark-checkbox>
           <ark-checkbox value="WPA2">WPA2</ark-checkbox>
         </ark-checkbox-group>
-
       </ark-form>
 
       <ark-button listen on-click="getValues" background="primary">

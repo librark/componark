@@ -7,8 +7,6 @@
 
     width: 100%;
 
-    // margin: 0 0.2rem;
-
     cursor: text;
 
     &>* {
@@ -16,16 +14,22 @@
     }
 
     input {
+      font-size: initial;
+
       border: 0;
       outline: 0;
-
-      background: none;
-
-      flex-basis: auto;
-      flex-grow: 1;
-      width: 1rem;
-
       color: inherit;
+      background: inherit;
+      border-color: initial;
+
+      * {
+        color: $color !important;
+        background: $background !important;
+      }
+
+      &:focus {
+        outline: 0 !important;
+      }
     }
 
     ark-multiselect-item {

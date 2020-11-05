@@ -1,15 +1,5 @@
-@import "@material/textfield/mdc-text-field.scss";
-
 @mixin multiselect_input_material_() {
   $component: "ark-multiselect-input";
 
-  #{$component} {
-    input {
-      margin: 0;
-      padding: 0.3rem;
-
-      flex-basis: auto;
-      flex-grow: 1;
-    }
-  }
+  #{$component} {}
 }
