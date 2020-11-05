@@ -10,11 +10,8 @@ export class MultiselectDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `${this.styles}
-
-			<ark-multiselect></ark-multiselect>
-
+			<ark-multiselect label="multiselect"></ark-multiselect>
       <br/>
-
 			<p data-input-value style="padding-top: 15rem;"></p>
 		`
     this.renderMultiselect()

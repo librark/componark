@@ -13,7 +13,7 @@ export class FormDemo extends Component {
 
         <ark-input form-item="ip" type="text" label="IP"></ark-input>
 
-        <ark-multiselect></ark-multiselect>
+        <ark-multiselect form-item="port" label="Port"></ark-multiselect>
 
         <ark-radio-group form-item="port" label="Port">
           <ark-radio-button value="1">1001</ark-radio-button>

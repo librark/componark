@@ -9,11 +9,17 @@ import { Component } from '../../component'
 export class Multiselect extends Component {
   /** @param {Object} context */
   init (context = {}) {
-    this.label = context.label || this.label || 'label'
+    this.label = context.label || this.label
+    this.value = context.value || this.value || ''
+
     this.items = context.items || this.items || []
     this.template = context.template || (data => `${data}`)
 
     return super.init()
+  }
+
+  reflectedProperties () {
+    return ['label']
   }
 
   render () {
@@ -180,8 +186,10 @@ export class Multiselect extends Component {
   }
 
   get value () {
-    return this.input.value
+    return ''// this.input.value
   }
+
+  set value (value) { }
 
   _alter (value) {
     this.dispatchEvent(
