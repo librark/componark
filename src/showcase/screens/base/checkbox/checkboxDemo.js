@@ -20,7 +20,7 @@ export class CheckboxDemo extends Component {
       <p>Valor seleccionado: <span data-checkbox-value></span></p>
     `
 
-    this.checkboxGroup.value = ['op1', 'op2']
+    this.checkboxGroup.value = 'op1,op2'
 
     return super.render()
   }

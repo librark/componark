@@ -7,7 +7,7 @@ export class FormDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.innerHTML = /* html */ `${this.styles}
       <ark-form>
         <ark-input form-item="test" type="text" label="Test"></ark-input>
         <ark-input form-item="ip" type="text" label="IP"></ark-input>
@@ -17,6 +17,12 @@ export class FormDemo extends Component {
           <ark-radio-button value="2">1002</ark-radio-button>
           <ark-radio-button value="3">1003</ark-radio-button>
         </ark-radio-group>
+
+        <ark-checkbox-group form-item="security" label="Security">
+          <ark-checkbox value="WEP">WEP</ark-checkbox>
+          <ark-checkbox value="WPA">WPA</ark-checkbox>
+          <ark-checkbox value="WPA2">WPA2</ark-checkbox>
+        </ark-checkbox-group>
 
       </ark-form>
 
@@ -32,6 +38,7 @@ export class FormDemo extends Component {
         test: '123',
         ip: '192.168.1.1',
         port: '2',
+        security: 'WPA2,WEP',
       }
     }).render()
 
@@ -45,6 +52,21 @@ export class FormDemo extends Component {
 
   get formComponent () {
     return /** @type {Form} */ (this.select('ark-form'))
+  }
+
+  get styles () {
+    return /* html */`
+      <style>
+        demo-form ark-form{
+          display: flex;
+          gap: .2rem;
+          padding: .2rem;
+        }
+        demo-form ark-form > *{
+          flex: 1 1 300px !important;
+        }
+      </style>
+    `
   }
 }
 customElements.define('demo-form', FormDemo)

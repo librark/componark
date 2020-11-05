@@ -4,8 +4,8 @@
   #{$component} {
     display: flex;
     flex-direction: column;
-    height: auto;
-    margin: 0.1rem;
+    width: 100%;
+    height: fit-content;
 
     &[disabled] {
       pointer-events: none !important;

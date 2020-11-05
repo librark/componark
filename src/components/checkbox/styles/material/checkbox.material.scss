@@ -1,16 +1,4 @@
-@import "@material/floating-label/mdc-floating-label.scss";
-@import "@material/form-field/mdc-form-field.scss";
-@import "@material/textfield/mdc-text-field.scss";
-
 @mixin checkbox_material_() {
-  @include mdc-form-field-core-styles;
-
-  $component: "ark-checkbox";
-  $mobile: 360px;
-  $tablet: 768px;
-  $desktop: 960px;
-  $margin: 16px;
-
   #{$component} {}
 
   .#{$component} {}

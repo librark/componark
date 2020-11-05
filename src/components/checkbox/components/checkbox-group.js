@@ -1,5 +1,5 @@
-/** @typedef {import('./checkbox').Checkbox} Checkbox */
 import { Component } from '../../component'
+import { Checkbox } from './checkbox'
 
 export class CheckboxGroup extends Component {
   init (context = {}) {
@@ -18,7 +18,7 @@ export class CheckboxGroup extends Component {
   render () {
     this.innerHTML = /* html */ `
       <div class="ark-checkbox-group__label">
-        <small data-checkbox-group-label>${this.label}</small>
+        <label data-checkbox-group-label>${this.label}</label>
       </div>
       <div>
         <div data-checkbox-list class="ark-checkbox-group__list"></div>
@@ -45,7 +45,7 @@ export class CheckboxGroup extends Component {
 
     if (!checkbox) return
 
-    checkbox.toggle()
+    checkbox.checked = !checkbox.checked
 
     this.dispatchEvent(
       new CustomEvent('alter', {
@@ -59,14 +59,16 @@ export class CheckboxGroup extends Component {
 
   _renderCheckboxList () {
     const container = this.querySelector('[data-checkbox-list]')
-    const checkboxList = this.selectAll('ark-checkbox')
-
-    checkboxList.forEach(checkbox => {
+    this.checkboxList.forEach(checkbox => {
       container.appendChild(checkbox)
     })
   }
 
-  /** @returns {string[]} */
+  get checkboxList () {
+    return /** @type {NodeListOf<Checkbox>} */(this.selectAll('ark-checkbox'))
+  }
+
+  /** @returns {string} */
   get value () {
     const values = []
 
@@ -74,21 +76,15 @@ export class CheckboxGroup extends Component {
 			/** @type {Checkbox} */ checkbox
     ) => values.push(checkbox.value))
 
-    return values
+    return values.join()
   }
 
-  /** @param {string[]} values */
+  /** @param {string} values */
   set value (values) {
-    values.forEach(value => {
-      const checkbox = /** @type {Checkbox} */(this.select(
-        `ark-checkbox[value="${value}"]`
-      ))
-
-      if (checkbox) {
-        checkbox.checked = true
-        checkbox.render()
-      }
-    })
+    const currentValues = (values || '').split(',')
+    this.checkboxList.forEach(checkbox => checkbox.checked = Boolean(
+      currentValues.find(value => value === checkbox.value)
+    ))
   }
 }
 customElements.define('ark-checkbox-group', CheckboxGroup)

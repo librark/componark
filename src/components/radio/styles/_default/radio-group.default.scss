@@ -3,6 +3,8 @@
 
   #{$component} {
     user-select: none;
+    width: 100%;
+    height: fit-content;
   }
 
   .#{$component} {
