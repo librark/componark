@@ -1,0 +1,6 @@
+@import '~tabulator-tables/dist/css/tabulator.min.css';
+@import "./styles/_default/main";
+
+@mixin tabulator($theme) {
+  @include tabulator_default();
+}

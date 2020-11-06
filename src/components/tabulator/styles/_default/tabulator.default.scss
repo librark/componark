@@ -1,0 +1,21 @@
+@mixin tabulator_default_() {
+  $component: "ark-tabulator";
+
+  #{$component} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+  }
+
+  .#{$component} {
+    &--container {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
