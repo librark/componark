@@ -25,7 +25,7 @@ export class TabulatorTable extends Component {
   renderTabulatorTable () {
     const element = this.querySelector("#tabulator-table")
     this.table = new Tabulator(element, this.options)
-    this.table.redraw()
+    this.table.redraw(true)
   }
 }
 customElements.define('ark-tabulator', TabulatorTable)
