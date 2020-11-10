@@ -1,12 +1,13 @@
 import { Component } from '../../component'
 
 export class Form extends Component {
+  constructor () {
+    super()
+    this.defaultContent = this.defaultContent || this.innerHTML
+  }
+
   init (context = {}) {
     this.defaultValues = context['values'] || {}
-
-    // local variables
-    this.defaultContent = this.defaultContent || this.innerHTML
-
     return super.init()
   }
 

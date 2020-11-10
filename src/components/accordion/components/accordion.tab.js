@@ -1,14 +1,15 @@
 import { Component } from '../../component'
 
 export class AccordionTab extends Component {
+  constructor () {
+    super()
+    this.defaultContent = this.defaultContent || this.innerHTML
+    this.index = ''
+  }
+
   /** @param {Object} context */
   init (context = {}) {
     this.header = context.header
-
-    // local variables
-    this.defaultContent = this.defaultContent || this.innerHTML
-    this.index = this.index || null
-
     return super.init()
   }
 

@@ -1,11 +1,13 @@
 import { Component } from '../../component'
 
 export class Button extends Component {
-  init (context = {}) {
-    // local variables
+  constructor () {
+    super()
     this.defaultContent = this.defaultContent || this.innerHTML
     this.navigatorObject = navigator
+  }
 
+  init (context = {}) {
     return super.init()
   }
 

@@ -3,6 +3,12 @@ import { Component } from '../../component'
 import { uuid } from '../../../utils'
 
 export class RadioGroup extends Component {
+  constructor () {
+    super()
+    this.defaultContent = this.defaultContent || this.innerHTML
+    this.name = uuid()
+  }
+
   /**
    * @param {{
    *  label?: string
@@ -10,10 +16,6 @@ export class RadioGroup extends Component {
    */
   init (context = {}) {
     this.label = context.label || this.label || ''
-
-    // local variables
-    this.defaultContent = this.defaultContent || this.innerHTML
-    this.name = this.name || uuid()
     return super.init()
   }
 

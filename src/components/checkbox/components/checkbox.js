@@ -1,6 +1,12 @@
 import { Component } from '../../component'
 
 export class Checkbox extends Component {
+  constructor () {
+    super()
+    this.defaultContent = this.defaultContent || this.innerHTML
+    this.value = ''
+  }
+
   /**
    * @param {{
    *  name: string
@@ -10,11 +16,6 @@ export class Checkbox extends Component {
   init (context) {
     this.name = context.name
     this.checked = context.checked
-
-    // local variables
-    this.value = this.value
-    this.defaultContent = this.defaultContent || this.innerHTML
-
     return super.init()
   }
 

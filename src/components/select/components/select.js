@@ -1,12 +1,14 @@
 import { Component } from '../../component'
 
 export class Select extends Component {
+  constructor () {
+    super()
+    this.defaultContent = this.defaultContent || this.innerHTML
+  }
+
   init (context = {}) {
     this.label = context.label || this.label
     this.value = context.value || this.value || ''
-
-    // local variables
-    this.defaultContent = this.defaultContent || this.innerHTML
     return super.init()
   }
 
