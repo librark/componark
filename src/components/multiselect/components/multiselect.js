@@ -1,20 +1,28 @@
-/**
- * @typedef {import('./multiselect.input').MultiselectInput} MultiselectInput
- * @typedef {import('./multiselect.item').MultiselectItem} MultiselectItem
- * @typedef {import('./multiselect.list').MultiselectList} MultiselectList
- * */
-
 import { Component } from '../../component'
+import { MultiselectInput } from './multiselect.input'
+import { MultiselectList } from './multiselect.list'
+import { MultiselectSelectedItem } from './multiselect.selected-item'
+import { MultiselectSelectedList } from './multiselect.selected-list'
 
 export class Multiselect extends Component {
-  /** @param {Object} context */
-  init (context = {}) {
+  /**
+   * @param {{
+   *  label?: string
+   *  value?: string
+   *  field?: string
+   *  template?: function
+   *  filter?: function
+   * }} context
+   **/
+  init (context) {
     this.label = context.label || this.label
     this.value = context.value || this.value || ''
-
-    this.items = context.items || this.items || []
+    this.field = context.field || this.field || ''
     this.template = context.template || (data => `${data}`)
+    this.filter = context.filter || (items => items)
 
+    // Local
+    this.selectedList = []
     return super.init()
   }
 
@@ -27,202 +35,136 @@ export class Multiselect extends Component {
 			<div class="ark-multiselect__label">
 				<label>${this.label}</label>
 			</div>
-			<div class="ark-multiselect__body">
-				<ark-multiselect-input></ark-multiselect-input>
+      <div class="ark-multiselect__body">
+        <ark-multiselect-selected-list>
+          <ark-multiselect-input></ark-multiselect-input>
+        </ark-multiselect-selected-list>
 				<div class="ark-multiselect__actions">
 					<button class="ark-multiselect__remove-all"
 					 listen on-click="onRemoveAll">&times;</button>
 				</div>
 			</div>
-
 			<ark-multiselect-list></ark-multiselect-list>
 		`
-
-    this.input
-      .init({
-        items: [],
-        template: this.template
-      })
-      .render()
-
-    this.multiselectList
-      .init({
-        items: this._getSelectionList(this.input.items),
-        template: this.template
-      })
-      .render()
-
     return super.render()
   }
 
   load () {
     this.addEventListener(
-      'multiselect-list:selected',
-      this.onMultiselectListSelected.bind(this)
-    )
-
-    this.addEventListener(
-      'multiselect-input:update-items',
-      this.onMultiselectInputUpdateItems.bind(this)
-    )
-
-    this.addEventListener(
       'multiselect-input:keydown',
       this.onMultiselectInputKeydown.bind(this)
     )
-
-    this.addEventListener(
-      'multiselect-input:focus',
-      this.onMultiselectInputFocus.bind(this)
-    )
-
-    this.addEventListener(
-      'multiselect-input:blur',
-      this.onMultiselectInputBlur.bind(this)
-    )
-
     this.addEventListener(
       'multiselect-input:alter',
       this.onMultiselectInputAlter.bind(this)
     )
-
     this.addEventListener(
-      'multiselect-input:input',
-      this.onMultiselectInputInput.bind(this)
+      'multiselect-input:focus',
+      this.onMultiselectInputFocus.bind(this)
     )
-  }
-
-  /** @param {event} event */
-  onRemoveAll (event) {
-    event.stopImmediatePropagation()
-    this.input.clean()
-  }
-
-  /** @param {CustomEvent} event */
-  onMultiselectListSelected (event) {
-    event.stopImmediatePropagation()
-
-    const item = event.detail.item
-
-    if (!item) return
-
-    this.input.addItem(item)
-    this.input.cleanInput()
-  }
-
-  /** @param {CustomEvent} event */
-  onMultiselectInputUpdateItems (event) {
-    event.stopImmediatePropagation()
-
-    if (!this.multiselectList.innerHTML.length) return
-
-    this.multiselectList
-      .init({
-        items: this._getSelectionList(this.input.items),
-        template: this.template
-      })
-      .render()
+    this.addEventListener(
+      'multiselect-input:blur',
+      this.onMultiselectInputBlur.bind(this)
+    )
+    this.addEventListener(
+      'multiselect-list:add',
+      this.onMultiselectListAdd.bind(this)
+    )
+    this.addEventListener(
+      'multiselect-selected-list:alter',
+      this.onMultiselectSelectedListAlter.bind(this)
+    )
   }
 
   /** @param {CustomEvent} event */
   onMultiselectInputKeydown (event) {
     event.stopImmediatePropagation()
-
-    const key = event.detail.origin.key
-
-    if (key === 'ArrowUp') {
-      this.multiselectList.open()
-      this.multiselectList.itemPosition--
-    } else if (key === 'ArrowDown') {
-      this.multiselectList.open()
-      this.multiselectList.itemPosition++
-    } else if (key === 'Enter') {
-      this.multiselectList.selectActiveItem()
-    }
   }
 
-  onMultiselectInputFocus (event) {
+  /** @param {CustomEvent} event */
+  async onMultiselectInputAlter (event) {
     event.stopImmediatePropagation()
-    this.multiselectList.toggle()
+    await this.filterItems()
   }
 
+  /** @param {CustomEvent} event */
+  async onMultiselectInputFocus (event) {
+    event.stopImmediatePropagation()
+    await this.filterItems()
+  }
+
+  /** @param {CustomEvent} event */
   onMultiselectInputBlur (event) {
     event.stopImmediatePropagation()
-
-    if (!this.multiselectList.hasAttribute('selected')) {
-      this.multiselectList.close()
-    }
+    // this.multiselectList.close()
   }
 
   /** @param {CustomEvent} event */
-  onMultiselectInputAlter (event) {
+  onMultiselectListAdd (event) {
     event.stopImmediatePropagation()
-    this._alter(event.detail)
+    this.multiselectList.close()
+    const field = event.detail.field
+    const text = event.detail.text
+    const item = new MultiselectSelectedItem()
+
+    item.init({ field, title: text }).render()
+    this.multiselectSelectedList.addItem(item)
   }
 
   /** @param {CustomEvent} event */
-  onMultiselectInputInput (event) {
+  onMultiselectSelectedListAlter (event) {
     event.stopImmediatePropagation()
-
-    this.multiselectList
-      .init({
-        items: this._getSelectionList(this.input.items, event.detail)
-      })
-      .render()
-
-    this.multiselectList.open()
+    this.dispatchAlterEvent()
   }
 
-  /** @returns {MultiselectList} */
-  get multiselectList () {
-    return /** @type {MultiselectList} */ (this.select('ark-multiselect-list'))
-  }
-
-  /** @returns {MultiselectInput} */
-  get input () {
-    return /** @type {MultiselectInput} */ (this.select(
-      'ark-multiselect-input'
-    ))
-  }
-
-  get value () {
-    return ''// this.input.value
-  }
-
-  set value (value) { }
-
-  _alter (value) {
+  dispatchAlterEvent () {
     this.dispatchEvent(
-      new CustomEvent('ark-multiselect:alter', {
-        bubbles: true,
-        detail: value
+      new CustomEvent('alter', {
+        detail: {
+          value: this.value,
+        }
       })
     )
   }
 
-  _getSelectionList (inputItems, value = '') {
-    const currentList = []
+  async filterItems () {
+    let items = await this.filter(this.multiselectInput.value)
+    const selectedList = this.multiselectSelectedList.value
 
-    value = value.trim().toLowerCase()
+    items = items.filter(item =>
+      !selectedList.find(field => (item[this.field] || item) === field)
+    )
 
-    this.items.forEach(item => {
-      const selectedItem = inputItems.find(selectedItem => {
-        if (JSON.stringify(selectedItem) === JSON.stringify(item)) return true
-      })
+    this.multiselectList.init({
+      field: this.field,
+      template: this.template,
+      items
+    }).render().open()
+  }
 
-      const title = this.template(item)
-        .trim()
-        .toLowerCase()
+  get value () {
+    if (!this.multiselectSelectedList) return ""
+    return this.multiselectSelectedList.value.join()
+  }
 
-      if (
-        (value.length && title.indexOf(value) > -1 && !selectedItem) ||
-        (!value.length && !selectedItem)
-      ) {
-        currentList.push(item)
-      }
-    })
+  set value (value) { }
 
-    return currentList
+  get multiselectInput () {
+    return /** @type {MultiselectInput} */(
+      this.select('ark-multiselect-input')
+    )
+  }
+
+  get multiselectList () {
+    return /** @type {MultiselectList} */(
+      this.select('ark-multiselect-list')
+    )
+  }
+
+  get multiselectSelectedList () {
+    return /** @type {MultiselectSelectedList} */(
+      this.select('ark-multiselect-selected-list')
+    )
   }
 }
 customElements.define('ark-multiselect', Multiselect)

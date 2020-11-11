@@ -1,11 +1,13 @@
 @import "./multiselect.input.default";
-@import "./multiselect.item.default";
 @import "./multiselect.list.default";
+@import "./multiselect.selected-item.default";
+@import "./multiselect.selected-list.default";
 @import "./multiselect.default";
 
 @mixin multiselect_default() {
   @include multiselect_input_default_();
-  @include multiselect_item_default_();
   @include multiselect_list_default_();
+  @include multiselect_selected_item_default_();
+  @include multiselect_selected_list_default_();
   @include multiselect_default_();
 }

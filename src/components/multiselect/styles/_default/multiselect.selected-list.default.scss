@@ -1,0 +1,8 @@
+@mixin multiselect_selected_list_default_() {
+  $component: "ark-multiselect-selected-list";
+
+  #{$component} {
+    display: flex;
+    width: 100%;
+  }
+}
