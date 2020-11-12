@@ -62,5 +62,9 @@ export class MultiselectInput extends Component {
   get value () {
     return this.input.value
   }
+
+  set value (value) {
+    this.input.value = value
+  }
 }
 customElements.define('ark-multiselect-input', MultiselectInput)

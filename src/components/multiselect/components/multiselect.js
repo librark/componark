@@ -79,6 +79,7 @@ export class Multiselect extends Component {
   /** @param {CustomEvent} event */
   onMultiselectInputKeydown (event) {
     event.stopImmediatePropagation()
+    console.log(">> keydown", event)
   }
 
   /** @param {CustomEvent} event */
@@ -103,6 +104,7 @@ export class Multiselect extends Component {
   onMultiselectListAdd (event) {
     event.stopImmediatePropagation()
     this.multiselectList.close()
+
     const field = event.detail.field
     const text = event.detail.text
     const item = new MultiselectSelectedItem()
@@ -114,7 +116,14 @@ export class Multiselect extends Component {
   /** @param {CustomEvent} event */
   onMultiselectSelectedListAlter (event) {
     event.stopImmediatePropagation()
+    this.multiselectList.close()
     this.dispatchAlterEvent()
+  }
+
+  /** @param {MouseEvent} event */
+  onRemoveAll (event) {
+    event.stopImmediatePropagation()
+    this.multiselectSelectedList.removeItems()
   }
 
   dispatchAlterEvent () {

@@ -43,6 +43,13 @@ export class MultiselectSelectedList extends Component {
     this.dispatchAlerteEvent()
   }
 
+  removeItems () {
+    this.querySelectorAll('ark-multiselect-selected-item').forEach(
+      item => item.remove()
+    )
+    this.dispatchAlerteEvent()
+  }
+
   dispatchAlerteEvent () {
     this.dispatchEvent(new CustomEvent('multiselect-selected-list:alter', {
       bubbles: true

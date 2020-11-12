@@ -36,7 +36,7 @@
       cursor: pointer;
       color: $color;
 
-      &:hover,
+      // &:hover,
       &[active] {
         background: rgba($color: $primary, $alpha: 0.1);
         outline: 0;
