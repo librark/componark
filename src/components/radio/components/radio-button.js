@@ -4,7 +4,7 @@ export class RadioButton extends Component {
   constructor () {
     super()
     this.defaultContent = this.defaultContent || this.innerHTML
-    this.value = ''
+    this.value = this.value
   }
 
   /**

@@ -4,7 +4,6 @@ export class AccordionTab extends Component {
   constructor () {
     super()
     this.defaultContent = this.defaultContent || this.innerHTML
-    this.index = ''
   }
 
   /** @param {Object} context */

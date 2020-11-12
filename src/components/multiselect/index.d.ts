@@ -8,4 +8,6 @@ export class Multiselect extends Component {
     template?: Function
     filter?: Function
   }): this
+
+  value: string
 }
