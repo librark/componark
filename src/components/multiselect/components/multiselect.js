@@ -131,9 +131,9 @@ export class Multiselect extends Component {
     let items = await this.filter(this.multiselectInput.value)
     const selectedList = this.multiselectSelectedList.value
 
-    items = items.filter(item =>
-      !selectedList.find(field => (item[this.field] || item) === field)
-    )
+    items = items.filter(item => !selectedList.find(
+      field => (item[this.field] || item).toString() === field
+    ))
 
     this.multiselectList.init({
       field: this.field,
