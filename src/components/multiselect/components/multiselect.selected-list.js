@@ -33,7 +33,13 @@ export class MultiselectSelectedList extends Component {
   /** @param {MultiselectSelectedItem} item */
   addItem (item) {
     if (this.querySelector(`[field="${item.field}"]`)) return
-    this.appendChild(item)
+
+    if (this.selectedItems.length) {
+      this.selectedItems[this.selectedItems.length - 1].after(item)
+    } else {
+      this.prepend(item)
+    }
+
     this.dispatchAlerteEvent()
   }
 
@@ -44,9 +50,7 @@ export class MultiselectSelectedList extends Component {
   }
 
   removeItems () {
-    this.querySelectorAll('ark-multiselect-selected-item').forEach(
-      item => item.remove()
-    )
+    this.selectedItems.forEach(item => item.remove())
     this.dispatchAlerteEvent()
   }
 
@@ -54,6 +58,12 @@ export class MultiselectSelectedList extends Component {
     this.dispatchEvent(new CustomEvent('multiselect-selected-list:alter', {
       bubbles: true
     }))
+  }
+
+  get selectedItems () {
+    return /** @type{NodeListOf<MultiselectSelectedItem>} */(
+      this.querySelectorAll('ark-multiselect-selected-item')
+    )
   }
 
   get value () {
