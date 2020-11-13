@@ -34,6 +34,7 @@ export class MultiselectInput extends Component {
   /** @param {event} event */
   onInput (event) {
     event.stopImmediatePropagation()
+    this.input.style.width = `${this.input.scrollWidth}px`
     this.dispatchCustomEvent('alter')
   }
 

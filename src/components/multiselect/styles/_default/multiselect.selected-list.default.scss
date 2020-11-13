@@ -4,5 +4,12 @@
   #{$component} {
     display: flex;
     width: 100%;
+    gap: .1rem;
+    margin-left: .1rem;
+    flex-flow: wrap;
+
+    ark-multiselect-input {
+      flex: 1;
+    }
   }
 }

@@ -4,7 +4,6 @@
   #{$component} {
     display: flex;
     flex-flow: wrap;
-
     width: 100%;
 
     cursor: text;
@@ -21,6 +20,7 @@
       color: inherit;
       background: inherit;
       border-color: initial;
+      width: 10px;
 
       * {
         color: $color !important;
