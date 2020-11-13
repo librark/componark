@@ -111,7 +111,8 @@ export class Multiselect extends Component {
   /** @param {CustomEvent} event */
   onMultiselectInputKeydown (event) {
     event.stopImmediatePropagation()
-    // console.log(">> keydown", event)
+    const key = (event.detail['key'] || '').toString()
+    this.keydownOptions(key)
   }
 
   /** @param {CustomEvent} event */
@@ -142,6 +143,7 @@ export class Multiselect extends Component {
     const item = new MultiselectSelectedItem()
 
     item.init({ field, title: text }).render()
+
     this.multiselectSelectedList.addItem(item)
     this.multiselectInput.input.value = ''
   }
@@ -164,6 +166,35 @@ export class Multiselect extends Component {
   onRemoveAll (event) {
     event.stopImmediatePropagation()
     this.multiselectSelectedList.removeItems()
+  }
+
+  /** @param {string} key */
+  keydownOptions (key) {
+    console.log(">>> keydownOptions [[Multiselect]] ", key)
+
+    switch (key) {
+      case "Escape":
+        this.multiselectList.close()
+        break
+      case "ArrowDown":
+        this.multiselectList.open()
+        break
+      case "ArrowUp":
+        this.multiselectList.open()
+        break
+      case "ArrowLeft":
+        this.multiselectList.open()
+        this.multiselectSelectedList.selectLeft()
+        break
+      case "ArrowRight":
+        this.multiselectSelectedList.selectRight()
+        break
+      case "Delete":
+        this.multiselectSelectedList.selectedDelete()
+        break
+      default:
+        break
+    }
   }
 
   dispatchAlterEvent () {

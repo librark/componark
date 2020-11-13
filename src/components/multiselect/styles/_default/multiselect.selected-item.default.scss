@@ -12,6 +12,10 @@
     user-select: none;
     overflow: hidden;
 
+    &[selected] {
+      background: rgba($color: $primary, $alpha: 8);
+    }
+
     small,
     button {
       display: flex;

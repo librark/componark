@@ -5,6 +5,7 @@ import { MultiselectSelectedItem } from './multiselect.selected-item'
 export class MultiselectSelectedList extends Component {
   /** @param {Object} context */
   init (context) {
+    this.selectedIndex = -1
     return super.init()
   }
 
@@ -56,6 +57,43 @@ export class MultiselectSelectedList extends Component {
     this.dispatchAlerteEvent()
   }
 
+
+
+  selectLeft () {
+    this.selectedIndex++
+
+    if (
+      this.selectedIndex > this.selectedItems.length ||
+      this.selectedItems.length === this.selectedIndex
+    ) this.selectedIndex = 0
+
+    this.updateCurrentSelectedItem()
+  }
+
+  selectRight () {
+    this.selectedIndex--
+
+    if (
+      this.selectedIndex > this.selectedItems.length ||
+      this.selectedIndex < 0
+    ) this.selectedIndex = this.selectedItems.length - 1
+
+    this.updateCurrentSelectedItem()
+  }
+
+  updateCurrentSelectedItem () {
+    if (this.selectedItem) this.selectedItem.removeAttribute('selected')
+    const item = this.selectedItems[this.selectedIndex]
+    if (item) item.setAttribute('selected', '')
+  }
+
+  selectedDelete () {
+    if (!this.selectedItem) return
+    this.selectedItem.remove()
+    this.selectedIndex = -1
+    this.dispatchAlerteEvent()
+  }
+
   dispatchAlerteEvent () {
     this.dispatchCustomEvent('alter')
   }
@@ -66,10 +104,16 @@ export class MultiselectSelectedList extends Component {
     }))
   }
 
-  get selectedItems () {
-    return /** @type{NodeListOf<MultiselectSelectedItem>} */(
-      this.querySelectorAll('ark-multiselect-selected-item')
+  get selectedItem () {
+    return /** @type{MultiselectSelectedItem} */(
+      this.select('ark-multiselect-selected-item[selected]')
     )
+  }
+
+  get selectedItems () {
+    return /** @type{MultiselectSelectedItem[]} */(Array.prototype.slice.call(
+      this.selectAll('ark-multiselect-selected-item')
+    )).reverse()
   }
 
   get value () {
