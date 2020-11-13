@@ -10,17 +10,19 @@ export class MultiselectDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `${this.styles}
-      <ark-multiselect list listen on-alter="alterMultiselect">
-      </ark-multiselect>
+      <div>
+        <ark-multiselect list listen on-alter="alterMultiselect">
+        </ark-multiselect>
 
-      <p>Value: <span data-multiselect></span></p>
+        <p>Value: <span data-multiselect></span></p>
+      </div>
 
-      <hr/>
+      <div>
+        <ark-multiselect objectList listen on-alter="alterMultiselectObject">
+        </ark-multiselect>
 
-      <ark-multiselect objectList listen on-alter="alterMultiselectObject">
-      </ark-multiselect>
-
-      <p>Value: <span data-multiselect-object></span></p>
+        <p>Value: <span data-multiselect-object></span></p>
+      </div>
 		`
     this.renderMultiselect()
     this.renderMultiselectObject()
@@ -115,6 +117,13 @@ export class MultiselectDemo extends Component {
   get styles () {
     return /* html */ `
       <style>
+        demo-multiselect{
+          display: flex !important;
+          gap: .5rem;
+        }
+        demo-multiselect div{
+          flex: 1;
+        }
       </style>
     `
   }

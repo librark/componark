@@ -3,8 +3,15 @@ import { MultiselectInput } from './multiselect.input'
 import { MultiselectList } from './multiselect.list'
 import { MultiselectSelectedItem } from './multiselect.selected-item'
 import { MultiselectSelectedList } from './multiselect.selected-list'
+import { uuid } from '../../../utils'
+
 
 export class Multiselect extends Component {
+  constructor () {
+    super()
+    this.id = this.id || uuid()
+  }
+
   /**
    * @param {{
    *  label?: string
@@ -12,6 +19,7 @@ export class Multiselect extends Component {
    *  field?: string
    *  template?: function
    *  filter?: function
+   *  global?
    * }} context
    **/
   init (context) {
@@ -23,6 +31,8 @@ export class Multiselect extends Component {
 
     // Local
     this.selectedList = []
+    this.global = context.global || window
+
     return super.init()
   }
 
@@ -32,19 +42,21 @@ export class Multiselect extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-			<div class="ark-multiselect__label">
-				<label>${this.label}</label>
-			</div>
-      <div class="ark-multiselect__body">
-        <ark-multiselect-selected-list>
-          <ark-multiselect-input></ark-multiselect-input>
-        </ark-multiselect-selected-list>
-				<div class="ark-multiselect__actions">
-					<button class="ark-multiselect__remove-all"
-					 listen on-click="onRemoveAll">&times;</button>
-				</div>
-			</div>
-			<ark-multiselect-list></ark-multiselect-list>
+      <div id="${this.id}">
+        <div class="ark-multiselect__label">
+          <label>${this.label}</label>
+        </div>
+        <div class="ark-multiselect__body">
+          <ark-multiselect-selected-list>
+            <ark-multiselect-input></ark-multiselect-input>
+          </ark-multiselect-selected-list>
+          <div class="ark-multiselect__actions">
+            <button class="ark-multiselect__remove-all"
+            listen on-click="onRemoveAll">&times;</button>
+          </div>
+        </div>
+        <ark-multiselect-list></ark-multiselect-list>
+      </div>
 		`
     return super.render()
   }
@@ -74,12 +86,28 @@ export class Multiselect extends Component {
       'multiselect-selected-list:alter',
       this.onMultiselectSelectedListAlter.bind(this)
     )
+    this.global.addEventListener(
+      'mouseup', this.onMultiselectMouseup.bind(this)
+    )
+  }
+
+  disconnectedCallback () {
+    this.global.removeEventListener(
+      'mouseup', this.onMultiselectMouseup.bind(this)
+    )
+  }
+
+  /** @param {MouseEvent} event */
+  onMultiselectMouseup (event) {
+    const target = /** @type {HTMLElement} */(event.target)
+    const multiselect = target.closest(`ark-multiselect[id="${this.id}"]`)
+    if (!multiselect) this.multiselectList.close()
   }
 
   /** @param {CustomEvent} event */
   onMultiselectInputKeydown (event) {
     event.stopImmediatePropagation()
-    console.log(">> keydown", event)
+    // console.log(">> keydown", event)
   }
 
   /** @param {CustomEvent} event */
