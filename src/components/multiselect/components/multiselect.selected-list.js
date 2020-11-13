@@ -24,10 +24,12 @@ export class MultiselectSelectedList extends Component {
       'ark-multiselect-selected-item button[remove]'
     )
 
-    if (!btnRemove) return
-
-    const item = /** @type {MultiselectSelectedItem} */(target.parentElement)
-    this.removeItem(item)
+    if (btnRemove) {
+      const item = /** @type {MultiselectSelectedItem} */(target.parentElement)
+      this.removeItem(item)
+    } else {
+      this.dispatchCustomEvent('click')
+    }
   }
 
   /** @param {MultiselectSelectedItem} item */
@@ -55,8 +57,12 @@ export class MultiselectSelectedList extends Component {
   }
 
   dispatchAlerteEvent () {
-    this.dispatchEvent(new CustomEvent('multiselect-selected-list:alter', {
-      bubbles: true
+    this.dispatchCustomEvent('alter')
+  }
+
+  dispatchCustomEvent (name, detail = {}) {
+    this.dispatchEvent(new CustomEvent(`multiselect-selected-list:${name}`, {
+      bubbles: true, detail
     }))
   }
 

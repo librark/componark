@@ -86,6 +86,10 @@ export class Multiselect extends Component {
       'multiselect-selected-list:alter',
       this.onMultiselectSelectedListAlter.bind(this)
     )
+    this.addEventListener(
+      'multiselect-selected-list:click',
+      this.onMultiselectSelectedListClick.bind(this)
+    )
     this.global.addEventListener(
       'mouseup', this.onMultiselectMouseup.bind(this)
     )
@@ -139,6 +143,7 @@ export class Multiselect extends Component {
 
     item.init({ field, title: text }).render()
     this.multiselectSelectedList.addItem(item)
+    this.multiselectInput.input.value = ''
   }
 
   /** @param {CustomEvent} event */
@@ -146,6 +151,13 @@ export class Multiselect extends Component {
     event.stopImmediatePropagation()
     this.multiselectList.close()
     this.dispatchAlterEvent()
+  }
+
+  /** @param {CustomEvent} event */
+  onMultiselectSelectedListClick (event) {
+    event.stopImmediatePropagation()
+    this.multiselectList.open()
+    this.multiselectInput.input.focus()
   }
 
   /** @param {MouseEvent} event */
