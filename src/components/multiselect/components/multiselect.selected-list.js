@@ -57,8 +57,6 @@ export class MultiselectSelectedList extends Component {
     this.dispatchAlerteEvent()
   }
 
-
-
   selectLeft () {
     this.selectedIndex++
 
@@ -102,6 +100,12 @@ export class MultiselectSelectedList extends Component {
     this.dispatchEvent(new CustomEvent(`multiselect-selected-list:${name}`, {
       bubbles: true, detail
     }))
+  }
+
+  clearSelectedItems () {
+    this.querySelectorAll('[selected]').forEach(
+      item => item.removeAttribute('selected')
+    )
   }
 
   get selectedItem () {

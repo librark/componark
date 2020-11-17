@@ -37,7 +37,7 @@
       color: $color;
 
       // &:hover,
-      &[active] {
+      &[selected] {
         background: rgba($color: $primary, $alpha: 0.1);
         outline: 0;
       }

@@ -119,6 +119,7 @@ export class Multiselect extends Component {
   async onMultiselectInputAlter (event) {
     event.stopImmediatePropagation()
     await this.filterItems()
+    this.multiselectSelectedList.clearSelectedItems()
   }
 
   /** @param {CustomEvent} event */
@@ -140,12 +141,7 @@ export class Multiselect extends Component {
 
     const field = event.detail.field
     const text = event.detail.text
-    const item = new MultiselectSelectedItem()
-
-    item.init({ field, title: text }).render()
-
-    this.multiselectSelectedList.addItem(item)
-    this.multiselectInput.input.value = ''
+    this.addSelectedItem(field, text)
   }
 
   /** @param {CustomEvent} event */
@@ -169,32 +165,51 @@ export class Multiselect extends Component {
   }
 
   /** @param {string} key */
-  keydownOptions (key) {
-    console.log(">>> keydownOptions [[Multiselect]] ", key)
-
+  async keydownOptions (key) {
     switch (key) {
       case "Escape":
         this.multiselectList.close()
         break
       case "ArrowDown":
+        await this.filterItems()
+        this.multiselectSelectedList.clearSelectedItems()
         this.multiselectList.open()
+        this.multiselectList.selectDown()
         break
       case "ArrowUp":
+        await this.filterItems()
+        this.multiselectSelectedList.clearSelectedItems()
         this.multiselectList.open()
+        this.multiselectList.selectUp()
         break
       case "ArrowLeft":
-        this.multiselectList.open()
         this.multiselectSelectedList.selectLeft()
+        this.multiselectList.clearSelectedItems()
         break
       case "ArrowRight":
         this.multiselectSelectedList.selectRight()
+        this.multiselectList.clearSelectedItems()
         break
       case "Delete":
         this.multiselectSelectedList.selectedDelete()
         break
+      case "Enter":
+        this.multiselectList.close()
+        const data = this.multiselectList.selectedDataItem
+        this.addSelectedItem(data.field, data.text)
+        break
       default:
         break
     }
+  }
+
+  addSelectedItem (field, title) {
+    const item = new MultiselectSelectedItem()
+
+    item.init({ field, title }).render()
+
+    this.multiselectSelectedList.addItem(item)
+    this.multiselectInput.input.value = ''
   }
 
   dispatchAlterEvent () {

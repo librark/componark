@@ -1,6 +1,11 @@
 import { Component } from '../../component'
 
 export class MultiselectList extends Component {
+  constructor () {
+    super()
+    this.selectedIndex = -1
+  }
+
   /**
    * @param {{
    *  field: string
@@ -16,6 +21,7 @@ export class MultiselectList extends Component {
 
     // LOCAL
     this.global = context.global || window
+
     return super.init()
   }
 
@@ -58,14 +64,14 @@ export class MultiselectList extends Component {
   onMouseEnter (event) {
     event.stopImmediatePropagation()
     const target = /** @type {HTMLElement} */(event.target)
-    target.setAttribute('active', '')
+    this.selectItem(target)
   }
 
   /** @param {MouseEvent} event */
   onMouseleave (event) {
     event.stopImmediatePropagation()
     const target = /** @type {HTMLElement} */(event.target)
-    target.removeAttribute('active')
+    target.removeAttribute('selected')
   }
 
   /** @param {MouseEvent} event */
@@ -75,12 +81,10 @@ export class MultiselectList extends Component {
     const item = /** @type {HTMLElement} */target.closest('li[data-item]')
     if (!item) return
 
-    const field = item.getAttribute('field')
-    const textContent = item.textContent.trim()
 
     this.dispatchEvent(new CustomEvent('multiselect-list:add', {
       bubbles: true,
-      detail: { field, text: textContent }
+      detail: this.selectedDataItem
     }))
   }
 
@@ -89,7 +93,62 @@ export class MultiselectList extends Component {
   }
 
   close () {
+    this.selectedIndex = -1
     this.removeAttribute('show')
+  }
+
+  selectUp () {
+    this.selectedIndex--
+    if (this.selectedIndex < 0) this.selectedIndex = this.liElements.length - 1
+    this.updateCurrentSelectedItem()
+  }
+
+  selectDown () {
+    this.selectedIndex++
+    if (this.selectedIndex >= this.liElements.length) this.selectedIndex = 0
+    this.updateCurrentSelectedItem()
+  }
+
+  updateCurrentSelectedItem () {
+    if (this.selectedItem) this.selectedItem.removeAttribute('selected')
+    const item = this.liElements[this.selectedIndex]
+    if (item) item.setAttribute('selected', '')
+  }
+
+  clearSelectedItems () {
+    this.querySelectorAll('[selected]').forEach(
+      item => item.removeAttribute('selected')
+    )
+  }
+
+  /** @param {HTMLElement} item */
+  selectItem (item) {
+    item.setAttribute('selected', '')
+
+    let index = 0
+    for (let li of this.liElements) {
+      index++
+
+      // if (this.liElements[i].hasAttribute('selected')) {
+      //   this.selectedIndex = i
+      //   continue
+      // }
+    }
+  }
+
+  get selectedItem () {
+    return this.querySelector('[selected]')
+  }
+
+  get selectedDataItem () {
+    const item = this.selectedItem
+    const field = item.getAttribute('field')
+    const text = item.textContent.trim()
+    return { field, text }
+  }
+
+  get liElements () {
+    return this.querySelectorAll('li')
   }
 }
 customElements.define('ark-multiselect-list', MultiselectList)
