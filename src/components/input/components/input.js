@@ -1,39 +1,17 @@
 import { Component } from '../../component'
 
 export class Input extends Component {
-  constructor () {
-    super()
-    this.defaultContent = this.defaultContent || this.innerHTML
-  }
-
-  /**
-   * @param {{
-   *  label?: string
-   *  value?: string
-   * }} context
-   */
-  init (context = {}) {
-    this.label = context.label || this.label
-    this.value = context.value || this.value || ''
-    return super.init()
-  }
-
   reflectedProperties () {
     return ['label']
   }
 
   render () {
     this.innerHTML = /* html */ `
-      <div class="ark-input__label" ${this._isRequired()}>
-        <label>${this.label}</label>
-      </div>
+      <label class="ark-input__label" ${this._isRequired()}>
+        ${this.label}</label>
 
       <div class="ark-input__input">
         <input data-input listen on-input="_onChangeInput">
-      </div>
-
-      <div class="ark-input__alert">
-        ${this.defaultContent}
       </div>
     `
     this._moveAttributes()
@@ -57,14 +35,12 @@ export class Input extends Component {
   }
 
   _isRequired () {
-    return this.hasAttribute('required') ? 'required' : ''
+    return this.hasAttribute('required') ? 'required' : 'x'
   }
 
   _moveAttributes () {
     Array.from(this.attributes).forEach(attribute => {
-      if (this._defaultAttributes().find(item => item === attribute.name)) {
-        this.input.setAttribute(attribute.name, attribute.value)
-      }
+      this.input.setAttribute(attribute.name, attribute.value)
     })
   }
 
@@ -78,41 +54,8 @@ export class Input extends Component {
 
   set value (value) {
     this.setAttribute('value', value)
-    if (this.input) this.input.value = value
+    this.input.value = value
     this._dispatchAlterEvent()
-  }
-
-  /** @return {Array<string>} */
-  _defaultAttributes () {
-    return [
-      'accept',
-      'align',
-      'alt',
-      'autocomplete',
-      'autofocus',
-      'checked',
-      'dirname',
-      'disabled',
-      'form',
-      'formaction',
-      'formenctype',
-      'formmethod',
-      'formnovalidate',
-      'formtarget',
-      'list',
-      'min',
-      'multiple',
-      'name',
-      'pattern',
-      'placeholder',
-      'readonly',
-      'required',
-      'size',
-      'src',
-      'step',
-      'type',
-      'value',
-    ]
   }
 }
 customElements.define('ark-input', Input)

@@ -1,75 +1,62 @@
-import { Input } from '../../../src/components/input'
+import { Input } from 'components/input'
 
 describe('Input', () => {
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const item = new Input()
-    item.init().render()
-
-    expect(item).toBeTruthy()
-
-    const init = item.init()
-    expect(item === init).toBeTruthy()
+    container.innerHTML = `<ark-input></ark-input>`
+    const component = container.querySelector('ark-input')
+    expect(component).toBeTruthy()
   })
 
-  it('can be rendered without content', () => {
-    const item = new Input()
-    item.innerHTML = /* html */''
-    item.connectedCallback()
+  it('sets its value attribute on input event', () => {
+    container.innerHTML = `<ark-input></ark-input>`
+    const component = container.querySelector('ark-input')
+
+    const input = component.querySelector('[data-input]')
+    input.value = 'X'
+    input.dispatchEvent(new Event('input'))
+
+    expect(component.value).toBe('X')
   })
 
-  it('can be rendered without content', () => {
-    const item = new Input()
-    // @ts-ignore
-    item.defaultContent = /* html */`
-	    <label slot="alert">alert label 1</label>
-	    <label slot="alert">alert label 2</label>
-	  `
-    item.connectedCallback()
-
-    const alerts = item.querySelector('.ark-input__alert')
-    expect(alerts.childElementCount === 2).toBeTruthy()
+  it('can be required', () => {
+    container.innerHTML = `<ark-input required></ark-input>`
+    const component = container.querySelector('ark-input')
+    const label = component.querySelector('label')
+    expect(label.getAttribute('required')).not.toBeNull()
   })
 
-  it('can be rendered with label', function () {
-    const item = new Input()
-    const att = document.createAttribute('label')
-    att.value = 'Date'
-    item.setAttributeNode(att)
-    item.connectedCallback()
-    // @ts-ignore
-    expect(item.label).toEqual('Date')
-  })
+  it('sets its value and dispatches an alter event', function () {
+    container.innerHTML = `<ark-input></ark-input>`
+    const component = container.querySelector('ark-input')
+    component.value = 'abc'
+    expect(component.input.value).toEqual('abc')
 
-  it('can be rendered with required', function () {
-    const item = new Input()
-    const att = document.createAttribute('required')
-    item.setAttributeNode(att)
+    let alter = null
+    component.addEventListener('alter', (event) => alter = event)
 
-    item.connectedCallback()
+    component.value = 'xyz'
 
-    expect(item.querySelector('.ark-input__type-text') === null).toBeTruthy()
-  })
-
-  it('can return value', function () {
-    const input = new Input()
-    input.connectedCallback()
-    input.value = 'abc'
-    expect(input.value === 'abc').toBeTruthy()
-
-    const event = new CustomEvent('input')
-    // @ts-ignore
-    input._onChangeInput(event)
-
-    input.value = ''
-    expect(input.value === '').toBeTruthy()
+    expect(alter.detail.value).toEqual('xyz')
   })
 
   it('can move attributes', function () {
-    const input = new Input()
-    input.setAttribute('value', 'abc')
-    input.setAttribute('listen', 'listen')
-    input.connectedCallback()
+    container.innerHTML = `
+    <ark-input value="https://www.knowark.com" type="url">
+    `
+    const component = container.querySelector('ark-input')
 
-    expect(input.hasAttribute('listen')).toBeTruthy()
+    expect(component.input.value).toEqual('https://www.knowark.com')
+    expect(component.input.type).toEqual('url')
   })
 })

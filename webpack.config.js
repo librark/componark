@@ -4,7 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 
 // @ts-ignore
@@ -23,7 +22,8 @@ module.exports = (env, argv) => {
       path: path.join(__dirname, '/dist')
     },
     optimization: {
-      runtimeChunk: 'single'
+      runtimeChunk: 'single',
+      moduleIds: 'deterministic'
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -42,8 +42,7 @@ module.exports = (env, argv) => {
         VERSION: JSON.stringify(require('./package.json').version),
         TARGET: JSON.stringify(target)
       }),
-      new HashedModuleIdsPlugin(),
-      new CopyWebpackPlugin(['src/assets/config/.htaccess']),
+      new HashedModuleIdsPlugin()
     ],
     resolve: {
       alias: {
