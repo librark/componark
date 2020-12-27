@@ -191,7 +191,7 @@ export class RootComponent extends Component {
 
         table {
           width: 100%;
-          margin-bottom: 20px;
+          padding-bottom: 20px;
         }
 
         td, th {
@@ -204,25 +204,30 @@ export class RootComponent extends Component {
         }
 
         .introduction {
-          margin-bottom: 25px;
+          padding-bottom: 25px;
         }
 
         .implementation {
           padding: 25px;
+          width: 90vw;
         }
 
         .examples {
-          margin: 15px;
+          padding: 15px;
         }
 
         .reference {
-          margin: 105x;
+          padding: 15px;
         }
 
         .example {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           background-color: whitesmoke;
+          padding: 10px;
+        }
+
+        .example .code {
           padding: 10px;
         }
 

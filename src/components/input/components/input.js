@@ -7,14 +7,13 @@ export class Input extends Component {
 
   render () {
     this.innerHTML = /* html */`
-      <label class="ark-input__label" ${this._isRequired()}>
-        ${this.label}
-        <input class="ark-input__input"
-          data-input listen on-input="onInputChange">
-      </label>
+    <label class="ark-input__label" ${this.isRequired()}>
+      ${this.label} <input class="ark-input__input"
+      data-input listen on-input="onInputChange">
+    </label>
     `
 
-    this._moveAttributes()
+    this.moveAttributes()
     return super.render()
   }
 
@@ -24,7 +23,7 @@ export class Input extends Component {
     this.value = this.input.value
   }
 
-  _dispatchAlterEvent () {
+  dispatchAlterEvent () {
     this.dispatchEvent(
       new CustomEvent('alter', {
         detail: {
@@ -34,11 +33,11 @@ export class Input extends Component {
     )
   }
 
-  _isRequired () {
+  isRequired () {
     return this.hasAttribute('required') ? 'required' : ''
   }
 
-  _moveAttributes () {
+  moveAttributes () {
     Array.from(this.attributes).forEach(attribute => {
       this.input.setAttribute(attribute.name, attribute.value)
     })
@@ -55,7 +54,7 @@ export class Input extends Component {
   set value (value) {
     this.setAttribute('value', value)
     this.input.value = value
-    this._dispatchAlterEvent()
+    this.dispatchAlterEvent()
   }
 }
 customElements.define('ark-input', Input)

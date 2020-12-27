@@ -15,13 +15,12 @@ export class InputDemo extends Component {
     </section>
     <section class="implementation">
       <ark-input data-input-text required inline
-                 label="Enter some text..."
+                 label="Enter some text:"
                  listen on-alter="onTextInput"></ark-input>
       <p>Value: <span data-input-value></span></p>
     </section>
     <section class="examples">
       <h2>Examples</h2>
-      <label>Label <input></input></label>
       ${this.firstExample}
       ${this.secondExample}
       ${this.thirdExample}
@@ -50,10 +49,10 @@ export class InputDemo extends Component {
   renderExample(example) {
     return `
     <div class="example">
-      <span class="value">
+      <div class="value">
         <pre><code class="html">${example.value}</code></pre>
-      </span>
-      <span class="code">${example.code}</span>
+      </div>
+      <div class="code">${example.code}</div>
     </div>
   `
   }
@@ -99,7 +98,6 @@ export class InputDemo extends Component {
       <ark-input type="file"></ark-input>
     `))
   }
-
 
   // Documentation
 

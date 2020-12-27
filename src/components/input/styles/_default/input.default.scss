@@ -2,9 +2,7 @@
   $component: "ark-input";
 
   #{$component} {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    display: block;
     height: fit-content;
     outline: none;
 
@@ -20,64 +18,24 @@
       }
     }
 
-    &[inline] {
+    .#{&}__label {
+      display: block;
+      text-overflow: ellipsis;
+    }
+
+    .#{&}__input {
+      display: block;
+      width: 100%;
+    }
+
+    &[inline] label {
+      display: flex;
       white-space: nowrap;
+
+      input {
+        display: initial;
+        margin-left: 0.5rem;
+      }
     }
-
-    &__label {
-      width: 100%;
-    }
-
-    &__input {
-      width: 100%;
-    }
-
-    //&::before,
-    //&::after {
-      //all: unset;
-    //}
-
   }
-
-  //#{$component} {
-    //&__label {
-      //text-decoration: none !important;
-      //border-bottom: none !important;
-      //outline: none !important;
-
-      //&>* {
-        //margin: 0;
-        //padding: 0;
-        ////width: 100%;
-        ////display: block;
-      //}
-    //}
-
-    //&__input {
-      //input {
-        //font-size: initial;
-        //border-bottom: none;
-        //outline: none;
-
-        //text-decoration: none !important;
-        //border-bottom: none !important;
-        //outline: none !important;
-
-        //color: inherit;
-        //background: inherit;
-
-        //* {
-          //color: $color !important;
-          //background: $background !important;
-        //}
-
-        ////&:focus {
-          ////outline: 1px solid rgba(0, 0, 0, 0.5);
-        ////}
-      //}
-    //}
-
-
-  //}
-  //
 }
