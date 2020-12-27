@@ -6,20 +6,20 @@ export class Input extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.innerHTML = /* html */`
       <label class="ark-input__label" ${this._isRequired()}>
-        ${this.label}</label>
-
-      <div class="ark-input__input">
-        <input data-input listen on-input="_onChangeInput">
-      </div>
+        ${this.label}
+        <input class="ark-input__input"
+          data-input listen on-input="onInputChange">
+      </label>
     `
+
     this._moveAttributes()
     return super.render()
   }
 
   /** @param {Event} event */
-  _onChangeInput (event) {
+  onInputChange (event) {
     event.stopImmediatePropagation()
     this.value = this.input.value
   }
@@ -35,7 +35,7 @@ export class Input extends Component {
   }
 
   _isRequired () {
-    return this.hasAttribute('required') ? 'required' : 'x'
+    return this.hasAttribute('required') ? 'required' : ''
   }
 
   _moveAttributes () {

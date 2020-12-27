@@ -1,7 +1,11 @@
-import './root.content.component'
-
+import hljs from 'highlight.js/lib/core';
+import 'highlight.js/styles/github.css';
+import xml from 'highlight.js/lib/languages/xml';
 import { Component } from '../loader'
 import { ThemeService } from '../theme/theme.service'
+
+hljs.registerLanguage('html', xml);
+hljs.initHighlightingOnLoad()
 
 /**
  * @typedef {import('../loader').List} List
@@ -27,9 +31,8 @@ export class RootComponent extends Component {
   render () {
     this.innerHTML = /* html */ `${this.styles}
       <ark-navbar justify='between' background="primary" color="white">
-
         <ark-nav brand>
-          <ark-button listen on-click='_onOpenSidebar'>
+          <ark-button listen on-click='onOpenSidebar'>
             <ark-icon name='fas fa-bars'></ark-icon>
           </ark-button>
           <span class='font-size' data-page-name>Componark</span>
@@ -48,43 +51,36 @@ export class RootComponent extends Component {
 
       </ark-navbar>
 
-      <ark-sidebar data-sidebar>
+      <ark-sidebar data-sidebar >
         <div slot='header'>
           <strong>Componark</strong>
           <br/>
-          <small>Versión: ${version}</small>
+          <small>Version: ${version}</small>
         </div>
-        <ark-list listen on-list:selected='_onListItemSelected'
+        <ark-list listen on-list:selected='onListItemSelected'
           data-sidebar-list action default>
         </ark-list>
-        <!-- <div slot='footer'></div> -->
       </ark-sidebar>
 
-      <div class='root-content' data-root>
-        <app-root-container data-root-container></app-root-container>
-      </div>
+      <div class='root-content' data-content></div>
     `
     return super.render()
   }
 
   load () {
-    this._renderMenuList()
-    this._updatePageName()
+    this.renderMenuList()
+    this.updatePageName()
     return super.load()
   }
 
-  /** @param {Component} component */
+  /** @param {Component}c> component */
   setContentComponent (component) {
     if (!component) return
+    const container = this.select('[data-content]')
 
-    const container = this.select('[data-root-container]')
-
-    container.init({
-      component: component,
-      currentStyle: this.themeService.currentStyle()
-    })
-
-    container.render().load()
+    container.firstChild?.remove()
+    container.append(component)
+    component.render().load()
   }
 
   /** @param {CustomEvent} event */
@@ -96,9 +92,8 @@ export class RootComponent extends Component {
     this.themeService.reload()
   }
 
-  _renderMenuList () {
+  renderMenuList () {
     const menuList = /** @type {List} */ (this.select('[data-sidebar-list]'))
-
     const template = item => /* html */ `
       <span>${item.name}</span>
     `
@@ -106,7 +101,7 @@ export class RootComponent extends Component {
     menuList.init({ source: this.locations, template: template }).render()
   }
 
-  _updatePageName () {
+  updatePageName () {
     const name = this.querySelector('[data-page-name]')
     const pathname = this.currentLocation.pathname
     const location = this.locations.find(
@@ -116,16 +111,16 @@ export class RootComponent extends Component {
     if (location) name.textContent = location.name
   }
 
-  _closeSidebar () {
-    this.sidebar.close()
+  closeSidebar () {
+    this.select('[data-sidebar]').close()
   }
 
-  _onOpenSidebar () {
-    this.sidebar.open()
+  onOpenSidebar () {
+    this.select('[data-sidebar]').open()
   }
 
   /** @param {CustomEvent} event */
-  _onListItemSelected (event) {
+  onListItemSelected (event) {
     this.dispatchEvent(
       new CustomEvent('navigate', {
         bubbles: true,
@@ -133,12 +128,8 @@ export class RootComponent extends Component {
       })
     )
 
-    this._closeSidebar()
-    this._updatePageName()
-  }
-
-  get sidebar () {
-    return /** @type {Sidebar} */ (this.select('[data-sidebar]'))
+    this.closeSidebar()
+    this.updatePageName()
   }
 
   get locations () {
@@ -195,7 +186,46 @@ export class RootComponent extends Component {
           width: 100%;
           height: 100%;
           overflow: auto;
+          padding: 20px;
         }
+
+        table {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        td, th {
+          border: 1px solid #ddd;
+          padding: 5px;
+        }
+
+        tbody tr:hover {
+          background-color: #ddd;
+        }
+
+        .introduction {
+          margin-bottom: 25px;
+        }
+
+        .implementation {
+          padding: 25px;
+        }
+
+        .examples {
+          margin: 15px;
+        }
+
+        .reference {
+          margin: 105x;
+        }
+
+        .example {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          background-color: whitesmoke;
+          padding: 10px;
+        }
+
       </style>
     `
   }

@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --coverage",
     "dev": "webpack serve --mode development --env development",
-    "build": "webpack -p --mode production --env production"
+    "build": "webpack --mode production --env production"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "web",
     "components"
   ],
+  "types": "src/components/index",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@knowark/injectarkjs": "^0.4.0",
@@ -37,6 +38,7 @@
     "chart.js": "^2.9.4",
     "fibers": "^5.0.0",
     "google-palette": "^1.1.0",
+    "highlight.js": "^10.5.0",
     "jquery": "^3.5.1",
     "leaflet": "^1.7.1",
     "material-components-web": "^8.0.0",
@@ -72,7 +74,6 @@
   "directories": {
     "test": "tests"
   },
-  "types": "src/components/index",
   "standard": {
     "env": [
       "jest",
