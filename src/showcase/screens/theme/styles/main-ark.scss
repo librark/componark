@@ -1,4 +1,4 @@
-@import "./componark";
+@use "./componark";
 
 // Componark
-@include componark(ark);
+@include componark.componark(ark);

@@ -1,8 +1,0 @@
-@mixin accordion_default_() {
-  $component: "ark-accordion";
-
-  #{$component} {
-    display: grid;
-    width: 100%;
-  }
-}

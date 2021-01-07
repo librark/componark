@@ -1,0 +1,22 @@
+@use "./styles/common";
+@use "./styles/ark";
+@use "./styles/bootstrap";
+@use "./styles/material";
+
+@mixin accordion($theme) {
+  @include common.accordion();
+  @include common.accordion_tab();
+
+  @if $theme==material {
+    @include material.accordion();
+  }
+
+  @else if $theme==bootstrap {
+    @include bootstrap.accordion();
+  }
+
+  @else {
+    @include ark.accordion();
+    @include ark.accordion_tab();
+  }
+}

@@ -1,8 +1,7 @@
-@mixin accordion_material_() {
-  $component: "ark-accordion";
+@mixin accordion() {
   $margin: 1rem;
 
-  #{$component} {
+  .ark-accordion {
     border-radius: 5px;
 
     &-tab {

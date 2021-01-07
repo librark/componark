@@ -1,7 +1,0 @@
-@import "./accordion.ark";
-@import "./accordion.tab.ark";
-
-@mixin accordion_ark() {
-  @include accordion_ark_();
-  @include accordion_tab_ark_();
-}

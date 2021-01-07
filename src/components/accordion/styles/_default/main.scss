@@ -1,7 +1,0 @@
-@import "./accordion.default";
-@import "./accordion.tab.default";
-
-@mixin accordion_default() {
-  @include accordion_default_();
-  @include accordion_tab_default_();
-}

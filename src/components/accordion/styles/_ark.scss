@@ -1,0 +1,11 @@
+@mixin accordion() {
+  .ark-accordion {}
+}
+
+@mixin accordion_tab() {
+  .ark-accordion-tab {
+    &__content {
+      margin-bottom: 0.3rem;
+    }
+  }
+}

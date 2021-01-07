@@ -1,21 +1,20 @@
-@import "./styles/_default/main";
-
-@import "./styles/ark/main";
-@import "./styles/bootstrap/main";
-@import "./styles/material/main";
+@use "./styles/default.scss";
+@use "./styles/ark.scss";
+@use "./styles/bootstrap.scss";
+@use "./styles/material.scss";
 
 @mixin input($theme) {
-  @include input_default();
+    @include default.input();
 
-  //@if $theme==material {
-    //@include input_material();
-  //}
+    @if $theme==material {
+        @include material.input();
+    }
 
-  //@else if $theme==bootstrap {
-    //@include input_bootstrap();
-  //}
+    @else if $theme==bootstrap {
+        @include bootstrap.input();
+    }
 
-  //@else {
-    //@include input_ark();
-  //}
+    @else {
+        @include ark.input();
+    }
 }

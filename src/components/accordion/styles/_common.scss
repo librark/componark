@@ -1,23 +1,23 @@
-@mixin accordion_tab_default_() {
-  $component: "ark-accordion-tab";
+@use "../../theme/variables" as *;
 
-  #{$component} {
+@mixin accordion() {
+  .ark-accordion {
+    display: grid;
+    width: 100%;
+  }
+}
+
+@mixin accordion_tab() {
+  .ark-accordion-tab {
     user-select: none;
     background: $background;
 
     &[disabled] {
       pointer-events: none;
-
-      .#{$component} {
-        &__btn-header {
-          color: gray !important;
-          background: rgba($color: gray, $alpha: 0.1) !important;
-        }
-      }
+      color: gray;
+      background: rgba($color: gray, $alpha: 0.1);
     }
-  }
 
-  .#{$component} {
     &__btn-header {
       width: auto;
       height: 2.5rem;

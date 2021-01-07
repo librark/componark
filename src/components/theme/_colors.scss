@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 // Background
 @mixin arkBackground($type, $background, $color: $light) {

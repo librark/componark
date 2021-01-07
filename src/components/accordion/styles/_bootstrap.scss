@@ -1,0 +1,7 @@
+@use "~bootstrap/scss/bootstrap.scss";
+
+@mixin accordion() {
+  .ark-accordion {
+    @extend .accordion;
+  }
+}
