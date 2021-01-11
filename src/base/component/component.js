@@ -1,4 +1,4 @@
-import { listen, reflect } from '../../utils'
+import { listen, reflect } from '../utils'
 
 export class Component extends HTMLElement {
   constructor () {
