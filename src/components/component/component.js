@@ -16,7 +16,10 @@ export class Component extends HTMLElement {
 
   connectedCallback () {
     this.render()
-    this.load()
+    this.load()?.catch(error => {
+      console.log(`{this.tagName}: loading error!`)
+      throw error 
+    })
   }
 
   /** @return {string[]} */
@@ -31,7 +34,7 @@ export class Component extends HTMLElement {
     return this
   }
 
-  load () { }
+  async load () { }
 
   /**
    * @param {string} selectors
@@ -47,5 +50,13 @@ export class Component extends HTMLElement {
     return /** @type {NodeListOf<Component>} */ (this.querySelectorAll(
       selectors
     ))
+  }
+
+  /**
+   * @param {string} type
+   * @param {any} detail */
+  emit(type, detail) {
+    this.dispatchEvent(new CustomEvent(type, { 
+      detail, bubbles: true, cancelable: true }))
   }
 }

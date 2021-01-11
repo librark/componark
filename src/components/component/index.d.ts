@@ -22,4 +22,6 @@ export class Component extends HTMLElement {
   select (selectors: string): Component
 
   selectAll (selectors: string): NodeListOf<Component>
+
+  emit(type: string, detail?: object): void
 }
