@@ -1,5 +1,5 @@
 const path = require('path')
-const { DefinePlugin } = require('webpack')
+const { DefinePlugin, EnvironmentPlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -36,12 +36,13 @@ module.exports = (env, argv) => {
       }),
       new DefinePlugin({
         PRODUCTION: !devMode,
-        // @ts-ignore
         VERSION: JSON.stringify(require('./package.json').version),
         TARGET: JSON.stringify(target)
       }),
+      new EnvironmentPlugin({
+        ARK_THEME: 'material'
+      })
     ],
-
     module: {
       rules: [
         {

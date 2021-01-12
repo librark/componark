@@ -1,7 +1,13 @@
 // @ts-nocheck
 
-import ArkCss from './_ark.scss'
+let styles = null
 
-export const stylesMap = {
-  default: ArkCss.toString()
+if (process.env.ARK_THEME === 'ark') {
+  styles = require('./_ark.scss').default.toString()
+} else if (process.env.ARK_THEME === 'material') {
+  styles = require('./_material.scss').default.toString()
+} else if (process.env.ARK_THEME === 'bootstrap') {
+  styles = require('./_bootstrap.scss').default.toString()
 }
+
+export {styles}

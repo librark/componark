@@ -1,15 +1,12 @@
-import { Component } from 'base/component'
+import { Component, html, css } from 'base/component'
 import { AccordionTab } from './accordion.tab'
+import { styles } from '../styles'
 
-import { stylesMap } from '../styles'
-
-console.log('ArkCss>>>', stylesMap);
-
+const tag = 'ark-accordion'
 export class Accordion extends Component {
-  init () {
-    this.addEventListener(
-      'click', this.onAccordionTabClick.bind(this))
-    return super.init()
+  init (context = {}) {
+    this.addEventListener('click', this._onClick.bind(this))
+    return super.init(context)
   }
 
   render () {
@@ -25,8 +22,7 @@ export class Accordion extends Component {
   }
 
   /** @param {MouseEvent} event */
-  onAccordionTabClick (event) {
-    console.log('Clicked!!!!');
+  _onClick (event) {
     event.stopPropagation()
 
     const target = /** @type {HTMLElement} */ (event.target)
@@ -54,4 +50,4 @@ export class Accordion extends Component {
     ])
   }
 }
-customElements.define('ark-accordion', Accordion)
+Component.define(tag, Accordion, styles)

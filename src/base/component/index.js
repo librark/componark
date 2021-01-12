@@ -1,1 +1,2 @@
-export { Component } from './component.js'
+export { Component } from './component'
+export { html, css } from '../utils'

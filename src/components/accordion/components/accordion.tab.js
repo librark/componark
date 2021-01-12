@@ -1,5 +1,7 @@
 import { Component } from 'base/component'
+import { html, css } from 'base/utils'
 
+const tag = 'ark-accordion-tab'
 export class AccordionTab extends Component {
   constructor () {
     super()
@@ -9,7 +11,7 @@ export class AccordionTab extends Component {
   /** @param {Object} context */
   init (context = {}) {
     this.header = context.header
-    return super.init()
+    return super.init(context)
   }
 
   reflectedProperties () {
@@ -17,7 +19,7 @@ export class AccordionTab extends Component {
   }
 
   render () {
-    this.innerHTML = this.header ? /* html */ `
+    this.content = this.header ? html`
       <div class="ark-accordion-tab__btn-header">
         <small data-accordion-tab-header>${this.header}</small>
       </div>
@@ -41,4 +43,4 @@ export class AccordionTab extends Component {
     this.hasAttribute('active') ? this.close() : this.open()
   }
 }
-customElements.define('ark-accordion-tab', AccordionTab)
+Component.define(tag, AccordionTab)

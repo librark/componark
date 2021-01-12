@@ -5,9 +5,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
       path: path,
       action: async () => {
         if (path === 'accordion') {
-          console.log('Accordion loaded>>>');
           const component = await import(`components/accordion`)
-          console.log(component);
         }
         const module = await import(`./${path}`)
         rootComponent.setContentComponent(module.hub(resolver))

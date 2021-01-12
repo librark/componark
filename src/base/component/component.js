@@ -1,4 +1,4 @@
-import { listen, reflect } from '../utils'
+import { define, listen, reflect } from 'base/utils'
 
 export class Component extends HTMLElement {
   constructor () {
@@ -7,24 +7,42 @@ export class Component extends HTMLElement {
     this.init({})
   }
 
-  /**
-   *  @param {Object<string, any>} context
-   *  @return {Component} */
-  init (context = {}) {
-    return this
+  /** 
+   * @param {string} tag
+   * @param {CustomElementConstructor} element
+   * @param {string} styles **/
+  static define(tag, element, styles = null) {
+    define(tag, element, styles)
   }
 
-  connectedCallback () {
-    this.render()
-    this.load()?.catch(error => {
-      console.log(`{this.tagName}: loading error!`)
-      throw error 
-    })
+  /**
+   * @param {Object<string, any>} context
+   * @return {Component} */
+  init (context = {}) {
+    return this
   }
 
   /** @return {string[]} */
   reflectedProperties () {
     return []
+  }
+
+  /** @param {string} content */
+  set content(content) {
+    this.innerHTML = content
+  }
+
+  /** @return {string} */
+  get content() {
+    return this.innerHTML
+  }
+
+  connectedCallback () {
+    this.render()
+    this.load()?.catch(error => {
+      console.error(`{this.tagName}: "load()" error!`)
+      throw error 
+    })
   }
 
   /** @return {Component} */
