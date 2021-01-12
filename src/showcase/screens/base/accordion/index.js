@@ -2,11 +2,7 @@ import { AccordionDemo } from './accordionDemo'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({
-    strategy: {
-      AccordionDemo: {
-        method: 'component'
-      }
-    },
+    strategy: {},
     factory: new ComponentFactory()
   })
 
@@ -14,12 +10,11 @@ export function hub (parentResolver) {
 }
 
 export class ComponentFactory {
-  /** @param {string} method */
-  extract (method) {
-    return this[`_${method}`]
+  extract (method = '') {
+    return this[`${method}`]
   }
 
-  _component () {
+  accordionDemo () {
     return new AccordionDemo()
   }
 }

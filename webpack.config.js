@@ -41,24 +41,17 @@ module.exports = (env, argv) => {
         TARGET: JSON.stringify(target)
       }),
     ],
-    resolve: {
-      alias: {
-        styles: path.resolve(__dirname, 'src/showcase/screens/theme/styles/'),
-        components: path.resolve(__dirname, './src/components/'),
-      }
-    },
+
     module: {
       rules: [
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            (devMode ? 'style-loader' : MiniCssExtractPlugin.loader),
             'css-loader',
             {
               loader: 'sass-loader',
               options: {
                 sassOptions: {
-                  sourceMap: true,
                   outputStyle: 'compressed',
                   includePaths: ['./node_modules']
                 }
@@ -83,6 +76,15 @@ module.exports = (env, argv) => {
           ]
         }
       ]
+    },
+
+    resolve: {
+      alias: {
+        base: path.resolve(__dirname, './src/base/'),
+        styles: path.resolve(__dirname, './src/base/theme/styles/'),
+        components: path.resolve(__dirname, './src/components/'),
+        screens: path.resolve(__dirname, './src/showcase/screens/')
+      }
     }
   }
 

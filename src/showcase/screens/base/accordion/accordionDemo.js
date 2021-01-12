@@ -1,10 +1,6 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class AccordionDemo extends Component {
-  init (context) {
-    return super.init(context)
-  }
-
   render () {
     this.innerHTML = /* html */ `${this.styles}
       <ark-accordion>

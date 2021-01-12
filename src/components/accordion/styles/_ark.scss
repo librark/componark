@@ -1,11 +1,7 @@
-@mixin accordion() {
-  .ark-accordion {}
-}
-
-@mixin accordion_tab() {
-  .ark-accordion-tab {
-    &__content {
-      margin-bottom: 0.3rem;
-    }
+.ark-accordion {
+  color: blue;
+  background-color: red;
+  &__header {
+    color: red;
   }
 }

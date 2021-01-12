@@ -1,9 +1,14 @@
-/** @typedef {import('./accordion.tab.js').AccordionTab} AccordionTab */
+import { Component } from 'base/component'
+import { AccordionTab } from './accordion.tab'
 
-import { Component } from '../../component'
+import { stylesMap } from '../styles'
+
+console.log('ArkCss>>>', stylesMap);
 
 export class Accordion extends Component {
   init () {
+    this.addEventListener(
+      'click', this.onAccordionTabClick.bind(this))
     return super.init()
   }
 
@@ -15,13 +20,14 @@ export class Accordion extends Component {
     return super.render()
   }
 
-  load () {
-    this.addEventListener('click', this.onAccordionTabClick.bind(this))
+  async load () {
+    //this.addEventListener('click', this.onAccordionTabClick.bind(this))
   }
 
   /** @param {MouseEvent} event */
   onAccordionTabClick (event) {
-    event.stopImmediatePropagation()
+    console.log('Clicked!!!!');
+    event.stopPropagation()
 
     const target = /** @type {HTMLElement} */ (event.target)
     const header = target.closest('.ark-accordion-tab__btn-header')
@@ -34,16 +40,11 @@ export class Accordion extends Component {
 
     tab.toggle()
 
-    if (this.multiple) return
+    if (this.hasAttribute('multiple')) return
 
     this.tabs.forEach(item => {
-      if (item.index !== tab.index) item.close()
+      if (item['index'] !== tab['index']) item.close()
     })
-  }
-
-  /** @returns {boolean} */
-  get multiple () {
-    return this.hasAttribute('multiple')
   }
 
   /** @returns {AccordionTab[]} */

@@ -1,21 +1,21 @@
 import hljs from 'highlight.js/lib/core';
 import 'highlight.js/styles/github.css';
 import xml from 'highlight.js/lib/languages/xml';
-import { Component } from '../loader'
-import { ThemeService } from '../theme/theme.service'
+import { Component } from 'base/component'
+import './root.component.scss'
+
+//import { Component } from '../loader'
+//import { ThemeService } from '../theme/theme.service'
 
 hljs.registerLanguage('html', xml);
 hljs.initHighlightingOnLoad()
 
-/**
- * @typedef {import('../loader').List} List
- * @typedef {import('../loader').Sidebar} Sidebar
- * */
 
 // @ts-ignore
 // eslint-disable-next-line no-undef
 export const version = VERSION
 
+const tag = 'app-root'
 export class RootComponent extends Component {
   /** @param {Object} context */
   init (context) {
@@ -23,57 +23,70 @@ export class RootComponent extends Component {
 
     // Local
     this.currentLocation = window.location
-    this.themeService = new ThemeService()
+    //this.themeService = new ThemeService()
 
     return super.init()
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
-      <ark-navbar justify='between' background="primary" color="white">
-        <ark-nav brand>
-          <ark-button listen on-click='onOpenSidebar'>
-            <ark-icon name='fas fa-bars'></ark-icon>
-          </ark-button>
-          <span class='font-size' data-page-name>Componark</span>
-        </ark-nav>
+    this.innerHTML = /* html */ `
+    <nav class="app-root__navbar">
+      <h1>Componark</h1>
+      <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
 
-        <ark-nav toggler>
-          <ark-select listen on-alter="selectEventListener" label="Estilo:">
-            <option value="material" ${this.themeService.currentStyle() === 'material' ? 'selected' : ''
-      }>Material</option>
-            <option value="bootstrap" ${this.themeService.currentStyle() === 'bootstrap' ? 'selected' : ''
-      }>bootstrap</option>
-            <option value="ark" ${this.themeService.currentStyle() === 'ark' ? 'selected' : ''
-      }>ark</option>
-          </ark-select>
-        </ark-nav>
+    <aside class="app-root__sidebar">
+      <h3>Menu</h3> 
+      ${this.locations.map((location) => `
+      <a href="${location.path}">${location.name}</a>
+      `).join("")}
+    </aside>
 
-      </ark-navbar>
+    <section data-content></section>
 
-      <ark-sidebar data-sidebar >
-        <div slot='header'>
-          <strong>Componark</strong>
-          <br/>
-          <small>Version: ${version}</small>
-        </div>
-        <ark-list listen on-list:selected='onListItemSelected'
-          data-sidebar-list action default>
-        </ark-list>
-      </ark-sidebar>
-
-      <div class='root-content' data-content></div>
     `
     return super.render()
   }
 
-  load () {
-    this.renderMenuList()
-    this.updatePageName()
+  //render () {
+    //this.innerHTML = [> html <] `${this.styles}
+      //<ark-navbar justify='between' background="primary" color="white">
+        //<ark-nav brand>
+          //<ark-button listen on-click='onOpenSidebar'>
+            //<ark-icon name='fas fa-bars'></ark-icon>
+          //</ark-button>
+          //<span class='font-size' data-page-name>Componark</span>
+        //</ark-nav>
+
+      //</ark-navbar>
+
+      //<ark-sidebar data-sidebar >
+        //<div slot='header'>
+          //<strong>Componark</strong>
+          //<br/>
+          //<small>Version: ${version}</small>
+        //</div>
+        //<ark-list listen on-list:selected='onListItemSelected'
+          //data-sidebar-list action default>
+        //</ark-list>
+      //</ark-sidebar>
+
+      //<div class='root-content' data-content></div>
+    //`
+    //return super.render()
+  //}
+
+  async load () {
+    //this.tenderMenuList()
+    //this.updatePageName()
     return super.load()
   }
 
-  /** @param {Component}c> component */
+  /** @param {Component} component */
   setContentComponent (component) {
     if (!component) return
     const container = this.select('[data-content]')
@@ -88,36 +101,19 @@ export class RootComponent extends Component {
     event.stopImmediatePropagation()
     const style = event.detail.value
 
-    this.themeService.set('style', style)
-    this.themeService.reload()
+    //this.themeService.set('style', style)
+    //this.themeService.reload()
   }
 
-  renderMenuList () {
-    const menuList = /** @type {List} */ (this.select('[data-sidebar-list]'))
-    const template = item => /* html */ `
-      <span>${item.name}</span>
-    `
+  //updatePageName () {
+    //const name = this.querySelector('[data-page-name]')
+    //const pathname = this.currentLocation.pathname
+    //const location = this.locations.find(
+      //location => location.path === pathname
+    //)
 
-    menuList.init({ source: this.locations, template: template }).render()
-  }
-
-  updatePageName () {
-    const name = this.querySelector('[data-page-name]')
-    const pathname = this.currentLocation.pathname
-    const location = this.locations.find(
-      location => location.path === pathname
-    )
-
-    if (location) name.textContent = location.name
-  }
-
-  closeSidebar () {
-    this.select('[data-sidebar]').close()
-  }
-
-  onOpenSidebar () {
-    this.select('[data-sidebar]').open()
-  }
+    //if (location) name.textContent = location.name
+  //}
 
   /** @param {CustomEvent} event */
   onListItemSelected (event) {
@@ -128,8 +124,8 @@ export class RootComponent extends Component {
       })
     )
 
-    this.closeSidebar()
-    this.updatePageName()
+    //this.updatePageName()
+
   }
 
   get locations () {
@@ -168,71 +164,5 @@ export class RootComponent extends Component {
       { name: 'Zone', path: '/base/zone' },
     ]
   }
-
-  get styles () {
-    return /* html */ `
-      <style>
-        app-root{
-          display: grid;
-          grid: auto 1fr / 1fr;
-
-          max-width: 100vw;
-          width: 100%;
-
-          max-height: 100vh;
-          height: 100vh;
-        }
-        app-root .root-content {
-          width: 100%;
-          height: 100%;
-          overflow: auto;
-          padding: 20px;
-        }
-
-        table {
-          width: 100%;
-          padding-bottom: 20px;
-        }
-
-        td, th {
-          border: 1px solid #ddd;
-          padding: 5px;
-        }
-
-        tbody tr:hover {
-          background-color: #ddd;
-        }
-
-        .introduction {
-          padding-bottom: 25px;
-        }
-
-        .implementation {
-          padding: 25px;
-          width: 90vw;
-        }
-
-        .examples {
-          padding: 15px;
-        }
-
-        .reference {
-          padding: 15px;
-        }
-
-        .example {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          background-color: whitesmoke;
-          padding: 10px;
-        }
-
-        .example .code {
-          padding: 10px;
-        }
-
-      </style>
-    `
-  }
 }
-customElements.define('app-root', RootComponent)
+customElements.define(tag, RootComponent)
