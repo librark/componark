@@ -1,50 +1,74 @@
-@use "base/theme/variables" as *;
-
-@mixin accordion() {
-  .ark-accordion {
-    display: grid;
-    width: 100%;
-  }
+.ark-accordion {
+  display: grid;
+  width: 100%;
+  border-radius: 5px;
 }
 
-@mixin accordion_tab() {
-  .ark-accordion-tab {
+.ark-accordion-tab {
+  border-style: solid;
+
+  &:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+
+  &[active] {
+    margin-bottom: $margin;
+
+    &~& {
+      margin-top: 0;
+    }
+  }
+
+  &[active]~&:not([active]) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &:not([active])~&[active] {
+    margin-top: $margin;
+  }
+
+  user-select: none;
+  //background: $background;
+
+  &[disabled] {
+    pointer-events: none;
+    color: gray;
+    //background: rgba($color: gray, $alpha: 0.1);
+  }
+
+  &__btn-header {
+    width: auto;
+    height: 2.5rem;
+
+    text-align: left;
+    padding-left: 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
     user-select: none;
-    background: $background;
 
-    &[disabled] {
-      pointer-events: none;
-      color: gray;
-      background: rgba($color: gray, $alpha: 0.1);
+    small {
+      all: unset;
     }
+  }
 
-    &__btn-header {
-      width: auto;
-      height: 2.5rem;
+  &__content {
+    display: none;
+    //background: $white;
+    //color: $dark;
+  }
 
-      text-align: left;
-      padding-left: 10px;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-
-      user-select: none;
-
-      small {
-        all: unset;
-      }
-    }
-
-    &__content {
-      display: none;
-      background: $white;
-      color: $dark;
-    }
-
-    [active] &__content {
-      display: block;
-    }
+  [active] &__content {
+    display: block;
   }
 }

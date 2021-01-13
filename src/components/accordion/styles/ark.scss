@@ -1,4 +1,7 @@
 .ark-accordion {
+  display: grid;
+  width: 100%;
+
   color: green;
   background-color: red;
   &__header {

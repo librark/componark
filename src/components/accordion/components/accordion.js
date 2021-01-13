@@ -17,10 +17,6 @@ export class Accordion extends Component {
     return super.render()
   }
 
-  async load () {
-    //this.addEventListener('click', this.onAccordionTabClick.bind(this))
-  }
-
   /** @param {MouseEvent} event */
   _onClick (event) {
     event.stopPropagation()
