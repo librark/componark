@@ -1,8 +1,4 @@
 /**
- * Taken from: https://gist.github.com/dtomasi/9327f704398be8d8ff5d0ab560b95641
- * */
-
-/**
  * Convert Strings from camelCase to kebab-case
  * @param {string} input @returns {string} */
 export function camelToKebab (input) {

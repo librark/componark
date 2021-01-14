@@ -1,4 +1,4 @@
-import { Component, html } from 'base/component'
+import { Component } from 'base/component'
 
 const tag = 'ark-accordion-tab'
 export class AccordionTab extends Component {
@@ -18,7 +18,7 @@ export class AccordionTab extends Component {
   }
 
   render () {
-    this.content = this.header ? html`
+    this.content = this.header ? /* html */`
       <div class="ark-accordion-tab__btn-header">
         <small data-accordion-tab-header>${this.header}</small>
       </div>
