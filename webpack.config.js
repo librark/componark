@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
         TARGET: JSON.stringify(target)
       }),
       new EnvironmentPlugin({
-        ARK_THEME: 'material'
+        ARK_THEME: 'ark'
       })
     ],
     module: {

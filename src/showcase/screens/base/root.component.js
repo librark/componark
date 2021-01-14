@@ -2,14 +2,9 @@ import hljs from 'highlight.js/lib/core';
 import 'highlight.js/styles/github.css';
 import xml from 'highlight.js/lib/languages/xml';
 import { Component } from 'base/component'
-import './root.component.scss'
-
-//import { Component } from '../loader'
-//import { ThemeService } from '../theme/theme.service'
 
 hljs.registerLanguage('html', xml);
 hljs.initHighlightingOnLoad()
-
 
 // @ts-ignore
 // eslint-disable-next-line no-undef
@@ -21,6 +16,7 @@ export class RootComponent extends Component {
   init (context) {
     this.path = context.path
 
+
     // Local
     this.currentLocation = window.location
     //this.themeService = new ThemeService()
@@ -29,7 +25,9 @@ export class RootComponent extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.style.setProperty('--background', 'pink')
+
+    this.content = /* html */ `
     <nav class="app-root__navbar">
       <h1>Componark</h1>
       <ul>
@@ -165,4 +163,13 @@ export class RootComponent extends Component {
     ]
   }
 }
-customElements.define(tag, RootComponent)
+
+const styles = `
+:root {
+  --background: purple;
+}
+other {
+color: blue;
+}
+`
+Component.define(tag, RootComponent, styles)

@@ -9,7 +9,7 @@ export function define(tag, element, styles) {
   style.id = `${tag}-style`
   document.head.appendChild(style);
 
-  const rules = styles.split(/(?<=})/)
+  const rules = styles.trim().split(/(?<=})/)
   for (const rule of rules) {
     style.sheet.insertRule(rule)
   }
