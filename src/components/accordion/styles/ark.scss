@@ -1,10 +1,9 @@
-.ark-accordion {
-  display: grid;
-  width: 100%;
+@use'./shared.scss';
 
-  color: green;
-  background-color: red;
-  &__header {
-    color: red;
-  }
+.ark-accordion {
+  @include shared.ark-accordion;
+}
+
+.ark-accordion-tab {
+  @include shared.ark-accordion-tab;
 }

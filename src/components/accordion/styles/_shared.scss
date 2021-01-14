@@ -1,10 +1,12 @@
-.ark-accordion {
+@use './config' as *;
+
+@mixin ark-accordion {
   display: grid;
   width: 100%;
   border-radius: 5px;
 }
 
-.ark-accordion-tab {
+@mixin ark-accordion-tab {
   border-style: solid;
 
   &:first-child {
@@ -35,12 +37,12 @@
   }
 
   user-select: none;
-  //background: $background;
+  background: $background;
 
   &[disabled] {
     pointer-events: none;
     color: gray;
-    //background: rgba($color: gray, $alpha: 0.1);
+    background: rgba($color: gray, $alpha: 0.1);
   }
 
   &__btn-header {
@@ -64,8 +66,6 @@
 
   &__content {
     display: none;
-    //background: $white;
-    //color: $dark;
   }
 
   [active] &__content {

@@ -4,7 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-// @ts-ignore
 module.exports = (env, argv) => {
   const devMode = argv.mode === 'development'
   const target = env.TARGET
@@ -53,7 +52,7 @@ module.exports = (env, argv) => {
               loader: 'sass-loader',
               options: {
                 sassOptions: {
-                  outputStyle: 'compressed',
+                  outputStyle: devMode ? 'expanded': 'compressed',
                   includePaths: ['./node_modules']
                 }
               }
@@ -90,7 +89,6 @@ module.exports = (env, argv) => {
   }
 
   if (devMode) {
-    // @ts-ignore
     config.devServer = {
       contentBase: './dist',
       historyApiFallback: true,

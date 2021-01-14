@@ -1,7 +1,9 @@
-//@use "~bootstrap/scss/bootstrap.scss";
+@use'./shared.scss';
 
-@mixin accordion() {
-  .ark-accordion {
-    @extend .accordion;
-  }
+.ark-accordion {
+  @include shared.ark-accordion;
+}
+
+.ark-accordion-tab {
+  @include shared.ark-accordion-tab;
 }
