@@ -1,116 +1,98 @@
 import { Accordion, AccordionTab } from '../../../src/components/accordion'
 
 describe('Accordion', () => {
-  it('can be instantiated', () => {
-    const accordion = new Accordion()
-
-    const tab1 = new AccordionTab()
-    tab1.setAttribute('header', 'tab1')
-    tab1.init().render()
-
-    const tab2 = new AccordionTab()
-    tab2.setAttribute('header', 'tab2')
-    tab2.init().render()
-
-    accordion.append(tab1)
-    accordion.append(tab2)
-
-    accordion.init().render().load()
-
-    expect(!tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
-
-    const hederTab1 = /** @type {HTMLElement} */(
-      tab1.querySelector('.ark-accordion-tab__btn-header')
-    )
-
-    const hederTab2 = /** @type {HTMLElement} */(
-      tab2.querySelector('.ark-accordion-tab__btn-header')
-    )
-
-    hederTab1.click()
-    expect(tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
-
-    hederTab2.click()
-    expect(!tab1.hasAttribute('active')).toBeTruthy()
-    expect(tab2.hasAttribute('active')).toBeTruthy()
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
   })
 
-  it('can be event delegation', () => {
-    const accordion = new Accordion()
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
 
-    const tab1 = new AccordionTab()
-    tab1.setAttribute('header', 'tab1')
-    tab1.init().render()
+  it('can be instantiated', () => {
+    container.innerHTML = `
+    <ark-accordion>
+      <ark-accordion-tab data-tab1 header="First Tab">
+        <span>First Content</span>
+      </ark-accordion-tab>
+      <ark-accordion-tab data-tab2 header="Second Tab">
+        <span>Second Content</span>
+      </ark-accordion-tab>
+    <ark-accordion>
+    `
+    const accordion = container.querySelector('ark-accordion')
+    accordion.init().render()
 
-    const tab2 = new AccordionTab()
-    tab2.setAttribute('header', 'tab2')
-    tab2.init().render()
+    const tab1 = accordion.select('[data-tab1]')
+    expect(tab1.getAttribute('header')).toEqual('First Tab')
+    expect(tab1.getAttribute('index')).toEqual('0')
 
-    accordion.append(tab1)
-    accordion.append(tab2)
+    const tab2 = accordion.select('[data-tab2]')
+    expect(tab2.getAttribute('header')).toEqual('Second Tab')
+    expect(tab2.getAttribute('index')).toEqual('1')
+  })
 
-    accordion.init().render().load()
+  it('can handle events delegation', () => {
+    container.innerHTML = `
+    <ark-accordion>
+      <ark-accordion-tab data-tab1 header="First Tab">
+        <span>First Content</span>
+      </ark-accordion-tab>
+      <ark-accordion-tab data-tab2 header="Second Tab">
+        <span>Second Content</span>
+      </ark-accordion-tab>
+    <ark-accordion>
+    `
+    const accordion = container.querySelector('ark-accordion')
 
-    expect(!tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
+    const tab1 = accordion.select('[data-tab1]')
+    const tab2 = accordion.select('[data-tab2]')
+
+    expect(tab1.hasAttribute('active')).toBeFalsy()
+    expect(tab2.hasAttribute('active')).toBeFalsy()
 
     tab1.click()
 
-    expect(!tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
-
-    const heder = /** @type {HTMLElement} */(
-      tab1.querySelector('.ark-accordion-tab__btn-header')
-    )
-
-    if (heder) heder.click()
-
     expect(tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
+    expect(tab2.hasAttribute('active')).toBeFalsy()
+
+    tab2.click()
+
+    expect(tab1.hasAttribute('active')).toBeFalsy()
+    expect(tab2.hasAttribute('active')).toBeTruthy()
   })
 
-  it('can be instantiated multiple', () => {
-    const accordion = new Accordion()
+  it('can have multiple items opened', () => {
+    container.innerHTML = `
+    <ark-accordion>
+      <ark-accordion-tab data-tab1 header="First Tab">
+        <span>First Content</span>
+      </ark-accordion-tab>
+      <ark-accordion-tab data-tab2 header="Second Tab">
+        <span>Second Content</span>
+      </ark-accordion-tab>
+    <ark-accordion>
+    `
+    const accordion = container.querySelector('ark-accordion')
     accordion.setAttribute('multiple', 'multiple')
 
-    const tab1 = new AccordionTab()
-    tab1.setAttribute('header', 'tab1')
-    tab1.init().render()
+    const tab1 = accordion.select('[data-tab1]')
+    const tab2 = accordion.select('[data-tab2]')
 
-    const tab2 = new AccordionTab()
-    tab2.setAttribute('header', 'tab2')
-    tab2.init().render()
+    expect(tab1.hasAttribute('active')).toBeFalsy()
+    expect(tab2.hasAttribute('active')).toBeFalsy()
 
-    accordion.append(tab1)
-    accordion.append(tab2)
+    tab1.click()
 
-    accordion.init().render().load()
-
-    expect(!tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
-
-    tab1.open()
     expect(tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
+    expect(tab2.hasAttribute('active')).toBeFalsy()
 
-    tab2.open()
+    tab2.click()
+
     expect(tab1.hasAttribute('active')).toBeTruthy()
     expect(tab2.hasAttribute('active')).toBeTruthy()
-
-    tab2.close()
-    expect(tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
-
-    tab1.close()
-    expect(!tab1.hasAttribute('active')).toBeTruthy()
-    expect(!tab2.hasAttribute('active')).toBeTruthy()
-
-    const heder = /** @type {HTMLElement} */(
-      tab1.querySelector('.ark-accordion-tab__btn-header')
-    )
-
-    if (heder) heder.click()
   })
 })

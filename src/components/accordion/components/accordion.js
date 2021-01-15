@@ -22,13 +22,8 @@ export class Accordion extends Component {
     event.stopPropagation()
 
     const target = /** @type {HTMLElement} */ (event.target)
-    const header = target.closest('.ark-accordion-tab__btn-header')
-
-    if (!header) return
-
     const tab = /** @type {AccordionTab} */ (
-      header.closest('ark-accordion-tab')
-    )
+      target.closest('ark-accordion-tab'))
 
     tab.toggle()
 

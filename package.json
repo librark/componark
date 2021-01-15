@@ -101,7 +101,8 @@
       "node_modules/(?!@knowark)"
     ],
     "moduleNameMapper": {
-      "\\.(css|less|scss)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png)$": "<rootDir>/tests/__mocks__/fileMock.js",
+      "\\.(css|less|sass|scss)$": "<rootDir>/tests/__mocks__/styleMock.js"
     }
   }
 }

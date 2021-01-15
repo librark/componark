@@ -19,7 +19,7 @@ export class AccordionTab extends Component {
 
   render () {
     this.content = this.header ? /* html */`
-      <div class="ark-accordion-tab__btn-header">
+      <div class="ark-accordion-tab__header">
         <small data-accordion-tab-header>${this.header}</small>
       </div>
       <div class="ark-accordion-tab__content">

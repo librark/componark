@@ -22,7 +22,6 @@ export class AccordionDemo extends Component {
       <hr/>
       <h1>multiple</h1>
 
-
       <ark-accordion multiple>
         <ark-accordion-tab header="tab A" >
           <span>content tab A</span>
@@ -37,7 +36,6 @@ export class AccordionDemo extends Component {
           <span>content tab D</span>
         </ark-accordion-tab>
       </ark-accordion>
-
     `
     return super.render()
   }

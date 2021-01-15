@@ -1,13 +1,5 @@
 // @ts-nocheck
 
-let styles = null
+const design = process.env.ARK_DESIGN
 
-if (process.env.ARK_THEME === 'ark') {
-  styles = require('./ark.scss').default.toString()
-} else if (process.env.ARK_THEME === 'material') {
-  styles = require('./material.scss').default.toString()
-} else if (process.env.ARK_THEME === 'bootstrap') {
-  styles = require('./bootstrap.scss').default.toString()
-}
-
-export {styles}
+export const styles = require(`./${design}.scss`).default?.toString()
