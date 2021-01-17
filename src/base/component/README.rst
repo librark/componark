@@ -52,7 +52,21 @@ constructor()
 This is a custom element's *standard* method. The constructor *must not*
 receive any parameters and is invoked every time a new instance of a
 *Component* is **created**. The default constructor implementation calls the
-**init()** method without parameters and that is the place in which custom
+**init()** method with an empty object and that is the place in which custom
 initialization of state should be performed when using componark. The automatic
 syncronization between reflected properties and attributes is also done inside
 the constructor.
+
+init(context: object)
+^^^^^^^^^^^^^^^^^^^^^
+
+The **init()** method is the place where state initialization of the component
+should be made. It is called without context arguments by the constructor on
+component creation and thus, should resiliently handle any form of attributes
+received to set the state of the component before **rendering**. The *init()*
+method should be called as well in parent components, for *updating* the
+state of the nested component and then explicitly invoking **render()** to
+present those changes in the user interface. The **init()** method returns the 
+current instance (i.e. *this*) to enable chaining, so don't forget to return
+*super.init()* when extending this method.
+
