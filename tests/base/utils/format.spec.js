@@ -1,4 +1,4 @@
-import { camelToKebab, kebabToCamel, snakeToCamel } from '../../src/utils'
+import { camelToKebab, kebabToCamel, snakeToCamel } from 'base/utils'
 
 describe('Format', () => {
   it('can convert camel to kebab', () => {

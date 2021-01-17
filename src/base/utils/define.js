@@ -1,7 +1,7 @@
 /** @param {string} tag
  * @param {CustomElementConstructor} element
  * @param {string} styles **/
-export function define(tag, element, styles) {
+export function define(tag, element, styles=null) {
   customElements.define(tag, element)
   if (!styles) return
 

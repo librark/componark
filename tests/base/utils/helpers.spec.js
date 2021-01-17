@@ -1,4 +1,4 @@
-import { listen, reflect } from '../../src/utils'
+import { listen, reflect } from 'base/utils'
 
 describe('Helpers', () => {
   it('does not allow invalid attribute', () => {
