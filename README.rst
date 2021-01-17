@@ -22,15 +22,3 @@ For theming one may use:
 
 - primary
 - secondary
-
-Credentials
-###########
-
-+-----------+----------------+
-| user      | password       |
-+-----------+----------------+
-| nubark    | siJtgC2I       |
-+-----------+----------------+
-
-
-URL: http://componark.nubark.cloud/
