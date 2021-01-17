@@ -9,10 +9,8 @@ of course use the pre-built components in this library in their composition.
 Reference
 =========
 
-
 Usage
 -----
-
 
 A new component (i.e. custom element) should be created by just extending the
 *Component* base class.
@@ -46,8 +44,8 @@ simplify state management and the rendering process.
 Methods
 -------
 
-*constructor()*
-^^^^^^^^^^^^^^^
+constructor()
+^^^^^^^^^^^^^
 
 This is a custom element *standard* method. The constructor *must not*
 receive any parameters and is invoked every time a new instance of a
@@ -57,8 +55,8 @@ initialization of state should be performed when using componark. The automatic
 syncronization between reflected properties and attributes is also done inside
 the constructor.
 
-*init(context: object)*
-^^^^^^^^^^^^^^^^^^^^^^^
+init(context: object)
+^^^^^^^^^^^^^^^^^^^^^
 
 The **init()** method is the place where state initialization of the component
 should be made. It is called without context arguments by the constructor on
@@ -70,8 +68,8 @@ present those changes in the user interface. The **init()** method returns the
 current instance (i.e. *this*) to enable chaining, so don't forget to return
 *super.init()* when extending this method.
 
-*connectedCallback()*
-^^^^^^^^^^^^^^^^^^^^^
+connectedCallback()
+^^^^^^^^^^^^^^^^^^^
 
 The *connectedCallback()* method is one of the default lifecycle callbacks or
 reactions of the `custom elements specification
@@ -82,16 +80,16 @@ this reference which are better suited to provide customization and extension.
 The **connectedCallback()** is invoked every time a *Component* is inserted
 into the *DOM* (i.e. injected in the page).
 
-*async update()*
-^^^^^^^^^^^^^^^^
+async update()
+^^^^^^^^^^^^^^
 
 The *update()* method is an *asynchronous* consolidation method whose purpose
 is to simultaneously call **render()** and **load()**. The *update()* method is
 called by the *connectedCallback()* standard reaction and after first injection
 might also be called explicitly by user code.
 
-*render()*
-^^^^^^^^^^
+render()
+^^^^^^^^
 
 This method should be extended by every component to set its visual
 representation (i.e. html) based on its current state. The produced document
@@ -103,8 +101,8 @@ environmental state. The **render()** method returns the current instance
 (i.e. *this*) to enable chaining, so don't forget to return *super.render()*
 when extending this method.
 
-*async load()*
-^^^^^^^^^^^^^^
+async load()
+^^^^^^^^^^^^
 
 The *load()* lifecycle asynchronous method is the place where custom data
 fetching or other kinds of asynchronous operations should be performed. This
@@ -112,4 +110,4 @@ method is invoked by *connectedCallback()* every time the *Component* is
 injected into the DOM (in an indirect manner through *update()*). After
 finishing its asynchronous tasks (e.g. obtaining some requested external data)
 the *load()* method might change the component's state and presentation and
-event explicitly call *render()*.
+even explicitly call *render()*.
