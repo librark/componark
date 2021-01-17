@@ -42,3 +42,17 @@ simplify state management and the rendering process.
         - **render()**
         - **async load()**
 
+
+Methods
+-------
+
+constructor()
+^^^^^^^^^^^^^
+
+This is a custom element's *standard* method. The constructor *must not*
+receive any parameters and is invoked every time a new instance of a
+*Component* is **created**. The default constructor implementation calls the
+**init()** method without parameters and that is the place in which custom
+initialization of state should be performed when using componark. The automatic
+syncronization between reflected properties and attributes is also done inside
+the constructor.
