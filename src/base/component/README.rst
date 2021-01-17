@@ -66,7 +66,39 @@ component creation and thus, should resiliently handle any form of attributes
 received to set the state of the component before **rendering**. The *init()*
 method should be called as well in parent components, for *updating* the
 state of the nested component and then explicitly invoking **render()** to
-present those changes in the user interface. The **init()** method returns the 
+present those changes in the user interface. The **init()** method returns the
 current instance (i.e. *this*) to enable chaining, so don't forget to return
 *super.init()* when extending this method.
 
+connectedCallback()
+^^^^^^^^^^^^^^^^^^^
+
+The *connectedCallback()* method is one of the default lifecycle callbacks or
+reactions of the `custom elements specification
+<https://developer.mozilla.org/en-US/docs/Web/Web_Components/
+Using_custom_elements#using_the_lifecycle_callbacks>`_. This method shouldn't
+be extended directly by Componark's components as there are other methods in
+this reference which are better suited to provide customization and extension.
+The **connectedCallback()** is invoked every time a *Component* is inserted
+into the *DOM* (i.e. injected in the page).
+
+async update()
+^^^^^^^^^^^^^^
+
+The *update()* method is an *asynchronous* consolidation method whose purpose
+is to simultaneously call **render()** and **load()**. The *update()* method is
+called by the *connectedCallback()* standard reaction and after first injection
+might also be called explicitly by user code.
+
+render()
+^^^^^^^^
+
+This method should be extended by every component to set its visual
+representation (i.e. html) based on its current state. The produced document
+string should be assigned to the **content** property of the *Component*
+which in turn will inject it into the *DOM*. Conditionals, loops and any kind
+of logic can be used inside the *render()* method to dynamically set the
+*Components* presentation based on its attributes, properties or any other
+environmental state. The **render()** method returns the current instance
+(i.e. *this*) to enable chaining, so don't forget to return *super.render()*
+when extending this method.
