@@ -38,11 +38,17 @@ export class Component extends HTMLElement {
   }
 
   connectedCallback () {
-    this.render()
-    this.load()?.catch(error => {
-      console.error(`{this.tagName}: "load()" error!`)
+    this.update()
+  }
+
+  async update() {
+    try {
+      this.render()
+      await this.load()
+    } catch (error) {
+      console.error(`{this.tagName}: Update error!`)
       throw error 
-    })
+    }
   }
 
   /** @return {Component} */
