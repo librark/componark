@@ -1,4 +1,6 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
+import { styles } from '../styles'
+
 
 export class Alert extends Component {
   init (context = {}) {
@@ -52,9 +54,6 @@ export class Alert extends Component {
       context.cancelButtonBackground || 'light'
     )
 
-    // local variables
-    this.global = document
-
     return super.init()
   }
 
@@ -87,8 +86,8 @@ export class Alert extends Component {
     return super.render()
   }
 
-  load () {
-    this.querySelectorAll('[close]').forEach(element =>
+  async load () {
+    this.selectAll('[close]').forEach(element =>
       element.addEventListener('click', _ => this.close())
     )
   }
@@ -164,7 +163,7 @@ export class Alert extends Component {
       return null
     }
 
-    const button = this.global.createElement('button')
+    const button = document.createElement('button')
     button.setAttribute('listen', '')
     button.setAttribute('on-click', '_clickConfirmButton')
     button.setAttribute('alert-confirm-button', '')
@@ -197,7 +196,7 @@ export class Alert extends Component {
       return null
     }
 
-    const button = this.global.createElement('button')
+    const button = document.createElement('button')
     button.setAttribute('listen', '')
     button.setAttribute('on-click', '_clickCancelButton')
     button.setAttribute('alert-cancel-button', '')
@@ -228,4 +227,4 @@ export class Alert extends Component {
     }
   }
 }
-customElements.define('ark-alert', Alert)
+Component.define('ark-alert', Alert, styles)

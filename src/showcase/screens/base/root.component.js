@@ -25,8 +25,6 @@ export class RootComponent extends Component {
   }
 
   render () {
-    this.style.setProperty('--background', 'pink')
-
     this.content = /* html */ `
     <nav class="app-root__navbar">
       <h1>Componark</h1>
@@ -166,10 +164,8 @@ export class RootComponent extends Component {
 
 const styles = `
 :root {
-  --background: purple;
-}
-other {
-color: blue;
+  color: black;
+  --background: cyan;
 }
 `
 Component.define(tag, RootComponent, styles)

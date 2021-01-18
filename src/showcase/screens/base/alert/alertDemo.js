@@ -1,4 +1,5 @@
-import { Alert, Component } from '../../loader'
+import { Component } from 'base/component'
+import { Alert } from 'components/alert'
 
 export class AlertDemo extends Component {
   init (context) {
@@ -8,7 +9,7 @@ export class AlertDemo extends Component {
   render () {
     this.innerHTML = /* html */ `
       <div>
-        <p>This is a alert.</p>
+        <p>This is an alert.</p>
         <button listen on-click="_onClick">open</button>
         <!-- <button btn-toggle>toggle</button> -->
       </div>
@@ -46,4 +47,4 @@ export class AlertDemo extends Component {
     }, this)
   }
 }
-customElements.define('demo-alert', AlertDemo)
+Component.define('demo-alert', AlertDemo)

@@ -1,0 +1,18 @@
+@use'./shared.scss';
+
+.ark-alert {
+  @include shared.ark-alert;
+
+  &__header {
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    margin-bottom: 0.5rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

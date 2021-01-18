@@ -2,11 +2,7 @@ import { AlertDemo } from './alertDemo'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({
-    strategy: {
-      AlertDemo: {
-        method: 'component'
-      }
-    },
+    strategy: {},
     factory: new ComponentFactory()
   })
 
@@ -16,10 +12,10 @@ export function hub (parentResolver) {
 export class ComponentFactory {
   /** @param {string} method */
   extract (method) {
-    return this[`_${method}`]
+    return this[`${method}`]
   }
 
-  _component () {
+  alertDemo () {
     return new AlertDemo()
   }
 }
