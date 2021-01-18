@@ -20,6 +20,10 @@ Render
 The **render()** function must **set the innerHTML** property of an element and
 and must **return its outerHTML** property.
 
+Reference
+=========
+
+- `Base Component <src/base/component>`_
 
 Theming
 #######
