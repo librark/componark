@@ -9,7 +9,7 @@ export class AccordionTab extends Component {
 
   /** @param {Object} context */
   init (context = {}) {
-    this.header = context.header
+    this.header = context.header || ""
     return super.init(context)
   }
 
