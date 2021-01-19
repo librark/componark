@@ -1,7 +1,7 @@
 import { Component } from 'base/component'
 import { styles } from '../styles'
 
-
+const tag = 'ark-alert'
 export class Alert extends Component {
   init (context = {}) {
     this.title = context.title || this.title || ''
@@ -45,7 +45,7 @@ export class Alert extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <div class="ark-alert__content">
         <div class="ark-alert__header">
           ${this._renderTitle()}
@@ -144,4 +144,4 @@ export class Alert extends Component {
   }
 
 }
-Component.define('ark-alert', Alert, styles)
+Component.define(tag, Alert, styles)

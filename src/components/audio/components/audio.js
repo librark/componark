@@ -1,9 +1,9 @@
-import { Component } from '../../component'
-import { getSlots } from '../../../utils'
+import { Component } from 'base/component'
+import { getSlots } from 'base/utils'
 
+const tag = 'ark-audio'
 export class Audio extends Component {
   init (context = {}) {
-    // local variables
     this.interval = null
     this.totalSeconds = 0
     this.slots = this.slots || getSlots(this)
@@ -15,17 +15,17 @@ export class Audio extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`
-      <div class="ark-audio__recording-time">
+    this.content = /* html */`
+      <div class="ark-audio__time">
         ${this._getSlots('microphone')}
         <label data-recording-time></label>
       </div>
 
-      <div class="ark-audio--buttons">
-        <button class="ark-audio--button-start" listen on-click="start">
+      <div class="ark-audio__buttons">
+        <button class="ark-audio__start" listen on-click="start">
           ${this._getSlots('start')}
         </button>
-        <button class="ark-audio--button-stop" listen on-click="stop">
+        <button class="ark-audio__stop" listen on-click="stop">
           ${this._getSlots('stop')}
         </button>
       </div>
@@ -33,8 +33,6 @@ export class Audio extends Component {
 
     return super.render()
   }
-
-  load () { }
 
   disconnectedCallback () {
     this.stop()
@@ -188,4 +186,4 @@ export class Audio extends Component {
     return this.querySelector('[data-recording-time]')
   }
 }
-customElements.define('ark-audio', Audio)
+customElements.define(tag, Audio)
