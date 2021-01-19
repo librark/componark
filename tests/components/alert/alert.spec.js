@@ -1,4 +1,4 @@
-import { Alert } from '../../../src/components/alert'
+import { Alert } from 'components/alert'
 
 describe('Alert', () => {
   it('can be instantiated', () => {
@@ -6,8 +6,7 @@ describe('Alert', () => {
     alert.init()
     expect(alert).toBeTruthy()
 
-    const init = alert.init({})
-    expect(alert === init).toBeTruthy()
+    expect(alert).toBe(alert.init({}))
 
     expect(!alert.title).toBeTruthy()
     expect(!alert.text).toBeTruthy()
@@ -21,7 +20,7 @@ describe('Alert', () => {
     expect(alert.cancelButtonBackground).toEqual('light')
   })
 
-  it('can be instantiated', () => {
+  it('can be initialized', () => {
     const alert = new Alert()
     alert.connectedCallback()
 
@@ -42,32 +41,12 @@ describe('Alert', () => {
     expect(alert.text).toEqual('Contenido')
     expect(alert.horizontal).toEqual('end')
     expect(alert.vertical).toEqual('left')
-    expect(!alert.showConfirmButton).toBeTruthy()
+    expect(alert.showConfirmButton).toBeFalsy()
     expect(alert.confirmButtonText).toEqual('confirmButtonText')
     expect(alert.confirmButtonBackground).toEqual('red')
-    expect(!alert.showCancelButton).toBeTruthy()
+    expect(alert.showCancelButton).toBeFalsy()
     expect(alert.cancelButtonText).toEqual('cancelButtonText')
     expect(alert.cancelButtonBackground).toEqual('blue')
-  })
-
-  it('parse Boolean Value', function () {
-    const alert = new Alert()
-    // @ts-ignore
-    expect(alert._parseBooleanValue('')).toBeTruthy()
-    // @ts-ignore
-    expect(alert._parseBooleanValue('true')).toBeTruthy()
-    // @ts-ignore
-    expect(alert._parseBooleanValue(true)).toBeTruthy()
-    // @ts-ignore
-    expect(!alert._parseBooleanValue('false')).toBeTruthy()
-    // @ts-ignore
-    expect(!alert._parseBooleanValue(false)).toBeTruthy()
-    // @ts-ignore
-    expect(!alert._parseBooleanValue(undefined)).toBeTruthy()
-    // @ts-ignore
-    expect(!alert._parseBooleanValue(123)).toBeTruthy()
-    // @ts-ignore
-    expect(!alert._parseBooleanValue('123')).toBeTruthy()
   })
 
   it('can close from scrim event', function () {
@@ -87,39 +66,42 @@ describe('Alert', () => {
     expect(!alert.hasAttribute('hidden')).toBeTruthy()
   })
 
-  it('can close from scrim event', function () {
-    /** @type {Alert} */
+  it('can close from scrim event on cancel', function () {
+    const container = document.createElement('div')
     const alert = Alert.launch({
       title: 'hello',
       text: 'word',
       showCancelButton: true,
       showConfirmButton: true
-    })
+    }, container)
     alert.render()
 
-    const cancel = alert.querySelector('[alert-cancel-button]')
-    const confirm = alert.querySelector('[alert-confirm-button]')
+    expect(container.querySelector('ark-alert')).toBeTruthy()
+    const cancel = alert.select('.ark-alert__cancel')
 
-    // @ts-ignore
     cancel.click()
-    // @ts-ignore
-    confirm.click()
+    expect(container.querySelector('ark-alert')).toBeFalsy()
   })
 
-  it('can close from scrim event', function () {
-    /** @type {Alert} */
-    let alert = Alert.launch({
+  it('can close from scrim event on confirm', function () {
+    const container = document.createElement('div')
+    const alert = Alert.launch({
       title: 'hello',
       text: 'word',
       showCancelButton: true,
       showConfirmButton: true
-    })
+    }, container)
     alert.render()
 
-    // @ts-ignore
-    expect(alert._createConfirmButton()).toBeTruthy()
+    expect(container.querySelector('ark-alert')).toBeTruthy()
+    const confirm = alert.select('.ark-alert__confirm')
 
-    alert = Alert.launch({
+    confirm.click()
+    expect(container.querySelector('ark-alert')).toBeFalsy()
+  })
+
+  it('can have no buttons', function () {
+    const alert = Alert.launch({
       title: 'hello',
       text: 'word',
       showCancelButton: false,
@@ -127,7 +109,10 @@ describe('Alert', () => {
     })
     alert.render()
 
-    // @ts-ignore
-    expect(!alert._createConfirmButton()).toBeTruthy()
+    expect(document.body.querySelector('ark-alert')).toBeTruthy()
+    const confirm = alert.select('.ark-alert__confirm')
+    const cancel = alert.select('.ark-alert__cancel')
+    expect(confirm).toBeFalsy()
+    expect(cancel).toBeFalsy()
   })
 })

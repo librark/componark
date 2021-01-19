@@ -4,55 +4,29 @@ import { styles } from '../styles'
 
 export class Alert extends Component {
   init (context = {}) {
-    this.title = this._defaultValue(this.title, context.title)
-    this.text = this._defaultValue(this.text, context.text)
+    this.title = context.title || this.title || ''
+    this.text = context.text || this.text || ''
 
-    this.horizontal = this._defaultValue(
-      this.horizontal,
-      context.horizontal || 'center'
-    )
+    this.horizontal = context.horizontal || this.horizontal || 'center'
+    this.vertical = context.vertical || this.vertical || 'center'
 
-    this.vertical = this._defaultValue(
-      this.vertical,
-      context.vertical || 'center'
-    )
+    this.showConfirmButton = context.showConfirmButton ?? true
 
-    let showConfirmButton = context.showConfirmButton
-    showConfirmButton =
-      showConfirmButton === undefined ? true : showConfirmButton
+    this.confirmButtonText = (
+      context.confirmButtonText || this.confirmButtonText || 'Aceptar')
 
-    this.showConfirmButton = this._defaultValue(
-      this.showConfirmButton,
-      showConfirmButton
-    )
+    this.confirmButtonBackground = (
+      context.confirmButtonBackground || 
+      this.confirmButtonBackground || 'primary')
 
-    this.confirmButtonText = this._defaultValue(
-      this.confirmButtonText,
-      context.confirmButtonText || 'Aceptar'
-    )
+    this.showCancelButton = context.showCancelButton ?? true
 
-    this.confirmButtonBackground = this._defaultValue(
-      this.confirmButtonBackground,
-      context.confirmButtonBackground || 'primary'
-    )
+    this.cancelButtonText = (
+      context.cancelButtonText || this.cancelButtonText || 'Cancelar')
 
-    let showCancelButton = context.showCancelButton
-    showCancelButton = showCancelButton === undefined ? true : showCancelButton
-
-    this.showCancelButton = this._defaultValue(
-      this.showCancelButton,
-      showCancelButton
-    )
-
-    this.cancelButtonText = this._defaultValue(
-      this.cancelButtonText,
-      context.cancelButtonText || 'Cancelar'
-    )
-
-    this.cancelButtonBackground = this._defaultValue(
-      this.cancelButtonBackground,
-      context.cancelButtonBackground || 'light'
-    )
+    this.cancelButtonBackground = (
+      context.cancelButtonBackground ||
+      this.cancelButtonBackground || 'light')
 
     return super.init()
   }
@@ -77,19 +51,15 @@ export class Alert extends Component {
           ${this._renderTitle()}
           ${this._renderText()}
         </div>
-        <div class="ark-alert__actions" data-alert-actions></div>
+        <div class="ark-alert__actions" data-alert-actions>
+          ${this._renderConfirmButton()}
+          ${this._renderCancelButton()}
+        </div>
       </div>
       <div class="ark-alert__scrim" listen on-click="close"></div>
     `
 
-    this._appendDefaultButtons()
     return super.render()
-  }
-
-  async load () {
-    this.selectAll('[close]').forEach(element =>
-      element.addEventListener('click', _ => this.close())
-    )
   }
 
   /** @param {Object} context @param {HTMLElement=} parent @return {Alert} */
@@ -117,10 +87,6 @@ export class Alert extends Component {
     this.hasAttribute('hidden') ? this.show() : this.hide()
   }
 
-  _defaultValue (currentValue, newValue) {
-    return newValue === undefined ? currentValue : newValue
-  }
-
   _renderTitle () {
     return this.title.length
       ? /* html */ `
@@ -143,88 +109,39 @@ export class Alert extends Component {
       : ''
   }
 
-  _appendDefaultButtons () {
-    const content = this.querySelector('[data-alert-actions]')
-
-    const confirmButton = this._createConfirmButton()
-    if (confirmButton) content.append(confirmButton)
-
-    const cancelButton = this._createCancelButton()
-    if (cancelButton) content.append(cancelButton)
-  }
-
-  /** @returns {HTMLElement} */
-  _createConfirmButton (show, text) {
-    if (
-      !this._parseBooleanValue(this.showConfirmButton) ||
-      (this._parseBooleanValue(this.showConfirmButton) &&
-        !this.confirmButtonText.length)
-    ) {
-      return null
-    }
-
-    const button = document.createElement('button')
-    button.setAttribute('listen', '')
-    button.setAttribute('on-click', '_clickConfirmButton')
-    button.setAttribute('alert-confirm-button', '')
-    button.setAttribute('background', this.confirmButtonBackground)
-    button.setAttribute('close', '')
-    button.textContent = this.confirmButtonText
-
-    return button
+  _renderConfirmButton () {
+    if (String(this.showConfirmButton).toLowerCase() !== 'true') return ''
+    return `
+      <button class="ark-alert__confirm" listen on-click="_onConfirm"
+        background="${this.confirmButtonBackground}" close>
+        ${this.confirmButtonText}
+      </button>
+    `
   }
 
   /** @param {Event} event */
-  _clickConfirmButton (event) {
+  _onConfirm (event) {
     event.stopPropagation()
-    this.dispatchEvent(
-      new CustomEvent('alert:confirm-button', {
-        detail: {
-          origin: event
-        }
-      })
-    )
+    this.emit('alert:confirm', {origin: event})
+    this.close()
   }
 
-  /** @returns {HTMLElement} */
-  _createCancelButton () {
-    if (
-      !this._parseBooleanValue(this.showCancelButton) ||
-      (this._parseBooleanValue(this.showCancelButton) &&
-        !this.cancelButtonText.length)
-    ) {
-      return null
-    }
-
-    const button = document.createElement('button')
-    button.setAttribute('listen', '')
-    button.setAttribute('on-click', '_clickCancelButton')
-    button.setAttribute('alert-cancel-button', '')
-    button.setAttribute('background', this.cancelButtonBackground)
-    button.setAttribute('close', '')
-    button.textContent = this.cancelButtonText
-
-    return button
+  _renderCancelButton () {
+    if (String(this.showCancelButton).toLowerCase() !== 'true') return ''
+    return `
+      <button class="ark-alert__cancel" listen on-click="_onCancel"
+        background="${this.cancelButtonBackground}" close>
+        ${this.cancelButtonText}
+      </button>
+    `
   }
 
   /** @param {Event} event */
-  _clickCancelButton (event) {
+  _onCancel (event) {
     event.stopPropagation()
-    this.dispatchEvent(
-      new CustomEvent('alert:cancel-button', {
-        detail: {
-          origin: event
-        }
-      })
-    )
+    this.emit('alert:cancel', {origin: event})
+    this.close()
   }
 
-  _parseBooleanValue (value) {
-    if (value === true || value === 'true' || value === '') {
-      return true
-    } else {
-      return false
-    }
-  }
 }
 Component.define('ark-alert', Alert, styles)

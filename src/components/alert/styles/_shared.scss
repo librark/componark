@@ -14,7 +14,7 @@
 
   // hidden
   &[hidden] {
-    display: none !important;
+    display: none;
   }
 
   // horizontal
@@ -69,10 +69,6 @@
     flex-flow: wrap;
     justify-content: flex-end;
     user-select: none;
-
-    &>* {
-      margin: 0.3rem;
-    }
   }
 
   &__scrim {
