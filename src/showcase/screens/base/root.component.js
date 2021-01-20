@@ -16,7 +16,6 @@ export class RootComponent extends Component {
   init (context) {
     this.path = context.path
 
-
     // Local
     this.currentLocation = window.location
     //this.themeService = new ThemeService()
@@ -25,6 +24,7 @@ export class RootComponent extends Component {
   }
 
   render () {
+    //this.style.cssText = '--background: blue;'
     this.content = /* html */ `
     <nav class="app-root__navbar">
       <h1>Componark</h1>
@@ -129,35 +129,35 @@ export class RootComponent extends Component {
       { name: 'Accordion', path: '/base/accordion' },
       { name: 'Alert', path: '/base/alert' },
       { name: 'Audio', path: '/base/audio' },
-      { name: 'Button', path: '/base/button' },
-      { name: 'Camera', path: '/base/camera' },
-      { name: 'Card', path: '/base/card' },
-      { name: 'Chart', path: '/base/chart' },
-      { name: 'Checkbox', path: '/base/checkbox' },
-      { name: 'Form', path: '/base/form' },
-      { name: 'Grid', path: '/base/grid' },
-      { name: 'Icon', path: '/base/icon' },
-      { name: 'Input', path: '/base/input' },
-      { name: 'List', path: '/base/list' },
-      { name: 'Location', path: '/base/location' },
-      { name: 'Map', path: '/base/map' },
-      { name: 'Modal', path: '/base/modal' },
-      { name: 'Multiselect', path: '/base/multiselect' },
-      { name: 'Navbar', path: '/base/navbar' },
-      { name: 'Paginator', path: '/base/paginator' },
-      { name: 'Pivot', path: '/base/pivot' },
-      { name: 'Radio', path: '/base/radio' },
-      { name: 'Select', path: '/base/select' },
-      { name: 'Sidebar', path: '/base/sidebar' },
-      { name: 'Signature', path: '/base/signature' },
-      { name: 'Spinner', path: '/base/spinner' },
-      { name: 'SplitView', path: '/base/splitview' },
-      { name: 'Table', path: '/base/table' },
-      { name: 'Tabs', path: '/base/tabs' },
-      { name: 'Tabulator', path: '/base/tabulator' },
-      { name: 'Tooltip', path: '/base/tooltip' },
-      { name: 'TreeTable', path: '/base/treetable' },
-      { name: 'Zone', path: '/base/zone' },
+      //{ name: 'Button', path: '/base/button' },
+      //{ name: 'Camera', path: '/base/camera' },
+      //{ name: 'Card', path: '/base/card' },
+      //{ name: 'Chart', path: '/base/chart' },
+      //{ name: 'Checkbox', path: '/base/checkbox' },
+      //{ name: 'Form', path: '/base/form' },
+      //{ name: 'Grid', path: '/base/grid' },
+      //{ name: 'Icon', path: '/base/icon' },
+      //{ name: 'Input', path: '/base/input' },
+      //{ name: 'List', path: '/base/list' },
+      //{ name: 'Location', path: '/base/location' },
+      //{ name: 'Map', path: '/base/map' },
+      //{ name: 'Modal', path: '/base/modal' },
+      //{ name: 'Multiselect', path: '/base/multiselect' },
+      //{ name: 'Navbar', path: '/base/navbar' },
+      //{ name: 'Paginator', path: '/base/paginator' },
+      //{ name: 'Pivot', path: '/base/pivot' },
+      //{ name: 'Radio', path: '/base/radio' },
+      //{ name: 'Select', path: '/base/select' },
+      //{ name: 'Sidebar', path: '/base/sidebar' },
+      //{ name: 'Signature', path: '/base/signature' },
+      //{ name: 'Spinner', path: '/base/spinner' },
+      //{ name: 'SplitView', path: '/base/splitview' },
+      //{ name: 'Table', path: '/base/table' },
+      //{ name: 'Tabs', path: '/base/tabs' },
+      //{ name: 'Tabulator', path: '/base/tabulator' },
+      //{ name: 'Tooltip', path: '/base/tooltip' },
+      //{ name: 'TreeTable', path: '/base/treetable' },
+      //{ name: 'Zone', path: '/base/zone' },
     ]
   }
 }
@@ -165,7 +165,16 @@ export class RootComponent extends Component {
 const styles = `
 :root {
   color: black;
-  --background: cyan;
+  --background: red;
+
+  --primary: green;
+  --roundness
+  --secondary: orange;
+
+}
+:root:hover {
+   --background: yellow;
+
 }
 `
 Component.define(tag, RootComponent, styles)

@@ -74,6 +74,10 @@ module.exports = (env, argv) => {
               }
             }
           ]
+        },
+        {
+          test: /\.(rst|d\.ts)$/,
+          loader: 'ignore-loader'
         }
       ]
     },

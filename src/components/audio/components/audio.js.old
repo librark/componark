@@ -4,59 +4,32 @@ import { getSlots } from 'base/utils'
 const tag = 'ark-audio'
 export class Audio extends Component {
   init (context = {}) {
-    this.status = context.status || this.status || 'idle'
     this.interval = null
     this.totalSeconds = 0
     this.slots = this.slots || getSlots(this)
     this.stream = null
     this.global = context.global || window
-    this.navigator = this.global.navigator
+    this.navigatorObject = navigator
 
     return super.init()
   }
 
-  reflectedProperties() {
-    return ['status']
-  }
-
   render () {
-    if (this.status === 'done') {
-      this.content = `
-      <div class="ark-audio__done">
-        <audio class="ark-audio__audio"></audio>
-        <button listen on-click="reset">❌</button>
+    this.content = /* html */`
+      <div class="ark-audio__time">
+        ${this._getSlots('microphone')}
+        <label data-recording-time></label>
       </div>
-      `
-    } else if (this.status === 'recording') {
-      this.content = `
-      <div class="ark-audio__recording">
-        <span>3:00</span>
-        <button listen on-click="stop">⏹️</button>
-      </div>
-      `
-    } else {
-      this.content = `
-      <div class="ark-audio__idle">
-        <button listen on-click="start">⏺️</button>
-      </div>
-      `
-    }
 
-    //this.content = [> html <]`
-      //<div class="ark-audio__time">
-        //${this._getSlots('microphone')}
-        //<label data-recording-time></label>
-      //</div>
-
-      //<div class="ark-audio__buttons">
-        //<button class="ark-audio__start" listen on-click="start">
-          //${this._getSlots('start')}
-        //</button>
-        //<button class="ark-audio__stop" listen on-click="stop">
-          //${this._getSlots('stop')}
-        //</button>
-      //</div>
-    //`
+      <div class="ark-audio__buttons">
+        <button class="ark-audio__start" listen on-click="start">
+          ${this._getSlots('start')}
+        </button>
+        <button class="ark-audio__stop" listen on-click="stop">
+          ${this._getSlots('stop')}
+        </button>
+      </div>
+    `
 
     return super.render()
   }
@@ -66,35 +39,14 @@ export class Audio extends Component {
   }
 
   start () {
-    this.status = 'recording'
-    this.render()
-    //this.navigator.mediaDevices.getUserMedia({
-      //audio: true
-    //}).then(stream => {
-      //const mediaRecorder = new this.global.MediaRecorder(stream)
-
-    //})
-  }
-
-  stop () {
-    this.status = 'done'
-    this.render()
-  }
-
-  reset () {
-    this.status = 'idle'
-    this.render()
-  }
-
-  startX () {
-    //this.stop()
+    this.stop()
 
     // @ts-ignore
-    this.navigator.getMedia = this.navigator.getUserMedia
+    this.navigatorObject.getMedia = this.navigatorObject.getUserMedia
 
-    if (!this.navigator.mediaDevices.getUserMedia) return
+    if (!this.navigatorObject.mediaDevices.getUserMedia) return
 
-    this.navigator.mediaDevices.getUserMedia({
+    this.navigatorObject.mediaDevices.getUserMedia({
       audio: true
     }).then(stream => {
       this.stream = stream
@@ -116,7 +68,7 @@ export class Audio extends Component {
     }).catch(e => console.error(e))
   }
 
-  stopX () {
+  stop () {
     this.global.clearInterval(this.interval)
     this.interval = null
 
@@ -234,4 +186,4 @@ export class Audio extends Component {
     return this.querySelector('[data-recording-time]')
   }
 }
-Component.define(tag, Audio)
+customElements.define(tag, Audio)

@@ -60,6 +60,7 @@
     "extract-loader": "^5.1.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "ignore-loader": "^0.1.2",
     "inspect-loader": "^1.0.0",
     "jest": "^26.6.3",
     "jest-canvas-mock": "^2.3.0",

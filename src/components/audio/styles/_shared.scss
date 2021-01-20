@@ -55,8 +55,8 @@
   }
 
   &--play {
-    background: $success !important;
-    color: $white !important;
+    background: $success;
+    color: white;
 
     [slot="microphone"] {
       animation: zoom 1s both infinite;
