@@ -5,12 +5,14 @@ const tag = 'ark-audio'
 export class Audio extends Component {
   init (context = {}) {
     this.status = context.status || this.status || 'idle'
-    this.interval = null
-    this.totalSeconds = 0
-    this.slots = this.slots || getSlots(this)
-    this.stream = null
+    //this.interval = null
+    //this.totalSeconds = 0
+    //this.slots = this.slots || getSlots(this)
+    //this.stream = null
+
+    this.recorder = null
+    this.timerId = null
     this.global = context.global || window
-    this.navigator = this.global.navigator
 
     return super.init()
   }
@@ -23,14 +25,14 @@ export class Audio extends Component {
     if (this.status === 'done') {
       this.content = `
       <div class="ark-audio__done">
-        <audio class="ark-audio__audio"></audio>
+        <audio class="ark-audio__audio" controls></audio>
         <button listen on-click="reset">❌</button>
       </div>
       `
     } else if (this.status === 'recording') {
       this.content = `
       <div class="ark-audio__recording">
-        <span>3:00</span>
+        <span class="ark-audio__timer">00:00</span>
         <button listen on-click="stop">⏹️</button>
       </div>
       `
@@ -61,75 +63,99 @@ export class Audio extends Component {
     return super.render()
   }
 
-  disconnectedCallback () {
-    this.stop()
-  }
+  //disconnectedCallback () {
+    //this.stop()
+  //}
 
-  start () {
+  async start () {
     this.status = 'recording'
     this.render()
-    //this.navigator.mediaDevices.getUserMedia({
-      //audio: true
-    //}).then(stream => {
-      //const mediaRecorder = new this.global.MediaRecorder(stream)
-
-    //})
+    const options = {audio: true}
+    const navigator = this.global.navigator
+    const stream = await navigator.mediaDevices.getUserMedia(options)
+    this.recorder = new this.global.MediaRecorder(stream)
+    this.recorder.addEventListener('dataavailable', (event) => {
+      const audio = this.select('.ark-audio__audio')
+      audio['src'] = this.global.URL.createObjectURL(event.data)
+    })
+    this.timerId = this.time()     
+    this.recorder.start()
   }
 
   stop () {
     this.status = 'done'
     this.render()
+    this.recorder.stop()
+    clearInterval(this.timerId)
+    this.recorder.stream.getTracks().forEach(
+      track => track.stop())
   }
 
   reset () {
     this.status = 'idle'
     this.render()
+    this.recorder = null
+    this.timerId = null
   }
 
-  startX () {
-    //this.stop()
+  time () {
+    let count = 0
+    return  setInterval(() => {
+      count += 1
+      const seconds = count % 60
+      const minutes = Math.trunc(count / 60)
+      let content = `${minutes < 10 ? '0' + minutes : minutes}:`
+      content += `${seconds < 10 ? '0' + seconds : seconds}`
 
-    // @ts-ignore
-    this.navigator.getMedia = this.navigator.getUserMedia
-
-    if (!this.navigator.mediaDevices.getUserMedia) return
-
-    this.navigator.mediaDevices.getUserMedia({
-      audio: true
-    }).then(stream => {
-      this.stream = stream
-      // @ts-ignore
-      this.mediaRecorder = new MediaRecorder(this.stream)
-
-      this.mediaRecorder.ondataavailable = event => {
-        this._setAudioURL(event.data)
-      }
-
-      this.mediaRecorder.onstop = _ => this._changeStyle('stop')
-
-      this.mediaRecorder.onstart = _ => {
-        this._initInterval()
-        this._changeStyle('start')
-      }
-
-      this.mediaRecorder.start()
-    }).catch(e => console.error(e))
+      const timer = this.select('.ark-audio__timer')
+      timer.textContent = content
+    }, 1000)
   }
 
-  stopX () {
-    this.global.clearInterval(this.interval)
-    this.interval = null
+  //startX () {
+    ////this.stop()
 
-    if (!this.mediaRecorder) return
+    //// @ts-ignore
+    //this.navigator.getMedia = this.navigator.getUserMedia
 
-    const tracks = this.stream ? this.stream.getTracks() : []
-    tracks.forEach(track => track.stop())
-    this.mediaRecorder.stop()
-    this.mediaRecorder = null
-    this.stream = null
+    //if (!this.navigator.mediaDevices.getUserMedia) return
 
-    this._onStopEvent()
-  }
+    //this.navigator.mediaDevices.getUserMedia({
+      //audio: true
+    //}).then(stream => {
+      //this.stream = stream
+      //// @ts-ignore
+      //this.mediaRecorder = new MediaRecorder(this.stream)
+
+      //this.mediaRecorder.ondataavailable = event => {
+        //this._setAudioURL(event.data)
+      //}
+
+      //this.mediaRecorder.onstop = _ => this._changeStyle('stop')
+
+      //this.mediaRecorder.onstart = _ => {
+        //this._initInterval()
+        //this._changeStyle('start')
+      //}
+
+      //this.mediaRecorder.start()
+    //}).catch(e => console.error(e))
+  //}
+
+  //stopX () {
+    //this.global.clearInterval(this.interval)
+    //this.interval = null
+
+    //if (!this.mediaRecorder) return
+
+    //const tracks = this.stream ? this.stream.getTracks() : []
+    //tracks.forEach(track => track.stop())
+    //this.mediaRecorder.stop()
+    //this.mediaRecorder = null
+    //this.stream = null
+
+    //this._onStopEvent()
+  //}
 
   dataURL () {
     return this.audioURL

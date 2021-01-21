@@ -13,36 +13,35 @@ export class AudioDemo extends Component {
     return super.render()
   }
 
-  async load () {
-    this.addEventListener('onStopaudio', (
-			/** @type {CustomEvent} */ event) => {
-      event.stopImmediatePropagation()
-      this.audio.src = event.detail.dataURL
-    })
+  //async load () {
+    //this.addEventListener('onStopaudio', (
+			//[>* @type {CustomEvent} <] event) => {
+      //event.stopImmediatePropagation()
+      //this.audio.src = event.detail.dataURL
+    //})
 
-    this.addEventListener('onStartaudio', (
-			/** @type {CustomEvent} */ event) => {
-      event.stopImmediatePropagation()
+    //this.addEventListener('onStartaudio', (
+			//[>* @type {CustomEvent} <] event) => {
+      //event.stopImmediatePropagation()
 
-      if (event.detail.totalSeconds >= 10) this.arkaudio.stop()
-    })
+      //if (event.detail.totalSeconds >= 10) this.arkaudio.stop()
+    //})
 
-    this.addEventListener('onStopaudio', (
-			/** @type {CustomEvent} */ event) => {
-      event.stopImmediatePropagation()
-    })
+    //this.addEventListener('onStopaudio', (
+			//[>* @type {CustomEvent} <] event) => {
+      //event.stopImmediatePropagation()
+    //})
 
-    return super.load()
-  }
+    //return super.load()
+  //}
 
-  /** @returns {HTMLAudioElement} */
-  get audio () {
-    return this.querySelector('[data-audio]')
-  }
+  //get audio () {
+    //return this.querySelector('[data-audio]')
+  //}
 
-  get arkaudio () {
-    return this.querySelector('[data-ark-audio]')
-  }
+  //get arkaudio () {
+    //return this.querySelector('[data-ark-audio]')
+  //}
 
 }
 
