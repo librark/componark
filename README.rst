@@ -13,12 +13,6 @@ inter-component compatibility and common development idioms. This class is only
 a thin wrapper on top of the *HTMLElement* custom elements class, and might be
 extended in your own application code to create new components.
 
-Render
-======
-
-The **render()** function must **set the innerHTML** property of an element and
-and must **return its outerHTML** property.
-
 Reference
 =========
 
