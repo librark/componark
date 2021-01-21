@@ -51,14 +51,8 @@ export class Audio extends Component {
     const stream = await navigator.mediaDevices.getUserMedia(options)
 
     this.recorder = new this.global.MediaRecorder(stream)
-    this.recorder.addEventListener('dataavailable', (event) => {
-      const audio = this.select('.ark-audio__audio')
-      audio['src'] = this.global.URL.createObjectURL(event.data)
-      const reader = new FileReader()
-      reader.readAsDataURL(event.data)
-      reader.onloadend = () => { this.data = reader.result }
-    })
-    this.timerId = this.time()     
+    this.recorder.addEventListener('dataavailable', this._onData.bind(this))
+    this.timerId = this._time()     
     this.recorder.start()
   }
 
@@ -79,7 +73,7 @@ export class Audio extends Component {
     this.recorder = null
   }
 
-  time () {
+  _time () {
     let count = 0
     return  setInterval(() => {
       count += 1
@@ -91,6 +85,14 @@ export class Audio extends Component {
       const timer = this.select('.ark-audio__timer')
       timer.textContent = content
     }, 1000)
+  }
+
+  _onData(event) {
+    const audio = this.select('.ark-audio__audio')
+    audio['src'] = this.global.URL.createObjectURL(event.data)
+    const reader = new this.global.FileReader()
+    reader.readAsDataURL(event.data)
+    reader.onloadend = () => { this.dataURL = reader.result }
   }
 }
 Component.define(tag, Audio)
