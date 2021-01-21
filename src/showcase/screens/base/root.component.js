@@ -24,7 +24,6 @@ export class RootComponent extends Component {
   }
 
   render () {
-    //this.style.cssText = '--background: blue;'
     this.content = /* html */ `
     <nav class="app-root__navbar">
       <h1>Componark</h1>
@@ -167,14 +166,13 @@ const styles = `
   color: black;
   --background: red;
 
-  --primary: green;
-  --roundness
+  --primary: blue;
   --secondary: orange;
-
+  --success: green;
+  --danger: red;
 }
 :root:hover {
    --background: yellow;
-
 }
 `
 Component.define(tag, RootComponent, styles)

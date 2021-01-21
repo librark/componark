@@ -9,20 +9,6 @@ export class ButtonDemo extends Component {
   render () {
     this.innerHTML = /* html */ `
       <div class="demo-button">
-        <p>Vibrate</p>
-
-        <ark-button background="primary" vibrate️>
-          Vibrate for 200 ms
-        </ark-button>
-        <ark-button background="primary" vibrate️="600">
-          Vibrate for 600 ms
-        </ark-button>
-        <ark-button background="primary" vibrate️="100 200 200 200 500">
-          Vibrate with pattern
-        </ark-button>
-      </div>
-
-      <div class="demo-button">
         <p>This is a button</p>
 
         <ark-button background="disabled" disabled>DISABLED</ark-button>

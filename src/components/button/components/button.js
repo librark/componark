@@ -1,5 +1,7 @@
 import { Component } from 'base/component'
+import { styles } from '../styles'
 
+console.log('styels>>', styles)
 const tag = 'ark-button'
 export class Button extends Component {
   constructor () {
@@ -14,20 +16,20 @@ export class Button extends Component {
 
   reflectedProperties() {
     return [
-      'href', 'horizontal', 'vertical'
+      'href', 'horizontal', 'vertical', 'vibrate'
     ]
   }
 
   render () {
     const element = this['href'] ? 'a' : 'button'
-
+    const href = this['href'] ? `href="${this['href']}"` : ''
     this.content = `
-      <${element} href"${this['href']}>
+      <${element} ${href} class='ark-button__button'>
         ${this.innerHTML}
-      <${element}>
+      </${element}>
     `
 
-    const properties = ['class', 'horizontal', 'vertical']
+    const properties = ['class', 'horizontal', 'vertical', 'vibrate']
     for (const attribute of Array.from(this.attributes)) {
       if (properties.includes(attribute.name)) continue
       this.firstElementChild.setAttribute(attribute.name, attribute.value)
@@ -41,4 +43,4 @@ export class Button extends Component {
     return super.render()
   }
 }
-Component.define(tag, Button)
+Component.define(tag, Button, styles)
