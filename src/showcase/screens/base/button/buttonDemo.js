@@ -1,5 +1,6 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
+const tag = 'demo-button'
 export class ButtonDemo extends Component {
   init (context) {
     return super.init(context)
@@ -128,4 +129,4 @@ export class ButtonDemo extends Component {
     return super.render()
   }
 }
-customElements.define('demo-button', ButtonDemo)
+Component.define(tag, ButtonDemo)

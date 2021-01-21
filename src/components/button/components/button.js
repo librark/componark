@@ -1,5 +1,6 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
 
+const tag = 'ark-button'
 export class Button extends Component {
   constructor () {
     super()
@@ -11,87 +12,33 @@ export class Button extends Component {
     return super.init()
   }
 
-  render () {
-    this.innerHTML = /* html */ `
-      <${this._getType()} data-element>
-        ${this.defaultContent}
-      </${this._getType()}>
-    `
-
-    this._moveAttributes()
-    this._setVibration()
-    return super.render()
-  }
-
-  load () { }
-
-  _isFab () {
-    if (!this.hasAttribute('fab')) return
-
-    if (!this.hasAttribute('horizontal')) {
-      this.setAttribute('horizontal', 'end')
-    }
-
-    if (!this.hasAttribute('vertical')) {
-      this.setAttribute('vertical', 'end')
-    }
-  }
-
-  _getType () {
-    return this.hasAttribute('href') ? 'a' : 'button'
-  }
-
-  _setVibration () {
-    if (!this.hasAttribute('vibrate️')) {
-      return
-    }
-
-    const value = this.getAttribute('vibrate️').trim()
-    const duration = (
-      value.length ? value.split(' ').map(item => parseInt(item)) : [200]
-    )
-
-    this.addEventListener('click', () => {
-      this.navigatorObject.vibrate(duration)
-    })
-  }
-
-  _moveAttributes () {
-    this._isFab()
-
-    const element = this.querySelector('[data-element]')
-    const attributes = Array.from(this.attributes)
-
-    attributes.forEach(attribute => {
-      if (this._defaultAttributes().find(item => item === attribute.name)) {
-        element.setAttribute(attribute.name, attribute.value)
-        // this.removeAttribute(attribute.name)
-      }
-    })
-  }
-
-  /** @return {Array<string>} */
-  _defaultAttributes () {
+  reflectedProperties() {
     return [
-      'autofocus',
-      'download',
-      'form',
-      'formaction',
-      'formenctype',
-      'formmethod',
-      'formnovalidate',
-      'formtarget',
-      'href',
-      'hreflang',
-      'media',
-      'name',
-      'ping',
-      'referrerpolicy',
-      'rel',
-      'target',
-      'type',
-      'value'
+      'href', 'horizontal', 'vertical'
     ]
   }
+
+  render () {
+    const element = this['href'] ? 'a' : 'button'
+
+    this.content = `
+      <${element} href"${this['href']}>
+        ${this.innerHTML}
+      <${element}>
+    `
+
+    const properties = ['class', 'horizontal', 'vertical']
+    for (const attribute of Array.from(this.attributes)) {
+      if (properties.includes(attribute.name)) continue
+      this.firstElementChild.setAttribute(attribute.name, attribute.value)
+    }
+
+    if (this.hasAttribute('fab')) {
+      this['horizontal'] = 'end'
+      this['vertical'] = 'end'
+    }
+
+    return super.render()
+  }
 }
-customElements.define('ark-button', Button)
+Component.define(tag, Button)

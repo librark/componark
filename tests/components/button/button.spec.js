@@ -1,72 +1,55 @@
-import { Button } from '../../../src/components/button'
+import { Button } from 'components/button'
 
 describe('Button', () => {
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const button = new Button()
+    container.innerHTML = `
+      <ark-button><ark-button>
+    `
+    const button = container.querySelector('ark-button')
     expect(button).toBeTruthy()
-
-    const init = button.init()
-    expect(button === init).toBeTruthy()
+    expect(button).toBe(button.init())
   })
 
-  it('can be rendered without content', function () {
-    const button = new Button()
-    button.connectedCallback()
-    const buttonElement = button.querySelector('button')
-    expect(buttonElement).toBeTruthy()
+  it('replicates its attributes in its inner element', () => {
+    container.innerHTML = `
+      <ark-button type="submit"><ark-button>
+    `
+    const button = container.querySelector('ark-button')
+    const element = button.firstElementChild
+
+    expect(element.tagName).toEqual('BUTTON')
+    expect(element.type).toEqual('submit')
   })
 
-  it('can be rendered with attribute value', function () {
-    const button = new Button()
-    button.setAttribute('myAttr', 'ok')
-    button.connectedCallback()
+  it('can be rendered with a child anchor (<a>)', () => {
+    container.innerHTML = `
+      <ark-button href="https://www.google.com/"><ark-button>
+    `
+    const button = container.querySelector('ark-button')
+    const element = button.firstElementChild
 
-    expect(button.hasAttribute('myAttr')).toBeTruthy()
-    expect(button.getAttribute('myAttr')).toEqual('ok')
+    expect(element.tagName).toEqual('A')
+    expect(element.href).toEqual('https://www.google.com/')
   })
 
-  it('can be rendered with tag <a>', function () {
-    const button = new Button()
-    const attr = document.createAttribute('href')
-    attr.value = '#'
-    button.setAttributeNode(attr)
+  it('can be rendered as a floating action button (fab)', () => {
+    container.innerHTML = `
+      <ark-button fab><ark-button>
+    `
+    const button = container.querySelector('ark-button')
 
-    button.connectedCallback()
-    const aElement = button.querySelector('a')
-    expect(aElement).toBeTruthy()
-  })
-
-  it('can be rendered Fab button', function () {
-    const button = new Button()
-    button.setAttribute('fab', '')
-
-    button.connectedCallback()
-
-    expect(button.getAttribute('horizontal')).toEqual('end')
-    expect(button.getAttribute('vertical')).toEqual('end')
-  })
-
-  it('can be rendered Fab button horizontal, vertical center', function () {
-    const button = new Button()
-    button.setAttribute('fab', '')
-    button.setAttribute('horizontal', 'center')
-    button.setAttribute('vertical', 'center')
-    button.setAttribute('autofocus', '')
-
-    button.connectedCallback()
-
-    expect(button.getAttribute('horizontal')).toEqual('center')
-    expect(button.getAttribute('vertical')).toEqual('center')
-  })
-  it('can be rendered setVibration', function () {
-    const button = new Button()
-    button.setAttribute('vibrate️', '')
-    button.init().render().load()
-    button['navigatorObject'].vibrate = () => { }
-    button.click()
-
-    button.setAttribute('vibrate️', '100,50')
-    button.init().render().load()
-    button.click()
+    expect(button.horizontal).toEqual('end')
+    expect(button.vertical).toEqual('end')
   })
 })
