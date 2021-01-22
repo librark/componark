@@ -2,9 +2,7 @@
 @use './config' as *;
 
 @mixin ark-button() {
-
   user-select: none;
-
   cursor: pointer;
 
   display: inline-flex;
@@ -25,15 +23,11 @@
 
   min-width: max-content;
 
-  overflow: hidden;
-
   &__button {
     all: unset;
 
     width: 100%;
     height: 100%;
-
-    margin: 3px;
 
     color: inherit;
     background: inherit;
@@ -44,20 +38,15 @@
     text-align: center;
 
     border-radius: inherit;
+  }
 
-    &:hover {
-      filter: brightness(110%);
-      color: inherit;
-      background: inherit;
-    }
-
-    &:focus {
-      outline: 1px solid rgba(0, 0, 0, 0.7);
-    }
+  &:hover {
+    filter: brightness(110%);
+    color: inherit;
+    background: inherit;
   }
 
   // Fab
-
   $fab-size: 2.8rem;
 
   &[fab] {
@@ -75,47 +64,38 @@
     min-height: $fab-size;
   }
 
-  // horizontal
-  &[horizontal~="center"] {
+  // Horizontal
+  &[horizontal="center"] {
     left: calc(50vw - (#{$fab-size} / 2));
   }
 
-  &[horizontal~="start"] {
+  &[horizontal="start"] {
     left: calc((#{$fab-size} / 3));
   }
 
-  &[horizontal~="end"] {
+  &[horizontal="end"] {
     right: calc((#{$fab-size} / 3));
   }
 
-  // vertical
-  &[vertical~="center"] {
+  // Vertical
+  &[vertical="center"] {
     top: calc(50vh - (#{$fab-size} / 2));
   }
 
-  &[vertical~="start"] {
+  &[vertical="start"] {
     top: calc((#{$fab-size} / 3));
   }
 
-  &[vertical~="end"] {
+  &[vertical="end"] {
     bottom: calc((#{$fab-size} / 3));
   }
 
-  //  Disabled
+  // Disabled
   &[disabled] {
-    pointer-events: none;
     cursor: default;
+    pointer-events: none;
     color: gray;
     background: rgba($color: gray, $alpha: 0.1);
 
-    &:hover {
-      background: none;
-    }
   }
-
-  &::before,
-  &::after {
-    all: unset;
-  }
-
 }

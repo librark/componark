@@ -170,6 +170,11 @@ const styles = `
   --secondary: orange;
   --success: green;
   --danger: red;
+  --warning: yellow;
+  --info: cyan;
+  --dark: black;
+  --muted: gray;
+  --light: lightgray;
 }
 :root:hover {
    --background: yellow;

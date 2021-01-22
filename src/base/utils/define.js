@@ -11,6 +11,10 @@ export function define(tag, element, styles=null) {
 
   const rules = styles.trim().split(/(?<=})/)
   for (const rule of rules) {
-    style.sheet.insertRule(rule)
+    try {
+      style.sheet.insertRule(rule)
+    } catch (error) {
+      continue
+    }
   }
 }

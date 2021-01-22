@@ -1,7 +1,6 @@
 import { Component } from 'base/component'
 import { styles } from '../styles'
 
-console.log('styels>>', styles)
 const tag = 'ark-button'
 export class Button extends Component {
   constructor () {
@@ -27,6 +26,7 @@ export class Button extends Component {
       <${element} ${href} class='ark-button__button'>
         ${this.innerHTML}
       </${element}>
+      <span class="ark-button__ripple"></span>
     `
 
     const properties = ['class', 'horizontal', 'vertical', 'vibrate']
