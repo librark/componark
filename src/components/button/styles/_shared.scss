@@ -10,9 +10,19 @@
   align-items: center;
   text-align: center;
 
+  transition: background 0.5s;
+
+  &:active {
+    background-color: silver;
+    background-size: 100%;
+    transition: background 0s;
+  }
+
   @each $color in $colors {
     &[background=#{$color}] {
-      background: var(--#{$color}, black);
+      $tone: var(--#{$color}, black);
+      background: $tone radial-gradient(circle, transparent 1%, $tone 1%)
+        center/15000%;
       color: white;
     }
 
@@ -20,8 +30,6 @@
       color: var(--#{$color}, white);
     }
   }
-
-  min-width: max-content;
 
   &__button {
     all: unset;
@@ -41,9 +49,7 @@
   }
 
   &:hover {
-    filter: brightness(110%);
-    color: inherit;
-    background: inherit;
+    filter: contrast(120%) brightness(80%);
   }
 
   // Fab
