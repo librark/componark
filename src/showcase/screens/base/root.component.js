@@ -12,73 +12,27 @@ export const version = VERSION
 
 const tag = 'app-root'
 export class RootComponent extends Component {
-  /** @param {Object} context */
-  init (context) {
-    this.path = context.path
-
-    // Local
-    this.currentLocation = window.location
-    //this.themeService = new ThemeService()
-
-    return super.init()
-  }
-
   render () {
     this.content = /* html */ `
     <nav class="app-root__navbar">
-      <h1>Componark</h1>
-      <ul>
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
+      <a class="app-root__navitem" href="/">Componark</a>
+      <a class="app-root__navitem" href="#">Contact</a>
+      <a class="app-root__navitem" href="#">About</a></li>
     </nav>
 
     <aside class="app-root__sidebar">
-      <h3>Menu</h3> 
+      <span class="app-root__sideitem">Menu</span> 
       ${this.locations.map((location) => `
-      <a href="${location.path}">${location.name}</a>
+      <a class="app-root__sideitem" href="${location.path}">
+        ${location.name}
+      </a>
       `).join("")}
     </aside>
 
-    <section data-content></section>
+    <section class="app-root__content" data-content></section>
 
     `
     return super.render()
-  }
-
-  //render () {
-    //this.innerHTML = [> html <] `${this.styles}
-      //<ark-navbar justify='between' background="primary" color="white">
-        //<ark-nav brand>
-          //<ark-button listen on-click='onOpenSidebar'>
-            //<ark-icon name='fas fa-bars'></ark-icon>
-          //</ark-button>
-          //<span class='font-size' data-page-name>Componark</span>
-        //</ark-nav>
-
-      //</ark-navbar>
-
-      //<ark-sidebar data-sidebar >
-        //<div slot='header'>
-          //<strong>Componark</strong>
-          //<br/>
-          //<small>Version: ${version}</small>
-        //</div>
-        //<ark-list listen on-list:selected='onListItemSelected'
-          //data-sidebar-list action default>
-        //</ark-list>
-      //</ark-sidebar>
-
-      //<div class='root-content' data-content></div>
-    //`
-    //return super.render()
-  //}
-
-  async load () {
-    //this.tenderMenuList()
-    //this.updatePageName()
-    return super.load()
   }
 
   /** @param {Component} component */
@@ -95,20 +49,7 @@ export class RootComponent extends Component {
   selectEventListener (event) {
     event.stopImmediatePropagation()
     const style = event.detail.value
-
-    //this.themeService.set('style', style)
-    //this.themeService.reload()
   }
-
-  //updatePageName () {
-    //const name = this.querySelector('[data-page-name]')
-    //const pathname = this.currentLocation.pathname
-    //const location = this.locations.find(
-      //location => location.path === pathname
-    //)
-
-    //if (location) name.textContent = location.name
-  //}
 
   /** @param {CustomEvent} event */
   onListItemSelected (event) {
@@ -118,9 +59,6 @@ export class RootComponent extends Component {
         detail: { path: event.detail.data.path }
       })
     )
-
-    //this.updatePageName()
-
   }
 
   get locations () {
@@ -161,6 +99,11 @@ export class RootComponent extends Component {
 }
 
 const styles = `
+body {
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   color: black;
   --background: white;
@@ -174,6 +117,58 @@ const styles = `
   --dark: black;
   --muted: gray;
   --light: lightgray;
+}
+
+:root:hover {
+   --background: yellow;
+}
+
+.app-root {
+  display: grid;
+}
+
+.app-root__navbar {
+  grid-column: 1 / 13;
+  display: flex;
+  background-color: #334455;
+  color: #00ffff;
+  text-decoration: none
+  overflow: hidden;
+}
+
+.app-root__navitem {
+  text-decoration: none;
+  padding: 2vw;
+  color: cyan;
+}
+
+.app-root__navitem:first-child {
+  text-transform: uppercase;
+}
+
+.app-root__sidebar {
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  background-color: #334455;
+  color: #00ffff;
+  text-decoration: none
+  overflow-x: hidden;
+}
+
+.app-root__sideitem {
+  text-decoration: none;
+  padding: 1vw;
+  color: cyan;
+}
+
+.app-root__sideitem:first-child {
+  text-transform: uppercase;
+}
+
+.app-root__content {
+  grid-column: 2 / 13;
+  padding: 2vmin;
 }
 
 `

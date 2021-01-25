@@ -1,5 +1,5 @@
 import { Component } from 'base/component'
-//import { styles } from '../styles'
+import { styles } from '../styles'
 
 const tag = 'ark-input'
 export class Input extends Component {
@@ -63,4 +63,4 @@ export class Input extends Component {
     this.dispatchAlterEvent()
   }
 }
-customElements.define(tag, Input)
+Component.define(tag, Input,styles)
