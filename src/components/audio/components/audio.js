@@ -1,5 +1,4 @@
 import { Component } from 'base/component'
-//import { styles } from '../styles'
 import { getSlots } from 'base/utils'
 
 const tag = 'ark-audio'

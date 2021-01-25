@@ -3,6 +3,10 @@ import { Component } from 'base/component'
 
 const tag = 'ark-input'
 export class Input extends Component {
+  init(context={}){
+    return super.init(context)
+  }
+
   reflectedProperties () {
     return ['label']
   }
