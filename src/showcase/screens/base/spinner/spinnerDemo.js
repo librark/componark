@@ -1,8 +1,4 @@
-/**
- * @typedef {import(
- * '../../../../components/spinner/components/spinner').Spinner} Spinner
- * */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class SpinnerDemo extends Component {
   init (context) {
@@ -46,4 +42,4 @@ export class SpinnerDemo extends Component {
     `
   }
 }
-customElements.define('demo-spinner', SpinnerDemo)
+Component.define('demo-spinner', SpinnerDemo)

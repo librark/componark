@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Sidebar} Sidebar
- **/
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class SidebarDemo extends Component {
   init (context) {
@@ -29,8 +26,8 @@ export class SidebarDemo extends Component {
   }
 
   _onClick () {
-    const sidebar = /** @type {Sidebar} */ (this.querySelector('ark-sidebar'))
-    sidebar.open()
+    const sidebar = this.querySelector('ark-sidebar')
+    sidebar['open']()
   }
 }
-customElements.define('demo-sidebar', SidebarDemo)
+Component.define('demo-sidebar', SidebarDemo)

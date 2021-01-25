@@ -1,9 +1,4 @@
-/**
- * @typedef {import('../../loader').List} List
- * @typedef {import('../../loader').Paginator} Paginator
- **/
-
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class PaginatorDemo extends Component {
   init (context) {
@@ -27,7 +22,7 @@ export class PaginatorDemo extends Component {
   }
 
   loadPaginator () {
-    const paginato = /** @type {Paginator} */ (this.select('ark-paginator'))
+    const paginato = this.select('ark-paginator')
     paginato.init({ collectionSize: this.list.length, pageSize: 1 }).render()
   }
 
@@ -69,4 +64,4 @@ export class PaginatorDemo extends Component {
     ]
   }
 }
-customElements.define('demo-paginator', PaginatorDemo)
+Component.define('demo-paginator', PaginatorDemo)

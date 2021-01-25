@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Card} Card
- */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 // @ts-ignore
 import Image from './assets/building.jpg'
 

@@ -1,4 +1,4 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class SelectDemo extends Component {
   init (context) {
@@ -39,4 +39,4 @@ export class SelectDemo extends Component {
     if (element) element.textContent = event.detail.value
   }
 }
-customElements.define('demo-select', SelectDemo)
+Component.define('demo-select', SelectDemo)

@@ -1,9 +1,4 @@
-/**
- * @typedef {import('../../../../components/zone/components/zone').Zone} Zone
- * @typedef {import(
- * '../../../../components/zone/components/drag').DragZone} DragZone
- * */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class ZoneDemo extends Component {
   init (context) {
@@ -189,4 +184,4 @@ export class ZoneDemo extends Component {
     `
   }
 }
-customElements.define('demo-zone', ZoneDemo)
+Component.define('demo-zone', ZoneDemo)

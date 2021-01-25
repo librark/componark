@@ -1,4 +1,4 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class GridDemo extends Component {
   init (context) {
@@ -67,4 +67,4 @@ export class GridDemo extends Component {
     `
   }
 }
-customElements.define('demo-grid', GridDemo)
+Component.define('demo-grid', GridDemo)

@@ -1,8 +1,4 @@
-import { Component } from '../../loader'
-
-/**
- * @typedef {import('../../loader').RadioGroup} RadioGroup
- **/
+import { Component } from 'base/component'
 
 export class RadioDemo extends Component {
   init (context) {
@@ -22,7 +18,7 @@ export class RadioDemo extends Component {
       <p>Valor seleccionado: <span data-radio-button-value></span></p>
     `
 
-    this.radioGroup.value = 'op2'
+    this.radioGroup['value'] = 'op2'
 
     this.updateSelectedValue()
 
@@ -37,11 +33,11 @@ export class RadioDemo extends Component {
   updateSelectedValue () {
     this.querySelector(
       '[data-radio-button-value]'
-    ).innerHTML = this.radioGroup.value
+    ).innerHTML = this.radioGroup['value']
   }
 
   get radioGroup () {
-    return /** @type {RadioGroup} */(this.select('ark-radio-group'))
+    return this.select('ark-radio-group')
   }
 }
-customElements.define('demo-radio', RadioDemo)
+Component.define('demo-radio', RadioDemo)

@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Tabs} Tabs
- **/
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class TabsDemo extends Component {
   init (context) {
@@ -73,9 +70,8 @@ export class TabsDemo extends Component {
     this.updateContent(tabItem.tab)
   }
 
-  /** @returns {Tabs} */
   get tabs () {
-    return /** @type {Tabs} */(this.select('ark-tabs'))
+    return this.select('ark-tabs')
   }
 
   /** @returns {HTMLElement} */
@@ -83,4 +79,4 @@ export class TabsDemo extends Component {
     return this.querySelector('[tab-content]')
   }
 }
-customElements.define('demo-tabs', TabsDemo)
+Component.define('demo-tabs', TabsDemo)

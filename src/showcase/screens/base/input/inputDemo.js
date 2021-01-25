@@ -1,6 +1,5 @@
-/** @typedef {import('../../loader').Input} Input */
 import hljs from 'highlight.js/lib/core'
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class InputDemo extends Component {
   init (context) {
@@ -35,7 +34,7 @@ export class InputDemo extends Component {
       Additionally, the following options are available:
       </p>
       <h3>Attributes</h3>
-      ${this.attributes}
+      ${this.attrs}
       <h3>Properties</h3>
       ${this.properties}
       <h3>Methods</h3>
@@ -101,7 +100,7 @@ export class InputDemo extends Component {
 
   // Documentation
 
-  get attributes() {
+  get attrs() {
     return this.renderTable([
       ['Name', 'Type', 'Defaul', 'Description'],
       ['type', 'string', 'text', 'Type of input.'],
@@ -136,4 +135,4 @@ export class InputDemo extends Component {
     return ``
   }
 }
-customElements.define('demo-input', InputDemo)
+Component.define('demo-input', InputDemo)

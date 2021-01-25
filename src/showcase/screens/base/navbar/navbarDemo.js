@@ -1,4 +1,4 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class NavbarDemo extends Component {
   init (context) {
@@ -76,4 +76,4 @@ export class NavbarDemo extends Component {
     `
   }
 }
-customElements.define('demo-navbar', NavbarDemo)
+Component.define('demo-navbar', NavbarDemo)

@@ -1,5 +1,4 @@
-/** @typedef {import('components').Map} Map */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class MapDemo extends Component {
   init (context) {
@@ -15,13 +14,8 @@ export class MapDemo extends Component {
   }
 
   load () {
-    setTimeout(_ => { this.map.updateSize() }, 800)
+    setTimeout(_ => { this.select('ark-map')['updateSize']() }, 800)
     return super.load()
-  }
-
-  /** @returns {Map} */
-  get map () {
-    return /** @type {Map} */ (this.select('ark-map'))
   }
 
   get token () {
@@ -38,4 +32,4 @@ export class MapDemo extends Component {
     `
   }
 }
-customElements.define('demo-map', MapDemo)
+Component.define('demo-map', MapDemo)

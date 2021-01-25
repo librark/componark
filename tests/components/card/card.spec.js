@@ -1,23 +1,29 @@
-import { Card } from '../../../src/components/card'
+import { Card } from 'components/card'
 
 describe('Card', () => {
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const element = new Card()
-    expect(element).toBeTruthy()
+    container.innerHTML = `
+      <ark-card><ark-card>
+    `
+    const card = container.querySelector('ark-card')
+    expect(card).toBeTruthy()
 
-    const init = element.init()
-    expect(element === init).toBeTruthy()
+    expect(card).toBe(card.init())
   })
 
-  it('can be rendered without content', function () {
-    const element = new Card()
-    element.connectedCallback()
-    expect(!element.innerHTML.trim().length).toBeTruthy()
-  })
-
-  it('can be rendered with content', function () {
-    const item = document.createElement('div')
-    item.innerHTML = /* html */ `
+  it('can be rendered with slotted content', function () {
+    container.innerHTML = /* html */ `
       <ark-card title="Title" subtitle="Subtitle">
         <img slot="media"/>
         <div>body</div>
@@ -25,8 +31,10 @@ describe('Card', () => {
       </ark-card>
     `
 
-    const card = /** @type {Card} */ (item.querySelector('ark-card'))
-    card.init().render().load()
+    const card = container.querySelector('ark-card')
+    //card.init().render().load()
+    //
+    console.log('Card Slots>>>', card.outerHTML)
 
     // @ts-ignore
     expect(card.slots.general.length).toBeTruthy()
@@ -36,7 +44,7 @@ describe('Card', () => {
     expect(card.slots.actions.length).toBeTruthy()
   })
 
-  it('can be rendered with content', function () {
+  xit('can be rendered with class elements content', function () {
     const item = document.createElement('div')
     item.innerHTML = /* html */ `
       <ark-card>

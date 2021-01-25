@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Table} Table
- **/
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class TableDemo extends Component {
   init (context) {
@@ -25,7 +22,7 @@ export class TableDemo extends Component {
   }
 
   _initTable () {
-    const table = /** @type {Table} */ (this.querySelector('ark-table'))
+    const table = this.select('ark-table')
 
     table.init({
       headers: { a: 'A', b: 'B', c: 'C' },
@@ -39,4 +36,4 @@ export class TableDemo extends Component {
     table.render()
   }
 }
-customElements.define('demo-table', TableDemo)
+Component.define('demo-table', TableDemo)

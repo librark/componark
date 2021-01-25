@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Treetable} Treetable
- **/
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 import data from './assets/diccionario.json'
 
 export class TreetableDemo extends Component {
@@ -38,9 +35,8 @@ export class TreetableDemo extends Component {
     return super.load()
   }
 
-  /** @returns {Treetable} */
   get treetable () {
     return this.select('ark-Treetable')
   }
 }
-customElements.define('demo-treetable', TreetableDemo)
+Component.define('demo-treetable', TreetableDemo)

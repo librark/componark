@@ -1,4 +1,4 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class TooltipDemo extends Component {
   init (context) {
@@ -54,4 +54,4 @@ export class TooltipDemo extends Component {
     `
   }
 }
-customElements.define('demo-tooltip', TooltipDemo)
+Component.define('demo-tooltip', TooltipDemo)

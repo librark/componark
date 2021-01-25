@@ -1,4 +1,4 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class IconDemo extends Component {
   init (context) {
@@ -35,4 +35,4 @@ export class IconDemo extends Component {
     `
   }
 }
-customElements.define('demo-icon', IconDemo)
+Component.define('demo-icon', IconDemo)

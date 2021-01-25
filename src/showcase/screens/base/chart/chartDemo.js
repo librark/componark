@@ -1,5 +1,4 @@
-import { Component } from '../../loader'
-/** @typedef {import('../../loader').Chart} Chart */
+import { Component } from 'base/component'
 
 export class ChartDemo extends Component {
   init (context) {
@@ -34,37 +33,32 @@ export class ChartDemo extends Component {
   }
 
   _initElement () {
-    const pie = /** @type {Chart} */ (this.querySelector('[data-chart-pie]'))
+    const pie = this.select('[data-chart-pie]')
     pie.init({
       details: this._getDetailsPie(pie)
     }).render()
 
-    const doughnut = /** @type {Chart} */ (this.querySelector(
-      '[data-chart-doughnut]'
-    ))
+    const doughnut = this.select('[data-chart-doughnut]')
     doughnut.init({
       details: this._getDetailsDoughnut(doughnut)
     }).render()
 
-    const bar = /** @type {Chart} */ (this.querySelector('[data-chart-bar]'))
+    const bar = this.select('[data-chart-bar]')
     bar.init({
       details: this._getDetailsBar(bar)
     }).render()
 
-    const line = /** @type {Chart} */ (this.querySelector('[data-chart-line]'))
+    const line = this.select('[data-chart-line]')
     line.init({
       details: this._getDetailsLine(line)
     }).render()
 
-    const radar = /** @type {Chart} */ (this.querySelector(
-      '[data-chart-radar]'
-    ))
+    const radar = this.select('[data-chart-radar]')
     radar.init({
       details: this._getDetailsRadar(radar)
     }).render()
   }
 
-  /** @param {Chart} chart */
   _getDetailsDoughnut (chart) {
     return {
       type: 'doughnut',
@@ -72,7 +66,6 @@ export class ChartDemo extends Component {
     }
   }
 
-  /** @param {Chart} chart */
   _getDetailsPie (chart) {
     return {
       type: 'pie',
@@ -80,7 +73,6 @@ export class ChartDemo extends Component {
     }
   }
 
-  /** @param {Chart} chart */
   _getDetailsRadar (chart) {
     return {
       type: 'radar',
@@ -88,7 +80,6 @@ export class ChartDemo extends Component {
     }
   }
 
-  /** @param {Chart} chart */
   _getDetailsLine (chart) {
     return {
       type: 'line',
@@ -96,7 +87,6 @@ export class ChartDemo extends Component {
     }
   }
 
-  /** @param {Chart} chart */
   _getDetailsBar (chart) {
     return {
       type: 'bar',
@@ -104,7 +94,6 @@ export class ChartDemo extends Component {
     }
   }
 
-  /** @param {Chart} chart */
   _data (chart) {
     const data = [12, 19, 3, 5, 2, 3]
     const colors = chart.generateColors(data.length)
@@ -123,4 +112,4 @@ export class ChartDemo extends Component {
     }
   }
 }
-customElements.define('demo-chart', ChartDemo)
+Component.define('demo-chart', ChartDemo)

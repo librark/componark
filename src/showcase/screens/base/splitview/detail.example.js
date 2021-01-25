@@ -1,4 +1,4 @@
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class ArkDetailExample extends Component {
   init (context) {
@@ -32,4 +32,4 @@ export class ArkDetailExample extends Component {
     `
   }
 }
-customElements.define('ark-detail-example', ArkDetailExample)
+Component.define('ark-detail-example', ArkDetailExample)

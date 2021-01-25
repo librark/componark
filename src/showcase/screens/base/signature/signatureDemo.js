@@ -1,6 +1,5 @@
-/** @typedef {import('components').Signature} Signature */
-import { Component } from '../../loader'
-import { uuid } from '../../../../utils'
+import { Component } from 'base/component'
+import { uuid } from 'base/utils'
 
 export class SignatureDemo extends Component {
   init (context) {
@@ -33,22 +32,22 @@ export class SignatureDemo extends Component {
   }
 
   load () {
-    this.dirty.innerText = String(this.signature.dirty)
+    this.dirty.innerText = String(this.signature['dirty'])
     return super.load()
   }
 
   /** @param {CustomEvent} event */
   _onDirty (event) {
     event.stopImmediatePropagation()
-    this.dirty.innerText = String(this.signature.dirty)
+    this.dirty.innerText = String(this.signature['dirty'])
   }
 
   _onShowImage () {
-    this.img.src = this.signature.dataURL(300, 300)
+    this.img.src = this.signature['dataURL'](300, 300)
   }
 
   _onSave () {
-    const src = this.signature.dataURL()
+    const src = this.signature['dataURL']()
     const fileName = uuid()
     const link = document.createElement('a')
     link.download = fileName + '.jpg'
@@ -57,12 +56,11 @@ export class SignatureDemo extends Component {
   }
 
   _onClear () {
-    this.signature.clear()
+    this.signature['clear']()
   }
 
-  /** @returns {Signature} */
   get signature () {
-    return /** @type {Signature} */ (this.select('ark-signature'))
+    return this.select('ark-signature')
   }
 
   /** @returns {HTMLElement} */
@@ -93,4 +91,4 @@ export class SignatureDemo extends Component {
     `
   }
 }
-customElements.define('demo-signature', SignatureDemo)
+Component.define('demo-signature', SignatureDemo)

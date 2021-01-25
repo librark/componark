@@ -1,6 +1,4 @@
-/** @typedef {import('components').Location} Location */
-/** @typedef {import('components').Map} Map */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class LocationDemo extends Component {
   init (context) {
@@ -21,7 +19,7 @@ export class LocationDemo extends Component {
       </div>
     `
 
-    this.location.start()
+    this.location['start']()
     return super.render()
   }
 
@@ -31,37 +29,35 @@ export class LocationDemo extends Component {
     ) => {
       event.stopImmediatePropagation()
       const coords = event.detail.currentPosition.coords
-      this.map.addMarker(coords.latitude, coords.longitude)
+      this.map['addMarker'](coords.latitude, coords.longitude)
     })
 
     return super.load()
   }
 
   disconnectedCallback () {
-    this.location.stop()
+    this.location['stop']()
   }
 
   async getCurrentPosition () {
     const span = this.querySelector('[data-position]')
     span.innerHTML = ''
 
-    this.location.stop()
-    const position = await this.location.getCurrentPosition()
-    this.location.start()
+    this.location['stop']()
+    const position = await this.location['getCurrentPosition']()
+    this.location['start']()
 
     span.innerHTML = `
       Lat: ${position.coords.latitude} Lng: ${position.coords.longitude}
     `
   }
 
-  /** @return {Location} */
   get location () {
-    return /** @type {Location} */ (this.select('ark-location'))
+    return this.select('ark-location')
   }
 
-  /** @returns {Map} */
   get map () {
-    return /** @type {Map} */ (this.select('ark-map'))
+    return this.select('ark-map')
   }
 
   get token () {
@@ -82,4 +78,4 @@ export class LocationDemo extends Component {
     `
   }
 }
-customElements.define('demo-location', LocationDemo)
+Component.define('demo-location', LocationDemo)

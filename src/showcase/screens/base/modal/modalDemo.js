@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Modal} Modal
- */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class ModalDemo extends Component {
   init (context) {
@@ -113,17 +110,16 @@ export class ModalDemo extends Component {
       })
 
     const open = this.querySelector('[btn-open]')
-    open.addEventListener('click', _ => this.modal.open())
+    open.addEventListener('click', _ => this.modal['open']())
 
     const toggle = this.querySelector('[btn-toggle]')
-    toggle.addEventListener('click', _ => this.modal.toggle())
+    toggle.addEventListener('click', _ => this.modal['toggle']())
 
     return super.load()
   }
 
-  /** @returns {Modal} */
   get modal () {
-    return /** @type {Modal} */ (this.select('ark-modal'))
+    return this.select('ark-modal')
   }
 
   get styles () {
@@ -136,4 +132,4 @@ export class ModalDemo extends Component {
     `
   }
 }
-customElements.define('demo-modal', ModalDemo)
+Component.define('demo-modal', ModalDemo)

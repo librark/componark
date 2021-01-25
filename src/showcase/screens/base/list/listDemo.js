@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').List} List
- */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class ListDemo extends Component {
   init (context) {
@@ -56,9 +53,7 @@ export class ListDemo extends Component {
       <span data-second>SECOND: ${item.second}</span>
     `
 
-    const templateList = /** @type {List} */ (this.select(
-      '[data-template-list]'
-    ))
+    const templateList = this.select('[data-template-list]')
     templateList
       .init({
         source: sourceTemplate,
@@ -90,4 +85,4 @@ export class ListDemo extends Component {
     `
   }
 }
-customElements.define('demo-list', ListDemo)
+Component.define('demo-list', ListDemo)

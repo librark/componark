@@ -1,5 +1,5 @@
-import { Component } from '../../component'
-import { getSlots } from '../../../utils'
+import { Component } from 'base/component'
+import { getSlots } from 'base/utils'
 
 export class Card extends Component {
   init (context = {}) {
@@ -17,37 +17,34 @@ export class Card extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    const slots = getSlots(this)
+
+    this.content = /* html */ `
       <div class="ark-card__media"></div>
       <div class="ark-card__header"></div>
       <div class="ark-card__body"></div>
       <div class="ark-card__actions"></div>
     `
 
-    this._renderMedia()
-    this._renderHeader()
-    this._renderBody()
-    this._renderActions()
+    this._renderMedia(slots)
+    this._renderHeader(slots)
+    this._renderBody(slots)
+    this._renderActions(slots)
 
     return super.render()
   }
 
-  _renderMedia () {
-    const container = /** @type {HTMLEmbedElement} */(
-      this.querySelector('.ark-card__media')
-    )
+  _renderMedia (slots) {
+    const media = this.select('.ark-card__media')
+    const mediaSlots = slots.media || []
 
-    const slots = /** @type {Array<HTMLElement>} */(this.slots.media || [])
+    if (!mediaSlots.length) return media.remove()
 
-    if (!slots.length) container.remove()
-
-    slots.forEach(element => container.append(element))
+    mediaSlots.forEach(element => media.append(element))
   }
 
-  _renderHeader () {
-    const container = /** @type {HTMLEmbedElement} */(
-      this.querySelector('.ark-card__header')
-    )
+  _renderHeader (slots) {
+    const header = this.select('.ark-card__header')
 
     const title = this.title.trim().length ? /* html */ `
       <h4 class="ark-card__title">${this.title}</h4>
@@ -57,47 +54,43 @@ export class Card extends Component {
       <span class="ark-card__subtitle">${this.subtitle}</span>
     ` : ''
 
-    if (!title.length && !subtitle.length) container.remove()
+    if (!title && !subtitle) return header.remove()
 
-    container.innerHTML = /* html */`${title} ${subtitle}`
+    header.innerHTML = /* html */`${title} ${subtitle}`
   }
 
-  _renderBody () {
-    const container = /** @type {HTMLEmbedElement} */(
-      this.querySelector('.ark-card__body')
-    )
+  _renderBody (slots) {
+    const body = this.select('.ark-card__body')
 
-    const slots = /** @type {Array<HTMLElement>} */(this.slots.general)
+    const bodySlots = this.slots.general || []
 
-    if (!slots.length) container.remove()
+    if (!slots.length) return body.remove()
 
     slots.forEach(element => {
       if (element.className === 'ark-card__body') {
         element.childNodes.forEach(child => {
-          container.append(child)
+          body.append(child)
         })
       } else if (
         element.className !== 'ark-card__media' &&
         element.className !== 'ark-card__header' &&
         element.className !== 'ark-card__actions'
       ) {
-        container.append(element)
+        body.append(element)
       }
     })
 
-    if (!container.childNodes.length) container.remove()
+    if (!body.childNodes.length) return body.remove()
   }
 
-  _renderActions () {
-    const container = /** @type {HTMLEmbedElement} */(
-      this.querySelector('.ark-card__actions')
-    )
+  _renderActions (slots) {
+    const actions = this.select('.ark-card__actions')
 
-    const slots = /** @type {Array<HTMLElement>} */(this.slots.actions || [])
+    const actionsSlots = this.slots.actions || []
 
-    if (!slots.length) container.remove()
+    if (!slots.length) return actions.remove()
 
-    slots.forEach(element => container.append(element))
+    slots.forEach(element => actions.append(element))
   }
 }
-customElements.define('ark-card', Card)
+Component.define('ark-card', Card)

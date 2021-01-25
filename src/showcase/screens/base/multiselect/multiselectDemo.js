@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').Multiselect} Multiselect
- **/
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class MultiselectDemo extends Component {
   init (context) {
@@ -102,9 +99,7 @@ export class MultiselectDemo extends Component {
       )
     }
 
-    const multiselect = /** @type {Multiselect} */(
-      this.select('ark-multiselect[objectList]')
-    )
+    const multiselect = this.select('ark-multiselect[objectList]')
 
     multiselect.init({
       label: "multiselect objectList",
@@ -128,4 +123,4 @@ export class MultiselectDemo extends Component {
     `
   }
 }
-customElements.define('demo-multiselect', MultiselectDemo)
+Component.define('demo-multiselect', MultiselectDemo)

@@ -1,7 +1,4 @@
-/**
- * @typedef {import('../../loader').TabulatorTable} Tabulator
- **/
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class TabulatorDemo extends Component {
   init (context) {
@@ -33,7 +30,7 @@ export class TabulatorDemo extends Component {
   }
 
   get tabulator () {
-    return /** @type {Tabulator} */(this.select('ark-tabulator'))
+    return this.select('ark-tabulator')
   }
 
   get styles () {
@@ -48,4 +45,4 @@ export class TabulatorDemo extends Component {
     `
   }
 }
-customElements.define('demo-tabulator', TabulatorDemo)
+Component.define('demo-tabulator', TabulatorDemo)

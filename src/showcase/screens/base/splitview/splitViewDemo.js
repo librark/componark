@@ -1,11 +1,6 @@
-/**
- * @typedef {import('../../loader').SplitView} SplitView
- * @typedef {import('../../loader').List} List
- **/
-
 import './detail.example'
 
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class SplitViewDemo extends Component {
   init (context) {
@@ -35,7 +30,7 @@ export class SplitViewDemo extends Component {
   }
 
   get splitview () {
-    return /** @type {SplitView} */ (this.select('ark-splitview'))
+    return this.select('ark-splitview')
   }
 
   initSplitView () {
@@ -64,7 +59,7 @@ export class SplitViewDemo extends Component {
       { first: 'Perú', second: 'Bolivia', year: 2019 }
     ]
 
-    const list = /** @type {List} */ (this.splitview.master.select('ark-list'))
+    const list = this.splitview['master'].select('ark-list')
     list
       .init({
         source: source,
@@ -73,4 +68,4 @@ export class SplitViewDemo extends Component {
       .render()
   }
 }
-customElements.define('demo-splitview', SplitViewDemo)
+Component.define('demo-splitview', SplitViewDemo)

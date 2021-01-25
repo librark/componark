@@ -1,5 +1,4 @@
-import { Component } from '../../loader'
-/** @typedef {import('../../loader').Form} Form */
+import { Component } from 'base/component'
 
 export class FormDemo extends Component {
   init (context) {
@@ -49,11 +48,11 @@ export class FormDemo extends Component {
 
   getValues () {
     const container = this.querySelector('[data-form-values]')
-    container.textContent = JSON.stringify(this.formComponent.values)
+    container.textContent = JSON.stringify(this.formComponent['values'])
   }
 
   get formComponent () {
-    return /** @type {Form} */ (this.select('ark-form'))
+    return this.select('ark-form')
   }
 
   get styles () {
@@ -71,4 +70,4 @@ export class FormDemo extends Component {
     `
   }
 }
-customElements.define('demo-form', FormDemo)
+Component.define('demo-form', FormDemo)

@@ -1,5 +1,4 @@
-/** @typedef {import('components').Camera} Camera */
-import { Component } from '../../loader'
+import { Component } from 'base/component'
 
 export class CameraDemo extends Component {
   init (context) {
@@ -18,30 +17,29 @@ export class CameraDemo extends Component {
       <img data-photo>
     `
 
-    this.camera.start()
+    this.camera['start']()
 
     return super.render()
   }
 
   disconnectedCallback () {
-    this.camera.stop()
+    this.camera['stop']()
   }
 
   takepicture () {
-    this.photo.setAttribute('src', this.camera.dataURL(200, 200))
+    this.photo.setAttribute('src', this.camera['dataURL'](200, 200))
   }
 
   startCamera () {
-    this.camera.start()
+    this.camera['start']()
   }
 
   stopCamera () {
-    this.camera.stop()
+    this.camera['stop']()
   }
 
-  /** @return {Camera} */
   get camera () {
-    return /** @type {Camera} */ (this.select('ark-Camera'))
+    return this.select('ark-Camera')
   }
 
   /** @returns {HTMLImageElement} */
@@ -72,4 +70,4 @@ export class CameraDemo extends Component {
     `
   }
 }
-customElements.define('demo-camera', CameraDemo)
+Component.define('demo-camera', CameraDemo)
