@@ -1,5 +1,7 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
+//import { styles } from '../styles'
 
+const tag = 'ark-input'
 export class Input extends Component {
   reflectedProperties () {
     return ['label']
@@ -40,9 +42,9 @@ export class Input extends Component {
   moveAttributes () {
     Array.from(this.attributes).forEach(attribute => {
       this.input.setAttribute(attribute.name, attribute.value)
-    })
-  }
-
+  })
+}
+// 
   get input () {
     return /** @type {HTMLInputElement} */(this.querySelector('[data-input]'))
   }
@@ -57,4 +59,4 @@ export class Input extends Component {
     this.dispatchAlterEvent()
   }
 }
-customElements.define('ark-input', Input)
+customElements.define(tag, Input)
