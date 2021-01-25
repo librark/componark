@@ -8,7 +8,7 @@ export class CardDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.innerHTML = /* html */ `
       <ark-card title="titulo" subtitle="subtitle [Hello World]">
         <img slot="media" src="${Image}" alt="" />
 
@@ -39,23 +39,8 @@ export class CardDemo extends Component {
     return super.render()
   }
 
-  load () {
-    this.card.render().render()
-  }
-
   get card () {
-    return /** @type {Card} */(this.select('ark-card'))
-  }
-
-  get styles () {
-    return /* html */`
-      <style>
-        demo-card{
-          display: block;
-          padding: 15px;
-        }
-      </style>
-    `
+    return this.select('ark-card')
   }
 }
-customElements.define('demo-card', CardDemo)
+Component.define('demo-card', CardDemo)
