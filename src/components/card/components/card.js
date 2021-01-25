@@ -1,6 +1,8 @@
 import { Component } from 'base/component'
 import { getSlots } from 'base/utils'
+import { styles } from '../styles'
 
+const tag = 'ark-card'
 export class Card extends Component {
   init (context = {}) {
     this.title = context.title
@@ -85,4 +87,4 @@ export class Card extends Component {
     this.append(actions)
   }
 }
-Component.define('ark-card', Card)
+Component.define(tag, Card, styles)

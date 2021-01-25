@@ -21,8 +21,4 @@ $query: feature-targeting.all();
     @include fab-mixins.icon-size(24px, $query: $query);
     @include fab-mixins.ink-color(on-secondary, $query: $query);
   }
-
-  &__icon {
-    @extend .material-icons !optional;
-  }
 }
