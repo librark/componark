@@ -1,0 +1,50 @@
+@use './config' as *;
+
+@mixin ark-card() {
+  display: block;
+  border: 1px solid rgba($color: gray, $alpha: 0.2);
+  overflow: hidden;
+
+  @each $color in $colors {
+    &[background=#{$color}] {
+      background: var(--#{$color}, black);
+      color: white;
+    }
+
+    &#{&}[color=#{$color}] {
+      color: var(--#{$color}, white);
+    }
+  }
+
+  &[no-border] {
+    border: 0;
+    border-radius: 0;
+    box-shadow: initial;
+  }
+
+  &__media {
+    display: flex;
+    overflow: hidden;
+    max-height: 20rem;
+    user-select: none;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__header,
+  &__body,
+  &__actions {
+    padding: 0.5rem;
+  }
+
+  &__header {}
+
+  &__body {}
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

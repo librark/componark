@@ -67,7 +67,7 @@ describe('Card', () => {
     expect(actions.firstElementChild.querySelector('button')).toBeTruthy()
   })
 
-  it('can renders all its general slots in its body', () => {
+  it('can render all its general slots in its body', () => {
     container.innerHTML = /* html */ `
       <ark-card>
         <div>body first</div>
