@@ -1,5 +1,25 @@
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use '@material/ripple/ripple';
+@use "@material/textfield/mixins";
+@use "@material/textfield/variables";
+@use '@material/feature-targeting/feature-targeting';
+//@use "@material/textfield";
+
 @use'./shared.scss';
+$query: feature-targeting.all();
+//$feat-color: feature-targeting.create-target($query, color);
+//$feat-structure: feature-targeting.create-target($query, structure);
+
+@include mixins.core-styles($query);
 
 .ark-input {
+  @include mixins.ripple($query);
+  //@include mixins.without-ripple($query);
   @include shared.ark-input;
+
+  &__label {
+    font-size: 1.2rem;
+  }
 }

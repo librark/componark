@@ -10,8 +10,8 @@
         pointer-events: none !important;
         cursor: default !important;
 
-        color: black;
-        background: white;
+        color: rgb(56, 56, 56);
+        background: rgb(206, 205, 205);
 
         &:hover {
             background: white;
@@ -37,6 +37,7 @@
     &[inline] label {
         display: flex;
         white-space: nowrap;
+        align-items: center;
 
         input {
             display: initial;
