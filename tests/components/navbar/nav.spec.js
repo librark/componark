@@ -1,43 +1,61 @@
 import { Nav } from 'components/navbar'
 
 describe('Nav', () => {
-  it('can be instantiated', () => {
-    const nav = new Nav()
-    expect(nav).toBeTruthy()
-
-    const init = nav.init({})
-    expect(nav === init).toBeTruthy()
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
   })
 
-  it('can be rendered with content', function () {
-    const nav = new Nav()
-    nav.innerHTML = /* HTML */`
-      <span>mySpan</span>
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
+  it('can be instantiated', () => {
+    container.innerHTML = `
+    <ark-nav></ark-nav>
     `
-    nav.connectedCallback()
-    const navElement = nav.querySelector('span')
+    const nav = container.querySelector('ark-nav')
+    expect(nav).toBeTruthy()
+
+    expect(nav).toBe(nav.init())
+  })
+
+  it('can be rendered with content', () => {
+    container.innerHTML = `
+    <ark-nav>
+      <span>mySpan</span>
+    </ark-nav>
+    `
+    const nav = container.querySelector('ark-nav')
+    const navElement = nav.select('span')
     expect(navElement.textContent).toEqual('mySpan')
   })
 
-  it('can be rendered with content', function () {
-    const nav = new Nav()
-    nav.setAttribute('brand', '')
+  it('can be used to show the brand of the site', () => {
+    container.innerHTML = `
+    <ark-nav brand>
+      <span>Knowark</span>
+    </ark-nav>
+    `
+    const nav = container.querySelector('ark-nav')
 
-    nav.init().render().load()
+    const attributes = Array.from(nav.attributes).map(
+      attribute => attribute.nodeName)
 
-    nav.toggleHide()
+    expect(Object.values(attributes)).toEqual(["brand", "class"])
   })
 
-  it('can be toggle hide', function () {
-    const nav = new Nav()
-    nav.init().render().load()
+  it('can toggle its visibility', () => {
+    container.innerHTML = `
+    <ark-nav>
+      <span>Knowark</span>
+    </ark-nav>
+    `
+    const nav = container.querySelector('ark-nav')
 
-    nav.toggleHide()
-
-    expect(nav.style.display).toEqual('flex')
-
-    nav.toggleHide()
-
-    expect(nav.style.display).toEqual('none')
+    nav.toggleVisibility()
+    expect(nav.hasAttribute('collapse')).toBeTruthy()
   })
 })

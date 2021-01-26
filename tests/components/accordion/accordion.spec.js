@@ -21,7 +21,7 @@ describe('Accordion', () => {
       <ark-accordion-tab data-tab2 header="Second Tab">
         <span>Second Content</span>
       </ark-accordion-tab>
-    <ark-accordion>
+    </ark-accordion>
     `
     const accordion = container.querySelector('ark-accordion')
     accordion.init().render()
@@ -44,7 +44,7 @@ describe('Accordion', () => {
       <ark-accordion-tab data-tab2 header="Second Tab">
         <span>Second Content</span>
       </ark-accordion-tab>
-    <ark-accordion>
+    </ark-accordion>
     `
     const accordion = container.querySelector('ark-accordion')
 
@@ -74,7 +74,7 @@ describe('Accordion', () => {
       <ark-accordion-tab data-tab2 header="Second Tab">
         <span>Second Content</span>
       </ark-accordion-tab>
-    <ark-accordion>
+    </ark-accordion>
     `
     const accordion = container.querySelector('ark-accordion')
     accordion.setAttribute('multiple', 'multiple')
