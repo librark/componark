@@ -26,7 +26,6 @@ export class Button extends Component {
       <${element} ${href} class='ark-button__button'>
         ${this.innerHTML}
       </${element}>
-      <span class="ark-button__ripple"></span>
     `
 
     const properties = ['class', 'horizontal', 'vertical', 'vibrate']

@@ -1,5 +1,6 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
 
+const tag = 'ark-nav'
 export class Nav extends Component {
   init (context = {}) {
     return super.init()
@@ -13,14 +14,10 @@ export class Nav extends Component {
     return super.render()
   }
 
-  toggleHide () {
-    if (!this.hasAttribute('collapse')) return
-
-    if (this.style.display === 'none' || this.style.display === '') {
-      this.style.display = 'flex'
-    } else {
-      this.style.display = 'none'
+  toggleVisibility () {
+    if (!(this.hasAttribute('brand') || this.hasAttribute('toggler'))) {
+      this.toggleAttribute('collapse')
     }
   }
 }
-customElements.define('ark-nav', Nav)
+Component.define(tag, Nav)

@@ -1,4 +1,5 @@
 @use 'sass:string';
+@use 'base/theme';
 @use './config' as *;
 
 @mixin ark-button() {
@@ -18,7 +19,7 @@
     transition: background 0s;
   }
 
-  @each $color in $colors {
+  @each $color in theme.$colors {
     &[background=#{$color}] {
       $tone: var(--#{$color}, black);
       background: $tone radial-gradient(circle, transparent 1%, $tone 1%)
