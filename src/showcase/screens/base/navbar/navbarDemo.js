@@ -6,7 +6,7 @@ export class NavbarDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.content = /* html */ `
       <ark-navbar background="dark" color="danger" justify="between">
 
         <ark-nav brand>
@@ -16,7 +16,7 @@ export class NavbarDemo extends Component {
           <span>Componark</span>
         </ark-nav>
 
-        <ark-nav>
+        <ark-nav background="secondary" color="success">
           <span>Element 1</span>
           <span>Element 2</span>
           <span>Element 3</span>
@@ -32,28 +32,12 @@ export class NavbarDemo extends Component {
 
         <ark-nav toggler>
           <span>User</span>
-          <ark-button navbar-toggler>
+          <ark-button>
             <ark-icon name='fas fa-ellipsis-v'></ark-icon>
           </ark-button>
         </ark-nav>
 
       </ark-navbar>
-
-      <!-- DOCUMENTATION -->
-      <div class="content-body">
-        <h3>ark-navbar</h3>
-        <small>Attributes:</small>
-        <p>fixed-top</p>
-        <hr/>
-        <small>Justify:</small>
-        <p>center</p>
-        <p>end</p>
-        <p>between</p>
-
-        <h3>ark-nav</h3>
-        <small>Attributes:</small>
-        <p>data-ark-navbar-toggle</p>
-      </div>
     `
 
     return super.render()

@@ -1,0 +1,9 @@
+@use'./shared.scss';
+
+.ark-nav {
+  @include shared.ark-nav;
+}
+
+.ark-navbar {
+  @include shared.ark-navbar;
+}

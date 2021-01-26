@@ -1,9 +1,12 @@
 export function setRoutes (resolver, rootComponent, prefix) {
   /** @param {string} path @returns {{path, action}} */
-  function getComponentRoute (path) {
+  function getComponentRoute (path, dependencies = []) {
     return {
       path: path,
       action: async () => {
+        for (const dependency of dependencies) {
+          await import(`components/${dependency}`)
+        }
         const component = await import(`components/${path}`)
         const module = await import(`./${path}`)
         rootComponent.setContentComponent(module.hub(resolver))
@@ -30,7 +33,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     //getComponentRoute('map'),
     //getComponentRoute('modal'),
     //getComponentRoute('multiselect'),
-    //getComponentRoute('navbar'),
+    getComponentRoute('navbar', ['button', 'icon']),
     //getComponentRoute('paginator'),
     //getComponentRoute('radio'),
     //getComponentRoute('select'),

@@ -1,4 +1,4 @@
-import { Nav } from '../../../src/components/navbar'
+import { Nav } from 'components/navbar'
 
 describe('Nav', () => {
   it('can be instantiated', () => {

@@ -1,0 +1,71 @@
+@use 'base/theme';
+@use './config' as *;
+
+@mixin ark-nav() {
+  @include theme.color;
+
+  background: inherit;
+  color: inherit;
+  min-height: 3rem;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  grid-column: 1 / 3;
+
+  &[brand] {
+    grid-area: brand;
+    justify-content: end;
+  }
+
+  &[toggler] {
+    grid-area: toggler;
+    justify-content: flex-end;
+  }
+
+  &[collapse] {
+    display: none;
+    height: auto;
+  }
+}
+
+@mixin ark-navbar() {
+  @include theme.color;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "brand toggler";
+
+  user-select: none;
+
+  &[justify="center"] {
+    justify-content: center;
+  }
+
+  &[justify="end"] {
+    justify-content: flex-end;
+  }
+
+  &[justify="between"] {
+    justify-content: space-between;
+  }
+
+  &[fixed-top] {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  //@media only screen and (min-width: theme.$desktop) {
+    //display: flex;
+
+    //.ark-nav {
+      //&[collapse] {
+        //display: flex;
+      //}
+    //}
+  //}
+
+}

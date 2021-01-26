@@ -1,7 +1,0 @@
-@import "./navbar.material";
-@import "./nav.material";
-
-@mixin navbar_material() {
-  @include navbar_material_();
-  @include nav_material_();
-}

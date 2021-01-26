@@ -1,0 +1,17 @@
+@use './variables';
+
+@mixin color() {
+  background: var(--primary, black);
+  color: white;
+
+  @each $color in variables.$colors {
+    &[background=#{$color}] {
+      background: var(--#{$color}, black);
+      color: white;
+    }
+
+    &#{&}[color=#{$color}] {
+      color: var(--#{$color}, white);
+    }
+  }
+}
