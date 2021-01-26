@@ -1,41 +1,46 @@
-import { Nav, Navbar } from '../../../src/components/navbar'
+import { Nav, Navbar } from 'components/navbar'
 
 describe('Navbar', () => {
-  it('can be instantiated', () => {
-    const navbar = new Navbar()
-    expect(navbar).toBeTruthy()
-
-    const init = navbar.init()
-    expect(navbar === init).toBeTruthy()
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
   })
 
-  it('can be rendered without content', function () {
-    const navbar = new Navbar()
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
 
-    const nav1 = new Nav()
-    nav1.setAttribute('brand', '')
-    nav1.init().render().load()
+  it('can be instantiated', () => {
+    container.innerHTML = `
+    <ark-navbar></ark-navbar>
+    `
+    const navbar = container.querySelector('ark-navbar')
+    expect(navbar).toBeTruthy()
 
-    const nav2 = new Nav()
-    nav2.init().render().load()
+    expect(navbar).toEqual(navbar.init())
+  })
 
-    const nav3 = new Nav()
-    nav3.setAttribute('toggler', '')
-    nav3.setAttribute('navbar-toggler', '')
-    nav3.init().render().load()
+  it('can toggle the visibility of its nav children', function () {
+    container.innerHTML = `
+    <ark-navbar>
+      <ark-nav data-first brand></ark-nav>
+      <ark-nav data-second></ark-nav>
+      <ark-nav data-third toggler></ark-nav>
+    </ark-navbar>
+    `
+    const navbar = container.querySelector('ark-navbar')
 
-    navbar.innerHTML = ''
-    navbar.appendChild(nav1)
-    navbar.appendChild(nav2)
-    navbar.appendChild(nav3)
+    const toggler = navbar.select('[toggler]')
+    toggler.click()
 
-    navbar.init().render().load()
+    const nav1 = navbar.select('[data-first]')  
+    const nav2 = navbar.select('[data-second]')  
+    const nav3 = navbar.select('[data-third]')  
 
-    // @ts-ignore
-    navbar.onToggleContent(new Event('click'))
-
-    expect(!nav1.hasAttribute('collapse')).toBeTruthy()
+    expect(nav1.hasAttribute('collapse')).toBeFalsy()
     expect(nav2.hasAttribute('collapse')).toBeTruthy()
-    expect(!nav3.hasAttribute('collapse')).toBeTruthy()
+    expect(nav3.hasAttribute('collapse')).toBeFalsy()
   })
 })
