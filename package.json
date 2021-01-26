@@ -20,7 +20,7 @@
   "types": "src/components/index",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
-    "@knowark/injectarkjs": "^0.4.0",
+    "@knowark/injectarkjs": "^0.4.1",
     "@knowark/routarkjs": "^0.5.1",
     "@material/button": "^9.0.0",
     "@material/card": "^9.0.0",
