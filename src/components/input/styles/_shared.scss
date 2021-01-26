@@ -10,8 +10,9 @@
         pointer-events: none !important;
         cursor: default !important;
 
-        color: rgb(56, 56, 56);
-        background: rgb(206, 205, 205);
+        &>.ark-input__input {
+            background: rgb(255, 255, 255);
+        }
 
         &:hover {
             background: white;
@@ -25,13 +26,22 @@
 
     &__input {
         display: block;
-        width: 50%;
+        max-width: 100%;
         padding: 0.5rem;
+
+        border: 2px solid rgb(175, 175, 175);
+
         border-radius: 3px;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         -ms-border-radius: 3px;
         -o-border-radius: 3px;
+
+        background-color: rgba(255, 255, 255, 0.596);
+
+        &:hover {
+            background-color: rgb(255, 255, 255);
+        }
     }
 
     &[inline] label {
