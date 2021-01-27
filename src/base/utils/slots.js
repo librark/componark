@@ -14,3 +14,5 @@ export function getSlots (container) {
 
   return slots
 }
+
+export const slot = getSlots

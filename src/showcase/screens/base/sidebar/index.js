@@ -2,11 +2,11 @@ import { SidebarDemo } from './sidebarDemo'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({
-    strategy: {
-      SidebarDemo: {
-        method: 'component'
-      }
-    },
+    //strategy: {
+      //SidebarDemo: {
+        //method: 'component'
+      //}
+    //},
     factory: new ComponentFactory()
   })
 
@@ -16,10 +16,10 @@ export function hub (parentResolver) {
 export class ComponentFactory {
   /** @param {string} method */
   extract (method) {
-    return this[`_${method}`]
+    return this[`${method}`]
   }
 
-  _component () {
+  sidebarDemo () {
     return new SidebarDemo()
   }
 }
