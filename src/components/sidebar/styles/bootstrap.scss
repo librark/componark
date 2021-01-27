@@ -1,0 +1,5 @@
+@use'./shared.scss';
+
+.ark-sidebar {
+  @include shared.ark-sidebar;
+}

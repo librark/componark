@@ -121,4 +121,22 @@ describe('Component', () => {
     const red = component.selectAll('.red')
     expect(red.length).toEqual(2)
   })
+
+  it('retrieves its slots through the slots method', () => {
+    container.innerHTML = `
+    <mock-component>
+      <div slot="header" class="header"></div>
+      <div class="body"></div>
+      <div class="aside"></div>
+      <div slot="footer" class="footer"></div>
+    </mock-component>
+    `
+    const component = container.querySelector('mock-component')
+
+    expect(component.slots()).toEqual({
+      header: [component.select('.header')],
+      general: [component.select('.body'), component.select('.aside')],
+      footer: [component.select('.footer')]
+    })
+  })
 })
