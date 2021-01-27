@@ -37,7 +37,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     //getComponentRoute('paginator'),
     //getComponentRoute('radio'),
     //getComponentRoute('select'),
-    //getComponentRoute('sidebar'),
+    getComponentRoute('sidebar', ['button']),
     //getComponentRoute('signature'),
     //getComponentRoute('spinner'),
     //getComponentRoute('splitview'),

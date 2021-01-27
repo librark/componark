@@ -84,7 +84,7 @@ export class RootComponent extends Component {
       //{ name: 'Paginator', path: '/base/paginator' },
       //{ name: 'Radio', path: '/base/radio' },
       //{ name: 'Select', path: '/base/select' },
-      //{ name: 'Sidebar', path: '/base/sidebar' },
+      { name: 'Sidebar', path: '/base/sidebar' },
       //{ name: 'Signature', path: '/base/signature' },
       //{ name: 'Spinner', path: '/base/spinner' },
       //{ name: 'SplitView', path: '/base/splitview' },

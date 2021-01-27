@@ -1,115 +1,79 @@
-import { Sidebar } from '../../../src/components/sidebar/components/sidebar'
+import { Sidebar } from 'components/sidebar'
 
 describe('Sidebar', () => {
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const item = new Sidebar()
-    expect(item).toBeTruthy()
-
-    const init = item.init()
-    expect(item === init).toBeTruthy()
-  })
-
-  it('can be rendered with content', function () {
-    const item = document.createElement('div')
-    item.innerHTML = /* html */ `
-      <ark-sidebar>
-        <div slot="header">Menu</div>
-        <div>body</div>
-        <div slot="footer">footer</div>
-      </ark-sidebar>
+    container.innerHTML = `
+    <ark-sidebar></ark-sidebar>
     `
+    const sidebar = container.querySelector('ark-sidebar')
+    expect(sidebar).toBeTruthy()
 
-    const sidebar = /** @type {Sidebar} */ (item.querySelector('ark-sidebar'))
-    sidebar.init().render().load()
-
-    expect(sidebar.slots.header.length).toBeTruthy()
-    expect(sidebar.slots.footer.length).toBeTruthy()
-    expect(sidebar.slots.general.length).toBeTruthy()
+    expect(sidebar).toBe(sidebar.init())
   })
 
-  it('can be opened with opened attribute', function () {
-    const item = new Sidebar()
-    const att = document.createAttribute('opened')
-    item.setAttributeNode(att)
-    item.connectedCallback()
+  it('can be opened, closed and toggled', () => {
+    container.innerHTML = `
+    <ark-sidebar></ark-sidebar>
+    `
+    const sidebar = container.querySelector('ark-sidebar')
 
-    const isClass = Array.from(item.classList).filter(l =>
-      l === 'ark-sidebar--opened').length
-
-    expect(isClass).toBeTruthy()
+    expect(sidebar.hasAttribute('opened')).toBeFalsy()
+    sidebar.open()
+    expect(sidebar.hasAttribute('opened')).toBeTruthy()
+    sidebar.close()
+    expect(sidebar.hasAttribute('opened')).toBeFalsy()
+    sidebar.toggle()
+    expect(sidebar.hasAttribute('opened')).toBeTruthy()
+    sidebar.toggle()
+    expect(sidebar.hasAttribute('opened')).toBeFalsy()
   })
 
-  it('can be closed', function () {
-    const item = new Sidebar()
-    const att = document.createAttribute('opened')
-    item.setAttributeNode(att)
-    item.init({})
-    item.connectedCallback()
+  it('can position slotted children elements', () => {
+    container.innerHTML = `
+    <ark-sidebar>
+      <div slot="header" class="first">Custom Header</div>
+      <div slot="footer" class="second">Custom Footer</div>
+      <ul class="third">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+    </ark-sidebar>
+    `
+    const sidebar = container.querySelector('ark-sidebar')
 
-    item.slots = {}
+    const header = sidebar.select('.ark-sidebar__header')
+    expect(header.firstElementChild).toBe(sidebar.select('.first'))
 
-    let isClass = Array.from(item.classList).filter(l =>
-      l === 'ark-sidebar--opened').length
+    const footer = sidebar.select('.ark-sidebar__footer')
+    expect(footer.firstElementChild).toBe(sidebar.select('.second'))
 
-    expect(isClass).toBeTruthy()
-
-    item.close()
-    isClass = Array.from(item.classList).filter(l =>
-      l === 'ark-sidebar--opened').length
-
-    expect(!isClass).toBeTruthy()
+    const body = sidebar.select('.ark-sidebar__body')
+    expect(body.firstElementChild).toBe(sidebar.select('.third'))
   })
 
-  it('can be closed with toggle option', function () {
-    const item = new Sidebar()
-    const att = document.createAttribute('opened')
-    item.setAttributeNode(att)
-    item.init()
-    item.connectedCallback()
+  it('closes itself on scrim click', function () {
+    container.innerHTML = `
+    <ark-sidebar></ark-sidebar>
+    `
+    const sidebar = container.querySelector('ark-sidebar')
 
-    let isClass = Array.from(item.classList).filter(l =>
-      l === 'ark-sidebar--opened').length
+    sidebar.open()
+    expect(sidebar.hasAttribute('opened')).toBeTruthy()
 
-    expect(isClass).toBeTruthy()
-
-    item.toggle()
-    isClass = Array.from(item.classList).filter(l =>
-      l === 'ark-sidebar--opened').length
-
-    expect(!isClass).toBeTruthy()
-  })
-
-  it('can be closed with scrim option', function () {
-    const item = new Sidebar()
-    const att = document.createAttribute('opened')
-    item.setAttributeNode(att)
-    item.connectedCallback()
-
-    let isClass = Array.from(item.classList).filter(l =>
-      l === 'ark-sidebar--opened').length
-
-    expect(isClass).toBeTruthy()
-
-    const scrim = item.querySelector('.ark-sidebar__scrim')
-    // @ts-ignore
+    const scrim = sidebar.select('.ark-sidebar__scrim')
     scrim.click()
-
-    isClass = Array.from(item.classList).filter(l =>
-      l === 'ark-sidebar--opened').length
-
-    expect(!isClass).toBeTruthy()
-  })
-
-  it('can be rendered without slots', function () {
-    const item = new Sidebar()
-
-    item.innerHTML = /* html */`
-      <div slot="header">Menu</div>
-    `
-
-    item.init().render().load()
-    item.connectedCallback()
-
-    expect(item.slots).toBeTruthy()
+    expect(sidebar.hasAttribute('opened')).toBeFalsy()
   })
 })
