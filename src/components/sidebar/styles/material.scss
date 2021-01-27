@@ -14,6 +14,27 @@ $feat-structure: feature-targeting.create-target($query, structure);
   @include shared.ark-sidebar;
 
   &__menu {
+    @include mixins.title-ink-color(variables.$title-ink-color, $query: $query);
+    @include mixins.subtitle-ink-color(variables.$subtitle-ink-color, $query: $query);
+    @include mixins.border-color(variables.$divider-color, $query: $query);
+    @include mixins.surface-fill-color(variables.$surface-fill-color, $query: $query);
+    @include mixins.item-icon-ink-color(
+      variables.$item-inactive-ink-color,
+      $query: $query
+    );
+    @include mixins.item-text-ink-color(
+      variables.$item-inactive-ink-color,
+      $query: $query
+    );
+    @include mixins.item-activated-icon-ink-color(
+      variables.$item-activated-ink-color,
+      $query: $query
+    );
+    @include mixins.item-activated-text-ink-color(
+      variables.$item-activated-ink-color,
+      $query: $query
+    );
+
     @include mixins.shape-radius(variables.$shape-radius, $query: $query);
     @include mixins.item-shape-radius(
       variables.$item-shape-radius, $query: $query);
