@@ -133,9 +133,7 @@ describe('Component', () => {
     `
     const component = container.querySelector('mock-component')
 
-    const slots = component.slots;
-
-    expect(slots).toEqual({
+    expect(component.slots).toEqual({
       header: [component.select('.header')],
       general: [component.select('.body'), component.select('.aside')],
       footer: [component.select('.footer')]
