@@ -6,14 +6,13 @@ export class SidebarDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`
+    this.content = /* html */`
       <div>
         <p>This is a sidebar.</p>
         <ark-button listen on-click="_onClick" background="primary">
           OPEN
         </ark-button>
       </div>
-
 
       <ark-sidebar>
         <div slot="header">My Menu</div>
@@ -25,7 +24,7 @@ export class SidebarDemo extends Component {
     return super.render()
   }
 
-  _onClick () {
+  _onClick (event) {
     const sidebar = this.querySelector('ark-sidebar')
     sidebar['open']()
   }
