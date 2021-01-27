@@ -1,5 +1,6 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
 
+const tag = 'ark-list-item'
 export class ListItem extends Component {
   init (context = {}) {
     this.index = context.index
@@ -19,4 +20,4 @@ export class ListItem extends Component {
     return super.render()
   }
 }
-customElements.define('ark-list-item', ListItem)
+Component.define(tag, ListItem)

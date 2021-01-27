@@ -28,7 +28,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     //getComponentRoute('grid'),
     //getComponentRoute('icon'),
     //getComponentRoute('input'),
-    //getComponentRoute('list'),
+    getComponentRoute('list'),
     //getComponentRoute('location'),
     //getComponentRoute('map'),
     //getComponentRoute('modal'),

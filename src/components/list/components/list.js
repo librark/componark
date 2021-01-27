@@ -1,6 +1,7 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
 import { ListItem } from './list.item'
 
+const tag = 'ark-list'
 export class List extends Component {
   /** @param {Object} context */
   init (context = {}) {
@@ -69,4 +70,4 @@ export class List extends Component {
     )
   }
 }
-customElements.define('ark-list', List)
+customElements.define(tag, List)

@@ -75,7 +75,7 @@ export class RootComponent extends Component {
       //{ name: 'Grid', path: '/base/grid' },
       //{ name: 'Icon', path: '/base/icon' },
       //{ name: 'Input', path: '/base/input' },
-      //{ name: 'List', path: '/base/list' },
+      { name: 'List', path: '/base/list' },
       //{ name: 'Location', path: '/base/location' },
       //{ name: 'Map', path: '/base/map' },
       //{ name: 'Modal', path: '/base/modal' },
