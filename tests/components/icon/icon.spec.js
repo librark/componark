@@ -1,31 +1,47 @@
-import { Icon } from '../../../src/components/icon'
+import { Icon } from 'components/icon'
 
 describe('Icon', () => {
-  it('can be instantiated', () => {
-    const icon = new Icon()
-    expect(icon).toBeTruthy()
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
   })
 
   it('can be instantiated', () => {
-    const icon = new Icon()
+    container.innerHTML = `
+    <ark-icon></ark-icon>
+    `
+    const icon = container.querySelector('ark-icon')
+
     expect(icon).toBeTruthy()
-    const init = icon.init()
-    expect(icon === init).toBeTruthy()
+
+    expect(icon).toBe(icon.init())
   })
 
-  it('can be rendered with default variables', function () {
-    const icon = new Icon()
-    icon.connectedCallback()
-    const iconElement = icon.querySelector('i')
-    expect(iconElement).toBeTruthy()
+  it('renders fontawesome icons by default', function () {
+    container.innerHTML = `
+    <ark-icon name="fab fa-android"></ark-icon>
+    `
+    const icon = container.querySelector('ark-icon')
+
+    expect(icon.select('i')).toBeTruthy()
+    expect(icon.select('i').textContent).toEqual('')
+    expect(icon.select('i').className).toEqual('fab fa-android')
   })
 
-  it('can be rendered with undefined variables', function () {
-    const icon = new Icon()
-    icon.setAttribute('type', 'mat')
-    icon.init().render().load()
-    icon.render()
+  it('can render material icons', function () {
+    container.innerHTML = `
+    <ark-icon type="mat" name="done"></ark-icon>
+    `
+    const icon = container.querySelector('ark-icon')
 
-    expect(icon.querySelector('.material-icons')).toBeTruthy()
+    expect(icon.select('i')).toBeTruthy()
+    expect(icon.select('i').textContent).toEqual('done')
+    expect(icon.select('i').className).toEqual('material-icons')
   })
 })
