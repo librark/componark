@@ -6,7 +6,7 @@ export class IconDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.innerHTML = /* html */ `
       <p>Icon:</p>
       <hr/><br/>
 
@@ -23,16 +23,6 @@ export class IconDemo extends Component {
     `
 
     return super.render()
-  }
-
-  get styles () {
-    return /* html */ `
-      <style>
-        demo-icon ark-icon{
-          font-size: 5rem;
-        }
-      </style>
-    `
   }
 }
 Component.define('demo-icon', IconDemo)
