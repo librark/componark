@@ -122,7 +122,7 @@ describe('Component', () => {
     expect(red.length).toEqual(2)
   })
 
-  it('retrieves its slots through the slot property', () => {
+  it('retrieves its slots through the slots method', () => {
     container.innerHTML = `
     <mock-component>
       <div slot="header" class="header"></div>
@@ -133,7 +133,7 @@ describe('Component', () => {
     `
     const component = container.querySelector('mock-component')
 
-    expect(component.slots).toEqual({
+    expect(component.slots()).toEqual({
       header: [component.select('.header')],
       general: [component.select('.body'), component.select('.aside')],
       footer: [component.select('.footer')]

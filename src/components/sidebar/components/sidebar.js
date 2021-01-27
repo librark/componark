@@ -8,7 +8,7 @@ export class Sidebar extends Component {
   }
 
   render () {
-    const slots = this.slots
+    const slots = this.slots()
 
     this.content = /* html */`
       <div class="ark-sidebar__menu">

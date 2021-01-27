@@ -27,7 +27,7 @@ export class Component extends HTMLElement {
     return []
   }
 
-  get slots() {
+  slots() {
     return slot(this)
   }
 
