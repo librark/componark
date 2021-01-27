@@ -1,13 +1,15 @@
 import hljs from 'highlight.js/lib/core'
 import { Component } from 'base/component'
 
+const tag = 'demo-input'
+
 export class InputDemo extends Component {
   init (context) {
     return super.init()
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.innerHTML = /* html */ `
     <section class="introduction">
       <h1><code>Input</code></h1>
       <p>User input component.</p>
@@ -24,23 +26,23 @@ export class InputDemo extends Component {
       ${this.secondExample}
       ${this.thirdExample}
     </section>
-    <section class="reference">
-      <h2>Reference</h2>
-      <p>
-      The <code>ark-input</code> element supports all the types of the default
-      <a href="https://www.w3schools.com/html/html_form_input_types.asp">
-        <code>input</code> web component.
-      </a>
-      Additionally, the following options are available:
-      </p>
-      <h3>Attributes</h3>
-      ${this.attrs}
-      <h3>Properties</h3>
-      ${this.properties}
-      <h3>Methods</h3>
-      ${this.methods}
-    </section>
-  `
+    `
+    // <section class="reference">
+    //   <h2>Reference</h2>
+    //   <p>
+    //   The <code>ark-input</code> element supports all the types of the default
+    //   <a href="https://www.w3schools.com/html/html_form_input_types.asp">
+    //     <code>input</code> web component.
+    //   </a>
+    //   Additionally, the following options are available:
+    //   </p>
+    //   <h3>Attributes</h3>
+    //   ${this.attrs}
+    //   <h3>Properties</h3>
+    //   ${this.properties}
+    //   <h3>Methods</h3>
+    //   ${this.methods}
+    // </section>
 
     return super.render()
   }
@@ -130,9 +132,15 @@ export class InputDemo extends Component {
       element.textContent = event.detail ? event.detail.value : ''
     }
   }
-
-  get styles () {
-    return ``
-  }
 }
-Component.define('demo-input', InputDemo)
+
+const styles = `
+  code.html{
+    display:block;
+    background-color:rgb(212 235 230);
+    padding: 5px;
+    min-width:70%;
+  }
+
+`
+Component.define(tag, InputDemo, styles)

@@ -74,7 +74,7 @@ export class RootComponent extends Component {
       //{ name: 'Form', path: '/base/form' },
       //{ name: 'Grid', path: '/base/grid' },
       //{ name: 'Icon', path: '/base/icon' },
-      //{ name: 'Input', path: '/base/input' },
+      { name: 'Input', path: '/base/input' },
       //{ name: 'List', path: '/base/list' },
       //{ name: 'Location', path: '/base/location' },
       //{ name: 'Map', path: '/base/map' },
@@ -106,7 +106,7 @@ body {
 
 :root {
   color: black;
-  --background: red;
+  --background: white;
 
   --primary: blue;
   --secondary: orange;
