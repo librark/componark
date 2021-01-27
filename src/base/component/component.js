@@ -1,4 +1,4 @@
-import { define, listen, reflect } from 'base/utils'
+import { define, listen, reflect, slot } from 'base/utils'
 
 export class Component extends HTMLElement {
   constructor () {
@@ -25,6 +25,10 @@ export class Component extends HTMLElement {
   /** @return {string[]} */
   reflectedProperties () {
     return []
+  }
+
+  get slots() {
+    return slot(this)
   }
 
   /** @param {string} content */
