@@ -1,5 +1,5 @@
-@use '@material/elevation/mixins' as elevation-mixins;
-@use '@material/dom/mixins' as dom-mixins;
+@use '@material/elevation/mixins'as elevation-mixins;
+@use '@material/dom/mixins'as dom-mixins;
 @use '@material/feature-targeting/feature-targeting';
 @use '@material/card/variables';
 @use '@material/card/mixins';
@@ -28,6 +28,7 @@ $feat-structure: feature-targeting.create-target($query, structure);
   &::after {
     @include mixins.shape-radius(variables.$shape-radius, $query: $query);
     @include dom-mixins.transparent-border($query: $query);
+
     @include feature-targeting.targets($feat-structure) {
       pointer-events: none;
     }

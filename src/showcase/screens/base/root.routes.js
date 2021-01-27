@@ -29,6 +29,8 @@ export function setRoutes (resolver, rootComponent, prefix) {
     //getComponentRoute('icon'),
     //getComponentRoute('input'),
     getComponentRoute('list'),
+    getComponentRoute('input'),
+    //getComponentRoute('list'),
     //getComponentRoute('location'),
     //getComponentRoute('map'),
     //getComponentRoute('modal'),

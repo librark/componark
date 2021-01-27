@@ -1,0 +1,57 @@
+@use './config'as *;
+
+@mixin ark-input() {
+    display: block;
+    height: fit-content;
+    outline: none;
+    margin-bottom: 10px;
+
+    &[disabled] {
+        pointer-events: none !important;
+        cursor: default !important;
+
+        &>.ark-input__input {
+            background: rgb(255, 255, 255);
+        }
+
+        &:hover {
+            background: white;
+        }
+    }
+
+    &__label {
+        display: block;
+        text-overflow: ellipsis;
+    }
+
+    &__input {
+        display: block;
+        max-width: 100%;
+        padding: 0.5rem;
+
+        border: 2px solid rgb(175, 175, 175);
+
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+
+        background-color: rgba(255, 255, 255, 0.596);
+
+        &:hover {
+            background-color: rgb(255, 255, 255);
+        }
+    }
+
+    &[inline] label {
+        display: flex;
+        white-space: nowrap;
+        align-items: center;
+
+        input {
+            display: initial;
+            margin-left: 0.5rem;
+        }
+    }
+}

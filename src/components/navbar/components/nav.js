@@ -2,14 +2,10 @@ import { Component } from 'base/component'
 
 const tag = 'ark-nav'
 export class Nav extends Component {
-  init (context = {}) {
-    return super.init()
-  }
-
   render () {
-    if (!(this.hasAttribute('brand') || this.hasAttribute('toggler'))) {
-      this.setAttribute('collapse', 'true')
-    }
+    //if (!(this.hasAttribute('brand') || this.hasAttribute('toggler'))) {
+      //this.setAttribute('collapse', 'true')
+    //}
 
     return super.render()
   }
