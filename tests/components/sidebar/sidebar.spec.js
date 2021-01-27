@@ -22,9 +22,9 @@ describe('Sidebar', () => {
     const sidebar = /** @type {Sidebar} */ (item.querySelector('ark-sidebar'))
     sidebar.init().render().load()
 
-    expect(sidebar.slots.header.length).toBeTruthy()
-    expect(sidebar.slots.footer.length).toBeTruthy()
-    expect(sidebar.slots.general.length).toBeTruthy()
+    expect(sidebar.slots().header.length).toBeTruthy()
+    expect(sidebar.slots().footer.length).toBeTruthy()
+    expect(sidebar.slots().general.length).toBeTruthy()
   })
 
   it('can be opened with opened attribute', function () {
