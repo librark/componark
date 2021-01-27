@@ -1,6 +1,8 @@
-import { Component } from '../../component'
-import { getSlots } from '../../../utils'
+import { Component } from 'base/component'
+import { getSlots } from 'base/utils'
+import { styles } from '../styles'
 
+const tag = 'ark-sidebar'
 export class Sidebar extends Component {
   init (context = {}) {
     // local variables
@@ -16,11 +18,8 @@ export class Sidebar extends Component {
   render () {
     this.innerHTML = /* html */`
       <div class="ark-sidebar__menu">
-        <div>
-          <div class="ark-sidebar__header"></div>
-          <div class="ark-sidebar__body"></div>
-        </div>
-
+        <div class="ark-sidebar__header"></div>
+        <div class="ark-sidebar__body"></div>
         <div class="ark-sidebar__footer"></div>
       </div>
       <div class="ark-sidebar__scrim" listen on-click="close"></div>
@@ -30,21 +29,19 @@ export class Sidebar extends Component {
     this._renderContent('general', '.ark-sidebar__body')
     this._renderContent('footer', '.ark-sidebar__footer')
 
-    if (this.hasAttribute('opened')) this.open()
-
     return super.render()
   }
 
   open () {
-    this.classList.add('ark-sidebar--opened')
+    this.setAttribute('opened', '')
   }
 
   close () {
-    this.classList.remove('ark-sidebar--opened')
+    this.removeAttribute('opened')
   }
 
   toggle () {
-    this.classList.toggle('ark-sidebar--opened')
+    this.toggleAttribute('opened')
   }
 
   _renderContent (slotKey, containerClass) {
@@ -59,4 +56,4 @@ export class Sidebar extends Component {
     slots.forEach(element => container.append(element))
   }
 }
-customElements.define('ark-sidebar', Sidebar)
+Component.define(tag, Sidebar, styles)
