@@ -15,7 +15,7 @@ export class RootComponent extends Component {
   render () {
     this.content = /* html */ `
     <nav class="app-root__navbar">
-      <a class="app-root__navitem" href="/">Componark</a>
+      <a class="app-root__navitem" href="/">Componark <span>web components</span></a>
       <a class="app-root__navitem" href="#">Contact</a>
       <a class="app-root__navitem" href="#">About</a></li>
     </nav>
@@ -99,97 +99,120 @@ export class RootComponent extends Component {
 }
 
 const styles = `
-  body {
-    margin: 0;
-    padding: 0;
-    
-    background-color: #fff7ea;
-  }
-  
-  :root {
-    color: black;
-    --background: white;
-  
-    --primary: blue;
-    --secondary: orange;
-    --success: green;
-    --danger: red;
-    --warning: yellow;
-    --info: cyan;
-    --dark: black;
-    --muted: gray;
-    --light: lightgray;
-  }
-  
-  .app-root {
-    display: grid;
-    font-family: helvetica, sans-serif;
-    letter-spacing: 0.02em;
-  }
-  
-  .app-root__navbar {
-    grid-column: 1 / 13;
-    display: flex;
-    background-color: #334455;
-    color: #00ffff;
-    text-decoration: none
-    overflow: hidden;
-    border-bottom:5px solid cyan;
-  }
-  
-  .app-root__navitem {
-    text-decoration: none;
-    padding: 2vw;
-    color: cyan;
-  }
-  
-  .app-root__navitem,
-  .app-root__sideitem{
-    transition: all 0.2s ease-in-out;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-  }
-  
-  .app-root__navitem:hover,
-  .app-root__sideitem:hover {
-    background-color: white;
-    color:black;
-  }
-  
-  .app-root__navitem:first-child {
-    text-transform: uppercase;
-  }
-  
-  .app-root__sidebar {
-    grid-column: 1 / 2;
-    display: flex;
-    flex-direction: column;
-    background-color: #334455;
-    color: #00ffff;
-    text-decoration: none
-    overflow-x: hidden;
-    width:100%;
-  }
-  
-  .app-root__sideitem {
-    text-decoration: none;
-    padding: 1vw;
-    color: cyan;
-  }
-  
-  .app-root__sideitem:first-child {
-    text-transform: uppercase;
-  }
-  
-  .app-root__content {
-    position:relative;
-    left:50px;
-    width:80vw;
-    grid-column: 2 / 13;
-    padding: 2vmin;
-    min-height:100vh;
-  }
+
+html{
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background-color: #fff7ea;
+}
+
+:root {
+  color: black;
+  --background: white;
+
+  --primary: blue;
+  --secondary: orange;
+  --success: green;
+  --danger: red;
+  --warning: yellow;
+  --info: cyan;
+  --dark: black;
+  --muted: gray;
+  --light: lightgray;
+}
+
+.app-root {
+  display: grid;
+  font-family: 'Cairo', helvetica, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.app-root__navbar {
+  grid-column: 1 / 13;
+  display: flex;
+  background-color: #334455;
+  color: #00ffff;
+  text-decoration: none
+  overflow: hidden;
+  border-bottom:5px solid cyan;
+  align-items:center;
+}
+
+.app-root__navitem {
+  text-decoration: none;
+  padding: 2vw;
+  color: cyan;
+  height:auto;
+}
+
+.app-root__navitem,
+.app-root__sideitem{
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+
+}
+
+.app-root__navitem:hover,
+.app-root__sideitem:hover {
+  background-color: white;
+  color:black;
+}
+
+.app-root__navitem:first-child {
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+}
+.app-root__navitem:first-child>span{
+  display:block;
+  font-size:0.9rem;
+  font-weight: 300;
+  text-transform:none;
+  position:relative;
+  bottom: 10px;
+  height:10px;
+  text-align:center;
+}
+.app-root__sidebar {
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  background-color: #334455;
+  color: #00ffff;
+  text-decoration: none
+  overflow-x: hidden;
+  width:100%;
+}
+
+.app-root__sideitem {
+  text-decoration: none;
+  padding: 1vw;
+  color: cyan;
+}
+
+.app-root__sideitem:first-child {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align:center;
+}
+
+.app-root__content {
+  position:relative;
+  left:50px;
+  width:80vw;
+  grid-column: 2 / 13;
+  padding: 2vmin;
+  min-height:100vh;
+}
+
 `
 Component.define(tag, RootComponent, styles)
