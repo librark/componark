@@ -14,6 +14,7 @@ export function define(tag, element, styles=null) {
     try {
       style.sheet.insertRule(rule)
     } catch (error) {
+      console.log(error)
       continue
     }
   }

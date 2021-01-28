@@ -15,23 +15,28 @@
     border-right: 2px solid rgba($color: gray, $alpha: 0.3);
   }
 
-  &--actions {
-    display: none;
-  }
 
-  // MASTER
+  /*MASTER*/
   &-master {
+
     display: block;
-    width: 50%;
+    width: 100%;
     overflow: auto;
     height: inherit;
 
-    &[resize] {
-      resize: horizontal;
+    @media (min-width: theme.$mobile) {
+      width: 50%;
+
+      &[resize] {
+        resize: horizontal;
+      }
     }
+
+
+
   }
 
-  // DETAIL
+  /*DETAIL*/
   &-detail {
     @include theme.paint;
 
@@ -47,9 +52,8 @@
     top: 0;
     left: 0;
 
-    width: auto;
+    width: 100vw;
     height: 100vh;
-    max-height: 100%;
 
     &[hidden] {
       display: block !important;
@@ -110,63 +114,54 @@
 
     }
 
+    @media (min-width: theme.$mobile) {
 
-
-  @media only screen and (max-width: theme.$tablet) {
-    & {
-      width: 100%;
-    }
-  }
-
-  @media only screen and (min-width: theme.$tablet) {
-    & {
-      position: initial;
+      //position: initial;
       // border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
-      height: initial;
 
-      display: block;
+      & {
+        overflow: auto;
+        position: relative;
+        z-index: 512;
+        top: initial;
+        left: initial;
 
-      padding-top: 0;
+        width: auto;
+        height: auto;
 
-      &[hidden] {
+
+        height: initial;
+
         display: block;
-        visibility: visible;
+
+        padding-top: 0;
+
+        &[hidden] {
+          display: block;
+          visibility: visible;
+        }
+
+
+        &__header {
+          display: none;
+        }
+
+        &__button--close {
+          display: none;
+        }
+
+        &__title {
+          margin-left: 20px;
+        }
       }
+
     }
 
-    & {
-      &__header {
-        display: none;
-      }
 
-      &__button--close {
-        display: none;
-      }
-
-      &__title {
-        margin-left: 20px;
-      }
-    }
   }
 
 
 
-  }
 
-  @media only screen and (max-width: theme.$tablet) {
 
-    ark-splitview-master,
-    ark-splitview-detail {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 100% !important;
-      border: 0px !important;
-    }
-
-    & {
-      &--actions {
-        display: block;
-      }
-    }
-  }
 }

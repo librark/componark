@@ -55,4 +55,5 @@ export class SplitView extends Component {
     this.emit('detail:change', context)
   }
 }
+console.log(styles)
 Component.define(tag, SplitView, styles)
