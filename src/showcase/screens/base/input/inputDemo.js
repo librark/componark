@@ -134,7 +134,7 @@ export class InputDemo extends Component {
   }
 }
 
-const styles = `
+const styles = /* css */`
   code.html{
     display:block;
     background-color:rgb(212 235 230);
