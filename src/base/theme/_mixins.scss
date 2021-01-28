@@ -1,6 +1,6 @@
 @use './variables';
 
-@mixin color() {
+@mixin paint() {
   background: var(--primary, black);
   color: white;
 
