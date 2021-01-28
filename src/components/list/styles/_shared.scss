@@ -1,0 +1,38 @@
+@use './config'as *;
+
+
+@mixin ark-list() {
+    display: flex;
+    flex-direction: column;
+
+    .ark-list-item {
+        &:not(:last-child) {
+            border-bottom: 1px solid rgb(192, 192, 192);
+        }
+    }
+
+    &[action] {
+        .ark-list-item {
+            padding: 1rem;
+            transition: 0.1s ease-in-out;
+            -webkit-transition: 0.1s ease-in-out;
+            -moz-transition: 0.1s ease-in-out;
+            -ms-transition: 0.1s ease-in-out;
+            -o-transition: 0.1s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(158, 168, 168, 0.541);
+            }
+        }
+    }
+
+    &-item {}
+
+    &[grid] {
+        display: flex;
+        flex-direction: column;
+        flex-flow: wrap;
+        justify-content: space-around;
+    }
+}

@@ -1,7 +1,11 @@
+// @ts-nocheck
 import { Component } from 'base/component'
 import { ListItem } from './list.item'
+import { styles } from '../styles'
+
 
 const tag = 'ark-list'
+
 export class List extends Component {
   /** @param {Object} context */
   init (context = {}) {
@@ -70,4 +74,4 @@ export class List extends Component {
     )
   }
 }
-customElements.define(tag, List)
+Component.define(tag, List, styles)
