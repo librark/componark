@@ -1,5 +1,6 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
 
+const tag = 'ark-splitview-detail'
 export class SplitViewDetail extends Component {
   init (context = {}) {
     this.title = context.title || this.title || ' '
@@ -58,4 +59,4 @@ export class SplitViewDetail extends Component {
     return this.backButtonIcon ? this.backButtonIcon() : '&times;'
   }
 }
-customElements.define('ark-splitview-detail', SplitViewDetail)
+Component.define(tag, SplitViewDetail)

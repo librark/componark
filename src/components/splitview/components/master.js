@@ -1,11 +1,7 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
 
+const tag = 'ark-splitview-master'
 export class SplitViewMaster extends Component {
-  init (context = {}) {
-    // eslint-disable-next-line no-self-assign
-    this.masterEvent = this.masterEvent
-    return super.init()
-  }
 
   reflectedProperties () {
     return ['masterEvent']
@@ -14,17 +10,15 @@ export class SplitViewMaster extends Component {
   render () {
     if (this.firstElementChild) {
       this.firstElementChild.addEventListener(
-        this.masterEvent,
-        this._onMasterEvent.bind(this)
+        this['masterEvent'], this._onMasterEvent.bind(this)
       )
     }
     return super.render()
   }
 
-  /** @argument {Event} event */
   _onMasterEvent (event) {
-    event.stopImmediatePropagation()
-    this.dispatchEvent(new CustomEvent('master:change', event))
+    event.stopPropagation()
+    this.emit('master:change', event.detail)
   }
 }
-customElements.define('ark-splitview-master', SplitViewMaster)
+Component.define(tag, SplitViewMaster)
