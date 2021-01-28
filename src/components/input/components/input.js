@@ -12,9 +12,9 @@ export class Input extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`
+    this.content = /* html */`
     <label class="ark-input__label" ${this.isRequired()}>
-      ${this.label} <input class="ark-input__input"
+       ${this.label} <input class="ark-input__input"
       data-input listen on-input="onInputChange">
     </label>
     `

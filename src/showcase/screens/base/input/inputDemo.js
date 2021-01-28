@@ -139,7 +139,7 @@ const styles = /* css */`
     display:block;
     background-color:rgb(212 235 230);
     padding: 5px;
-    min-width:70%;
+    max-width:100%;
   }
 
 `
