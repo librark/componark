@@ -1,22 +1,61 @@
-@use "@material/floating-label/mdc-floating-label";
-@use "@material/line-ripple/mdc-line-ripple";
-@use "@material/notched-outline/mdc-notched-outline";
-@use '@material/ripple/ripple';
+@use '@material/floating-label/mixins'as floating-label-mixins;
+@use '@material/floating-label/variables'as floating-label-variables;
+@use '@material/theme/theme';
+@use "@material/shape";
+@use '@material/feature-targeting/feature-targeting';
+
 @use "@material/textfield/mixins";
 @use "@material/textfield/variables";
-@use '@material/feature-targeting/feature-targeting';
-//@use "@material/textfield";
 
 @use'./shared.scss';
+
+//*VARIABLES
 $query: feature-targeting.all();
-//$feat-color: feature-targeting.create-target($query, color);
+$feat-structure: feature-targeting.create-target($query, structure);
+$feat-color: feature-targeting.create-target($query, color);
 //$feat-structure: feature-targeting.create-target($query, structure);
+//*-----------
 
 .ark-input {
-  //@include mixins.without-ripple($query);
+
   @include shared.ark-input;
 
+
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0 variables.$padding-horizontal;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* @alternate */
+  will-change: opacity, transform, error;
+
+
+
+  &__input {
+    @include theme.prop(border-color, grey);
+    @include mixins.fill-color(surface, $query);
+    @include shape.radius(4px, false);
+
+    @include feature-targeting.targets($feat-structure) {
+      text-align: left;
+    }
+
+    &:focus {
+      @include mixins.fill-color(rgb(221, 239, 255), $query);
+      @include theme.prop(border-color, primary);
+      outline: none;
+    }
+
+    &:hover {
+      @include theme.prop(border-color, primary);
+    }
+  }
+
   &__label {
+    @include floating-label-mixins.ink-color(primary, $query: $query);
     font-size: 1.1rem;
   }
+
+
 }
