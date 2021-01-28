@@ -14,7 +14,7 @@ describe('Card', () => {
 
   it('can be instantiated', () => {
     container.innerHTML = `
-      <ark-card><ark-card>
+    <ark-card></ark-card>
     `
     const card = container.querySelector('ark-card')
     expect(card).toBeTruthy()
@@ -24,14 +24,14 @@ describe('Card', () => {
 
   it('can have a title and/or a subtitle', () => {
     container.innerHTML = `
-      <ark-card title="Random Title"><ark-card>
+    <ark-card title="Random Title"></ark-card>
     `
     let card = container.querySelector('ark-card')
     expect(card.select(
       '.ark-card__title').textContent).toEqual('Random Title')
 
     container.innerHTML = `
-      <ark-card data-card1 subtitle="Random Subtitle"><ark-card>
+    <ark-card data-card1 subtitle="Random Subtitle"></ark-card>
     `
     card = container.querySelector('ark-card')
     expect(card.select(

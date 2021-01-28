@@ -14,7 +14,7 @@ describe('Button', () => {
 
   it('can be instantiated', () => {
     container.innerHTML = `
-      <ark-button><ark-button>
+    <ark-button></ark-button>
     `
     const button = container.querySelector('ark-button')
     expect(button).toBeTruthy()
@@ -23,7 +23,7 @@ describe('Button', () => {
 
   it('replicates its attributes in its inner element', () => {
     container.innerHTML = `
-      <ark-button type="submit"><ark-button>
+    <ark-button type="submit"></ark-button>
     `
     const button = container.querySelector('ark-button')
     const element = button.firstElementChild
@@ -34,7 +34,7 @@ describe('Button', () => {
 
   it('can be rendered with a child anchor (<a>)', () => {
     container.innerHTML = `
-      <ark-button href="https://www.google.com/"><ark-button>
+    <ark-button href="https://www.google.com/"></ark-button>
     `
     const button = container.querySelector('ark-button')
     const element = button.firstElementChild
@@ -45,7 +45,7 @@ describe('Button', () => {
 
   it('can be rendered as a floating action button (fab)', () => {
     container.innerHTML = `
-      <ark-button fab><ark-button>
+    <ark-button fab></ark-button>
     `
     const button = container.querySelector('ark-button')
 

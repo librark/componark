@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
 
 export class Icon extends Component {
   init (context = {}) {
@@ -13,21 +13,13 @@ export class Icon extends Component {
   }
 
   render () {
-    if (this.type === 'mat') {
-      this.innerHTML = this._renderMaterial()
+    if (['mat', 'material'].includes(this.type)) {
+      this.content = /* html */`<i class="material-icons">${this.name}</i>`
     } else {
-      this.innerHTML = this._renderFontAwesome()
+      this.content = /* html */`<i class="${this.name}"></i>`
     }
 
     return super.render()
   }
-
-  _renderFontAwesome () {
-    return /* html */ `<i class="${this.name}"></i>`
-  }
-
-  _renderMaterial () {
-    return /* html */ `<i class="material-icons">${this.name}</i>`
-  }
 }
-customElements.define('ark-icon', Icon)
+Component.define('ark-icon', Icon)
