@@ -1,6 +1,6 @@
 import { Component } from 'base/component'
 
-export class ArkDetailExample extends Component {
+export class SplitviewDetailDemo extends Component {
   init (context) {
     const data = context.data || {}
 
@@ -32,4 +32,4 @@ export class ArkDetailExample extends Component {
     `
   }
 }
-Component.define('ark-detail-example', ArkDetailExample)
+Component.define('demo-splitview-detail', SplitviewDetailDemo)

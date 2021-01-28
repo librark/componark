@@ -1,13 +1,44 @@
-@mixin splitview_detail_default() {
-  $component: "ark-splitview-detail";
+@use 'base/theme';
 
-  $headerHeight: 3rem;
+@mixin ark-splitview() {
+  @include theme.paint;
 
-  #{$component} {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: auto;
+
+
+  &>*:first-child {
+    border-right: 2px solid rgba($color: gray, $alpha: 0.3);
+  }
+
+  &--actions {
+    display: none;
+  }
+
+  // MASTER
+  &-master {
+    display: block;
+    width: 50%;
+    overflow: auto;
+    height: inherit;
+
+    &[resize] {
+      resize: horizontal;
+    }
+  }
+
+  // DETAIL
+  &-detail {
+    @include theme.paint;
+
     display: grid;
     grid: auto 1fr / 1fr;
 
-    background: $background;
+
     flex: 1;
 
     overflow: auto;
@@ -28,12 +59,10 @@
     &>* {
       overflow: auto;
     }
-  }
 
-  .#{$component} {
     &__header {
-      background: $primary;
-      color: $light;
+      background: inherit;
+      color: inherit;
 
       display: flex;
       width: 100%;
@@ -41,11 +70,6 @@
       font-size: initial;
 
       user-select: none;
-
-      &,
-      * {
-        min-height: $headerHeight;
-      }
     }
 
     &__button--close {
@@ -80,24 +104,22 @@
       justify-content: center;
       align-items: center;
 
-      color: $muted;
+      color: gray;
 
-      background: rgba($color: $muted, $alpha: 0.1);
+      background: rgba($color: gray, $alpha: 0.1);
 
-      ark-icon {
-        font-size: 8rem;
-      }
+    }
+
+
+
+  @media only screen and (max-width: theme.$tablet) {
+    & {
+      width: 100%;
     }
   }
 
-  @media only screen and (max-width: $tablet) {
-    #{$component} {
-      width: 100% !important;
-    }
-  }
-
-  @media only screen and (min-width: $tablet) {
-    #{$component} {
+  @media only screen and (min-width: theme.$tablet) {
+    & {
       position: initial;
       // border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
       height: initial;
@@ -107,12 +129,12 @@
       padding-top: 0;
 
       &[hidden] {
-        display: block !important;
-        visibility: visible !important;
+        display: block;
+        visibility: visible;
       }
     }
 
-    .#{$component} {
+    & {
       &__header {
         display: none;
       }
@@ -123,6 +145,27 @@
 
       &__title {
         margin-left: 20px;
+      }
+    }
+  }
+
+
+
+  }
+
+  @media only screen and (max-width: theme.$tablet) {
+
+    ark-splitview-master,
+    ark-splitview-detail {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+      border: 0px !important;
+    }
+
+    & {
+      &--actions {
+        display: block;
       }
     }
   }
