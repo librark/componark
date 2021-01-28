@@ -206,12 +206,8 @@ body {
 }
 
 .app-root__content {
-  //position:relative;
-  //left:50px;
-  //width:80vw;
   grid-column: 2 / 13;
   padding: 2vmin;
-  //min-height:100vh;
 }
 
 `
