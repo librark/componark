@@ -15,7 +15,10 @@ export class RootComponent extends Component {
   render () {
     this.content = /* html */ `
     <nav class="app-root__navbar">
-      <a class="app-root__navitem" href="/">Componark <span>web components</span></a>
+      <a class="app-root__navitem" href="/">
+        <div class="app-root__title">Componark</div>
+        <div class="app-root__subtitle">web components</div>
+      </a>
       <a class="app-root__navitem" href="#">Contact</a>
       <a class="app-root__navitem" href="#">About</a></li>
     </nav>
@@ -100,10 +103,6 @@ export class RootComponent extends Component {
 
 const styles = `
 
-html{
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -151,13 +150,12 @@ body {
 }
 
 .app-root__navitem,
-.app-root__sideitem{
+.app-root__sideitem {
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
-
 }
 
 .app-root__navitem:hover,
@@ -166,12 +164,13 @@ body {
   color:black;
 }
 
-.app-root__navitem:first-child {
+.app-root__title {
   font-weight: 700;
   font-size: 1.3rem;
   text-transform: uppercase;
 }
-.app-root__navitem:first-child>span{
+
+.app-root__subtittle {
   display:block;
   font-size:0.9rem;
   font-weight: 300;
@@ -181,6 +180,7 @@ body {
   height:10px;
   text-align:center;
 }
+
 .app-root__sidebar {
   grid-column: 1 / 2;
   display: flex;
@@ -206,12 +206,12 @@ body {
 }
 
 .app-root__content {
-  position:relative;
-  left:50px;
-  width:80vw;
+  //position:relative;
+  //left:50px;
+  //width:80vw;
   grid-column: 2 / 13;
   padding: 2vmin;
-  min-height:100vh;
+  //min-height:100vh;
 }
 
 `
