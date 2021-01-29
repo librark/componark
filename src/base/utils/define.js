@@ -7,7 +7,6 @@ export function define(tag, element, styles=null) {
   customElements.define(tag, element)
   if (!styles) return
 
-  console.log(styles)
   try {
     const sheet = new CSSStyleSheet()
     sheet.replaceSync(styles)
