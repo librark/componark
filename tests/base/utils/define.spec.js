@@ -58,26 +58,4 @@ describe('Define', () => {
     const style = document.head.querySelector('style')
     expect(style).toBeTruthy()
   })
-
-  xit('ignores unsupported or incorrect rules', () => {
-    class MockStyle extends HTMLElement {
-      sheet = {
-        insertRule: (rule) => {throw new Error('Rule Error!')}
-      }
-    }
-    customElements.define('mock-style', MockStyle)
-
-    jest.spyOn(document, "createElement").mockReturnValue(new MockStyle())
-
-    class BadElement extends HTMLElement {}
-    const styles = `
-    # {
-      margin: 5px;
-    }
-    `
-
-    define('bad-element', BadElement, styles)
-    const style = document.getElementById('bad-element-style')
-    expect(style).toBeTruthy()
-  })
 })
