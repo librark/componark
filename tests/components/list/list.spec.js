@@ -4,7 +4,7 @@ describe('List', () => {
   it('can be instantiated', () => {
     const list = new List()
     list.connectedCallback()
-    expect(list.outerHTML).toEqual('<ark-list></ark-list>')
+    expect(list.outerHTML).toEqual('<ark-list class="ark-list"></ark-list>')
 
     list.init()
     list.render()
