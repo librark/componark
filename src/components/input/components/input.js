@@ -3,10 +3,6 @@ import { styles } from '../styles'
 
 const tag = 'ark-input'
 export class Input extends Component {
-  init(context={}){
-    return super.init(context)
-  }
-
   reflectedProperties () {
     return ['label']
   }
@@ -14,7 +10,7 @@ export class Input extends Component {
   render () {
     this.content = /* html */`
     <label class="ark-input__label" ${this.isRequired()}>
-       ${this.label} <input class="ark-input__input"
+      ${this.label} <input class="ark-input__input"
       data-input listen on-input="onInputChange">
     </label>
     `
@@ -48,7 +44,7 @@ export class Input extends Component {
       this.input.setAttribute(attribute.name, attribute.value)
   })
 }
-// 
+
   get input () {
     return /** @type {HTMLInputElement} */(this.querySelector('[data-input]'))
   }
