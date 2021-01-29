@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /** @param {string} tag
  * @param {CustomElementConstructor} element
  * @param {string} styles **/
@@ -5,17 +7,15 @@ export function define(tag, element, styles=null) {
   customElements.define(tag, element)
   if (!styles) return
 
-  const style = document.createElement('style')
-  style.id = `${tag}-style`
-  document.head.appendChild(style);
-
-  const rules = styles.trim().split(/(?<=})/)
-  for (const rule of rules) {
-    try {
-      style.sheet.insertRule(rule)
-    } catch (error) {
-      console.log(error)
-      continue
-    }
+  try {
+    const sheet = new CSSStyleSheet()
+    sheet.replaceSync(styles)
+    return document.adoptedStyleSheets = [
+      ...document.adoptedStyleSheets, sheet]
+  } catch (error) {
+    const style = document.createElement('style')
+    style.textContent = styles
+    document.head.appendChild(style);
   }
+
 }
