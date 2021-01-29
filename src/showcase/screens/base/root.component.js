@@ -85,7 +85,7 @@ export class RootComponent extends Component {
       //{ name: 'Modal', path: '/base/modal' },
       //{ name: 'Multiselect', path: '/base/multiselect' },
       { name: 'Navbar', path: '/base/navbar' },
-      //{ name: 'Paginator', path: '/base/paginator' },
+      { name: 'Paginator', path: '/base/paginator' },
       //{ name: 'Radio', path: '/base/radio' },
       //{ name: 'Select', path: '/base/select' },
       { name: 'Sidebar', path: '/base/sidebar' },
