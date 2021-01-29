@@ -1,7 +1,0 @@
-@import "./list.default";
-@import "./list.item.default";
-
-@mixin list_default() {
-  @include list_item_default_();
-  @include list_default_();
-}
