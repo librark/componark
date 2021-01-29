@@ -2,11 +2,6 @@ import { ButtonDemo } from './buttonDemo'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({
-    strategy: {
-      ButtonDemo: {
-        method: 'component'
-      }
-    },
     factory: new ComponentFactory()
   })
 
@@ -16,10 +11,10 @@ export function hub (parentResolver) {
 export class ComponentFactory {
   /** @param {string} method */
   extract (method) {
-    return this[`_${method}`]
+    return this[`${method}`]
   }
 
-  _component () {
+  buttonDemo () {
     return new ButtonDemo()
   }
 }
