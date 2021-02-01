@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from '../../../base/component'
 import { AccordionTab } from './accordion.tab'
 import { styles } from '../styles'
 

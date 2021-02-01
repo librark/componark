@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from '../../../base/component'
 
 const tag = 'ark-accordion-tab'
 export class AccordionTab extends Component {
