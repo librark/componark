@@ -1,0 +1,28 @@
+@use './config'as *;
+
+@mixin ark-radio() {
+
+    &-group {
+        user-select: none;
+        width: 100%;
+        height: fit-content;
+
+        &__label {
+            font-size: small;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: block;
+        }
+    }
+
+    &-button {
+        cursor: pointer;
+        display: flex;
+        user-select: none;
+
+        &__button {
+            margin: 0 5px;
+        }
+    }
+}
