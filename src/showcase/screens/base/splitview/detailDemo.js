@@ -1,5 +1,6 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-splitview-detail'
 export class SplitviewDetailDemo extends Component {
   init (context) {
     const data = context.data || {}
@@ -12,7 +13,7 @@ export class SplitviewDetailDemo extends Component {
   }
 
   render () {
-    this.innerHTML = this.first ? /* html */ `${this.styles}
+    this.content = this.first ? /* html */ `
         <h1>${this.year}</h1>
         <p>
           <span data-first>FIRST: ${this.first}</span>
@@ -26,10 +27,5 @@ export class SplitviewDetailDemo extends Component {
     return super.render()
   }
 
-  get styles () {
-    return /* html */`
-      <style></style>
-    `
-  }
 }
-Component.define('demo-splitview-detail', SplitviewDetailDemo)
+Component.define(tag, SplitviewDetailDemo)

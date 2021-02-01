@@ -1,7 +1,6 @@
-import { Component } from 'base/component'
+import { Component } from '../../../base/component'
 
 const tag = 'ark-list-item'
-
 export class ListItem extends Component {
   init (context = {}) {
     this.index = context.index

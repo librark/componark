@@ -31,9 +31,6 @@
         resize: horizontal;
       }
     }
-
-
-
   }
 
   /*DETAIL*/
@@ -76,7 +73,7 @@
       user-select: none;
     }
 
-    &__button--close {
+    &__close {
       display: block;
 
       padding: 0 19px;
@@ -115,10 +112,6 @@
     }
 
     @media (min-width: theme.$mobile) {
-
-      //position: initial;
-      // border-left: 2px solid rgba($color: $muted, $alpha: 0.3);
-
       & {
         overflow: auto;
         position: relative;
@@ -154,14 +147,6 @@
           margin-left: 20px;
         }
       }
-
     }
-
-
   }
-
-
-
-
-
 }

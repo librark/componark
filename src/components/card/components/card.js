@@ -1,5 +1,5 @@
-import { Component } from 'base/component'
-import { getSlots } from 'base/utils'
+import { Component } from '../../../base/component'
+import { getSlots } from '../../../base/utils'
 import { styles } from '../styles'
 
 const tag = 'ark-card'

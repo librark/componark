@@ -1,7 +1,7 @@
 @use '@material/feature-targeting/feature-targeting';
 @use '@material/button/variables';
 @use '@material/button/mixins';
-@use '@material/fab/mixins' as fab-mixins;
+@use '@material/fab/mixins'as fab-mixins;
 @use './shared.scss';
 
 $query: feature-targeting.all();
@@ -14,7 +14,10 @@ $query: feature-targeting.all();
   @include mixins.density(variables.$density-scale, $query: $query);
 
   &[fab] {
-    @include fab-mixins.base_($query: $query);
+    @include fab-mixins.base_($query: $query); //fab mixins has position relative
     @include fab-mixins.icon-size(24px, $query: $query);
+    position: fixed; // overwrite this prop in base
   }
+
+
 }
