@@ -1,5 +1,4 @@
-import { Component } from '../../component'
-import { getSlots } from '../../../utils'
+import { Component } from '../../../base/component'
 
 export class Modal extends Component {
   init (context = {}) {
@@ -7,7 +6,7 @@ export class Modal extends Component {
     this.subtitle = context.subtitle
 
     // local variables
-    this.slots = this.slots || getSlots(this)
+    this.slotted = this.slotted || this.slots()
     this.width = this.width || ''
     this.height = this.height || ''
 
@@ -35,7 +34,7 @@ export class Modal extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     if (!this._isBlockedScrim()) {
       this.scrim.addEventListener('click', _ => this.close())
     }
@@ -76,8 +75,8 @@ export class Modal extends Component {
   _appendSlots () {
     if (!Object.keys(this.slots || {}).length) return
 
-    const general = this.slots.general || []
-    const action = this.slots.action || []
+    const general = this.slotted.general || []
+    const action = this.slotted.action || []
 
     general.forEach(
       slot => this.querySelector('[data-body]').appendChild(slot)
