@@ -1,5 +1,4 @@
 import { Component } from 'base/component'
-import { List } from 'components/list'
 
 const tag = 'demo-paginator'
 export class PaginatorDemo extends Component {
