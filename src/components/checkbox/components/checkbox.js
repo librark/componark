@@ -1,19 +1,16 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-checkbox'
 export class Checkbox extends Component {
   constructor () {
     super()
-    this.defaultContent = this.defaultContent || this.innerHTML
+    this.defaultContent = this.defaultContent || this.content
+    /** @type {string} */
     this.value = this.value
   }
 
-  /**
-   * @param {{
-   *  name: string
-   *  checked?: boolean
-   * }} context?
-   **/
-  init (context) {
+  init (context = {}) {
     this.name = context.name
     this.checked = context.checked
     return super.init()
@@ -24,7 +21,7 @@ export class Checkbox extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <div class="ark-checkbox__input">
         <input data-input type="checkbox">
       </div>
@@ -100,4 +97,4 @@ export class Checkbox extends Component {
     ]
   }
 }
-customElements.define('ark-checkbox', Checkbox)
+Component.define(tag, Checkbox, styles)
