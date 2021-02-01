@@ -1,5 +1,6 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-list'
 export class ListDemo extends Component {
   init (context) {
     return super.init({})
@@ -85,4 +86,4 @@ export class ListDemo extends Component {
     `
   }
 }
-Component.define('demo-list', ListDemo)
+Component.define(tag, ListDemo)

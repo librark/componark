@@ -1,0 +1,78 @@
+@use './config';
+@use 'base/theme';
+
+@mixin ark-paginator() {
+
+    &__body {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+
+        small[data-info] {}
+    }
+
+    &__default-buttons {
+        margin: 10px;
+
+        //Buttons
+        button {
+            border-radius: 50%;
+            width: 1.8rem;
+            height: 1.8rem;
+            border: 0;
+            margin: 0.1rem;
+            background: inherit
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button:active {
+            border: 1px solid var(--primary, white);
+        }
+
+        button[on-click="_prev"],
+        button[on-click="_next"] {
+            background: var(--secondary, black);
+        }
+
+        button[on-click="_first"],
+        button[on-click="_last"] {
+            background: var(--danger, black)
+        }
+
+    }
+
+    &__button-list {
+        display: flex;
+
+
+        button {
+            border-radius: 50%;
+            width: 1.8rem;
+            height: 1.8rem;
+            border: 1px solid var(--primary, black);
+            margin: 0.1rem;
+            background: inherit;
+
+            &:focus {
+                border-radius: 50%;
+                outline: none;
+            }
+
+            &[active] {
+                background: var(--primary, blue);
+                color: var(--secondary, white);
+            }
+        }
+
+    }
+}

@@ -1,4 +1,4 @@
-import { define, listen, reflect, slot } from 'base/utils'
+import { define, listen, reflect, slot } from '../utils'
 
 export class Component extends HTMLElement {
   constructor () {

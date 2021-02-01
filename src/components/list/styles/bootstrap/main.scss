@@ -1,7 +1,0 @@
-@import "./list.bootstrap";
-@import "./list.item.bootstrap";
-
-@mixin list_bootstrap() {
-  @include list_bootstrap_();
-  @include list_item_bootstrap_();
-}

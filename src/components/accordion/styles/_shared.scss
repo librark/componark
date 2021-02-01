@@ -1,3 +1,4 @@
+@use 'base/theme';
 @use './config' as *;
 
 @mixin ark-accordion {
@@ -7,6 +8,7 @@
 }
 
 @mixin ark-accordion-tab {
+  @include theme.paint;
   border-style: solid;
 
   &:first-child {
@@ -37,7 +39,6 @@
   }
 
   user-select: none;
-  background: $background;
 
   &[disabled] {
     pointer-events: none;
