@@ -1,4 +1,5 @@
-import { Component } from '../../component'
+import { Component } from 'base/component'
+import { styles } from '../styles'
 
 export class Paginator extends Component {
   init (context = {}) {
@@ -13,7 +14,7 @@ export class Paginator extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <div class="ark-paginator__body">
         <div class="ark-paginator__default-buttons">
           <button listen on-click="_prev"><</button>
@@ -125,4 +126,4 @@ export class Paginator extends Component {
     return Math.ceil(this.collectionSize / this.pageSize) || 0
   }
 }
-customElements.define('ark-paginator', Paginator)
+Component.define('ark-paginator', Paginator,styles)
