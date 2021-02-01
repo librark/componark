@@ -3,16 +3,6 @@ import { styles } from '../styles'
 
 const tag = 'ark-splitview'
 export class SplitView extends Component {
-  init (context = {}) {
-    this.detailTitle = context.title || this.detailTitle
-
-    this.detailBackButtonIcon = context.backButtonIcon ||
-      this.detailBackButtonIcon
-
-    
-    return super.init()
-  }
-
   render () {
     this.renderDetail()
     if (this.master) {
@@ -25,14 +15,6 @@ export class SplitView extends Component {
   /** @param {Object} context */
   renderDetail (context = {}) {
     if (!this.detail || !this.detail.init) return
-
-    context['title'] = (
-      context.title || this.detailTitle
-    )
-
-    context['backButtonIcon'] = (
-      context.backButtonIcon || this.detailBackButtonIcon
-    )
 
     this.detail.init(context).render()
     this.detail['show']()
@@ -50,7 +32,7 @@ export class SplitView extends Component {
   _onMasterChange (event) {
     event.stopPropagation()
 
-    const context = event.detail || {}
+    const context = event.detail
     this.renderDetail(context)
 
     this.emit('detail:change', context)

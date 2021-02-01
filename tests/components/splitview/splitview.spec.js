@@ -1,43 +1,73 @@
-import { SplitView }
-  from '../../../src/components/splitview/components/splitView'
-import { SplitViewDetail }
-  from '../../../src/components/splitview/components/detail'
-import { SplitViewMaster }
-  from '../../../src/components/splitview/components/master'
+import { Component } from 'base/component'
+import {
+  SplitView, SplitViewDetail, SplitViewMaster
+} from 'components/splitview'
+
+class NestedMaster extends Component {
+  constructor() {
+    super()
+    this.addEventListener('click', (_) => {
+      this.emit('nested:master', {value: 'NESTED MASTER VALUE'})
+
+    })
+  }
+}
+Component.define('nested-master', NestedMaster)
+
+class NestedDetail extends Component {
+  init(context) {
+    this.value = context.value
+    return super.init()
+  }
+
+  render() {
+    this.content = this.value
+    return super.render()
+  }
+}
+Component.define('nested-detail', NestedDetail)
+
 
 describe('SplitView', () => {
-  it('can be instantiated without elements', () => {
-    const splitview = new SplitView()
-    splitview.init().render().load()
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
 
-    // @ts-ignore
-    splitview.renderDetail()
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
+  it('can be instantiated', () => {
+    container.innerHTML = `
+    <ark-splitview></ark-splitview>
+    `
+    const splitview = container.querySelector('ark-splitview')
 
     expect(splitview).toBeTruthy()
   })
 
-  it('can be instantiated with elements', () => {
-    const splitview = new SplitView()
-    const master = new SplitViewMaster()
-    const detail = new SplitViewDetail()
+  it('can coordinate the master and the detail components', () => {
+    container.innerHTML = `
+    <ark-splitview>
+      <ark-splitview-master master-event="nested:master">
+        <nested-master></nested-master>
+      </ark-splitview-master>
+      <ark-splitview-detail>
+        <nested-detail></nested-detail>
+      </ark-splitview-detail>
+    </ark-splitview>
+    `
+    const splitview = container.querySelector('ark-splitview')
 
-    master.render()
-    detail.render()
+    const nestedMaster = splitview.select('nested-master')
 
-    splitview.appendChild(master)
-    splitview.appendChild(detail)
+    nestedMaster.click()
 
-    splitview.init().render().load()
+    const nestedDetail = splitview.select('nested-detail')
 
-    splitview.renderDetail({})
-
-    splitview.addEventListener('test', event => {
-      expect(event['detail'].data).toBeTruthy()
-    })
-
-    const event = new CustomEvent('test', { detail: { data: true } })
-    splitview._onMasterChange(event)
-
-    splitview._onMasterChange(new CustomEvent(''))
+    expect(nestedDetail.content).toEqual('NESTED MASTER VALUE')
   })
 })

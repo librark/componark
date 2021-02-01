@@ -20,23 +20,11 @@ export class SplitViewDemo extends Component {
       </ark-splitview>
     `
 
-    this.initSplitView()
     this.initList()
 
     return super.render()
   }
 
-  initSplitView () {
-    this.select('ark-splitview').init({
-      title: 'Resultados',
-      backButtonIcon: () => {
-        return /* html */ `
-        <ark-icon name='fas fa-chevron-left'>
-        </ark-icon>
-        `
-      }
-    }).render()
-  }
 
   initList () {
     const template = item => /* html */ `
