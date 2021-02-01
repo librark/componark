@@ -1,0 +1,26 @@
+@use './config'as *;
+
+@mixin ark-checkbox() {
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+
+  &-group {
+    user-select: none;
+    width: 100%;
+    height: fit-content;
+
+    &__label {
+      font-size: small;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      display: block
+    }
+  }
+
+  &__input {
+    margin: 0 5px;
+  }
+
+}
