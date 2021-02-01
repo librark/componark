@@ -86,23 +86,4 @@ describe('SplitViewDetail', () => {
     detail.toggle()
     expect(detail.hasAttribute('hidden')).toBeTruthy()
   })
-
-  xit('can be instantiated with attribute', () => {
-    const detail = new SplitViewDetail().init({
-      title: 'my title',
-      data: 'ok',
-      backButtonIcon: () => /* html */ '<span data-button>icon</span>'
-    })
-    detail.render()
-
-    expect(
-      detail.querySelector(
-        '[data-master-title]'
-      ).textContent.trim() === 'my title'
-    ).toBeTruthy()
-
-    expect(
-      detail.querySelector('[data-button]').textContent.trim() === 'icon'
-    ).toBeTruthy()
-  })
 })

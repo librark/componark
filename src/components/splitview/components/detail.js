@@ -26,7 +26,7 @@ export class SplitViewDetail extends Component {
     this.content = `
     <div class="ark-splitview-detail__header">
       <button listen on-click="hide"
-        class="ark-splitview-detail__button--close">
+        class="ark-splitview-detail__close">
       </button>
       <div data-master-title class="ark-splitview-detail__title">
         ${this.title}
@@ -36,7 +36,7 @@ export class SplitViewDetail extends Component {
     </div>
     `
 
-    this.select('.ark-splitview-detail__button--close').append(this.icon)
+    this.select('.ark-splitview-detail__close').append(this.icon)
     this.select('.ark-splitview-detail__main').append(this.main)
 
     if (this.main) this.main.render()
