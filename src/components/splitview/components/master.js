@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from '../../../base/component'
 
 const tag = 'ark-splitview-master'
 export class SplitViewMaster extends Component {

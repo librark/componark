@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from '../../../base/component'
 
 export class Icon extends Component {
   init (context = {}) {
