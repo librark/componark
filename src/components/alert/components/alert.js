@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from '../../../base/component'
 import { styles } from '../styles'
 
 const tag = 'ark-alert'

@@ -1,0 +1,5 @@
+@use'./shared.scss';
+
+.ark-paginator {
+    @include shared.ark-paginator;
+}

@@ -1,9 +1,0 @@
-@import "~bootstrap/scss/bootstrap.scss";
-
-@mixin list_bootstrap_() {
-  $component: "ark-list";
-
-  #{$component} {
-    @extend .list-group;
-  }
-}

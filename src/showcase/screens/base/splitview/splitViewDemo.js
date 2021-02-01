@@ -1,48 +1,30 @@
-import './detail.example'
-
 import { Component } from 'base/component'
 
-export class SplitViewDemo extends Component {
-  init (context) {
-    return super.init()
-  }
+import './detailDemo'
 
+
+export class SplitViewDemo extends Component {
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <ark-splitview>
 
-        <ark-splitview-master resize master-event="list:selected"
-         style="width: 40%">
-          <ark-list></ark-list>
+        <ark-splitview-master resize master-event="list:selected">
+          <ark-list data-list></ark-list>
         </ark-splitview-master>
 
-        <ark-splitview-detail>
-          <ark-detail-example></ark-detail-example>
+        <ark-splitview-detail title="Demo">
+          <ark-icon slot="icon" name='fas fa-chevron-left'></ark-icon>
+          <demo-splitview-detail></demo-splitview-detail>
         </ark-splitview-detail>
 
       </ark-splitview>
     `
 
-    this.initSplitView()
     this.initList()
 
     return super.render()
   }
 
-  get splitview () {
-    return this.select('ark-splitview')
-  }
-
-  initSplitView () {
-    this.splitview.init({
-      title: 'Resultados',
-      backButtonIcon: () => {
-        return /* html */ `
-          <ark-icon name='fas fa-chevron-left'></ark-icon>
-        `
-      }
-    }).render()
-  }
 
   initList () {
     const template = item => /* html */ `
@@ -59,13 +41,10 @@ export class SplitViewDemo extends Component {
       { first: 'Perú', second: 'Bolivia', year: 2019 }
     ]
 
-    const list = this.splitview['master'].select('ark-list')
-    list
-      .init({
-        source: source,
-        template: template
-      })
-      .render()
+    this.select('[data-list]').init({
+      source: source,
+      template: template
+    }).render()
   }
 }
 Component.define('demo-splitview', SplitViewDemo)

@@ -1,0 +1,33 @@
+@use './config'as *;
+
+
+@mixin ark-list() {
+    display: flex;
+    flex-direction: column;
+
+    .ark-list-item {
+        &:not(:last-child) {
+            border-bottom: 1px solid rgb(192, 192, 192);
+        }
+    }
+
+    &[action] {
+        .ark-list-item {
+            padding: 1rem;
+            cursor: pointer;
+
+            &:active {
+                background: rgba(158, 168, 168, 0.541);
+            }
+        }
+    }
+
+    &-item {}
+
+    &[grid] {
+        display: flex;
+        flex-direction: column;
+        flex-flow: wrap;
+        justify-content: space-around;
+    }
+}

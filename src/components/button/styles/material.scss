@@ -1,7 +1,7 @@
 @use '@material/feature-targeting/feature-targeting';
 @use '@material/button/variables';
 @use '@material/button/mixins';
-@use '@material/fab/mixins' as fab-mixins;
+@use '@material/fab/mixins'as fab-mixins;
 @use './shared.scss';
 
 $query: feature-targeting.all();
@@ -12,13 +12,12 @@ $query: feature-targeting.all();
   @include mixins.base_($query);
   @include mixins.shape-radius(variables.$shape-radius, $query: $query);
   @include mixins.density(variables.$density-scale, $query: $query);
-  @include mixins.container-fill-color(transparent, $query);
-  @include mixins.disabled-container-fill-color(transparent, $query);
 
   &[fab] {
-    @include fab-mixins.base_($query: $query);
-    @include fab-mixins.container-color(secondary, $query: $query);
+    @include fab-mixins.base_($query: $query); //fab mixins has position relative
     @include fab-mixins.icon-size(24px, $query: $query);
-    @include fab-mixins.ink-color(on-secondary, $query: $query);
+    position: fixed; // overwrite this prop in base
   }
+
+
 }

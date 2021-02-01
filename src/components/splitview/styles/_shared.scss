@@ -1,0 +1,152 @@
+@use 'base/theme';
+
+@mixin ark-splitview() {
+  @include theme.paint;
+
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: auto;
+
+
+  &>*:first-child {
+    border-right: 2px solid rgba($color: gray, $alpha: 0.3);
+  }
+
+
+  /*MASTER*/
+  &-master {
+
+    display: block;
+    width: 100%;
+    overflow: auto;
+    height: inherit;
+
+    @media (min-width: theme.$mobile) {
+      width: 50%;
+
+      &[resize] {
+        resize: horizontal;
+      }
+    }
+  }
+
+  /*DETAIL*/
+  &-detail {
+    @include theme.paint;
+
+    display: grid;
+    grid: auto 1fr / 1fr;
+
+
+    flex: 1;
+
+    overflow: auto;
+    position: fixed;
+    z-index: 512;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    &[hidden] {
+      display: block !important;
+      visibility: hidden !important;
+    }
+
+    &>* {
+      overflow: auto;
+    }
+
+    &__header {
+      background: inherit;
+      color: inherit;
+
+      display: flex;
+      width: 100%;
+      height: fit-content;
+      font-size: initial;
+
+      user-select: none;
+    }
+
+    &__close {
+      display: block;
+
+      padding: 0 19px;
+      border: 0;
+      outline: 0 !important;
+
+      background: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      font-size: larger;
+    }
+
+    &__body {
+      height: 100%;
+      overflow: auto;
+    }
+
+    &__default-template {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      color: gray;
+
+      background: rgba($color: gray, $alpha: 0.1);
+
+    }
+
+    @media (min-width: theme.$mobile) {
+      & {
+        overflow: auto;
+        position: relative;
+        z-index: 512;
+        top: initial;
+        left: initial;
+
+        width: auto;
+        height: auto;
+
+
+        height: initial;
+
+        display: block;
+
+        padding-top: 0;
+
+        &[hidden] {
+          display: block;
+          visibility: visible;
+        }
+
+
+        &__header {
+          display: none;
+        }
+
+        &__button--close {
+          display: none;
+        }
+
+        &__title {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

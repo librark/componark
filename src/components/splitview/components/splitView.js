@@ -1,68 +1,41 @@
-/**
- * @typedef {import('./detail.js').SplitViewDetail} SplitViewDetail
- * @typedef {import('./master.js').SplitViewMaster} SplitViewMaster
- **/
+import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
-import { Component } from '../../component'
-
+const tag = 'ark-splitview'
 export class SplitView extends Component {
-  init (context = {}) {
-    this.detailTitle = context.title || this.detailTitle
-
-    this.detailBackButtonIcon = context.backButtonIcon ||
-      this.detailBackButtonIcon
-
-    return super.init()
-  }
-
   render () {
     this.renderDetail()
-    return super.render()
-  }
-
-  load () {
     if (this.master) {
       this.master.addEventListener(
-        'master:change',
-        this._onMasterChange.bind(this)
-      )
+        'master:change', this._onMasterChange.bind(this))
     }
+    return super.render()
   }
 
   /** @param {Object} context */
   renderDetail (context = {}) {
     if (!this.detail || !this.detail.init) return
 
-    context['title'] = (
-      context.title || this.detailTitle
-    )
-
-    context['backButtonIcon'] = (
-      context.backButtonIcon || this.detailBackButtonIcon
-    )
-
     this.detail.init(context).render()
-    this.detail.show()
+    this.detail['show']()
   }
 
-  /** @return {SplitViewMaster} */
   get master () {
-    return /** @type {SplitViewMaster} */ (this.select('ark-splitview-master'))
+    return this.select('ark-splitview-master')
   }
 
-  /** @return {SplitViewDetail} */
   get detail () {
-    return /** @type {SplitViewDetail} */ (this.select('ark-splitview-detail'))
+    return this.select('ark-splitview-detail')
   }
 
   /** @param {CustomEvent} event */
   _onMasterChange (event) {
-    event.stopImmediatePropagation()
+    event.stopPropagation()
 
-    const context = event.detail || {}
+    const context = event.detail
     this.renderDetail(context)
 
-    this.dispatchEvent(new CustomEvent('detail:change', event))
+    this.emit('detail:change', context)
   }
 }
-customElements.define('ark-splitview', SplitView)
+Component.define(tag, SplitView, styles)

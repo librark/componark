@@ -1,7 +1,0 @@
-@import "./list.material";
-@import "./list.item.material";
-
-@mixin list_material() {
-  @include list_material_();
-  @include list_item_material_();
-}

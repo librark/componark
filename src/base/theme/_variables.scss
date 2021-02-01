@@ -1,6 +1,15 @@
+$primary: var(--primary, black);
+$secondary: var(--secondary, black);
+$danger: var(--danger, black);
+$warning: var(--warning, black);
+$info: var(--info, black);
+$dark: var(--dark, black);
+$muted: var(--muted, black);
+$light: var(--light, black);
+
 $colors: primary, secondary, success, danger,
   warning, info, dark, muted, light;
 
 $desktop: 960px;
 $tablet: 768px;
-$mobile: 360px;
+$mobile: 480px;
