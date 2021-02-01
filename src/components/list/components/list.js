@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Component } from '../../../base/component'
+import { Component } from 'base/component'
 import { ListItem } from './list.item'
 import { styles } from '../styles'
 
