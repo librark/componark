@@ -1,5 +1,4 @@
-/** @typedef {import('../../../src/components').Checkbox} Checkbox */
-import { CheckboxGroup } from '../../../src/components/checkbox'
+import { CheckboxGroup } from 'components/checkbox'
 
 describe('Checkbox', () => {
   it('can be instantiated', () => {

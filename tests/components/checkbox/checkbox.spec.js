@@ -1,4 +1,4 @@
-import { Checkbox } from '../../../src/components/checkbox'
+import { Checkbox } from 'components/checkbox'
 
 describe('Checkbox', () => {
   it('can be instantiated.', () => {

@@ -23,7 +23,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('camera'),
     getComponentRoute('card'),
     //getComponentRoute('chart'),
-    //getComponentRoute('checkbox'),
+    getComponentRoute('checkbox'),
     //getComponentRoute('form'),
     //getComponentRoute('grid'),
     //getComponentRoute('icon'),
