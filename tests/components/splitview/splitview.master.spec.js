@@ -1,27 +1,55 @@
-import { SplitViewMaster }
-  from '../../../src/components/splitview/components/master'
+import { SplitViewMaster } from 'components/splitview'
 
 describe('SplitViewMaster', () => {
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const master = new SplitViewMaster()
+    container.innerHTML = `
+    <ark-splitview-master>
+    </ark-splitview-master>
+    `
+    const master = container.querySelector('ark-splitview-master')
     master.init()
     master.connectedCallback()
-    expect(master.getAttribute('master-event') === '').toBeTruthy()
+
+    expect(master).toBeTruthy()
+    expect(master).toBe(master.init())
+    expect(master.getAttribute('master-event')).toBeNull()
   })
+
   it('can be instantiated with master-event attribute', () => {
-    const master = new SplitViewMaster()
-    master.setAttribute('master-event', 'my-event')
-    master.connectedCallback()
-    expect(master.getAttribute('master-event') === 'my-event').toBeTruthy()
-  })
-  it('can throw event', () => {
-    const master = new SplitViewMaster()
-    master.innerHTML = /* html */ `
-      <button btn>btn</button>
+    container.innerHTML = `
+    <ark-splitview-master master-event="my-event">
+    </ark-splitview-master>
     `
-    master.setAttribute('master-event', 'click')
-    master.connectedCallback()
-    // @ts-ignore
-    master.querySelector('[btn]').click()
+    const master = container.querySelector('ark-splitview-master')
+    expect(master.getAttribute('master-event')).toEqual('my-event')
+    expect(master.masterEvent).toEqual('my-event')
+  })
+
+  it('can throw a master:change event', () => {
+    container.innerHTML = `
+    <ark-splitview-master master-event="click">
+      <button>Button</button>
+    </ark-splitview-master>
+    `
+    const master = container.querySelector('ark-splitview-master')
+    const button = master.select('button')
+
+    let masterEvent = null
+    master.addEventListener('master:change', (event) => {masterEvent = event})
+
+    button.click()
+
+    expect(masterEvent).toBeTruthy()
   })
 })
