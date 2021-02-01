@@ -12,7 +12,8 @@ export class SplitViewDemo extends Component {
           <ark-list data-list></ark-list>
         </ark-splitview-master>
 
-        <ark-splitview-detail>
+        <ark-splitview-detail title="Demo">
+          <ark-icon slot="icon" name='fas fa-chevron-left'></ark-icon>
           <demo-splitview-detail></demo-splitview-detail>
         </ark-splitview-detail>
 
@@ -30,7 +31,8 @@ export class SplitViewDemo extends Component {
       title: 'Resultados',
       backButtonIcon: () => {
         return /* html */ `
-          <ark-icon name='fas fa-chevron-left'></ark-icon>
+        <ark-icon name='fas fa-chevron-left'>
+        </ark-icon>
         `
       }
     }).render()

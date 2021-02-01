@@ -1,45 +1,93 @@
-import { Button } from '../../../src/components/button'
-import {
-  SplitViewDetail
-} from '../../../src/components/splitview/components/detail'
+import { Component } from 'base/component'
+import {  SplitViewDetail } from 'components/splitview'
+
+class MockMain extends Component {
+  init(context={}) {
+    this.name = context.name
+    return super.init(context)
+  }
+
+  render() {
+    if (this.name) {
+      this.content = `${this.name}`
+    }
+    return super.render()
+  }
+} 
+Component.define('mock-main', MockMain)
 
 describe('SplitViewDetail', () => {
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const detail = new SplitViewDetail()
-    detail.init()
-    detail.connectedCallback()
-    expect(detail.outerHTML.trim().length).toBeTruthy()
+    container.innerHTML = `
+    <ark-splitview-detail>
+    </ark-splitview-detail>
+    `
+    const detail = container.querySelector('ark-splitview-detail')
+    expect(detail).toBeTruthy()
+
+    expect(detail).toBe(detail.init())
   })
 
-  it('can be instantiated with elements', () => {
-    const detail = new SplitViewDetail()
+  it('can be instantiated with an inner main Component', () => {
+    container.innerHTML = `
+    <ark-splitview-detail>
+      <mock-main>MAIN CONTENT</mock-main>
+    </ark-splitview-detail>
+    `
+    const detail = container.querySelector('ark-splitview-detail')
 
-    const button = new Button()
-    button.connectedCallback()
-
-    detail.append(button)
-    detail.init({}).render()
+    const main = detail.select('.ark-splitview-detail__main')
+    expect(main.firstElementChild.textContent).toEqual('MAIN CONTENT')
   })
 
-  it('can be remove the hidden attribute', () => {
-    const detail = new SplitViewDetail()
-    detail.init({})
-    detail.connectedCallback()
+  it('can initialize its main Component', () => {
+    container.innerHTML = `
+    <ark-splitview-detail>
+      <mock-main></mock-main>
+    </ark-splitview-detail>
+    `
+    const detail = container.querySelector('ark-splitview-detail')
+
+    detail.init({name: 'Servagro'}).render()
+
+    const main = detail.select('.ark-splitview-detail__main')
+    expect(main.firstElementChild.textContent).toEqual('Servagro')
+  })
+
+
+  it('can manipulate its hidden attribute', () => {
+    container.innerHTML = `
+    <ark-splitview-detail>
+      <mock-main></mock-main>
+    </ark-splitview-detail>
+    `
+    const detail = container.querySelector('ark-splitview-detail')
 
     detail.show()
-    expect(!detail.hasAttribute('hidden')).toBeTruthy()
+    expect(detail.hasAttribute('hidden')).toBeFalsy()
 
     detail.hide()
     expect(detail.hasAttribute('hidden')).toBeTruthy()
 
     detail.toggle()
-    expect(!detail.hasAttribute('hidden')).toBeTruthy()
+    expect(detail.hasAttribute('hidden')).toBeFalsy()
 
     detail.toggle()
     expect(detail.hasAttribute('hidden')).toBeTruthy()
   })
 
-  it('can be instantiated with attribute', () => {
+  xit('can be instantiated with attribute', () => {
     const detail = new SplitViewDetail().init({
       title: 'my title',
       data: 'ok',

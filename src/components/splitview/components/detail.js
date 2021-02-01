@@ -2,44 +2,45 @@ import { Component } from 'base/component'
 
 const tag = 'ark-splitview-detail'
 export class SplitViewDetail extends Component {
-  init (context = {}) {
-    this.title = context.title || this.title || ' '
-    this.backButtonIcon = context.backButtonIcon || this.backButtonIcon
+  init(context={}) {
+    const slots = this.slots()
 
-    // local variables
-    this.global = document
+    const [main] = slots['general']
+    const [icon] = slots['icon'] || []
 
-    this.detail = this.detail || /** @type {Component} */ (
-      this.firstElementChild
-    )
+    this.main = this.main || main
+    this.icon = this.icon || icon
 
-    if (this.detail && this.detail.init) this.detail.init(context)
+    if (this.main && this.main.init) {
+      this.main.init(context)
+    }
 
-    return super.init()
+    return super.init(context)
+  }
+
+  reflectedProperties() {
+    return ['title']
   }
 
   render () {
-    let header = this.querySelector('header')
-
-    if (!header) {
-      header = this.global.createElement('header')
-      header.classList.add('ark-splitview-detail__header')
-      this.insertBefore(header, this.firstChild)
-    }
-
-    header.innerHTML = /* html */`
+    this.content = `
+    <div class="ark-splitview-detail__header">
       <button listen on-click="hide"
         class="ark-splitview-detail__button--close">
-        ${this._renderBackButtonIcon()}
       </button>
       <div data-master-title class="ark-splitview-detail__title">
         ${this.title}
       </div>
+    </div>
+    <div class="ark-splitview-detail__main">
+    </div>
     `
 
-    if (this.detail && this.detail.render) this.detail.render()
+    this.select('.ark-splitview-detail__button--close').append(this.icon)
+    this.select('.ark-splitview-detail__main').append(this.main)
 
-    this.hide()
+    if (this.main) this.main.render()
+   
     return super.render()
   }
 
@@ -52,11 +53,7 @@ export class SplitViewDetail extends Component {
   }
 
   toggle () {
-    this.hasAttribute('hidden') ? this.show() : this.hide()
-  }
-
-  _renderBackButtonIcon () {
-    return this.backButtonIcon ? this.backButtonIcon() : '&times;'
+    this.toggleAttribute('hidden')
   }
 }
 Component.define(tag, SplitViewDetail)
