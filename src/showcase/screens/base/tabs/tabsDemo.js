@@ -1,12 +1,13 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-tabs'
 export class TabsDemo extends Component {
   init (context) {
     return super.init(context)
   }
 
   render () {
-    this.innerHTML = /* html */`
+    this.content = /* html */`
       <div>
         <p>This is a tabs.</p>
       </div>
@@ -79,4 +80,4 @@ export class TabsDemo extends Component {
     return this.querySelector('[tab-content]')
   }
 }
-Component.define('demo-tabs', TabsDemo)
+Component.define(tag, TabsDemo)
