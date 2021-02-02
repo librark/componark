@@ -1,26 +1,44 @@
 import { Signature } from '../../../src/components/signature'
 
 describe('Signature', () => {
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const signature = new Signature()
+    container.innerHTML = `
+    <ark-signature></ark-signature>
+    `
+    const signature = document.querySelector('ark-signature')
+    expect(signature).toBeTruthy()
+    expect(signature).toBe(signature.init())
+    expect(signature.canvas).toBeTruthy()
 
-    signature.init()
-    signature.render()
-    signature.load()
 
-    signature.dataURL()
+    // signature.init()
+    // signature.render()
+    // signature.load()
 
-    signature.clear()
+    // signature.dataURL()
+
+    // signature.clear()
 
     // @ts-ignore
-    signature.resizeCanvas()
+    // signature.resizeCanvas()
 
     // @ts-ignore
-    signature.isDirty()
+    // signature.isDirty()
 
-    signature.disconnectedCallback()
+    // signature.disconnectedCallback()
 
-    expect(signature.querySelector('canvas')).toBeTruthy()
+    // expect(signature.querySelector('canvas')).toBeTruthy()
   })
 
   it('can be resize Canvas', () => {
