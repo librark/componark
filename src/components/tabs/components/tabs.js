@@ -2,7 +2,9 @@
  * @typedef {import('./tabs.item').TabsItem} TabsItem
  **/
 import { Component } from '../../../base/component'
+import { styles }  from '../styles'
 
+const tag = 'ark-tabs'
 export class Tabs extends Component {
   init (context = {}) {
     return super.init()
@@ -50,4 +52,4 @@ export class Tabs extends Component {
     return this.selectAll('ark-tabs-item')
   }
 }
-customElements.define('ark-tabs', Tabs)
+Component.define(tag, Tabs, styles)
