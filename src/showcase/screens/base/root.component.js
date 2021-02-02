@@ -189,8 +189,8 @@ body {
   background-color: #334455;
   color: #00ffff;
   text-decoration: none
-  overflow-x: hidden;
-  width:100%;
+  width: 100%;
+  overflow: auto;
 }
 
 .app-root__sideitem {
@@ -209,6 +209,7 @@ body {
 .app-root__content {
   grid-column: 2 / 13;
   padding: 2vmin;
+  overflow: scroll;
 }
 
 `

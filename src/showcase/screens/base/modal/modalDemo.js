@@ -6,7 +6,7 @@ export class ModalDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.content = /* html */ `${this.styles}
       <div>
         <p>This is a modal.</p>
         <button btn-open>open</button>
@@ -15,8 +15,7 @@ export class ModalDemo extends Component {
 
       <ark-modal title="My Title" subtitle="My Subtitle"
         horizontal="center" vertical="center"
-        width="80vw" height="30vh"
-        block-scrim>
+        width="80vw" height="40vh">
 
         <div style="margin: 1rem;">
           <div>
