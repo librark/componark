@@ -1,0 +1,5 @@
+@use'./shared.scss';
+
+.ark-list {
+    @include shared.ark-list;
+}

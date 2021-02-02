@@ -1,12 +1,13 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-spinner'
 export class SpinnerDemo extends Component {
   init (context) {
     return super.init()
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.content = /* html */ `${this.styles}
       <h1>spinner</h1>
 
       <div class="spinner-container">
@@ -42,4 +43,4 @@ export class SpinnerDemo extends Component {
     `
   }
 }
-Component.define('demo-spinner', SpinnerDemo)
+Component.define(tag, SpinnerDemo)

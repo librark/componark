@@ -1,0 +1,6 @@
+@use'./shared.scss';
+
+
+.ark-spinner {
+    @include shared.ark-spinner;
+}
