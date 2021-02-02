@@ -4,13 +4,13 @@ import { styles } from '../styles'
 const tag = 'ark-modal'
 export class Modal extends Component {
   init (context = {}) {
-    this.title = context.title
-    this.subtitle = context.subtitle
+    const slots = this.slots()
 
-    // local variables
-    this.slotted = this.slotted || this.slots()
-    this.width = this.width || ''
-    this.height = this.height || ''
+    this.body = this.body || slots['general']
+    this.actions = this.actions || slots['action'] || []
+
+    this.width = context.width || this.width || ''
+    this.height = context.height || this.height || ''
 
     return super.init()
   }
@@ -20,105 +20,71 @@ export class Modal extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <div class="ark-modal__content" ${this._getContentStyle()}>
         <div class="ark-modal__header">
           ${this._renderHeader()}
         </div>
-        <div class="ark-modal__body" data-body></div>
-        <div class="ark-modal__actions" data-actions></div>
+        <div class="ark-modal__body"></div>
+        <div class="ark-modal__actions"></div>
       </div>
 
       <div data-scrim class="ark-modal__scrim"></div>
     `
 
-    this._appendSlots()
-    return super.render()
-  }
+    this.body.forEach(
+      slot => this.select('.ark-modal__body').append(slot))
 
-  async load () {
-    if (!this._isBlockedScrim()) {
-      this.scrim.addEventListener('click', _ => this.close())
+    this.actions.forEach(
+      slot => this.select('.ark-modal__actions').append(slot))
+
+    this.selectAll('[close]').forEach(
+      button => button.addEventListener('click', _ => this.close()))
+
+    if (!this.hasAttribute('block-scrim')) {
+      this.select('.ark-modal__scrim').addEventListener(
+        'click', _ => this.close())
     }
 
-    this.querySelectorAll('[close]').forEach(
-      button => button.addEventListener('click', _ => this.close())
-    )
-  }
-
-  open () {
-    this.setAttribute('show', '')
-    this._onHiddenEvent()
-  }
-
-  close () {
-    this.removeAttribute('show')
-    this._onHiddenEvent()
-  }
-
-  toggle () {
-    this.hasAttribute('show') ? this.close() : this.open()
-  }
-
-  /** @return {HTMLDivElement} */
-  get scrim () {
-    return this.querySelector('[data-scrim]')
-  }
-
-  _getContentStyle () {
-    const width = this.width ? `width: ${this.width};` : ''
-    const height = this.height ? `height: ${this.height};` : ''
-
-    return `
-      style="${width} ${height}"
-    `
-  }
-
-  _appendSlots () {
-    if (!Object.keys(this.slots || {}).length) return
-
-    const general = this.slotted.general || []
-    const action = this.slotted.action || []
-
-    general.forEach(
-      slot => this.querySelector('[data-body]').appendChild(slot)
-    )
-
-    action.forEach(
-      slot => this.querySelector('[data-actions]').appendChild(slot)
-    )
+    return super.render()
   }
 
   _renderHeader () {
     let header = ''
 
-    if (this.title.length) {
+    if (this['title'].length) {
       header += /* html */`
-        <strong class="ark-card__title">${this.title}</strong>
+        <strong class="ark-card__title">${this['title']}</strong>
       `
     }
 
-    if (this.subtitle.length) {
+    if (this['subtitle'].length) {
       header += /* html */`
-        <span class="ark-card__subtitle">${this.subtitle}</span>
+        <span class="ark-card__subtitle">${this['subtitle']}</span>
       `
     }
 
     return header
   }
 
-  _onHiddenEvent () {
-    this.dispatchEvent(new CustomEvent('onHiddenModal', {
-      bubbles: true,
-      detail: {
-        hidden: !this.hasAttribute('show')
-      }
-    }))
+  _getContentStyle () {
+    const width = this.width ? `width: ${this.width};` : ''
+    const height = this.height ? `height: ${this.height};` : ''
+
+    return `style="${width} ${height}"`
   }
 
-  /** @return {boolean} */
-  _isBlockedScrim () {
-    return this.hasAttribute('block-scrim')
+
+  open () {
+    this.setAttribute('show', '')
+  }
+
+  close () {
+    this.removeAttribute('show')
+  }
+
+  toggle () {
+    this.toggleAttribute('show')
   }
 }
 Component.define(tag, Modal, styles)

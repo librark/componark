@@ -87,10 +87,10 @@ export class RootComponent extends Component {
       { name: 'Navbar', path: '/base/navbar' },
       { name: 'Paginator', path: '/base/paginator' },
       { name: 'Radio', path: '/base/radio' },
-      //{ name: 'Select', path: '/base/select' },
+      { name: 'Select', path: '/base/select' },
       { name: 'Sidebar', path: '/base/sidebar' },
-      //{ name: 'Signature', path: '/base/signature' },
-      { name: 'Spinner', path: '/base/spinner' },
+      { name: 'Signature', path: '/base/signature' },
+      //{ name: 'Spinner', path: '/base/spinner' },
       { name: 'SplitView', path: '/base/splitview' },
       //{ name: 'Table', path: '/base/table' },
       { name: 'Tabs', path: '/base/tabs' },
@@ -189,8 +189,8 @@ body {
   background-color: #334455;
   color: #00ffff;
   text-decoration: none
-  overflow-x: hidden;
-  width:100%;
+  width: 100%;
+  overflow: auto;
 }
 
 .app-root__sideitem {
@@ -209,6 +209,7 @@ body {
 .app-root__content {
   grid-column: 2 / 13;
   padding: 2vmin;
+  overflow: scroll;
 }
 
 `
