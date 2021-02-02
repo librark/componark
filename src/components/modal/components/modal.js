@@ -1,5 +1,7 @@
 import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-modal'
 export class Modal extends Component {
   init (context = {}) {
     this.title = context.title
@@ -119,4 +121,4 @@ export class Modal extends Component {
     return this.hasAttribute('block-scrim')
   }
 }
-customElements.define('ark-modal', Modal)
+Component.define(tag, Modal, styles)
