@@ -1,9 +1,11 @@
 import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-select'
 export class Select extends Component {
   constructor () {
     super()
-    this.defaultContent = this.defaultContent || this.innerHTML
+    this.defaultContent = this.defaultContent || this.content
   }
 
   init (context = {}) {
@@ -84,4 +86,4 @@ export class Select extends Component {
     ]
   }
 }
-customElements.define('ark-select', Select)
+Component.define(tag, Select, styles)
