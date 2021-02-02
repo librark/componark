@@ -93,7 +93,7 @@ export class RootComponent extends Component {
       //{ name: 'Spinner', path: '/base/spinner' },
       { name: 'SplitView', path: '/base/splitview' },
       //{ name: 'Table', path: '/base/table' },
-      //{ name: 'Tabs', path: '/base/tabs' },
+      { name: 'Tabs', path: '/base/tabs' },
       //{ name: 'Tabulator', path: '/base/tabulator' },
       //{ name: 'Tooltip', path: '/base/tooltip' },
       //{ name: 'TreeTable', path: '/base/treetable' },

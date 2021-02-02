@@ -1,7 +1,0 @@
-@import "./tabs.material";
-@import "./tabs.item.material";
-
-@mixin tabs_material() {
-  @include tabs_material_();
-  @include tabs-item_material_();
-}
