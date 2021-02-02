@@ -12,8 +12,9 @@ export class Signature extends Component {
     // Local
     this.global = context.global || window
     this._dirty = false
-
+    console.log(this)
     return super.init()
+  
   }
 
   reflectedProperties () {

@@ -39,7 +39,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('radio'),
     //getComponentRoute('select'),
     getComponentRoute('sidebar', ['button']),
-    getComponentRoute('signature'),
+    getComponentRoute('signature', ['button']),
     //getComponentRoute('spinner'),
     getComponentRoute('splitview', ['icon', 'list']),
     //getComponentRoute('table'),
