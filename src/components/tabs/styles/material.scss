@@ -1,0 +1,9 @@
+@use'./shared.scss';
+
+.ark-tabs {
+
+  @include shared.ark-tabs;
+
+  &-item {}
+
+}

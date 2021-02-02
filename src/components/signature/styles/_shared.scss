@@ -1,0 +1,14 @@
+@use 'base/theme';
+@use './config'as *;
+
+@mixin ark-signature() {
+
+  display: table;
+
+  &--pad {
+    display: block;
+    height: inherit;
+    width: inherit
+  }
+
+}
