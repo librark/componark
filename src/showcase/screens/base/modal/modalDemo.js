@@ -8,9 +8,9 @@ export class ModalDemo extends Component {
   render () {
     this.content = /* html */ `${this.styles}
       <div>
-        <p>This is a modal.</p>
-        <button btn-open>open</button>
-        <button btn-toggle>toggle</button>
+        <h1>This is a modal.</h1>
+        <ark-button btn-open>open</ark-button>
+        <ark-button btn-toggle>toggle</ark-button>
       </div>
 
       <ark-modal title="My Title" subtitle="My Subtitle"
@@ -80,15 +80,15 @@ export class ModalDemo extends Component {
       <!-- DOCUMENTATION -->
 
       <div>
-        <h3>ark-button</h3>
-        <small>Attributes:</small>
+        <!--<h3>ark-button</h3>-->
         <hr />
+        <h3>Attributes:</h3>
         <p>Modal show: </p>
           <ul>
             <li>onHiddenModal:<span data-hidden> hidden: false</span></li>
           </ul>
 
-        <p>Size of a new modal window</p>
+        <p>Size of a new modal window:</p>
         <ul>
           <li>360px [default]</li>
           <li>lg => 960px</li>
@@ -126,6 +126,14 @@ export class ModalDemo extends Component {
       <style>
         demo-modal ark-modal p{
           margin: 0;
+        }
+        ark-button[btn-open]{
+          background:var(--primary);
+          color:var(--light);
+        }
+        ark-button[btn-toggle]{
+          background:var(--secondary);
+          color:var(--primary);
         }
       </style>
     `
