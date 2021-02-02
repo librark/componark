@@ -87,7 +87,7 @@ export class RootComponent extends Component {
       { name: 'Navbar', path: '/base/navbar' },
       { name: 'Paginator', path: '/base/paginator' },
       { name: 'Radio', path: '/base/radio' },
-      //{ name: 'Select', path: '/base/select' },
+      { name: 'Select', path: '/base/select' },
       { name: 'Sidebar', path: '/base/sidebar' },
       //{ name: 'Signature', path: '/base/signature' },
       //{ name: 'Spinner', path: '/base/spinner' },
