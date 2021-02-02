@@ -90,7 +90,7 @@ export class RootComponent extends Component {
       //{ name: 'Select', path: '/base/select' },
       { name: 'Sidebar', path: '/base/sidebar' },
       //{ name: 'Signature', path: '/base/signature' },
-      //{ name: 'Spinner', path: '/base/spinner' },
+      { name: 'Spinner', path: '/base/spinner' },
       { name: 'SplitView', path: '/base/splitview' },
       //{ name: 'Table', path: '/base/table' },
       { name: 'Tabs', path: '/base/tabs' },

@@ -1,5 +1,7 @@
 import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-spinner'
 export class Spinner extends Component {
   init (context = {}) {
     this.size = context.size || this.size || '1.5rem'
@@ -35,4 +37,4 @@ export class Spinner extends Component {
     return this.querySelector('[data-loader]')
   }
 }
-Component.define('ark-spinner', Spinner)
+Component.define(tag, Spinner, styles)
