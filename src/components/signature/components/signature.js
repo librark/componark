@@ -1,6 +1,9 @@
 import { Component } from '../../../base/component'
 import SignaturePad from 'signature_pad'
+import { styles } from '../styles'
 
+
+const tag = 'ark-signature'
 export class Signature extends Component {
   init (context = {}) {
     this.width = this.width || context.width
@@ -18,7 +21,7 @@ export class Signature extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`
+    this.content = /* html */`
       <canvas data-signature-pad class="ark-signature--pad"></canvas>
     `
 
@@ -116,4 +119,4 @@ export class Signature extends Component {
     return this.querySelector('[data-signature-pad]')
   }
 }
-customElements.define('ark-signature', Signature)
+Component.define(tag, Signature, styles)
