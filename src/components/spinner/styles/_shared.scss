@@ -4,22 +4,18 @@
 @mixin ark-spinner() {
     overflow: hidden;
 
-    &[data-loader] {
+    [data-loader] {
         $border: 0.3rem solid;
-        $circle: 5rem;
-
+        $circle: 6rem;
         width: $circle;
         height: $circle;
-
         border: $border;
-        border-color: $white !important;
-
+        border-color: var(--light, white);
         border-top: $border;
-        border-top-color: $primary !important;
-
+        border-top-color: var(--primary, blue);
         border-radius: 50%;
-
-        animation: spin 2s linear infinite;
+        animation: spin 1.8s linear infinite;
+        -webkit-animation: spin 1.8s linear infinite;
     }
 
     @keyframes spin {
