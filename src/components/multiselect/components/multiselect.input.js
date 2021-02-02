@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class MultiselectInput extends Component {
   /** @param {{}} context */
@@ -11,11 +11,8 @@ export class MultiselectInput extends Component {
       <input type="text" listen on-input="onInput" on-keydown="onkeyDown"
         on-blur="onBlur" on-focus="onFocus"/>
 		`
-    return super.render()
-  }
-
-  load () {
     this.addEventListener('click', this.onClick.bind(this))
+    return super.render()
   }
 
   /** @param {MouseEvent} event */
@@ -78,4 +75,4 @@ export class MultiselectInput extends Component {
     this.input.value = value
   }
 }
-customElements.define('ark-multiselect-input', MultiselectInput)
+Component.define('ark-multiselect-input', MultiselectInput)

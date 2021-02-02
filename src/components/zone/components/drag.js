@@ -1,7 +1,7 @@
 /** @typedef {import('./drop').DropZone} DropZone */
 
-import { Component } from '../../component'
-import { uuid } from '../../../utils'
+import { Component } from '../../../base/component'
+import { uuid } from '../../../base/utils'
 
 export class DragZone extends Component {
   init (context = {}) {

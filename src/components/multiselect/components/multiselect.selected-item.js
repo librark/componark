@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class MultiselectSelectedItem extends Component {
   /**
@@ -22,4 +22,4 @@ export class MultiselectSelectedItem extends Component {
     return super.render()
   }
 }
-customElements.define('ark-multiselect-selected-item', MultiselectSelectedItem)
+Component.define('ark-multiselect-selected-item', MultiselectSelectedItem)

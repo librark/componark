@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Spinner extends Component {
   init (context = {}) {
@@ -30,11 +30,9 @@ export class Spinner extends Component {
     return super.render()
   }
 
-  load () { }
-
   /** @returns {HTMLElement} */
   get loader () {
     return this.querySelector('[data-loader]')
   }
 }
-customElements.define('ark-spinner', Spinner)
+Component.define('ark-spinner', Spinner)

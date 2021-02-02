@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Grid extends Component {
   init (context = {}) {
@@ -25,4 +25,4 @@ export class Grid extends Component {
     this.style.gridGap = `${this.gap}`
   }
 }
-customElements.define('ark-grid', Grid)
+Component.define('ark-grid', Grid)

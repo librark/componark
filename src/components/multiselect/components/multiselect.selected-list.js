@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 import { MultiselectSelectedItem } from './multiselect.selected-item'
 
 
@@ -10,11 +10,8 @@ export class MultiselectSelectedList extends Component {
   }
 
   render () {
-    return super.render()
-  }
-
-  load () {
     this.addEventListener('click', this.onClick.bind(this))
+    return super.render()
   }
 
   /** @param {MouseEvent} event */
@@ -128,4 +125,4 @@ export class MultiselectSelectedList extends Component {
     return fields
   }
 }
-customElements.define('ark-multiselect-selected-list', MultiselectSelectedList)
+Component.define('ark-multiselect-selected-list', MultiselectSelectedList)

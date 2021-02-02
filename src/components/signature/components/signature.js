@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 import SignaturePad from 'signature_pad'
 
 export class Signature extends Component {
@@ -33,7 +33,7 @@ export class Signature extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.global.addEventListener('resize', _ => this.resizeCanvas())
 
     this.canvas.addEventListener('touchend', _ => this.isDirty())

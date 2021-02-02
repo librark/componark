@@ -1,10 +1,9 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
+import { uuid } from '../../../base/utils'
 import { MultiselectInput } from './multiselect.input'
 import { MultiselectList } from './multiselect.list'
 import { MultiselectSelectedItem } from './multiselect.selected-item'
 import { MultiselectSelectedList } from './multiselect.selected-list'
-import { uuid } from '../../../utils'
-
 
 export class Multiselect extends Component {
   constructor () {

@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class MultiselectList extends Component {
   constructor () {
@@ -33,12 +33,10 @@ export class MultiselectList extends Component {
       item.addEventListener('mouseleave', this.onMouseleave.bind(this))
     })
 
-    return super.render()
-  }
-
-  load () {
     this.addEventListener('click', this.onClick.bind(this))
     this.global.addEventListener('click', event => this.close())
+
+    return super.render()
   }
 
   disconnectCallback () {
@@ -151,4 +149,4 @@ export class MultiselectList extends Component {
     return this.querySelectorAll('li')
   }
 }
-customElements.define('ark-multiselect-list', MultiselectList)
+Component.define('ark-multiselect-list', MultiselectList)

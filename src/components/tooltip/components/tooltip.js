@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Tooltip extends Component {
   constructor () {
@@ -29,4 +29,4 @@ export class Tooltip extends Component {
     return super.render()
   }
 }
-customElements.define('ark-tooltip', Tooltip)
+Component.define('ark-tooltip', Tooltip)

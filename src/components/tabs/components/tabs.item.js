@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class TabsItem extends Component {
   constructor () {
@@ -29,4 +29,4 @@ export class TabsItem extends Component {
     return this.hasAttribute('href') ? 'a' : 'button'
   }
 }
-customElements.define('ark-tabs-item', TabsItem)
+Component.define('ark-tabs-item', TabsItem)

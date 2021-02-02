@@ -1,5 +1,5 @@
 import Tabulator from 'tabulator-tables'
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class TabulatorTable extends Component {
   /**
@@ -28,4 +28,4 @@ export class TabulatorTable extends Component {
     this.table.redraw(true)
   }
 }
-customElements.define('ark-tabulator', TabulatorTable)
+Component.define('ark-tabulator', TabulatorTable)

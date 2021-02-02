@@ -1,4 +1,3 @@
-import { styles } from 'components/accordion/styles'
 import { Component } from '../../../base/component'
 
 const tag = 'ark-radio-button'

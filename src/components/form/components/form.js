@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Form extends Component {
   constructor () {
@@ -22,8 +22,6 @@ export class Form extends Component {
 
     return super.render()
   }
-
-  load () { }
 
   setItemValue (key, value) {
     const item = this.getItem(key)
@@ -55,4 +53,4 @@ export class Form extends Component {
     return this.select(`[form-item="${key}"]`)
   }
 }
-customElements.define('ark-form', Form)
+Component.define('ark-form', Form)

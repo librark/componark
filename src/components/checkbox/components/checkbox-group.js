@@ -35,7 +35,7 @@ export class CheckboxGroup extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.addEventListener('click', this.onAlter.bind(this))
   }
 

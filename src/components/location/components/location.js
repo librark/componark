@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Location extends Component {
   init () {
@@ -65,4 +65,4 @@ export class Location extends Component {
     }))
   }
 }
-customElements.define('ark-location', Location)
+Component.define('ark-location', Location)

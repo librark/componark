@@ -1,6 +1,6 @@
 import { RadioButton } from './radio-button'
 import { Component } from '../../../base/component'
-import { uuid } from '../../../utils'
+import { uuid } from '../../../base/utils'
 import { styles } from '../styles'
 
 const tag = 'ark-radio-group'

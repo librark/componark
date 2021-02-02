@@ -1,7 +1,0 @@
-// Theme
-@import '~leaflet/dist/leaflet.css';
-@import "./styles/_default/main";
-
-@mixin map($theme) {
-  @include map_default();
-}

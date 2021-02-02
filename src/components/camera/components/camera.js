@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Camera extends Component {
   init (context = {}) {
@@ -22,7 +22,7 @@ export class Camera extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.video.addEventListener('canplay', _ => {
       this.video.setAttribute('width', `${this.width}px`)
       this.video.setAttribute('height', `${this.height}px`)
@@ -87,4 +87,4 @@ export class Camera extends Component {
     return this.querySelector('[data-canvas]')
   }
 }
-customElements.define('ark-camera', Camera)
+Component.define('ark-camera', Camera)

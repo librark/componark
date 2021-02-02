@@ -1,7 +1,7 @@
 /**
  * @typedef {import('./tabs.item').TabsItem} TabsItem
  **/
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Tabs extends Component {
   init (context = {}) {
@@ -12,7 +12,7 @@ export class Tabs extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     if (!this.currentTab) {
       const tab = /** @type {TabsItem} */(
         this.tabs.length ? this.tabs[0] : null

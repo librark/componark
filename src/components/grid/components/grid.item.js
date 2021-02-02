@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class GridItem extends Component {
   init (context = {}) {
@@ -21,4 +21,4 @@ export class GridItem extends Component {
     this.style.gridColumnStart = `${this.cols} span`
   }
 }
-customElements.define('ark-grid-item', GridItem)
+Component.define('ark-grid-item', GridItem)

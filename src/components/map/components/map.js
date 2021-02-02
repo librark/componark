@@ -1,5 +1,5 @@
-import { uuid } from '../../../utils'
-import { Component } from '../../component'
+import { uuid } from '../../../base/utils'
+import { Component } from '../../../base/component'
 import * as leaflet from 'leaflet'
 // @ts-ignore
 import icon from '../assets/icons/marker-icon.png'
@@ -31,7 +31,7 @@ export class Map extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.map.addEventListener('load', this.updateSize.bind(this))
     this.map.addEventListener('resize', this.updateSize.bind(this))
     this.global.addEventListener('resize', this.updateSize.bind(this))
@@ -85,4 +85,4 @@ export class Map extends Component {
     return leaflet
   }
 }
-customElements.define('ark-map', Map)
+Component.define('ark-map', Map)
