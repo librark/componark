@@ -54,13 +54,13 @@ export class Modal extends Component {
 
     if (this['title'].length) {
       header += /* html */`
-        <strong class="ark-card__title">${this['title']}</strong>
+        <strong class="ark-modal__title">${this['title']}</strong>
       `
     }
 
     if (this['subtitle'].length) {
       header += /* html */`
-        <span class="ark-card__subtitle">${this['subtitle']}</span>
+        <span class="ark-modal__subtitle">${this['subtitle']}</span>
       `
     }
 

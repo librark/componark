@@ -23,22 +23,18 @@ $feat-typography: feature-targeting.create-target($query, typography);
   }
 
   &__actions {
-    ark-button {
-
-      &[close] {
-        background: var(--light);
-        color: var(--primary);
-      }
-
+    [close] {
+      background: var(--light);
+      color: var(--primary);
     }
   }
 
   &__header {
-    .ark-card__title {
+    .ark-modal__title {
       @include typography.typography(headline4, $query);
     }
 
-    .ark-card__subtitle {
+    .ark-modal__subtitle {
       @include typography.typography(subtitle1, $query);
     }
   }
