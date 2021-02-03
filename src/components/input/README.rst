@@ -1,20 +1,35 @@
 INPUT
-*********
+*****
 
 The ``ark-input`` element supports all the types of the default 
-.. _a link: https://www.w3schools.com/html/html_form_input_types.asp 
+`w3schools: <https://www.w3schools.com/html/html_form_input_types.asp>`_
 ``input`` web component.
     
 
-Example
-=======
+Examples
+========
 
-.. code:: html
+    **Default input with label:**
 
-    <ark-input data-input-text required inline 
-        label="Enter some text:" 
-        listen on-alter="onTextInput">
-    </ark-input>
+    .. code-block:: html
+        
+        <ark-input label="Label"></ark-input>
+
+    **Inputs with inline and header labels:**
+
+    .. code-block:: html
+        
+        <ark-input label="Inline Label" inline></ark-input>
+        <ark-input label="Header Label"></ark-input> 
+
+    **Inputs using type attribute:**
+
+    .. code-block:: html
+        
+        <ark-input type="file"></ark-input>
+        <ark-input type="email"></ark-input>
+        <ark-input type="password"></ark-input>
+
 
 
 Attributes
@@ -27,8 +42,6 @@ Attributes
 +-------+--------+---------+----------------------------+
 | label | string | null    | Input´s accompanying label |
 +-------+--------+---------+----------------------------+
-
-
 
 
 

@@ -97,6 +97,7 @@ export class InputDemo extends Component {
   get thirdExample() {
     return this.renderExample(hljs.highlight('html', `
       <ark-input type="file"></ark-input>
+      <ark-input type="date"></ark-input>
     `))
   }
 
