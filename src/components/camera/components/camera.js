@@ -21,16 +21,15 @@ export class Camera extends Component {
       <canvas class="ark-camera__canvas"></canvas>
       <video class="ark-camera__video" playsinline autoplay></video>
     `
-    return super.render()
-  }
 
-  async load () {
     this.video.addEventListener('canplay', _ => {
       this.video.setAttribute('width', `${this.width}px`)
       this.video.setAttribute('height', `${this.height}px`)
       this.canvas.setAttribute('width', `${this.width}px`)
       this.canvas.setAttribute('height', `${this.height}px`)
     }, false)
+
+    return super.render()
   }
 
   /** @returns {string} */
@@ -76,7 +75,7 @@ export class Camera extends Component {
   setCameraOrientation (facingMode) {
     this.stop()
     this.facingMode = facingMode
-    this.stop()
+    this.start()
   }
 
   /** @returns {HTMLVideoElement} */

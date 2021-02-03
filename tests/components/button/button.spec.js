@@ -30,7 +30,7 @@ describe('Button', () => {
 
     expect(element.tagName).toEqual('BUTTON')
     expect(element.type).toEqual('submit')
-    expect(element.className).toEqual('')
+    expect(element.className).toEqual('ark-button__button')
   })
 
   it('can be rendered with a child anchor (<a>)', () => {

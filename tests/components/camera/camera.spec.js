@@ -1,4 +1,4 @@
-import { Audio } from 'components/camera'
+import { Camera } from 'components/camera'
 
 jest.useFakeTimers()
 
@@ -25,7 +25,7 @@ const mockGlobal = {
   URL: {createObjectURL: (data) => 'mock://data/url'}
 }
 
-describe('Audio', () => {
+describe('Camera', () => {
   let container = null
   beforeEach(() => {
     container = document.createElement('div')
@@ -39,27 +39,32 @@ describe('Audio', () => {
 
   it('can be instantiated', () => {
     container.innerHTML = `
-      <ark-audio></ark-audio>
+      <ark-camera></ark-camera>
     `
-    const audio = container.querySelector('ark-audio')
-    audio.init()
-    expect(audio).toBeTruthy()
+    const camera = container.querySelector('ark-camera')
+    expect(camera).toBeTruthy()
+
+    expect(camera).toBe(camera.init())
   })
 
-  it('can start recording', async () => {
+  it('sets its dimensions on canplay event', async () => {
     container.innerHTML = `
-      <ark-audio></ark-audio>
+      <ark-camera width="50" height="80"></ark-camera>
     `
-    const audio = container.querySelector('ark-audio')
-    audio.init({global: mockGlobal})
+    const camera = container.querySelector('ark-camera')
+    const video = camera.select('video')
+    const canvas = camera.select('canvas')
 
-    expect(audio.status).toEqual('idle')
-    await audio.start()
-    expect(audio.status).toEqual('recording')
-    expect(audio.recorder).toBeTruthy()
+    video.dispatchEvent(new Event('canplay'))
+
+    expect(video.width).toEqual(50)
+    expect(video.height).toEqual(80)
+
+    expect(canvas.width).toEqual(50)
+    expect(canvas.height).toEqual(80)
   })
 
-  it('can stop recording', async () => {
+  xit('can stop recording', async () => {
     container.innerHTML = `
       <ark-audio></ark-audio>
     `
@@ -73,7 +78,7 @@ describe('Audio', () => {
     expect(audio.status).toEqual('done')
   })
 
-  it('can reset recording', async () => {
+  xit('can reset recording', async () => {
     container.innerHTML = `
       <ark-audio></ark-audio>
     `
@@ -90,7 +95,7 @@ describe('Audio', () => {
     expect(audio.recorder).toBeNull()
   })
 
-  it('counts the ellapsed time of the recording', async () => {
+  xit('counts the ellapsed time of the recording', async () => {
     container.innerHTML = `
       <ark-audio></ark-audio>
     `
@@ -106,7 +111,7 @@ describe('Audio', () => {
     expect(timer.textContent).toEqual('10:24')
   })
 
-  it('sets the dataURL (base64) property when stopped', async () => {
+  xit('sets the dataURL (base64) property when stopped', async () => {
     container.innerHTML = `
       <ark-audio></ark-audio>
     `
