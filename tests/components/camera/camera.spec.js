@@ -8,22 +8,7 @@ const mockGlobal = () => ({
         return { getTracks: () => [{stop: () => {this.__stops += 1}}] }
       }
     }
-  },
-  //MediaRecorder: function (stream) {
-    //this.stream = stream
-    //this.start = () => {}
-    //this.addEventListener = (type, callback) => {}
-    //this.stop = () => {}
-    //this.stream = {getTracks: () => [{stop: () => null}]}
-  //},
-  //FileReader: function () {
-    //const self = this
-    //this.readAsDataURL = (data) => setTimeout(
-      //() => self['onloadend'](), 1000)
-    //this.result = 'base64::data::result'
-
-  //},
-  //URL: {createObjectURL: (data) => 'mock://data/url'}
+  }
 })
 
 describe('Camera', () => {
