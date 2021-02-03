@@ -30,7 +30,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('list'),
     getComponentRoute('icon'),
     getComponentRoute('input'),
-    //getComponentRoute('location'),
+    getComponentRoute('location', ['button', 'map']),
     //getComponentRoute('map'),
     getComponentRoute('modal', ['button']),
     //getComponentRoute('multiselect'),

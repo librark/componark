@@ -80,7 +80,7 @@ export class RootComponent extends Component {
       { name: 'List', path: '/base/list' },
       { name: 'Icon', path: '/base/icon' },
       { name: 'Input', path: '/base/input' },
-      //{ name: 'Location', path: '/base/location' },
+      { name: 'Location', path: '/base/location' },
       //{ name: 'Map', path: '/base/map' },
       { name: 'Modal', path: '/base/modal' },
       //{ name: 'Multiselect', path: '/base/multiselect' },
