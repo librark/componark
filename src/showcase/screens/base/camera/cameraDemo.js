@@ -8,7 +8,7 @@ export class CameraDemo extends Component {
   render () {
     this.innerHTML = /* html */ `${this.styles}
       <div class="camera-container">
-        <ark-Camera></ark-Camera>
+        <ark-camera></ark-camera>
         <ark-button listen on-click="takepicture">Take photo</ark-button>
         <ark-button listen on-click="startCamera">Start</ark-button>
         <ark-button listen on-click="stopCamera">stop</ark-button>

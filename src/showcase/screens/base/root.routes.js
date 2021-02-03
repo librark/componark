@@ -20,7 +20,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('alert'),
     getComponentRoute('audio'),
     getComponentRoute('button'),
-    getComponentRoute('camera'),
+    getComponentRoute('camera', ['button']),
     getComponentRoute('card'),
     //getComponentRoute('chart'),
     getComponentRoute('checkbox'),

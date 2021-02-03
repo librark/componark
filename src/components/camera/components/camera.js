@@ -1,5 +1,7 @@
 import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-camera'
 export class Camera extends Component {
   init (context = {}) {
     this.width = this.width || context.width || 320
@@ -15,9 +17,9 @@ export class Camera extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */`
-      <canvas data-canvas></canvas>
-      <video data-video playsinline autoplay></video>
+    this.content = /* html */`
+      <canvas class="ark-camera__canvas"></canvas>
+      <video class="ark-camera__video" playsinline autoplay></video>
     `
     return super.render()
   }
@@ -79,12 +81,12 @@ export class Camera extends Component {
 
   /** @returns {HTMLVideoElement} */
   get video () {
-    return this.querySelector('[data-video]')
+    return this.querySelector('.ark-camera__video')
   }
 
   /** @returns {HTMLCanvasElement} */
   get canvas () {
-    return this.querySelector('[data-canvas]')
+    return this.querySelector('.ark-camera__canvas')
   }
 }
-Component.define('ark-camera', Camera)
+Component.define(tag, Camera, styles)
