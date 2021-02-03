@@ -7,7 +7,7 @@ export class Camera extends Component {
     this.width = this.width || context.width || 320
     this.height = this.height || context.height || 320
     this.facingMode = this.facingMode || context.facingMode || 'user'
-    this.navigatorObject = navigator
+    this.global = context.global || window
 
     return super.init()
   }
@@ -33,37 +33,31 @@ export class Camera extends Component {
   }
 
   /** @returns {string} */
-  dataURL (width = this.width, height = this.height) {
+  dataURL (width = null, height = null) {
     /** @type {HTMLCanvasElement} */
-    const dupCanvas = (this.canvas.cloneNode(true))
+    const canvas = (this.canvas.cloneNode(true))
 
-    dupCanvas.width = this.width
-    dupCanvas.height = this.height
-    dupCanvas.getContext('2d').drawImage(
+    canvas.width = width || this.width
+    canvas.height = height || this.height
+    canvas.getContext('2d').drawImage(
       this.video,
       0, 0, this.width, this.height,
-      0, 0, width, height
-    )
+      0, 0, width, height)
 
-    return dupCanvas.toDataURL('image/jpg')
+    return canvas.toDataURL('image/jpg')
   }
 
-  start () {
-    // @ts-ignore
-    this.navigatorObject.getMedia = this.navigatorObject.getUserMedia
-
-    if (!this.navigatorObject.mediaDevices.getUserMedia) return
-
-    this.navigatorObject.mediaDevices.getUserMedia({
+  async start () {
+    const stream = await this.global.navigator.mediaDevices.getUserMedia({
       video: {
         width: this.width,
         height: this.height,
         facingMode: this.facingMode
       },
       audio: false
-    }).then(stream => {
-      this.video.srcObject = stream
-    }).catch(e => console.error(e))
+    })
+
+    this.video.srcObject = stream
   }
 
   stop () {
@@ -72,10 +66,10 @@ export class Camera extends Component {
     tracks.forEach(track => track.stop())
   }
 
-  setCameraOrientation (facingMode) {
+  async setCameraOrientation (facingMode) {
     this.stop()
     this.facingMode = facingMode
-    this.start()
+    await this.start()
   }
 
   /** @returns {HTMLVideoElement} */
