@@ -1,8 +1,26 @@
+import { container } from 'webpack'
 import { Select } from '../../../src/components/select'
 
 describe('Select', () => {
+
+  let container = null
+  
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const item = new Select()
+    container.innerHTML =/* html */ `
+        <ark-select></ark-select>
+    `
+
+    const item = container.querySelector('ark-select')
     expect(item).toBeTruthy()
 
     const init = item.init()
@@ -10,9 +28,13 @@ describe('Select', () => {
   })
 
   it('can be rendered with content', function () {
-    const item = new Select()
+    container.innerHTML =/* html */ `
+        <ark-select></ark-select>
+    `
+    
+    const item = container.querySelector('ark-select')
     // @ts-ignore
-    item.defaultContent = /* HTML */`
+    item.defaultContent = /* html */`
       <option>myOption</option>
     `
     item.connectedCallback()
@@ -21,13 +43,16 @@ describe('Select', () => {
   })
 
   it('can be rendered with attributes', function () {
-    const item = new Select()
+    container.innerHTML =/* html */ `
+        <ark-select></ark-select>
+    `
+    const item = container.querySelector('ark-select')
     const att = document.createAttribute('placeholder')
     att.value = 'placeholder'
     item.setAttributeNode(att)
 
     // @ts-ignore
-    item.defaultContent = /* HTML */`
+    item.defaultContent = /* html */`
       <option>myOption</option>
     `
     item.connectedCallback()
@@ -36,7 +61,11 @@ describe('Select', () => {
   })
 
   it('can be rendered with attributes', function () {
-    const item = new Select()
+    container.innerHTML =/* html */ `
+        <ark-select></ark-select>
+    `
+    
+    const item = container.querySelector('ark-select')
     const att = document.createAttribute('autofocus')
     item.setAttributeNode(att)
 
@@ -44,13 +73,16 @@ describe('Select', () => {
     const itemElement = item.querySelector('select')
     expect(!itemElement.getAttribute('autofocus')).toBeTruthy()
   })
+
   it('can be rendered with attributes', function () {
-    const select = new Select()
-    select.innerHTML = /** html */`
-      <option value="op1">opcion 1</option>
-      <option value="op2">opcion 2</option>
-      <option value="op3">opcion 3</option>
+    container.innerHTML =/* html */ `
+        <ark-select label="my select">
+          <option value="op1">opcion 1</option>
+          <option value="op2">opcion 2</option>
+          <option value="op3">opcion 3</option>
+        </ark-select>
     `
+    const select= container.querySelector('ark-select')
     select.init({ label: 'my select' })
     select.connectedCallback()
 
@@ -58,8 +90,7 @@ describe('Select', () => {
     // @ts-ignore
     select._change(event)
 
-    const element = (/** @type {Select} */ (
-      select.querySelector('[data-select]')))
+    const element = select.querySelector('option')
     element.value = 'op2'
 
     expect(select.value).toEqual('op2')
