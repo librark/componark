@@ -1,5 +1,6 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-checkbox'
 export class CheckboxDemo extends Component {
   init (context) {
     return super.init()
@@ -46,4 +47,4 @@ export class CheckboxDemo extends Component {
     
   }
 }
-Component.define('demo-checkbox', CheckboxDemo)
+Component.define(tag, CheckboxDemo)
