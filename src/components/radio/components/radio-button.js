@@ -97,5 +97,21 @@ export class RadioButton extends Component {
       'value',
     ]
   }
+
+  //Methods
+
+  check(){
+    this.checked = true
+  }
+  unCheck(){
+    this.checked = false
+  }
+  toggle(){
+    if (this.checked == true){
+      this.checked = false
+    } else {
+      this.checked = true
+    }
+  }
 }
 Component.define(tag, RadioButton)

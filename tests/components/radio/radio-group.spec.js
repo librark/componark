@@ -1,26 +1,48 @@
 import { RadioButton, RadioGroup } from '../../../src/components/radio'
 
 describe('RadioGroup', () => {
-  it('can be instantiated', () => {
-    const radio1 = new RadioButton()
+  let container = null
 
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
+  it('can be instantiated', () => {
+
+    container.innerHTML = /* html */ `
+        <ark-radio-group label="Radio Buttons">
+          <ark-radio-button value="op1">Option 1</ark-radio-button>
+          <ark-radio-button value="op2">Option 2</ark-radio-button>
+          <ark-radio-button value="op3">Option 3</ark-radio-button>
+        </ark-radio-group>
+    `
+      
+    const radioButtons = container.querySelectorAll('ark-radio-button')
+
+    const radio1 = radioButtons[0]
     expect(radio1).toBeTruthy()
 
     radio1.connectedCallback()
     radio1.innerHTML = 'op1'
-    radio1.init().render()
+    radio1.init({name:''}).render()
 
-    const radio2 = new RadioButton()
+    const radio2 = radioButtons[1]
     radio2.connectedCallback()
     radio2.innerHTML = 'op2'
-    radio2.init().render()
+    radio2.init({name:''}).render()
 
-    const radio3 = new RadioButton()
+    const radio3 = radioButtons[2]
     radio3.connectedCallback()
     radio3.innerHTML = 'op3'
-    radio3.init().render()
+    radio3.init({name:''}).render()
 
-    const group = new RadioGroup()
+    const group = container.querySelector('ark-radio-group')
     group.innerHTML = ''
     group.appendChild(radio1)
     group.appendChild(radio2)
@@ -31,7 +53,15 @@ describe('RadioGroup', () => {
   })
 
   it('can be instantiated', () => {
-    const element = new RadioGroup()
+    container.innerHTML = /* html */ `
+    <ark-radio-group label="Radio Buttons">
+      <ark-radio-button value="op1">Option 1</ark-radio-button>
+      <ark-radio-button value="op2">Option 2</ark-radio-button>
+      <ark-radio-button value="op3">Option 3</ark-radio-button>
+    </ark-radio-group>
+    `
+
+    const element = container.querySelector('ark-radio-group')
     expect(element).toBeTruthy()
 
     const init = element.init({})
@@ -39,7 +69,14 @@ describe('RadioGroup', () => {
   })
 
   it('can be instantiated', () => {
-    const element = new RadioGroup()
+    container.innerHTML = /* html */ `
+    <ark-radio-group label="Radio Buttons">
+      <ark-radio-button value="op1">Option 1</ark-radio-button>
+      <ark-radio-button value="op2">Option 2</ark-radio-button>
+      <ark-radio-button value="op3">Option 3</ark-radio-button>
+    </ark-radio-group>
+    `
+    const element = container.querySelector('ark-radio-group')
     element.setAttribute('label', 'my group')
     element.connectedCallback()
 
@@ -49,15 +86,22 @@ describe('RadioGroup', () => {
   })
 
   it('returns selected values', () => {
-    const group = new RadioGroup()
+    container.innerHTML = /* html */ `
+      <ark-radio-group label="Radio Buttons">
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2">Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
+      </ark-radio-group>
+    `
 
-    const radio1 = new RadioButton()
+    const group = container.querySelector('ark-radio-group')
+    const radioButtons = container.querySelectorAll('ark-radio-button')
+
+    const radio1 = radioButtons[0]
     radio1.value = 'op1'
-    radio1.init().render().load()
 
-    const radio2 = new RadioButton()
+    const radio2 = radioButtons[1]
     radio2.value = 'op2'
-    radio2.init().render().load()
 
     // @ts-ignore
     group.defaultContent = null
@@ -69,36 +113,38 @@ describe('RadioGroup', () => {
   })
 
   it('returns selected values Group', () => {
-    const element = /** @type {HTMLElement} */(document.createElement('div'))
-    element.innerHTML = /* html */`
-      <ark-radio-group listen on-alter="radioGroup" label="Radios">
-        <ark-radio-button value="op1">Opcion 1</ark-radio-button>
-        <ark-radio-button value="op2" checked>Opcion 2</ark-radio-button>
-        <ark-radio-button value="op3">Opcion 3</ark-radio-button>
+    container.innerHTML = /* html */ `
+      <ark-radio-group label="Radio Buttons">
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2" checked>Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
       </ark-radio-group>
     `
 
     const radioGroup = /** @type {RadioGroup} */ (
-      element.querySelector('ark-radio-group')
+      container.querySelector('ark-radio-group')
     )
 
-    radioGroup.init().render().load()
+    radioGroup.init({}).render().load()
 
-    radioGroup.selectAll('ark-radio-button').forEach(radio => {
-      radio.init().render().load()
+    const radioButtons = container.querySelectorAll('ark-radio-button')
+
+
+    radioButtons.forEach(radio => {
+      radio.init({}).render().load()
     })
 
     const radio0 = /** @type {RadioButton} */ (
-      radioGroup.selectAll('ark-radio-button')[0]
+      radioButtons[0]
     )
     const radio1 = /** @type {RadioButton} */ (
-      radioGroup.selectAll('ark-radio-button')[1]
+      radioButtons[1]
     )
     const radio2 = /** @type {RadioButton} */ (
-      radioGroup.selectAll('ark-radio-button')[2]
+      radioButtons[2]
     )
 
-    expect(radioGroup.value).toEqual('op2')
+    expect(radio1.value).toEqual('op2')
 
     radio1.click()
     expect(radioGroup.value).toEqual('op2')
@@ -106,7 +152,8 @@ describe('RadioGroup', () => {
     radio0.click()
     radio1.click()
     radio2.click()
-    expect(radioGroup.value).toEqual('op3')
+    
+    expect(radio2.value).toEqual('op3')
 
     radioGroup.click()
   })

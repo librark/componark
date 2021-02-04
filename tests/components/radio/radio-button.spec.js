@@ -1,8 +1,28 @@
 import { RadioButton } from '../../../src/components/radio'
 
 describe('RadioButton', () => {
+  let container = null
+
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated', () => {
-    const element = new RadioButton()
+
+    container.innerHTML = /* html */ `
+        <ark-radio-group label="Radio Buttons">
+          <ark-radio-button value="op1">Option 1</ark-radio-button>
+          <ark-radio-button value="op2">Option 2</ark-radio-button>
+          <ark-radio-button value="op3">Option 3</ark-radio-button>
+        </ark-radio-group>
+    `
+    const element = container.querySelector('ark-radio-button')
     expect(element).toBeTruthy()
 
     const init = element.init({})
@@ -10,7 +30,16 @@ describe('RadioButton', () => {
   })
 
   it('can be instantiated', () => {
-    const element = new RadioButton()
+
+
+    container.innerHTML = /* html */ `
+      <ark-radio-group label="Radio Buttons">
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2">Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
+      </ark-radio-group>
+    `
+    const element = container.querySelector('ark-radio-button')
     element.value = 'op1'
     element.connectedCallback()
 
@@ -28,7 +57,16 @@ describe('RadioButton', () => {
   })
 
   it('It does not allow changing the type of element.', () => {
-    const element = new RadioButton()
+
+    container.innerHTML = /* html */ `
+      <ark-radio-group label="Radio Buttons">
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2">Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
+      </ark-radio-group>
+    `
+
+    const element = container.querySelector('ark-radio-button')
     element.setAttribute('type', 'text')
     element.setAttribute('value', '')
     element.setAttribute('data-valid', '')
@@ -40,22 +78,32 @@ describe('RadioButton', () => {
   })
 
   it('It does not allow changing the type of element.', () => {
-    const element = new RadioButton()
-    element.init({ value: 'op1' }).render()
+
+   container.innerHTML = /* html */ `
+      <ark-radio-group label="Radio Buttons">
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2">Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
+      </ark-radio-group>
+    `
+    const element = container.querySelector('ark-radio-button')
+    element.value = 'op1'
     expect(element.value).toEqual('op1')
   })
 
   it('can render several times', () => {
-    const container = document.createElement('div')
-    container.appendChild(new RadioButton())
+    container.innerHTML = /* html */ `
+      <ark-radio-group label="Radio Buttons">
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2">Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
+      </ark-radio-group>
+    `
+    const radio = container.querySelector('ark-radio-button')
 
-    const radio = /** @type {RadioButton} */(
-      container.querySelector('ark-radio-button')
-    )
-
-    radio.init()
-    radio.init()
-    radio.init()
+    radio.init({})
+    radio.init({})
+    radio.init({})
     radio.render()
     radio.render().load()
 
