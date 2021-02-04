@@ -1,11 +1,32 @@
 import { Checkbox } from 'components/checkbox'
+import { container } from 'webpack'
 
 describe('Checkbox', () => {
+  let container = null
+
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated.', () => {
-    const checkbox = new Checkbox()
+    container.innerHTML = /* html */`
+      <ark-checkbox.group>
+            <ark-checkbox value="1" checked></ark-checkbox>
+            <ark-checkbox value="2"></ark-checkbox>
+            <ark-checkbox value="3"></ark-checkbox>
+      </ark-checkbox-group>
+    
+    `
+    const checkbox = container.querySelector('ark-checkbox')
     checkbox.init().render().load()
 
-    expect(checkbox.value).toEqual('')
+    expect(checkbox.value).toEqual('1')
     expect(checkbox.checked).toEqual(false)
 
     checkbox.init({
