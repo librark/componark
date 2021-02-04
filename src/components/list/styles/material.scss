@@ -6,26 +6,6 @@
 
 @use'./shared.scss';
 
-/*-------------- Notes ----------------------*/
-
-// To colorize an element with material use
-// @include theme.prop(property, color)
-// WHERE color is: primary, secondary, background, surface, error
-// WHERE property is: background, color
-
-
-// Apply changes to typography with
-// @include typography.typography(typo-style, $query);
-// WHERE typo-style is:headline1, headline2, headline3, headline4, headline5, 
-// headline6, subtitle1, subtitle2, body1, body2, caption, button, overline
-
-// Evaluate the structure of multiline lists, 
-// is hard to apply styles without nested selectors
-
-
-/*_______________end-of-notes______________*/
-
-
 $query: feature-targeting.all();
 $feat-color: feature-targeting.create-target($query, color);
 $feat-structure: feature-targeting.create-target($query, structure);
@@ -48,10 +28,11 @@ $feat-typography: feature-targeting.create-target($query, typography);
 
     &-item {
         //@include mixins.item-base_;
-        @include theme.prop(color, rgb(28, 58, 78));
+        //@include theme.prop(color, rgb(28, 58, 78));
 
         &:hover {
             @include theme.prop(background, rgb(230, 232, 255));
+            @include theme.prop(color, rgb(28, 58, 78));
         }
     }
 
