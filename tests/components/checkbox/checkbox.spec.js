@@ -24,8 +24,9 @@ describe('Checkbox', () => {
     `
     const checkbox = container.querySelector('ark-checkbox')
     checkbox.checked = false
+    checkbox.value = ''
 
-    expect(checkbox.value).toEqual('1')
+    expect(checkbox.value).toEqual('')
     expect(checkbox.checked).toEqual(false)
 
     checkbox.init({
