@@ -1,5 +1,4 @@
 import { Checkbox } from 'components/checkbox'
-import { container } from 'webpack'
 
 describe('Checkbox', () => {
   let container = null
@@ -24,7 +23,7 @@ describe('Checkbox', () => {
     
     `
     const checkbox = container.querySelector('ark-checkbox')
-    checkbox.init().render().load()
+    checkbox.checked = false
 
     expect(checkbox.value).toEqual('1')
     expect(checkbox.checked).toEqual(false)
