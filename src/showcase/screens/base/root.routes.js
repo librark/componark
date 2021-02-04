@@ -25,7 +25,6 @@ export function setRoutes (resolver, rootComponent, prefix) {
     //getComponentRoute('chart'),
     getComponentRoute('checkbox'),
     //getComponentRoute('form'),
-    //getComponentRoute('grid'),
     //getComponentRoute('icon'),
     getComponentRoute('list'),
     getComponentRoute('icon'),

@@ -75,7 +75,6 @@ export class RootComponent extends Component {
       //{ name: 'Chart', path: '/base/chart' },
       { name: 'Checkbox', path: '/base/checkbox' },
       //{ name: 'Form', path: '/base/form' },
-      //{ name: 'Grid', path: '/base/grid' },
       //{ name: 'Icon', path: '/base/icon' },
       { name: 'List', path: '/base/list' },
       { name: 'Icon', path: '/base/icon' },
