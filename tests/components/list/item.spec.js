@@ -1,11 +1,13 @@
 import { ListItem } from '../../../src/components/list'
 
 describe('List item', () => {
+
   it('can be instantiated', () => {
     const item = new ListItem()
     item.init()
     item.connectedCallback()
   })
+
   it('can be rendered with data', function () {
     const item = new ListItem()
     item.init({
@@ -20,6 +22,7 @@ describe('List item', () => {
     // // @ts-ignore
     // item._onSelected(event)
   })
+
   it('can be rendered with template', function () {
     const item = new ListItem()
     item.init({
@@ -29,6 +32,7 @@ describe('List item', () => {
 
     expect(item.innerHTML.trim()).toEqual('<span>my data</span>')
   })
+  
   it('can be rendered with template', function () {
     const item = new ListItem()
     item.init({
