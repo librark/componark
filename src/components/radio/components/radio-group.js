@@ -1,6 +1,6 @@
 import { RadioButton } from './radio-button'
 import { Component } from '../../../base/component'
-//import { uuid } from '../../../base/utils'
+import { uuid } from '../../../base/utils'
 import { styles } from '../styles'
 
 const tag = 'ark-radio-group'
@@ -8,9 +8,9 @@ export class RadioGroup extends Component {
   constructor () {
     super()
     this.defaultContent = this.defaultContent || this.innerHTML
-    //this.name = uuid()
+    this.name = uuid()
   }
-
+  
   /**
    * @param {{
    *  label?: string

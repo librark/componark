@@ -16,97 +16,69 @@ describe('RadioButton', () => {
   it('can be instantiated', () => {
 
     container.innerHTML = /* html */ `
-        <ark-radio-group label="Radio Buttons">
+        <ark-radio-group>
           <ark-radio-button value="op1">Option 1</ark-radio-button>
-          <ark-radio-button value="op2">Option 2</ark-radio-button>
-          <ark-radio-button value="op3">Option 3</ark-radio-button>
         </ark-radio-group>
     `
-    const element = container.querySelector('ark-radio-button')
-    expect(element).toBeTruthy()
-
-    const init = element.init({})
-    expect(element === init).toBeTruthy()
+    const radioButton = container.querySelector('ark-radio-button')
+    
+    expect(radioButton).toBeTruthy()
+    expect(radioButton).toBe(radioButton.init({}))
   })
 
-  it('can be instantiated', () => {
-
-
+  
+  it('can return selected values',()=> {
     container.innerHTML = /* html */ `
-      <ark-radio-group label="Radio Buttons">
-        <ark-radio-button value="op1">Option 1</ark-radio-button>
-        <ark-radio-button value="op2">Option 2</ark-radio-button>
-        <ark-radio-button value="op3">Option 3</ark-radio-button>
+    <ark-radio-group">
+    <ark-radio-button value="op1">Option 1</ark-radio-button>
+    <ark-radio-button value="op2">Option 1</ark-radio-button>
+    <ark-radio-button value="op3">Option 1</ark-radio-button>
       </ark-radio-group>
-    `
-    const element = container.querySelector('ark-radio-button')
-    element.value = 'op1'
-    element.connectedCallback()
-
-    element.check()
-    expect(element.hasAttribute('checked')).toBeTruthy()
-
-    element.unCheck()
-    expect(!element.hasAttribute('checked')).toBeTruthy()
-
-    element.toggle()
-    expect(element.hasAttribute('checked')).toBeTruthy()
-
-    element.toggle()
-    expect(!element.hasAttribute('checked')).toBeTruthy()
+      `
+    const element = container.querySelectorAll('ark-radio-button')
+    
+    expect(element[0].value).toBe("op1")
+    expect(element[1].value).toBe("op2")
+    expect(element[2].value).toBe("op3")
+    // element.setAttribute('data-valid', '')
+    // element.setAttribute('autofocus', 'autofocus')
   })
 
   it('It does not allow changing the type of element.', () => {
-
+    
     container.innerHTML = /* html */ `
-      <ark-radio-group label="Radio Buttons">
-        <ark-radio-button value="op1">Option 1</ark-radio-button>
-        <ark-radio-button value="op2">Option 2</ark-radio-button>
-        <ark-radio-button value="op3">Option 3</ark-radio-button>
-      </ark-radio-group>
+    <ark-radio-group">
+    <ark-radio-button value="op1">Option 1</ark-radio-button>
+    </ark-radio-group>
     `
-
+    
     const element = container.querySelector('ark-radio-button')
     element.setAttribute('type', 'text')
-    element.setAttribute('value', '')
-    element.setAttribute('data-valid', '')
-    element.setAttribute('autofocus', 'autofocus')
-    element.connectedCallback()
-
-    element.unCheck()
-    expect(!element.hasAttribute('checked')).toBeTruthy()
+    expect(element.querySelector('[data-input]').type).toBe('radio')
+    // element.setAttribute('value', '')
+    // element.setAttribute('data-valid', '')
+    // element.setAttribute('autofocus', 'autofocus')
   })
-
-  it('It does not allow changing the type of element.', () => {
-
-   container.innerHTML = /* html */ `
-      <ark-radio-group label="Radio Buttons">
-        <ark-radio-button value="op1">Option 1</ark-radio-button>
-        <ark-radio-button value="op2">Option 2</ark-radio-button>
-        <ark-radio-button value="op3">Option 3</ark-radio-button>
-      </ark-radio-group>
-    `
-    const element = container.querySelector('ark-radio-button')
-    element.value = 'op1'
-    expect(element.value).toEqual('op1')
-  })
-
-  it('can render several times', () => {
+  
+  it('can be checked', () => {
     container.innerHTML = /* html */ `
-      <ark-radio-group label="Radio Buttons">
+      <ark-radio-group>
         <ark-radio-button value="op1">Option 1</ark-radio-button>
-        <ark-radio-button value="op2">Option 2</ark-radio-button>
-        <ark-radio-button value="op3">Option 3</ark-radio-button>
       </ark-radio-group>
     `
-    const radio = container.querySelector('ark-radio-button')
+    const radioButton = container.querySelector('ark-radio-button')
 
-    radio.init({})
-    radio.init({})
-    radio.init({})
-    radio.render()
-    radio.render().load()
+    radioButton.check()
+    expect(radioButton.hasAttribute('checked')).toBeTruthy()
 
-    expect(radio.querySelectorAll('input').length).toEqual(1)
+    radioButton.unCheck()
+    expect(!radioButton.hasAttribute('checked')).toBeTruthy()
+
+    radioButton.toggle()
+    expect(radioButton.hasAttribute('checked')).toBeTruthy()
+    
+    radioButton.toggle()
+    expect(!radioButton.hasAttribute('checked')).toBeTruthy()
   })
+
 })
