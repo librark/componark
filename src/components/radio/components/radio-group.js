@@ -92,7 +92,7 @@ export class RadioGroup extends Component {
   /** @param {string} value */
   set value (value) {
     const button = /** @type {RadioButton} */ (
-      this.select(`ark-radio-button[value="${value}"]`)
+      this.select(`ark-radio-button[value=${value}]`)
     )
     if (button) button.checked = true
   }

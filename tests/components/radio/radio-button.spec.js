@@ -40,8 +40,6 @@ describe('RadioButton', () => {
     expect(element[0].value).toBe("op1")
     expect(element[1].value).toBe("op2")
     expect(element[2].value).toBe("op3")
-    // element.setAttribute('data-valid', '')
-    // element.setAttribute('autofocus', 'autofocus')
   })
 
   it('It does not allow changing the type of element.', () => {
@@ -55,9 +53,6 @@ describe('RadioButton', () => {
     const element = container.querySelector('ark-radio-button')
     element.setAttribute('type', 'text')
     expect(element.querySelector('[data-input]').type).toBe('radio')
-    // element.setAttribute('value', '')
-    // element.setAttribute('data-valid', '')
-    // element.setAttribute('autofocus', 'autofocus')
   })
   
   it('can be checked', () => {

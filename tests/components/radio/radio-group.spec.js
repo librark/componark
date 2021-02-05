@@ -53,7 +53,7 @@ describe('RadioGroup', () => {
     expect(!group.value.trim().length).toBeTruthy()
   })
 
-   it('returns selected values Group', () => {
+  it('returns selected values Group', () => {
     container.innerHTML = /* html */ `
       <ark-radio-group>
         <ark-radio-button value="op1">Option 1</ark-radio-button>
@@ -76,7 +76,10 @@ describe('RadioGroup', () => {
       radioButtons[2]
       )
           
-          
+    radioGroup['value'] = 'op2'
+    expect(radioGroup.value).toEqual('op2')
+    expect(radio1.checked).toBeTruthy
+    
     radio0.click()
     expect(radioGroup.value).toEqual('op1')
     expect(radio0.checked).toBeTruthy
@@ -88,8 +91,6 @@ describe('RadioGroup', () => {
     radio2.click()
     expect(radioGroup.value).toEqual('op3')
     expect(radio2.checked).toBeTruthy
-  
   })
- 
 })
   
