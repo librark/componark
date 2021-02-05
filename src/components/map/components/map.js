@@ -1,9 +1,11 @@
-import { uuid } from '../../../utils'
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
+import { uuid } from '../../../base/utils'
 import * as leaflet from 'leaflet'
+import { styles } from '../styles'
 // @ts-ignore
 import icon from '../assets/icons/marker-icon.png'
 
+const tag = 'ark-map'
 export class Map extends Component {
   init (context = {}) {
     this.lat = parseFloat(context.lat || this.lat || 2.44073)
@@ -11,78 +13,50 @@ export class Map extends Component {
     this.zoom = parseInt(context.zoom || this.zoom || 13)
     this.token = context.token || this.token
 
-    // Local
-    this.mapId = uuid()
-    this.global = context.global || window
-    this.map = this.map
+    this.mapId = this.mapId || `map-${uuid()}`
+    this.map = this.map || null
+    this.width = context.width || this.width || '100%'
+    this.height = context.heigth || this.height || '50vh'
 
     return super.init()
   }
 
   reflectedProperties () {
-    return ['token', 'zoom', 'lat', 'lon']
+    return ['token', 'width', 'height', 'lat', 'lon', 'zoom']
   }
 
   render () {
-    this.innerHTML = /* html */ `
-      <div id="${this.mapId}" class="map"></div>
+    this.style.height = this.height
+    this.style.width = this.width
+
+    this.content = /* html */`
+      <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+
+      <div id="${this.mapId}" class="ark-map__map"></div>
     `
-    this.renderMap()
+    this.map = this.lib.map(this.mapId)
+    this.lib.tileLayer(this.urlTemplate).addTo(this.map)
+    this.map.setView([this.lat, this.lon], this.zoom)
+
     return super.render()
   }
 
-  load () {
-    this.map.addEventListener('load', this.updateSize.bind(this))
-    this.map.addEventListener('resize', this.updateSize.bind(this))
-    this.global.addEventListener('resize', this.updateSize.bind(this))
-  }
-
-  disconnectedCallback () {
-    this.map.removeEventListener('load', this.updateSize())
-    this.map.removeEventListener('resize', this.updateSize())
-    this.global.removeEventListener('resize', _ => this.updateSize())
-  }
-
-  renderMap () {
-    this.map = this.mapLib.map(this.mapId)
-    this.mapLib.tileLayer(this.urlTemplate()).addTo(this.map)
-    this.map.setView([this.lat, this.lon], this.zoom)
-    this.updateSize()
-  }
-
-  updateSize () {
-    const width = this.offsetWidth
-    const height = this.offsetHeight
-
-    this.mapContainer.style.width = `${width}px`
-    this.mapContainer.style.height = `${height}px`
-
-    this.map.invalidateSize()
-  }
-
   addMarker (lat, lon) {
-    this.mapLib.marker([lat, lon], {
-      icon: this.mapLib.divIcon({
+    this.lib.marker([lat, lon], {
+      icon: this.lib.divIcon({
         html: /* html */`<img src="${icon}"/>`,
       })
     }).addTo(this.map)
-
-    this.updateSize()
   }
 
-  urlTemplate () {
+  get urlTemplate () {
     return 'https://api.mapbox.com/styles/v1/mapbox/' +
       `streets-v11/tiles/256/{z}/{x}/{y}?access_token=${this.token}`
   }
 
-  get mapContainer () {
-    return /** @type {HTMLDivElement} */ (
-      this.querySelector(`[id="${this.mapId}"]`)
-    )
-  }
-
-  get mapLib () {
+  get lib () {
     return leaflet
   }
 }
-customElements.define('ark-map', Map)
+Component.define(tag, Map, styles)

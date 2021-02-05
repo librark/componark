@@ -1,10 +1,12 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 import { Checkbox } from './checkbox'
+import { styles } from '../styles'
 
+const tag = 'ark-checkbox-group'
 export class CheckboxGroup extends Component {
   constructor () {
     super()
-    this.defaultContent = this.defaultContent || this.innerHTML
+    this.defaultContent = this.defaultContent || this.content
   }
 
   init (context = {}) {
@@ -17,7 +19,7 @@ export class CheckboxGroup extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <div class="ark-checkbox-group__label">
         <label data-checkbox-group-label>${this.label}</label>
       </div>
@@ -33,7 +35,7 @@ export class CheckboxGroup extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.addEventListener('click', this.onAlter.bind(this))
   }
 
@@ -88,4 +90,4 @@ export class CheckboxGroup extends Component {
     ))
   }
 }
-customElements.define('ark-checkbox-group', CheckboxGroup)
+Component.define(tag, CheckboxGroup, styles)

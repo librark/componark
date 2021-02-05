@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Table extends Component {
   init (context = {}) {

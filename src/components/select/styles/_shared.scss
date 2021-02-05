@@ -1,0 +1,52 @@
+@use './config';
+@use 'base/theme';
+
+@mixin ark-select() {
+
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 0.1rem;
+
+    &[disabled] {
+        pointer-events: none;
+        cursor: default;
+
+        color: var(--muted, grey);
+        background: rgba(var(--muted), $alpha: 0.1);
+
+        &:hover {
+            background: none;
+        }
+    }
+
+    select {
+        font-size: initial;
+
+        color: inherit;
+        background: inherit;
+        border-color: initial;
+
+        width: 100%;
+
+        * {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        &:focus {
+            outline: 1px solid rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    select,
+    option {
+        cursor: pointer;
+    }
+
+    &::before,
+    &::after {
+        all: unset;
+    }
+
+}

@@ -1,8 +1,10 @@
 /**
  * @typedef {import('./tabs.item').TabsItem} TabsItem
  **/
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
+import { styles }  from '../styles'
 
+const tag = 'ark-tabs'
 export class Tabs extends Component {
   init (context = {}) {
     return super.init()
@@ -12,7 +14,7 @@ export class Tabs extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     if (!this.currentTab) {
       const tab = /** @type {TabsItem} */(
         this.tabs.length ? this.tabs[0] : null
@@ -50,4 +52,4 @@ export class Tabs extends Component {
     return this.selectAll('ark-tabs-item')
   }
 }
-customElements.define('ark-tabs', Tabs)
+Component.define(tag, Tabs, styles)

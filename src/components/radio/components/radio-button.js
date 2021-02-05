@@ -1,5 +1,6 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
+const tag = 'ark-radio-button'
 export class RadioButton extends Component {
   constructor () {
     super()
@@ -97,4 +98,4 @@ export class RadioButton extends Component {
     ]
   }
 }
-customElements.define('ark-radio-button', RadioButton)
+Component.define(tag, RadioButton)

@@ -1,7 +1,9 @@
 import { RadioButton } from './radio-button'
-import { Component } from '../../component'
-import { uuid } from '../../../utils'
+import { Component } from '../../../base/component'
+import { uuid } from '../../../base/utils'
+import { styles } from '../styles'
 
+const tag = 'ark-radio-group'
 export class RadioGroup extends Component {
   constructor () {
     super()
@@ -95,4 +97,4 @@ export class RadioGroup extends Component {
     if (button) button.checked = true
   }
 }
-customElements.define('ark-radio-group', RadioGroup)
+Component.define(tag, RadioGroup,styles)

@@ -1,4 +1,4 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
 
 export class Treetable extends Component {
   init (context = {}) {
@@ -135,4 +135,4 @@ export class Treetable extends Component {
     return /* html */ `<tr>${headers}</tr>`
   }
 }
-customElements.define('ark-treetable', Treetable)
+Component.define('ark-treetable', Treetable)

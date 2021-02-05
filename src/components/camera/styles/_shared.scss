@@ -1,0 +1,15 @@
+@mixin ark-camera() {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  overflow: hidden;
+  user-select: none;
+
+  &__canvas {
+    display: none;
+  }
+
+  &__video {
+    transform: rotateY(180deg);
+  }
+}

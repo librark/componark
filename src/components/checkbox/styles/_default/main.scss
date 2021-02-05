@@ -1,7 +1,0 @@
-@import "./checkbox-group.default.scss";
-@import "./checkbox.default.scss";
-
-@mixin checkbox_default() {
-  @include checkbox_group_default_();
-  @include checkbox_default_();
-}

@@ -1,0 +1,50 @@
+@use'./shared.scss';
+
+@use '@material/shape';
+@use "@material/elevation";
+@use '@material/feature-targeting/feature-targeting';
+@use '@material/elevation/elevation-theme';
+@use '@material/typography/typography';
+
+$small-component-radius: 4px !default;
+$medium-component-radius: 4px !default;
+$large-component-radius: 0 !default;
+$query: feature-targeting.all();
+$feat-typography: feature-targeting.create-target($query, typography);
+
+
+.ark-modal {
+  @include shared.ark-modal;
+
+  &__content {
+    background: var(--primary);
+    @include shape.radius($medium-component-radius, $rtl-reflexive: true);
+    @include elevation-theme.elevation($z-value: 24, $query: $query);
+  }
+
+  &__actions {
+    [close] {
+      background: var(--light);
+      color: var(--primary);
+    }
+  }
+
+  &__header {
+    .ark-modal__title {
+      @include typography.typography(headline4, $query);
+    }
+
+    .ark-modal__subtitle {
+      @include typography.typography(subtitle1, $query);
+    }
+  }
+
+  &__body {
+    background: var(--light);
+    color: var(--primary);
+
+    p {
+      @include typography.typography(body2, $query);
+    }
+  }
+}

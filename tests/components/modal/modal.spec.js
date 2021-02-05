@@ -1,110 +1,129 @@
-import { Modal } from '../../../src/components/modal/components/modal'
+import { Modal } from 'components/modal'
 
 describe('Modal', () => {
-  it('can render content', function () {
-    const modal = new Modal()
-    modal.init({
-      title: 'title',
-      subtitle: 'subtitle'
-    }).render().load()
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
+  it('can be instantiated', function () {
+    container.innerHTML = `
+    <ark-modal></ark-modal>
+    `
+
+    const modal = container.querySelector('ark-modal')
+
+    expect(modal).toBe(modal.init())
+  })
+
+  it('can be instantiated with title and subtitle', function () {
+    container.innerHTML = `
+    <ark-modal title="MyTitle" subtitle="MySubtitle">
+    </ark-modal>
+    `
+
+    const modal = container.querySelector('ark-modal')
 
     expect(
-      modal.querySelector('.ark-card__title').textContent.trim()
-    ).toEqual('title')
+      modal.select('.ark-modal__title').textContent.trim()
+    ).toEqual('MyTitle')
 
     expect(
-      modal.querySelector('.ark-card__subtitle').textContent.trim()
-    ).toEqual('subtitle')
+      modal.select('.ark-modal__subtitle').textContent.trim()
+    ).toEqual('MySubtitle')
   })
 
   it('can be rendered with slots', function () {
-    const element = document.createElement('div')
-    element.innerHTML = /* html */ `
+    container.innerHTML = /* html */ `
       <ark-modal title="myTitle">
-        <div>body</div>
+        <div>MyBody</div>
         <div slot="action" close>action</div>
       </ark-modal>
     `
 
-    let modal = /** @type {Modal} */(element.querySelector('ark-modal'))
-    modal.init().render().load()
+    const modal = container.querySelector('ark-modal')
 
-    expect(modal.slots.general.length).toBeTruthy()
-    expect(modal.slots.action.length).toBeTruthy()
+    expect(
+      modal.select('.ark-modal__body').textContent.trim()
+    ).toEqual('MyBody')
 
-    element.innerHTML = /* html */ `
+    expect(
+      modal.select(
+        '.ark-modal__actions').firstElementChild.hasAttribute('close')
+    ).toBeTruthy()
+  })
+
+  it('can be opened, closed and toggled', function () {
+    container.innerHTML = /* html */ `
       <ark-modal title="myTitle">
+        <div>MyBody</div>
         <div slot="action" close>action</div>
       </ark-modal>
     `
+    const modal = container.querySelector('ark-modal')
 
-    modal = /** @type {Modal} */(element.querySelector('ark-modal'))
-    modal.init()
-    modal.slots.general = null
-    modal.render().load()
-
-    expect(modal.slots.action.length).toBeTruthy()
-  })
-
-  it('can be toggle', function () {
-    const modal = new Modal()
-    modal.init()
-    modal.slots = null
-
-    modal.render()
-    modal.load()
-
-    modal.toggle()
-    expect(modal.hasAttribute('show')).toBeTruthy()
-
-    modal.toggle()
-    expect(!modal.hasAttribute('show')).toBeTruthy()
-  })
-
-  it('can be open', function () {
-    const modal = new Modal()
-    modal.init().render().load()
     modal.open()
     expect(modal.hasAttribute('show')).toBeTruthy()
-  })
-
-  it('can be close', function () {
-    const modal = new Modal()
-    modal.init().render()
     modal.close()
-    expect(!modal.hasAttribute('show')).toBeTruthy()
+    expect(modal.hasAttribute('show')).toBeFalsy()
+    modal.toggle()
+    expect(modal.hasAttribute('show')).toBeTruthy()
+    modal.toggle()
+    expect(modal.hasAttribute('show')).toBeFalsy()
   })
 
-  it('can be attribute block-scrim', function () {
-    const modal = new Modal()
-    modal.init().render()
+  it('closes on scrim clicked', () => {
+    container.innerHTML = /* html */ `
+      <ark-modal title="myTitle">
+        <div>MyBody</div>
+        <div slot="action" close>action</div>
+      </ark-modal>
+    `
+    const modal = container.querySelector('ark-modal')
 
-    modal.setAttribute('block-scrim', '')
+    const scrim = modal.select('.ark-modal__scrim')
 
-    modal.load()
+    modal.open()
+    expect(modal.hasAttribute('show')).toBeTruthy()
 
-    expect(modal.hasAttribute('block-scrim')).toBeTruthy()
+    scrim.click()
+    expect(modal.hasAttribute('show')).toBeFalsy()
   })
 
-  it('can remove attributes', function () {
-    const item = new Modal()
+  it('can block its closing scrim', () => {
+    container.innerHTML = /* html */ `
+      <ark-modal block-scrim>
+        <div>MyBody</div>
+      </ark-modal>
+    `
+    const modal = container.querySelector('ark-modal')
 
-    item.setAttribute('name', 'my-item')
-    item.setAttribute('id', 'it-1')
-    item.setAttribute('title', 'my-title')
+    const scrim = modal.select('.ark-modal__scrim')
 
-    item.setAttributeNode(document.createAttribute('open'))
+    modal.open()
+    expect(modal.hasAttribute('show')).toBeTruthy()
 
-    item.innerHTML = /* HTML */ ''
-    item.connectedCallback()
-
-    expect(!item.getAttribute('open')).toBeTruthy()
+    scrim.click()
+    expect(modal.hasAttribute('show')).toBeTruthy()
   })
 
-  it('can render content null', function () {
-    const item = new Modal()
-    item.setAttribute('width', '100px')
-    item.setAttribute('height', '100px')
-    item.init().render().load()
+  it('can set its content width and height', function () {
+    container.innerHTML = /* html */ `
+      <ark-modal block-scrim width="70vw" height="50vh">
+        <div>MyBody</div>
+      </ark-modal>
+    `
+    const modal = container.querySelector('ark-modal')
+
+    const content = modal.select('.ark-modal__content')
+    expect(content.style.width).toEqual('70vw')
+    expect(content.style.height).toEqual('50vh')
   })
+
 })

@@ -6,33 +6,24 @@ export class LocationDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.content = /* html */ `
       <div>
         <ark-button background="primary" listen on-click="getCurrentPosition">
-          Current position
+          Get position
+        </ark-button>
+        <ark-button background="secondary" listen on-click="resetPosition">
+          Reset position
         </ark-button>
         <span data-position></span>
       </div>
-      <div class="location-container">
-        <ark-location></ark-location>
-        <ark-map token="${this.token}"></ark-map>
-      </div>
+      <ark-location></ark-location>
     `
 
-    this.location['start']()
     return super.render()
   }
 
-  load () {
-    this.addEventListener('onCurrentPosition', (
-			/** @type {CustomEvent} */ event
-    ) => {
-      event.stopImmediatePropagation()
-      const coords = event.detail.currentPosition.coords
-      this.map['addMarker'](coords.latitude, coords.longitude)
-    })
-
-    return super.load()
+  get location () {
+    return this.select('ark-location')
   }
 
   disconnectedCallback () {
@@ -40,42 +31,19 @@ export class LocationDemo extends Component {
   }
 
   async getCurrentPosition () {
-    const span = this.querySelector('[data-position]')
-    span.innerHTML = ''
+    this.querySelector('[data-position]').innerHTML = ''
 
-    this.location['stop']()
     const position = await this.location['getCurrentPosition']()
-    this.location['start']()
 
-    span.innerHTML = `
+    this.querySelector('[data-position]').innerHTML = `
       Lat: ${position.coords.latitude} Lng: ${position.coords.longitude}
     `
   }
 
-  get location () {
-    return this.select('ark-location')
+  resetPosition() {
+    this.querySelector('[data-position]').innerHTML = ''
   }
 
-  get map () {
-    return this.select('ark-map')
-  }
 
-  get token () {
-    return 'pk.' +
-      'eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.' +
-      'zA2W0IkI0c6KaAhJfk9bWg'
-  }
-
-  get styles () {
-    return /* html */ `
-      <style>
-        demo-location .location-container{
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
-      </style>
-    `
-  }
 }
 Component.define('demo-location', LocationDemo)

@@ -27,22 +27,22 @@ export class InputDemo extends Component {
       ${this.thirdExample}
     </section>
     `
-    // <section class="reference">
-    //   <h2>Reference</h2>
-    //   <p>
-    //   The <code>ark-input</code> element supports all the types of the default
-    //   <a href="https://www.w3schools.com/html/html_form_input_types.asp">
-    //     <code>input</code> web component.
-    //   </a>
-    //   Additionally, the following options are available:
-    //   </p>
-    //   <h3>Attributes</h3>
-    //   ${this.attrs}
-    //   <h3>Properties</h3>
-    //   ${this.properties}
-    //   <h3>Methods</h3>
-    //   ${this.methods}
-    // </section>
+    //  <section class="reference">
+    //    <h2>Reference</h2>
+    //    <p>
+    //     The <code>ark-input</code> element supports all the types of the default
+    //     <a href="https://www.w3schools.com/html/html_form_input_types.asp">
+    //      <code>input</code> web component.
+    //     </a>
+    //     Additionally, the following options are available:
+    //    </p>
+    //    <h3>Attributes</h3>
+    //     ${this.attrs}
+    //    <h3>Properties</h3>
+    //     ${this.properties}
+    //    <h3>Methods</h3>
+    //     ${this.methods}
+    //  </section>
 
     return super.render()
   }
@@ -97,6 +97,7 @@ export class InputDemo extends Component {
   get thirdExample() {
     return this.renderExample(hljs.highlight('html', `
       <ark-input type="file"></ark-input>
+      <ark-input type="date"></ark-input>
     `))
   }
 

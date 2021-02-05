@@ -1,9 +1,30 @@
-import { Checkbox } from '../../../src/components/checkbox'
+import { Checkbox } from 'components/checkbox'
 
 describe('Checkbox', () => {
+  let container = null
+
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
   it('can be instantiated.', () => {
-    const checkbox = new Checkbox()
-    checkbox.init().render().load()
+    container.innerHTML = /* html */`
+      <ark-checkbox.group>
+            <ark-checkbox value="1" checked></ark-checkbox>
+            <ark-checkbox value="2"></ark-checkbox>
+            <ark-checkbox value="3"></ark-checkbox>
+      </ark-checkbox-group>
+    
+    `
+    const checkbox = container.querySelector('ark-checkbox')
+    checkbox.checked = false
+    checkbox.value = ''
 
     expect(checkbox.value).toEqual('')
     expect(checkbox.checked).toEqual(false)

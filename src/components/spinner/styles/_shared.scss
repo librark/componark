@@ -1,0 +1,30 @@
+@use './config'as *;
+
+
+@mixin ark-spinner() {
+    overflow: hidden;
+
+    [data-loader] {
+        $border: 0.3rem solid;
+        $circle: 6rem;
+        width: $circle;
+        height: $circle;
+        border: $border;
+        border-color: var(--light, white);
+        border-top: $border;
+        border-top-color: var(--primary, blue);
+        border-radius: 50%;
+        animation: spin 1.8s linear infinite;
+        -webkit-animation: spin 1.8s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

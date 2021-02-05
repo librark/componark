@@ -1,9 +1,11 @@
-import { Component } from '../../component'
+import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-tabs-item'
 export class TabsItem extends Component {
   constructor () {
     super()
-    this.defaultContent = this.defaultContent || this.innerHTML
+    this.defaultContent = this.defaultContent || this.content
   }
 
   init (context = {}) {
@@ -16,7 +18,7 @@ export class TabsItem extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <${this._getType()}>
         ${this.defaultContent}
         <span>${this.title}</span>
@@ -29,4 +31,4 @@ export class TabsItem extends Component {
     return this.hasAttribute('href') ? 'a' : 'button'
   }
 }
-customElements.define('ark-tabs-item', TabsItem)
+Component.define(tag, TabsItem, styles)
