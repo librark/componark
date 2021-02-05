@@ -22,15 +22,24 @@ describe('Checkbox', () => {
     `
 
     const checkboxGroup = container.querySelector('ark-checkbox-group')
-    checkboxGroup.setAttribute('label', 'myCheckboxGroup')
-    checkboxGroup.init().render().load()
+    expect(checkboxGroup).toBeTruthy()
+    expect(checkboxGroup).toBe(checkboxGroup.init())
+  })
+  
+  it('can be instantiated with label', () => {
+
+    container.innerHTML = /* html */ `
+        <ark-checkbox-group label="myCheckboxGroup"></ark-checkbox-group>
+    `
+
+    const checkboxGroup = container.querySelector('ark-checkbox-group')
 
     expect(
       checkboxGroup.querySelector('[data-checkbox-group-label]').textContent
     ).toEqual('myCheckboxGroup')
   })
 
-  it('can be instantiated', () => {
+  it('returns selected values', () => {
       container.innerHTML = /* html */ `
           <ark-checkbox-group>
             <ark-checkbox value="1" checked></ark-checkbox>
@@ -43,17 +52,11 @@ describe('Checkbox', () => {
     const checkboxGroup = /** @type {CheckboxGroup} */(
       container.querySelector('ark-checkbox-group')
       )
-      
-    checkboxGroup.init().render().load()
-      
     const items = container.querySelectorAll('ark-checkbox')
-    
-    items.forEach(
-      (/** @type {Checkbox} */ item) => {
-        item.init().render().load()
-      })
 
     expect(items[0].value).toEqual('1')
+    expect(items[1].value).toEqual('2')
+    expect(items[2].value).toEqual('3')
   })
 
   it('returns selected values Group', () => {
@@ -69,19 +72,10 @@ describe('Checkbox', () => {
     const checkboxGroup = /** @type {CheckboxGroup} */ (
       container.querySelector('ark-checkbox-group')
     )
-
-    checkboxGroup.init().render().load()
-
     const items = checkboxGroup.querySelectorAll('ark-checkbox')
-    
-    items.forEach(checkbox => {
-      checkbox.init().render().load()
-    })
 
     const checkbox0 = items[0]
-    
     const checkbox1 = items[1]
-    
     const checkbox2 = items[2]
     
 
@@ -93,9 +87,9 @@ describe('Checkbox', () => {
     checkbox0.click()
     checkbox1.click()
     checkbox2.click()
-    expect(checkbox0.value).toEqual('op1')
-    expect(checkbox1.value).toEqual('op2')
-    expect(checkbox2.value).toEqual('op3')
+
+   //checkboxGroup.value.split(',').length returns the number of checkbox selected
+   //checkboxGroup.checkboxList[2].input.checked returns true if input is selected
 
     const label = /** @type {HTMLElement} */(
       checkboxGroup.querySelector('.ark-checkbox-group__label')
