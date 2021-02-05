@@ -52,7 +52,6 @@ export class RadioGroup extends Component {
     const button = /** @type {RadioButton} */(
       target.closest('ark-radio-button')
     )
-    if (!button) return
 
     this.radioButtons.forEach(
       item => item.checked = item.value === button.value
@@ -84,7 +83,7 @@ export class RadioGroup extends Component {
   /** @returns {string} */
   get value () {
     const button = /** @type {RadioButton} */ (
-      this.select('ark-radio-button[checked]')
+     this.select('ark-radio-button[checked]')
     )
     return button ? button.value : ''
   }
@@ -92,7 +91,7 @@ export class RadioGroup extends Component {
   /** @param {string} value */
   set value (value) {
     const button = /** @type {RadioButton} */ (
-      this.select(`ark-radio-button[value=${value}]`)
+      this.select(`ark-radio-button[value="${value}"]`)
     )
     if (button) button.checked = true
   }

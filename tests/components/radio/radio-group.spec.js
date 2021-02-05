@@ -92,5 +92,27 @@ describe('RadioGroup', () => {
     expect(radioGroup.value).toEqual('op3')
     expect(radio2.checked).toBeTruthy
   })
+  
+  it('can handle values not in group',()=>{
+    
+    container.innerHTML = /* html */ `
+      <ark-radio-group>
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2">Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
+      </ark-radio-group>
+    `
+
+    const radioGroup = container.querySelector('ark-radio-group')
+    
+    const radioButtons = container.querySelectorAll('ark-radio-button')
+    
+    radioGroup['value'] = 'op4'
+    
+    for(let btn of radioButtons){
+      expect(btn.checked).toBeFalsy
+    }
+
+  })
 })
   

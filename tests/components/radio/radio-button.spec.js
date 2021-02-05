@@ -76,4 +76,28 @@ describe('RadioButton', () => {
     expect(!radioButton.hasAttribute('checked')).toBeTruthy()
   })
 
+  it('input childs can be checked',()=>{
+
+    container.innerHTML = /* html */ `
+      <ark-radio-group>
+        <ark-radio-button value="op1">Option 1</ark-radio-button>
+        <ark-radio-button value="op2">Option 2</ark-radio-button>
+        <ark-radio-button value="op3">Option 3</ark-radio-button>
+      </ark-radio-group>
+    `
+    const radioButtons = container.querySelectorAll('ark-radio-button')
+
+    radioButtons[0].click()
+    expect(radioButtons[0].input.checked).toBeTruthy
+
+    radioButtons[1].click()
+    expect(radioButtons[1].input.checked).toBeTruthy
+    
+    radioButtons[2].click()
+    expect(radioButtons[2].input.checked).toBeTruthy
+    expect(radioButtons[0].input.checked).toBeFalsy
+    expect(radioButtons[1].input.checked).toBeFalsy
+
+  })
+
 })
