@@ -10,7 +10,7 @@ export class RadioGroup extends Component {
     this.defaultContent = this.defaultContent || this.innerHTML
     this.name = uuid()
   }
-
+  
   /**
    * @param {{
    *  label?: string
@@ -52,7 +52,6 @@ export class RadioGroup extends Component {
     const button = /** @type {RadioButton} */(
       target.closest('ark-radio-button')
     )
-    if (!button) return
 
     this.radioButtons.forEach(
       item => item.checked = item.value === button.value
@@ -84,7 +83,7 @@ export class RadioGroup extends Component {
   /** @returns {string} */
   get value () {
     const button = /** @type {RadioButton} */ (
-      this.select('ark-radio-button[checked]')
+     this.select('ark-radio-button[checked]')
     )
     return button ? button.value : ''
   }

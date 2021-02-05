@@ -46,10 +46,10 @@ export class RadioButton extends Component {
   set checked (value) {
     if (value) {
       this.setAttribute('checked', '')
-      if (this.input) this.input['checked'] = true
+      this.input['checked'] = true
     } else {
       this.removeAttribute('checked')
-      if (this.input) this.input['checked'] = false
+      if(this.input) this.input['checked'] = false
     }
   }
 
@@ -96,6 +96,22 @@ export class RadioButton extends Component {
       'step',
       'value',
     ]
+  }
+
+  //Methods
+
+  check(){
+    this.checked = true
+  }
+  unCheck(){
+    this.checked = false
+  }
+  toggle(){
+    if (this.checked == true){
+      this.checked = false
+    } else {
+      this.checked = true
+    }
   }
 }
 Component.define(tag, RadioButton)
