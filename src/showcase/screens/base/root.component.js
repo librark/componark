@@ -137,6 +137,7 @@ body {
   overflow: hidden;
   border-bottom:5px solid cyan;
   align-items:center;
+  height:100px;
 }
 
 .app-root__navitem {
@@ -167,7 +168,7 @@ body {
   text-transform: uppercase;
 }
 
-.app-root__subtittle {
+.app-root__subtitle {
   display:block;
   font-size:0.9rem;
   font-weight: 300;
@@ -185,8 +186,8 @@ body {
   background-color: #334455;
   color: #00ffff;
   text-decoration: none
-  width: 100%;
-  overflow: auto;
+  overflow-x: hidden;
+  max-width:100px;
 }
 
 .app-root__sideitem {

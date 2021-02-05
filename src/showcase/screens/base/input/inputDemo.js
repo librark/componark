@@ -135,31 +135,8 @@ export class InputDemo extends Component {
   }
 }
 
-const styles = `
-*::before, *::after{
-  box-sizing:border-box;
-}
-
-h1>code{
-  font-size: 3rem;
-  color: #e83e8c
-}
-
-.examples{
-  padding:20px;
-}
-.example{
-  display:grid;
-  grid-template-columns: repeat(2,1fr);
-  padding: 10px;
-  border-bottom: 2px solid #d5d2d2;
-  margin:10px;
-}
-.example:last-child{
-  border-bottom:none;
-}
-
-div.value{
+const styles = /* css */`
+  code.html{
     display:block;
     background-color:rgb(212 235 230);
     padding: 5px;
