@@ -1,25 +1,50 @@
 import { List } from '../../../src/components/list'
 
 describe('List', () => {
+  let container = null
+
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+  
+
+  
   it('can be instantiated', () => {
-    const list = new List()
-    list.connectedCallback()
-    expect(list.outerHTML).toEqual('<ark-list class="ark-list"></ark-list>')
+    container.innerHTML = `
+      <ark-list></ark-list>
+    `
 
-    list.init()
-    list.render()
-
-    list.setAttribute('click-disabled', '')
+    const list = container.querySelector('ark-list')
+    expect(list).toEqual(list.init())
+    
+  })
+  
+  it('can be instantiated', () => {
+    container.innerHTML = `
+    <ark-list></ark-list>
+    `
+    
+    const list = container.querySelector('ark-list')
+    expect(list.click()).toBeFalsy
+    
   })
 
   it('can be instantiated with items', async () => {
-    const context = {
-      source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
-    }
+     container.innerHTML = `
+      <ark-list></ark-list>
+    `
 
-    const list = new List()
-    list.init(context).render().load()
-
+    
+    const list =  container.querySelector('ark-list')
+    list.source =  ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+    list.render().load()
+    
     const items = list.selectAll('ark-list-item')
 
     expect(items.length).toEqual(4)
@@ -33,42 +58,33 @@ describe('List', () => {
   })
 
   it('can be instantiated with items click-disabled', async () => {
-    const context = {
-      source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
-    }
+    container.innerHTML = `
+    <ark-list click-disabled></ark-list
+    `
 
-    const list = new List()
-    list.setAttribute('click-disabled', '')
-    list.init(context).render()
-
+    const list = container.querySelector('ark-list')
+    list.source = ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+    list.render()
     const items = list.selectAll('ark-list-item')
-
+    
     expect(items.length).toEqual(4)
     expect(items[0].textContent.trim()).toEqual('Colombia')
     expect(items[1].textContent.trim()).toEqual('Uruguay')
     expect(items[2].textContent.trim()).toEqual('Brasil')
     expect(items[3].textContent.trim()).toEqual('Perú')
   })
-
+  
   it('can delete', async () => {
-    const context = {
-      source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
-    }
-
-    const list = new List()
-    list.setAttribute('click-disabled', '')
-    await list.init(context).render()
-
-    let items = list.selectAll('ark-list-item')
-
-    expect(items.length).toEqual(4)
-    expect(items[0].textContent.trim()).toEqual('Colombia')
-    expect(items[1].textContent.trim()).toEqual('Uruguay')
-    expect(items[2].textContent.trim()).toEqual('Brasil')
-    expect(items[3].textContent.trim()).toEqual('Perú')
+    container.innerHTML = `
+    <ark-list click-disabled></ark-list
+    `
+  
+    const list = container.querySelector('ark-list')
+    list.source =  ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+    list.render()
 
     list.delete(1)
-    items = list.selectAll('ark-list-item')
+    let items = list.selectAll('ark-list-item')
     expect(items.length).toEqual(3)
     expect(items[1].textContent.trim()).toEqual('Brasil')
 
@@ -79,12 +95,14 @@ describe('List', () => {
   })
 
   it('can be instantiated with items', () => {
-    const context = {
-      source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
-    }
+    container.innerHTML = `
+    <ark-list click-disabled></ark-list
+    `
 
-    const list = new List()
-    list.init(context).render()
+    
+    const list = container.querySelector('ark-list')
+    list.source =  ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+    list.render()
 
     const items = list.selectAll('ark-list-item')
     expect(items.length).toEqual(4)
@@ -97,12 +115,13 @@ describe('List', () => {
   })
 
   it('can select an item when it is clicked', () => {
-    const context = {
-      source: ['Colombia', 'Uruguay', 'Brasil', 'Perú']
-    }
-
-    const list = new List()
-    list.init(context).render()
+    container.innerHTML = `
+    <ark-list click-disabled></ark-list
+    `
+    
+    const list = container.querySelector('ark-list')
+    list.source =  ['Colombia', 'Uruguay', 'Brasil', 'Perú']
+    list.render()
 
     const items = list.selectAll('ark-list-item')
     expect(items.length).toEqual(4)
