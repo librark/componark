@@ -44,7 +44,7 @@ export class Checkbox extends Component {
   set checked (value) {
     if (value) {
       this.setAttribute('checked', '')
-      if (this.input) this.input['checked'] = true
+      this.input['checked'] = true
     } else {
       this.removeAttribute('checked')
       if (this.input) this.input['checked'] = false
