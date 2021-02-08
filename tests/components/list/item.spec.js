@@ -26,7 +26,7 @@ describe('List item', () => {
     expect(item).toEqual(item.init())
   })
 
-  it('can be rendered with data', function () {
+  it('can be rendered with data', () => {
      container.innerHTML = `
       <ark-list></ark-list>
     `
@@ -42,7 +42,7 @@ describe('List item', () => {
     expect(item.innerHTML.trim()).toEqual('my data')
   })
 
-  it('can be rendered with template', function () {
+  it('can be rendered with template', () => {
     container.innerHTML = `
       <ark-list data-template-list></ark-list>
     `
@@ -59,7 +59,7 @@ describe('List item', () => {
     expect(item.innerHTML.trim()).toEqual('<span>my data</span>')
   })
   
-  it('can be rendered with template', function () {
+  it('can be rendered with template', () => {
     container.innerHTML = `
       <ark-list data-template-list></ark-list>
     `
@@ -77,6 +77,17 @@ describe('List item', () => {
       expect(event['detail'].data).toEqual('my data')
     })
     item.click()
+  })
+  
+  it('can be rendered without template', () => {
+
+    const item = new ListItem()
+    item.init({
+      data:'my data'
+    }).render()
+
+    expect(item.innerHTML.trim()).toEqual('my data')
+
   })
 
 })
