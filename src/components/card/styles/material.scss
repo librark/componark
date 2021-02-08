@@ -6,7 +6,6 @@
 @use'./shared.scss';
 
 $query: feature-targeting.all();
-$feat-color: feature-targeting.create-target($query, color);
 $feat-structure: feature-targeting.create-target($query, structure);
 
 @include elevation-mixins.overlay-common($query);
@@ -15,7 +14,6 @@ $feat-structure: feature-targeting.create-target($query, structure);
   @include shared.ark-card;
 
   @include mixins.shape-radius(variables.$shape-radius, $query: $query);
-  @include mixins.fill-color(surface, $query);
 
   @include elevation-mixins.overlay-surface-position($query: $query);
   @include elevation-mixins.overlay-dimensions(100%, $query: $query);
@@ -81,8 +79,4 @@ $feat-structure: feature-targeting.create-target($query, structure);
       padding: 8px;
     }
   }
-
-
-
-
 }
