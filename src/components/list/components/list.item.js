@@ -5,7 +5,7 @@ export class ListItem extends Component {
   init (context = {}) {
     this.index = context.index
     this.data = context.data || null
-    this.template = context.template || (data => `${data}`)
+    this.template = context.template
 
     return super.init()
   }
