@@ -26,10 +26,12 @@ $feat-typography: feature-targeting.create-target($query, typography);
 
     }
 
-    &-item {
-        &:hover {
-            @include theme.prop(background, rgb(230, 232, 255));
-            @include theme.prop(color, rgb(28, 58, 78));
+    &[data-template-list] {
+        .ark-list-item {
+            &:hover {
+                @include theme.prop(background, rgb(230, 232, 255));
+                @include theme.prop(color, rgb(28, 58, 78));
+            }
         }
     }
 }
