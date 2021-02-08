@@ -1,7 +1,9 @@
+@use 'base/theme';
 @use './config'as *;
 
 
 @mixin ark-list() {
+    @include theme.paint;
     display: flex;
     flex-direction: column;
 
@@ -21,8 +23,6 @@
             cursor: pointer;
         }
     }
-
-
 
     &[grid] {
         display: flex;

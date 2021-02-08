@@ -51,7 +51,7 @@ describe('List item', () => {
     list.source =  ['Colombia']
     list.render()
     const item = list.querySelector('ark-list-item')
-
+    
     item.data = 'my data'
     item.template = data => /* html */ `<span>${data}</span>` 
     item.render()
