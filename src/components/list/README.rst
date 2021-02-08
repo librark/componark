@@ -1,7 +1,7 @@
 LIST
 ****
 
-The ``ark-list`` component provides an idexed vertical list of ``ark-list-items``.
+The ``ark-list`` component provides an indexed vertical list of ``ark-list-items``.
 
     
 
