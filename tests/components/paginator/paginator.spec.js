@@ -1,64 +1,74 @@
 import { Paginator } from '../../../src/components/paginator'
 
 describe('Paginator', () => {
+  let container = null
+
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
+
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
+  it('can be instantiated',()=>{
+    container.innerHTML = /* html */ `
+      <ark-paginator></ark-paginator>
+    `
+    const paginator = container.querySelector('ark-paginator')
+
+    expect(paginator).toBe(paginator.init())
+  })
+
+
   it('get collection Length', () => {
-    const paginator = new Paginator()
-    paginator.init()
+    container.innerHTML = /* html */ `
+      <ark-paginator></ark-paginator>
+    `
+    const paginator = container.querySelector('ark-paginator')
 
-    paginator.init({
-      collectionSize: 100,
-      pageSize: 10
-    })
-
+    paginator.collectionSize = 100
+    paginator.pageSize = 10
+    
     // @ts-ignore
     expect(paginator._collectionLength).toBe(10)
-
-    paginator.init({
-      collectionSize: 105,
-      pageSize: 10
-    })
-
+    
+    paginator.collectionSize = 105
+    paginator.pageSize = 10
+    
     // @ts-ignore
     expect(paginator._collectionLength).toBe(11)
-
-    paginator.init({
-      collectionSize: 96,
-      pageSize: 10
-    })
-
+    
+    paginator.collectionSize = 96
+    paginator.pageSize = 10
+    
     // @ts-ignore
     expect(paginator._collectionLength).toBe(10)
-
-    paginator
-      .init({
-        collectionSize: 0,
-        pageSize: 10
-      })
-      .render()
-
+    
+    paginator.collectionSize = 0
+    paginator.pageSize = 10
+    
     // @ts-ignore
     expect(paginator._collectionLength).toBe(0)
-
-    paginator
-      .init({
-        collectionSize: 3,
-        pageSize: 10
-      })
-      .render()
+    
+    paginator.collectionSize = 3
+    paginator.pageSize = 10
 
     // @ts-ignore
     expect(paginator._collectionLength).toBe(1)
   })
 
   it('can render buttons', () => {
-    const paginator = new Paginator()
+    container.innerHTML = /* html */ `
+      <ark-paginator></ark-paginator>
+    `
+    const paginator = container.querySelector('ark-paginator')
 
-    paginator
-      .init({
-        collectionSize: 101,
-        pageSize: 10
-      })
-      .render()
+    paginator.collectionSize = 101
+    paginator.pageSize = 10
+    paginator.render()
 
     // @ts-ignore
     expect(paginator._collectionLength).toBe(11)
@@ -87,14 +97,14 @@ describe('Paginator', () => {
   })
 
   it('can change buttons', () => {
-    const paginator = new Paginator()
+      container.innerHTML = /* html */ `
+      <ark-paginator></ark-paginator>
+    `
+    const paginator = container.querySelector('ark-paginator')
 
-    paginator
-      .init({
-        collectionSize: 101,
-        pageSize: 10
-      })
-      .render()
+    paginator.collectionSize = 101
+    paginator.pageSize = 10
+    paginator.render()
 
     // @ts-ignore
     expect(paginator._collectionLength).toBe(11)
@@ -116,15 +126,15 @@ describe('Paginator', () => {
   })
 
   it('can change with default buttons', () => {
-    const paginator = new Paginator()
+      container.innerHTML = /* html */ `
+      <ark-paginator></ark-paginator>
+    `
+    const paginator = container.querySelector('ark-paginator')
 
-    paginator
-      .init({
-        collectionSize: 101,
-        pageSize: 10
-      })
-      .render()
-
+    paginator.collectionSize = 101
+    paginator.pageSize = 10
+    paginator.render()
+  
     // @ts-ignore
     expect(paginator._collectionLength).toBe(11)
 
