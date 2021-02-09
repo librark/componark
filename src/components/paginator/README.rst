@@ -8,31 +8,6 @@ The ``ark-paginator`` component allows the user to select a specific page from a
 Examples
 ========
 
-Default list :
---------------
-
-
-    **One-line list, receives the items as a source:**
-
-    .. code-block:: javascript
-        
-        const sourceDefault = ['Colombia', 'Uruguay', 'Brasil', 'Perú']
-
-        const defaultList = this.select('[data-default-list]')
-    
-        defaultList.init({
-                source: sourceDefault
-                }).render()>
-
-    **The** ``data-default-list`` **attribute returns the item**
-
-    .. code-block:: html
-        
-        <ark-list data-default-list click-disabled no-borders></ark-list>
-
-Template list :
----------------  
-
     **This component needs to initialize with** ``collectionSize`` **and** ``pageSize`` **properties to display the button and pages needed**
         
         .. code-block:: javascript
