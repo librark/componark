@@ -1,6 +1,8 @@
 import { Component } from '../../../base/component'
 import { styles } from '../styles'
 
+const tag = 'ark-paginator'
+
 export class Paginator extends Component {
   init (context = {}) {
     this.collectionSize = context.collectionSize
@@ -126,4 +128,5 @@ export class Paginator extends Component {
     return Math.ceil(this.collectionSize / this.pageSize) || 0
   }
 }
-Component.define('ark-paginator', Paginator,styles)
+
+Component.define(tag, Paginator,styles)
