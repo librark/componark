@@ -1,9 +1,10 @@
-@use 'base/theme';
+@use '../../../base/theme';
 @use './config'as *;
 
 
 @mixin ark-list() {
-    @include theme.paint;
+    @include theme.paint();
+
     display: flex;
     flex-direction: column;
 
