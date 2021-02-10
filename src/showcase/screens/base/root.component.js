@@ -91,7 +91,7 @@ export class RootComponent extends Component {
       { name: 'SplitView', path: '/base/splitview' },
       //{ name: 'Table', path: '/base/table' },
       { name: 'Tabs', path: '/base/tabs' },
-      //{ name: 'Tooltip', path: '/base/tooltip' },
+      { name: 'Tooltip', path: '/base/tooltip' },
       //{ name: 'TreeTable', path: '/base/treetable' },
       //{ name: 'Zone', path: '/base/zone' },
     ]

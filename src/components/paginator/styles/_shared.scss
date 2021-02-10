@@ -2,6 +2,7 @@
 @use 'base/theme';
 
 @mixin ark-paginator() {
+    @include theme.paint;
 
     &__body {
         width: 100%;
