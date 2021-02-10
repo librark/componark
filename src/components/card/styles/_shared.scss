@@ -1,20 +1,12 @@
+@use '../../../base/theme';
 @use './config'as *;
 
 @mixin ark-card() {
+  @include theme.paint;
+
   display: block;
   border: 1px solid rgba($color: gray, $alpha: 0.2);
   overflow: hidden;
-
-  @each $color in $colors {
-    &[background=#{$color}] {
-      background: var(--#{$color}, black);
-      color: white;
-    }
-
-    &#{&}[color=#{$color}] {
-      color: var(--#{$color}, white);
-    }
-  }
 
   &[no-border] {
     border: 0;

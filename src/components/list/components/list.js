@@ -16,7 +16,7 @@ export class List extends Component {
   }
 
   render () {
-    this.innerHTML = ''
+    this.content = ''
 
     this.source.forEach((data, index) => {
       const item = new ListItem()

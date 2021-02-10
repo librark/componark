@@ -74,14 +74,11 @@ export class RootComponent extends Component {
       { name: 'Card', path: '/base/card' },
       //{ name: 'Chart', path: '/base/chart' },
       { name: 'Checkbox', path: '/base/checkbox' },
-      //{ name: 'Form', path: '/base/form' },
-      //{ name: 'Grid', path: '/base/grid' },
-      //{ name: 'Icon', path: '/base/icon' },
-      { name: 'List', path: '/base/list' },
       { name: 'Icon', path: '/base/icon' },
+      { name: 'List', path: '/base/list' },
       { name: 'Input', path: '/base/input' },
       { name: 'Location', path: '/base/location' },
-      //{ name: 'Map', path: '/base/map' },
+      { name: 'Map', path: '/base/map' },
       { name: 'Modal', path: '/base/modal' },
       //{ name: 'Multiselect', path: '/base/multiselect' },
       { name: 'Navbar', path: '/base/navbar' },
@@ -94,8 +91,7 @@ export class RootComponent extends Component {
       { name: 'SplitView', path: '/base/splitview' },
       //{ name: 'Table', path: '/base/table' },
       { name: 'Tabs', path: '/base/tabs' },
-      //{ name: 'Tabulator', path: '/base/tabulator' },
-      //{ name: 'Tooltip', path: '/base/tooltip' },
+      { name: 'Tooltip', path: '/base/tooltip' },
       //{ name: 'TreeTable', path: '/base/treetable' },
       //{ name: 'Zone', path: '/base/zone' },
     ]
@@ -141,6 +137,7 @@ body {
   overflow: hidden;
   border-bottom:5px solid cyan;
   align-items:center;
+  height:100px;
 }
 
 .app-root__navitem {
@@ -171,7 +168,7 @@ body {
   text-transform: uppercase;
 }
 
-.app-root__subtittle {
+.app-root__subtitle {
   display:block;
   font-size:0.9rem;
   font-weight: 300;
@@ -189,8 +186,8 @@ body {
   background-color: #334455;
   color: #00ffff;
   text-decoration: none
-  width: 100%;
-  overflow: auto;
+  overflow-x: hidden;
+  max-width:100px;
 }
 
 .app-root__sideitem {
