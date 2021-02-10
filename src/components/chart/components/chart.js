@@ -71,7 +71,7 @@ export class Chart extends Component {
 
   _resizeCanvas () {
     if (this._containsData()) {
-      for (var id in ChartJs.instances) {
+      for (let id in ChartJs.instances) {
         ChartJs.instances[id].resize()
       }
     }
