@@ -2,19 +2,7 @@
 @use '../../../base/theme';
 
 @mixin ark-select() {
-
     @include theme.paint;
-
-    @each $color in theme.$colors {
-        [color=#{$color}] {
-            color: var(--#{$color}, white);
-        }
-
-        [background=#{$color}] {
-            background: var(--#{$color}, black);
-            color: white;
-        }
-    }
 
     display: flex;
     flex-direction: column;
