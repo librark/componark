@@ -1,6 +1,9 @@
 @use './config'as *;
+@use '../../../base/theme';
 
 @mixin ark-checkbox() {
+  @include theme.paint();
+
   display: flex;
   cursor: pointer;
   user-select: none;
