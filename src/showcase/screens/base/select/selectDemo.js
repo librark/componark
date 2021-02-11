@@ -15,7 +15,7 @@ export class SelectDemo extends Component {
         <p>This is a select.</p>
       </div>
 
-      <ark-select listen on-alter="selectEventListener" label="my select">
+      <ark-select background="light" color="dark" listen on-alter="selectEventListener" label="my select">
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="mercedes">Mercedes</option>
