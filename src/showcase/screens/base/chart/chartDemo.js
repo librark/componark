@@ -1,5 +1,6 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-chart'
 export class ChartDemo extends Component {
   init (context) {
     return super.init()
@@ -9,8 +10,8 @@ export class ChartDemo extends Component {
     this.innerHTML = /* html */ `
     <!-- DOCUMENTATION -->
       <p>
-        <a href="https://www.chartjs.org">ChartJs</a>
-        <a href="https://github.com/google/palette.js/tree/master">
+        <a href="https://www.chartjs.org" target="_blank">ChartJs</a>
+        <a href="https://github.com/google/palette.js/tree/master" target="_blank">
           paletteJs
         </a>
       </p>
@@ -112,4 +113,4 @@ export class ChartDemo extends Component {
     }
   }
 }
-Component.define('demo-chart', ChartDemo)
+Component.define(tag, ChartDemo)

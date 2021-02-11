@@ -72,7 +72,7 @@ export class RootComponent extends Component {
       { name: 'Button', path: '/base/button' },
       { name: 'Camera', path: '/base/camera' },
       { name: 'Card', path: '/base/card' },
-      //{ name: 'Chart', path: '/base/chart' },
+      { name: 'Chart', path: '/base/chart' },
       { name: 'Checkbox', path: '/base/checkbox' },
       { name: 'Icon', path: '/base/icon' },
       { name: 'List', path: '/base/list' },
