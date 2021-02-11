@@ -33,7 +33,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('modal', ['button']),
     //getComponentRoute('multiselect'),
     getComponentRoute('navbar', ['button', 'icon']),
-    getComponentRoute('paginator', ['list']),
+    getComponentRoute('paginator', ['list','button']),
     getComponentRoute('radio'),
     getComponentRoute('select'),
     getComponentRoute('sidebar', ['button']),

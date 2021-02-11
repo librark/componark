@@ -19,15 +19,15 @@ export class Paginator extends Component {
     this.content = /* html */ `
       <div class="ark-paginator__body">
         <div class="ark-paginator__default-buttons">
-          <button listen on-click="_prev"><</button>
           <button listen on-click="_first"><<</button>
+          <button listen on-click="_prev"><</button>
         </div>
 
         <div class="ark-paginator__button-list" data-button-list></div>
 
         <div class="ark-paginator__default-buttons">
-          <button listen on-click="_last">>></button>
           <button listen on-click="_next">></button>
+          <button listen on-click="_last">>></button>
         </div>
       </div>
       <div class="ark-paginator__footer">
@@ -55,7 +55,7 @@ export class Paginator extends Component {
     }
 
     for (let index = init; index < init + numberButtons; index++) {
-      const button = this.global.createElement('button')
+      const button = this.global.createElement('ark-button')
       button.innerText = index.toString()
       button.id = index.toString()
       button.addEventListener('click', event => {
@@ -64,7 +64,8 @@ export class Paginator extends Component {
         this._setCurrentPage(parseInt(target.id))
       })
       if (index === this.currentPage) button.setAttribute('active', '')
-
+      button.setAttribute('background','light');
+      button.setAttribute('color','dark');
       list.append(button)
     }
 
