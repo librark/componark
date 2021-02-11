@@ -27,22 +27,22 @@ export class InputDemo extends Component {
       ${this.thirdExample}
     </section>
     `
-    // <section class="reference">
-    //   <h2>Reference</h2>
-    //   <p>
-    //   The <code>ark-input</code> element supports all the types of the default
-    //   <a href="https://www.w3schools.com/html/html_form_input_types.asp">
-    //     <code>input</code> web component.
-    //   </a>
-    //   Additionally, the following options are available:
-    //   </p>
-    //   <h3>Attributes</h3>
-    //   ${this.attrs}
-    //   <h3>Properties</h3>
-    //   ${this.properties}
-    //   <h3>Methods</h3>
-    //   ${this.methods}
-    // </section>
+    //  <section class="reference">
+    //    <h2>Reference</h2>
+    //    <p>
+    //     The <code>ark-input</code> element supports all the types of the default
+    //     <a href="https://www.w3schools.com/html/html_form_input_types.asp">
+    //      <code>input</code> web component.
+    //     </a>
+    //     Additionally, the following options are available:
+    //    </p>
+    //    <h3>Attributes</h3>
+    //     ${this.attrs}
+    //    <h3>Properties</h3>
+    //     ${this.properties}
+    //    <h3>Methods</h3>
+    //     ${this.methods}
+    //  </section>
 
     return super.render()
   }
@@ -97,6 +97,7 @@ export class InputDemo extends Component {
   get thirdExample() {
     return this.renderExample(hljs.highlight('html', `
       <ark-input type="file"></ark-input>
+      <ark-input type="date"></ark-input>
     `))
   }
 
@@ -134,31 +135,8 @@ export class InputDemo extends Component {
   }
 }
 
-const styles = `
-*::before, *::after{
-  box-sizing:border-box;
-}
-
-h1>code{
-  font-size: 3rem;
-  color: #e83e8c
-}
-
-.examples{
-  padding:20px;
-}
-.example{
-  display:grid;
-  grid-template-columns: repeat(2,1fr);
-  padding: 10px;
-  border-bottom: 2px solid #d5d2d2;
-  margin:10px;
-}
-.example:last-child{
-  border-bottom:none;
-}
-
-div.value{
+const styles = /* css */`
+  code.html{
     display:block;
     background-color:rgb(212 235 230);
     padding: 5px;

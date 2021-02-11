@@ -46,8 +46,6 @@ export class CheckboxGroup extends Component {
     const target = /** @type {HTMLElement} */(event.target)
     const checkbox = /** @type {Checkbox} */ (target.closest('ark-checkbox'))
 
-    if (!checkbox) return
-
     checkbox.checked = !checkbox.checked
 
     this.dispatchEvent(

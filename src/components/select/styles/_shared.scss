@@ -1,12 +1,14 @@
 @use './config';
-@use 'base/theme';
+@use '../../../base/theme';
 
 @mixin ark-select() {
+    @include theme.paint;
 
     display: flex;
     flex-direction: column;
     height: auto;
     margin: 0.1rem;
+
 
     &[disabled] {
         pointer-events: none;
@@ -26,13 +28,7 @@
         color: inherit;
         background: inherit;
         border-color: initial;
-
         width: 100%;
-
-        * {
-            color: var(--primary);
-            background: var(--light);
-        }
 
         &:focus {
             outline: 1px solid rgba(0, 0, 0, 0.5);

@@ -70,18 +70,15 @@ export class RootComponent extends Component {
       { name: 'Alert', path: '/base/alert' },
       { name: 'Audio', path: '/base/audio' },
       { name: 'Button', path: '/base/button' },
-      //{ name: 'Camera', path: '/base/camera' },
+      { name: 'Camera', path: '/base/camera' },
       { name: 'Card', path: '/base/card' },
-      //{ name: 'Chart', path: '/base/chart' },
+      { name: 'Chart', path: '/base/chart' },
       { name: 'Checkbox', path: '/base/checkbox' },
-      //{ name: 'Form', path: '/base/form' },
-      //{ name: 'Grid', path: '/base/grid' },
-      //{ name: 'Icon', path: '/base/icon' },
-      { name: 'List', path: '/base/list' },
       { name: 'Icon', path: '/base/icon' },
+      { name: 'List', path: '/base/list' },
       { name: 'Input', path: '/base/input' },
-      //{ name: 'Location', path: '/base/location' },
-      //{ name: 'Map', path: '/base/map' },
+      { name: 'Location', path: '/base/location' },
+      { name: 'Map', path: '/base/map' },
       { name: 'Modal', path: '/base/modal' },
       //{ name: 'Multiselect', path: '/base/multiselect' },
       { name: 'Navbar', path: '/base/navbar' },
@@ -90,12 +87,11 @@ export class RootComponent extends Component {
       { name: 'Select', path: '/base/select' },
       { name: 'Sidebar', path: '/base/sidebar' },
       { name: 'Signature', path: '/base/signature' },
-      //{ name: 'Spinner', path: '/base/spinner' },
+      { name: 'Spinner', path: '/base/spinner' },
       { name: 'SplitView', path: '/base/splitview' },
       //{ name: 'Table', path: '/base/table' },
       { name: 'Tabs', path: '/base/tabs' },
-      //{ name: 'Tabulator', path: '/base/tabulator' },
-      //{ name: 'Tooltip', path: '/base/tooltip' },
+      { name: 'Tooltip', path: '/base/tooltip' },
       //{ name: 'TreeTable', path: '/base/treetable' },
       //{ name: 'Zone', path: '/base/zone' },
     ]
@@ -141,6 +137,7 @@ body {
   overflow: hidden;
   border-bottom:5px solid cyan;
   align-items:center;
+  height:100px;
 }
 
 .app-root__navitem {
@@ -171,7 +168,7 @@ body {
   text-transform: uppercase;
 }
 
-.app-root__subtittle {
+.app-root__subtitle {
   display:block;
   font-size:0.9rem;
   font-weight: 300;
@@ -189,8 +186,8 @@ body {
   background-color: #334455;
   color: #00ffff;
   text-decoration: none
-  width: 100%;
-  overflow: auto;
+  overflow-x: hidden;
+  max-width:100px;
 }
 
 .app-root__sideitem {

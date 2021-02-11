@@ -1,6 +1,8 @@
 import { Chart as ChartJs } from 'chart.js'
 import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-chart'
 export class Chart extends Component {
   init (context = {}) {
     this.details = context.details
@@ -69,7 +71,7 @@ export class Chart extends Component {
 
   _resizeCanvas () {
     if (this._containsData()) {
-      for (var id in ChartJs.instances) {
+      for (let id in ChartJs.instances) {
         ChartJs.instances[id].resize()
       }
     }
@@ -81,4 +83,4 @@ export class Chart extends Component {
     return `rgba(${r},${g},${b},${alpha})`
   }
 }
-customElements.define('ark-chart', Chart)
+Component.define(tag, Chart, styles)

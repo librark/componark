@@ -45,10 +45,13 @@ export class TooltipDemo extends Component {
           justify-content: space-around;
           align-items: center;
           width: 100%;
+          margin-top: 100px;
         }
 
         .demo-tooltip__content ark-tooltip{
           margin: 1rem;
+          padding:10px;
+          border-radius: 10px;
         }
       </style>
     `

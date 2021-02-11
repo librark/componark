@@ -1,8 +1,0 @@
-@import "./item.ark";
-@import "./grid.ark";
-@import "./default";
-
-@mixin grid_ark() {
-  @include grid_ark_();
-  @include grid_item_ark_();
-}

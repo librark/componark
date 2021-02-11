@@ -28,7 +28,7 @@ $feat-typography: feature-targeting.create-target($query, typography);
       @include typography.typography(headline4, $query);
     }
 
-    .ark-card__subtitle {
+    .ark-modal__subtitle {
       @include typography.typography(subtitle1, $query);
     }
   }

@@ -1,7 +1,8 @@
 @use './config';
-@use 'base/theme';
+@use '../../../base/theme';
 
 @mixin ark-paginator() {
+    @include theme.paint;
 
     &__body {
         width: 100%;
@@ -15,7 +16,9 @@
         display: flex;
         justify-content: center;
 
-        small[data-info] {}
+        small[data-info] {
+            color: var(--primary);
+        }
     }
 
     &__default-buttons {

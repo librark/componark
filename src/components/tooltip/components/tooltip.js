@@ -1,5 +1,7 @@
 import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-tooltip'
 export class Tooltip extends Component {
   constructor () {
     super()
@@ -17,7 +19,7 @@ export class Tooltip extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `
+    this.content = /* html */ `
       <div class="ark-tooltip__content">
         ${this.defaultContent}
       </div>
@@ -29,4 +31,4 @@ export class Tooltip extends Component {
     return super.render()
   }
 }
-Component.define('ark-tooltip', Tooltip)
+Component.define(tag, Tooltip, styles)

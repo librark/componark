@@ -23,13 +23,14 @@ describe('Button', () => {
 
   it('replicates its attributes in its inner element', () => {
     container.innerHTML = `
-    <ark-button type="submit"></ark-button>
+    <ark-button class="custom" type="submit"></ark-button>
     `
     const button = container.querySelector('ark-button')
     const element = button.firstElementChild
 
     expect(element.tagName).toEqual('BUTTON')
     expect(element.type).toEqual('submit')
+    expect(element.className).toEqual('ark-button__button')
   })
 
   it('can be rendered with a child anchor (<a>)', () => {

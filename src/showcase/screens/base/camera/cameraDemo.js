@@ -1,14 +1,10 @@
 import { Component } from 'base/component'
 
 export class CameraDemo extends Component {
-  init (context) {
-    return super.init(context)
-  }
-
   render () {
     this.innerHTML = /* html */ `${this.styles}
       <div class="camera-container">
-        <ark-Camera></ark-Camera>
+        <ark-camera></ark-camera>
         <ark-button listen on-click="takepicture">Take photo</ark-button>
         <ark-button listen on-click="startCamera">Start</ark-button>
         <ark-button listen on-click="stopCamera">stop</ark-button>
@@ -39,7 +35,7 @@ export class CameraDemo extends Component {
   }
 
   get camera () {
-    return this.select('ark-Camera')
+    return this.select('ark-camera')
   }
 
   /** @returns {HTMLImageElement} */
@@ -55,7 +51,7 @@ export class CameraDemo extends Component {
           flex-direction: column;
         }
 
-        ark-Camera, img{
+        ark-camera, img{
           border-radius: 5px;
         }
 

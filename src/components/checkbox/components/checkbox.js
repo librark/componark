@@ -7,12 +7,12 @@ export class Checkbox extends Component {
     super()
     this.defaultContent = this.defaultContent || this.content
     /** @type {string} */
-    this.value = this.value
   }
-
+  
   init (context = {}) {
     this.name = context.name
     this.checked = context.checked
+    this.value = context.value
     return super.init()
   }
 
@@ -44,7 +44,7 @@ export class Checkbox extends Component {
   set checked (value) {
     if (value) {
       this.setAttribute('checked', '')
-      if (this.input) this.input['checked'] = true
+      this.input['checked'] = true
     } else {
       this.removeAttribute('checked')
       if (this.input) this.input['checked'] = false
@@ -96,5 +96,22 @@ export class Checkbox extends Component {
       'width',
     ]
   }
+
+  //Methods
+
+  check(){
+    this.checked = true
+  }
+  unCheck(){
+    this.checked = false
+  }
+  toggle(){
+    if (this.checked == true){
+      this.checked = false
+    } else {
+      this.checked = true
+    }
+  }
+
 }
 Component.define(tag, Checkbox, styles)
