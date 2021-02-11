@@ -1,4 +1,4 @@
-@use 'base/theme';
+@use '../../../base/theme';
 
 @mixin ark-tabs() {
   @include theme.paint;
@@ -13,43 +13,45 @@
   background: none;
   color: var(--dark, black);
   user-select: none;
-
-
+  
+  
   &::-webkit-scrollbar {
     display: none;
   }
-
+  
   // item
   &-item {
-
+    cursor: pointer;
+    
     &:hover {
       background: var(--primary, grey);
       color: var(--light, white);
     }
-
+    
+    
     margin: 0.5rem;
-
+    
     button,
     a {
       all: unset;
-
+      
       padding: 0.3rem;
-
+      
       margin: inherit;
       padding: inherit;
-
+      
       width: auto;
       text-align: center;
 
       outline: 0;
-
-
+      
+      
       ark-icon {
         font-size: 24px;
       }
     }
-
-
+    
+    
   }
 
 
