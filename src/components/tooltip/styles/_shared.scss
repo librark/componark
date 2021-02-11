@@ -1,5 +1,5 @@
 @use './config';
-@use 'base/theme';
+@use '../../../base/theme';
 
 @mixin ark-tooltip() {
     @include theme.paint;

@@ -1,20 +1,29 @@
+@use '../../../base/theme';
 @use './config'as *;
 
 @mixin ark-radio() {
-
     &-group {
+        @include theme.paint;
+
         user-select: none;
         width: 100%;
         height: fit-content;
 
+        &__list {
+            color: var(--primary, black)
+        }
+
         &__label {
             font-size: small;
             margin: 0;
-            padding: 0;
+            padding: 2px;
             width: 100%;
             display: block;
+            background: inherit;
         }
+
     }
+
 
     &-button {
         cursor: pointer;
@@ -25,4 +34,5 @@
             margin: 0 5px;
         }
     }
+
 }

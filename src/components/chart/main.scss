@@ -1,5 +1,0 @@
-@import "./styles/default/chart.default";
-
-@mixin chart($theme) {
-  @include chart_default();
-}
