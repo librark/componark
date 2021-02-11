@@ -1,6 +1,10 @@
 @use './config'as *;
+@use '../../../base/theme';
 
 @mixin ark-input() {
+    @include theme.paint();
+    background: transparent;
+
     &[disabled] {
         pointer-events: none !important;
         cursor: default !important;
