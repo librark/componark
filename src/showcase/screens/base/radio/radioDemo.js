@@ -6,13 +6,14 @@ export class RadioDemo extends Component {
   }
 
   render () {
+    const background = "light"
+    const color = "dark"
     this.innerHTML = /* html */ `
       <ark-radio-group listen on-alter="onSelectRadioGroup"
         label="Radio Buttons">
-
-        <ark-radio-button value="op1">Option 1</ark-radio-button>
-        <ark-radio-button value="op2">Option 2</ark-radio-button>
-        <ark-radio-button value="op3">Option 3</ark-radio-button>
+        <ark-radio-button background="${background}" color="${color}" value="op1">Option 1</ark-radio-button>
+        <ark-radio-button background="${background}" color="${color}" value="op2">Option 2</ark-radio-button>
+        <ark-radio-button background="${background}" color="${color}" value="op3">Option 3</ark-radio-button>
       </ark-radio-group>
 
       <p>Valor seleccionado: <span data-radio-button-value></span></p>
