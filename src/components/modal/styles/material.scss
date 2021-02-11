@@ -17,23 +17,13 @@ $feat-typography: feature-targeting.create-target($query, typography);
   @include shared.ark-modal;
 
   &__content {
-    background: var(--primary);
+    //background: var(--primary);
     @include shape.radius($medium-component-radius, $rtl-reflexive: true);
     @include elevation-theme.elevation($z-value: 24, $query: $query);
   }
 
-  &__actions {
-    ark-button {
-
-      &[close] {
-        background: var(--light);
-        color: var(--primary);
-      }
-
-    }
-  }
-
   &__header {
+
     .ark-card__title {
       @include typography.typography(headline4, $query);
     }
