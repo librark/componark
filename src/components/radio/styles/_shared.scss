@@ -2,6 +2,7 @@
 @use './config'as *;
 
 @mixin ark-radio() {
+
     &-group {
         @include theme.paint;
 
@@ -14,11 +15,9 @@
         }
 
         &__label {
-            font-size: small;
+            font-size: 1.2;
             margin: 0;
-            padding: 2px;
-            width: 100%;
-            display: block;
+            padding: 5px;
             background: inherit;
         }
 
@@ -26,12 +25,18 @@
 
 
     &-button {
+        @include theme.paint;
         cursor: pointer;
         display: flex;
         user-select: none;
 
         &__button {
             margin: 0 5px;
+
+            input[type=radio] {
+                width: 20px;
+                height: 20px;
+            }
         }
     }
 

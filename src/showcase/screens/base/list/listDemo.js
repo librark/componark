@@ -10,11 +10,11 @@ export class ListDemo extends Component {
     this.innerHTML = /* html */ `${this.styles}
       <h1>Default List</h1>
 
-      <ark-list data-default-list click-disabled></ark-list>
+      <ark-list background="light" color="dark" data-default-list click-disabled></ark-list>
 
       <h1>Template List <span data-template-selected></span></h1>
 
-      <ark-list data-template-list action default
+      <ark-list background="light" color="primary"  data-template-list action default
         listen on-list:selected="onTemplateListSelected"></ark-list>
     `
 
