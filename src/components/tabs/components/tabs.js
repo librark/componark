@@ -11,9 +11,15 @@ export class Tabs extends Component {
   }
   
   render () {
-    if(this.getAttribute('background') == 'light'){
+    if(this.getAttribute('background') === 'light'){
+      this.setAttribute('color','dark')
       this.tabs.forEach(tab=>{
             tab.setAttribute('background', 'dark')
+      })
+    }else if(this.getAttribute('background') === 'dark'){
+      this.tabs.forEach(tab=>{
+            tab.setAttribute('background', 'light')
+            tab.setAttribute('color', 'dark')
       })
     }else{
       this.tabs.forEach(tab=>{
@@ -48,6 +54,7 @@ export class Tabs extends Component {
 
     this.currentTab.removeAttribute('active')
     tab.setAttribute('active', '')
+
 
     this.dispatchEvent(new CustomEvent('tabs:selected', {
       detail: {
