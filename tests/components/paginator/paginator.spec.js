@@ -73,25 +73,25 @@ describe('Paginator', () => {
     // @ts-ignore
     expect(paginator._collectionLength).toBe(11)
 
-    let buttons = paginator.querySelectorAll('[data-button-list] button')
+    let buttons = paginator.querySelectorAll('[data-button-list] ark-button')
     expect(buttons[0].id).toBe('1')
     expect(buttons[buttons.length - 1].id).toBe('5')
 
     // @ts-ignore
     paginator._setCurrentPage(2)
-    buttons = paginator.querySelectorAll('[data-button-list] button')
+    buttons = paginator.querySelectorAll('[data-button-list] ark-button')
     expect(buttons[0].id).toBe('1')
     expect(buttons[buttons.length - 1].id).toBe('5')
 
     // @ts-ignore
     paginator._setCurrentPage(5)
-    buttons = paginator.querySelectorAll('[data-button-list] button')
+    buttons = paginator.querySelectorAll('[data-button-list] ark-button')
     expect(buttons[0].id).toBe('3')
     expect(buttons[buttons.length - 1].id).toBe('7')
 
     // @ts-ignore
     paginator._setCurrentPage(10)
-    buttons = paginator.querySelectorAll('[data-button-list] button')
+    buttons = paginator.querySelectorAll('[data-button-list] ark-button')
     expect(buttons[0].id).toBe('7')
     expect(buttons[buttons.length - 1].id).toBe('11')
   })
@@ -113,14 +113,14 @@ describe('Paginator', () => {
     paginator._setCurrentPage(12)
     expect(paginator.currentPage).toBe(1)
 
-    let buttons = paginator.querySelectorAll('[data-button-list] button')
+    let buttons = paginator.querySelectorAll('[data-button-list] ark-button')
     expect(buttons[0].id).toBe('1')
     expect(buttons[buttons.length - 1].id).toBe('5')
 
     // @ts-ignore
     buttons[buttons.length - 1].click()
 
-    buttons = paginator.querySelectorAll('[data-button-list] button')
+    buttons = paginator.querySelectorAll('[data-button-list] ark-button')
     expect(buttons[0].id).toBe('3')
     expect(buttons[buttons.length - 1].id).toBe('7')
   })
