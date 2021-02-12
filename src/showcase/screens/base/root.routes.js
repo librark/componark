@@ -41,7 +41,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('spinner'),
     getComponentRoute('splitview', ['icon', 'list']),
     //getComponentRoute('table'),
-    getComponentRoute('tabs'),
+    getComponentRoute('tabs',['icon']),
     getComponentRoute('tooltip'),
     //getComponentRoute('treetable'),
     //getComponentRoute('zone'),

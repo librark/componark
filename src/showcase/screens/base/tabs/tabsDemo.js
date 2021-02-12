@@ -12,7 +12,7 @@ export class TabsDemo extends Component {
         <p>This is a tabs.</p>
       </div>
 
-      <ark-tabs listen on-tabs:selected="onSelectedTab">
+      <ark-tabs background="light" color="dark" listen on-tabs:selected="onSelectedTab">
         <ark-tabs-item title="tab 1" tab="example-1">
           <ark-icon name="far fa-address-book"></ark-icon>
         </ark-tabs-item>

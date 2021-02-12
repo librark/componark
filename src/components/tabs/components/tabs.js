@@ -9,20 +9,34 @@ export class Tabs extends Component {
   init (context = {}) {
     return super.init()
   }
-
+  
   render () {
+    if(this.getAttribute('background') == 'light'){
+      this.tabs.forEach(tab=>{
+            tab.setAttribute('background', 'dark')
+      })
+    }else{
+      this.tabs.forEach(tab=>{
+            tab.setAttribute('background', 'light')
+            tab.setAttribute('color', 'dark')
+      })
+    }
+    
     return super.render()
   }
-
+  
   async load () {
     if (!this.currentTab) {
       const tab = /** @type {TabsItem} */(
         this.tabs.length ? this.tabs[0] : null
-      )
-
-      if (tab) tab.setAttribute('active', '')
-    }
-
+        )
+        
+        if(tab){
+          tab.setAttribute('active', '')
+        }
+      }
+    
+      
     this.addEventListener('click', this.onAlterCurrentTab.bind(this))
   }
 
