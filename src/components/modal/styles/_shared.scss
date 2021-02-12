@@ -1,7 +1,9 @@
 @use '../../../base/theme';
-@use './config' as *;
+@use '../../../base/theme/variables';
+@use './config'as *;
 
 @mixin ark-modal() {
+
   display: none;
   position: fixed;
   z-index: 10;
@@ -13,6 +15,34 @@
   height: 100%;
 
   overflow: hidden;
+
+
+  div.ark-modal__content {
+
+    //@include theme.paint;
+    @each $color in variables.$colors {
+      &[background=#{$color}] {
+        background: var(--#{$color}, black);
+        color: white;
+      }
+
+      &[color=#{$color}] {
+        color: var(--#{$color}, white);
+      }
+    }
+
+    display: flex;
+    position: relative;
+    left: 0;
+    flex-direction: column;
+    z-index: inherit;
+
+    max-width: calc(100vw - 3vmin);
+    max-height: calc(100vh - 3vmin);
+
+    overflow: hidden;
+
+  }
 
   // show
   &[show] {
@@ -54,19 +84,6 @@
     align-items: flex-end;
   }
 
-  &__content {
-    display: flex;
-    flex-direction: column;
-    z-index: inherit;
-
-    background: blue;
-    color: white;
-
-    max-width: calc(100vw - 3vmin);
-    max-height: calc(100vh - 3vmin);
-
-    overflow: hidden;
-  }
 
   &__header {
     display: flex;
