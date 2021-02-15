@@ -17,19 +17,8 @@
   overflow: hidden;
 
 
-  div.ark-modal__content {
-
-    //@include theme.paint;
-    @each $color in variables.$colors {
-      &[background=#{$color}] {
-        background: var(--#{$color}, black);
-        color: white;
-      }
-
-      &[color=#{$color}] {
-        color: var(--#{$color}, white);
-      }
-    }
+  &__content {
+    @include theme.paint;
 
     display: flex;
     position: relative;

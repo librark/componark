@@ -84,7 +84,7 @@ export class ModalDemo extends Component {
     const myBackground = this.querySelector('ark-modal').getAttribute('background')
     const myColor = this.querySelector('ark-modal').getAttribute('color')
 
-    this.modal.background = myBackground
+    this.modal.background = myBackground || 'primary'
     this.modal.color = myColor
     this.modal.render()
 
