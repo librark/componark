@@ -82,27 +82,4 @@ describe('Tabs', () => {
     const element2 = tabs.querySelector('[id="t-2"]')
     expect(!element2.getAttribute('active')).toBeTruthy
   })
-  it('Theme change affects items', () => {
-    container.innerHTML = /* html */ `
-    <ark-tabs>
-      <ark-tabs-item></ark-tabs-item>
-      <ark-tabs-item></ark-tabs-item>
-    </ark-tabs>`
-
-    const tabs = container.querySelector('ark-tabs')
-    const items = tabs.tabs
-
-    tabs.setAttribute('background','dark')
-    tabs.render()
-    expect(tabs.getAttribute('background')).toBe('dark')
-    
-    items[0].click()
-    expect(items[0].getAttribute('background')).toBe('light')
-    
-    tabs.setAttribute('background','light')
-    tabs.render()
-
-    items[0].click()
-    expect(items[0].getAttribute('background')).toBe('dark')
-  })
 })
