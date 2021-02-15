@@ -7,7 +7,7 @@ export class ListDemo extends Component {
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.innerHTML = /* html */ `
       <h1>Default List</h1>
 
       <ark-list background="light" color="dark" data-default-list click-disabled></ark-list>
@@ -16,6 +16,10 @@ export class ListDemo extends Component {
 
       <ark-list background="light" color="primary"  data-template-list action default
         listen on-list:selected="onTemplateListSelected"></ark-list>
+    
+        <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/list/README.rst">
+        * Reference
+        </a>
     `
 
     return super.render()
@@ -70,15 +74,13 @@ export class ListDemo extends Component {
       [${index}]    ${data.year} - ${data.first}
     `.trim()
   }
-
-  get styles () {
-    return /* html */ `
-      <style>
-        demo-list ark-list{
-          margin: 1rem;
-        }
-      </style>
-    `
-  }
 }
-Component.define(tag, ListDemo)
+
+const styles = /* css */`
+  .ark-list{
+    margin-bottom:20px;
+  }
+`
+
+
+Component.define(tag, ListDemo, styles)
