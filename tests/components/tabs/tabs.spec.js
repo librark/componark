@@ -1,72 +1,85 @@
 import { Tabs } from '../../../src/components/tabs'
 
 describe('Tabs', () => {
-  it('can be instantiated', () => {
-    const item = new Tabs()
-    expect(item).toBeTruthy()
-
-    const init = item.init()
-    expect(item === init).toBeTruthy()
-
-    item.init().render().load()
-    item.click()
+  let container = null
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
   })
 
-  it('can be rendered without active attribute', function () {
-    const item = new Tabs()
-    item.innerHTML = /* HTML */ `
-      <ark-tabs-item id="t-1">
-        <ark-icon name="far fa-address-book"></ark-icon>
-        <span>span-1</span>
+  afterEach(() => {
+    container.remove()
+    container = null
+  })
+
+  it('can be instantiated', () => {
+    
+    container.innerHTML =/* html */`
+        <ark-tabs></ark-tabs>
+    `
+    const tabs = container.querySelector('ark-tabs')
+    expect(tabs).toBe(tabs.init())
+  })
+
+  it('can be rendered without active attribute', () => {
+    container.innerHTML = /* html */ `
+    <ark-tabs>
+      <ark-tabs-item id="t-1" active>
+      <ark-icon name="far fa-address-book"></ark-icon>
+      <span>span-1</span>
       </ark-tabs-item>
       <ark-tabs-item id="t-2">
-        <ark-icon name="far fa-address-book"></ark-icon>
-        <span>span-2 asdf asdfs</span>
+      <ark-icon name="far fa-address-book"></ark-icon>
+      <span>span-2 asdf asdfs</span>
       </ark-tabs-item>
-    `
-    item.connectedCallback()
+    </ark-tabs>`
 
-    const element = item.querySelector('[active]')
-    expect(element.getAttribute('id') === 't-1').toBeTruthy()
+    const tabs = document.querySelector('ark-tabs')
+
+    const element = tabs.querySelector('[active]')
+    expect(element.getAttribute('id')).toBe('t-1')
   })
 
-  it('can be rendered with active attribute', function () {
-    const item = new Tabs()
-    item.innerHTML = /* HTML */ `
+  it('can be rendered with active attribute', () => {
+    container.innerHTML = /* html */ `
+    <ark-tabs>
       <ark-tabs-item id="t-1">
-        <ark-icon name="far fa-address-book"></ark-icon>
-        <span>span-1</span>
+      <ark-icon name="far fa-address-book"></ark-icon>
+      <span>span-1</span>
       </ark-tabs-item>
       <ark-tabs-item id="t-2" active>
-        <ark-icon name="far fa-address-book"></ark-icon>
-        <span>span-2 asdf asdfs</span>
+      <ark-icon name="far fa-address-book"></ark-icon>
+      <span>span-2 asdf asdfs</span>
       </ark-tabs-item>
-    `
-    item.connectedCallback()
+    </ark-tabs>`
 
-    const element = item.querySelector('[active]')
-    expect(element.getAttribute('id') === 't-2').toBeTruthy()
+    const tabs = document.querySelector('ark-tabs')
+    const tabItem = tabs.querySelector('[active]')
+    expect(tabItem.getAttribute('id')).toBe('t-2')
   })
 
-  it('can be rendered replace active attribute', function () {
-    const item = new Tabs()
-    item.innerHTML = /* HTML */ `
+  it('can be rendered replace active attribute', () => {
+    container.innerHTML = /* html */ `
+    <ark-tabs>
       <ark-tabs-item id="t-1">
-        <ark-icon name="far fa-address-book"></ark-icon>
-        <span>span-1</span>
+      <ark-icon name="far fa-address-book"></ark-icon>
+      <span>span-1</span>
       </ark-tabs-item>
-      <ark-tabs-item id="t-2" active>
-        <ark-icon name="far fa-address-book"></ark-icon>
-        <span>span-2 asdf asdfs</span>
+      <ark-tabs-item id="t-2">
+      <ark-icon name="far fa-address-book"></ark-icon>
+      <span>span-2 asdf asdfs</span>
       </ark-tabs-item>
-    `
-    item.connectedCallback()
+    </ark-tabs>`
 
-    const element = item.querySelector('[id="t-1"]')
+    const tabs = document.querySelector('ark-tabs')
+
+    const element = tabs.querySelector('[id="t-1"]')
     // @ts-ignore
+    tabs.click()
     element.click()
-
-    const element2 = item.querySelector('[id="t-2"]')
-    expect(!element2.getAttribute('active')).toBeTruthy()
+    expect(element.getAttribute('active')).toBeTruthy
+    
+    const element2 = tabs.querySelector('[id="t-2"]')
+    expect(!element2.getAttribute('active')).toBeTruthy
   })
 })

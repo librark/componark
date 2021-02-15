@@ -4,14 +4,12 @@
   @include theme.paint;
 
   display: flex;
+  justify-content: space-between;
   width: 100%;
   height: auto;
 
   overflow-x: scroll;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-
-  background: none;
-  color: var(--dark, black);
   user-select: none;
   
   
@@ -22,14 +20,19 @@
   // item
   &-item {
     cursor: pointer;
+    padding: 0.5rem;
+    width:100%;
+    text-align: center;
+
+    &[active]{
+      @include theme.paint;
+    }
     
     &:hover {
-      background: var(--primary, grey);
-      color: var(--light, white);
+      opacity: 0.8;
     }
     
     
-    margin: 0.5rem;
     
     button,
     a {
