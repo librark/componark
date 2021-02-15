@@ -3,11 +3,12 @@
 
 @mixin ark-input() {
     @include theme.paint();
-    background: transparent;
+    background:transparent;
+    padding:10px;
 
     &[disabled] {
-        pointer-events: none !important;
-        cursor: default !important;
+        pointer-events: none;
+        cursor: default;
 
         &>.ark-input__input {
             background: rgb(255, 255, 255);
@@ -28,17 +29,6 @@
         max-width: 100%;
         padding: 0.5rem;
         border: 2px solid rgb(175, 175, 175);
-
-        &:focus {
-            //background-color: rgb(243, 248, 255);
-            //border: 2px solid rgb(67, 123, 255);
-            //outline: none;
-        }
-
-        &:hover {
-            //border: 2px solid rgb(67, 123, 255);
-            //background-color: rgb(255, 255, 255);
-        }
     }
 
     &[inline] label {

@@ -23,7 +23,6 @@ $feat-color: feature-targeting.create-target($query, color);
 
   display: inline-flex;
   align-items: baseline;
-  padding: 0 variables.$padding-horizontal;
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
@@ -31,7 +30,7 @@ $feat-color: feature-targeting.create-target($query, color);
   will-change: opacity, transform, error;
 
 
-
+ 
   &__input {
     @include theme.prop(border-color, grey);
     @include mixins.fill-color(surface, $query);
@@ -53,7 +52,6 @@ $feat-color: feature-targeting.create-target($query, color);
   }
 
   &__label {
-    @include floating-label-mixins.ink-color(primary, $query: $query);
     font-size: 1.1rem;
   }
 
