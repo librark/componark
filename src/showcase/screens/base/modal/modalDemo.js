@@ -77,11 +77,17 @@ export class ModalDemo extends Component {
         <ark-button background="primary" slot="action" close>Cerrar</ark-button>
       </ark-modal>
       <br>
-      <a href="https://github.com/knowark/componark/blob/master/src/components/modal/README.rst">
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/modal/README.rst">
       * Reference
       </a>
     `
-    this.modal.init({background: 'dark'}).render();
+    const myBackground = this.querySelector('ark-modal').getAttribute('background')
+    const myColor = this.querySelector('ark-modal').getAttribute('color')
+
+    this.modal.background = myBackground
+    this.modal.color = myColor
+    this.modal.render()
+
     return super.render()
   }
 
