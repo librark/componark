@@ -9,21 +9,26 @@
   user-select: none;
 
   &-group {
+    @include theme.paint();
     user-select: none;
     width: 100%;
     height: fit-content;
 
     &__label {
-      font-size: small;
+      background: inherit;
+      font-size: 1.2;
       margin: 0;
-      padding: 0;
-      width: 100%;
-      display: block
+      padding: 5px;
     }
   }
 
   &__input {
     margin: 0 5px;
+
+    input[type=checkbox] {
+      width: 20px;
+      height: 20px;
+    }
   }
 
 }
