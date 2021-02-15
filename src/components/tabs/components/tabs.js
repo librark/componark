@@ -11,23 +11,6 @@ export class Tabs extends Component {
   }
   
   render () {
-    if(this.getAttribute('background') === 'light'){
-      this.setAttribute('color','dark')
-      this.tabs.forEach(tab=>{
-            tab.setAttribute('background', 'dark')
-      })
-    }else if(this.getAttribute('background') === 'dark'){
-      this.tabs.forEach(tab=>{
-            tab.setAttribute('background', 'light')
-            tab.setAttribute('color', 'dark')
-      })
-    }else{
-      this.tabs.forEach(tab=>{
-            tab.setAttribute('background', 'light')
-            tab.setAttribute('color', 'dark')
-      })
-    }
-    
     return super.render()
   }
   
