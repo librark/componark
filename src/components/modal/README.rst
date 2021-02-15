@@ -1,0 +1,86 @@
+MODAL
+*****
+
+The ``ark-modal`` displays a box/pop-up window with a title, subtitle, content and actions on top of the page 
+
+    
+
+Examples
+========
+
+    **A modal needs a button with the** ``open`` **or** ``toggle`` **methods applied as an event**
+    
+    .. code-block:: html
+
+        <ark-button btn-open>open</ark-button>
+        <ark-button btn-toggle>toggle</ark-button>
+    
+    **define the events for buttons**
+
+    .. code-block:: javascript
+
+        const open = this.querySelector('[btn-open]')
+        open.addEventListener('click', _ => this.modal['open']())
+
+        const toggle = this.querySelector('[btn-toggle]')
+        toggle.addEventListener('click', _ => this.modal['toggle']())
+
+
+
+    **Ark-modal, with respective title, subtitle, content and actions**
+
+    .. code-block:: html
+
+        <ark-modal title="My Title" subtitle="My Subtitle"
+        horizontal="center" vertical="center"
+        width="80vw" height="40vh">
+            <ark-button slot="action">Aceptar</ark-button>
+            <ark-button slot="action" close>Cerrar</ark-button>
+        <ark-modal>
+
+
+
+Attributes
+----------
+
++---------+---------+---------+--------------------------------------------+
+|  Name   |  Type   | Default |                Description                 |
++=========+=========+=========+============================================+
+| title  | string  | null   | Creates a title that displays in the header        |
++---------+---------+---------+--------------------------------------------+
+| subtitle  | string  | null    | Creates a subtitle that displays in the header            |
++---------+---------+---------+--------------------------------------------+
+| width   | string  | null    | Checkbox value                             |
++---------+---------+---------+--------------------------------------------+
+| height | string | -       | Indicate if checkbox is checked by default |
++---------+---------+---------+--------------------------------------------+
+
+Properties
+----------
++------------------------+---------+---------+---------+--------------------------------------------+
+|       Component        |  Name   |  Type   | Default |                Description                 |
++========================+=========+=========+=========+============================================+
+| ``ark-checkbox-group`` | label   | string  | text    | Checkbox group accompanying label          |
++------------------------+---------+---------+---------+--------------------------------------------+
+| ``ark-checkbox-group`` | value   | string  | null    | Checks the default checkboxes              |
++------------------------+---------+---------+---------+--------------------------------------------+
+| ``ark-checkbox``       | value   | string  | null    | Checkbox value                             |
++------------------------+---------+---------+---------+--------------------------------------------+
+| ``ark-checkbox``       | checked | boolean | -       | Indicate if checkbox is checked by default |
++------------------------+---------+---------+---------+--------------------------------------------+
+
+
+Methods
+-------
+
++--------------+------------+------------------------------------------+
+|     Name     | Parameters |               Description                |
++==============+============+==========================================+
+| checkboxList | -          | returns the list of `ark-checkbox` nodes |
++--------------+------------+------------------------------------------+
+| check        | -          | ``checked`` on                           |
++--------------+------------+------------------------------------------+
+| unCheck      | -          | ``checked`` off                          |
++--------------+------------+------------------------------------------+
+| toggle       | -          | toggle the ``checked`` attribute         |
++--------------+------------+------------------------------------------+
