@@ -11,39 +11,26 @@ export class InputDemo extends Component {
   render () {
     this.innerHTML = /* html */ `
     <section class="introduction">
-      <h1><code>Input</code></h1>
-      <p>User input component.</p>
+      <h1 class="intro-title">Input</h1>
+      <p class="intro-subtitle">User input component.</p>
     </section>
+
     <section class="implementation">
-      <ark-input data-input-text required inline
+      <ark-input color="primary" data-input-text required inline
                  label="Enter some text:"
                  listen on-alter="onTextInput"></ark-input>
       <p>Value: <span data-input-value></span></p>
     </section>
+
     <section class="examples">
       <h2>Examples</h2>
       ${this.firstExample}
       ${this.secondExample}
       ${this.thirdExample}
     </section>
+    
+    <a class="reference" target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/input/README.rst">* Reference</a>
     `
-    //  <section class="reference">
-    //    <h2>Reference</h2>
-    //    <p>
-    //     The <code>ark-input</code> element supports all the types of the default
-    //     <a href="https://www.w3schools.com/html/html_form_input_types.asp">
-    //      <code>input</code> web component.
-    //     </a>
-    //     Additionally, the following options are available:
-    //    </p>
-    //    <h3>Attributes</h3>
-    //     ${this.attrs}
-    //    <h3>Properties</h3>
-    //     ${this.properties}
-    //    <h3>Methods</h3>
-    //     ${this.methods}
-    //  </section>
-
     return super.render()
   }
 
@@ -83,46 +70,22 @@ export class InputDemo extends Component {
 
   get firstExample() {
     return this.renderExample(hljs.highlight('html', `
-      <ark-input label="Label"></ark-input>
+      <ark-input color="primary" label="Label"></ark-input>
     `))
   }
 
   get secondExample() {
     return this.renderExample(hljs.highlight('html', `
-      <ark-input label="Inline Label" inline></ark-input>
-      <ark-input label="Header Label"></ark-input>
+      <ark-input color="primary" label="Inline Label" inline></ark-input>
+      <ark-input color="primary" label="Header Label"></ark-input>
     `))
   }
 
   get thirdExample() {
-    return this.renderExample(hljs.highlight('html', `
-      <ark-input type="file"></ark-input>
-      <ark-input type="date"></ark-input>
+    return this.renderExample(hljs.highlight('html',/* html */ `
+      <ark-input label="File" color="primary" type="file"></ark-input>
+      <ark-input label="Date" color="primary" type="date"></ark-input>
     `))
-  }
-
-  // Documentation
-
-  get attrs() {
-    return this.renderTable([
-      ['Name', 'Type', 'Defaul', 'Description'],
-      ['type', 'string', 'text', 'Type of input.'],
-      ['label', 'string', 'null', "Input's accompanying label."]
-    ])
-  }
-
-  get properties() {
-    return this.renderTable([
-      ['Name', 'Type', 'Defaul', 'Description'],
-      ['label', 'string', 'null', "Input's accompanying label."]
-    ])
-  }
-
-  get methods() {
-    return this.renderTable([
-      ['Name', 'Type', 'Defaul', 'Description'],
-      ['label', 'string', 'null', 'Input accompanying label.']
-    ])
   }
 
   // Handlers
@@ -136,12 +99,30 @@ export class InputDemo extends Component {
 }
 
 const styles = /* css */`
-  code.html{
+
+.intro-title{
+  font-size:2rem;
+  padding:0;
+  margin:0;
+}  
+.intro-subtitle{
+  padding:0;
+  margin:0;
+}
+
+.html{
     display:block;
     background-color:rgb(212 235 230);
     padding: 5px;
     max-width:100%;
   }
+
+.examples{
+  margin-bottom:20px;
+}  
+.example{
+  background:var(--light);
+}
 
 `
 Component.define(tag, InputDemo, styles)
