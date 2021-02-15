@@ -21,7 +21,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('audio'),
     getComponentRoute('button'),
     getComponentRoute('camera', ['button']),
-    getComponentRoute('card'),
+    getComponentRoute('card',['button']),
     getComponentRoute('chart'),
     getComponentRoute('checkbox'),
     getComponentRoute('icon'),
