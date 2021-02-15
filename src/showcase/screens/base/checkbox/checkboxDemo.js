@@ -21,6 +21,10 @@ export class CheckboxDemo extends Component {
       </ark-checkbox-group>
 
       <p>Valor seleccionado: <span data-checkbox-value></span></p>
+
+      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/checkbox/README.rst">
+      * Reference
+      </a>
     `
 
     this.checkboxGroup['value'] = 'op1,op2'
