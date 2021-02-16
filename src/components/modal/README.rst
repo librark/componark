@@ -89,10 +89,10 @@ Slots
 
 **Add a** ``slot`` **attribute on the element to specify the section of the card in wich the content is to be displayed**
 
-+----------------+--------------------+----------------------------------------------------------------+
-|      Name      |       Class        |                          Description                           |
-+================+====================+================================================================+
-| body (general) | ark-modal__body    | Shows the window on top of the page                            |
-+----------------+--------------------+----------------------------------------------------------------+
-| actions        | ark-modal__actions | Displays the buttons in the right bottom section of the window |
-+----------------+--------------------+----------------------------------------------------------------+
++---------+------------------------------------------------------------------+
+|  Name   |                           Description                            |
++=========+==================================================================+
+| general | Every element that has not a slot specified displays in the body |
++---------+------------------------------------------------------------------+
+| actions | Displays the buttons in the right bottom section of the window   |
++---------+------------------------------------------------------------------+
