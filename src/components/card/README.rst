@@ -51,14 +51,14 @@ Slots
 
 **Add a** ``slot`` **attribute on the element to specify the section of the card in wich the content is to be displayed**
 
-+----------------+-------------------+------------------------------------------------------------------+
-|      Name      |       class       |                           Description                            |
-+================+===================+==================================================================+
-| media          | ark-card__media   | Slot for displaying images that shows on top of all content      |
-+----------------+-------------------+------------------------------------------------------------------+
-| header         | ark-card__header  | If it is specified displays on top                               |
-+----------------+-------------------+------------------------------------------------------------------+
-| body (general) | ark-card__body    | Every element that has not a slot specified displays in the body |
-+----------------+-------------------+------------------------------------------------------------------+
-| actions        | ark-card__actions | Displays in the right bottom section of card, ideal for buttons  |
-+----------------+-------------------+------------------------------------------------------------------+
++---------+------------------------------------------------------------------+
+|  Name   |                           Description                            |
++=========+==================================================================+
+| general | Every element that has not a slot specified displays in the body |
++---------+------------------------------------------------------------------+
+| media   | Slot for displaying images that shows on top of all content      |
++---------+------------------------------------------------------------------+
+| header  | If it is specified displays on top                               |
++---------+------------------------------------------------------------------+
+| actions | Displays in the right bottom section of card, ideal for buttons  |
++---------+------------------------------------------------------------------+
