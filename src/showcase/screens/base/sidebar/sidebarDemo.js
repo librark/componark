@@ -19,6 +19,10 @@ export class SidebarDemo extends Component {
         <div>body</div>
         <div slot="footer">footer</div>
       </ark-sidebar>
+
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/navbar/README.rst">
+      * Reference
+      </a>
     `
 
     return super.render()
