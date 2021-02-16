@@ -2,8 +2,7 @@ PAGINATOR
 *********
 
 The ``ark-paginator`` component allows the user to select a specific page from a range of pages.
-
-    
+   
 
 Examples
 ========
@@ -21,19 +20,6 @@ Examples
 
             <ark-paginator listen on-page-change="updateList"></ark-paginator>
         
-
-Attributes
-----------
-
-+-------------------+----------------+---------+---------+-----------------------------------------------+
-|     Component     |      Name      |  Type   | Default |                  Description                  |
-+===================+================+=========+=========+===============================================+
-| ``ark-paginator`` | on-page-change | string  | null    | Sets the data to be displayed in the pages    |
-+-------------------+----------------+---------+---------+-----------------------------------------------+
-| ``ark-paginator`` | listen         | boolean | null    | Enables the event needed to display the pages |
-+-------------------+----------------+---------+---------+-----------------------------------------------+
-
-
 
 Properties
 ----------
