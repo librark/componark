@@ -52,7 +52,7 @@ Attributes
 +----------+--------+---------+------------------------------------------------+
 | width    | string | null    | Sets the width of the window                   |
 +----------+--------+---------+------------------------------------------------+
-| height   | string | -       | Sets the height of the window                  |
+| height   | string | null    | Sets the height of the window                  |
 +----------+--------+---------+------------------------------------------------+
 
 Properties
@@ -67,7 +67,7 @@ Properties
 +----------+--------+---------+------------------------------------------------+
 | width    | string | null    | Sets the width of the window                   |
 +----------+--------+---------+------------------------------------------------+
-| height   | string | -       | Sets the height of the window                  |
+| height   | string | null    | Sets the height of the window                  |
 +----------+--------+---------+------------------------------------------------+
 
 
@@ -83,3 +83,16 @@ Methods
 +--------+------------+-------------------------------------+
 | toggle | -          | Toggle between open and close       |
 +--------+------------+-------------------------------------+
+
+Slots
+-----
+
+**Add a** ``slot`` **attribute on the element to specify the section of the card in wich the content is to be displayed**
+
++----------------+--------------------+----------------------------------------------------------------+
+|      Name      |       Class        |                          Description                           |
++================+====================+================================================================+
+| body (general) | ark-modal__body    | Shows the window on top of the page                            |
++----------------+--------------------+----------------------------------------------------------------+
+| actions        | ark-modal__actions | Displays the buttons in the right bottom section of the window |
++----------------+--------------------+----------------------------------------------------------------+
