@@ -13,6 +13,7 @@ export class Modal extends Component {
     this.height = context.height || this.height || ''
 
     this.background = context.background
+    this.color = context.color 
 
     return super.init()
   }
@@ -50,7 +51,7 @@ export class Modal extends Component {
 
     const modalContent = this.querySelector('.ark-modal__content')
     modalContent.setAttribute('background', this.background)
-    modalContent.setAttribute('color','danger')
+    modalContent.setAttribute('color', this.color)
 
     return super.render()
   }

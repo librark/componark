@@ -17,7 +17,6 @@ $feat-typography: feature-targeting.create-target($query, typography);
   @include shared.ark-modal;
 
   &__content {
-    //background: var(--primary);
     @include shape.radius($medium-component-radius, $rtl-reflexive: true);
     @include elevation-theme.elevation($z-value: 24, $query: $query);
   }
