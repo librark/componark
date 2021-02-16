@@ -2,6 +2,7 @@ import { Component } from 'base/component'
 
 import './detailDemo'
 
+const tag = 'demo-splitview'
 
 export class SplitViewDemo extends Component {
   render () {
@@ -18,6 +19,10 @@ export class SplitViewDemo extends Component {
         </ark-splitview-detail>
 
       </ark-splitview>
+
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/splitview/README.rst" class="reference">
+      * Reference
+      </a>
     `
 
     this.initList()
@@ -47,4 +52,5 @@ export class SplitViewDemo extends Component {
     }).render()
   }
 }
-Component.define('demo-splitview', SplitViewDemo)
+
+Component.define(tag, SplitViewDemo)

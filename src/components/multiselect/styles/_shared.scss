@@ -1,0 +1,160 @@
+@use '../../../base/theme';
+@use './config'as *;
+
+@mixin ark-multiselect() {
+  @include theme.paint;
+  background:transparent;
+  color:var(--dark);
+  position: relative;
+  display: block;
+  height: fit-content;
+  width:100%;
+
+  &__label {
+    user-select: none;
+    font-size: small;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+  }
+
+  .ark-multiselect__remove-all {
+    margin: 0;
+    padding: 0;
+
+    width: 1.2rem;
+    height: 1.2rem;
+
+    background: none;
+    color: inherit;
+
+    font-weight: bolder;
+
+    border: 0;
+    outline: 0;
+
+    cursor: pointer;
+
+    &:hover{
+      background: var(--primary);
+      color:var(--light);
+    }
+
+  }
+
+  &-input{
+    margin: 0.1rem;
+    padding:5px;
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+    cursor: text;
+
+
+    input {
+      font-size: initial;
+      color: var(--dark);
+      background: white;
+      
+
+      &:focus {
+        //outline: 0;
+      }
+    }
+  }
+
+  &-list{
+    display: none;
+
+    background: var(--light);
+    user-select: none;
+    border: 1px solid rgba(var(--dark), 0.3);
+
+    position: absolute;
+
+    width: 100%;
+    max-width: -webkit-fill-available;
+    max-height: 14.5rem;
+
+    overflow-y: auto;
+
+    z-index: 1024;
+
+    &[show] {
+      display: block;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0.2rem 0;
+
+      :not(:first-child) {
+        border-top: 1px solid rgba(var(--light), 0.3);
+      }
+    }
+
+    li {
+      padding: 0.2rem 0.5rem;
+      cursor: pointer;
+      color: var(--dark);
+
+      &:hover,
+      &[selected] {
+        background: rgba(var(--primary), 0.1);
+        outline: 0;
+      }
+    }
+  }
+
+  &-selected-item{
+    background: rgba(var(--primary), 0.5);
+    display: flex;
+
+    width: auto;
+    max-width: inherit;
+
+    border-radius: 5px;
+    user-select: none;
+    overflow: hidden;
+
+    &[selected] {
+      background: rgba(var(--primary), 8);
+    }
+
+    small,
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    small {
+      margin: 0 .2rem;
+    }
+
+    button {
+      all: unset;
+      outline: 0;
+      padding: 0 .2rem;
+      height: 100%;
+      background: rgba(var(--dark), 0.1);
+    }
+  }
+
+  &-selected-list{
+    display: flex;
+    width: 100%;
+    gap: .1rem;
+    margin-left: .1rem;
+    flex-flow: wrap;
+
+    ark-multiselect-input {
+      flex: 1;
+    }
+  }
+
+}
+
+
+
