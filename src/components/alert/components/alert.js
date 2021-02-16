@@ -112,10 +112,10 @@ export class Alert extends Component {
   _renderConfirmButton () {
     if (String(this.showConfirmButton).toLowerCase() !== 'true') return ''
     return `
-      <button class="ark-alert__confirm" listen on-click="_onConfirm"
+      <ark-button background="success" class="ark-alert__confirm" listen on-click="_onConfirm"
         background="${this.confirmButtonBackground}" close>
         ${this.confirmButtonText}
-      </button>
+      </ark-button>
     `
   }
 
@@ -129,10 +129,10 @@ export class Alert extends Component {
   _renderCancelButton () {
     if (String(this.showCancelButton).toLowerCase() !== 'true') return ''
     return `
-      <button class="ark-alert__cancel" listen on-click="_onCancel"
+      <ark-button class="ark-alert__cancel" listen on-click="_onCancel"
         background="${this.cancelButtonBackground}" close>
         ${this.cancelButtonText}
-      </button>
+      </ark-button>
     `
   }
 
