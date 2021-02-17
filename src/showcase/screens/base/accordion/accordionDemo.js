@@ -36,6 +36,10 @@ export class AccordionDemo extends Component {
           <span>content tab D</span>
         </ark-accordion-tab>
       </ark-accordion>
+
+      <a href="https://github.com/knowark/componark/blob/master/src/components/accordion/README.rst">
+      * Reference
+      </a>
     `
     return super.render()
   }
