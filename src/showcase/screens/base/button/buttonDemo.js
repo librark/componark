@@ -110,6 +110,10 @@ export class ButtonDemo extends Component {
           <li>vertical: end</li>
         </ul>
       </div>
+
+      <a href="https://github.com/knowark/componark/blob/master/src/components/button/README.rst">
+      * Reference
+      </a>
     `
 
     return super.render()
