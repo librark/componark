@@ -1,6 +1,8 @@
 import { Component } from 'base/component'
 import { Alert } from 'components/alert'
 
+const tag = 'demo-alert'
+
 export class AlertDemo extends Component {
   init (context) {
     return super.init(context)
@@ -10,7 +12,7 @@ export class AlertDemo extends Component {
     this.innerHTML = /* html */ `
       <div>
         <p>This is an alert.</p>
-        <button listen on-click="_onClick">open</button>
+        <ark-button background="primary" listen on-click="_onClick">open</ark-button>
         <!-- <button btn-toggle>toggle</button> -->
       </div>
 
@@ -25,6 +27,11 @@ export class AlertDemo extends Component {
           <li>end</li>
         </ul>
       </div>
+
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/alert/README.rst">
+      * Reference
+      </a>
+      
     `
 
     this._onClick()
@@ -47,4 +54,5 @@ export class AlertDemo extends Component {
     }, this)
   }
 }
-Component.define('demo-alert', AlertDemo)
+
+Component.define(tag, AlertDemo)

@@ -1,55 +1,56 @@
 @use './config' as *;
+@use '../../../base/theme';
 
 @mixin ark-alert() {
   width: 100vw;
   height: 100vh;
-
+  
   position: fixed;
   top: 0;
   left: 0;
-
+  
   z-index: 4096;
-
+  
   display: flex;
-
+  
   // hidden
   &[hidden] {
     display: none;
   }
-
+  
   // horizontal
   &[horizontal~="center"] {
     justify-content: center;
   }
-
+  
   &[horizontal~="start"] {
     justify-content: start;
   }
-
+  
   &[horizontal~="end"] {
     justify-content: flex-end;
   }
-
+  
   // vertical
   &[vertical~="center"] {
     align-items: center;
   }
-
+  
   &[vertical~="start"] {
     align-items: start;
   }
-
+  
   &[vertical~="end"] {
     align-items: flex-end;
   }
-
+  
   &__content {
     z-index: inherit;
     background: $background;
-
+    
     width: fit-content;
     height: fit-content;
-
+    
     padding: 1rem;
     margin: 0.5rem;
 
