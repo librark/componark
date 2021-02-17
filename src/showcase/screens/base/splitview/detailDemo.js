@@ -1,6 +1,7 @@
 import { Component } from 'base/component'
 
 const tag = 'demo-splitview-detail'
+
 export class SplitviewDetailDemo extends Component {
   init (context) {
     const data = context.data || {}
