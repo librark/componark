@@ -13,14 +13,14 @@ export class ButtonDemo extends Component {
 
         <ark-button background="disabled" disabled>DISABLED</ark-button>
         <ark-button background="primary">primary</ark-button>
-        <ark-button background="secondary">secondary</ark-button>
+        <ark-button background="secondary" color="dark">secondary</ark-button>
         <ark-button background="success">success</ark-button>
         <ark-button background="danger">danger</ark-button>
-        <ark-button background="warning">warning</ark-button>
-        <ark-button background="info">info</ark-button>
+        <ark-button background="warning" color="dark">warning</ark-button>
+        <ark-button background="info" color="dark">info</ark-button>
         <ark-button background="dark">dark</ark-button>
         <ark-button background="muted">muted</ark-button>
-        <ark-button background="light">light</ark-button>
+        <ark-button background="light" color="dark">light</ark-button>
         <ark-button background="white">white</ark-button>
 
         <ark-button background="dark" color="danger">dark, danger</ark-button>
@@ -51,14 +51,14 @@ export class ButtonDemo extends Component {
           disabled
         </ark-button>
         <ark-button href="a" background="primary">primary</ark-button>
-        <ark-button href="a" background="secondary">secondary</ark-button>
+        <ark-button href="a" background="secondary" color="dark">secondary</ark-button>
         <ark-button href="a" background="success">success</ark-button>
         <ark-button href="a" background="danger">danger</ark-button>
-        <ark-button href="a" background="warning">warning</ark-button>
-        <ark-button href="a" background="info">info</ark-button>
+        <ark-button href="a" background="warning" color="dark">warning</ark-button>
+        <ark-button href="a" background="info" color="dark">info</ark-button>
         <ark-button href="a" background="dark">dark</ark-button>
         <ark-button href="a" background="muted">muted</ark-button>
-        <ark-button href="a" background="light">light</ark-button>
+        <ark-button href="a" background="light" color="dark">light</ark-button>
         <ark-button href="a" background="white">white</ark-button>
       </div>
 
@@ -81,7 +81,7 @@ export class ButtonDemo extends Component {
 
 
       <div class="demo-button">
-        <p>This is a Fab Buttons</p>
+        <p>This is a Fab Button</p>
 
         <ark-button fab background="primary">
           <ark-icon name="fas fa-address-book"></ark-icon>
@@ -115,4 +115,9 @@ export class ButtonDemo extends Component {
     return super.render()
   }
 }
-Component.define(tag, ButtonDemo)
+const styles = /* css */ `
+  .ark-button{
+    margin:10px;
+  }
+`
+Component.define(tag, ButtonDemo, styles)

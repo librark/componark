@@ -19,7 +19,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('accordion'),
     getComponentRoute('alert',['button']),
     getComponentRoute('audio'),
-    getComponentRoute('button'),
+    getComponentRoute('button', ['icon']),
     getComponentRoute('camera', ['button']),
     getComponentRoute('card',['button']),
     getComponentRoute('chart'),
