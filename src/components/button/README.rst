@@ -26,20 +26,20 @@ Examples
 
     **A disabled button**
 
-        ..code:: html
+        .. code:: html
 
             <ark-button background="disabled" disabled>DISABLED</ark-button>
 
     **An outline button**
 
-        ..code:: html
+        .. code:: html
 
             <ark-button outline="primary">primary</ark-button>
 
     **A floating action button (FAB), uses special attributes** ``horizontal`` **and** ``vertical`` 
     **to represents the primary actions of a screen**
 
-        ..code:: html
+        .. code:: html
 
             <ark-button fab background="primary">
             </ark-button>
