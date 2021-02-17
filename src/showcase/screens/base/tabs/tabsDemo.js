@@ -31,6 +31,10 @@ export class TabsDemo extends Component {
       </ark-tabs>
 
       <div tab-content></div>
+
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/tabs/README.rst" class="reference">
+      * Reference
+      </a>
     `
 
     const currentTab = this.tabs.currentTab ? this.tabs.currentTab.tab : ''
