@@ -1,13 +1,13 @@
 TABS
 ****
 
-The ``ark-tabs`` component provides groups a set of items, making easy to switch between different views.
+The ``ark-tabs`` component groups a set of items in tabs, making it easy to switch between different views.
     
 
 Examples
 ========
 
-    **radio group with label and multiple radio buttons**
+    **A group of tabs pointing to content**
 
     .. code-block:: html
         
@@ -25,15 +25,15 @@ Examples
 Attributes
 ----------
 
-+-------------------+--------+---------+---------+--------------------------------------------------------------------------------+
-|     Component     |  Name  |  Type   | Default |                                  Description                                   |
-+===================+========+=========+=========+================================================================================+
-| ``ark-tabs``      | active | boolean | null    | Selects the current tab                                                        |
-+-------------------+--------+---------+---------+--------------------------------------------------------------------------------+
-| ``ark-tabs-item`` | title  | string  | null    | Specifies the name that shows in the tab button                                |
-+-------------------+--------+---------+---------+--------------------------------------------------------------------------------+
-| ``ark-tabs-item`` | tab    | string  | -       | Provides a reference to the content that is displayed when the tab is selected |
-+-------------------+--------+---------+---------+--------------------------------------------------------------------------------+
++-------------------+--------+---------+---------+------------------------------------------------------------------------+
+|     Component     |  Name  |  Type   | Default |                              Description                               |
++===================+========+=========+=========+========================================================================+
+| ``ark-tabs``      | active | boolean | null    | Selects the current tab                                                |
++-------------------+--------+---------+---------+------------------------------------------------------------------------+
+| ``ark-tabs-item`` | title  | string  | null    | Specifies the name displayed in the tab button                         |
++-------------------+--------+---------+---------+------------------------------------------------------------------------+
+| ``ark-tabs-item`` | tab    | string  | null    | Provides a reference to the content displayed when the tab is selected |
++-------------------+--------+---------+---------+------------------------------------------------------------------------+
 
 Properties
 ----------
@@ -43,13 +43,13 @@ Properties
 +===================+============+=========+=========+================================================================================+
 | ``ark-tabs``      | active     | boolean | null    | Selects the current tab                                                        |
 +-------------------+------------+---------+---------+--------------------------------------------------------------------------------+
-| ``ark-tabs``      | tabs       | boolean | null    | Returns a list of tasb                                                         |
+| ``ark-tabs``      | tabs       | boolean | null    | Returns a list of tabs                                                         |
 +-------------------+------------+---------+---------+--------------------------------------------------------------------------------+
 | ``ark-tabs``      | currentTab | boolean | null    | Returns the current tab selected                                               |
 +-------------------+------------+---------+---------+--------------------------------------------------------------------------------+
 | ``ark-tabs-item`` | title      | string  | null    | Specifies the name that shows in the tab button                                |
 +-------------------+------------+---------+---------+--------------------------------------------------------------------------------+
-| ``ark-tabs-item`` | tab        | string  | -       | Provides a reference to the content that is displayed when the tab is selected |
+| ``ark-tabs-item`` | tab        | string  | null    | Provides a reference to the content that is displayed when the tab is selected |
 +-------------------+------------+---------+---------+--------------------------------------------------------------------------------+
 
 
