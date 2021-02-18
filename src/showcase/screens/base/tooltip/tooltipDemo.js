@@ -1,12 +1,13 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-tooltip'
 export class TooltipDemo extends Component {
   init (context) {
     return super.init(context)
   }
 
   render () {
-    this.innerHTML = /* html */`${this.styles}
+    this.content = /* html */`
       <div class="demo-tooltip__content">
         <ark-tooltip position="top" text="tooltip Top">
           <span>Top</span>
@@ -23,7 +24,12 @@ export class TooltipDemo extends Component {
         <ark-tooltip position="left" text="tooltip Left">
           <span>Left</span>
         </ark-tooltip>
-      </div>
+        </div>
+        <br>
+        <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/tooltip/README.rst">
+        * Reference
+        </a>
+
     `
 
     return super.render()
@@ -32,29 +38,25 @@ export class TooltipDemo extends Component {
   load () {
     return super.load()
   }
-
-  get styles () {
-    return /* html */`
-      <style>
-        demo-tooltip{
-          display: flex !important;
-        }
-
-        .demo-tooltip__content{
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          width: 100%;
-          margin-top: 100px;
-        }
-
-        .demo-tooltip__content ark-tooltip{
-          margin: 1rem;
-          padding:10px;
-          border-radius: 10px;
-        }
-      </style>
-    `
-  }
 }
-Component.define('demo-tooltip', TooltipDemo)
+
+const styles = /* css */`
+
+.demo-tooltip__content{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.demo-tooltip__content ark-tooltip{
+  margin: 1rem;
+  padding:10px;
+  border-radius: 10px;
+}
+
+
+`
+
+Component.define(tag, TooltipDemo, styles)
