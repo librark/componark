@@ -8,6 +8,10 @@ export class MapDemo extends Component {
       <div>
         <a href="https://leafletjs.com//">leafletjs</a>
       </div>
+
+      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/map/README.rst">
+      * Reference
+      </a>
     `
     return super.render()
   }
