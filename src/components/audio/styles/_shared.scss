@@ -1,34 +1,22 @@
-@use './config' as *;
+@use '../../../base/theme';
+@use './config'as *;
 
 @mixin ark-audio() {
+  @include theme.paint;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  height: 2.5rem;
-  width: 100%;
+  width: fit-content;
   overflow: hidden;
 
-  border: 1px solid rgba($color: #000000, $alpha: 0.1);
   border-radius: 5px;
 
   padding: 0 0.5rem;
   user-select: none;
 
-  background: $background;
-  color: gray;
-
-  * {
-    color: inherit;
-  }
-
-  [data-toggle-icon-stop] {
-    display: none;
-  }
-
-  button {
+  ark-button {
     border: 0;
-    outline: 0 !important;
+    outline: 0;
     background: transparent;
 
     text-align: center;
@@ -36,76 +24,37 @@
     margin: 0;
     padding: 0;
 
-    width: 2rem;
-    height: 2rem;
   }
 
-  &__time {
+  &__recording {
+    label {
+      font-weight: 700;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15rem;
+    height: 3rem;
+  }
+
+
+  &__timer {
+    display: flex;
+    background: var(--light);
+    color: var(--dark);
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem 0.5rem;
+  }
+
+  &__idle {
+    display: flex;
+  }
+
+  &__done {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    padding-left: 0.5rem;
-
-    label {
-      margin: 0;
-      margin-left: 1rem;
-      padding: 0;
-    }
-  }
-
-  &--play {
-    background: $success;
-    color: white;
-
-    [slot="microphone"] {
-      animation: zoom 1s both infinite;
-    }
-
-    .ark-audio__start {
-      display: none;
-    }
-
-    .ark-audio__stop {
-      display: block;
-    }
-  }
-
-  &__buttons {
-    display: flex;
-    flex-direction: row;
-  }
-
-  &__start {
-    display: block;
-  }
-
-  &__stop {
-    display: none;
-  }
-
-
-  @keyframes zoom {
-    0% {
-      opacity: 0;
-      transform: scale(0);
-    }
-
-    10% {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    51% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 0;
-    }
   }
 }
