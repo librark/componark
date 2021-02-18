@@ -17,6 +17,10 @@ export class RadioDemo extends Component {
       </ark-radio-group>
 
       <p>Valor seleccionado: <span data-radio-button-value></span></p>
+
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/radio/README.rst" class="reference">
+      * Reference
+      </a>
     `
 
     this.radioGroup['value'] = 'op2'
