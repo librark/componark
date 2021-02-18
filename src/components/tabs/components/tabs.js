@@ -9,20 +9,23 @@ export class Tabs extends Component {
   init (context = {}) {
     return super.init()
   }
-
+  
   render () {
     return super.render()
   }
-
+  
   async load () {
     if (!this.currentTab) {
       const tab = /** @type {TabsItem} */(
         this.tabs.length ? this.tabs[0] : null
-      )
-
-      if (tab) tab.setAttribute('active', '')
-    }
-
+        )
+        
+        if(tab){
+          tab.setAttribute('active', '')
+        }
+      }
+    
+      
     this.addEventListener('click', this.onAlterCurrentTab.bind(this))
   }
 
@@ -34,6 +37,7 @@ export class Tabs extends Component {
 
     this.currentTab.removeAttribute('active')
     tab.setAttribute('active', '')
+
 
     this.dispatchEvent(new CustomEvent('tabs:selected', {
       detail: {

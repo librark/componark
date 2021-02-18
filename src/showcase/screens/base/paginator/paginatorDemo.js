@@ -5,8 +5,11 @@ export class PaginatorDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <ark-list data-list></ark-list>
+      <ark-list background="light" color="dark" data-list action></ark-list>
       <ark-paginator listen on-page-change="updateList"></ark-paginator>
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/paginator/README.rst" class="reference">
+      * Reference
+      </a>
     `
     return super.render()
   }

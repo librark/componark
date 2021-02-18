@@ -12,14 +12,14 @@ export class TabsDemo extends Component {
         <p>This is a tabs.</p>
       </div>
 
-      <ark-tabs listen on-tabs:selected="onSelectedTab">
+      <ark-tabs background="light" color="dark" listen on-tabs:selected="onSelectedTab">
         <ark-tabs-item title="tab 1" tab="example-1">
           <ark-icon name="far fa-address-book"></ark-icon>
         </ark-tabs-item>
         <ark-tabs-item title="tab 2" tab="example-2">
           <ark-icon name="far fa-address-book"></ark-icon>
         </ark-tabs-item>
-        <ark-tabs-item title="tab 3" tab="example-3" active>
+        <ark-tabs-item title="tab 3" tab="example-3">
           <ark-icon name="far fa-address-book"></ark-icon>
         </ark-tabs-item>
         <ark-tabs-item title="tab 4" tab="example-4">
@@ -31,6 +31,10 @@ export class TabsDemo extends Component {
       </ark-tabs>
 
       <div tab-content></div>
+
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/tabs/README.rst" class="reference">
+      * Reference
+      </a>
     `
 
     const currentTab = this.tabs.currentTab ? this.tabs.currentTab.tab : ''

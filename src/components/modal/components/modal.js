@@ -12,6 +12,9 @@ export class Modal extends Component {
     this.width = context.width || this.width || ''
     this.height = context.height || this.height || ''
 
+    this.background = context.background
+    this.color = context.color 
+
     return super.init()
   }
 
@@ -28,9 +31,9 @@ export class Modal extends Component {
         <div class="ark-modal__body"></div>
         <div class="ark-modal__actions"></div>
       </div>
-
+      
       <div data-scrim class="ark-modal__scrim"></div>
-    `
+      `
 
     this.body.forEach(
       slot => this.select('.ark-modal__body').append(slot))
@@ -45,6 +48,10 @@ export class Modal extends Component {
       this.select('.ark-modal__scrim').addEventListener(
         'click', _ => this.close())
     }
+
+    const modalContent = this.querySelector('.ark-modal__content')
+    modalContent.setAttribute('background', this.background)
+    modalContent.setAttribute('color', this.color)
 
     return super.render()
   }
@@ -74,7 +81,6 @@ export class Modal extends Component {
     return `style="${width} ${height}"`
   }
 
-
   open () {
     this.setAttribute('show', '')
   }
@@ -87,4 +93,6 @@ export class Modal extends Component {
     this.toggleAttribute('show')
   }
 }
+
+console.log(styles)
 Component.define(tag, Modal, styles)

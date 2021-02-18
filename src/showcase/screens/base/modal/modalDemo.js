@@ -9,11 +9,11 @@ export class ModalDemo extends Component {
     this.content = /* html */ `${this.styles}
       <div>
         <h1>This is a modal.</h1>
-        <ark-button btn-open>open</ark-button>
-        <ark-button btn-toggle>toggle</ark-button>
+        <ark-button background="primary" btn-open>open</ark-button>
+        <ark-button background="secondary" color="dark" btn-toggle>toggle</ark-button>
       </div>
 
-      <ark-modal title="My Title" subtitle="My Subtitle"
+      <ark-modal background="dark" title="My Title" subtitle="My Subtitle"
         horizontal="center" vertical="center"
         width="80vw" height="40vh">
 
@@ -73,28 +73,20 @@ export class ModalDemo extends Component {
           </div>
         </div>
 
-        <ark-button slot="action">Aceptar</ark-button>
-        <ark-button slot="action" close>Cerrar</ark-button>
+        <ark-button background="light" color="dark" slot="action">Aceptar</ark-button>
+        <ark-button background="primary" slot="action" close>Cerrar</ark-button>
       </ark-modal>
-
-      <!-- DOCUMENTATION -->
-
-      <div>
-        <!--<h3>ark-button</h3>-->
-        <hr />
-        <h3>Attributes:</h3>
-        <p>Modal show: </p>
-          <ul>
-            <li>onHiddenModal:<span data-hidden> hidden: false</span></li>
-          </ul>
-
-        <p>Size of a new modal window:</p>
-        <ul>
-          <li>360px [default]</li>
-          <li>lg => 960px</li>
-        </ul>
-      </div>
+      <br>
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/modal/README.rst">
+      * Reference
+      </a>
     `
+    const myBackground = this.querySelector('ark-modal').getAttribute('background')
+    const myColor = this.querySelector('ark-modal').getAttribute('color')
+
+    this.modal.background = myBackground || 'primary'
+    this.modal.color = myColor
+    this.modal.render()
 
     return super.render()
   }
@@ -126,14 +118,6 @@ export class ModalDemo extends Component {
       <style>
         demo-modal ark-modal p{
           margin: 0;
-        }
-        ark-button[btn-open]{
-          background:var(--primary);
-          color:var(--light);
-        }
-        ark-button[btn-toggle]{
-          background:var(--secondary);
-          color:var(--primary);
         }
       </style>
     `

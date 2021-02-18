@@ -1,5 +1,5 @@
 @use './config';
-@use 'base/theme';
+@use '../../../base/theme';
 
 @mixin ark-paginator() {
     @include theme.paint;
@@ -16,7 +16,9 @@
         display: flex;
         justify-content: center;
 
-        small[data-info] {}
+        small[data-info] {
+            color: var(--primary);
+        }
     }
 
     &__default-buttons {
@@ -34,10 +36,12 @@
 
         button:focus {
             outline: none;
+            border-radius: 50%;
         }
 
         button:active {
-            border: 1px solid var(--primary, white);
+            border: 1px solid black;
+            //border: inherit;
         }
 
         button[on-click="_prev"],
@@ -47,7 +51,7 @@
 
         button[on-click="_first"],
         button[on-click="_last"] {
-            background: var(--danger, black)
+            background: var(--danger, black);
         }
 
     }
@@ -56,13 +60,16 @@
         display: flex;
 
 
-        button {
+        ark-button {
             border-radius: 50%;
+            min-width: 1.8rem;
             width: 1.8rem;
+            min-height: 1.8rem;
             height: 1.8rem;
             border: 1px solid var(--primary, black);
             margin: 0.1rem;
-            background: inherit;
+            //background: inherit;
+            text-align: center;
 
             &:focus {
                 border-radius: 50%;
@@ -71,7 +78,7 @@
 
             &[active] {
                 background: var(--primary, blue);
-                color: var(--secondary, white);
+                color: white !important;
             }
         }
 

@@ -1,12 +1,19 @@
 @use './config';
-@use 'base/theme';
+@use '../../../base/theme';
 
 @mixin ark-select() {
+    @include theme.paint;
 
     display: flex;
     flex-direction: column;
     height: auto;
     margin: 0.1rem;
+
+    &--label {
+        padding: 5px;
+        font-weight: 700;
+    }
+
 
     &[disabled] {
         pointer-events: none;
@@ -22,20 +29,18 @@
 
     select {
         font-size: initial;
-
         color: inherit;
         background: inherit;
         border-color: initial;
-
-        width: 100%;
-
-        * {
-            color: var(--primary);
-            background: var(--light);
-        }
+        padding: 5px;
+        margin: 5px;
 
         &:focus {
-            outline: 1px solid rgba(0, 0, 0, 0.5);
+            outline: 1px solid var(--primary);
+        }
+
+        &:hover {
+            outline: 1px solid var(--primary);
         }
     }
 
