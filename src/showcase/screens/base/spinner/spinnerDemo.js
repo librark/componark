@@ -7,40 +7,35 @@ export class SpinnerDemo extends Component {
   }
 
   render () {
-    this.content = /* html */ `${this.styles}
+    this.content = /* html */ `
       <h1>spinner</h1>
 
       <div class="spinner-container">
-        <ark-spinner borde="0.5rem"></ark-spinner>
-        <ark-spinner size='4rem' borde="0.5rem"></ark-spinner>
-        <ark-spinner size='8rem' borde="0.5rem"></ark-spinner>
+        <ark-spinner border="0.4rem"></ark-spinner>
+        <ark-spinner size='4rem' border="0.5rem"></ark-spinner>
+        <ark-spinner size='8rem' border="0.5rem"></ark-spinner>
       </div>
 
-      ${this._getDoc()}
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/spinner/README.rst">
+      * Reference
+      </a>
     `
     return super.render()
   }
-
-  _getDoc () {
-    return /* html */ `
-    `
-  }
-
-  get styles () {
-    return /* html */`
-      <style>
-        .spinner-container{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-        }
-
-        .spinner-container > *{
-          margin: 0.5rem;
-        }
-      </style>
-    `
-  }
 }
-Component.define(tag, SpinnerDemo)
+
+const styles = /* css */`
+.spinner-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.spinner-container > *{
+  margin: 0.5rem;
+}
+
+
+`
+Component.define(tag, SpinnerDemo, styles)

@@ -1,5 +1,6 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-navbar'
 export class NavbarDemo extends Component {
   init (context) {
     return super.init(context)
@@ -38,6 +39,12 @@ export class NavbarDemo extends Component {
         </ark-nav>
 
       </ark-navbar>
+
+      <br>
+
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/navbar/README.rst">
+      * Reference
+      </a>
     `
 
     return super.render()
@@ -60,4 +67,4 @@ export class NavbarDemo extends Component {
     `
   }
 }
-Component.define('demo-navbar', NavbarDemo)
+Component.define(tag, NavbarDemo)
