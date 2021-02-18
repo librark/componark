@@ -1,5 +1,6 @@
 import { Component } from '../../../base/component'
 
+const tag = 'ark-icon'
 export class Icon extends Component {
   init (context = {}) {
     this.type = this.type || 'awe'
@@ -22,4 +23,4 @@ export class Icon extends Component {
     return super.render()
   }
 }
-Component.define('ark-icon', Icon)
+Component.define(tag, Icon)
