@@ -1,5 +1,6 @@
 import { Component } from '../../../base/component'
 
+const tag = 'ark-multiselect-input'
 export class MultiselectInput extends Component {
   /** @param {{}} context */
   init (context) {
@@ -31,7 +32,7 @@ export class MultiselectInput extends Component {
   /** @param {event} event */
   onInput (event) {
     event.stopImmediatePropagation()
-    this.input.style.width = `${this.input.scrollWidth}px`
+    //this.input.style.width = `${this.input.scrollWidth}px`
     this.dispatchCustomEvent('alter')
   }
 
@@ -75,4 +76,5 @@ export class MultiselectInput extends Component {
     this.input.value = value
   }
 }
-Component.define('ark-multiselect-input', MultiselectInput)
+
+Component.define(tag, MultiselectInput)

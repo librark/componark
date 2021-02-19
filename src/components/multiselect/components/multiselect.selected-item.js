@@ -22,4 +22,5 @@ export class MultiselectSelectedItem extends Component {
     return super.render()
   }
 }
+
 Component.define('ark-multiselect-selected-item', MultiselectSelectedItem)

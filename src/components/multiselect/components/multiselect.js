@@ -5,6 +5,9 @@ import { MultiselectList } from './multiselect.list'
 import { MultiselectSelectedItem } from './multiselect.selected-item'
 import { MultiselectSelectedList } from './multiselect.selected-list'
 
+import { styles } from '../styles'
+
+const tag = 'ark-multiselect'
 export class Multiselect extends Component {
   constructor () {
     super()
@@ -46,12 +49,14 @@ export class Multiselect extends Component {
           <label>${this.label}</label>
         </div>
         <div class="ark-multiselect__body">
-          <ark-multiselect-selected-list>
+          <div class="ark-multiselect__box">
+            <div class="ark-multiselect__actions">
+              <button class="ark-multiselect__remove-all"
+              listen on-click="onRemoveAll">&times;</button>
+            </div>
+            <ark-multiselect-selected-list>
+            </ark-multiselect-selected-list>
             <ark-multiselect-input></ark-multiselect-input>
-          </ark-multiselect-selected-list>
-          <div class="ark-multiselect__actions">
-            <button class="ark-multiselect__remove-all"
-            listen on-click="onRemoveAll">&times;</button>
           </div>
         </div>
         <ark-multiselect-list></ark-multiselect-list>
@@ -260,5 +265,7 @@ export class Multiselect extends Component {
       this.select('ark-multiselect-selected-list')
     )
   }
+
 }
-customElements.define('ark-multiselect', Multiselect)
+
+Component.define(tag, Multiselect, styles)
