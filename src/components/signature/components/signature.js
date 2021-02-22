@@ -9,11 +9,11 @@ export class Signature extends Component {
     this.width = this.width || context.width
     this.height = this.height || context.height
 
-    // Local
     this.global = context.global || window
+    this.lib = context.lib || SignaturePad
     this._dirty = false
+
     return super.init()
-  
   }
 
   reflectedProperties () {
@@ -22,10 +22,10 @@ export class Signature extends Component {
 
   render () {
     this.content = /* html */`
-      <canvas data-signature-pad class="ark-signature--pad"></canvas>
+      <canvas data-signature-pad class="ark-signature__pad"></canvas>
     `
 
-    this.signaturePad = new SignaturePad(this.canvas, {
+    this.signaturePad = new this.lib(this.canvas, {
       backgroundColor: 'rgba(255, 255, 255, 1)',
       penColor: 'rgb(0, 0, 0)'
     })
@@ -33,21 +33,17 @@ export class Signature extends Component {
     if (this.width) this.style.width = this.width
     if (this.height) this.style.height = this.height
 
+    //this.canvas.addEventListener('touchend', _ => this.isDirty())
+    //this.canvas.addEventListener('mouseup', _ => this.isDirty())
+
+    //this.resizeCanvas()
+
     return super.render()
   }
 
-  async load () {
-    this.global.addEventListener('resize', _ => this.resizeCanvas())
-
-    this.canvas.addEventListener('touchend', _ => this.isDirty())
-
-    this.canvas.addEventListener('mouseup', _ => this.isDirty())
-
-    setTimeout(_ => { this.resizeCanvas(true) }, 800)
-  }
-
-  disconnectedCallback () {
-    this.global.removeEventListener('resize', _ => this.resizeCanvas())
+  /** @returns {HTMLCanvasElement} */
+  get canvas () {
+    return this.querySelector('[data-signature-pad]')
   }
 
   /** @returns {string} */
@@ -77,9 +73,7 @@ export class Signature extends Component {
     this.dispatchDirtyEvent()
   }
 
-  resizeCanvas (isResponsive = this._isResponsive) {
-    if (!isResponsive) return
-
+  resizeCanvas () {
     const ratio = Math.max(this.global.devicePixelRatio || 1, 1)
     const width = this.offsetWidth * ratio
     const height = this.offsetHeight * ratio
@@ -98,25 +92,9 @@ export class Signature extends Component {
     return this._dirty
   }
 
-  /** @returns {boolean} */
-  get _isResponsive () {
-    return this.hasAttribute('responsive')
-  }
-
   dispatchDirtyEvent () {
-    this.dispatchEvent(
-      new CustomEvent('signature:dirty', {
-        bubbles: true,
-        detail: {
-          dirty: this.dirty
-        }
-      })
-    )
+    this.emit('signature:dirty', { dirty: this.dirty })
   }
 
-  /** @returns {HTMLCanvasElement} */
-  get canvas () {
-    return this.querySelector('[data-signature-pad]')
-  }
 }
 Component.define(tag, Signature, styles)

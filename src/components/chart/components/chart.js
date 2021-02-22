@@ -7,7 +7,7 @@ export class Chart extends Component {
   init (context = {}) {
     this.details = context.details || {}
     this.global = context.global || window
-    this.lib = ChartJs
+    this.lib = context.lib || ChartJs
 
     return super.init()
   }

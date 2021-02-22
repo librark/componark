@@ -57,11 +57,9 @@ describe('Chart', () => {
       }
     }
 
+    const lib = MockChartJs
     const details = {type: 'bar', data: testData(chart)}
-    chart.init({details})
-    chart.lib = MockChartJs
-
-    chart.render()
+    chart.init({lib, details}).render()
 
     const canvas = chart.querySelector('canvas')
     expect(canvas).toBeTruthy()
