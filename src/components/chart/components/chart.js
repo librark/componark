@@ -14,7 +14,7 @@ export class Chart extends Component {
 
   connectedCallback () {
     super.connectedCallback()
-  }
+  }°0
 
   render () {
     this.content  = /* html */ `
