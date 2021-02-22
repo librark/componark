@@ -22,6 +22,7 @@ module.exports = (env, argv) => {
       runtimeChunk: 'single',
       moduleIds: 'deterministic'
     },
+    devtool: 'inline-source-map',
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({

@@ -5,29 +5,23 @@ import { styles } from '../styles'
 const tag = 'ark-chart'
 export class Chart extends Component {
   init (context = {}) {
-    this.details = context.details
+    this.details = context.details || {}
     this.global = context.global || window
+    this.lib = ChartJs
 
     return super.init()
   }
 
   connectedCallback () {
     super.connectedCallback()
-    this.global.addEventListener('resize', this._resizeCanvas.bind(this))
-  }
-
-  disconnectedCallback () {
-    this.global.removeEventListener('resize', this._resizeCanvas.bind(this))
-  }
+  }°0
 
   render () {
-    this.innerHTML = this._containsData()
-      ? /* html */ `
-      <canvas data-chart listen>
+    this.content  = /* html */ `
+      <canvas data-chart>
         Your browser does not support the canvas element.
       </canvas>
     `
-      : ''
     this._renderChart()
 
     return super.render()
@@ -58,22 +52,10 @@ export class Chart extends Component {
     return this._chart || null
   }
 
-  _containsData () {
-    return Boolean(this.details && Object.keys(this.details).length)
-  }
-
   _renderChart () {
-    if (this._containsData()) {
+    if (Object.keys(this.details).length) {
       const element = this.querySelector('[data-chart]')
-      this._chart = new ChartJs(element, this.details)
-    }
-  }
-
-  _resizeCanvas () {
-    if (this._containsData()) {
-      for (let id in ChartJs.instances) {
-        ChartJs.instances[id].resize()
-      }
+      this._chart = new this.lib(element, this.details)
     }
   }
 
