@@ -38,16 +38,8 @@ describe('Chart', () => {
     const chart = container.querySelector('ark-chart')
     expect(chart).toBeTruthy()
     expect(chart).toBe(chart.init())
+    expect(chart.chart).toBeFalsy()
   })
-
-  it('can be instantiated', () => {
-    container.innerHTML = `
-    <ark-chart></ark-chart>
-    `
-    const chart = container.querySelector('ark-chart')
-    expect(!chart.chart).toBeTruthy()
-  })
-
 
   it('can be instantiated with details', () => {
     container.innerHTML = `
@@ -55,13 +47,26 @@ describe('Chart', () => {
     `
     const chart = container.querySelector('ark-chart')
 
-    const details = {type: 'bar', data: testData(chart)}
+    let givenElement = null
+    let givenDetails = null
 
-    chart.init({details}).render()
+    class MockChartJs {
+      constructor(element, details) {
+        givenElement = element
+        givenDetails = details
+      }
+    }
+
+    const details = {type: 'bar', data: testData(chart)}
+    chart.init({details})
+    chart.lib = MockChartJs
+
+    chart.render()
 
     const canvas = chart.querySelector('canvas')
-    
     expect(canvas).toBeTruthy()
+    expect(givenElement).toBe(canvas)
+    expect(givenDetails).toBe(details)
   })
 
   it('generates its colors', () => {
