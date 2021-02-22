@@ -12,10 +12,6 @@ export class Chart extends Component {
     return super.init()
   }
 
-  connectedCallback () {
-    super.connectedCallback()
-  }°0
-
   render () {
     this.content  = /* html */ `
       <canvas data-chart>
