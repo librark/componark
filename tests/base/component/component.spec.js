@@ -96,6 +96,9 @@ describe('Component', () => {
     const renderSpy = jest.spyOn(component, 'render')
     const loadSpy = jest.spyOn(component, 'load')
 
+    const consoleError = console.error;
+    console.error = jest.fn();
+
     component.load = async () => { throw new Error('Load Error!') }
 
     try {
@@ -103,6 +106,8 @@ describe('Component', () => {
     } catch (error) {
       expect(error.message).toEqual('Load Error!')
     }
+
+    console.error = consoleError
   })
 
   it('selects the children matching a selector', () => {
