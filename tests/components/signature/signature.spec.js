@@ -72,8 +72,6 @@ describe('Signature', () => {
 
     const dataURL = signature.dataURL()
 
-    console.log('DataUrl>>', dataURL)
-
     expect(dataURL).toBeTruthy()
   })
 
