@@ -33,10 +33,10 @@ export class Signature extends Component {
     if (this.width) this.style.width = this.width
     if (this.height) this.style.height = this.height
 
-    //this.canvas.addEventListener('touchend', _ => this.isDirty())
-    //this.canvas.addEventListener('mouseup', _ => this.isDirty())
+    this.canvas.addEventListener('touchend', _ => this.mark())
+    this.canvas.addEventListener('mouseup', _ => this.mark())
 
-    //this.resizeCanvas()
+    this.resizeCanvas()
 
     return super.render()
   }
@@ -47,12 +47,12 @@ export class Signature extends Component {
   }
 
   /** @returns {string} */
-  dataURL (width = this.offsetWidth, height = this.offsetHeight) {
+  dataURL (width = null, height = null) {
     /** @type {HTMLCanvasElement} */
     const dupCanvas = (this.canvas.cloneNode(true))
 
-    dupCanvas.width = width
-    dupCanvas.height = height
+    dupCanvas.width = width || this.width
+    dupCanvas.height = height || this.height
     dupCanvas.getContext('2d').drawImage(
       this.canvas,
       0, 0, this.canvas.width, this.canvas.height,
@@ -62,19 +62,19 @@ export class Signature extends Component {
     return dupCanvas.toDataURL('image/jpg')
   }
 
-  clear (dirty = false) {
+  clear (dirty) {
     this.signaturePad.clear()
     this._dirty = dirty
     this.dispatchDirtyEvent()
   }
 
-  isDirty () {
+  mark () {
     this._dirty = true
     this.dispatchDirtyEvent()
   }
 
   resizeCanvas () {
-    const ratio = Math.max(this.global.devicePixelRatio || 1, 1)
+    const ratio = Math.max(this.global.devicePixelRatio, 1)
     const width = this.offsetWidth * ratio
     const height = this.offsetHeight * ratio
     const dataURL = this.dataURL(width, height)
