@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+  import { Component } from 'base/component'
 
 export class MultiselectDemo extends Component {
   init (context) {
@@ -112,13 +112,6 @@ export class MultiselectDemo extends Component {
   get styles () {
     return /* html */ `
       <style>
-        demo-multiselect{
-          display: flex !important;
-          gap: .5rem;
-        }
-        demo-multiselect div{
-          flex: 1;
-        }
       </style>
     `
   }

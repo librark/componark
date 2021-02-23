@@ -18,7 +18,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
   router.addRoutes(prefix, [
     getComponentRoute('accordion'),
     getComponentRoute('alert',['button']),
-    getComponentRoute('audio'),
+    getComponentRoute('audio',['button']),
     getComponentRoute('button', ['icon']),
     getComponentRoute('camera', ['button']),
     getComponentRoute('card',['button']),
@@ -31,7 +31,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('location', ['button', 'map']),
     getComponentRoute('map'),
     getComponentRoute('modal', ['button']),
-    //getComponentRoute('multiselect'),
+    getComponentRoute('multiselect'),
     getComponentRoute('navbar', ['button', 'icon']),
     getComponentRoute('paginator', ['list','button']),
     getComponentRoute('radio'),

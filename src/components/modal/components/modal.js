@@ -94,5 +94,4 @@ export class Modal extends Component {
   }
 }
 
-console.log(styles)
 Component.define(tag, Modal, styles)

@@ -17,6 +17,12 @@ export class LocationDemo extends Component {
         <span data-position></span>
       </div>
       <ark-location></ark-location>
+
+      <br>
+
+      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/location/README.rst">
+      * Reference
+      </a>
     `
 
     return super.render()

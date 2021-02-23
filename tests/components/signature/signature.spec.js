@@ -1,5 +1,28 @@
 import { Signature } from '../../../src/components/signature'
 
+jest.mock('signature_pad', () => jest.fn(
+  () => ({ 
+    clear: () => null, 
+    fromDataURL: (dataURL) => null
+  })))
+
+class MockSignaturePad {
+  constructor(element, options) {
+    this.element = element
+    this.options = options
+  }
+
+  clear() {}
+
+  fromDataURL(dataURL) {}
+}
+
+// @ts-ignore
+window.HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
+  scale: (x, y) => null, 
+  drawImage: (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) => null
+}))
+
 describe('Signature', () => {
   let container = null
   beforeEach(() => {
@@ -16,78 +39,63 @@ describe('Signature', () => {
     container.innerHTML = `
     <ark-signature></ark-signature>
     `
-    const signature = document.querySelector('ark-signature')
+    const signature = container.querySelector('ark-signature')
     expect(signature).toBeTruthy()
     expect(signature).toBe(signature.init())
     expect(signature.canvas).toBeTruthy()
 
-
-    // signature.init()
-    // signature.render()
-    // signature.load()
-
-    // signature.dataURL()
-
-    // signature.clear()
-
-    // @ts-ignore
-    // signature.resizeCanvas()
-
-    // @ts-ignore
-    // signature.isDirty()
-
-    // signature.disconnectedCallback()
-
-    // expect(signature.querySelector('canvas')).toBeTruthy()
   })
 
-  it('can be resize Canvas', () => {
-    const signature = new Signature()
+  it('is applied on a canvas element', () => {
+    container.innerHTML = `
+    <ark-signature width="90hw" height="90vw"></ark-signature>
+    `
 
-    signature.init()
-    signature.render()
-    signature.load()
+    const lib = MockSignaturePad
+    const signature = container.querySelector('ark-signature')
+    signature.init({lib}).render()
 
-    signature.dataURL()
+    const canvas = signature.select('canvas')
 
-    signature.clear()
-
-    // @ts-ignore
-    signature.global.devicePixelRatio = 0
-
-    expect(signature.querySelector('canvas')).toBeTruthy()
+    expect(signature.signaturePad.element).toBe(canvas)
+    expect(signature.signaturePad.options).toBeTruthy()
   })
 
-  it('can be responsive', () => {
-    const signature = new Signature()
+  it('returns its data as a dataURL', () => {
+    container.innerHTML = `
+    <ark-signature></ark-signature>
+    `
 
-    signature.init()
-    signature.render()
-    signature.load()
+    const lib = MockSignaturePad
+    const signature = container.querySelector('ark-signature')
+    signature.init({lib}).render()
 
-    // @ts-ignore
-    signature.resizeCanvas(true)
+    const dataURL = signature.dataURL()
 
-    // @ts-ignore
-    signature.global.devicePixelRatio = 0
-
-    expect(signature.querySelector('canvas')).toBeTruthy()
+    expect(dataURL).toBeTruthy()
   })
 
-  it('can be width and height', () => {
-    const signature = new Signature()
+  it('is marked on touchend and mouseup canvas events', () => {
+    container.innerHTML = `
+    <ark-signature></ark-signature>
+    `
 
-    signature.init({ height: '100', width: '100' })
+    const lib = MockSignaturePad
+    const signature = container.querySelector('ark-signature')
+    signature.init({lib}).render()
 
-    signature.render()
-    signature.load()
 
-    // @ts-ignore
-    signature.resizeCanvas(true)
+    const canvas = signature.canvas
 
-    // @ts-ignore
-    signature.global.devicePixelRatio = 0
+    expect(signature.dirty).toBeFalsy()
+    canvas.dispatchEvent(new Event('touchend'))
+    expect(signature.dirty).toBeTruthy()
 
-    expect(signature.querySelector('canvas')).toBeTruthy()
+    signature._dirty = false
+
+    expect(signature.dirty).toBeFalsy()
+    canvas.dispatchEvent(new Event('mouseup'))
+    expect(signature.dirty).toBeTruthy()
   })
+
 })

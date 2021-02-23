@@ -1,4 +1,5 @@
 import { Component } from '../../../base/component'
+import {  styles  } from '../styles'
 import { getSlots } from '../../../base/utils'
 
 const tag = 'ark-audio'
@@ -22,20 +23,21 @@ export class Audio extends Component {
       this.content = `
       <div class="ark-audio__done">
         <audio class="ark-audio__audio" controls></audio>
-        <button listen on-click="reset">❌</button>
+        <ark-button listen on-click="reset">❌</ark-button>
       </div>
       `
     } else if (this.status === 'recording') {
       this.content = `
       <div class="ark-audio__recording">
+        <label>Recording</label>  
         <span class="ark-audio__timer">00:00</span>
-        <button listen on-click="stop">⏹️</button>
+        <ark-button listen on-click="stop">⏹️</ark-button>
       </div>
       `
     } else {
       this.content = `
       <div class="ark-audio__idle">
-        <button listen on-click="start">⏺️</button>
+        <ark-button listen on-click="start">⏺️</ark-button>
       </div>
       `
     }
@@ -95,4 +97,4 @@ export class Audio extends Component {
     reader.onloadend = () => { this.dataURL = reader.result }
   }
 }
-Component.define(tag, Audio)
+Component.define(tag, Audio, styles)
