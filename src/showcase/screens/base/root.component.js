@@ -64,6 +64,7 @@ export class RootComponent extends Component {
     )
   }
 
+
   get locations () {
     return [
       { name: 'Accordion', path: '/base/accordion' },
@@ -98,7 +99,7 @@ export class RootComponent extends Component {
   }
 }
 
-const styles = `
+const styles = /* css */`
 
 body {
   margin: 0;
@@ -185,9 +186,9 @@ body {
   flex-direction: column;
   background-color: #334455;
   color: #00ffff;
-  text-decoration: none
+  text-decoration: none;
   overflow-x: hidden;
-  max-width:100px;
+  min-width:15vw;
 }
 
 .app-root__sideitem {
