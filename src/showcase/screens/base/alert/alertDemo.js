@@ -41,16 +41,18 @@ export class AlertDemo extends Component {
 
   _onClick (event) {
     Alert.launch({
-      title: 'Title....',
-      text: 'Text ....',
+      title: 'Atención ¡esto es un Alert!',
+      text: 'Y este un texto descriptivo',
       showConfirmButton: true,
       confirmButtonText: 'Confirm',
-      confirmButtonBackground: 'info',
+      confirmButtonBackground: 'success',
+      contentBackground: 'light',
+      contentColor: 'dark',
       showCancelButton: true,
       cancelButtonText: 'Cerrar',
       cancelButtonBackground: 'dark',
-      horizontal: 'end',
-      vertical: 'end'
+      horizontal: 'center',
+      vertical: 'center'
     }, this)
   }
 }
