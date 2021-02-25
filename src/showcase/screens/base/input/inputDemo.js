@@ -16,7 +16,7 @@ export class InputDemo extends Component {
     </section>
 
     <section class="implementation">
-      <ark-input background="light" color="primary" data-input-text required inline
+      <ark-input border-color="dark" data-input-text required inline
                  label="Enter some text:"
                  listen on-alter="onTextInput"></ark-input>
       <p>Value: <span data-input-value></span></p>
