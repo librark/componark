@@ -16,7 +16,7 @@ export class InputDemo extends Component {
     </section>
 
     <section class="implementation">
-      <ark-input color="primary" data-input-text required inline
+      <ark-input background="light" color="primary" data-input-text required inline
                  label="Enter some text:"
                  listen on-alter="onTextInput"></ark-input>
       <p>Value: <span data-input-value></span></p>
@@ -70,21 +70,21 @@ export class InputDemo extends Component {
 
   get firstExample() {
     return this.renderExample(hljs.highlight('html', `
-      <ark-input color="primary" label="Label"></ark-input>
+      <ark-input label="Label"></ark-input>
     `))
   }
 
   get secondExample() {
     return this.renderExample(hljs.highlight('html', `
-      <ark-input color="primary" label="Inline Label" inline></ark-input>
-      <ark-input color="primary" label="Header Label"></ark-input>
+      <ark-input label="Inline Label" inline></ark-input>
+      <ark-input label="Header Label"></ark-input>
     `))
   }
 
   get thirdExample() {
     return this.renderExample(hljs.highlight('html',/* html */ `
-      <ark-input label="File" color="primary" type="file"></ark-input>
-      <ark-input label="Date" color="primary" type="date"></ark-input>
+      <ark-input label="File" type="file"></ark-input>
+      <ark-input label="Date" type="date"></ark-input>
     `))
   }
 

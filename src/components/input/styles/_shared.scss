@@ -3,15 +3,14 @@
 
 @mixin ark-input() {
     @include theme.paint();
-    background:transparent;
-    padding:10px;
+    padding: 10px;
 
     &[disabled] {
         pointer-events: none;
         cursor: default;
 
         &>.ark-input__input {
-            background: rgb(255, 255, 255);
+            background: inherit;
         }
 
         &:hover {
