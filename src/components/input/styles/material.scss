@@ -13,7 +13,6 @@
 $query: feature-targeting.all();
 $feat-structure: feature-targeting.create-target($query, structure);
 $feat-color: feature-targeting.create-target($query, color);
-//$feat-structure: feature-targeting.create-target($query, structure);
 //*-----------
 
 .ark-input {
@@ -30,10 +29,9 @@ $feat-color: feature-targeting.create-target($query, color);
   will-change: opacity, transform, error;
 
 
- 
+
   &__input {
-    @include theme.prop(border-color, grey);
-    @include mixins.fill-color(surface, $query);
+    @include theme.prop(border-color, var(--light));
     @include shape.radius(4px, false);
 
     @include feature-targeting.targets($feat-structure) {
@@ -41,13 +39,12 @@ $feat-color: feature-targeting.create-target($query, color);
     }
 
     &:focus {
-      @include mixins.fill-color(rgb(221, 239, 255), $query);
-      @include theme.prop(border-color, primary);
+      @include theme.prop(border-color, var(--primary));
       outline: none;
     }
 
     &:hover {
-      @include theme.prop(border-color, primary);
+      @include theme.prop(border-color, var(--primary));
     }
   }
 
