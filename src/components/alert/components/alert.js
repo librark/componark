@@ -10,6 +10,16 @@ export class Alert extends Component {
     this.horizontal = context.horizontal || this.horizontal || 'center'
     this.vertical = context.vertical || this.vertical || 'center'
 
+    this.contentBackground = (
+      context.contentBackground ||
+      this.contentBackground ||
+      'primary'
+    )
+    this.contentColor = (
+      context.contentColor ||
+      this.contentColor
+    )
+
     this.showConfirmButton = context.showConfirmButton ?? true
 
     this.confirmButtonText = (
@@ -46,7 +56,7 @@ export class Alert extends Component {
 
   render () {
     this.content = /* html */ `
-      <div class="ark-alert__content">
+      <div background="${this.contentBackground}" color="${this.contentColor}" class="ark-alert__content">
         <div class="ark-alert__header">
           ${this._renderTitle()}
           ${this._renderText()}
@@ -112,7 +122,7 @@ export class Alert extends Component {
   _renderConfirmButton () {
     if (String(this.showConfirmButton).toLowerCase() !== 'true') return ''
     return `
-      <ark-button background="success" class="ark-alert__confirm" listen on-click="_onConfirm"
+      <ark-button class="ark-alert__confirm" listen on-click="_onConfirm"
         background="${this.confirmButtonBackground}" close>
         ${this.confirmButtonText}
       </ark-button>

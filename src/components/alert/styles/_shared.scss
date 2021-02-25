@@ -1,56 +1,58 @@
-@use './config' as *;
+@use './config'as *;
 @use '../../../base/theme';
 
 @mixin ark-alert() {
   width: 100vw;
   height: 100vh;
-  
+
   position: fixed;
   top: 0;
   left: 0;
-  
+
   z-index: 4096;
-  
+
   display: flex;
-  
+
   // hidden
   &[hidden] {
     display: none;
   }
-  
+
   // horizontal
   &[horizontal~="center"] {
     justify-content: center;
   }
-  
+
   &[horizontal~="start"] {
     justify-content: start;
   }
-  
+
   &[horizontal~="end"] {
     justify-content: flex-end;
   }
-  
+
   // vertical
   &[vertical~="center"] {
     align-items: center;
   }
-  
+
   &[vertical~="start"] {
     align-items: start;
   }
-  
+
   &[vertical~="end"] {
     align-items: flex-end;
   }
-  
+
   &__content {
+    @include theme.paint;
     z-index: inherit;
-    background: $background;
-    
+
+    border-radius: 5px;
+
     width: fit-content;
     height: fit-content;
-    
+
     padding: 1rem;
     margin: 0.5rem;
 
@@ -58,11 +60,23 @@
     max-height: calc(100vh - 3rem);
 
     overflow: hidden;
+
+    .ark-button {
+      transform: scale(0.9);
+      margin: 0.1rem 0.6rem;
+    }
   }
 
   &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     overflow: hidden;
     user-select: none;
+
+    span {
+      font-size: 0.9rem;
+    }
   }
 
   &__actions {
