@@ -32,7 +32,6 @@ $feat-color: feature-targeting.create-target($query, color);
 
   &__input {
     @include theme.prop(border-color, var(--light));
-    //@include mixins.fill-color(surface, $query);
     @include shape.radius(4px, false);
 
     @include feature-targeting.targets($feat-structure) {
@@ -40,7 +39,6 @@ $feat-color: feature-targeting.create-target($query, color);
     }
 
     &:focus {
-      //@include mixins.fill-color(var(--light), $query);
       @include theme.prop(border-color, var(--primary));
       outline: none;
     }
