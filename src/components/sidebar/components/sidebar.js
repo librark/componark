@@ -28,10 +28,12 @@ export class Sidebar extends Component {
 
   open () {
     this.setAttribute('opened', '')
+    document.querySelector('body').style.overflow = "hidden"
   }
-
+  
   close () {
     this.removeAttribute('opened')
+    document.querySelector('body').style.overflow = "auto"
   }
 
   toggle () {
