@@ -15,7 +15,8 @@ export class Multiselect extends Component {
 
  
   init (context) {
-    // this.label = context.label || this.label
+    this.label = this.label
+    //this.global = context.global || window
     // this.value = context.value || this.value || ''
     // this.field = context.field || this.field || ''
     // this.template = context.template || (data => `${data}`)
@@ -23,7 +24,6 @@ export class Multiselect extends Component {
 
     // Local
     // this.selectedList = []
-    // this.global = context.global || window
 
     return super.init()
   }
@@ -34,17 +34,43 @@ export class Multiselect extends Component {
 
   render () {
     this.innerHTML = /* html */ `
+    <div class="ark-multiselect"}>
+      <h1>${this.label}</h1>
+      <div class="ark-multiselect__field" tabindex="0"></div>
+      <div class="ark-multiselect__popup">
+      HI IM POPUP
+      </div>
+      </div>
 		`
+   
+    this._popup = this.select('.ark-multiselect__popup')
+   
     return super.render()
   }
 
   load () {
-    
+  }
+  
+  showPopup(show){
+    this.isOpened = show
+    this._popup.display = show ? 'block' : 'none'
   }
 
-  disconnectedCallback () {
-    
+  open(){
+    this.showPopup(true)
   }
+  close(){
+    this.showPopup(false)
+  }
+  
+
+  // disconnectedCallback () {
+    
+  // }
+
+  // isRequired () {
+  //   return this.hasAttribute('required') ? 'required' : ''
+  // }
 
 }
 
