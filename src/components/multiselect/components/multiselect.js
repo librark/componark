@@ -40,20 +40,27 @@ export class Multiselect extends Component {
       <div class="ark-multiselect__popup">
       HI IM POPUP
       </div>
-      </div>
+    </div>
 		`
    
     this._popup = this.select('.ark-multiselect__popup')
-   
+    this._field = this.select('.ark-multiselect__field')
+
+    this._field.addEventListener('click', this.fieldClickHandler.bind(this))
+
     return super.render()
   }
 
   load () {
   }
+
+  fieldClickHandler(event){
+    this.isOpened ? this.close() : this.open()
+  }
   
   showPopup(show){
     this.isOpened = show
-    this._popup.display = show ? 'block' : 'none'
+    this._popup.style.display = show ? 'block' : 'none'
   }
 
   open(){
@@ -66,10 +73,6 @@ export class Multiselect extends Component {
 
   // disconnectedCallback () {
     
-  // }
-
-  // isRequired () {
-  //   return this.hasAttribute('required') ? 'required' : ''
   // }
 
 }
