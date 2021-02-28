@@ -5,9 +5,9 @@
   //@include theme.paint;
 
   .ark-multiselect {
-    position: relative;
-    box-sizing: border-box;
     display: inline-block;
+    position: relative;
+    box-sizing: content-box;
     width: 100%;
 
 
@@ -16,9 +16,9 @@
       justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
+      padding: 0.5em;
 
       overflow: hidden;
-      padding: .2em .5em;
       border: 1px solid var(--light);
       border-radius: .2em;
       cursor: pointer;
@@ -32,12 +32,14 @@
 
       input {
         width: 100%;
+
+        align-self: flex-start;
         padding: 0.5em;
-        margin: 0.5em 0em;
         border: 2px solid rgba(50, 100, 255, 0.5);
         border-radius: .2em;
-        align-self: flex-end;
+
       }
+
     }
 
     &__tag {
