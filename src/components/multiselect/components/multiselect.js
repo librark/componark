@@ -17,6 +17,7 @@ export class Multiselect extends Component {
     this.field = context.field || this.field || ''
     this.template = context.template || (data => `${data}`)
     this.items = context.items || []
+    this.global = context.global || window
     
     return super.init()
   }
@@ -53,11 +54,10 @@ export class Multiselect extends Component {
   async load() {
     this._field.addEventListener('click', this.fieldClickHandler.bind(this))
     this._field.addEventListener('input', this.inputValue.bind(this))
+    this._list.addEventListener('click', this.listClickHandler.bind(this))
+    //this._input.addEventListener('blur', this.fieldClickHandler.bind(this))
     //this._input.addEventListener('input', this.popupChange.bind(this))
   }
-
-
-
 
   addListItems(){
       this._list.init({
@@ -81,6 +81,46 @@ export class Multiselect extends Component {
     const value = this._input.value
     return value
   }
+  
+  selectItem(item){
+    
+    if(item && item.tagName != 'LI'){
+      item.parentNode
+    }else if(!item.hasAttribute('selected')){
+      item.setAttribute('selected', 'true')
+    }
+    
+  }
+
+  listClickHandler(event){
+    const item = event.target
+
+    //console.log(this.items[item.id])
+    //onsole.log(this.items)
+    //console.log(item.id)
+
+
+    this.selectItem(item)
+  }
+
+  // createTag(item){
+  //   const tag = document.createElement('div')
+  //   tag.className = 'ark-multiselect__tag'
+
+  //   const tagText = document.createElement('div')
+  //   tagText.className = 'ark-multiselect__tag-text'
+  //   tagText.textContent = item.textContent
+    
+  //   const removeButton = document.createElement('div')
+  //   removeButton.className = 'ark-multiselect__tag-remove-button'
+  //   removeButton.addEventListener('click', this.removeTag.bind(this,tag,item))
+
+  //   tag.appendChild(tagText)
+  //   tag.appendChild(removeButton)
+
+  //   return tag
+  // }
+
   
   open(){
     this.showPopup(true)

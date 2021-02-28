@@ -12,6 +12,7 @@ export class MultiselectList extends Component {
     this.field = context.field || ''
     this.template = context.template 
     this.items = context.items || []
+    this.global = context.global || window
 
     return super.init()
   }
@@ -24,12 +25,12 @@ export class MultiselectList extends Component {
 
   async renderItems () {
     let content = this.items.length ? '' : /* html */ `
-      <span class="ark-multiselect-list__no-options">Sin Opciones</span>
+      <span type="empty" class="ark-multiselect-list__no-options">Sin Opciones</span>
     `
     this.items.forEach((item, index) => {
       const currentField = item[this.field] || item
       content += /* html */`
-        <li id="${index}" field="${currentField}" type="none" data-item>
+        <li id="${index}" field="${currentField}" data-item>
           ${this.template(item)}
         </li>
       `

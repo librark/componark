@@ -11,6 +11,7 @@ export class MultiselectDemo extends Component {
       <ark-multiselect list label='multiselect list'></ark-multiselect>
       <br>
       <ark-multiselect list-object label='multiselect object'></ark-multiselect>
+      <ark-multiselect label='multi none'></ark-multiselect>
 		`
     this.renderMultiselect()
     this.renderMultiselectObject()
