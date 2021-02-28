@@ -24,7 +24,7 @@ export class Multiselect extends Component {
    *  global?
    * }} context
    **/
-  init (context) {
+  init (context = {}) {
     this.label = context.label || this.label
     this.value = context.value || this.value || ''
     this.field = context.field || this.field || ''

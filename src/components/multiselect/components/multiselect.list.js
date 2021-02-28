@@ -8,9 +8,9 @@ export class MultiselectList extends Component {
     //this.selectedIndex = -1
   }
 
-  init (context) {
+  init (context = {}) {
     this.field = context.field || ''
-    this.template = context.template || (data => `${data}`)
+    this.template = context.template 
     this.items = context.items || []
 
     return super.init()
@@ -22,7 +22,7 @@ export class MultiselectList extends Component {
   }
 
 
-  renderItems () {
+  async renderItems () {
     let content = this.items.length ? '' : /* html */ `
       <span class="ark-multiselect-list__no-options">Sin Opciones</span>
     `
@@ -34,7 +34,7 @@ export class MultiselectList extends Component {
         </li>
       `
     })
-    this.innerHTML = content
+    this.content = content
   }
 }
 

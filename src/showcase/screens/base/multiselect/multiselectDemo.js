@@ -8,9 +8,12 @@ export class MultiselectDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <ark-multiselect list label='multiselect'></ark-multiselect>
+      <ark-multiselect list label='multiselect list'></ark-multiselect>
+      <br>
+      <ark-multiselect list-object label='multiselect object'></ark-multiselect>
 		`
     this.renderMultiselect()
+    this.renderMultiselectObject()
     
 
     return super.render()
@@ -40,15 +43,43 @@ export class MultiselectDemo extends Component {
     const multiselect = /** @type {Multiselect} */(
       this.select('ark-multiselect[list]')
     )
-
+    
     multiselect.init({
       label: "multiselect test",
       items: myItems
     }).render().load()
   }
+  
+  renderMultiselectObject () {
+    const myItems = [
+      { id: '101', name: 'Camila' },
+      { id: '102', name: 'Luisa' },
+      { id: '103', name: 'Andres' },
+      { id: '104', name: 'Daniela' },
+      { id: '105', name: 'Alejandro' },
+    ]
+    
+    const field = "id"
+    const template = (item) => `${item['id']} - ${item['name']}`
+    
+    const multiselect =(
+      this.select('ark-multiselect[list-object]')
+    )
 
-
+    multiselect.init({
+        template: template,
+        field: field,
+        items: myItems
+    }).render().load()
 
 
 }
-Component.define(tag, MultiselectDemo)
+}
+
+const styles = /* css */`
+
+
+
+`
+
+Component.define(tag, MultiselectDemo, styles)

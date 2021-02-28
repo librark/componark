@@ -12,7 +12,7 @@ export class Multiselect extends Component {
     super()
   }
   
-  init(context) {
+  init(context = {}) {
     this.label = this.label
     this.field = context.field || this.field || ''
     this.template = context.template || (data => `${data}`)
@@ -43,10 +43,10 @@ export class Multiselect extends Component {
     this._field = this.select('.ark-multiselect__field')
     this._input = this.select('.ark-multiselect__input')
     this._list = this.select('ark-multiselect-list')
-
+    
     this.addListItems()
-  
-
+    
+    
     return super.render()
   }
   
@@ -55,6 +55,9 @@ export class Multiselect extends Component {
     this._field.addEventListener('input', this.inputValue.bind(this))
     //this._input.addEventListener('input', this.popupChange.bind(this))
   }
+
+
+
 
   addListItems(){
       this._list.init({
@@ -78,18 +81,18 @@ export class Multiselect extends Component {
     const value = this._input.value
     return value
   }
-
-  get multiselectList () {
-    return /** @type {MultiselectList} */(
-      this.select('ark-multiselect-list')
-    )
-  }
-
+  
   open(){
     this.showPopup(true)
   }
   close(){
     this.showPopup(false)
+  }
+  
+  get multiselectList () {
+    return /** @type {MultiselectList} */(
+      this.select('ark-multiselect-list')
+    )
   }
 
   

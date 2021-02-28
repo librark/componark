@@ -20,17 +20,6 @@ describe('Multiselect', () => {
     `
     const multiselect = container.querySelector('ark-multiselect')
 
-    const myItems = [
-      '01 display',
-      '02 max-width',
-      '03 max-height',
-      '04 width'
-    ]
-
-    multiselect.items = myItems
-    multiselect.render()
-
-
     expect(multiselect).toBeTruthy()
     expect(multiselect).toEqual(multiselect.init())
   }) 
