@@ -1,0 +1,54 @@
+@mixin multiselect_list_default_() {
+  $component: "ark-multiselect-list";
+
+  #{$component} {
+    display: none;
+
+    background: $white;
+    user-select: none;
+    border: 1px solid rgba($color: $color, $alpha: 0.3);
+
+    position: absolute;
+
+    width: 100%;
+    max-width: -webkit-fill-available;
+    max-height: 14.5rem;
+
+    overflow-y: auto;
+
+    z-index: 1024;
+
+    &[show] {
+      display: block;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0.2rem 0;
+
+      :not(:first-child) {
+        border-top: 1px solid rgba($color: $color, $alpha: 0.3);
+      }
+    }
+
+    li {
+      padding: 0.2rem 0.5rem;
+      cursor: pointer;
+      color: $color;
+
+      // &:hover,
+      &[selected] {
+        background: rgba($color: $primary, $alpha: 0.1);
+        outline: 0;
+      }
+    }
+  }
+
+  .#{$component} {
+    &__no-options {
+      margin: 0.2rem;
+      color: $muted;
+      display: block;
+    }
+  }
+}

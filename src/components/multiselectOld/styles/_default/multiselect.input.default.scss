@@ -1,0 +1,40 @@
+@mixin multiselect_input_default_() {
+  $component: "ark-multiselect-input";
+
+  #{$component} {
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+
+    cursor: text;
+
+    &>* {
+      margin: 0.1rem;
+    }
+
+    input {
+      font-size: initial;
+
+      border: 0;
+      outline: 0;
+      color: inherit;
+      background: inherit;
+      border-color: initial;
+      width: 10px;
+
+      * {
+        color: $color !important;
+        background: $background !important;
+      }
+
+      &:focus {
+        outline: 0 !important;
+      }
+    }
+
+    ark-multiselect-item {
+      flex-grow: 1;
+      flex-basis: auto;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@mixin multiselect_material_() {
+  $component: "ark-multiselect";
+
+  #{$component} {
+    border-bottom: 1px solid;
+    border-color: inherit;
+  }
+
+  .#{$component} {}
+}
