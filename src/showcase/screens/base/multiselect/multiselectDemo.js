@@ -1,49 +1,27 @@
-  import { Component } from 'base/component'
+import { Component } from 'base/component'
 
+const tag = 'demo-multiselect'
 export class MultiselectDemo extends Component {
   init (context) {
     return super.init(context)
   }
 
   render () {
-    this.innerHTML = /* html */ `${this.styles}
-      <div>
-        <ark-multiselect list listen on-alter="alterMultiselect">
-        </ark-multiselect>
-
-        <p>Value: <span data-multiselect></span></p>
-      </div>
-
-      <div>
-        <ark-multiselect objectList listen on-alter="alterMultiselectObject">
-        </ark-multiselect>
-
-        <p>Value: <span data-multiselect-object></span></p>
-      </div>
+    this.innerHTML = /* html */ `
+      <ark-multiselect list label='multiselect list'></ark-multiselect>
+      <br>
+      <ark-multiselect list-object label='multiselect object'></ark-multiselect>
+      <ark-multiselect label='multi none'></ark-multiselect>
 		`
     this.renderMultiselect()
     this.renderMultiselectObject()
+    
+
     return super.render()
   }
 
-  /** @param {CustomEvent} event */
-  alterMultiselect (event) {
-    event.stopImmediatePropagation()
-    this.querySelector('[data-multiselect]').innerHTML = JSON.stringify(
-      event.detail
-    )
-  }
-
-  /** @param {CustomEvent} event */
-  alterMultiselectObject (event) {
-    event.stopImmediatePropagation()
-    this.querySelector('[data-multiselect-object]').innerHTML = JSON.stringify(
-      event.detail
-    )
-  }
-
   renderMultiselect () {
-    const items = [
+    const myItems = [
       '01 display',
       '02 max-width',
       '03 max-height',
@@ -63,57 +41,46 @@ export class MultiselectDemo extends Component {
       '17 align-items'
     ]
 
-    const filter = (value) => {
-      if (!value.length) return items
-      return items.filter(item =>
-        item.toLowerCase().indexOf(value.toLowerCase()) !== -1
-      )
-    }
-
     const multiselect = /** @type {Multiselect} */(
       this.select('ark-multiselect[list]')
     )
-
+    
     multiselect.init({
       label: "multiselect test",
-      filter
-    }).render()
+      items: myItems
+    }).render().load()
   }
-
+  
   renderMultiselectObject () {
-    const items = [
+    const myItems = [
       { id: '101', name: 'Camila' },
       { id: '102', name: 'Luisa' },
       { id: '103', name: 'Andres' },
       { id: '104', name: 'Daniela' },
       { id: '105', name: 'Alejandro' },
     ]
-
+    
     const field = "id"
     const template = (item) => `${item['id']} - ${item['name']}`
-
-    const filter = (value) => {
-      if (!value.length) return items
-      return items.filter(item =>
-        template(item).toLowerCase().indexOf(value.toLowerCase()) !== -1
-      )
-    }
-
-    const multiselect = this.select('ark-multiselect[objectList]')
+    
+    const multiselect =(
+      this.select('ark-multiselect[list-object]')
+    )
 
     multiselect.init({
-      label: "multiselect objectList",
-      field,
-      template,
-      filter
-    }).render()
-  }
+        template: template,
+        field: field,
+        items: myItems
+    }).render().load()
 
-  get styles () {
-    return /* html */ `
-      <style>
-      </style>
-    `
-  }
+
 }
-Component.define('demo-multiselect', MultiselectDemo)
+}
+
+const styles = /* css */`
+
+
+
+`
+
+Component.define(tag, MultiselectDemo, styles)
