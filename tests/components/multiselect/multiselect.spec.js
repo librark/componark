@@ -46,9 +46,23 @@ describe('Multiselect', () => {
     `
     const multiselect = container.querySelector('ark-multiselect')
     const input = multiselect._input
-
+    
     input.value = "hello"
     expect(multiselect.inputValue()).toBe('hello')
+  })
+  
+  xit('List item get tab index',()=>{
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    const multiselect = container.querySelector('ark-multiselect')
+    
+
+
+
+
+
+
   })
   
   // it('Popup text change with value of input', () => {

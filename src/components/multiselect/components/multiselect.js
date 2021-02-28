@@ -66,6 +66,7 @@ export class Multiselect extends Component {
           items:this.items
         }).render()
   }
+
       
   
   fieldClickHandler(){

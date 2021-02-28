@@ -95,7 +95,7 @@ describe('MultiselectList', () => {
         
         
       const multiselectList = multiselect._list
-      const items = multiselectList.querySelectorAll('li')
+      const items = multiselectList.itemElements
 
       items[0].click()
       items[0].click()
@@ -104,16 +104,16 @@ describe('MultiselectList', () => {
   
     }) 
 
-it('not li items cant be selected', () => {
+it('items thar arent li, cant be selected', () => {
       container.innerHTML = /* html */`
       <ark-multiselect></ark-multiselect>
       `
       const multiselect = container.querySelector('ark-multiselect')
+      const list = multiselect._list
      
-      const list = multiselect.querySelector('ark-multiselect-list')
-
-      list.querySelector('span').click()
-  
+      list.click()
+      list.childNodes[1].click()
+      expect(list.childNodes[1].hasAttribute('selected')).toBeFalsy  
     }) 
 
 
