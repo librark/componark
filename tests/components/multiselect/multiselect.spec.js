@@ -94,12 +94,10 @@ describe('Multiselect', () => {
     
     multiselect.click()
     container.click()
-    
+
     jest.runAllTimers()
 
     expect(setTimeout).toBeCalledTimes(1)
-
-    
   })
   
   xit('List item get tab index',()=>{

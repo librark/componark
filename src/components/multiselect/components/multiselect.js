@@ -85,6 +85,7 @@ export class Multiselect extends Component {
   
   inputValue(){
     const value = this._input.value
+    console.log(value)
     return value
   }
   
@@ -95,10 +96,10 @@ export class Multiselect extends Component {
       this.refreshField()
       item.remove()
       this.close()
-      let index = 0
-      for (let li of this.multiselectList.itemElements) {
-        index++
-      }
+        // let index = 0
+        // for (let li of this.multiselectList.itemElements) {
+        //   index++
+        // }
     }
     
   }
@@ -146,10 +147,9 @@ export class Multiselect extends Component {
   }
 
   removeTag(tag,item,event){
-      //const savedItem = item
-      //this._list.append(item)
+      
       tag.remove()
-      //item.style.display = 'block'
+      item.style.display = 'block'
       event.stopPropagation()
   }
 
