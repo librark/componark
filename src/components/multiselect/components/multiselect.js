@@ -29,14 +29,14 @@ export class Multiselect extends Component {
   render () {
     this.innerHTML = /* html */ `
     <div class="ark-multiselect">
-    <h1>${this.label}</h1>
-    <div class="ark-multiselect__field" tabindex="0">
-    <input class="ark-multiselect__input" type="text">
-    </div>
-    <div class="ark-multiselect__popup">
-      <ark-multiselect-list><ark-multiselect-list>
-    HI
-    </div>
+      <h1>${this.label}</h1>
+      <div class="ark-multiselect__field" tabindex="0">
+      <input class="ark-multiselect__input" type="text">
+      </div>
+      <div class="ark-multiselect__popup">
+        <ark-multiselect-list><ark-multiselect-list>
+      HI
+      </div>
     </div>
     `
    
@@ -46,7 +46,8 @@ export class Multiselect extends Component {
     this._list = this.select('ark-multiselect-list')
     
     this.addListItems()
-    
+    //this.refreshItems()
+    //this.filterItems()
     
     return super.render()
   }
@@ -56,7 +57,6 @@ export class Multiselect extends Component {
     this._field.addEventListener('input', this.inputValue.bind(this))
     this._list.addEventListener('click', this.listClickHandler.bind(this))
     //this._input.addEventListener('blur', this.fieldClickHandler.bind(this))
-    //this._input.addEventListener('input', this.popupChange.bind(this))
   }
 
   addListItems(){
@@ -64,11 +64,10 @@ export class Multiselect extends Component {
           field: this.field,
           template:this.template,
           items:this.items
-        }).render()
+        }).render().load()
   }
 
-      
-  
+
   fieldClickHandler(){
     this.isOpened ? this.close() : this.open()
   }
@@ -85,42 +84,64 @@ export class Multiselect extends Component {
   
   selectItem(item){
     
-    if(item && item.tagName != 'LI'){
-      item.parentNode
-    }else if(!item.hasAttribute('selected')){
+    if(item.tagName === 'LI' && !item.hasAttribute('selected')){ 
       item.setAttribute('selected', 'true')
+      this.refreshField()
+      item.remove()
+      this.close()
     }
     
   }
 
+  refreshField(){
+    const selectedItems = this.querySelectorAll('li[selected]')
+
+    for(let i = 0; i < selectedItems.length; i++){
+      this._field.appendChild(this.createTag(selectedItems[i]))
+    }
+
+  }
+
+  // refreshItems(){
+  //   const itemElements = this.multiselectList.itemElements
+  //   for(let i=0; i<itemElements.length; i++){
+  //     const itemElement = itemElements[i]
+  //     itemElement.setAttribute("role","option")
+  //     itemElement.setAttribute('aria-selected',itemElement.hasAttribute('selected'))
+  //     itemElement.setAttribute('tabindex','-1')
+  //   }
+  // }
+
   listClickHandler(event){
     const item = event.target
-
-    //console.log(this.items[item.id])
-    //onsole.log(this.items)
-    //console.log(item.id)
-
-
     this.selectItem(item)
   }
 
-  // createTag(item){
-  //   const tag = document.createElement('div')
-  //   tag.className = 'ark-multiselect__tag'
+  createTag(item){
+    const tag = document.createElement('div')
+    tag.className = 'ark-multiselect__tag'
 
-  //   const tagText = document.createElement('div')
-  //   tagText.className = 'ark-multiselect__tag-text'
-  //   tagText.textContent = item.textContent
+    const tagText = document.createElement('div')
+    tagText.className = 'ark-multiselect__tag-text'
+    tagText.textContent = item.textContent
     
-  //   const removeButton = document.createElement('div')
-  //   removeButton.className = 'ark-multiselect__tag-remove-button'
-  //   removeButton.addEventListener('click', this.removeTag.bind(this,tag,item))
+    const removeButton = document.createElement('div')
+    removeButton.className = 'ark-multiselect__tag-remove-button'
+    removeButton.addEventListener('click', this.removeTag.bind(this,tag,item))
 
-  //   tag.appendChild(tagText)
-  //   tag.appendChild(removeButton)
+    tag.appendChild(tagText)
+    tag.appendChild(removeButton)
 
-  //   return tag
-  // }
+    return tag
+  }
+
+  removeTag(tag,item,event){
+      //const savedItem = item
+      //this._list.append(item)
+      tag.remove()
+      //item.style.display = 'block'
+      event.stopPropagation()
+  }
 
   
   open(){

@@ -50,18 +50,44 @@ describe('Multiselect', () => {
     input.value = "hello"
     expect(multiselect.inputValue()).toBe('hello')
   })
-  
-  xit('List item get tab index',()=>{
+
+  it('tag can be removed',()=>{
     container.innerHTML = /* html */`
     <ark-multiselect></ark-multiselect>
     `
     const multiselect = container.querySelector('ark-multiselect')
     
+    const myItems = [
+      '01 display',
+      '02 max-width',
+      '03 max-height',
+      '04 width',
+      '05 height'
+    ]
+    
+    multiselect.init({
+      items:myItems
+    }).render().load()
+    
+    const list = multiselect._list
+    
+    list.itemElements[1].click()
+    list.itemElements[2].click()
+    
+    let removeButtons = multiselect.querySelectorAll('.ark-multiselect__tag-remove-button')
+  
+    
+    removeButtons[0].click()
+    removeButtons[1].click()
+    
+    expect(multiselect.querySelectorAll('.ark-multiselect__tag-remove-button')).not.toHaveLength
+  })
 
-
-
-
-
+  xit('List item get tab index',()=>{
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    const multiselect = container.querySelector('ark-multiselect')
 
   })
   

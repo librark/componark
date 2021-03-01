@@ -116,5 +116,32 @@ it('items thar arent li, cant be selected', () => {
       expect(list.childNodes[1].hasAttribute('selected')).toBeFalsy  
     }) 
 
+it('Can create a tag',()=>{
+  container.innerHTML = /* html */`
+  <ark-multiselect></ark-multiselect>
+  `
+  const multiselect = container.querySelector('ark-multiselect')
+  
+  const myItems = [
+    '01 display',
+    '02 max-width',
+    '03 max-height',
+    '04 width',
+    '05 height'
+  ]
+  
+  multiselect.init({
+    items:myItems
+  }).render().load()
+  
+  const list = multiselect._list
+  list.itemElements[1].click()
+  list.itemElements[2].click()
+
+  expect(list.itemElements.length).not.toBe(list.items.length)
+  expect(multiselect.querySelectorAll('.ark-multiselect__tag').length).toBe(2)
+})
+
+
 
 })
