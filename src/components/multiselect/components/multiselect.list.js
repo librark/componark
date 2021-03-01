@@ -22,7 +22,6 @@ export class MultiselectList extends Component {
     return super.render()
   }
 
-
   async renderItems () {
     let content = this.items.length ? '' : /* html */ `
       <span type="empty" class="ark-multiselect-list__no-options">Sin Opciones</span>

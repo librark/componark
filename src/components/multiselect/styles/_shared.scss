@@ -122,29 +122,29 @@
           pointer-events: none;
           user-select: none;
       }
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+  
+      li {
+        padding: .5em 1em;
+        min-height: 1em;
+        list-style: none;
+        cursor: pointer;
+      }
+  
+      li[selected] {
+        background: #f3f3f3;
+      }
+  
+      li:focus,
+      li:hover {
+        outline: dotted 1px var(--dark);
+        background: var(--primary);
+        color: var(--light);
+      }
     }
 
-    ul {
-      margin: 0;
-      padding: 0;
-    }
-
-    li {
-      padding: .5em 1em;
-      min-height: 1em;
-      list-style: none;
-      cursor: pointer;
-    }
-
-    li[selected] {
-      background: #f3f3f3;
-    }
-
-    li:focus,
-    li:hover {
-      outline: dotted 1px var(--dark);
-      background: var(--primary);
-      color: var(--light);
-    }
   }
 }

@@ -104,7 +104,7 @@ describe('MultiselectList', () => {
   
     }) 
 
-it('items thar arent li, cant be selected', () => {
+it('items that arent li, cant be selected', () => {
       container.innerHTML = /* html */`
       <ark-multiselect></ark-multiselect>
       `

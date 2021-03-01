@@ -27,8 +27,8 @@ export class Multiselect extends Component {
   }
   
   render () {
+    this.className = 'ark-multiselect'
     this.innerHTML = /* html */ `
-    <div class="ark-multiselect">
       <h1>${this.label}</h1>
       <div class="ark-multiselect__field" tabindex="0">
       <input class="ark-multiselect__input" type="text">
@@ -37,13 +37,14 @@ export class Multiselect extends Component {
         <ark-multiselect-list><ark-multiselect-list>
       HI
       </div>
-    </div>
     `
+    
    
     this._popup = this.select('.ark-multiselect__popup')
     this._field = this.select('.ark-multiselect__field')
     this._input = this.select('.ark-multiselect__input')
     this._list = this.select('ark-multiselect-list')
+
     
     this.addListItems()
     //this.refreshItems()
@@ -54,8 +55,9 @@ export class Multiselect extends Component {
   
   async load() {
     this._field.addEventListener('click', this.fieldClickHandler.bind(this))
-    this._field.addEventListener('input', this.inputValue.bind(this))
+    this._field.addEventListener('focusout', this.focusOut.bind(this))
     this._list.addEventListener('click', this.listClickHandler.bind(this))
+    this._field.addEventListener('input', this.inputValue.bind(this))
     //this._input.addEventListener('blur', this.fieldClickHandler.bind(this))
   }
 
@@ -67,6 +69,10 @@ export class Multiselect extends Component {
         }).render().load()
   }
 
+  async focusOut(){
+    setTimeout(()=>{this.close()},200)
+    this.dispatchEvent
+  }
 
   fieldClickHandler(){
     this.isOpened ? this.close() : this.open()
@@ -85,10 +91,14 @@ export class Multiselect extends Component {
   selectItem(item){
     
     if(item.tagName === 'LI' && !item.hasAttribute('selected')){ 
-      item.setAttribute('selected', 'true')
+      item.setAttribute('selected', '')
       this.refreshField()
       item.remove()
       this.close()
+      let index = 0
+      for (let li of this.multiselectList.itemElements) {
+        index++
+      }
     }
     
   }

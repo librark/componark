@@ -2,6 +2,7 @@ import {Multiselect} from '../../../src/components/multiselect/components/multis
 
 describe('Multiselect', () => {
   let container = null
+  jest.useFakeTimers()
 
   
   beforeEach(() => {
@@ -83,13 +84,33 @@ describe('Multiselect', () => {
     expect(multiselect.querySelectorAll('.ark-multiselect__tag-remove-button')).not.toHaveLength
   })
 
+  
+  it('Click outside element close list',()=>{
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    const multiselect = container.querySelector('ark-multiselect')
+    multiselect.addEventListener('focusout',multiselect.focusOut())
+    
+    multiselect.click()
+    container.click()
+    
+    jest.runAllTimers()
+
+    expect(setTimeout).toBeCalledTimes(1)
+
+    
+  })
+  
   xit('List item get tab index',()=>{
     container.innerHTML = /* html */`
     <ark-multiselect></ark-multiselect>
     `
     const multiselect = container.querySelector('ark-multiselect')
-
+    
   })
+  
+
   
   // it('Popup text change with value of input', () => {
   //   container.innerHTML = /* html */`
