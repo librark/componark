@@ -7,8 +7,9 @@ export class Button extends Component {
     super()
     this.defaultContent = this.defaultContent || this.innerHTML
     this.navigatorObject = navigator
+    
   }
-
+  
   init (context = {}) {
     return super.init()
   }
@@ -22,23 +23,24 @@ export class Button extends Component {
   render () {
     const element = this['href'] ? 'a' : 'button'
     const href = this['href'] ? `href="${this['href']}"` : ''
-    this.content = `
-      <${element} ${href} class='ark-button__button'>
+    this.content = /* html */ `
+      <${element} ${href} class="ark-button__button">
+        <div class="ark-button__icon">
+        </div>
         ${this.innerHTML}
       </${element}>
     `
-
+    
     const properties = ['class', 'horizontal', 'vertical', 'vibrate']
     for (const attribute of Array.from(this.attributes)) {
       if (properties.includes(attribute.name)) continue
       this.firstElementChild.setAttribute(attribute.name, attribute.value)
     }
-
+    
     if (this.hasAttribute('fab')) {
       this['horizontal'] = 'end'
       this['vertical'] = 'end'
     }
-
     return super.render()
   }
 }
