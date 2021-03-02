@@ -4,16 +4,16 @@
 @mixin ark-input() {
     padding: 10px;
 
+    
     &[disabled] {
         pointer-events: none;
         cursor: default;
+        label{
+            input:disabled{
+                background-color:rgb(243, 240, 240);
+                border-color: rgba(185, 185, 185, 0.712);
+            }
 
-        &>.ark-input__input {
-            background: inherit;
-        }
-
-        &:hover {
-            background: white;
         }
     }
 
