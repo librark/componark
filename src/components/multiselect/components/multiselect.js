@@ -31,7 +31,7 @@ export class Multiselect extends Component {
     this.innerHTML = /* html */ `
       <h1>${this.label}</h1>
       <div class="ark-multiselect__field" tabindex="0">
-      <input class="ark-multiselect__input" type="text">
+      <input placeholder="Add" class="ark-multiselect__input" type="text">
       </div>
       <div class="ark-multiselect__popup">
         <ark-multiselect-list><ark-multiselect-list>
@@ -108,7 +108,7 @@ export class Multiselect extends Component {
     const selectedItems = this.querySelectorAll('li[selected]')
 
     for(let i = 0; i < selectedItems.length; i++){
-      this._field.appendChild(this.createTag(selectedItems[i]))
+      this._field.insertBefore(this.createTag(selectedItems[i]),this._field.firstElementChild)
     }
 
   }
@@ -143,11 +143,12 @@ export class Multiselect extends Component {
     tag.appendChild(tagText)
     tag.appendChild(removeButton)
 
+    console.log(this._field.lastElementChild)
+
     return tag
   }
 
   removeTag(tag,item,event){
-      
       tag.remove()
       item.style.display = 'block'
       event.stopPropagation()
