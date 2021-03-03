@@ -7,17 +7,23 @@ export class Input extends Component {
     this.background = context.background || this.background
     this.color = context.color || this.color
     this.borderColor = context.borderColor  || this.borderColor
+    this.placeholder = context.placeholder || this.placeholder
   }
 
   reflectedProperties () {
-    return ['label']
+    return ['label','placeholder']
   }
 
   render () {
     this.content = /* html */`
     <label class="ark-input__label" ${this.isRequired()}>
-      ${this.label} <input background="${this.background}" color="${this.color}" border-color="${this.borderColor}" class="ark-input__input"
-      data-input listen on-input="onInputChange">
+      ${this.label} 
+      <input background="${this.background}" 
+             color="${this.color}" 
+             border-color="${this.borderColor}"
+             placeholder = "${this.placeholder}"
+             class="ark-input__input"
+             data-input listen on-input="onInputChange">
     </label>
     `
 
