@@ -22,6 +22,12 @@ export class ChartDemo extends Component {
       <ark-chart data-chart-bar></ark-chart>
       <ark-chart data-chart-line></ark-chart>
       <ark-chart data-chart-radar></ark-chart>
+
+      <br>
+
+      <a href="https://github.com/knowark/componark/blob/master/src/components/chart/README.rst">
+      * Reference
+      </a>
     `
 
     return super.render()

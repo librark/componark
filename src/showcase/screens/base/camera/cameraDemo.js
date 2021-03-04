@@ -1,16 +1,25 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-camera'
 export class CameraDemo extends Component {
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.innerHTML = /* html */ `
       <div class="camera-container">
-        <ark-camera></ark-camera>
-        <ark-button listen on-click="takepicture">Take photo</ark-button>
-        <ark-button listen on-click="startCamera">Start</ark-button>
-        <ark-button listen on-click="stopCamera">stop</ark-button>
+          <ark-camera></ark-camera>
+          <div class="menu">
+            <ark-button background="primary" listen on-click="takepicture">Take photo</ark-button>
+            <ark-button background="success" listen on-click="startCamera">Start</ark-button>
+            <ark-button background="danger"  color="dark" listen on-click="stopCamera">stop</ark-button>
+          </div>
       </div>
 
       <img data-photo>
+
+      <br>
+
+      <a href="https://github.com/knowark/componark/blob/master/src/components/camera/README.rst">
+      * Reference
+      </a>
     `
 
     this.camera['start']()
@@ -43,9 +52,10 @@ export class CameraDemo extends Component {
     return this.querySelector('[data-photo]')
   }
 
-  get styles () {
-    return /* html */ `
-      <style>
+}
+
+const styles = /* css */`
+
         demo-camera{
           display: flex;
           flex-direction: column;
@@ -57,13 +67,15 @@ export class CameraDemo extends Component {
 
         .camera-container{
           display: flex;
-          justify-content: space-around;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
           padding: 1rem;
           width: 100%;
         }
-      </style>
-    `
-  }
-}
-Component.define('demo-camera', CameraDemo)
+
+        .ark-button{
+          margin:1rem 0.6rem;
+        }
+
+`
+Component.define(tag, CameraDemo, styles)

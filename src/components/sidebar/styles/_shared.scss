@@ -1,5 +1,5 @@
-@use 'base/theme';
-@use './config' as *;
+@use '../../../base/theme';
+@use './config'as *;
 
 @mixin ark-sidebar() {
   display: none;
@@ -8,7 +8,6 @@
   width: 100vw;
   height: 100vh;
   position: absolute;
-  overflow: auto;
   top: 0;
   left: 0;
 
@@ -22,11 +21,14 @@
     flex-direction: column;
     justify-content: space-between;
 
-    overflow: auto;
     position: absolute;
     top: 0;
 
     @include theme.paint;
+  }
+
+  &__body {
+    overflow-y: scroll;
   }
 
   &__header,
@@ -43,9 +45,9 @@
   }
 
   &__scrim {
-    display: block;
     width: 100%;
     height: 100%;
+    //overflow: hidden;
 
     background: rgba(0, 0, 0, 0.3);
   }

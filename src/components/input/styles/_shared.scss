@@ -1,21 +1,19 @@
 @use './config'as *;
-@use '../../../base/theme';
+@use '../../../base/theme/variables';
 
 @mixin ark-input() {
-    @include theme.paint();
-    background:transparent;
-    padding:10px;
+    padding: 10px;
 
+    
     &[disabled] {
         pointer-events: none;
         cursor: default;
+        label{
+            input:disabled{
+                background-color:rgb(243, 240, 240);
+                border-color: rgba(185, 185, 185, 0.712);
+            }
 
-        &>.ark-input__input {
-            background: rgb(255, 255, 255);
-        }
-
-        &:hover {
-            background: white;
         }
     }
 
@@ -25,10 +23,35 @@
     }
 
     &__input {
+        border: 2px solid rgb(175, 175, 175);
+
+        @each $color in variables.$colors {
+            &[background=#{$color}] {
+                background: var(--#{$color}, black);
+                color: white;
+            }
+
+            &[border-color=#{$color}] {
+                @if $color==primary {
+
+                    &:focus,
+                    &:hover {
+                        border-color: var(--dark);
+                    }
+
+                }
+
+                border-color: var(--#{$color}, white);
+            }
+
+            &[color=#{$color}] {
+                color: var(--#{$color}, white);
+            }
+        }
+
         display: block;
         max-width: 100%;
         padding: 0.5rem;
-        border: 2px solid rgb(175, 175, 175);
     }
 
     &[inline] label {

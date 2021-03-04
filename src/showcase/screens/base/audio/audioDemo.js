@@ -9,6 +9,10 @@ export class AudioDemo extends Component {
   render () {
     this.content = /* html */ `
       <ark-audio></ark-audio>
+
+      <a href="https://github.com/knowark/componark/blob/master/src/components/audio/README.rst">
+      * Reference
+      </a>
     `
     return super.render()
   }

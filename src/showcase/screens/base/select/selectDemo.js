@@ -1,5 +1,6 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-select'
 export class SelectDemo extends Component {
   init (context) {
     return super.init()
@@ -30,6 +31,9 @@ export class SelectDemo extends Component {
       </ark-select>
 
       <p>Elemento seleccionado: <span data-select-value></span></p>
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/select/README.rst" class="reference">
+      * Reference
+      </a>
     `
     return super.render()
   }
@@ -39,4 +43,4 @@ export class SelectDemo extends Component {
     if (element) element.textContent = event.detail.value
   }
 }
-Component.define('demo-select', SelectDemo)
+Component.define(tag, SelectDemo)

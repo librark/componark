@@ -9,15 +9,15 @@ export class CardDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <ark-card title="titulo" subtitle="subtitle [Hello World]">
+      <ark-card title="Title" subtitle="subtitle [Hello World]">
         <img slot="media" src="${Image}" alt="" />
 
         <div>
           body
         </div>
 
-        <ark-button slot="actions">btn 1</ark-button>
-        <ark-button slot="actions">btn 2</ark-button>
+        <ark-button background="secondary" color="dark" slot="actions">btn 1</ark-button>
+        <ark-button background="dark" slot="actions">btn 2</ark-button>
       </ark-card>
 
       <hr/>
@@ -29,11 +29,15 @@ export class CardDemo extends Component {
           body
         </div>
 
-        <ark-button slot="actions">btn 1</ark-button>
-        <ark-button slot="actions">btn 2</ark-button>
+        <ark-button background="secondary" color="dark" slot="actions">btn 1</ark-button>
+        <ark-button background="dark" slot="actions">btn 2</ark-button>
       </ark-card>
 
       <br/>
+
+      <a href="https://github.com/knowark/componark/blob/master/src/components/card/README.rst">
+      * Reference
+      </a>
     `
 
     return super.render()

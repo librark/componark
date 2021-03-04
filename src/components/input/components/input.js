@@ -3,6 +3,12 @@ import { styles } from '../styles'
 
 const tag = 'ark-input'
 export class Input extends Component {
+  init(context){
+    this.background = context.background || this.background
+    this.color = context.color || this.color
+    this.borderColor = context.borderColor  || this.borderColor
+  }
+
   reflectedProperties () {
     return ['label']
   }
@@ -10,7 +16,7 @@ export class Input extends Component {
   render () {
     this.content = /* html */`
     <label class="ark-input__label" ${this.isRequired()}>
-      ${this.label} <input class="ark-input__input"
+      ${this.label} <input background="${this.background}" color="${this.color}" border-color="${this.borderColor}" class="ark-input__input"
       data-input listen on-input="onInputChange">
     </label>
     `
