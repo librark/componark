@@ -24,7 +24,6 @@ $feat-color: feature-targeting.create-target($query, color);
   align-items: baseline;
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;
   /* @alternate */
   will-change: opacity, transform, error;
 
