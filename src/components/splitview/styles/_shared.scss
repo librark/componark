@@ -1,14 +1,26 @@
-@use 'base/theme';
+@use '../../../base/theme';
+@use '../../../base/theme/variables';
 
 @mixin ark-splitview() {
-  @include theme.paint;
+  background: var(--light, black);
+  color: dark;
 
-  display: flex;
+  @each $color in variables.$colors {
+    &[background=#{$color}] {
+      background: var(--#{$color}, black);
+      color: white;
+    }
+
+    &#{&}[color=#{$color}] {
+      color: var(--#{$color}, white);
+    }
+  }
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
   width: 100%;
   height: 100%;
-
-  z-index: auto;
 
 
   &>*:first-child {
@@ -18,14 +30,12 @@
 
   /*MASTER*/
   &-master {
-
-    display: block;
-    width: 100%;
+    width: 70vw;
     overflow: auto;
     height: inherit;
 
     @media (min-width: theme.$mobile) {
-      width: 50%;
+      width: 100%;
 
       &[resize] {
         resize: horizontal;
@@ -35,26 +45,18 @@
 
   /*DETAIL*/
   &-detail {
-    @include theme.paint;
+    background: inherit;
 
-    display: grid;
-    grid: auto 1fr / 1fr;
-
-
-    flex: 1;
-
-    overflow: auto;
     position: fixed;
-    z-index: 512;
     top: 0;
     left: 0;
-
+    overflow: auto;
     width: 100vw;
     height: 100vh;
 
     &[hidden] {
-      display: block !important;
-      visibility: hidden !important;
+      display: none;
+      //visibility: hidden;
     }
 
     &>* {
@@ -78,7 +80,7 @@
 
       padding: 0 19px;
       border: 0;
-      outline: 0 !important;
+      outline: 0;
 
       background: inherit;
       color: inherit;
@@ -114,18 +116,11 @@
     @media (min-width: theme.$mobile) {
       & {
         overflow: auto;
-        position: relative;
-        z-index: 512;
-        top: initial;
-        left: initial;
-
+        position: initial;
         width: auto;
         height: auto;
 
-
         height: initial;
-
-        display: block;
 
         padding-top: 0;
 
