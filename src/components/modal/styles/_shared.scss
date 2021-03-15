@@ -48,6 +48,9 @@
   }
 
   // horizontal
+  justify-content: center;
+  align-items: center;
+
   &[horizontal~="center"] {
     justify-content: center;
   }
