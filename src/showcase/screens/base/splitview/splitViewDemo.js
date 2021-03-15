@@ -9,7 +9,7 @@ export class SplitViewDemo extends Component {
     this.content = /* html */ `
       <ark-splitview>
         <ark-splitview-master resize master-event="list:selected">
-          <ark-list data-list></ark-list>
+          <ark-list background='light' color='dark' data-list></ark-list>
         </ark-splitview-master>
 
         <ark-splitview-detail title="Demo">
