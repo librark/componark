@@ -9,15 +9,12 @@
   @include mixins.icon-ink-color(on-primary);
 
   height: variables.$row-height;
-  width: 100%;
-  z-index: 4;
 }
 
 .ark-nav {
   @include shared.ark-nav;
 
-  padding: variables.$section-vertical-padding
-    variables.$section-horizontal-padding;
+  padding: variables.$section-vertical-padding variables.$section-horizontal-padding;
   z-index: 1;
 }
 
