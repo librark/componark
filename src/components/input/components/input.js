@@ -71,4 +71,4 @@ export class Input extends Component {
     this.dispatchAlterEvent()
   }
 }
-Component.define(tag, Input,styles)
+Component.define(tag, Input, styles)
