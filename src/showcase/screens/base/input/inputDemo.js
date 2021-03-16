@@ -19,7 +19,7 @@ export class InputDemo extends Component {
     <section class="implementation">
       <ark-input border-color="dark" data-input-text required inline
                  label="Enter some text:"
-                 listen on-alter="{{ data.text }}"
+                 listen on-alter="onTextInput"
                  placeholder = "Take this text"></ark-input>
       <p>Value: <span data-input-value></span></p>
     </section>
@@ -96,7 +96,7 @@ export class InputDemo extends Component {
   onTextInput (event) {
     const element = this.querySelector('[data-input-value]')
     if (element) {
-      element.textContent = event.detail ? event.detail.value : ''
+      element.textContent = event.detail || ''
     }
   }
 }
