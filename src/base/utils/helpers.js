@@ -7,7 +7,18 @@ export function listen (self) {
     for (const attribute of Array.from(element.attributes)) {
       if (attribute.name.startsWith('on-')) {
         const event = attribute.name.replace('on-', '')
-        const handler = self[attribute.value]
+        let handler = self[attribute.value]
+
+        const [assignment] = attribute.value.match(/[^{{]+(?=\}})/g) || []
+
+        if (assignment) {
+          let [objectPath, eventPath] = assignment.split('=')
+          eventPath = eventPath || 'detail'
+          handler = function (event) {
+            set(this, objectPath.trim(), get(event, eventPath))
+          } 
+        } 
+
         if (!handler) continue
 
         element.addEventListener(event, handler.bind(self))
@@ -33,4 +44,23 @@ export function reflect (self, properties) {
     }
   }
   Object.defineProperties(self, descriptors)
+}
+
+/** @param {Object} object @param {string} path @param {any} value */
+export function set (object, path, value) {
+  const pathArray = path.match(/([^[.\]])+/g)
+
+  pathArray.reduce((accumulator, key, index) => {
+    if (accumulator[key.trim()] === undefined) accumulator[key.trim()] = {}
+    if (index === pathArray.length - 1) accumulator[key.trim()] = value
+    return accumulator[key.trim()]
+  }, object)
+}
+
+/** @param {Object} object @param {string} path @param {any} fallback */
+export function get (object, path, fallback) {
+  const pathArray = path.match(/([^[.\]])+/g)
+
+  return pathArray.reduce((accumulator, key) => accumulator &&
+    accumulator[key.trim()], object) || fallback
 }

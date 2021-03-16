@@ -5,6 +5,7 @@ const tag = 'demo-input'
 
 export class InputDemo extends Component {
   init (context) {
+    this.data = {}
     return super.init()
   }
 
@@ -18,7 +19,7 @@ export class InputDemo extends Component {
     <section class="implementation">
       <ark-input border-color="dark" data-input-text required inline
                  label="Enter some text:"
-                 listen on-alter="onTextInput"
+                 listen on-alter="{{ data.text }}"
                  placeholder = "Take this text"></ark-input>
       <p>Value: <span data-input-value></span></p>
     </section>

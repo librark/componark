@@ -3,6 +3,7 @@
 class MockComponent extends Component {
   init(context = {}) {
     this.context = context
+    this.data = {}
     return super.init()
   }
   reflectedProperties() { return ['code'] }
@@ -17,6 +18,7 @@ describe('Component', () => {
     container = document.createElement('div')
     container.innerHTML = `<mock-component code="XYZ123"></mock-component>`
     component = container.querySelector('mock-component')
+    document.body.append(container)
   })
 
   afterEach(() => {
@@ -143,5 +145,37 @@ describe('Component', () => {
       general: [component.select('.body'), component.select('.aside')],
       footer: [component.select('.footer')]
     })
+  })
+  
+  it('binds its properties to children events', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-input="{{ data.value = data }}"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+    const input = component.select('input')
+
+
+    input.dispatchEvent(new InputEvent('input',  {bubbles: true, data: 'E'}))
+
+    expect(component.data.value).toEqual('E')
+  })
+
+  it('binds to the detail.value event property by default', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-alter="{{ data.value }}"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+    const input = component.select('input')
+
+    input.dispatchEvent(
+      new CustomEvent('alter',  {bubbles: true, detail: 'A'}))
+
+    expect(component.data.value).toEqual('A')
   })
 })
