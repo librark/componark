@@ -50,7 +50,7 @@ describe('Helpers', () => {
     expect(!element.hasAttribute('clicked-element')).toBeTruthy()
   })
 
-  it('can create events', () => {
+  it('can listen events', () => {
     const element = document.createElement('div')
     element['binding'] = 'listen'
     element.innerHTML = /* html */`
@@ -65,6 +65,23 @@ describe('Helpers', () => {
 
     element.querySelector('button').click()
     expect(element.hasAttribute('clicked-element')).toBeTruthy()
+  })
+
+  it('ignores missing methods when listening', () => {
+    const element = document.createElement('div')
+    element['binding'] = 'listen'
+    element.innerHTML = /* html */`
+	    <button listen on-click="missing"></button>
+	  `
+    // @ts-ignore
+    element.myMethod = function () {
+      element.setAttribute('clicked-element', '')
+    }
+
+    listen(element)
+
+    element.querySelector('button').click()
+    expect(element.hasAttribute('clicked-element')).toBeFalsy()
   })
 
   it('can create attribute', () => {
