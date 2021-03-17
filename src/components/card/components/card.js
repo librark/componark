@@ -5,7 +5,7 @@ import { styles } from '../styles'
 const tag = 'ark-card'
 export class Card extends Component {
   init (context = {}) {
-    this.binding = 'card:listen'
+    this.binding = 'card-listen'
     this.title = context.title
     this.subtitle = context.subtitle
     this.global = context.global || window
