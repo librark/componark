@@ -5,7 +5,7 @@ import { styles } from '../styles'
 const tag = 'ark-accordion'
 export class Accordion extends Component {
   init (context = {}) {
-    this.binding = 'accordion:listen'
+    this.binding = 'accordion-listen'
     this.addEventListener('click', this._onClick.bind(this))
     return super.init(context)
   }

@@ -4,7 +4,7 @@ import { styles } from '../styles'
 const tag = 'ark-splitview'
 export class SplitView extends Component {
   init(context = {}) {
-    this.binding = 'splitview:listen'
+    this.binding = 'splitview-listen'
     return super.init(context)
   }
 

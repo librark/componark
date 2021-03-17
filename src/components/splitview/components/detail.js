@@ -3,7 +3,7 @@ import { Component } from '../../../base/component'
 const tag = 'ark-splitview-detail'
 export class SplitViewDetail extends Component {
   init(context = {}) {
-    this.binding = 'splitview-detail:listen'
+    this.binding = 'splitview-detail-listen'
 
     const slots = this.slots()
 

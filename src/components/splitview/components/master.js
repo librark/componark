@@ -9,7 +9,7 @@ export class SplitViewMaster extends Component {
   }
 
   init(context = {}) {
-    this.binding = 'splitview-master:listen'
+    this.binding = 'splitview-master-listen'
     return super.init(context)
   }
 

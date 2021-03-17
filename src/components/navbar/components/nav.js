@@ -3,7 +3,7 @@ import { Component } from '../../../base/component'
 const tag = 'ark-nav'
 export class Nav extends Component {
   init(context = {}) {
-    this.binding = 'nav:listen'
+    this.binding = 'nav-listen'
     return super.init(context)
   }
 

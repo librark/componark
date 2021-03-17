@@ -4,7 +4,7 @@ import { styles } from '../styles'
 const tag = 'ark-navbar'
 export class Navbar extends Component {
   init(context = {}) {
-    this.binding = 'navbar:listen'
+    this.binding = 'navbar-listen'
     return super.init(context)
   }
 

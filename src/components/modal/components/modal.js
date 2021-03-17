@@ -4,7 +4,7 @@ import { styles } from '../styles'
 const tag = 'ark-modal'
 export class Modal extends Component {
   init (context = {}) {
-    this.binding = 'modal:listen'
+    this.binding = 'modal-listen'
 
     const slots = this.slots()
 
