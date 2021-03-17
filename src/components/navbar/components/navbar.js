@@ -3,6 +3,11 @@ import { styles } from '../styles'
 
 const tag = 'ark-navbar'
 export class Navbar extends Component {
+  init(context = {}) {
+    this.binding = 'navbar:listen'
+    return super.init(context)
+  }
+
   render () {
     this.querySelectorAll('[toggler]').forEach(toggler => {
       toggler.addEventListener('click', this.onToggleContent.bind(this))
