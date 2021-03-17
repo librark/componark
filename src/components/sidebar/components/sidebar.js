@@ -3,6 +3,11 @@ import { styles } from '../styles'
 
 const tag = 'ark-sidebar'
 export class Sidebar extends Component {
+  init(context = {}) {
+    this.binding = 'sidebar:listen'
+    return super.init(context)
+  }
+
   reflectedProperties () {
     return ['opened']
   }
@@ -16,7 +21,7 @@ export class Sidebar extends Component {
         <div class="ark-sidebar__body"></div>
         <div class="ark-sidebar__footer"></div>
       </div>
-      <div class="ark-sidebar__scrim" listen on-click="close"></div>
+      <div class="ark-sidebar__scrim" sidebar:listen on-click="close"></div>
     `
 
     this._renderSlot(slots, 'header', '.ark-sidebar__header')
