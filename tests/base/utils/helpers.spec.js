@@ -52,6 +52,7 @@ describe('Helpers', () => {
 
   it('can create events', () => {
     const element = document.createElement('div')
+    element['binding'] = 'listen'
     element.innerHTML = /* html */`
 	    <button listen on-click="myMethod"></button>
 	  `

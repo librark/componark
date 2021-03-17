@@ -2,11 +2,12 @@ import { camelToKebab } from './format'
 
 /** @param {HTMLElement} self */
 export function listen (self) {
-  const elements = self.querySelectorAll('[listen]')
+  const binding = self['binding']
+  const elements = self.querySelectorAll(`[${binding}]`)
   for (const element of elements) {
     for (const attribute of Array.from(element.attributes)) {
       if (attribute.name.startsWith('on-')) {
-        const event = attribute.name.replace('on-', '')
+        const eventName = attribute.name.replace('on-', '').trim()
         let handler = self[attribute.value]
 
         const [assignment] = attribute.value.match(/[^{{]+(?=\}})/g) || []
@@ -21,8 +22,8 @@ export function listen (self) {
 
         if (!handler) continue
 
-        element.addEventListener(event, handler.bind(self))
-        if (element.hasAttribute('listen')) element.removeAttribute('listen')
+        element.addEventListener(eventName, handler.bind(self))
+        if (element.hasAttribute(binding)) element.removeAttribute(binding)
       }
     }
   }

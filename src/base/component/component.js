@@ -3,6 +3,7 @@ import { define, listen, reflect, slot } from '../utils'
 export class Component extends HTMLElement {
   constructor () {
     super()
+    this.binding = 'listen'
     reflect(this, this.reflectedProperties())
     this.init({})
   }
