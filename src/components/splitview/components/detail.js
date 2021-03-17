@@ -27,7 +27,7 @@ export class SplitViewDetail extends Component {
   render () {
     this.content = `
     <div class="ark-splitview-detail__header">
-      <button listen on-click="hide"
+      <button splitview-detail-listen on-click="hide"
         class="ark-splitview-detail__close">
       </button>
       <div data-master-title class="ark-splitview-detail__title">

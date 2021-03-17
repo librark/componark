@@ -72,7 +72,17 @@
       height: fit-content;
       font-size: initial;
 
+      padding: 0.5rem;
+      border-bottom: 2px solid rgb(206, 204, 204);
+
       user-select: none;
+
+      button{
+        margin-right: 0.5rem;
+      }
+      button:hover{
+        background: rgb(222, 223, 228);
+      }
     }
 
     &__close {
@@ -95,7 +105,12 @@
 
     &__body {
       height: 100%;
+      padding:1rem;
       overflow: auto;
+    }
+
+    &__main{
+      padding:1rem;
     }
 
     &__default-template {
