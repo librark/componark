@@ -7,6 +7,10 @@ class MockComponent extends Component {
     return super.init()
   }
   reflectedProperties() { return ['code'] }
+
+  erroringHandler (event) {
+    throw new Error('Something went wrong!')
+  }
 }
 Component.define('mock-component', MockComponent)
 
@@ -177,5 +181,25 @@ describe('Component', () => {
       new CustomEvent('alter',  {bubbles: true, detail: 'A'}))
 
     expect(component.data.value).toEqual('A')
+  })
+
+  it('emits an error event on declared listeners', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-alter="erroringHandler"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+
+    let errorEvent = {}
+    component.addEventListener('error', (event) => errorEvent = event)
+
+    const input = component.select('input')
+
+    input.dispatchEvent(
+      new CustomEvent('alter',  { bubbles: true, detail: 'I will error!' }))
+
+    expect(errorEvent.detail.message).toEqual('Something went wrong!')
   })
 })

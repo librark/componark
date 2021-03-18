@@ -22,7 +22,16 @@ export function listen (self) {
 
         if (!handler) continue
 
-        element.addEventListener(eventName, handler.bind(self))
+        const catchingHandler = function (event) {
+          try {
+            return handler.bind(this)(event)
+          } catch (error) {
+            this.dispatchEvent(
+              new CustomEvent('error', { detail: error }))
+          }
+        }
+
+        element.addEventListener(eventName, catchingHandler.bind(self))
         if (element.hasAttribute(binding)) element.removeAttribute(binding)
       }
     }
