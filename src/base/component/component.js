@@ -51,7 +51,7 @@ export class Component extends HTMLElement {
       this.render()
       await this.load()
     } catch (error) {
-      console.error(`{this.tagName}: Update error!`)
+      this.emit('error', error)
       throw error 
     }
   }
