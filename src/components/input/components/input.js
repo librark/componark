@@ -4,21 +4,21 @@ import { styles } from '../styles'
 const tag = 'ark-input'
 export class Input extends Component {
   init(context) {
-    this.background = context.background || this.background
-    this.color = context.color || this.color
-    this.borderColor = context.borderColor  || this.borderColor
-    this.placeholder = context.placeholder || this.placeholder
+    this.background = context.background || this.background || ''
+    this.color = context.color || this.color || ''
+    this.borderColor = context.borderColor  || this.borderColor || ''
+    this.placeholder = context.placeholder || this.placeholder || ''
     return super.init()
   }
 
   reflectedProperties () {
-    return ['label','placeholder']
+    return ['background', 'color', 'label', 'placeholder', 'borderColor']
   }
 
   render () {
     this.content = /* html */`
     <label class="ark-input__label" ${this.isRequired()}>
-      ${this['label']} 
+      <span class="ark-input__text">${this['label']}</span>
       <input background="${this.background}" 
              color="${this.color}" 
              border-color="${this.borderColor}"

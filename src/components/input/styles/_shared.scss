@@ -23,7 +23,7 @@
     }
 
     &__input {
-        border: 2px solid rgb(175, 175, 175);
+        border: 2px solid black;
 
         @each $color in variables.$colors {
             &[background=#{$color}] {

@@ -1,8 +1,8 @@
 @use './variables';
 
 @mixin paint() {
-  background: var(--primary, black);
-  color: white;
+  background: var(--canvas, white);
+  color: var(--ink, black);
 
   @each $color in variables.$colors {
     &[background=#{$color}] {
