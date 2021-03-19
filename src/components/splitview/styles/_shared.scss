@@ -16,8 +16,8 @@
     }
   }
 
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  //grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
 
   width: 100%;
   height: fit-content;
@@ -28,19 +28,19 @@
     border-right: 2px solid rgba($color: gray, $alpha: 0.3);
   }
 
-
   /*MASTER*/
   &-master {
-    width: 100vw;
+    width: 100%;
     overflow: auto;
     height: inherit;
 
     @media (min-width: theme.$mobile) {
-      width: 100%;
+      width: 50%;
 
       &[resize] {
         resize: horizontal;
       }
+
     }
   }
 
