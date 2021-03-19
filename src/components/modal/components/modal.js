@@ -14,8 +14,8 @@ export class Modal extends Component {
     this.width = context.width || this.width || ''
     this.height = context.height || this.height || ''
 
-    this.background = context.background
-    this.color = context.color 
+    this.background = context.background || this.background || ''
+    this.color = context.color || this.color || ''
 
     return super.init()
   }
@@ -26,7 +26,7 @@ export class Modal extends Component {
 
   render () {
     this.content = /* html */ `
-      <div class="ark-modal__content" ${this._getContentStyle()}>
+      <div class="ark-modal__content" background="${this.background}" color="${this.color}" ${this._getContentStyle()}>
         <div class="ark-modal__header">
           ${this._renderHeader()}
         </div>
@@ -51,9 +51,6 @@ export class Modal extends Component {
         'click', _ => this.close())
     }
 
-    const modalContent = this.querySelector('.ark-modal__content')
-    modalContent.setAttribute('background', this.background)
-    modalContent.setAttribute('color', this.color)
 
     return super.render()
   }
