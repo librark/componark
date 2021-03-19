@@ -12,13 +12,11 @@ export class Alert extends Component {
 
     this.contentBackground = (
       context.contentBackground ||
-      this.contentBackground ||
-      'primary'
-    )
+      this.contentBackground || '')
+
     this.contentColor = (
       context.contentColor ||
-      this.contentColor
-    )
+      this.contentColor)
 
     this.showConfirmButton = context.showConfirmButton ?? true
 
@@ -27,7 +25,7 @@ export class Alert extends Component {
 
     this.confirmButtonBackground = (
       context.confirmButtonBackground || 
-      this.confirmButtonBackground || 'primary')
+      this.confirmButtonBackground || 'success')
 
     this.showCancelButton = context.showCancelButton ?? true
 
@@ -36,7 +34,7 @@ export class Alert extends Component {
 
     this.cancelButtonBackground = (
       context.cancelButtonBackground ||
-      this.cancelButtonBackground || 'light')
+      this.cancelButtonBackground || 'primary')
 
     return super.init()
   }
@@ -56,7 +54,8 @@ export class Alert extends Component {
 
   render () {
     this.content = /* html */ `
-      <div background="${this.contentBackground}" color="${this.contentColor}" class="ark-alert__content">
+    <div background="${this.contentBackground}"
+      color="${this.contentColor}" class="ark-alert__content">
         <div class="ark-alert__header">
           ${this._renderTitle()}
           ${this._renderText()}
