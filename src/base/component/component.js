@@ -46,10 +46,15 @@ export class Component extends HTMLElement {
     this.update()
   }
 
-  async update() {
+  /** 
+   * @param {Object<string, any> | null} context
+   * @return {Promise<Component>} */
+  async update(context = null) {
     try {
+      if (context) this.init(context)
       this.render()
       await this.load()
+      return this
     } catch (error) {
       this.emit('error', error)
       throw error 

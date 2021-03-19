@@ -231,4 +231,17 @@ describe('Component', () => {
 
     expect(errorEvent.detail.message).toEqual('Something went async wrong!')
   })
+
+  it('updates with a given initialization context', async () => {
+    container.innerHTML = `
+    <mock-component></mock-component>
+    `
+    const component = container.querySelector('mock-component')
+
+    const context = {data: 'context'}
+
+    await component.update(context)
+
+    expect(component.context).toBe(context)
+  })
 })
