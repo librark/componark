@@ -11,6 +11,12 @@ class MockComponent extends Component {
   erroringHandler (event) {
     throw new Error('Something went wrong!')
   }
+
+  async asyncErroringHandler (event) {
+    const callback = async () => { 
+      throw new Error('Something went async wrong!') }
+    await callback()
+  }
 }
 Component.define('mock-component', MockComponent)
 
@@ -201,5 +207,28 @@ describe('Component', () => {
       new CustomEvent('alter',  { bubbles: true, detail: 'I will error!' }))
 
     expect(errorEvent.detail.message).toEqual('Something went wrong!')
+  })
+
+  it('emits an error event on declared async listeners', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-alter="asyncErroringHandler"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+
+    let errorEvent = {}
+    component.addEventListener('error', (event) => errorEvent = event)
+
+    const input = component.select('input')
+
+    input.dispatchEvent(
+      new CustomEvent('alter',  { bubbles: true, detail: 'I will error!' }))
+
+    // Sleep
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(errorEvent.detail.message).toEqual('Something went async wrong!')
   })
 })

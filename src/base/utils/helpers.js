@@ -22,12 +22,12 @@ export function listen (self) {
 
         if (!handler) continue
 
-        const catchingHandler = function (event) {
+        const catchingHandler = async function (event) {
           try {
-            return handler.bind(this)(event)
+            return await Promise.resolve(handler.bind(this)(event))
           } catch (error) {
-            this.dispatchEvent(
-              new CustomEvent('error', { detail: error }))
+            this.dispatchEvent(new CustomEvent('error', {
+              detail: error, bubbles: true, cancelable: true }))
           }
         }
 
