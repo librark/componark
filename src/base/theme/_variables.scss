@@ -13,6 +13,6 @@ $light: var(--light, black);
 $colors: primary, secondary, success, danger,
   warning, info, dark, muted, light;
 
-$desktop: var(--desktop, 960px);
-$tablet: var(--tablet, 768px);
-$mobile: var(--mobile, 480px);
+$desktop: 960px;
+$tablet: 768px;
+$mobile: 480px;
