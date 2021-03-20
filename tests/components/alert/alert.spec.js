@@ -14,10 +14,10 @@ describe('Alert', () => {
     expect(alert.vertical).toEqual('center')
     expect(alert.showConfirmButton).toBeTruthy()
     expect(alert.confirmButtonText).toEqual('Aceptar')
-    expect(alert.confirmButtonBackground).toEqual('primary')
+    expect(alert.confirmButtonBackground).toEqual('success')
     expect(alert.showCancelButton).toBeTruthy()
     expect(alert.cancelButtonText).toEqual('Cancelar')
-    expect(alert.cancelButtonBackground).toEqual('light')
+    expect(alert.cancelButtonBackground).toEqual('primary')
   })
 
   it('can be initialized', () => {
