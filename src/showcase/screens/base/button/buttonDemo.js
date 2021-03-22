@@ -12,7 +12,9 @@ export class ButtonDemo extends Component {
         <p>This is a button</p>
 
         <ark-button background="disabled" disabled>DISABLED</ark-button>
-        <ark-button background="primary">primary</ark-button>
+        <ark-button background="primary">
+        <ark-icon name="fas fa-address-book"></ark-icon>
+        primary</ark-button>
         <ark-button background="secondary" color="dark">secondary</ark-button>
         <ark-button background="success">success</ark-button>
         <ark-button background="danger">danger</ark-button>
@@ -67,7 +69,9 @@ export class ButtonDemo extends Component {
         <ark-button href="a" outline="disabled" disabled>
           disabled
         </ark-button>
-        <ark-button href="a" outline="primary">primary</ark-button>
+        <ark-button href="a" outline="primary">
+          primary
+        </ark-button>
         <ark-button href="a" outline="secondary">secondary</ark-button>
         <ark-button href="a" outline="success">success</ark-button>
         <ark-button href="a" outline="danger">danger</ark-button>

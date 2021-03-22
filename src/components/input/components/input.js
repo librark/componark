@@ -3,23 +3,30 @@ import { styles } from '../styles'
 
 const tag = 'ark-input'
 export class Input extends Component {
-  init(context){
-    this.background = context.background || this.background
-    this.color = context.color || this.color
-    this.borderColor = context.borderColor  || this.borderColor
+  init(context) {
+    this.background = context.background || this.background || ''
+    this.color = context.color || this.color || ''
+    this.borderColor = context.borderColor  || this.borderColor || ''
+    this.placeholder = context.placeholder || this.placeholder || ''
+    return super.init()
   }
 
   reflectedProperties () {
-    return ['label']
+    return ['background', 'color', 'label', 'placeholder', 'borderColor']
   }
 
   render () {
     this.content = /* html */`
     <label class="ark-input__label" ${this.isRequired()}>
-      ${this.label} <input background="${this.background}" color="${this.color}" border-color="${this.borderColor}" class="ark-input__input"
-      data-input listen on-input="onInputChange">
+      <span class="ark-input__text">${this['label']}</span>
+      <input background="${this.background}" 
+             color="${this.color}" 
+             border-color="${this.borderColor}"
+             placeholder = "${this.placeholder}"
+             class="ark-input__input"
+             data-input listen on-input="onInputChange">
     </label>
-    `
+  `
 
     this.moveAttributes()
     return super.render()
@@ -27,18 +34,12 @@ export class Input extends Component {
 
   /** @param {Event} event */
   onInputChange (event) {
-    event.stopImmediatePropagation()
+    event.stopPropagation()
     this.value = this.input.value
   }
 
   dispatchAlterEvent () {
-    this.dispatchEvent(
-      new CustomEvent('alter', {
-        detail: {
-          value: this.value,
-        }
-      })
-    )
+    this.emit('alter', this.value)
   }
 
   isRequired () {
@@ -48,8 +49,8 @@ export class Input extends Component {
   moveAttributes () {
     Array.from(this.attributes).forEach(attribute => {
       this.input.setAttribute(attribute.name, attribute.value)
-  })
-}
+    })
+  }
 
   get input () {
     return /** @type {HTMLInputElement} */(this.querySelector('[data-input]'))
@@ -65,4 +66,4 @@ export class Input extends Component {
     this.dispatchAlterEvent()
   }
 }
-Component.define(tag, Input,styles)
+Component.define(tag, Input, styles)

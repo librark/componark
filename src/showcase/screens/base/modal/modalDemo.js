@@ -14,7 +14,6 @@ export class ModalDemo extends Component {
       </div>
 
       <ark-modal background="dark" title="My Title" subtitle="My Subtitle"
-        horizontal="center" vertical="center"
         width="80vw" height="40vh">
 
         <div style="margin: 1rem;">

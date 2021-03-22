@@ -42,12 +42,12 @@ describe('Input', () => {
     component.value = 'abc'
     expect(component.input.value).toEqual('abc')
 
-    let alter = null
+    let alter = {}
     component.addEventListener('alter', (event) => alter = event)
 
     component.value = 'xyz'
 
-    expect(alter.detail.value).toEqual('xyz')
+    expect(alter.detail).toEqual('xyz')
   })
 
   it('can move attributes', function () {
