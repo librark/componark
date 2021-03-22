@@ -31,7 +31,7 @@ export class Multiselect extends Component {
     this.innerHTML = /* html */ `
       <h1>${this.label}</h1>
       <div class="ark-multiselect__field" tabindex="0">
-      <input class="ark-multiselect__input" type="text">
+      <input class="ark-multiselect__input" placeholder="Add" type="text">
       </div>
       <div class="ark-multiselect__popup">
         <ark-multiselect-list><ark-multiselect-list>
