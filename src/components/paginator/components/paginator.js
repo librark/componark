@@ -61,13 +61,9 @@ export class Paginator extends Component {
 
   _notifyChange () {
     const page = parseInt(this.currentPage)
-    const pageSize = parseInt(this.pageSize)
-    const offset = (page - 1) * pageSize
-    this.emit('page-changed', {
-      page: page,
-      offset: offset,
-      limit: offset + pageSize
-    })
+    const limit = parseInt(this.pageSize)
+    const offset = (page - 1) * limit
+    this.emit('page-changed', { page, limit, offset })
   }
 
   /** @param {number} currentPage */
