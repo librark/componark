@@ -50,7 +50,8 @@ export class Paginator extends Component {
   }
 
   get currentPages () {
-    const displayedPages = parseInt(this.displayedPages)
+    const displayedPages = Math.min(
+      parseInt(this.displayedPages), this.totalPages)
     const currentPage = parseInt(this.currentPage)
     let startPage = Math.max(currentPage - Math.trunc(displayedPages / 2), 1)
     startPage = Math.min(1 + this.totalPages - displayedPages, startPage)
