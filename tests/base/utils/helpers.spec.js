@@ -1,4 +1,4 @@
-import { listen, reflect } from 'base/utils'
+import { listen, reflect, set, get } from 'base/utils'
 
 describe('Helpers', () => {
   it('does not allow invalid attribute', () => {
@@ -50,8 +50,9 @@ describe('Helpers', () => {
     expect(!element.hasAttribute('clicked-element')).toBeTruthy()
   })
 
-  it('can create events', () => {
+  it('can listen events', () => {
     const element = document.createElement('div')
+    element['binding'] = 'listen'
     element.innerHTML = /* html */`
 	    <button listen on-click="myMethod"></button>
 	  `
@@ -66,9 +67,23 @@ describe('Helpers', () => {
     expect(element.hasAttribute('clicked-element')).toBeTruthy()
   })
 
-  /****************************************************************************
-   * reflect
-   ***************************************************************************/
+  it('ignores missing methods when listening', () => {
+    const element = document.createElement('div')
+    element['binding'] = 'listen'
+    element.innerHTML = /* html */`
+	    <button listen on-click="missing"></button>
+	  `
+    // @ts-ignore
+    element.myMethod = function () {
+      element.setAttribute('clicked-element', '')
+    }
+
+    listen(element)
+
+    element.querySelector('button').click()
+    expect(element.hasAttribute('clicked-element')).toBeFalsy()
+  })
+
   it('can create attribute', () => {
     const element = document.createElement('div')
     const properties = ['myProperty']
@@ -95,5 +110,29 @@ describe('Helpers', () => {
     // @ts-ignore
     expect(element.myProperty).toBe('')
     expect(!element.hasAttribute('my-property')).toBeTruthy()
+  })
+
+  it('sets an object properties by a given path', () => {
+    const object = {}
+
+    set(object, 'value.data', 'Hello')
+
+    expect(object.value.data).toEqual('Hello')
+  })
+
+  it('gets an object properties by a given path', () => {
+    const object = {state: {data: {value: 25}}, data: 13}
+
+    let value = get(object, 'data')
+
+    expect(value).toEqual(13)
+
+    value = get(object, 'state.data.value')
+
+    expect(value).toEqual(25)
+
+    const fallback = get(object, 'state.missing.value', 7)
+
+    expect(fallback).toEqual(7)
   })
 })

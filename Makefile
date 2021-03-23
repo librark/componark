@@ -18,6 +18,9 @@ dev:
 build:
 	npm run build
 
+push:
+	git push && git push --tags
+
 reset:
 	git reset --hard
 	git clean -xdf
