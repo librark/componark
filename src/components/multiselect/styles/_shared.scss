@@ -6,9 +6,7 @@
 
   .ark-multiselect {
     display: flex;
-    box-sizing: content-box;
-    width: fit-content;
-
+    box-sizing: border-box;
 
     &__field {
       display: flex;
@@ -33,13 +31,13 @@
 
       input {
         flex: 1;
-        max-width: 100%;
+        //max-width: 100%;
         min-width: 100px;
         //white-space: nowrap;
+        width: auto;
         overflow: hidden;
         align-self: center;
         padding: 0.5em;
-        border-radius: .2em;
         background: transparent;
         border: none;
 
@@ -106,16 +104,14 @@
     }
 
     &__popup {
-      position: relative;
       display: none;
-      overflow-y: auto;
-      min-width: 100%;
-      max-height: 300px;
-      box-sizing: border-box;
-      border: 1px solid var(--light);
-      border-radius: .2em;
-      background: white;
+      position: relative;
       z-index: 2;
+      overflow-y: auto;
+      width: 100%;
+      max-height: 300px;
+      border: 1px solid var(--light);
+      background: white;
 
 
 

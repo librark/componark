@@ -81,8 +81,8 @@ export class MultiselectDemo extends Component {
 
 const styles = /* css */`
 
-  div.multi-container{
-    width:50%:
+  .multi-container{
+    width:80% !important;
   }
 
 `

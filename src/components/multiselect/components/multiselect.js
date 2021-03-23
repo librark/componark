@@ -112,15 +112,15 @@ export class Multiselect extends Component {
 
   }
 
-  // refreshItems(){
-  //   const itemElements = this.multiselectList.itemElements
-  //   for(let i=0; i<itemElements.length; i++){
-  //     const itemElement = itemElements[i]
-  //     itemElement.setAttribute("role","option")
-  //     itemElement.setAttribute('aria-selected',itemElement.hasAttribute('selected'))
-  //     itemElement.setAttribute('tabindex','-1')
-  //   }
-  // }
+  refreshItems(){
+    const itemElements = this.multiselectList.itemElements
+    for(let i=0; i<itemElements.length; i++){
+      const itemElement = itemElements[i]
+      itemElement.setAttribute("role","option")
+      itemElement.setAttribute('aria-selected',itemElement.hasAttribute('selected'))
+      itemElement.setAttribute('tabindex','-1')
+    }
+  }
 
   listClickHandler(event){
     const item = event.target
