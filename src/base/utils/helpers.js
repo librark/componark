@@ -16,7 +16,7 @@ export function listen (self) {
           let [objectPath, eventPath] = assignment.split('=')
           eventPath = eventPath || 'detail'
           handler = function (event) {
-            set(this, objectPath.trim(), get(event, eventPath))
+            set(this, objectPath.trim(), get(event, eventPath, ''))
           } 
         } 
 
