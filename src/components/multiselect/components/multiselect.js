@@ -69,7 +69,7 @@ export class Multiselect extends Component {
         }).render().load()
   }
 
-  async focusOut(){
+  focusOut(){
     setTimeout(()=>{this.close()},200)
     this.dispatchEvent
   }
@@ -94,34 +94,31 @@ export class Multiselect extends Component {
     if(item.tagName === 'LI' && !item.hasAttribute('selected')){ 
       item.setAttribute('selected', '')
       this.refreshField()
-      item.remove()
-      this.close()
-        // let index = 0
-        // for (let li of this.multiselectList.itemElements) {
-        //   index++
-        // }
     }
     
   }
 
   refreshField(){
+    this._field.innerHTML = /* html */ `
+    <input placeholder="Add" class="ark-multiselect__input" type="text">
+    `
     const selectedItems = this.querySelectorAll('li[selected]')
-
-    for(let i = 0; i < selectedItems.length; i++){
-      this._field.insertBefore(this.createTag(selectedItems[i]),this._field.firstElementChild)
-    }
+    
+      for(let i = 0; i < selectedItems.length; i++){
+        this._field.insertBefore(this.createTag(selectedItems[i]),this._field.firstElementChild)
+      }
 
   }
 
-  refreshItems(){
-    const itemElements = this.multiselectList.itemElements
-    for(let i=0; i<itemElements.length; i++){
-      const itemElement = itemElements[i]
-      itemElement.setAttribute("role","option")
-      itemElement.setAttribute('aria-selected',itemElement.hasAttribute('selected'))
-      itemElement.setAttribute('tabindex','-1')
-    }
-  }
+  // refreshItems(){
+  //   const itemElements = this.multiselectList.itemElements
+  //   for(let i=0; i<itemElements.length; i++){
+  //     const itemElement = itemElements[i]
+  //     itemElement.setAttribute("role","option")
+  //     itemElement.setAttribute('aria-selected',itemElement.hasAttribute('selected'))
+  //     itemElement.setAttribute('tabindex','-1')
+  //   }
+  // }
 
   listClickHandler(event){
     const item = event.target
@@ -151,6 +148,7 @@ export class Multiselect extends Component {
   removeTag(tag,item,event){
       tag.remove()
       item.style.display = 'block'
+      item.removeAttribute('selected')
       event.stopPropagation()
   }
 

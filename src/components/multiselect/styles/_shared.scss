@@ -5,19 +5,21 @@
   //@include theme.paint;
 
   .ark-multiselect {
-    display: flex;
-    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    box-sizing: content-box;
+    width: 100%;
+
 
     &__field {
       min-width: 0;
       display: flex;
       justify-content: flex-start;
-      //flex-direction: row-reverse;
       align-items: center;
       flex-wrap: wrap;
       flex-grow:1;
-      gap: 0.3rem;
       padding: 0.5em;
+
       overflow: hidden;
       border: 1px solid var(--light);
       border-radius: .2em;
@@ -25,7 +27,7 @@
       -webkit-user-select: none;
       user-select: none;
 
-
+  
       &:focus {
         border: 2px solid var(--primary);
         outline: none;
@@ -43,21 +45,7 @@
         //border: 2px solid rgba(50, 100, 255, 0.5);
         //border-radius: .2em;
         margin: .2em .2em;
-        flex: 1;
-        //max-width: 100%;
-        min-width: 100px;
-        //white-space: nowrap;
-        width: auto;
-        overflow: hidden;
-        align-self: center;
-        padding: 0.5em;
-        background: transparent;
-        border: none;
 
-        &:focus {
-          outline: none;
-          border: none;
-        }
       }
 
     }
@@ -119,43 +107,42 @@
     &__popup {
       //position: absolute;
       display: none;
-      position: relative;
-      z-index: 2;
       overflow-y: auto;
       width: 100%;
       max-height: 300px;
+      box-sizing: border-box;
       border: 1px solid var(--light);
+      border-radius: .2em;
       background: white;
-
-
-
     }
-
+    
     &-list {
       padding: 0;
       margin: 0;
 
-      &__no-options {
-        pointer-events: none;
-        user-select: none;
+      &__no-options{
+          pointer-events: none;
+          user-select: none;
       }
-
       ul {
         margin: 0;
         padding: 0;
       }
-
+  
       li {
         padding: .5em 1em;
         min-height: 1em;
         list-style: none;
         cursor: pointer;
       }
-
+  
       li[selected] {
-        background: #f3f3f3;
+        background: #cecece;
       }
-
+      li[selected]::after {
+        content: "✓";
+      }
+  
       li:focus,
       li:hover {
         outline: dotted 1px var(--dark);
