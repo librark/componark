@@ -100,12 +100,44 @@ describe('Multiselect', () => {
     expect(setTimeout).toBeCalledTimes(1)
   })
   
+  it('Clean button clean all tags from field',()=>{
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    const multiselect = container.querySelector('ark-multiselect')
+    const myItems = [
+      '01 display',
+      '02 max-width',
+    ]
+    
+    multiselect.init({
+      items:myItems
+    }).render().load()
+  
+  
+    const list = multiselect._list
+    const clean = multiselect._clean
+    
+    list.itemElements[0].click()
+    list.itemElements[1].click()
+
+    expect(multiselect.querySelectorAll('.ark-multiselect__tag').length).toBe(2)
+    clean.click()
+
+    expect(multiselect.querySelectorAll('.ark-multiselect__tag').length).toBe(0)
+
+  })
+
   xit('List item get tab index',()=>{
     container.innerHTML = /* html */`
     <ark-multiselect></ark-multiselect>
     `
     const multiselect = container.querySelector('ark-multiselect')
     
+
+
+
+
   })
   
 

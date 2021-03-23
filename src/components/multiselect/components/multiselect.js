@@ -31,13 +31,13 @@ export class Multiselect extends Component {
     this.className = 'ark-multiselect'
     this.fieldContent = /* html */ `
       <input placeholder="Add" class="ark-multiselect__input" type="text">
-      <div class="ark-multiselect__field--remove"></div>
     `
     this.innerHTML = /* html */ `
       <h1>${this.label}</h1>
       <div class="ark-multiselect__field" tabindex="0">
         ${this.fieldContent}
       </div>
+      <div class="ark-multiselect__field--remove">╳</div>
       <div class="ark-multiselect__popup">
         <ark-multiselect-list><ark-multiselect-list>
       HI
@@ -49,11 +49,11 @@ export class Multiselect extends Component {
     this._field = this.select('.ark-multiselect__field')
     this._input = this.select('.ark-multiselect__input')
     this._list = this.select('ark-multiselect-list')
-    this._clear = this.select('.ark-multiselect__field--remove')
+    this._clean = this.select('.ark-multiselect__field--remove')
 
     
     this.addListItems()
-    //this.refreshItems()
+    this.refreshField()
     //this.filterItems()
     
     return super.render()
@@ -64,6 +64,7 @@ export class Multiselect extends Component {
     this._field.addEventListener('focusout', this.focusOut.bind(this))
     this._list.addEventListener('click', this.listClickHandler.bind(this))
     this._field.addEventListener('input', this.inputValue.bind(this))
+    this._clean.addEventListener('click',this.cleanTags.bind(this))
     //this._input.addEventListener('blur', this.fieldClickHandler.bind(this))
   }
 
@@ -76,8 +77,9 @@ export class Multiselect extends Component {
   }
 
   focusOut(){
-    setTimeout(()=>{this.close()},200)
-    this.dispatchEvent
+    setTimeout(()=>{
+      this.close()
+    },200)
   }
 
   fieldClickHandler(){
@@ -143,7 +145,16 @@ export class Multiselect extends Component {
       tag.remove()
       item.style.display = 'block'
       item.removeAttribute('selected')
-      event.stopPropagation()
+     
+  }
+
+  cleanTags(item,event){
+    const selectedItems = this.querySelectorAll('li[selected]');
+    for(let i = 0; i < selectedItems.length; i++){
+     selectedItems[i].removeAttribute('selected');
+    }
+    this._field.innerHTML = this.fieldContent
+
   }
 
 
