@@ -27,11 +27,16 @@ export class Multiselect extends Component {
   }
   
   render () {
+
     this.className = 'ark-multiselect'
+    this.fieldContent = /* html */ `
+      <input placeholder="Add" class="ark-multiselect__input" type="text">
+      <div class="ark-multiselect__field--remove"></div>
+    `
     this.innerHTML = /* html */ `
       <h1>${this.label}</h1>
       <div class="ark-multiselect__field" tabindex="0">
-      <input placeholder="Add" class="ark-multiselect__input" type="text">
+        ${this.fieldContent}
       </div>
       <div class="ark-multiselect__popup">
         <ark-multiselect-list><ark-multiselect-list>
@@ -44,6 +49,7 @@ export class Multiselect extends Component {
     this._field = this.select('.ark-multiselect__field')
     this._input = this.select('.ark-multiselect__input')
     this._list = this.select('ark-multiselect-list')
+    this._clear = this.select('.ark-multiselect__field--remove')
 
     
     this.addListItems()
@@ -99,26 +105,16 @@ export class Multiselect extends Component {
   }
 
   refreshField(){
-    this._field.innerHTML = /* html */ `
-    <input placeholder="Add" class="ark-multiselect__input" type="text">
-    `
+    this._field.innerHTML = this.fieldContent
     const selectedItems = this.querySelectorAll('li[selected]')
     
       for(let i = 0; i < selectedItems.length; i++){
         this._field.insertBefore(this.createTag(selectedItems[i]),this._field.firstElementChild)
       }
+    
 
   }
 
-  // refreshItems(){
-  //   const itemElements = this.multiselectList.itemElements
-  //   for(let i=0; i<itemElements.length; i++){
-  //     const itemElement = itemElements[i]
-  //     itemElement.setAttribute("role","option")
-  //     itemElement.setAttribute('aria-selected',itemElement.hasAttribute('selected'))
-  //     itemElement.setAttribute('tabindex','-1')
-  //   }
-  // }
 
   listClickHandler(event){
     const item = event.target
@@ -140,8 +136,6 @@ export class Multiselect extends Component {
     tag.appendChild(tagText)
     tag.appendChild(removeButton)
 
-    console.log(this._field.lastElementChild)
-
     return tag
   }
 
@@ -151,6 +145,8 @@ export class Multiselect extends Component {
       item.removeAttribute('selected')
       event.stopPropagation()
   }
+
+
 
   
   open(){

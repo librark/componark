@@ -27,6 +27,34 @@
       -webkit-user-select: none;
       user-select: none;
 
+      &--remove{
+        position: relative;
+        right: .25em;
+        width: 1em;
+        height: 1em;
+        opacity: 0.3;
+        z-index: 2;
+      }
+      &--remove:hover{
+        opacity: 1;
+      }
+      &--remove:before,
+      &--remove:after {
+      content: ' ';
+      position: absolute;
+      left: .5em;
+      width: 2px;
+      height: 1em;
+      background-color: rgb(255, 100, 100);
+      }
+
+      &--remove:before {
+        transform: rotate(45deg);
+     }
+
+      &--remove:after {
+        transform: rotate(-45deg);
+      }
   
       &:focus {
         border: 2px solid var(--primary);
@@ -35,8 +63,7 @@
 
       input {
         width: 100%;
-
-        //align-self: flex-start;
+        min-width: 100px;
         flex: 1 1;
         padding: 0.5em;
         border:none;
@@ -137,7 +164,7 @@
       }
   
       li[selected] {
-        background: #cecece;
+        background: #ceebcb;
       }
       li[selected]::after {
         content: "✓";
