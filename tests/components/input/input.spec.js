@@ -44,6 +44,10 @@ describe('Input', () => {
     component.value = 'abc'
     expect(component.input.value).toEqual('abc')
 
+    component.value = undefined
+    expect(component.value).toEqual('')
+    expect(component.input.value).toEqual('')
+
     let alter = {}
     component.addEventListener('alter', (event) => alter = event)
 

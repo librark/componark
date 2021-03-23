@@ -61,8 +61,8 @@ export class Input extends Component {
   }
 
   set value (value) {
-    this.setAttribute('value', value)
-    this.input.value = value
+    this.setAttribute('value', value || '')
+    this.input.value = value || ''
     this.dispatchAlterEvent()
   }
 }
