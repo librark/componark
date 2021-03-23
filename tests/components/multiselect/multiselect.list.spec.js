@@ -138,7 +138,6 @@ it('Can create a tag',()=>{
   list.itemElements[1].click()
   list.itemElements[2].click()
 
-  expect(list.itemElements.length).not.toBe(list.items.length)
   expect(multiselect.querySelectorAll('.ark-multiselect__tag').length).toBe(2)
 })
 
