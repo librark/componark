@@ -4,7 +4,7 @@
 @mixin ark-input() {
     padding: 10px;
 
-    
+
     &[disabled] {
         pointer-events: none;
         cursor: default;
@@ -23,6 +23,9 @@
     }
 
     &__input {
+        display: block;
+        width: 100%;
+        padding: 0.5rem;
         border: 2px solid black;
 
         @each $color in variables.$colors {
@@ -49,9 +52,6 @@
             }
         }
 
-        display: block;
-        max-width: 100%;
-        padding: 0.5rem;
     }
 
     &[inline] label {
