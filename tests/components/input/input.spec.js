@@ -21,8 +21,10 @@ describe('Input', () => {
   it('sets its value attribute on input event', () => {
     container.innerHTML = `<ark-input></ark-input>`
     const component = container.querySelector('ark-input')
+    expect(component.value).toBe('')
 
     const input = component.querySelector('[data-input]')
+
     input.value = 'X'
     input.dispatchEvent(new Event('input'))
 
@@ -41,6 +43,10 @@ describe('Input', () => {
     const component = container.querySelector('ark-input')
     component.value = 'abc'
     expect(component.input.value).toEqual('abc')
+
+    component.value = undefined
+    expect(component.value).toEqual('')
+    expect(component.input.value).toEqual('')
 
     let alter = {}
     component.addEventListener('alter', (event) => alter = event)

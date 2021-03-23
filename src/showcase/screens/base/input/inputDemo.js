@@ -88,6 +88,7 @@ export class InputDemo extends Component {
       <ark-input type="file"></ark-input>
       <ark-input label="Date" type="date"></ark-input>
       <ark-input type="text" label="Disabled" placeholder="Disabled input" disabled></ark-input>
+      <ark-input type="search" label="Search"></ark-input>
     `))
   }
 

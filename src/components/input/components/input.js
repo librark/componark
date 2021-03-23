@@ -57,12 +57,12 @@ export class Input extends Component {
   }
 
   get value () {
-    return /** @type {string} */(this.getAttribute('value'))
+    return /** @type {string} */(this.getAttribute('value')) || ''
   }
 
   set value (value) {
-    this.setAttribute('value', value)
-    this.input.value = value
+    this.setAttribute('value', value || '')
+    this.input.value = value || ''
     this.dispatchAlterEvent()
   }
 }
