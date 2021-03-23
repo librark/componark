@@ -18,17 +18,7 @@ $feat-color: feature-targeting.create-target($query, color);
 .ark-input {
 
   @include shared.ark-input;
-
-
-  display: inline-flex;
-  align-items: baseline;
-  position: relative;
-  box-sizing: border-box;
-  /* @alternate */
-  will-change: opacity, transform, error;
-
-
-
+  
   &__input {
     @include shape.radius(4px, false);
 

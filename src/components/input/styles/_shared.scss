@@ -2,6 +2,7 @@
 @use '../../../base/theme/variables';
 
 @mixin ark-input() {
+    display: inline-flex;
     padding: 10px;
 
     
@@ -23,6 +24,9 @@
     }
 
     &__input {
+        display: block;
+        width: 100%;
+        padding: 0.5rem;
         border: 2px solid black;
 
         @each $color in variables.$colors {
@@ -49,15 +53,13 @@
             }
         }
 
-        display: block;
-        max-width: 100%;
-        padding: 0.5rem;
     }
 
     &[inline] label {
         display: flex;
         white-space: nowrap;
         align-items: center;
+        width: 100%;
 
         input {
             display: initial;
