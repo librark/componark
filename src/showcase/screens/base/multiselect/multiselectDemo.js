@@ -8,10 +8,12 @@ export class MultiselectDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `
+    <div class="multi-container">
       <ark-multiselect list label='multiselect list'></ark-multiselect>
       <br>
       <ark-multiselect list-object label='multiselect object'></ark-multiselect>
       <ark-multiselect label='multi none'></ark-multiselect>
+    </div>
 		`
     this.renderMultiselect()
     this.renderMultiselectObject()
@@ -79,7 +81,9 @@ export class MultiselectDemo extends Component {
 
 const styles = /* css */`
 
-
+  .multi-container{
+    width:80% !important;
+  }
 
 `
 
