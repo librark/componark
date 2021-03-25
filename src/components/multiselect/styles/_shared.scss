@@ -1,168 +1,189 @@
 @use '../../../base/theme';
 @use './config';
 
-@mixin ark-multiselect(){
-  position: relative;
-  display: block;
-  height: fit-content;
+@mixin ark-multiselect() {
+  //@include theme.paint;
 
-  &__label {
-    user-select: none;
-    font-size: small;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    display: block;
-  }
-
-  &__body {
-    display: flex;
-    align-items: center;
-  }
-
+  display: grid;
+  grid-template-columns: repeat(2,1fr) 0.2fr;
+  grid-template-row: repeat(3, 1fr);
+  grid-gap:0.2rem;
   
-  //---->input
-  &-input{
-    display: flex;
+  h1{
+    user-select: none;
+  }
+  .ark-multiselect {
+    box-sizing: content-box;
     width: 100%;
-    //flex-flow: wrap;
-    cursor: text;
 
-    input {
-      font-size: initial;
-      padding: 0.5rem;
-      width: 100%;
-      //border: 0;
-      //outline: 0;
-      
-      &:focus {
-        outline: 0;
-      }
-    }
-  }
-  //---->list
-  &-list{
-    display: none;
-    user-select: none;
-    width:100%;
-    background: var(--light);
-    border: 1px solid rgba($color: var(--dark), $alpha: 0.3);
-    
-    position: absolute;
-    
-    max-height: 14.5rem;
 
-    overflow-y: auto;
-    
-    z-index: 1024;
-    
-    &[show] {
-      display: block;
-    }
-    
-    ul {
-      margin: 0;
-      padding: 0.2rem 0;
-
-      :not(:first-child) {
-        border-top: 1px solid rgba($color: var(--light), $alpha: 0.3);
-      }
-    }
-    
-    li {
-      padding: 0.2rem 0.5rem;
-      cursor: pointer;
-      color: var(--dark);
-
-      &:hover,
-      &[selected] {
-        background: var(--primary);
-        color:var(--light);
-        outline: 0;
-      }
-    }
-  }
-
-  &-selected-item{
-    display: flex;
-    margin:0.5rem 0.3rem;
-    width: auto;
-    background: var(--light);
-    color:var(--dark);
-    
-    border-radius: 5px;
-    user-select: none;
-    overflow: hidden;
-
-    &[selected] {
-      background: var(--primary);
-    }
-    
-    small,
-    button {
+    &__field {
+      grid-row: 2;
+      grid-column:span 2;
+      min-width: 0;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-    }
+      flex-wrap: wrap;
+      flex-grow:1;
+      padding: 0.5em;
 
-    small {
-      margin: 0 .2rem;
-    }
-    
-    button {
-      all: unset;
-      outline: 0;
-      padding: 0 .5rem;
-      height: 100%;
-      &[remove]{
-        background: var(--dark);
-        color:var(--light);
-      }
-      cursor:pointer;
-    }
-  }
-  
-  &__box{
-    width:100%;
-  }
-
-  &-selected-list{
-    display: flex;
-    margin-bottom: 0.3rem;
-    flex-flow: wrap;
-    padding: 10px;
-    border:1px solid var(--primary);
-    border-style: dashed;
-    gap: .1rem;
-    
-  }
-  
-  &__actions{
-    position: relative;
-    top:1.6rem;
-    opacity: 0.8;
-    .ark-multiselect__remove-all {
-      //margin: 1rem;
-      position: sticky;
-      right:0;
-      top:0;
-      left:100%;
-      padding: 0.3rem;
-    
-      width: 1.2rem;
-      height: 1.2rem;
-    
-      font-weight: bolder;
-    
-      border: 0;
-      outline: 0;
-    
+      overflow: hidden;
+      border: 1px solid var(--light);
+      border-radius: .2em;
       cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+
+      &--remove{
+        cursor: pointer;
+        grid-row:2;
+        grid-column: 3;
+        align-self: start;
+        font-size: 0.5rem;
+        position: relative;
+        left:-25px;
+        width:fit-content;
+          width:-moz-fit-content;
+        padding:0.28rem 0.4rem;
+        background: transparent;
+        color:black;
+        user-select: none;
+        &:hover{
+            background: rgb(250, 110, 110);
+            color:white;
+        }
+        &:hover:after{
+            content:'clear';
+            position: absolute;
+            top:20px;
+            left:2px;
+            color:black;
+        }
+      }
+
+
+      &:focus {
+        border: 2px solid var(--primary);
+        outline: none;
+      }
+
+      input {
+        width: 100%;
+        min-width: 100px;
+        flex: 1 1;
+        padding: 0.5em;
+        border:none;
+        outline:none;
+        background: transparent;
+        margin: .2em .2em;
+
+      }
+
+    }
+
+    &__tag {
+      position: relative;
+      display: inline-block;
+      padding: .25em 1.5em .25em .5em;
+      border: 1px solid #bdbdbd;
+      border-radius: .2em;
+      margin: .2em;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    &__tag:last-child {
+      margin-right: 0;
+    }
+
+    &__tag:hover {
+      background: #efefef;
+    }
+
+    &__tag-text {
+      min-height: 1em;
+    }
+
+    &__tag-remove-button {
+      position: absolute;
+      top: .25em;
+      right: .25em;
+      width: 1em;
+      height: 1em;
+      opacity: 0.3;
+    }
+
+    &__tag-remove-button:hover {
+      opacity: 1;
+    }
+
+    &__tag-remove-button:before,
+    &__tag-remove-button:after {
+      content: ' ';
+      position: absolute;
+      left: .5em;
+      width: 2px;
+      height: 1em;
+      background-color: #333;
+    }
+
+    &__tag-remove-button:before {
+      transform: rotate(45deg);
+    }
+
+    &__tag-remove-button:after {
+      transform: rotate(-45deg);
+    }
+
+    &__popup {
+      display: none;
+      grid-row: 3;
+      grid-column:span 2;
+      overflow-y: auto;
+      width: 100%;
+      max-height: 300px;
+      box-sizing: border-box;
+      border: 1px solid var(--light);
+      border-radius: .2em;
+      background: white;
+      user-select: none;
+    }
     
-      &:hover {
-        background: var(--danger);
+    &-list {
+      padding: 0;
+      margin: 0;
+
+      &__no-options{
+          pointer-events: none;
+          user-select: none;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+  
+      li {
+        padding: .5em 1em;
+        min-height: 1em;
+        list-style: none;
+        cursor: pointer;
+      }
+  
+      li[selected] {
+        background: #ceebcb;
+      }
+      li[selected]::after {
+        content: "✓";
+      }
+  
+      li:focus,
+      li:hover {
+        outline: dotted 1px var(--dark);
+        background: var(--primary);
+        color: var(--light);
       }
     }
+
   }
-  
 }
