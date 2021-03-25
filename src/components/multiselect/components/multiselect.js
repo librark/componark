@@ -18,7 +18,7 @@ export class Multiselect extends Component {
     this.field = context.field || this.field || ''
     this.template = context.template || (data => `${data}`)
     this.items = context.items || []
-    //this.filter = context.filter || (items => items)
+    this.filter = context.filter || (items => items)
     this.global = context.global || window
     
     return super.init()
@@ -59,21 +59,41 @@ export class Multiselect extends Component {
     return super.render()
   }
   
-  async load() {
+  load() {
     this._field.addEventListener('click', this.fieldClickHandler.bind(this))
     this._field.addEventListener('focusout', this.focusOut.bind(this))
     this._list.addEventListener('click', this.listClickHandler.bind(this))
     this._field.addEventListener('input', this.inputValue.bind(this))
     this._clean.addEventListener('click',this.cleanTags.bind(this))
+
   }
 
-  addListItems(){
-      this._list.init({
+  async addListItems(){
+     await this._list.init({
           field: this.field,
           template:this.template,
           items:this.items
         }).render().load()
   }
+
+  // async filterItems(){
+
+  //   let items = await this.filter(this.multiselectInput.value)
+  //   const selectedList = this.multiselectList.selectedList
+    
+  //   items = this.items.filter(item => this.items.find(
+  //     field => (item[this.field] || item).toString() === field
+  //     ))
+      
+  //   this._list.init({
+  //     field: this.field,
+  //     template: this.template,
+  //     items
+  //   }).render()
+
+
+  // }
+
 
   focusOut(){
     setTimeout(()=>{
@@ -92,7 +112,7 @@ export class Multiselect extends Component {
   
   inputValue(){
     const value = this._input.value
-    console.log(value)
+    //await this.filterItems()
     return value
   }
   
@@ -165,6 +185,10 @@ export class Multiselect extends Component {
   }
   close(){
     this.showPopup(false)
+  }
+
+  get multiselectInput(){
+    return this.select('ark-multiselect-input')
   }
   
   get multiselectList () {

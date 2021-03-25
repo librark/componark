@@ -128,11 +128,4 @@ describe('Multiselect', () => {
 
   })
 
-  xit('List item get tab index',()=>{
-    container.innerHTML = /* html */`
-    <ark-multiselect></ark-multiselect>
-    `
-    const multiselect = container.querySelector('ark-multiselect')
-  })
-
 })
