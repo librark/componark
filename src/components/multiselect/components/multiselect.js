@@ -156,7 +156,7 @@ export class Multiselect extends Component {
   }
 
   dispatchAlertEvent(){
-    this.emit('alter', this.multiselectList.selectedList)
+    this.emit('alter', this.value)
   }
   
   open(){
@@ -174,6 +174,10 @@ export class Multiselect extends Component {
     return /** @type {MultiselectList} */(
       this.select('ark-multiselect-list')
     )
+  }
+
+  get value () {
+    return this.multiselectList.selectedList.join()
   }
 
   

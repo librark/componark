@@ -128,4 +128,28 @@ describe('Multiselect', () => {
 
   })
 
+  it('Returns value as string of selected items',()=>{
+
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    const multiselect = container.querySelector('ark-multiselect')
+    const myItems = [
+      '01 display',
+      '02 max-width',
+    ]
+    
+    multiselect.init({
+      items:myItems
+    }).render().load()
+  
+  
+    const list = multiselect._list
+    
+    list.itemElements[0].click()
+    list.itemElements[1].click()
+    expect(multiselect.value).toBe(list.selectedList.join())
+
+  })
+
 })

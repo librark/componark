@@ -37,8 +37,6 @@ export class MultiselectList extends Component {
     this.content = content
   }
 
- 
-
   get itemElements(){
     return this.selectAll('li')
   }
