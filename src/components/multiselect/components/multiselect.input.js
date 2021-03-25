@@ -10,7 +10,7 @@ export class MultiselectInput extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <input type="text" placeholder="Add" class="ark-multiselect__input"/>
+      <input type="text" placeholder="Add" disabled class="ark-multiselect__input"/>
 		`
     return super.render()
   }
