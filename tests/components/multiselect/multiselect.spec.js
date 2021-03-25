@@ -133,27 +133,6 @@ describe('Multiselect', () => {
     <ark-multiselect></ark-multiselect>
     `
     const multiselect = container.querySelector('ark-multiselect')
-    
-
-
-
-
   })
-  
-
-  
-  // it('Popup text change with value of input', () => {
-  //   container.innerHTML = /* html */`
-  //   <ark-multiselect></ark-multiselect>
-  //   `
-  //   const multiselect = container.querySelector('ark-multiselect')
-  //   const input = multiselect._input
-  
-  //   input.value = "hello"
-
-  //   multiselect.popupChange()
-  //   expect(multiselect._popup.innerText).toBe('hello')
-  // })
-
 
 })

@@ -9,17 +9,38 @@ export class MultiselectDemo extends Component {
   render () {
     this.innerHTML = /* html */ `
     <div class="multi-container">
-      <ark-multiselect list label='multiselect list'></ark-multiselect>
+      <ark-multiselect 
+                      list label='multiselect list' 
+                      listen on-alter="alterMultiselect">
+      </ark-multiselect>
+      <p>value: <span data-multiselect></span> </p>
       <br>
-      <ark-multiselect list-object label='multiselect object'></ark-multiselect>
+      <ark-multiselect 
+                      list-object 
+                      label='multiselect object'
+                      listen on-alter="alterMultiselectObject">
+      </ark-multiselect>
+      <p>value: <span data-multiselect-object></span> </p>
       <ark-multiselect label='multi none'></ark-multiselect>
     </div>
 		`
     this.renderMultiselect()
     this.renderMultiselectObject()
-    
 
     return super.render()
+  }
+
+  alterMultiselect (event) {
+    event.stopImmediatePropagation()
+    this.querySelector('[data-multiselect]').innerHTML = JSON.stringify(
+      event.detail
+    )
+  }
+  alterMultiselectObject (event) {
+    event.stopImmediatePropagation()
+    this.querySelector('[data-multiselect-object]').innerHTML = JSON.stringify(
+      event.detail
+    )
   }
 
   renderMultiselect () {

@@ -1,5 +1,6 @@
 import { Component } from '../../../base/component'
 import { MultiselectList } from './multiselect.list'
+import { MultiselectInput } from './multiselect.input'
 // import { uuid } from '../../../base/utils'
 // import { MultiselectSelectedItem } from './multiselect.selected-item'
 // import { MultiselectSelectedList } from './multiselect.selected-list'
@@ -17,6 +18,7 @@ export class Multiselect extends Component {
     this.field = context.field || this.field || ''
     this.template = context.template || (data => `${data}`)
     this.items = context.items || []
+    //this.filter = context.filter || (items => items)
     this.global = context.global || window
     
     return super.init()
@@ -30,7 +32,7 @@ export class Multiselect extends Component {
 
     this.className = 'ark-multiselect'
     this.fieldContent = /* html */ `
-      <input placeholder="Add" class="ark-multiselect__input" type="text">
+      <ark-multiselect-input></ark-multiselect-input>
     `
     this.innerHTML = /* html */ `
       <h1>${this.label}</h1>
@@ -40,7 +42,6 @@ export class Multiselect extends Component {
       <div class="ark-multiselect__field--remove">╳</div>
       <div class="ark-multiselect__popup">
         <ark-multiselect-list><ark-multiselect-list>
-      HI
       </div>
     `
     
@@ -51,10 +52,9 @@ export class Multiselect extends Component {
     this._list = this.select('ark-multiselect-list')
     this._clean = this.select('.ark-multiselect__field--remove')
 
-    
     this.addListItems()
-    this.refreshField()
     //this.filterItems()
+    this.refreshField()
     
     return super.render()
   }
@@ -65,7 +65,6 @@ export class Multiselect extends Component {
     this._list.addEventListener('click', this.listClickHandler.bind(this))
     this._field.addEventListener('input', this.inputValue.bind(this))
     this._clean.addEventListener('click',this.cleanTags.bind(this))
-    //this._input.addEventListener('blur', this.fieldClickHandler.bind(this))
   }
 
   addListItems(){
@@ -112,9 +111,7 @@ export class Multiselect extends Component {
     
       for(let i = 0; i < selectedItems.length; i++){
         this._field.insertBefore(this.createTag(selectedItems[i]),this._field.firstElementChild)
-      }
-    
-
+      } 
   }
 
 
@@ -135,9 +132,10 @@ export class Multiselect extends Component {
     removeButton.className = 'ark-multiselect__tag-remove-button'
     removeButton.addEventListener('click', this.removeTag.bind(this,tag,item))
 
+    
     tag.appendChild(tagText)
     tag.appendChild(removeButton)
-
+    this.dispatchAlertEvent()
     return tag
   }
 
@@ -145,7 +143,7 @@ export class Multiselect extends Component {
       tag.remove()
       item.style.display = 'block'
       item.removeAttribute('selected')
-     
+      this.dispatchAlertEvent()
   }
 
   cleanTags(item,event){
@@ -153,12 +151,14 @@ export class Multiselect extends Component {
     for(let i = 0; i < selectedItems.length; i++){
      selectedItems[i].removeAttribute('selected');
     }
+    this.dispatchAlertEvent()
     this._field.innerHTML = this.fieldContent
 
   }
 
-
-
+  dispatchAlertEvent(){
+    this.emit('alter', this.multiselectList.selectedList)
+  }
   
   open(){
     this.showPopup(true)
@@ -177,8 +177,3 @@ export class Multiselect extends Component {
 }
 
 Component.define(tag, Multiselect, styles)
-
-// popupChange(){
-//   this.open()
-//   this._popup.innerText = this.inputValue()
-// }

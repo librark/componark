@@ -9,8 +9,8 @@ export class MultiselectInput extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <input type="text" listen on-input="onInput" on-keydown="onkeyDown"
-        on-blur="onBlur" on-focus="onFocus"/>
+      <input type="text" placeholder="Add" listen on-input="onInput" on-keydown="onkeyDown"
+        on-blur="onBlur" on-focus="onFocus" class="ark-multiselect__input"/>
 		`
     this.addEventListener('click', this.onClick.bind(this))
     return super.render()

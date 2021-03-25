@@ -139,6 +139,31 @@ it('Can create a tag',()=>{
   list.itemElements[2].click()
 
   expect(multiselect.querySelectorAll('.ark-multiselect__tag').length).toBe(2)
+
+})
+it('Return list of selected items',()=>{
+  container.innerHTML = /* html */`
+  <ark-multiselect></ark-multiselect>
+  `
+  const multiselect = container.querySelector('ark-multiselect')
+  
+  const myItems = [
+    '01 display',
+    '02 max-width',
+    '03 max-height',
+    '04 width',
+    '05 height'
+  ]
+  
+  multiselect.init({
+    items:myItems
+  }).render().load()
+  
+  const list = multiselect._list
+  list.itemElements[0].click()
+  list.itemElements[1].click()
+  expect(list.selectedList.length).toBe(list.selectedItems.length)
+
 })
 
 

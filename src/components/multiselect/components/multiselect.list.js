@@ -22,7 +22,7 @@ export class MultiselectList extends Component {
     return super.render()
   }
 
-  async renderItems () {
+ renderItems () {
     let content = this.items.length ? '' : /* html */ `
       <span type="empty" class="ark-multiselect-list__no-options">Sin Opciones</span>
     `
@@ -37,9 +37,25 @@ export class MultiselectList extends Component {
     this.content = content
   }
 
+ 
+
   get itemElements(){
     return this.selectAll('li')
   }
+
+  get selectedItems(){
+    return Array.prototype.slice.call(this.selectAll('li[selected]')).reverse()
+  }
+
+  get selectedList(){
+    const fields=[]
+    this.querySelectorAll('[selected]').forEach(
+      item => fields.push(item.getAttribute('field'))
+    )
+    return fields.sort()
+  }
+
+
 }
 
 Component.define(tag, MultiselectList)

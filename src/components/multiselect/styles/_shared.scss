@@ -8,7 +8,10 @@
   grid-template-columns: repeat(2,1fr) 0.2fr;
   grid-template-row: repeat(3, 1fr);
   grid-gap:0.2rem;
-
+  
+  h1{
+    user-select: none;
+  }
   .ark-multiselect {
     box-sizing: content-box;
     width: 100%;
@@ -31,7 +34,6 @@
       cursor: pointer;
       -webkit-user-select: none;
       user-select: none;
-
 
       &--remove{
         cursor: pointer;
@@ -145,6 +147,7 @@
       border: 1px solid var(--light);
       border-radius: .2em;
       background: white;
+      user-select: none;
     }
     
     &-list {
