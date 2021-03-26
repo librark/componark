@@ -21,7 +21,7 @@ describe('MultiselectList', () => {
     <ark-multiselect></ark-multiselect>
     `
     const multiselect = container.querySelector('ark-multiselect')
-    const list = multiselect._list
+    const list = multiselect.multiselectList
 
     expect(list).toBeTruthy()
     expect(list).toEqual(list.init())
@@ -94,7 +94,7 @@ describe('MultiselectList', () => {
         }).render().load()
         
         
-      const multiselectList = multiselect._list
+      const multiselectList = multiselect.multiselectList
       const items = multiselectList.itemElements
 
       items[0].click()
@@ -109,7 +109,7 @@ it('items that arent li, cant be selected', () => {
       <ark-multiselect></ark-multiselect>
       `
       const multiselect = container.querySelector('ark-multiselect')
-      const list = multiselect._list
+      const list = multiselect.multiselectList
      
       list.click()
       list.childNodes[1].click()
@@ -134,7 +134,7 @@ it('Can create a tag',()=>{
     items:myItems
   }).render().load()
   
-  const list = multiselect._list
+  const list = multiselect.multiselectList
   list.itemElements[1].click()
   list.itemElements[2].click()
 
@@ -159,7 +159,7 @@ it('Return list of selected items',()=>{
     items:myItems
   }).render().load()
   
-  const list = multiselect._list
+  const list = multiselect.multiselectList
   list.itemElements[0].click()
   list.itemElements[1].click()
   expect(list.selectedList.length).toBe(list.selectedItems.length)

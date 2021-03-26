@@ -40,18 +40,6 @@ describe('Multiselect', () => {
     expect(multiselect.isOpened).toBeFalsy()
   })
 
-  it('returns input value', () => {
-
-    container.innerHTML = /* html */`
-    <ark-multiselect></ark-multiselect>
-    `
-    const multiselect = container.querySelector('ark-multiselect')
-    const input = multiselect._input
-    
-    input.value = "hello"
-    expect(multiselect.inputValue()).toBe('hello')
-  })
-
   it('tag can be removed',()=>{
     container.innerHTML = /* html */`
     <ark-multiselect></ark-multiselect>
@@ -70,7 +58,7 @@ describe('Multiselect', () => {
       items:myItems
     }).render().load()
     
-    const list = multiselect._list
+    const list = multiselect.multiselectList
     
     list.itemElements[1].click()
     list.itemElements[2].click()
@@ -115,7 +103,7 @@ describe('Multiselect', () => {
     }).render().load()
   
   
-    const list = multiselect._list
+    const list = multiselect.multiselectList
     const clean = multiselect._clean
     
     list.itemElements[0].click()
@@ -144,7 +132,7 @@ describe('Multiselect', () => {
     }).render().load()
   
   
-    const list = multiselect._list
+    const list = multiselect.multiselectList
     
     list.itemElements[0].click()
     list.itemElements[1].click()
@@ -162,7 +150,7 @@ describe('Multiselect', () => {
       '01 display',
       '02 max-width',
     ]
-
+    
     
     multiselect.init({
       items:myItems
@@ -173,6 +161,39 @@ describe('Multiselect', () => {
     const field = multiselect._field
     
     input.value = 'display'
+    field.dispatchEvent(new Event('input'))
+
+    expect(list.itemElements[1].style.display).toBe('none')
+  })
+  
+  it('Input value can filter items of object list',()=>{
+
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    
+   const multiselect = container.querySelector('ark-multiselect')
+   
+   const myItems = [
+      { id: '101', name: 'Camila' },
+      { id: '102', name: 'Luisa' }
+    ]
+    
+    const objectField = "id"
+    const template = (item) => `${item['id']} - ${item['name']}`
+
+    
+     multiselect.init({
+        template: template,
+        field: objectField,
+        items: myItems
+    }).render().load()
+
+    const input = multiselect.querySelector('ark-multiselect-input')
+    const list = multiselect.multiselectList
+    const field = multiselect._field
+    
+    input.value = 'camila'
     field.dispatchEvent(new Event('input'))
 
     expect(list.itemElements[1].style.display).toBe('none')
