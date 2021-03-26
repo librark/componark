@@ -2,15 +2,17 @@
 @use '../../../base/theme/variables';
 
 @mixin ark-input() {
+    display: inline-flex;
     padding: 10px;
 
 
     &[disabled] {
         pointer-events: none;
         cursor: default;
-        label{
-            input:disabled{
-                background-color:rgb(243, 240, 240);
+
+        label {
+            input:disabled {
+                background-color: rgb(243, 240, 240);
                 border-color: rgba(185, 185, 185, 0.712);
             }
 
@@ -20,6 +22,7 @@
     &__label {
         display: block;
         text-overflow: ellipsis;
+        user-select: none;
     }
 
     &__input {
@@ -58,6 +61,7 @@
         display: flex;
         white-space: nowrap;
         align-items: center;
+        width: 100%;
 
         input {
             display: initial;

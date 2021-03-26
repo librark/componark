@@ -18,7 +18,11 @@ $feat-color: feature-targeting.create-target($query, color);
 .ark-input {
 
   @include shared.ark-input;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 109c79c65d5d16c557550ee6eaf516f0fdfdc266
   &__input {
     @include shape.radius(4px, false);
 
