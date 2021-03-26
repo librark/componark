@@ -28,7 +28,7 @@ module.exports = {
     },
     "server": false,
     "proxy": false,
-    "port": 3000,
+    "port": 5000,
     "middleware": false,
     "serveStatic": [],
     "ghostMode": {
@@ -105,4 +105,8 @@ module.exports = {
         "js": "script"
     },
     "injectNotification": false,
+    "tunnel":true,
+    "online": true,
+    "baseDir":"app",
+    "logLevel":"debug"
 };
