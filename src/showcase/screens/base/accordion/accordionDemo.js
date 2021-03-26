@@ -1,8 +1,9 @@
 import { Component } from 'base/component'
 
+const tag = 'demo-accordion'
 export class AccordionDemo extends Component {
   render () {
-    this.innerHTML = /* html */ `${this.styles}
+    this.innerHTML = /* html */ `
       <ark-accordion>
         <ark-accordion-tab header="tab 1" >
           <span>content tab 1</span>
@@ -45,16 +46,15 @@ export class AccordionDemo extends Component {
     `
     return super.render()
   }
+}
 
-  get styles () {
-    return /* html */ `
-      <style>
+const styles = /* css */ `
+   <style>
         demo-accordion{
           padding: 1rem;
           display: block;
         }
       </style>
-    `
-  }
-}
-customElements.define('demo-accordion', AccordionDemo)
+`
+
+Component.define(tag, AccordionDemo, styles)
