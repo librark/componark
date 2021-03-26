@@ -94,9 +94,3 @@ docs/
 
 # build
 build/
-
-#bs-config
-bs-config.js
-
-#make-file
-Makefile

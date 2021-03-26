@@ -32,7 +32,7 @@ http:
 	http-server -p 8084 -c-1 dist
 
 browser-sync:
-	browser-sync start --proxy "localhost:7890" --files "*" --config "bs-config.js" 
+	browser-sync start --proxy "localhost:8084" --files "*" --https
 
 inotifyWatchesLimit:
 	sudo sysctl fs.inotify.max_user_watches=524288
