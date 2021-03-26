@@ -104,6 +104,10 @@ export class InputDemo extends Component {
 
 const styles = /* css */`
 
+*{
+  box-sizing:border-box;
+}
+
 .intro-title{
   font-size:2rem;
   padding:0;
@@ -118,14 +122,16 @@ const styles = /* css */`
     display:block;
     background-color:rgb(212 235 230);
     padding: 5px;
-    max-width:100%;
+    width:100%;
   }
 
 .examples{
   margin-bottom:20px;
+  width:100%;
 }  
 .example{
   background:var(--light);
+  padding: 1rem;
 }
 
 `
