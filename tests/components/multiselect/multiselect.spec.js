@@ -152,4 +152,30 @@ describe('Multiselect', () => {
 
   })
 
+  it('Input value can filter list items',()=>{
+
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    const multiselect = container.querySelector('ark-multiselect')
+    const myItems = [
+      '01 display',
+      '02 max-width',
+    ]
+
+    
+    multiselect.init({
+      items:myItems
+    }).render().load()
+
+    const input = multiselect.querySelector('ark-multiselect-input')
+    const list = multiselect.multiselectList
+    const field = multiselect._field
+    
+    input.value = 'display'
+    field.dispatchEvent(new Event('input'))
+
+    expect(list.itemElements[1].style.display).toBe('none')
+  })
+
 })

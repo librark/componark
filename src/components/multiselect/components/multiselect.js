@@ -1,9 +1,6 @@
 import { Component } from '../../../base/component'
 import { MultiselectList } from './multiselect.list'
 import { MultiselectInput } from './multiselect.input'
-// import { uuid } from '../../../base/utils'
-// import { MultiselectSelectedItem } from './multiselect.selected-item'
-// import { MultiselectSelectedList } from './multiselect.selected-list'
 
 import { styles } from '../styles'
 
@@ -52,7 +49,6 @@ export class Multiselect extends Component {
     this._clean = this.select('.ark-multiselect__field--remove')
 
     this.addListItems()
-    //this.filterItems()
     this.refreshField()
     
     return super.render()
@@ -62,7 +58,7 @@ export class Multiselect extends Component {
     this._field.addEventListener('click', this.fieldClickHandler.bind(this))
     this._field.addEventListener('focusout', this.focusOut.bind(this))
     this._list.addEventListener('click', this.listClickHandler.bind(this))
-    this._field.addEventListener('input', this.inputValue.bind(this))
+    this._field.addEventListener('input', this.filterItems.bind(this))
     this._clean.addEventListener('click',this.cleanTags.bind(this))
 
   }
@@ -73,6 +69,18 @@ export class Multiselect extends Component {
           template:this.template,
           items:this.items
         }).render().load()
+  }
+
+  filterItems(){
+    const inputValue = this.multiselectInput.value
+    const filter = inputValue.toUpperCase()
+    const items = this.multiselectList.itemElements
+    let text
+    items.forEach((item,index)=>{
+      text = item.getAttribute('field')
+      text.toUpperCase().indexOf(filter) > -1 ? items[index].style.display = '' 
+      : items[index].style.display = 'none'
+    })
   }
 
   focusOut(){
@@ -138,6 +146,7 @@ export class Multiselect extends Component {
     return tag
   }
 
+
   removeTag(tag,item,event){
       tag.remove()
       item.style.display = 'block'
@@ -166,9 +175,9 @@ export class Multiselect extends Component {
     this.showPopup(false)
   }
 
-  // get multiselectInput(){
-  //   return this.select('ark-multiselect-input')
-  // }
+  get multiselectInput(){
+    return this.select('ark-multiselect-input')
+  }
   
   get multiselectList () {
     return /** @type {MultiselectList} */(
