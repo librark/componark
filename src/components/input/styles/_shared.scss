@@ -2,9 +2,7 @@
 @use '../../../base/theme/variables';
 
 @mixin ark-input() {
-    display: inline-flex;
     padding: 10px;
-
 
     &[disabled] {
         pointer-events: none;
