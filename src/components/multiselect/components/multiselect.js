@@ -1,9 +1,6 @@
 import { Component } from '../../../base/component'
 import { MultiselectList } from './multiselect.list'
 import { MultiselectInput } from './multiselect.input'
-// import { uuid } from '../../../base/utils'
-// import { MultiselectSelectedItem } from './multiselect.selected-item'
-// import { MultiselectSelectedList } from './multiselect.selected-list'
 
 import { styles } from '../styles'
 
@@ -47,12 +44,9 @@ export class Multiselect extends Component {
    
     this._popup = this.select('.ark-multiselect__popup')
     this._field = this.select('.ark-multiselect__field')
-    this._input = this.select('.ark-multiselect__input')
-    this._list = this.select('ark-multiselect-list')
     this._clean = this.select('.ark-multiselect__field--remove')
 
     this.addListItems()
-    //this.filterItems()
     this.refreshField()
     
     return super.render()
@@ -61,18 +55,31 @@ export class Multiselect extends Component {
   load() {
     this._field.addEventListener('click', this.fieldClickHandler.bind(this))
     this._field.addEventListener('focusout', this.focusOut.bind(this))
-    this._list.addEventListener('click', this.listClickHandler.bind(this))
-    this._field.addEventListener('input', this.inputValue.bind(this))
+    this.multiselectList.addEventListener('click', this.listClickHandler.bind(this))
+    this._field.addEventListener('input', this.filterItems.bind(this))
     this._clean.addEventListener('click',this.cleanTags.bind(this))
 
   }
 
   async addListItems(){
-     await this._list.init({
+     await this.multiselectList.init({
           field: this.field,
           template:this.template,
           items:this.items
         }).render().load()
+  }
+
+  filterItems(){
+    let inputValue = this.multiselectInput.value
+    const filter = inputValue.toUpperCase()
+    const items = this.multiselectList.itemElements
+    let text
+    items.forEach((item,index)=>{
+      let name = this.items[index].name
+      text = !name? item.getAttribute('field'): name
+      text.toUpperCase().indexOf(filter) > -1 ? items[index].style.display = ''
+      : items[index].style.display = 'none'
+    })
   }
 
   focusOut(){
@@ -90,17 +97,17 @@ export class Multiselect extends Component {
     this._popup.style.display = show ? 'block' : 'none'
   }
   
- inputValue(){
-    const value = this._input.value
-    return value
-  }
-  
   selectItem(item){
+    const items = this.multiselectList.itemElements
     
     if(item.tagName === 'LI' && !item.hasAttribute('selected')){ 
       item.setAttribute('selected', '')
-      this.refreshField()
     }
+    this.refreshField()
+    
+    items.forEach((item)=>{
+      item.style.display = ''
+    })
     
   }
 
@@ -138,6 +145,7 @@ export class Multiselect extends Component {
     return tag
   }
 
+
   removeTag(tag,item,event){
       tag.remove()
       item.style.display = 'block'
@@ -156,7 +164,7 @@ export class Multiselect extends Component {
   }
 
   dispatchAlertEvent(){
-    this.emit('alter', this.multiselectList.selectedList)
+    this.emit('alter', this.value)
   }
   
   open(){
@@ -166,14 +174,18 @@ export class Multiselect extends Component {
     this.showPopup(false)
   }
 
-  // get multiselectInput(){
-  //   return this.select('ark-multiselect-input')
-  // }
+  get multiselectInput(){
+    return this.select('ark-multiselect-input')
+  }
   
   get multiselectList () {
     return /** @type {MultiselectList} */(
       this.select('ark-multiselect-list')
     )
+  }
+
+  get value () {
+    return this.multiselectList.selectedList.join()
   }
 
   
