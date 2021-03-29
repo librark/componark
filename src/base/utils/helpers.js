@@ -32,7 +32,7 @@ export function listen (self) {
         }
 
         element.addEventListener(eventName, catchingHandler.bind(self))
-        if (element.hasAttribute(binding)) element.removeAttribute(binding)
+        element.removeAttribute(binding)
       }
     }
   }
