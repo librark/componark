@@ -6,7 +6,7 @@ export class Button extends Component {
   init (context = {}) {
     const slots = this.slots()
 
-    this.position = context.position || this.position || 'left'
+    this.iconPosition = context.iconPosition || this.iconPosition || 'left'
 
     const [body] = slots['general']
     const [icon] = slots['icon'] || []
@@ -19,7 +19,7 @@ export class Button extends Component {
 
   reflectedProperties() {
     return [
-      'href', 'horizontal', 'vertical', 'vibrate', 'position'
+      'href', 'horizontal', 'vertical', 'vibrate', 'iconPosition'
     ]
   }
 
@@ -28,7 +28,7 @@ export class Button extends Component {
     const href = this['href'] ? `href="${this['href']}"` : ''
     this.content = /* html */ `
       <${element} ${href} class="ark-button__button">
-        <div position="${this.position}" class="ark-button__icon"></div>
+        <div class="ark-button__icon"></div>
         <div class="ark-button__body"></div>
       </${element}>
     `
@@ -51,9 +51,12 @@ export class Button extends Component {
     body.append(this.body)
     icon.append(this.icon)
 
-    icon.getAttribute('position') == "right" ? 
+    this.iconPosition == "right" ? 
       button.style.flexDirection = "row-reverse" :
       button.style.flexDirection = "row"
+    
+
+
    
     return super.render()
   }
