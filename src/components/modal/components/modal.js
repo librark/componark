@@ -43,7 +43,7 @@ export class Modal extends Component {
     this.actions.forEach(
       slot => this.select('.ark-modal__actions').append(slot))
 
-    this.selectAll('[close]').forEach(
+    this.selectAll('[data-modal-close]').forEach(
       button => button.addEventListener('click', _ => this.close()))
 
     if (!this.hasAttribute('block-scrim')) {
