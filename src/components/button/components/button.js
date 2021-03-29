@@ -30,19 +30,19 @@ export class Button extends Component {
       <${element} ${href} class="ark-button__button">
         <div position="${this.position}" class="ark-button__icon"></div>
         <div class="ark-button__body"></div>
-        </${element}>
-        `
+      </${element}>
+    `
         
-        const properties = ['class', 'horizontal', 'vertical', 'vibrate']
-        for (const attribute of Array.from(this.attributes)) {
-          if (properties.includes(attribute.name)) continue
-          this.firstElementChild.setAttribute(attribute.name, attribute.value)
-        }
-        
-        if (this.hasAttribute('fab')) {
-          this['horizontal'] = 'end'
-          this['vertical'] = 'end'
-        }
+    const properties = ['class', 'horizontal', 'vertical', 'vibrate']
+    for (const attribute of Array.from(this.attributes)) {
+      if (properties.includes(attribute.name)) continue
+      this.firstElementChild.setAttribute(attribute.name, attribute.value)
+    }
+    
+    if (this.hasAttribute('fab')) {
+      this['horizontal'] = 'end'
+      this['vertical'] = 'end'
+    }
     
     const button = this.select('.ark-button__button')
     const body = this.select('.ark-button__body')
