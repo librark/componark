@@ -9,7 +9,7 @@ export class MultiselectDemo extends Component {
   render () {
     this.innerHTML = /* html */ `
     <div class="multi-container">
-      <ark-multiselect 
+      <ark-multiselect
                       list label='multiselect list' 
                       listen on-alter="alterMultiselect">
       </ark-multiselect>
@@ -74,15 +74,13 @@ export class MultiselectDemo extends Component {
     }).render().load()
   }
   
-  renderMultiselectObject () {
-    const myItems = [
-      { id: '101', name: 'Camila' },
-      { id: '102', name: 'Luisa' },
-      { id: '103', name: 'Andres' },
-      { id: '104', name: 'Daniela' },
-      { id: '105', name: 'Alejandro' },
-    ]
-    
+  async renderMultiselectObject () {
+
+    const myItems = await fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then((json) => json)
+
+
     const field = "id"
     const template = (item) => `${item['id']} - ${item['name']}`
     
@@ -95,15 +93,14 @@ export class MultiselectDemo extends Component {
         field: field,
         items: myItems
     }).render().load()
-
-
-}
+  }
 }
 
 const styles = /* css */`
 
   .multi-container{
-    width:80% !important;
+    display:grid;
+    grid-gap:1rem;
   }
 
 `

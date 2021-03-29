@@ -69,7 +69,7 @@ export class Multiselect extends Component {
         }).render().load()
   }
 
-  filterItems(){
+ filterItems(){
     let inputValue = this.multiselectInput.value
     const filter = inputValue.toUpperCase()
     const items = this.multiselectList.itemElements

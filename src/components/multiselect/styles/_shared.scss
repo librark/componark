@@ -2,31 +2,33 @@
 @use './config';
 
 @mixin ark-multiselect() {
-  //@include theme.paint;
 
   display: grid;
-  grid-template-columns: repeat(2,1fr) 0.2fr;
+  grid-template-columns: repeat(2, 1fr) 0.2fr;
   grid-template-row: repeat(3, 1fr);
-  grid-gap:0.2rem;
-  
-  h1{
+  grid-gap: 0.2rem;
+
+  h1 {
     user-select: none;
   }
+
   .ark-multiselect {
     box-sizing: content-box;
     width: 100%;
 
 
     &__field {
+      @include theme.paint;
       grid-row: 2;
-      grid-column:span 2;
+      grid-column: span 2;
       min-width: 0;
+      padding: 0.5em;
+
       display: flex;
       justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
-      flex-grow:1;
-      padding: 0.5em;
+      flex-grow: 1;
 
       overflow: hidden;
       border: 1px solid var(--light);
@@ -35,30 +37,32 @@
       -webkit-user-select: none;
       user-select: none;
 
-      &--remove{
+      &--remove {
         cursor: pointer;
-        grid-row:2;
+        grid-row: 2;
         grid-column: 3;
         align-self: start;
         font-size: 0.5rem;
         position: relative;
-        left:-25px;
-        width:fit-content;
-          width:-moz-fit-content;
-        padding:0.28rem 0.4rem;
+        left: -25px;
+        width: fit-content;
+        width: -moz-fit-content;
+        padding: 0.28rem 0.4rem;
         background: transparent;
-        color:black;
+        color: black;
         user-select: none;
-        &:hover{
-            background: rgb(250, 110, 110);
-            color:white;
+
+        &:hover {
+          background: rgb(250, 110, 110);
+          color: white;
         }
-        &:hover:after{
-            content:'clear';
-            position: absolute;
-            top:20px;
-            left:2px;
-            color:black;
+
+        &:hover:after {
+          content: 'clear';
+          position: absolute;
+          top: 20px;
+          left: 2px;
+          color: black;
         }
       }
 
@@ -73,8 +77,8 @@
         min-width: 100px;
         flex: 1 1;
         padding: 0.5em;
-        border:none;
-        outline:none;
+        border: none;
+        outline: none;
         background: transparent;
         margin: .2em .2em;
 
@@ -139,7 +143,7 @@
     &__popup {
       display: none;
       grid-row: 3;
-      grid-column:span 2;
+      grid-column: span 2;
       overflow-y: auto;
       width: 100%;
       max-height: 300px;
@@ -149,34 +153,36 @@
       background: white;
       user-select: none;
     }
-    
+
     &-list {
       padding: 0;
       margin: 0;
 
-      &__no-options{
-          pointer-events: none;
-          user-select: none;
+      &__no-options {
+        pointer-events: none;
+        user-select: none;
       }
+
       ul {
         margin: 0;
         padding: 0;
       }
-  
+
       li {
         padding: .5em 1em;
         min-height: 1em;
         list-style: none;
         cursor: pointer;
       }
-  
+
       li[selected] {
         background: #ceebcb;
       }
+
       li[selected]::after {
         content: "✓";
       }
-  
+
       li:focus,
       li:hover {
         outline: dotted 1px var(--dark);
