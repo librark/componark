@@ -46,14 +46,13 @@ describe('Button', () => {
 
   it('can handle position of the icon',()=>{
     container.innerHTML = `
-    <ark-button position="right" type="submit">
+    <ark-button icon-position="right" type="submit">
       <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
     </ark-button>
     `
     const button = container.querySelector('ark-button')
-    const icon = button.querySelector('.ark-button__icon')
 
-    expect(icon.getAttribute('position')).toBe("right")
+    expect(button.getAttribute('icon-position')).toBe("right")
   })
 
   it('can be rendered as a floating action button (fab)', () => {
