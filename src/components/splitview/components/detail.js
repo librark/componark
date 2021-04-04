@@ -41,7 +41,9 @@ export class SplitViewDetail extends Component {
     this.select('.ark-splitview-detail__close').append(this.icon)
     this.select('.ark-splitview-detail__main').append(this.main)
 
-    if (this.main) this.main.render()
+    if (this.main && this.main.render) {
+      this.main.render()
+    }
    
     return super.render()
   }
