@@ -93,4 +93,14 @@ export class Component extends HTMLElement {
     this.dispatchEvent(new CustomEvent(type, { 
       detail, bubbles: true, cancelable: true }))
   }
+
+  /**
+   * @param {string} resource
+   * @return {any} */
+  resolve(resource) {
+    const event = new CustomEvent('resolve', { 
+      detail: { resource }, bubbles: true, cancelable: true })
+    this.dispatchEvent(event)
+    return event.detail[resource]
+  }
 }

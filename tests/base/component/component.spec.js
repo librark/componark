@@ -4,8 +4,10 @@ class MockComponent extends Component {
   init(context = {}) {
     this.context = context
     this.data = {}
+    this.dependency = undefined
     return super.init()
   }
+
   reflectedProperties() { return ['code'] }
 
   erroringHandler (event) {
@@ -16,6 +18,11 @@ class MockComponent extends Component {
     const callback = async () => { 
       throw new Error('Something went async wrong!') }
     await callback()
+  }
+
+  render() {
+    this.dependency = this.resolve('Dependency')
+    return super.render()
   }
 }
 Component.define('mock-component', MockComponent)
@@ -243,5 +250,18 @@ describe('Component', () => {
     await component.update(context)
 
     expect(component.context).toBe(context)
+  })
+
+  it('resolves its resource dependencies using events propagation', () => {
+    document.addEventListener('resolve', (event) => {
+      const resource = event.detail.resource
+      event.detail[resource] = 'RESOLVED_DEPENDENCY'
+    })
+    container.innerHTML = `
+    <mock-component></mock-component>
+    `
+    const component = container.querySelector('mock-component')
+
+    expect(component.dependency).toEqual('RESOLVED_DEPENDENCY')
   })
 })
