@@ -16,7 +16,6 @@ $query: feature-targeting.all();
   &[fab] {
     @include fab-mixins.base_($query: $query); //fab mixins has position relative
     @include fab-mixins.icon-size(24px, $query: $query);
-    position: fixed; // overwrite this prop in base
   }
 
 

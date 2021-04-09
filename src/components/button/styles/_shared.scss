@@ -72,8 +72,8 @@
     padding: 0.2rem;
     margin: 0;
 
+    position: relative;
     z-index: 1024;
-    position: fixed;
 
     min-width: $fab-size;
     min-height: $fab-size;
