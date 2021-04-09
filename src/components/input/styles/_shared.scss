@@ -8,22 +8,26 @@
         pointer-events: none;
         cursor: default;
 
-        &>.ark-input__input {
-            background: inherit;
-        }
+        label {
+            input:disabled {
+                background-color: rgb(243, 240, 240);
+                border-color: rgba(185, 185, 185, 0.712);
+            }
 
-        &:hover {
-            background: white;
         }
     }
 
     &__label {
         display: block;
         text-overflow: ellipsis;
+        user-select: none;
     }
 
     &__input {
-        border: 2px solid rgb(175, 175, 175);
+        display: block;
+        width: 100%;
+        padding: 0.5rem;
+        border: 2px solid black;
 
         @each $color in variables.$colors {
             &[background=#{$color}] {
@@ -49,15 +53,13 @@
             }
         }
 
-        display: block;
-        max-width: 100%;
-        padding: 0.5rem;
     }
 
     &[inline] label {
         display: flex;
         white-space: nowrap;
         align-items: center;
+        width: 100%;
 
         input {
             display: initial;

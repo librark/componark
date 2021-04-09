@@ -3,6 +3,7 @@ import { define, listen, reflect, slot } from '../utils'
 export class Component extends HTMLElement {
   constructor () {
     super()
+    this.binding = 'listen'
     reflect(this, this.reflectedProperties())
     this.init({})
   }
@@ -45,12 +46,17 @@ export class Component extends HTMLElement {
     this.update()
   }
 
-  async update() {
+  /** 
+   * @param {Object<string, any> | null} context
+   * @return {Promise<Component>} */
+  async update(context = null) {
     try {
+      if (context) this.init(context)
       this.render()
       await this.load()
+      return this
     } catch (error) {
-      console.error(`{this.tagName}: Update error!`)
+      this.emit('error', error)
       throw error 
     }
   }
@@ -86,5 +92,15 @@ export class Component extends HTMLElement {
   emit(type, detail) {
     this.dispatchEvent(new CustomEvent(type, { 
       detail, bubbles: true, cancelable: true }))
+  }
+
+  /**
+   * @param {string} resource
+   * @return {any} */
+  resolve(resource) {
+    const event = new CustomEvent('resolve', { 
+      detail: { resource }, bubbles: true, cancelable: true })
+    this.dispatchEvent(event)
+    return event.detail[resource]
   }
 }

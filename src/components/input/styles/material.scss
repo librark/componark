@@ -19,19 +19,7 @@ $feat-color: feature-targeting.create-target($query, color);
 
   @include shared.ark-input;
 
-
-  display: inline-flex;
-  align-items: baseline;
-  position: relative;
-  box-sizing: border-box;
-  overflow: hidden;
-  /* @alternate */
-  will-change: opacity, transform, error;
-
-
-
   &__input {
-    @include theme.prop(border-color, var(--light));
     @include shape.radius(4px, false);
 
     @include feature-targeting.targets($feat-structure) {

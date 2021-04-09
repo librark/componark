@@ -96,6 +96,24 @@ describe('Modal', () => {
     expect(modal.hasAttribute('show')).toBeFalsy()
   })
 
+  it('closes on child data modal close', () => {
+    container.innerHTML = /* html */ `
+      <ark-modal title="myTitle">
+        <div>MyBody</div>
+        <div slot="action" data-modal-close>close</div>
+      </ark-modal>
+    `
+    const modal = container.querySelector('ark-modal')
+
+    const closeDiv = modal.select('[data-modal-close]')
+
+    modal.open()
+    expect(modal.hasAttribute('show')).toBeTruthy()
+
+    closeDiv.click()
+    expect(modal.hasAttribute('show')).toBeFalsy()
+  })
+
   it('can block its closing scrim', () => {
     container.innerHTML = /* html */ `
       <ark-modal block-scrim>

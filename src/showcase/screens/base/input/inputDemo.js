@@ -5,6 +5,7 @@ const tag = 'demo-input'
 
 export class InputDemo extends Component {
   init (context) {
+    this.data = {}
     return super.init()
   }
 
@@ -16,9 +17,10 @@ export class InputDemo extends Component {
     </section>
 
     <section class="implementation">
-      <ark-input border-color="dark" data-input-text required inline
+      <ark-input border-color="dark" data-input-text required
                  label="Enter some text:"
-                 listen on-alter="onTextInput"></ark-input>
+                 listen on-alter="onTextInput"
+                 placeholder = "Take this text"></ark-input>
       <p>Value: <span data-input-value></span></p>
     </section>
 
@@ -83,8 +85,10 @@ export class InputDemo extends Component {
 
   get thirdExample() {
     return this.renderExample(hljs.highlight('html',/* html */ `
-      <ark-input label="File" type="file"></ark-input>
+      <ark-input type="file"></ark-input>
       <ark-input label="Date" type="date"></ark-input>
+      <ark-input type="text" label="Disabled" placeholder="Disabled input" disabled></ark-input>
+      <ark-input type="search" label="Search"></ark-input>
     `))
   }
 
@@ -93,12 +97,16 @@ export class InputDemo extends Component {
   onTextInput (event) {
     const element = this.querySelector('[data-input-value]')
     if (element) {
-      element.textContent = event.detail ? event.detail.value : ''
+      element.textContent = event.detail || ''
     }
   }
 }
 
 const styles = /* css */`
+
+*{
+  box-sizing:border-box;
+}
 
 .intro-title{
   font-size:2rem;
@@ -114,14 +122,16 @@ const styles = /* css */`
     display:block;
     background-color:rgb(212 235 230);
     padding: 5px;
-    max-width:100%;
+    width:100%;
   }
 
 .examples{
   margin-bottom:20px;
+  width:100%;
 }  
 .example{
   background:var(--light);
+  padding: 1rem;
 }
 
 `

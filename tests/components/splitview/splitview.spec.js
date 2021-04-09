@@ -47,6 +47,7 @@ describe('SplitView', () => {
     const splitview = container.querySelector('ark-splitview')
 
     expect(splitview).toBeTruthy()
+    expect(splitview.init()).toBe(splitview)
   })
 
   it('can coordinate the master and the detail components', () => {
