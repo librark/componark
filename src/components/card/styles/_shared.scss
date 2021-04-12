@@ -17,11 +17,10 @@
   &__media {
     display: flex;
     overflow: hidden;
-    max-height: 20rem;
     user-select: none;
 
     img {
-      width: 100%;
+     max-width: 100%;
     }
   }
 
@@ -47,8 +46,6 @@
     text-decoration: inherit;
     text-transform: inherit;
   }
-
-  &__body {}
 
   &__actions {
     display: flex;

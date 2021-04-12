@@ -9,16 +9,22 @@ export class CardDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <ark-card title="Title" subtitle="subtitle [Hello World]">
+      <ark-card background="primary" title="CARD TITLE" subtitle="subtitle card">
         <img slot="media" src="${Image}" alt="" />
 
         <div>
-          body
+          Lorem ipsum dolor sit, amet consectetur 
+          adipisicing elit. Alias harum ea inventore 
+          iure autem porro debitis provident architecto accusantium id?
         </div>
 
-        <ark-button background="secondary" color="dark" slot="actions">btn 1</ark-button>
-        <ark-button background="dark" slot="actions">btn 2</ark-button>
+        <ark-button slot="actions" fab background="light" color="dark" >
+          <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
+        </ark-button>
+
       </ark-card>
+
+
 
       <hr/>
 
@@ -47,4 +53,10 @@ export class CardDemo extends Component {
     return this.select('ark-card')
   }
 }
-Component.define('demo-card', CardDemo)
+
+const styles = /* css */`
+  :root{
+    --primary: #1c1c3d;
+  }
+`
+Component.define('demo-card', CardDemo, styles)
