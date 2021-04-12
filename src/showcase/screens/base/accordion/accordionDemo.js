@@ -4,23 +4,46 @@ const tag = 'demo-accordion'
 export class AccordionDemo extends Component {
   render () {
     this.innerHTML = /* html */ `
-      <ark-accordion>
+    <h1>Normal</h1>  
+    <ark-accordion>
         <ark-accordion-tab header="tab 1" >
-          <span>content tab 1</span>
+          <span>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
+          sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
+          tempore quae tenetur incidunt vel unde corporis debitis maiores facilis assumenda et culpa placeat. 
+          Perspiciatis dolore iste pariatur error cumque fugiat. Nesciunt libero 
+          vero expedita, ipsum repellat quisquam nostrum voluptate tempora dolore!
+          </span>
         </ark-accordion-tab>
         <ark-accordion-tab header="tab 2">
-          <span>content tab 2</span>
+          <span>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
+          sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
+          tempore quae tenetur incidunt vel unde corporis debitis maiores facilis assumenda et culpa placeat. 
+          Perspiciatis dolore iste pariatur error cumque fugiat. Nesciunt libero 
+          vero expedita, ipsum repellat quisquam nostrum voluptate tempora dolore!
+          </span>
         </ark-accordion-tab>
         <ark-accordion-tab header="tab 3">
-          <span>content tab 3</span>
+          <span>
+           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
+          sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
+          tempore quae tenetur incidunt vel unde corporis debitis maiores facilis assumenda et culpa placeat. 
+          Perspiciatis dolore iste pariatur error cumque fugiat. Nesciunt libero 
+          vero expedita, ipsum repellat quisquam nostrum voluptate tempora dolore!
+          </span>
         </ark-accordion-tab>
         <ark-accordion-tab header="tab 4" disabled>
-          <span>content tab 4</span>
+          <span>
+           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
+          sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
+          tempore quae tenetur incidunt vel unde corporis debitis maiores facilis assumenda et culpa placeat. 
+          Perspiciatis dolore iste pariatur error cumque fugiat. Nesciunt libero 
+          vero expedita, ipsum repellat quisquam nostrum voluptate tempora dolore!
+          </span>
         </ark-accordion-tab>
       </ark-accordion>
 
-      <br/>
-      <hr/>
       <h1>multiple</h1>
 
       <ark-accordion multiple>
@@ -49,12 +72,15 @@ export class AccordionDemo extends Component {
 }
 
 const styles = /* css */ `
-   <style>
-        demo-accordion{
+
+        :root{
+          --primary: rgb(41, 31, 177);
+        }
+        .demo-accordion{
           padding: 1rem;
           display: block;
+          width: 70vw;
         }
-      </style>
 `
 
 Component.define(tag, AccordionDemo, styles)

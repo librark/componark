@@ -2,8 +2,30 @@
 
 .ark-accordion {
   @include shared.ark-accordion;
+
+
 }
 
 .ark-accordion-tab {
   @include shared.ark-accordion-tab;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 4px;
+  
+  &__header{
+    background: var(--primary);
+    color: white;
+    border-radius: 4px 4px 0px 0px;
+  }
+
+  &__content{
+    word-wrap: break-word ;
+  }
+  
+
+
+  &[disabled]{
+    background: gray;
+    opacity: 20%;
+  }
+
 }
