@@ -13,7 +13,7 @@ export class ButtonDemo extends Component {
 
         <ark-button background="disabled" disabled>DISABLED</ark-button>
 
-        <ark-button icon-position="right" background="primary">
+        <ark-button no-radius icon-position="right" background="primary">
           <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
             Primary
         </ark-button>

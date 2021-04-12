@@ -2,4 +2,14 @@
 
 .ark-button {
   @include shared.ark-button;
+  box-sizing: border-box;
+  padding: 0.2rem 0.8rem;
+  border-radius: 4px;
+  font-size: 1.05rem;
+
+  &[no-radius]{
+    border-radius: 1px;
+  }
+
+  
 }
