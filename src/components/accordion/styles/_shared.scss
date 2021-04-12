@@ -9,6 +9,7 @@
 
 @mixin ark-accordion-tab {
   @include theme.paint;
+  width:100%;
   border-width: 1px;
   border-style: solid;
 
@@ -70,8 +71,11 @@
   }
 
   &__content {
+    box-sizing: border-box;
     display: none;
-    padding: 0.5em;
+    width: 100%;
+    padding: 1em;
+    position: relative;
   }
 
   [active] &__content {
