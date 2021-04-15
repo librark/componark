@@ -5,9 +5,8 @@ export class ButtonDemo extends Component {
   init (context) {
     return super.init(context)
   }
-
   render () {
-    this.innerHTML = /* html */ `
+    this.innerHTML = /* html */`
       <div class="demo-button">
         <p>This is a button</p>
 
