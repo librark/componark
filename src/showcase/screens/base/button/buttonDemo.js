@@ -6,7 +6,7 @@ export class ButtonDemo extends Component {
     return super.init(context)
   }
   render () {
-    this.innerHTML = /* html */`
+    this.content = /* html */`
       <div class="demo-button">
         <p>This is a button</p>
 
@@ -90,7 +90,7 @@ export class ButtonDemo extends Component {
       </div>
 
 
-      <div class="demo-button">
+      <div class="fab-box">
         <p>This is a Fab Button</p>
 
         <ark-button fab background="primary">
@@ -99,28 +99,14 @@ export class ButtonDemo extends Component {
 
       </div>
 
-
-      <!-- DOCUMENTATION -->
-
-      <div>
-        <h3>ark-button</h3>
-        <small>Attributes:</small>
-        <hr />
-        <p>horizontal, vertical:</p>
-        <ul>
-          <li>center </li>
-          <li>start</li>
-          <li>end</li>
-        </ul>
-        <br/>
-        <h3>Fab</h3>
-        <small>Default attributes:</small>
-        <ul>
-          <li>horizontal: end</li>
-          <li>vertical: end</li>
-        </ul>
+      <div class="demo-button">
+        <p>Roundness examples</p>
+        <ark-button background="primary" round="xs">round xs</ark-button>
+        <ark-button background="primary" round="sm">round sm</ark-button>
+        <ark-button background="primary" round="md">round md</ark-button>
+        <ark-button background="primary" round="lg">round lg</ark-button>
       </div>
-
+      
       <a href="https://github.com/knowark/componark/blob/master/src/components/button/README.rst">
       * Reference
       </a>
@@ -130,8 +116,18 @@ export class ButtonDemo extends Component {
   }
 }
 const styles = /* css */ `
-  .ark-button{
+.demo-button > .fab-box{
+    box-sizing: border-box;
+    border: 1px solid var(--primary);
+    padding:1rem;
+    width:50%;
+    height:20%;
+}
+
+.ark-button{
     margin:10px;
   }
 `
+
+console.log(styles)
 Component.define(tag, ButtonDemo, styles)
