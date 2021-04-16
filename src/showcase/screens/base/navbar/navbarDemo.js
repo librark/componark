@@ -8,7 +8,7 @@ export class NavbarDemo extends Component {
 
   render () {
     this.content = /* html */ `
-      <ark-navbar background="dark" color="danger" justify="between">
+      <ark-navbar  justify="between">
 
         <ark-nav brand>
           <ark-button>
@@ -17,7 +17,7 @@ export class NavbarDemo extends Component {
           <span>Componark</span>
         </ark-nav>
 
-        <ark-nav background="secondary" color="success">
+        <ark-nav color="success">
           <span>Element 1</span>
           <span>Element 2</span>
           <span>Element 3</span>

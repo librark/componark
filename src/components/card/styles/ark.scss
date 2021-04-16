@@ -10,20 +10,20 @@
     transform: scale(1.01);
   }
 
-
   &__actions{
     gap:0.5rem;
     [fab]{
       filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.10));
+      transform: scale(1.12);
       transition: filter 0.3s ease, transform 0.2s ease-in-out;
     }
     [fab]:hover{
       filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
-      transform:scale(1.05);
+      transform:scale(1.17);
       transition: transform 0.2s ease-in-out;
     }
     [fab]:active{
-      transform: scale(1.02);
+      transform: scale(1.12);
     }
   }
 

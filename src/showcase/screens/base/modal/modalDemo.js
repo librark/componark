@@ -6,14 +6,14 @@ export class ModalDemo extends Component {
   }
 
   render () {
-    this.content = /* html */ `${this.styles}
+    this.content = /* html */ `
       <div>
         <h1>This is a modal.</h1>
         <ark-button background="primary" btn-open>open</ark-button>
         <ark-button background="secondary" color="dark" btn-toggle>toggle</ark-button>
       </div>
 
-      <ark-modal background="dark" title="My Title" subtitle="My Subtitle"
+      <ark-modal title="My Title" subtitle="My Subtitle"
         width="80vw" height="40vh">
 
         <div style="margin: 1rem;">
@@ -72,7 +72,7 @@ export class ModalDemo extends Component {
           </div>
         </div>
 
-        <ark-button background="light" color="dark" slot="action">Aceptar</ark-button>
+        <ark-button background="success" color="dark" slot="action">Aceptar</ark-button>
         <ark-button background="primary" slot="action" close>Cerrar</ark-button>
       </ark-modal>
       <br>
@@ -111,15 +111,13 @@ export class ModalDemo extends Component {
   get modal () {
     return this.select('ark-modal')
   }
-
-  get styles () {
-    return /* html */ `
-      <style>
-        demo-modal ark-modal p{
-          margin: 0;
-        }
-      </style>
-    `
-  }
 }
-Component.define('demo-modal', ModalDemo)
+
+const styles = /* css */ `
+:root{
+  --primary: #1c1c3d;
+}
+
+
+`
+Component.define('demo-modal', ModalDemo, styles)
