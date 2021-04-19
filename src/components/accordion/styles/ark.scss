@@ -9,7 +9,6 @@
 .ark-accordion-tab {
   @include shared.ark-accordion-tab;
   border: 1px solid rgb(206, 206, 206);
-  border-radius: 4px;
   
   &__header{
     background: var(--primary);
