@@ -8,11 +8,12 @@ export class Input extends Component {
     this.color = context.color || this.color || ''
     this.borderColor = context.borderColor  || this.borderColor || ''
     this.placeholder = context.placeholder || this.placeholder || ''
+    this.round = context.round || this.round || 'xs'
     return super.init()
   }
 
   reflectedProperties () {
-    return ['background', 'color', 'label', 'placeholder', 'borderColor']
+    return ['background', 'color', 'label', 'placeholder', 'borderColor','round']
   }
 
   render () {
@@ -23,6 +24,7 @@ export class Input extends Component {
              color="${this.color}" 
              border-color="${this.borderColor}"
              placeholder = "${this.placeholder}"
+             round ="${this.round}"
              class="ark-input__input"
              data-input listen on-input="onInputChange">
     </label>

@@ -21,7 +21,7 @@ export class InputDemo extends Component {
                  label="Enter some text:"
                  listen on-alter="onTextInput"
                  placeholder = "Take this text"
-                 rounded></ark-input>
+                 round="lg"></ark-input>
       <p>Value: <span data-input-value></span></p>
     </section>
 
