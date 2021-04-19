@@ -14,6 +14,10 @@ export class Button extends Component {
     this.body = this.body || body || this.innerText
     this.icon = this.icon || icon || ''
 
+    this.horizontal = context.horizontal || this.horizontal || 'end'
+    this.vertical = context.vertical || this.vertical || 'end'
+
+      
     return super.init()
   }
 
@@ -40,8 +44,8 @@ export class Button extends Component {
     }
     
     if (this.hasAttribute('fab')) {
-      this['horizontal'] = 'end'
-      this['vertical'] = 'end'
+      this['horizontal'] = this.horizontal
+      this['vertical'] = this.vertical
     }
     
     const button = this.select('.ark-button__button')
@@ -54,10 +58,7 @@ export class Button extends Component {
     this.iconPosition == "right" ? 
       button.style.flexDirection = "row-reverse" :
       button.style.flexDirection = "row"
-    
-
-
-   
+  
     return super.render()
   }
 }

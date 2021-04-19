@@ -120,7 +120,13 @@ body {
   --dark: black;
   --muted: gray;
   --light: lightgray;
+  --xs: 0.3rem;
+  --sm: 0.8rem;
+  --md: 1rem;
+  --lg: 2rem;
+  --xl: 3rem;
 }
+
 
 .app-root {
   display: grid;

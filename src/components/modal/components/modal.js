@@ -14,19 +14,20 @@ export class Modal extends Component {
     this.width = context.width || this.width || ''
     this.height = context.height || this.height || ''
 
-    this.background = context.background || this.background || ''
+    this.background = context.background || this.background || 'primary'
     this.color = context.color || this.color || ''
+    this.round = context.round || this.round || 'sm'
 
     return super.init()
   }
 
   reflectedProperties () {
-    return ['title', 'subtitle', 'width', 'height']
+    return ['title', 'subtitle', 'width', 'height','background','color','round']
   }
 
   render () {
     this.content = /* html */ `
-      <div class="ark-modal__content" background="${this.background}" color="${this.color}" ${this._getContentStyle()}>
+      <div class="ark-modal__content" round="${this.round}" background="${this.background}" color="${this.color}" ${this._getContentStyle()}>
         <div class="ark-modal__header">
           ${this._renderHeader()}
         </div>

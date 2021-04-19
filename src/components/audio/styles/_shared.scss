@@ -2,14 +2,11 @@
 @use './config'as *;
 
 @mixin ark-audio() {
-  @include theme.paint;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: fit-content;
+  height: auto;
   overflow: hidden;
-
-  border-radius: 5px;
 
   padding: 0 0.5rem;
   user-select: none;
@@ -32,7 +29,7 @@
     }
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 15rem;
     height: 3rem;
@@ -52,9 +49,21 @@
     display: flex;
   }
 
+  &__idle::before{
+    content: 'Grabar';
+    padding-right: 0.25em;
+  }  
+
   &__done {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    border-radius: 2rem;
+
+    audio{
+      width:220px;
+      height: 54px;
+      outline: none;
+    }
   }
 }

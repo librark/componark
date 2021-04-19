@@ -15,3 +15,13 @@
     }
   }
 }
+
+@mixin round(){
+
+  border-radius: var(--xs, 4px);
+  @each $size in variables.$sizes {
+    &[round=#{$size}]{
+      border-radius: var(--#{$size}, 4px);
+    }
+  }
+}

@@ -9,7 +9,7 @@ export class CardDemo extends Component {
 
   render () {
     this.innerHTML = /* html */ `
-      <ark-card background="primary" title="CARD TITLE" subtitle="subtitle card">
+      <ark-card round="xl" background="primary" title="CARD TITLE" subtitle="subtitle card">
         <img slot="media" src="${Image}" alt="" />
 
         <div>
@@ -18,7 +18,7 @@ export class CardDemo extends Component {
           iure autem porro debitis provident architecto accusantium id?
         </div>
 
-        <ark-button slot="actions" fab background="light" color="dark" >
+        <ark-button fab slot="actions"  background="light" color="dark" >
           <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
         </ark-button>
 
@@ -57,6 +57,9 @@ export class CardDemo extends Component {
 const styles = /* css */`
   :root{
     --primary: #1c1c3d;
+  }
+  .ark-card{
+  width:40%;
   }
 `
 Component.define('demo-card', CardDemo, styles)

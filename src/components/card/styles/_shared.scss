@@ -3,16 +3,9 @@
 
 @mixin ark-card() {
   @include theme.paint;
-
+  @include theme.round;
   display: block;
-  border: 1px solid rgba($color: gray, $alpha: 0.2);
   overflow: hidden;
-
-  &[no-border] {
-    border: 0;
-    border-radius: 0;
-    box-shadow: initial;
-  }
 
   &__media {
     display: flex;
@@ -27,7 +20,15 @@
   &__header,
   &__body,
   &__actions {
-    padding: 0.5rem;
+      box-sizing: border-box;
+      padding: 1rem;
+      user-select: none;
+  }
+
+  &__body{
+      letter-spacing: 0.020em;
+      line-height: 1.5em;
+      width: 80%;
   }
 
   &__title {
@@ -49,6 +50,7 @@
 
   &__actions {
     display: flex;
+    gap: 1rem;
     justify-content: flex-end;
   }
 }

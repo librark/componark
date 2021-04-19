@@ -13,8 +13,12 @@ export class ModalDemo extends Component {
         <ark-button background="secondary" color="dark" btn-toggle>toggle</ark-button>
       </div>
 
-      <ark-modal title="My Title" subtitle="My Subtitle"
-        width="80vw" height="40vh">
+      <ark-modal 
+        round="lg" 
+        title="My Title" 
+        subtitle="My Subtitle"
+        width="80vw" 
+        height="40vh">
 
         <div style="margin: 1rem;">
           <div>
@@ -80,11 +84,7 @@ export class ModalDemo extends Component {
       * Reference
       </a>
     `
-    const myBackground = this.querySelector('ark-modal').getAttribute('background')
-    const myColor = this.querySelector('ark-modal').getAttribute('color')
 
-    this.modal.background = myBackground || 'primary'
-    this.modal.color = myColor
     this.modal.render()
 
     return super.render()
