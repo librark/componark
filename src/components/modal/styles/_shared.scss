@@ -19,7 +19,7 @@
 
   &__content {
     @include theme.paint;
-
+    @include theme.round;
     display: flex;
     position: relative;
     left: 0;
