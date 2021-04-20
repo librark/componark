@@ -24,7 +24,7 @@ export function setRoutes (resolver, rootComponent, prefix) {
     getComponentRoute('card',['button','icon']),
     getComponentRoute('chart'),
     getComponentRoute('checkbox'),
-    getComponentRoute('droparea'),
+    getComponentRoute('droparea',['icon']),
     getComponentRoute('icon'),
     getComponentRoute('list'),
     getComponentRoute('icon'),
