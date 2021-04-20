@@ -1,0 +1,15 @@
+@use './config'as *;
+@use '../../../base/theme';
+
+@mixin ark-droparea() {
+  &__form{
+    @include theme.paint;
+    @include theme.round;
+    box-sizing: border-box; 
+    border: 2px solid black;
+    width: 100%;
+    padding:1rem;
+
+  }
+
+}
