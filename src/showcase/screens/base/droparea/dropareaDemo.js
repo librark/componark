@@ -12,8 +12,9 @@ export class DropareaDemo extends Component {
         <h1 class="title">
             This is a drop area
         </h1>
-
-        <ark-droparea></ark-droparea>
+        <div class="droparea-demo">
+            <ark-droparea></ark-droparea>
+        </div>
         
         `
 
@@ -24,6 +25,9 @@ export class DropareaDemo extends Component {
 const styles = /* css */ `
     .title{
         color: var(--primary);
+    }
+    .droparea-demo{
+        width: 50%;
     }
 `
 
