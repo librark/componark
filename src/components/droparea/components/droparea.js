@@ -128,6 +128,7 @@ export class Droparea extends Component {
   //     console.log(reader.result)
   //   }
   // }
+
   get dropZone() {
     return this.select(".ark-droparea__form")
   }
