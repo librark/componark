@@ -13,9 +13,13 @@ export class SplitViewDetail extends Component {
     this.main = this.main || main
     this.icon = this.icon || icon
 
+    // console.log("++++",this.main, this.main.init)
+    
     if (this.main && this.main.init) {
       this.main.init(context)
+      console.log("===",context)
     }
+    
 
     return super.init(context)
   }
@@ -40,11 +44,12 @@ export class SplitViewDetail extends Component {
 
     this.select('.ark-splitview-detail__close').append(this.icon)
     this.select('.ark-splitview-detail__main').append(this.main)
-
+    // console.log("***", this.main, this.main.render ,this.main.name)
     if (this.main && this.main.render) {
+      // console.log("$$$In if: ")  
       this.main.render()
     }
-   
+
     return super.render()
   }
 

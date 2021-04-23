@@ -49,6 +49,7 @@ export class SplitViewDemo extends Component {
       source: source,
       template: template
     }).render()
+
   }
 }
 

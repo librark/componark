@@ -12,7 +12,7 @@ describe('Define', () => {
   it('can define a custom element using constructable CSSStyleSheet', () => {
     let definedStyles = null
     class MockCSSStyleSheet extends CSSStyleSheet {
-      replaceSync = (styles) => {
+      replaceSync (styles) {
         definedStyles = styles
       }
     }

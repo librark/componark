@@ -13,7 +13,7 @@ export class SplitView extends Component {
     if (this.master) {
       this.master.addEventListener(
         'master:change', this._onMasterChange.bind(this))
-    }
+      }
     return super.render()
   }
 
@@ -22,7 +22,7 @@ export class SplitView extends Component {
     if (!this.detail || !this.detail.init) return
 
     this.detail.init(context).render()
-    this.detail['show']()
+    this.detail["show"]()
   }
 
   get master () {
