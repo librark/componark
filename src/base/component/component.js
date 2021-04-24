@@ -1,14 +1,13 @@
-import { define, listen, reflect, slot } from '../utils'
+import { define, listen, reflect, slot } from "../utils"
 
 export class Component extends HTMLElement {
-  constructor () {
+  constructor() {
     super()
-    this.binding = 'listen'
+    this.binding = "listen"
     reflect(this, this.reflectedProperties())
-    this.init({})
   }
 
-  /** 
+  /**
    * @param {string} tag
    * @param {CustomElementConstructor} element
    * @param {string} styles **/
@@ -19,12 +18,12 @@ export class Component extends HTMLElement {
   /**
    * @param {Object<string, any>} context
    * @return {Component} */
-  init (context = {}) {
+  init(context = {}) {
     return this
   }
 
   /** @return {string[]} */
-  reflectedProperties () {
+  reflectedProperties() {
     return []
   }
 
@@ -42,11 +41,11 @@ export class Component extends HTMLElement {
     return this.innerHTML
   }
 
-  connectedCallback () {
-    this.update()
+  connectedCallback() {
+    this.update({})
   }
 
-  /** 
+  /**
    * @param {Object<string, any> | null} context
    * @return {Promise<Component>} */
   async update(context = null) {
@@ -56,31 +55,31 @@ export class Component extends HTMLElement {
       await this.load()
       return this
     } catch (error) {
-      this.emit('error', error)
-      throw error 
+      this.emit("error", error)
+      throw error
     }
   }
 
   /** @return {Component} */
-  render () {
+  render() {
     this.className = this.tagName.toLowerCase()
     listen(this)
     return this
   }
 
-  async load () { }
+  async load() {}
 
   /**
    * @param {string} selectors
    * @return {Component} */
-  select (selectors) {
+  select(selectors) {
     return /** @type {Component} */ (this.querySelector(selectors))
   }
 
   /**
    * @param {string} selectors
    * @return {NodeListOf<Component>} */
-  selectAll (selectors) {
+  selectAll(selectors) {
     return /** @type {NodeListOf<Component>} */ (this.querySelectorAll(
       selectors
     ))
@@ -90,16 +89,24 @@ export class Component extends HTMLElement {
    * @param {string} type
    * @param {any} detail */
   emit(type, detail) {
-    this.dispatchEvent(new CustomEvent(type, { 
-      detail, bubbles: true, cancelable: true }))
+    this.dispatchEvent(
+      new CustomEvent(type, {
+        detail,
+        bubbles: true,
+        cancelable: true,
+      })
+    )
   }
 
   /**
    * @param {string} resource
    * @return {any} */
   resolve(resource) {
-    const event = new CustomEvent('resolve', { 
-      detail: { resource }, bubbles: true, cancelable: true })
+    const event = new CustomEvent("resolve", {
+      detail: { resource },
+      bubbles: true,
+      cancelable: true,
+    })
     this.dispatchEvent(event)
     return event.detail[resource]
   }
