@@ -47,10 +47,10 @@ describe('Drop Zone', () => {
   })
 
   it('set Position', () => {
-    const parent = new DropZone()
-    const drop1 = new DropZone()
-    const drop2 = new DropZone()
-    const drop3 = new DropZone()
+    const parent = (new DropZone()).init()
+    const drop1 = (new DropZone()).init()
+    const drop2 = (new DropZone()).init()
+    const drop3 = (new DropZone()).init()
 
     parent.appendChild(drop1)
     parent.appendChild(drop2)
@@ -71,13 +71,13 @@ describe('Drop Zone', () => {
   })
 
   it('set Position with columns', () => {
-    const parent = new DropZone()
+    const parent = (new DropZone()).init()
     parent.setAttribute('cols', '2')
 
-    const drop1 = new DropZone()
-    const drop2 = new DropZone()
-    const drop3 = new DropZone()
-    const drop4 = new DropZone()
+    const drop1 = (new DropZone()).init()
+    const drop2 = (new DropZone()).init()
+    const drop3 = (new DropZone()).init()
+    const drop4 = (new DropZone()).init()
 
     parent.appendChild(drop1)
     parent.appendChild(drop2)
@@ -126,7 +126,7 @@ describe('Drop Zone', () => {
   })
 
   it('set Position with columns', () => {
-    const parent = new DropZone()
+    const parent = (new DropZone()).init()
     parent.setAttribute('cols', '3')
 
     const drop1 = new DropZone()
