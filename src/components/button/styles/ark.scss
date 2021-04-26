@@ -5,4 +5,7 @@
   box-sizing: border-box;
   padding: 0.2rem 0.8rem;
   font-size: 1.05rem;
+  &[fab]{
+      position: absolute;
+  }
 }
