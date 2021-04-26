@@ -1,6 +1,7 @@
 const path = require('path')
 const { DefinePlugin, EnvironmentPlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -8,27 +9,22 @@ module.exports = (env, argv) => {
   const devMode = argv.mode === 'development'
   const target = env.TARGET
 
-  const config = {
+  const commonConfig = {
     mode: argv.mode,
     entry: {
-      app: './src/showcase/index.js'
+      showcase: './src/showcase/design/index.js'
     },
-    output: {
-      publicPath: '/',
-      filename: '[name].[contenthash].js',
-      path: path.join(__dirname, '/dist')
-    },
-    optimization: {
-      runtimeChunk: 'single',
-      moduleIds: 'deterministic'
-    },
-    devtool: 'inline-source-map',
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        chunks: ['app', 'runtime'],
-        title: 'componark',
-        template: './src/showcase/index.html'
+        chunks: ['showcase', 'runtime'],
+        title: 'Componark',
+        template: './src/showcase/design/index.html'
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          "src/showcase/design/.htaccess" 
+        ],
       }),
       new MiniCssExtractPlugin({
         filename: devMode ? '[name].css' : '[name].[hash].css',
@@ -38,9 +34,6 @@ module.exports = (env, argv) => {
         PRODUCTION: !devMode,
         VERSION: JSON.stringify(require('./package.json').version),
         TARGET: JSON.stringify(target)
-      }),
-      new EnvironmentPlugin({
-        ARK_DESIGN: 'ark'
       })
     ],
     module: {
@@ -82,7 +75,6 @@ module.exports = (env, argv) => {
         }
       ]
     },
-
     resolve: {
       alias: {
         base: path.resolve(__dirname, './src/base/'),
@@ -93,13 +85,73 @@ module.exports = (env, argv) => {
     }
   }
 
+  const arkConfig = Object.assign({}, commonConfig, {
+    name: 'ark',
+    mode: argv.mode,
+    output: {
+      publicPath: '/ark/',
+      filename: '[name].[contenthash].js',
+      path: path.join(__dirname, '/dist/ark')
+    },
+    plugins: commonConfig.plugins.concat([
+      new EnvironmentPlugin({
+        ARK_DESIGN: 'ark'
+      })
+    ])
+  })
+
+  const materialConfig = Object.assign({}, commonConfig, {
+    name: 'material',
+    mode: argv.mode,
+    output: {
+      publicPath: '/material/',
+      filename: '[name].[contenthash].js',
+      path: path.join(__dirname, '/dist/material')
+    },
+    plugins: commonConfig.plugins.concat([
+      new EnvironmentPlugin({
+        ARK_DESIGN: 'material'
+      })
+    ])
+  })
+
+  const rootConfig = {
+    name: 'root',
+    mode: argv.mode,
+    entry: {
+      index: './src/showcase/index.js'
+    },
+    plugins: [
+      new CleanWebpackPlugin(),
+      new DefinePlugin({
+        PRODUCTION: !devMode,
+        VERSION: JSON.stringify(require('./package.json').version),
+        TARGET: JSON.stringify(target)
+      }),
+      new HtmlWebpackPlugin({
+        title: 'Componark',
+        template: './src/showcase/index.html'
+      }),
+    ]
+  }
+
   if (devMode) {
-    config.devServer = {
-      contentBase: './dist',
-      historyApiFallback: true,
+    rootConfig.devServer = {
+      contentBase: [
+        path.join(__dirname, 'dist'),
+        path.join(__dirname, 'dist/ark'),
+        path.join(__dirname, 'dist/material'),
+      ],
+      historyApiFallback: {
+        rewrites: [
+          { from: /^\/$/, to: '/index.html' },
+          { from: /^\/ark/, to: '/ark/index.html' },
+          { from: /^\/material/, to: '/material/index.html' },
+        ]
+      },
       port: 7890
     }
   }
 
-  return config
+  return [rootConfig, arkConfig, materialConfig]
 }

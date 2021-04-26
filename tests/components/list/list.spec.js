@@ -25,16 +25,6 @@ describe('List', () => {
     
   })
   
-  it('can be instantiated', () => {
-    container.innerHTML = `
-    <ark-list></ark-list>
-    `
-    
-    const list = container.querySelector('ark-list')
-    expect(list.click()).toBeFalsy
-    
-  })
-
   it('can be instantiated with items', async () => {
      container.innerHTML = `
       <ark-list></ark-list>
@@ -43,8 +33,8 @@ describe('List', () => {
     
     const list =  container.querySelector('ark-list')
     list.source =  ['Colombia', 'Uruguay', 'Brasil', 'Perú']
-    list.render().load()
-    
+    await list.update()
+      
     const items = list.selectAll('ark-list-item')
 
     expect(items.length).toEqual(4)

@@ -37,6 +37,7 @@
   }
 
   &__button {
+    position: absolute;
     all: unset;
 
     display: flex;
@@ -86,7 +87,7 @@
   // Horizontal
 
   &[horizontal="center"] {
-    left: calc(50vw - (#{$fab-size} / 2));
+    left: calc(50% - (#{$fab-size} / 2));
   }
 
   &[horizontal="start"] {
@@ -99,7 +100,7 @@
 
   // Vertical
   &[vertical="center"] {
-    top: calc(50vh - (#{$fab-size} / 2));
+    top: calc(50% - (#{$fab-size} / 2));
   }
 
   &[vertical="start"] {

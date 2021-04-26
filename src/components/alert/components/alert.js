@@ -75,8 +75,8 @@ export class Alert extends Component {
   static launch (context, parent = document.body) {
     /** @type {Alert} */
     const alert = new Alert()
-    alert.init(context)
     parent.appendChild(alert)
+    alert.init(context).render()
     return alert
   }
 
