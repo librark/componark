@@ -10,6 +10,8 @@ hljs.initHighlightingOnLoad()
 // eslint-disable-next-line no-undef
 export const version = VERSION
 
+const design = process.env.ARK_DESIGN
+
 const tag = 'app-root'
 export class RootComponent extends Component {
   render () {
@@ -19,6 +21,7 @@ export class RootComponent extends Component {
         <div class="app-root__title">Componark</div>
         <div class="app-root__subtitle">web components</div>
       </a>
+      <a class="app-root__navitem" href="#">${design}</a>
       <a class="app-root__navitem" href="#">Contact</a>
       <a class="app-root__navitem" href="#">About</a></li>
     </nav>
@@ -26,7 +29,7 @@ export class RootComponent extends Component {
     <aside class="app-root__sidebar">
       <span class="app-root__sideitem">Menu</span> 
       ${this.locations.map((location) => `
-      <a class="app-root__sideitem" href="${location.path}">
+      <a class="app-root__sideitem" href="/${design}${location.path}">
         ${location.name}
       </a>
       `).join("")}

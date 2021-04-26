@@ -129,5 +129,4 @@ const styles = /* css */ `
   }
 `
 
-console.log(styles)
 Component.define(tag, ButtonDemo, styles)

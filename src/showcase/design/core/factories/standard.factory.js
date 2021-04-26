@@ -7,7 +7,8 @@ export class StandardFactory {
   }
 
   _router () {
-    return new Routark(window)
+    const design = process.env.ARK_DESIGN
+    return new Routark(window, `/${design}/`)
   }
 }
 
