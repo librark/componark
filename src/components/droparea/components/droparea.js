@@ -1,5 +1,9 @@
-import { Component } from "../../../base/component"
-import { styles } from "../styles"
+import {
+  Component
+} from "../../../base/component"
+import {
+  styles
+} from "../styles"
 // @ts-ignore
 const tag = "ark-droparea"
 
@@ -77,56 +81,27 @@ export class Droparea extends Component {
 
   handleFiles(files) {
     files = [...files]
-    // files.forEach(this.uploadFile)
     files.forEach(this.previewFile)
     files.forEach((file) => this.fileList.push(file))
   }
 
-  // uploadFile(file){
-  //     let url = 'YOUR URL HERE'
-  //     let formData = new FormData()
-
-  //     formData.append('file', file)
-
-  //     fetch(url,{
-  //         method: 'POST',
-  //         body: formData
-  //     })
-  //         .then(()=>{
-  //             /* Done. Inform the user*/
-  //             //this.progressDone
-  //         })
-  //         .catch(()=>{
-  //             /* Error, Inform the user */
-  //         })
-  // }
 
   previewFile(file) {
     const gallery = document.querySelector(".ark-droparea__gallery")
     let reader = new FileReader()
     let fileType = file.type.split("/")[0]
     reader.readAsDataURL(file)
+    /* istanbul ignore next */
     reader.onloadend = () => {
       let picture = document.createElement("picture")
       let p = document.createElement("p")
       p.innerText = file.name
       picture.style.backgroundImage = `url('${reader.result}')`
-      fileType != "image"
-        ? gallery.appendChild(p)
-        : gallery.appendChild(picture)
+      fileType != "image" ?
+        gallery.appendChild(p) :
+        gallery.appendChild(picture)
     }
   }
-
-  // printRawData() {
-  //   const myFiles = this.returnFiles
-  //   const reader = new FileReader()
-
-  //   reader.readAsBinaryString(myFiles[0])
-
-  //   reader.onloadend = () => {
-  //     console.log(reader.result)
-  //   }
-  // }
 
   get dropZone() {
     return this.select(".ark-droparea__form")
