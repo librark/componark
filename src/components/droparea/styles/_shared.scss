@@ -1,0 +1,68 @@
+@use './config'as *;
+@use '../../../base/theme';
+
+@mixin ark-droparea() {
+  &__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include theme.paint;
+    @include theme.round;
+    box-sizing: border-box; 
+    border: 2px dashed black;
+    width: 100%;
+    padding:0.5rem;
+    opacity:0.8;
+    &.highlight{
+        border: 4px solid purple;
+        opacity: 1;
+    }
+    input{
+      display: flex;
+      justify-content:center;
+      align-items:center;
+    }
+    ark-icon{
+        user-select: none;
+        padding: 0px;
+        i{
+            font-size: 8rem;
+        }
+    }
+  }
+
+  &__message{
+      font-size: 1.5rem;
+      user-select: none;
+  }
+
+  &__gallery{
+    user-select: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    padding: 1rem;
+
+    gap: 1rem;
+    picture{
+      width: 100px;
+      height: 100px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 4px;
+    }
+    p{
+        width: 100px;
+        height: 100px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        word-wrap: break-word;
+        background-color: var(--primary);
+        text-align: center;
+        vertical-align: middle;
+        color: white;
+    }
+  }
+
+}
