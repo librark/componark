@@ -66,7 +66,6 @@ export class Droparea extends Component {
     let data = e.dataTransfer
     let files = data.files
     this.handleFiles(files)
-    console.log(this.returnFiles)
   }
 
   onChange(e) {
@@ -133,7 +132,7 @@ export class Droparea extends Component {
     return this.select(".ark-droparea__form")
   }
 
-  get returnFiles() {
+  get getFiles() {
     return this.fileList
   }
 }
