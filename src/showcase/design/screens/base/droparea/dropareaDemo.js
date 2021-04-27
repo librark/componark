@@ -1,4 +1,6 @@
-import { Component } from "base/component"
+import {
+  Component
+} from "base/component"
 
 const tag = "demo-droparea"
 
@@ -27,7 +29,8 @@ const styles = /* css */ `
         color: var(--primary);
     }
     .droparea-demo{
-        width: 50%;
+        max-width: 50%;
+        min-width: 250px;
     }
 `
 

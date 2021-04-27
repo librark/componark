@@ -6,23 +6,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:1rem;
     @include theme.paint;
     @include theme.round;
     box-sizing: border-box; 
     border: 2px dashed black;
     width: 100%;
-    padding:2rem;
+    padding:0.5rem;
     opacity:0.8;
     &.highlight{
         border: 4px solid purple;
         opacity: 1;
     }
     input{
-        border-radius: 4px;
-        width: 50%;
-        border: 2px solid var(--primary);
-        padding:1rem;
+      display: flex;
+      justify-content:center;
+      align-items:center;
     }
     ark-icon{
         user-select: none;

@@ -17,7 +17,7 @@ export class Droparea extends Component {
       <form class="ark-droparea__form">
           <ark-icon type="mat" name="cloud_upload"></ark-icon>
           <h1 class="ark-droparea__message">
-          Drag & Drop multiple files or click to upload
+          Drag & Drop Files 
         </h1>
         <input type="file" 
                class="ark-droparea__input"
