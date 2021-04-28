@@ -9,6 +9,7 @@ const tag = "ark-droparea"
 
 export class Droparea extends Component {
   init(context = {}) {
+    this.fileList = []
     return super.init()
   }
 
@@ -32,7 +33,6 @@ export class Droparea extends Component {
     this.dropEvents = this.dragDropEvents.slice(2)
     this._input = this.select(".ark-droparea__input")
 
-    this.fileList = []
     return super.render()
   }
 
@@ -107,7 +107,7 @@ export class Droparea extends Component {
     return this.select(".ark-droparea__form")
   }
 
-  get getFiles() {
+  get files() {
     return this.fileList
   }
 }
