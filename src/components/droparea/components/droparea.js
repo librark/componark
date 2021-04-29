@@ -1,9 +1,5 @@
-import {
-  Component
-} from "../../../base/component"
-import {
-  styles
-} from "../styles"
+import { Component } from "../../../base/component"
+import { styles } from "../styles"
 // @ts-ignore
 const tag = "ark-droparea"
 
@@ -16,10 +12,10 @@ export class Droparea extends Component {
   render() {
     this.content = /* html */ `
       <form class="ark-droparea__form">
-          <ark-icon type="mat" name="cloud_upload"></ark-icon>
           <h1 class="ark-droparea__message">
           Drag & Drop Files 
-        </h1>
+          </h1>
+          <p>or click to upload</p>
         <input type="file" 
                class="ark-droparea__input"
                id="fileElem" 
@@ -51,6 +47,12 @@ export class Droparea extends Component {
 
     this.addEventListener("drop", this.handleDrop, false)
     this._input.addEventListener("change", this.onChange, false)
+    this.addEventListener("click", this.openInput, false)
+  }
+
+  openInput() {
+    const input = this._input
+    input.click()
   }
 
   preventDefaults(e) {
@@ -85,7 +87,6 @@ export class Droparea extends Component {
     files.forEach((file) => this.fileList.push(file))
   }
 
-
   previewFile(file) {
     const gallery = document.querySelector(".ark-droparea__gallery")
     let reader = new FileReader()
@@ -93,13 +94,15 @@ export class Droparea extends Component {
     reader.readAsDataURL(file)
     /* istanbul ignore next */
     reader.onloadend = () => {
-      let picture = document.createElement("picture")
-      let p = document.createElement("p")
+      const picture = document.createElement("picture")
+      const textPreview = document.createElement("div")
+      const p = document.createElement("p")
+      textPreview.appendChild(p)
       p.innerText = file.name
       picture.style.backgroundImage = `url('${reader.result}')`
-      fileType != "image" ?
-        gallery.appendChild(p) :
-        gallery.appendChild(picture)
+      fileType != "image"
+        ? gallery.appendChild(textPreview)
+        : gallery.appendChild(picture)
     }
   }
 
