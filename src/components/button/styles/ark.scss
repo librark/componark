@@ -1,11 +1,12 @@
-@use'./shared.scss';
+@use './shared.scss';
 
 .ark-button {
   @include shared.ark-button;
   box-sizing: border-box;
   padding: 0.2rem 0.8rem;
   font-size: 1.05rem;
-  &[fab]{
-      position: absolute;
+  vertical-align: middle;
+  &[fab] {
+    position: absolute;
   }
 }

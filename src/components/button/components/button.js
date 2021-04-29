@@ -41,6 +41,7 @@ export class Button extends Component {
     }
 
     if (this.hasAttribute("fab")) {
+      this.parentNode.style.position = "relative"
       this["horizontal"] = this.horizontal || "end"
       this["vertical"] = this.vertical || "end"
     }
@@ -55,8 +56,6 @@ export class Button extends Component {
     this.iconPosition == "right"
       ? (button.style.flexDirection = "row-reverse")
       : (button.style.flexDirection = "row")
-
-    this.parentNode.style.position = "relative"
 
     return super.render()
   }
