@@ -69,12 +69,14 @@ export class Droparea extends Component {
   }
 
   handleDrop(e) {
+    e.stopPropagation()
     let data = e.dataTransfer
     let files = data.files
     this.handleFiles(files)
   }
 
   onChange(e) {
+    e.stopPropagation()
     const droparea = this.parentElement.parentElement
     const input = e.target
     const files = input.files
@@ -82,9 +84,15 @@ export class Droparea extends Component {
   }
 
   handleFiles(files) {
-    files = [...files]
-    files.forEach(this.previewFile)
-    files.forEach((file) => this.fileList.push(file))
+    if (this.hasAttribute("single")) {
+      files = [files[0]]
+      this.fileList[0] = files[0]
+      this.gallery.innerHTML = `<div><p>${files[0].name}</p></div>`
+    } else {
+      files = [...files]
+      files.forEach((file) => this.fileList.push(file))
+      files.forEach(this.previewFile)
+    }
   }
 
   previewFile(file) {
@@ -108,6 +116,9 @@ export class Droparea extends Component {
 
   get dropZone() {
     return this.select(".ark-droparea__form")
+  }
+  get gallery() {
+    return this.select(".ark-droparea__gallery")
   }
 
   get files() {

@@ -1,6 +1,4 @@
-import {
-  Component
-} from "base/component"
+import { Component } from "base/component"
 
 const tag = "demo-droparea"
 
@@ -15,9 +13,13 @@ export class DropareaDemo extends Component {
             This is a drop area
         </h1>
         <div class="droparea-demo">
+            <p>Default(multi)</p>
             <ark-droparea></ark-droparea>
-        </div>
-        
+       </div>
+        <div class="droparea-demo">
+           <p>Single</p>
+           <ark-droparea single></ark-droparea>
+       </div>
         `
 
     return super.render()
@@ -35,3 +37,4 @@ const styles = /* css */ `
 `
 
 Component.define(tag, DropareaDemo, styles)
+
