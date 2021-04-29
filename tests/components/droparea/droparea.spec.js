@@ -1,13 +1,9 @@
-import {
-  Droparea
-} from "components/droparea"
+import { Droparea } from "components/droparea"
 
 describe("Droparea", () => {
-  const file = new File([new ArrayBuffer(1)], "file.jpg")
-
   const createBubbledEvent = (type, props = {}) => {
     const event = new Event(type, {
-      bubbles: true
+      bubbles: true,
     })
     Object.assign(event, props)
     return event
@@ -18,7 +14,6 @@ describe("Droparea", () => {
   beforeEach(() => {
     container = document.createElement("div")
     document.body.appendChild(container)
-    jest.clearAllMocks()
   })
 
   afterEach(() => {
@@ -47,7 +42,7 @@ describe("Droparea", () => {
     dragNode.dispatchEvent(
       createBubbledEvent("dragover", {
         clientX: 0,
-        clientY: 1
+        clientY: 1,
       })
     )
     expect(dropZone.classList["1"]).toBe("highlight")
@@ -64,7 +59,7 @@ describe("Droparea", () => {
     dropZone.dispatchEvent(
       createBubbledEvent("dragleave", {
         clientX: 0,
-        clientY: 1
+        clientY: 1,
       })
     )
     expect(dropZone.classList.length).toBe(1)
@@ -84,7 +79,7 @@ describe("Droparea", () => {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
-        files: [myFile]
+        files: [myFile],
       },
     })
 
@@ -110,12 +105,12 @@ describe("Droparea", () => {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
-        files: [myFile, myFile2]
+        files: [myFile, myFile2],
       },
     })
 
     dropZone.dispatchEvent(dropEvent)
-    expect(droparea.getFiles.length).toEqual(droparea.fileList.length)
+    expect(droparea.files.length).toEqual(droparea.fileList.length)
   })
 
   it("Can select files from input", () => {
@@ -124,7 +119,6 @@ describe("Droparea", () => {
         `
 
     const droparea = container.querySelector("ark-droparea")
-    const dropZone = droparea.querySelector(".ark-droparea__form")
     const input = droparea.querySelector(".ark-droparea__input")
     const myFile = new File(["image"], "Snoopy.png", {
       type: "image/png",
@@ -132,12 +126,13 @@ describe("Droparea", () => {
     const changeEvent = createBubbledEvent("change", {})
     Object.defineProperty(changeEvent, "target", {
       value: {
-        files: [file]
-      }
+        files: [myFile],
+      },
     })
+    droparea.click()
     input.dispatchEvent(changeEvent)
 
-    expect(droparea.getFiles.length).toBeTruthy()
+    expect(droparea.files.length).toBeTruthy()
   })
-
 })
+
