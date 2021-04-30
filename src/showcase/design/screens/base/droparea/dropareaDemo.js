@@ -14,11 +14,11 @@ export class DropareaDemo extends Component {
         </h1>
         <div class="droparea-demo">
             <p>Default(multi)</p>
-            <ark-droparea></ark-droparea>
-       </div>
+            <ark-droparea accept=".jpg, .png"></ark-droparea>
+        </div>
         <div class="droparea-demo">
            <p>Single</p>
-           <ark-droparea single></ark-droparea>
+           <ark-droparea single accept=".jpg, .png"></ark-droparea>
        </div>
         `
 
@@ -31,10 +31,9 @@ const styles = /* css */ `
         color: var(--primary);
     }
     .droparea-demo{
-        max-width: 50%;
+        max-width: 80%;
         min-width: 250px;
     }
 `
 
 Component.define(tag, DropareaDemo, styles)
-

@@ -1,4 +1,6 @@
-import { Droparea } from "components/droparea"
+import {
+  Droparea
+} from "components/droparea"
 
 describe("Droparea", () => {
   const createBubbledEvent = (type, props = {}) => {
@@ -163,5 +165,52 @@ describe("Droparea", () => {
     input.dispatchEvent(changeEvent)
 
     expect(droparea.files.length).toBeTruthy()
+  })
+
+  it("Can limit the file formats that component recieves", () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea accept=".jpg, .png"></ark-droparea>
+        `
+
+    const droparea = container.querySelector("ark-droparea")
+    const input = droparea.querySelector(".ark-droparea__input")
+    const myFile = new File(["image"], "Snoopy.jpg", {
+      type: "image/png",
+    })
+    const myFile2 = new File(["image"], "Scrappy.png", {
+      type: "image/png",
+    })
+    const changeEvent = createBubbledEvent("change", {})
+    Object.defineProperty(changeEvent, "target", {
+      value: {
+        files: [myFile, myFile2],
+      },
+    })
+    input.dispatchEvent(changeEvent)
+
+    expect(droparea.files.length).toBeTruthy()
+  })
+  it("Does not allow dropping a file that doesn't not exist in accept'", () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea accept=".jpg, .png"></ark-droparea>
+        `
+
+    const droparea = container.querySelector("ark-droparea")
+    const input = droparea.querySelector(".ark-droparea__input")
+    const myFile = new File(["text"], "Snoopy.txt", {
+      type: "text/txt",
+    })
+    const myFile2 = new File(["text"], "styles.css", {
+      type: "text/css",
+    })
+    const changeEvent = createBubbledEvent("change", {})
+    Object.defineProperty(changeEvent, "target", {
+      value: {
+        files: [myFile, myFile2],
+      },
+    })
+    input.dispatchEvent(changeEvent)
+
+    expect(droparea.files.length).toBeFalsy()
   })
 })

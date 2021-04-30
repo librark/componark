@@ -1,11 +1,16 @@
-import { Component } from "../../../base/component"
-import { styles } from "../styles"
+import {
+  Component
+} from "../../../base/component"
+import {
+  styles
+} from "../styles"
 // @ts-ignore
 const tag = "ark-droparea"
 
 export class Droparea extends Component {
   init(context = {}) {
     this.fileList = []
+    this.accept = context.accept || this.accept
     return super.init()
   }
 
@@ -13,7 +18,8 @@ export class Droparea extends Component {
     this.content = /* html */ `
       <form class="ark-droparea__form">
           <h1 class="ark-droparea__message">
-          Drag & Drop Files 
+              Drag & Drop 
+                  <small>${this.accept ? this.accept : ""} Files</small> 
           </h1>
           <p>or click to upload</p>
         <input type="file" 
@@ -28,8 +34,11 @@ export class Droparea extends Component {
     this.dragEvents = this.dragDropEvents.slice(0, 2)
     this.dropEvents = this.dragDropEvents.slice(2)
     this._input = this.select(".ark-droparea__input")
-
     return super.render()
+  }
+
+  reflectedProperties() {
+    return ["size", "accept"]
   }
 
   async load() {
@@ -86,13 +95,47 @@ export class Droparea extends Component {
   handleFiles(files) {
     if (this.hasAttribute("single")) {
       files = [files[0]]
-      this.fileList[0] = files[0]
-      this.gallery.innerHTML = `<div><p>${files[0].name}</p></div>`
+      if (this.validate(files)) {
+        this.fileList[0] = files[0]
+        this.gallery.innerHTML = `<div><p>${files[0].name}</p></div>`
+      }
     } else {
       files = [...files]
-      files.forEach((file) => this.fileList.push(file))
-      files.forEach(this.previewFile)
+      if (this.validate(files)) {
+        files.forEach((file) => {
+          this.fileList.push(file)
+          this.previewFile(file)
+          this.validate(files)
+        })
+      }
     }
+  }
+
+  validate(fileList) {
+    if (!this.accept || this.accept.length === 0) return true
+    const acceptList = this.accept.split(",").map((s) => s.trim().toLowerCase())
+    if (acceptList.length === 0) return true
+    const hasAudio = acceptList.indexOf("audio/*") >= 0
+    const hasVideo = acceptList.indexOf("video/*") >= 0
+    const hasImage = acceptList.indexOf("image/*") >= 0
+    const hasText = acceptList.indexOf("text/*") >= 0
+
+    for (let i = 0, len = fileList.length; i < len; ++i) {
+      let ext = "." + fileList[i].name.split(".").pop().toLowerCase()
+      if (acceptList.indexOf(ext) >= 0) continue
+      if (hasAudio && fileList[i].type.split("/")[0] === "audio") continue
+      if (hasVideo && fileList[i].type.split("/")[0] === "video") continue
+      if (hasImage && fileList[i].type.split("/")[0] === "image") continue
+      if (hasText && fileList[i].type.split("/")[0] === "text") continue
+      if (acceptList.indexOf(fileList[i].type) >= 0) continue
+
+      // did not match anything in accept
+      const message = `${fileList[i].name} is not valid a valid file format, only accepts ${this.accept} files`
+      //alert(message)
+      return false
+    }
+
+    return true
   }
 
   previewFile(file) {
@@ -108,9 +151,9 @@ export class Droparea extends Component {
       textPreview.appendChild(p)
       p.innerText = file.name
       picture.style.backgroundImage = `url('${reader.result}')`
-      fileType != "image"
-        ? gallery.appendChild(textPreview)
-        : gallery.appendChild(picture)
+      fileType != "image" ?
+        gallery.appendChild(textPreview) :
+        gallery.appendChild(picture)
     }
   }
 
