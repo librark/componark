@@ -1,9 +1,5 @@
-import {
-  Component
-} from "../../../base/component"
-import {
-  styles
-} from "../styles"
+import { Component } from "../../../base/component"
+import { styles } from "../styles"
 // @ts-ignore
 const tag = "ark-droparea"
 
@@ -11,6 +7,7 @@ export class Droparea extends Component {
   init(context = {}) {
     this.fileList = []
     this.accept = context.accept || this.accept
+    this.single = this.hasAttribute("single")
     return super.init()
   }
 
@@ -93,11 +90,12 @@ export class Droparea extends Component {
   }
 
   handleFiles(files) {
-    if (this.hasAttribute("single")) {
+    if (this.single) {
       files = [files[0]]
       if (this.validate(files)) {
         this.fileList[0] = files[0]
-        this.gallery.innerHTML = `<div><p>${files[0].name}</p></div>`
+        this.gallery.innerHTML = ""
+        this.previewFile(this.fileList[0])
       }
     } else {
       files = [...files]
@@ -139,7 +137,7 @@ export class Droparea extends Component {
   }
 
   previewFile(file) {
-    const gallery = document.querySelector(".ark-droparea__gallery")
+    const gallery = this.gallery
     let reader = new FileReader()
     let fileType = file.type.split("/")[0]
     reader.readAsDataURL(file)
@@ -151,9 +149,9 @@ export class Droparea extends Component {
       textPreview.appendChild(p)
       p.innerText = file.name
       picture.style.backgroundImage = `url('${reader.result}')`
-      fileType != "image" ?
-        gallery.appendChild(textPreview) :
-        gallery.appendChild(picture)
+      fileType != "image"
+        ? gallery.appendChild(textPreview)
+        : gallery.appendChild(picture)
     }
   }
 
@@ -169,3 +167,4 @@ export class Droparea extends Component {
   }
 }
 Component.define(tag, Droparea, styles)
+
