@@ -24,8 +24,8 @@ export class Droparea extends Component {
                id="fileElem" 
                multiple 
                 >
-        <div class="ark-droparea__gallery"></div>
       </form>
+        <div class="ark-droparea__gallery"></div>
   `
     this.dragDropEvents = ["dragenter", "dragover", "dragleave", "drop"]
     this.dragEvents = this.dragDropEvents.slice(0, 2)
@@ -53,11 +53,11 @@ export class Droparea extends Component {
 
     this.addEventListener("drop", this.handleDrop, false)
     this._input.addEventListener("change", this.onChange, false)
-    this.addEventListener("click", this.openInput, false)
+    this.dropZone.addEventListener("click", this.openInput, false)
   }
 
   openInput() {
-    const input = this._input
+    const input = this.parentElement._input
     input.click()
   }
 
@@ -129,6 +129,7 @@ export class Droparea extends Component {
 
       // did not match anything in accept
       const message = `${fileList[i].name} is not valid a valid file format, only accepts ${this.accept} files`
+      console.log(message)
       return false
     }
 
@@ -142,13 +143,12 @@ export class Droparea extends Component {
     reader.readAsDataURL(file)
     /* istanbul ignore next */
     reader.onloadend = () => {
-      const picture = document.createElement("picture")
+      const picture = document.createElement("div")
       picture.className = "ark-droparea__picture-preview"
       const removeButton = document.createElement("button")
       removeButton.innerText = "⨯"
       removeButton.className = "ark-droparea__remove"
       if (fileType != "image") {
-        picture.style.backgroundColor = "var(--primary, white)"
         picture.innerHTML = `<p>${file.name}</p>`
       } else {
         picture.style.backgroundImage = `url('${reader.result}')`
