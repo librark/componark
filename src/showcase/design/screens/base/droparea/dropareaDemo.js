@@ -14,11 +14,11 @@ export class DropareaDemo extends Component {
         </h1>
         <div class="droparea-demo">
             <p>Default(multi)</p>
-            <ark-droparea accept=".jpg, .png"></ark-droparea>
+            <ark-droparea></ark-droparea>
         </div>
         <div class="droparea-demo">
            <p>Single</p>
-           <ark-droparea single accept=".jpg, .png"></ark-droparea>
+           <ark-droparea single accept="jpg, png"></ark-droparea>
        </div>
         `
 

@@ -1,6 +1,4 @@
-import {
-  Droparea
-} from "components/droparea"
+import { Droparea } from "components/droparea"
 
 describe("Droparea", () => {
   const createBubbledEvent = (type, props = {}) => {
@@ -189,6 +187,7 @@ describe("Droparea", () => {
     input.dispatchEvent(changeEvent)
 
     expect(droparea.files.length).toBeTruthy()
+    droparea.files.forEach((file) => console.log(file.size))
   })
   it("Does not allow dropping a file that doesn't not exist in accept'", () => {
     container.innerHTML = /* html */ `
@@ -210,7 +209,6 @@ describe("Droparea", () => {
       },
     })
     input.dispatchEvent(changeEvent)
-
     expect(droparea.files.length).toBeFalsy()
   })
 })

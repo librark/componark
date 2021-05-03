@@ -119,7 +119,7 @@ export class Droparea extends Component {
     const hasText = acceptList.indexOf("text/*") >= 0
 
     for (let i = 0, len = fileList.length; i < len; ++i) {
-      let ext = "." + fileList[i].name.split(".").pop().toLowerCase()
+      let ext = "" + fileList[i].name.split(".").pop().toLowerCase()
       if (acceptList.indexOf(ext) >= 0) continue
       if (hasAudio && fileList[i].type.split("/")[0] === "audio") continue
       if (hasVideo && fileList[i].type.split("/")[0] === "video") continue
@@ -129,7 +129,6 @@ export class Droparea extends Component {
 
       // did not match anything in accept
       const message = `${fileList[i].name} is not valid a valid file format, only accepts ${this.accept} files`
-      //alert(message)
       return false
     }
 
@@ -144,14 +143,18 @@ export class Droparea extends Component {
     /* istanbul ignore next */
     reader.onloadend = () => {
       const picture = document.createElement("picture")
-      const textPreview = document.createElement("div")
-      const p = document.createElement("p")
-      textPreview.appendChild(p)
-      p.innerText = file.name
-      picture.style.backgroundImage = `url('${reader.result}')`
-      fileType != "image"
-        ? gallery.appendChild(textPreview)
-        : gallery.appendChild(picture)
+      picture.className = "ark-droparea__picture-preview"
+      const removeButton = document.createElement("button")
+      removeButton.innerText = "⨯"
+      removeButton.className = "ark-droparea__remove"
+      if (fileType != "image") {
+        picture.style.backgroundColor = "var(--primary, white)"
+        picture.innerHTML = `<p>${file.name}</p>`
+      } else {
+        picture.style.backgroundImage = `url('${reader.result}')`
+      }
+      gallery.appendChild(picture)
+      picture.appendChild(removeButton)
     }
   }
 
@@ -166,5 +169,5 @@ export class Droparea extends Component {
     return this.fileList
   }
 }
-Component.define(tag, Droparea, styles)
 
+Component.define(tag, Droparea, styles)
