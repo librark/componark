@@ -65,7 +65,7 @@ describe("Droparea", () => {
     expect(dropZone.classList.length).toBe(1)
   })
 
-  it("Allows dropping files to the component", () => {
+  it("Allows dropping multiple files to the component", () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
@@ -75,16 +75,46 @@ describe("Droparea", () => {
     const myFile = new File(["image"], "Doggy.png", {
       type: "image/png",
     })
+    const myFile2 = new File(["image"], "Scooby.png", {
+      type: "image/png",
+    })
     const dropEvent = createBubbledEvent("drop", {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
-        files: [myFile],
+        files: [myFile, myFile2],
       },
     })
 
     dropZone.dispatchEvent(dropEvent)
     expect(droparea.fileList[0].name).toEqual(myFile.name)
+    expect(droparea.fileList[1].name).toEqual(myFile2.name)
+  })
+  it("Can recieve a single file", () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea single></ark-droparea>
+        `
+
+    const droparea = container.querySelector("ark-droparea")
+    const dropZone = droparea.querySelector(".ark-droparea__form")
+    const myFile = new File(["image"], "Snoopy.png", {
+      type: "image/png",
+    })
+    const myFile2 = new File(["image"], "Scooby.png", {
+      type: "image/png",
+    })
+
+    const dropEvent = createBubbledEvent("drop", {
+      clientX: 0,
+      clientY: 1,
+      dataTransfer: {
+        files: [myFile, myFile2],
+      },
+    })
+
+    dropZone.dispatchEvent(dropEvent)
+    expect(droparea.files[0]).toEqual(droparea.fileList[0])
+    expect(droparea.files[1]).toBeFalsy()
   })
 
   it("Returns the file list", () => {
@@ -134,5 +164,51 @@ describe("Droparea", () => {
 
     expect(droparea.files.length).toBeTruthy()
   })
-})
 
+  it("Can limit the file formats that component recieves", () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea accept=".jpg, .png"></ark-droparea>
+        `
+
+    const droparea = container.querySelector("ark-droparea")
+    const input = droparea.querySelector(".ark-droparea__input")
+    const myFile = new File(["image"], "Snoopy.jpg", {
+      type: "image/png",
+    })
+    const myFile2 = new File(["image"], "Scrappy.png", {
+      type: "image/png",
+    })
+    const changeEvent = createBubbledEvent("change", {})
+    Object.defineProperty(changeEvent, "target", {
+      value: {
+        files: [myFile, myFile2],
+      },
+    })
+    input.dispatchEvent(changeEvent)
+
+    expect(droparea.files.length).toBeTruthy()
+    droparea.files.forEach((file) => console.log(file.size))
+  })
+  it("Does not allow dropping a file that doesn't not exist in accept'", () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea accept=".jpg, .png"></ark-droparea>
+        `
+
+    const droparea = container.querySelector("ark-droparea")
+    const input = droparea.querySelector(".ark-droparea__input")
+    const myFile = new File(["text"], "Snoopy.txt", {
+      type: "text/txt",
+    })
+    const myFile2 = new File(["text"], "styles.css", {
+      type: "text/css",
+    })
+    const changeEvent = createBubbledEvent("change", {})
+    Object.defineProperty(changeEvent, "target", {
+      value: {
+        files: [myFile, myFile2],
+      },
+    })
+    input.dispatchEvent(changeEvent)
+    expect(droparea.files.length).toBeFalsy()
+  })
+})
