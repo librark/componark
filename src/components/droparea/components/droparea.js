@@ -153,9 +153,17 @@ export class Droparea extends Component {
       } else {
         picture.style.backgroundImage = `url('${reader.result}')`
       }
+      removeButton.addEventListener("click", this.removeFile.bind(this, file))
       gallery.appendChild(picture)
       picture.appendChild(removeButton)
     }
+  }
+
+  removeFile(file, event) {
+    let element = event.target
+    const fileIndex = this.fileList.indexOf(file)
+    this.fileList.splice(fileIndex, 1)
+    element.parentNode.remove()
   }
 
   get dropZone() {

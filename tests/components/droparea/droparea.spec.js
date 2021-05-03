@@ -149,6 +149,7 @@ describe("Droparea", () => {
         `
 
     const droparea = container.querySelector("ark-droparea")
+    const dropzone = droparea.querySelector(".ark-droparea__form")
     const input = droparea.querySelector(".ark-droparea__input")
     const myFile = new File(["image"], "Snoopy.png", {
       type: "image/png",
@@ -159,7 +160,7 @@ describe("Droparea", () => {
         files: [myFile],
       },
     })
-    droparea.click()
+    dropzone.click()
     input.dispatchEvent(changeEvent)
 
     expect(droparea.files.length).toBeTruthy()
@@ -167,7 +168,7 @@ describe("Droparea", () => {
 
   it("Can limit the file formats that component recieves", () => {
     container.innerHTML = /* html */ `
-            <ark-droparea accept=".jpg, .png"></ark-droparea>
+            <ark-droparea accept="jpg, png"></ark-droparea>
         `
 
     const droparea = container.querySelector("ark-droparea")
@@ -187,11 +188,10 @@ describe("Droparea", () => {
     input.dispatchEvent(changeEvent)
 
     expect(droparea.files.length).toBeTruthy()
-    droparea.files.forEach((file) => console.log(file.size))
   })
   it("Does not allow dropping a file that doesn't not exist in accept'", () => {
     container.innerHTML = /* html */ `
-            <ark-droparea accept=".jpg, .png"></ark-droparea>
+            <ark-droparea accept="jpg, png"></ark-droparea>
         `
 
     const droparea = container.querySelector("ark-droparea")
@@ -199,16 +199,45 @@ describe("Droparea", () => {
     const myFile = new File(["text"], "Snoopy.txt", {
       type: "text/txt",
     })
-    const myFile2 = new File(["text"], "styles.css", {
-      type: "text/css",
-    })
     const changeEvent = createBubbledEvent("change", {})
     Object.defineProperty(changeEvent, "target", {
       value: {
-        files: [myFile, myFile2],
+        files: [myFile],
       },
     })
     input.dispatchEvent(changeEvent)
     expect(droparea.files.length).toBeFalsy()
+  })
+  xit("Testing coverage'", () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea accept="jpg, mp3, css, mov"></ark-droparea>
+        `
+
+    const droparea = container.querySelector("ark-droparea")
+    const dropZone = droparea.querySelector(".ark-droparea__form")
+    const myFile = new File(["audio"], "music.mp3", {
+      type: "audio/mp3",
+    })
+    const myFile2 = new File(["audio"], "music.wav", {
+      type: "audio/wav",
+    })
+    const dropEvent1 = createBubbledEvent("drop", {
+      clientX: 0,
+      clientY: 1,
+      dataTransfer: {
+        files: [myFile],
+      },
+    })
+    const dropEvent2 = createBubbledEvent("drop", {
+      clientX: 0,
+      clientY: 1,
+      dataTransfer: {
+        files: [myFile2],
+      },
+    })
+    dropZone.dispatchEvent(dropEvent1)
+    dropZone.dispatchEvent(dropEvent2)
+    droparea.files.forEach((file) => console.log("***", file.type, file.name))
+    // expect(droparea.files.length).toBeTruthy()
   })
 })
