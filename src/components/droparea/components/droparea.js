@@ -1,5 +1,9 @@
-import { Component } from "../../../base/component"
-import { styles } from "../styles"
+import {
+  Component
+} from "../../../base/component"
+import {
+  styles
+} from "../styles"
 // @ts-ignore
 const tag = "ark-droparea"
 
@@ -104,7 +108,6 @@ export class Droparea extends Component {
       if (this.validate(files)) {
         files.forEach((file) => {
           this.fileList.push(file)
-          console.log(files.includes)
           this.previewFile(file)
         })
       }
@@ -114,11 +117,10 @@ export class Droparea extends Component {
   validate(fileList) {
     if (!this.accept || this.accept.length === 0) return true
     const acceptList = this.accept.split(",").map((s) => s.trim().toLowerCase())
-    if (acceptList.length === 0) return true
-    const hasAudio = acceptList.indexOf("audio/*") >= 0
-    const hasVideo = acceptList.indexOf("video/*") >= 0
-    const hasImage = acceptList.indexOf("image/*") >= 0
-    const hasText = acceptList.indexOf("text/*") >= 0
+    const hasAudio = acceptList.indexOf("audio") >= 0
+    const hasVideo = acceptList.indexOf("video") >= 0
+    const hasImage = acceptList.indexOf("image") >= 0
+    const hasText = acceptList.indexOf("text") >= 0
 
     for (let i = 0, len = fileList.length; i < len; ++i) {
       let ext = "" + fileList[i].name.split(".").pop().toLowerCase()
