@@ -1,4 +1,6 @@
-import { Droparea } from "components/droparea"
+import {
+  Droparea
+} from "components/droparea"
 
 describe("Droparea", () => {
   const createBubbledEvent = (type, props = {}) => {
@@ -149,7 +151,7 @@ describe("Droparea", () => {
         `
 
     const droparea = container.querySelector("ark-droparea")
-    const dropzone = droparea.querySelector(".ark-droparea__form")
+    const dropOpen = droparea.querySelector(".ark-droparea__open")
     const input = droparea.querySelector(".ark-droparea__input")
     const myFile = new File(["image"], "Snoopy.png", {
       type: "image/png",
@@ -160,9 +162,8 @@ describe("Droparea", () => {
         files: [myFile],
       },
     })
-    dropzone.click()
+    dropOpen.click()
     input.dispatchEvent(changeEvent)
-
     expect(droparea.files.length).toBeTruthy()
   })
 
@@ -208,36 +209,40 @@ describe("Droparea", () => {
     input.dispatchEvent(changeEvent)
     expect(droparea.files.length).toBeFalsy()
   })
-  xit("Testing coverage'", () => {
+  it("General file type values can be specified'", () => {
     container.innerHTML = /* html */ `
-            <ark-droparea accept="jpg, mp3, css, mov"></ark-droparea>
+            <ark-droparea accept="audio, image, video, text">
+            </ark-droparea>
         `
 
     const droparea = container.querySelector("ark-droparea")
     const dropZone = droparea.querySelector(".ark-droparea__form")
-    const myFile = new File(["audio"], "music.mp3", {
+    const myFile = new File(["audio"], "autechre.mp3", {
       type: "audio/mp3",
     })
-    const myFile2 = new File(["audio"], "music.wav", {
-      type: "audio/wav",
+    const myFile2 = new File(["video"], "cats.mov", {
+      type: "video/mov",
     })
-    const dropEvent1 = createBubbledEvent("drop", {
+    const myFile3 = new File(["image"], "snoopy.jpg", {
+      type: "image/jpg",
+    })
+    const myFile4 = new File(["text"], "styles.css", {
+      type: "text/css",
+    })
+
+    const files = [myFile, myFile2, myFile3, myFile4]
+    const dropEvent = createBubbledEvent("drop", {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
-        files: [myFile],
+        files: files,
       },
     })
-    const dropEvent2 = createBubbledEvent("drop", {
-      clientX: 0,
-      clientY: 1,
-      dataTransfer: {
-        files: [myFile2],
-      },
+    dropZone.dispatchEvent(dropEvent)
+
+    droparea.files.forEach((file, i) => {
+      expect(file.type).toBe(files[i].type)
     })
-    dropZone.dispatchEvent(dropEvent1)
-    dropZone.dispatchEvent(dropEvent2)
-    droparea.files.forEach((file) => console.log("***", file.type, file.name))
-    // expect(droparea.files.length).toBeTruthy()
+
   })
 })

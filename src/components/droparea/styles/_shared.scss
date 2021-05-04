@@ -5,22 +5,21 @@
   &__form {
     @include theme.paint;
     @include theme.round;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     box-sizing: border-box;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
     border: 2px dashed black;
-    min-width: fit-content;
-    max-width: 100%;
-    opacity: 0.8;
-    transition: all 0.2s ease-out;
-    &.highlight,
-    &:hover {
-      border: solid 3px gray;
-      background-color: var(--light, white);
-      opacity: 1;
-      cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+
+    &>* {
+      margin: 0;
     }
+
     input {
       visibility: hidden;
     }
@@ -35,14 +34,16 @@
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
+    scroll-margin-right: 1rem;
     white-space: nowrap;
     border: 1px solid black;
     user-select: none;
     padding: 1.2rem;
     gap: 0.8rem;
   }
+
   &__picture-preview {
-      box-sizing: border-box;
+    box-sizing: border-box;
     flex: 0 0 110px;
     display: flex;
     width: 110px;
@@ -54,30 +55,50 @@
     background-size: cover;
     background-color: var(--primary, white);
     border-radius: 4px;
-    box-shadow: -3px 4px 6px -4px rgba(1,31,255,0.71);
-    transition:all 0.2s ease-in-out;
-    &:hover{
-        .ark-droparea__remove{
-            visibility: visible;
-        }
-        cursor: pointer;
-        box-shadow: -3px 4px 15px -4px rgba(120,10,255,0.71);
-        transform: scale(1.05);
+    box-shadow: -3px 4px 6px -4px rgba(1, 31, 255, 0.71);
+    margin: 0.3rem;
+    transition: all 0.2s ease-in-out;
+
+    &:hover,
+    &:active {
+      .ark-droparea__remove {
+        visibility: visible;
+      }
+
+      cursor: pointer;
+      box-shadow: -3px 4px 15px -4px rgba(120, 10, 255, 0.71);
+      transform: scale(1.05);
+    }
+
+    &:focus {}
+
+    &:after {
+      content: "";
+      display: block;
+      position: relative;
+      right: -3rem;
+      width: 5rem;
+      height: 1px;
+      ;
     }
 
     p {
-        box-sizing: border-box;
-        overflow: hidden;
-        white-space: pre-wrap;
-        width: inherit;
-        font-size: 0.6rem;
-        padding: 0.2rem;
-        line-height: 1.2;
-        text-align: center;
-        color: white;
+      box-sizing: border-box;
+      overflow: hidden;
+      white-space: pre-wrap;
+      width: inherit;
+      font-size: 0.6rem;
+      padding: 0.2rem;
+      line-height: 1.2;
+      text-align: center;
+      color: white;
     }
   }
+
   &__remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
     visibility: hidden;
     width: 30px;
     height: 30px;
@@ -86,10 +107,11 @@
     border-radius: 50%;
     border: 1px solid white;
     color: black;
-    outline:none;
+    outline: none;
     font-size: 1rem;
     opacity: 0.8;
     transition: all 0.1s ease-in-out;
+
     &:hover {
       background: black;
       color: rgb(255, 118, 118);
@@ -98,4 +120,26 @@
       opacity: 1;
     }
   }
+
+  &__open {
+    user-select: none;
+    border: 2px solid black;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      box-shadow: 2px 4px 13px -3px rgba(0, 0, 0, 0.56);
+      background-color: white;
+    }
+
+    &:active {
+      transform: scale(0.95);
+
+    }
+
+  }
+
+
 }
