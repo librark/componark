@@ -18,11 +18,11 @@ export class Droparea extends Component {
               Drag & Drop 
                   <small>${this.accept ? this.accept : ""} Files</small> 
           </h1>
-          <p>or click to upload</p>
+          <div class="ark-droparea__open">or click to upload</div>
         <input type="file" 
                class="ark-droparea__input"
-               id="fileElem" 
-               multiple 
+               id="fileElem"
+               multiple
                 >
       </form>
         <div class="ark-droparea__gallery"></div>
@@ -31,6 +31,7 @@ export class Droparea extends Component {
     this.dragEvents = this.dragDropEvents.slice(0, 2)
     this.dropEvents = this.dragDropEvents.slice(2)
     this._input = this.select(".ark-droparea__input")
+    this.openButton = this.select(".ark-droparea__open")
     return super.render()
   }
 
@@ -53,11 +54,12 @@ export class Droparea extends Component {
 
     this.addEventListener("drop", this.handleDrop, false)
     this._input.addEventListener("change", this.onChange, false)
-    this.dropZone.addEventListener("click", this.openInput, false)
+    this.openButton.addEventListener("click", this.openInput, false)
   }
 
-  openInput() {
-    const input = this.parentElement._input
+  openInput(e) {
+    e.stopPropagation()
+    const input = this.parentNode.parentNode._input
     input.click()
   }
 
@@ -102,8 +104,8 @@ export class Droparea extends Component {
       if (this.validate(files)) {
         files.forEach((file) => {
           this.fileList.push(file)
+          console.log(files.includes)
           this.previewFile(file)
-          this.validate(files)
         })
       }
     }

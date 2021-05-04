@@ -1,14 +1,16 @@
-import { Component } from "base/component"
+import {
+    Component
+} from "base/component"
 
 const tag = "demo-droparea"
 
 export class DropareaDemo extends Component {
-  init(context) {
-    return super.init(context)
-  }
+    init(context) {
+        return super.init(context)
+    }
 
-  render() {
-    this.innerHTML = /* html */ `
+    render() {
+        this.innerHTML = /* html */ `
         <h1 class="title">
             This is a drop area
         </h1>
@@ -20,10 +22,13 @@ export class DropareaDemo extends Component {
            <p>Single</p>
            <ark-droparea single accept="jpg, png"></ark-droparea>
        </div>
-        `
 
-    return super.render()
-  }
+     <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/droparea/README.rst">
+      * Reference
+      </a>
+        `
+        return super.render()
+    }
 }
 
 const styles = /* css */ `
