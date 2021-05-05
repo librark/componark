@@ -2,6 +2,11 @@ import {
   Droparea
 } from "components/droparea"
 
+import {
+  DropareaGallery
+} from '../../../src/components/droparea/components/droparea-gallery'
+
+
 describe("Droparea", () => {
   const createBubbledEvent = (type, props = {}) => {
     const event = new Event(type, {

@@ -2,6 +2,10 @@ import {
   Component
 } from "../../../base/component"
 import {
+  DropareaGallery
+}
+from "./droparea-gallery"
+import {
   styles
 } from "../styles"
 // @ts-ignore
@@ -29,8 +33,9 @@ export class Droparea extends Component {
                multiple
                 >
       </form>
-        <div class="ark-droparea__gallery"></div>
-  `
+      <ark-droparea-gallery></ark-droparea-gallery>
+      `
+    // <div class="ark-droparea__gallery"></div>
     this.dragDropEvents = ["dragenter", "dragover", "dragleave", "drop"]
     this.dragEvents = this.dragDropEvents.slice(0, 2)
     this.dropEvents = this.dragDropEvents.slice(2)
@@ -98,17 +103,18 @@ export class Droparea extends Component {
   handleFiles(files) {
     if (this.single) {
       files = [files[0]]
+      /* istanbul ignore else */
       if (this.validate(files)) {
         this.fileList[0] = files[0]
         this.gallery.innerHTML = ""
-        this.previewFile(this.fileList[0])
+        this.gallery.previewFile(this.fileList[0])
       }
     } else {
       files = [...files]
       if (this.validate(files)) {
         files.forEach((file) => {
           this.fileList.push(file)
-          this.previewFile(file)
+          this.gallery.previewFile(file)
         })
       }
     }
@@ -140,45 +146,12 @@ export class Droparea extends Component {
     return true
   }
 
-  previewFile(file) {
-    const gallery = this.gallery
-    let reader = new FileReader()
-    let fileType = file.type.split("/")[0]
-    reader.readAsDataURL(file)
-    /* istanbul ignore next */
-    reader.onloadend = () => {
-      const picture = document.createElement("div")
-      picture.className = "ark-droparea__picture-preview"
-      const removeButton = document.createElement("button")
-      removeButton.innerText = "⨯"
-      removeButton.className = "ark-droparea__remove"
-      if (fileType != "image") {
-        picture.innerHTML = `<p>${file.name}</p>`
-      } else {
-        picture.style.backgroundImage = `url('${reader.result}')`
-      }
-      removeButton.addEventListener("click", this.removeFile.bind(this, file))
-      gallery.appendChild(picture)
-      picture.appendChild(removeButton)
-    }
-  }
-
-  removeFile(file, event) {
-    let element = event.target
-    const fileIndex = this.fileList.indexOf(file)
-    this.fileList.splice(fileIndex, 1)
-    element.parentNode.remove()
-  }
-
   get dropZone() {
     return this.select(".ark-droparea__form")
   }
-  get gallery() {
-    return this.select(".ark-droparea__gallery")
-  }
 
-  get files() {
-    return this.fileList
+  get gallery() {
+    return this.select(".ark-droparea-gallery")
   }
 }
 

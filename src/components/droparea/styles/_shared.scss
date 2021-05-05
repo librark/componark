@@ -30,7 +30,7 @@
     user-select: none;
   }
 
-  &__gallery {
+  &-gallery {
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
@@ -72,15 +72,15 @@
 
     &:focus {}
 
-    &:after {
-      content: "";
-      display: block;
-      position: relative;
-      right: -3rem;
-      width: 5rem;
-      height: 1px;
-      ;
-    }
+    // &:after {
+    //   content: "";
+    //   background-color: transparent;
+    //   display: block;
+    //   position: relative;
+    //   right: -3rem;
+    //   width: 5rem;
+    //   height: 1px;
+    // }
 
     p {
       box-sizing: border-box;
