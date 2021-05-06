@@ -1,35 +1,35 @@
 GALLERY
 *******
 
-The ``ark-gallery`` component is a simple image gallery that recieves a list of images as files, 
-and renders them in an organized slider ideal for product detail, this component 
-allows the user to select each image to preview it.
+The ``ark-gallery`` component is a simple image gallery that recieves a list of images as URL, separated by commas, 
+and renders them in an organized slider, ideal for product detail, this component allows the user to select each image to preview it.
 
 Examples
 ========
 
     .. code:: html
 
-        <ark-gallery></ark-gallery>
+        <ark-gallery images="https://picsum.photos/200/300?random=1, 
+                         https://picsum.photos/200/300?random=2, 
+                         https://picsum.photos/200/300?random=3">
+        </ark-gallery>
 
 
-Attributes and Properties
--------------------------
 
-**Material icons**
+Attributes
+----------
 
-+------+---------------+--------------+
-| Name |    Options    | Description  |
-+======+===============+==============+
-| type | mat           | icon library |
-+------+---------------+--------------+
-| name | all available | icon name    |
-+------+---------------+--------------+
++--------+-------------+---------------------------------------------------+
+|  Name  |   Options   |                    Description                    |
++========+=============+===================================================+
+| images | (image url) | Recieves a list of images url separated by commas |
++--------+-------------+---------------------------------------------------+
 
-**Fontawsome free icons**
+Properties
+----------
 
-+------+---------------+----------------------------------------+
-| Name |    Options    |              Description               |
-+======+===============+========================================+
-| name | all available | icon name format: ``prefix icon_name`` |
-+------+---------------+----------------------------------------+
++--------+-------------+---------------------------------------------------+
+|  Name  |   Options   |                    Description                    |
++========+=============+===================================================+
+| images | (image url) | Recieves a list of images url separated by commas |
++--------+-------------+---------------------------------------------------+
