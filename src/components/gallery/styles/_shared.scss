@@ -4,15 +4,18 @@
 @mixin ark-gallery() {
   background: transparent;
   display: grid;
+  grid-gap:0.8rem;
   justify-items: center;
   align-content: center;
+  grid-template-columns: 1fr 4fr;
 
   width:100%;
-  height: fit-content;
 
   &__thumbnails{
     padding: 0;
     display:flex;
+    align-self: center;
+    flex-direction: column;
     justify-items: center;
     gap: 0.8rem;
     list-style: none;
@@ -22,8 +25,8 @@
     div{
       user-select: none;
 
-      width:100px;
-      height:100px;
+      width:50px;
+      height:50px;
       background-repeat: no-repeat;
       background-size: cover;
 
@@ -33,16 +36,21 @@
       &:hover{
         transform: scale(1.05);
         cursor: pointer;
+        box-shadow: -3px 4px 15px -4px rgba(120, 10, 255, 0.71);
       }
     }
   }
 
   &__image{
+    display:flex;
+    align-items: center;
     user-select: none;
-    width: 40% !important;
     background: transparent;
+    padding: 0.5rem;
+
     img{
       max-width: 100%;
+      min-width: 250px;
     }
   }
 

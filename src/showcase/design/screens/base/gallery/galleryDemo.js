@@ -36,13 +36,25 @@ export class GalleryDemo extends Component {
     const images = []
 
     for (let i = 0; i < 5; i++) {
-      images.push(`https://source.unsplash.com/collection/8272759/sig=${i}`)
+      images.push(
+        `https://source.unsplash.com/collection/9371913/1720x920/?sig=${i}`
+      )
     }
 
     return images.join()
   }
 }
 const styles = /* css */ `
+.demo-gallery{
+  width:100%;
+}  
+.ark-gallery{
+    min-width:40%;
+    max-width: 50%
+  }
 
+h1{
+  align-self: flex-start;
+}
 `
 Component.define(tag, GalleryDemo, styles)
