@@ -22,7 +22,6 @@ export class SplitView extends Component {
     if (!this.detail || !this.detail.init) return
 
     this.detail.init(context).render()
-    this.detail["show"]()
   }
 
   get master () {
@@ -39,6 +38,7 @@ export class SplitView extends Component {
 
     const context = event.detail
     this.renderDetail(context)
+    this.detail["show"]()
 
     this.emit('detail:change', context)
   }
