@@ -1,13 +1,6 @@
-import {
-  Component
-} from "../../../base/component"
-import {
-  DropareaGallery
-}
-from "./droparea-gallery"
-import {
-  styles
-} from "../styles"
+import { Component } from "../../../base/component"
+import { DropareaPreview } from "./droparea-preview"
+import { styles } from "../styles"
 // @ts-ignore
 const tag = "ark-droparea"
 
@@ -33,9 +26,8 @@ export class Droparea extends Component {
                multiple
                 >
       </form>
-      <ark-droparea-gallery></ark-droparea-gallery>
+      <ark-droparea-preview></ark-droparea-preview>
       `
-    // <div class="ark-droparea__gallery"></div>
     this.dragDropEvents = ["dragenter", "dragover", "dragleave", "drop"]
     this.dragEvents = this.dragDropEvents.slice(0, 2)
     this.dropEvents = this.dragDropEvents.slice(2)
@@ -106,15 +98,17 @@ export class Droparea extends Component {
       /* istanbul ignore else */
       if (this.validate(files)) {
         this.fileList[0] = files[0]
-        this.gallery.innerHTML = ""
-        this.gallery.previewFile(this.fileList[0])
+        this.preview.innerHTML = ""
+        this.preview.previewFile(this.fileList[0])
       }
     } else {
       files = [...files]
       if (this.validate(files)) {
         files.forEach((file) => {
-          this.fileList.push(file)
-          this.gallery.previewFile(file)
+          if (!this.preview.fileExists(file)) {
+            this.fileList.push(file)
+            this.preview.previewFile(file)
+          }
         })
       }
     }
@@ -150,9 +144,10 @@ export class Droparea extends Component {
     return this.select(".ark-droparea__form")
   }
 
-  get gallery() {
-    return this.select(".ark-droparea-gallery")
+  get preview() {
+    return this.select(".ark-droparea-preview")
   }
 }
 
 Component.define(tag, Droparea, styles)
+
