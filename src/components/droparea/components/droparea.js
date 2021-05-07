@@ -98,6 +98,7 @@ export class Droparea extends Component {
   handleFiles(files) {
     if (this.single) {
       files = [files[0]]
+      /* istanbul ignore else */
       if (this.validate(files)) {
         this.fileList[0] = files[0]
         this.gallery.innerHTML = ""
@@ -129,11 +130,8 @@ export class Droparea extends Component {
       if (hasVideo && fileList[i].type.split("/")[0] === "video") continue
       if (hasImage && fileList[i].type.split("/")[0] === "image") continue
       if (hasText && fileList[i].type.split("/")[0] === "text") continue
-      if (acceptList.indexOf(fileList[i].type) >= 0) continue
+      //if (acceptList.indexOf(fileList[i].type) >= 0) continue
 
-      // did not match anything in accept
-      const message = `${fileList[i].name} is not valid a valid file format, only accepts ${this.accept} files`
-      console.log(message)
       return false
     }
 
@@ -157,18 +155,18 @@ export class Droparea extends Component {
       } else {
         picture.style.backgroundImage = `url('${reader.result}')`
       }
-      removeButton.addEventListener("click", this.removeFile.bind(this, file))
+      // removeButton.addEventListener("click", this.removeFile.bind(this, file))
       gallery.appendChild(picture)
       picture.appendChild(removeButton)
     }
   }
 
-  removeFile(file, event) {
-    let element = event.target
-    const fileIndex = this.fileList.indexOf(file)
-    this.fileList.splice(fileIndex, 1)
-    element.parentNode.remove()
-  }
+  // removeFile(file, event) {
+  //   let element = event.target
+  //   const fileIndex = this.fileList.indexOf(file)
+  //   this.fileList.splice(fileIndex, 1)
+  //   element.parentNode.remove()
+  // }
 
   get dropZone() {
     return this.select(".ark-droparea__form")
