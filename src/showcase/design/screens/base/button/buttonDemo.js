@@ -116,7 +116,7 @@ export class ButtonDemo extends Component {
       <p>A photo with close button</p>
 
       <div class="fab-box photo">
-        <ark-button horizontal="end" vertical="start" fab background="primary">
+        <ark-button class="close-photo" horizontal="end" vertical="start" fab background="primary">
           <ark-icon slot='icon' type="mat" name="close"></ark-icon>
         </ark-button>
       </div>
@@ -157,6 +157,19 @@ const styles = /* css */ `
   background-size: cover;
   background-position:center;
 }
+
+.photo > ark-button{
+  visibility: hidden;
+  transform: scale(0.8);
+  opacity: 0.5;
+  transition: all 0.2s ease-in-out;
+}
+
+.photo:hover > ark-button{
+  visibility: visible;
+  opacity: 1;
+}
+
 
 .ark-button{
     margin:10px;
