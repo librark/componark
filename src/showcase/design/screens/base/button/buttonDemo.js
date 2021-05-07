@@ -92,7 +92,6 @@ export class ButtonDemo extends Component {
 
       <p>This is a Fab Button</p>
       <div class="fab-box">
-
         <ark-button fab background="primary">
           <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
         </ark-button>
@@ -112,7 +111,14 @@ export class ButtonDemo extends Component {
         <ark-button horizontal="center" vertical="center" fab background="primary">
           <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
         </ark-button>
+      </div>
 
+      <p>A photo with close button</p>
+
+      <div class="fab-box photo">
+        <ark-button horizontal="end" vertical="start" fab background="primary">
+          <ark-icon slot='icon' type="mat" name="close"></ark-icon>
+        </ark-button>
       </div>
 
       <div class="demo-button">
@@ -128,7 +134,13 @@ export class ButtonDemo extends Component {
       </a>
     `
 
+    this.renderPhoto()
+
     return super.render()
+  }
+
+  renderPhoto(){
+    this.querySelector('.photo').style.backgroundImage = 'url("https://picsum.photos/id/237/200/300")'
   }
 }
 const styles = /* css */ `
@@ -138,6 +150,12 @@ const styles = /* css */ `
     padding:1rem;
     width:50%;
     height:20%;
+}
+
+.photo{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:center;
 }
 
 .ark-button{
