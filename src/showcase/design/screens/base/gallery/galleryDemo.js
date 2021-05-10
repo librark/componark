@@ -10,7 +10,7 @@ export class GalleryDemo extends Component {
     this.innerHTML = /* html */ `
       <h1>Gallery component</h1>
 
-      <ark-gallery images="${this.getImages()}"></ark-gallery>
+      <ark-gallery images="${this.getImages()}" width="500px"></ark-gallery>
 
       <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/gallery/README.rst">
       * Reference
@@ -21,24 +21,12 @@ export class GalleryDemo extends Component {
 
     return super.render()
   }
-  /* 
-  RANDOM IMAGE API
-  
-  https://source.unsplash.com/random/sig=1 
-  
-  Products Collections
-  
-  https://source.unsplash.com/collection/8272759/sig=1
-  
-  */
 
   getImages() {
     const images = []
 
     for (let i = 0; i < 5; i++) {
-      images.push(
-        `https://source.unsplash.com/collection/9371913/1720x920/?sig=${i}`
-      )
+      images.push(`https://picsum.photos/id/100${i}/300`)
     }
 
     return images.join()
