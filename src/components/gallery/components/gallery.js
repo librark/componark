@@ -17,19 +17,41 @@ export class Gallery extends Component {
     this.content = /* html */ `
     <ul class="ark-gallery__thumbnails"></ul>
     <div class="ark-gallery__image">
-      <img class="ark-gallery__selected" src="${this.imageList[0]}" alt="product image">
+      <img data-selected-image class="ark-gallery__selected" src="${this.imageList[0]}" alt="product image">
     </div>
     `
+
     this.handleImages(this.images)
+    this.moveAttributes()
+    this.imageSelected = this.select("[data-selected-image]")
+    if (!this.imageSelected.getAttribute("width")) {
+      this.imageSelected.style.maxWidth = "100%"
+      this.imageSelected.style.minWidth = "250px"
+    }
 
     return super.render()
   }
 
+  moveAttributes() {
+    Array.from(this.attributes).forEach((attribute) => {
+      if (attribute.name != "images") {
+        this.select("[data-selected-image]").setAttribute(
+          attribute.name,
+          attribute.value
+        )
+      }
+    })
+  }
+
   handleImages(images) {
     const imagesList = this.imageList
-    imagesList.forEach((image) => {
-      this.createThumbnails(image)
-    })
+    if (imagesList.length === 1) {
+      this.galleryThumbnails.style.display = "none"
+    } else {
+      imagesList.forEach((image) => {
+        this.createThumbnails(image)
+      })
+    }
   }
 
   createThumbnails(image) {
