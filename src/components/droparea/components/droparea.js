@@ -96,15 +96,15 @@ export class Droparea extends Component {
     if (this.single) {
       files = [files[0]]
       /* istanbul ignore else */
-      if (this.validate(files)) {
+      if (this.validate(files) && !this.preview.fileExists(files[0])) {
         this.fileList[0] = files[0]
-        this.preview.innerHTML = ""
         this.preview.previewFile(this.fileList[0])
       }
     } else {
       files = [...files]
       if (this.validate(files)) {
         files.forEach((file) => {
+          /*istanbul ignore else*/
           if (!this.preview.fileExists(file)) {
             this.fileList.push(file)
             this.preview.previewFile(file)

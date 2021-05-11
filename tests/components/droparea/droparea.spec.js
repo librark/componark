@@ -1,11 +1,6 @@
-import {
-  Droparea
-} from "components/droparea"
+import { Droparea } from "components/droparea"
 
-import {
-  DropareaGallery
-} from '../../../src/components/droparea/components/droparea-preview'
-
+import { DropareaGallery } from "../../../src/components/droparea/components/droparea-preview"
 
 describe("Droparea", () => {
   const createBubbledEvent = (type, props = {}) => {
@@ -15,6 +10,8 @@ describe("Droparea", () => {
     Object.assign(event, props)
     return event
   }
+
+  global.URL.createObjectURL = jest.fn()
 
   let container = null
 
@@ -72,12 +69,12 @@ describe("Droparea", () => {
     expect(dropZone.classList.length).toBe(1)
   })
 
-  xit("Allows dropping multiple files to the component", () => {
+  it("Allows dropping multiple files to the component", () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-
+    const droparea = container.querySelector("ark-droparea")
     const dropZone = droparea.querySelector(".ark-droparea__form")
     const myFile = new File(["image"], "Doggy.png", {
       type: "image/png",
@@ -97,7 +94,8 @@ describe("Droparea", () => {
     expect(droparea.fileList[0].name).toEqual(myFile.name)
     expect(droparea.fileList[1].name).toEqual(myFile2.name)
   })
-  xit("Can recieve a single file", () => {
+
+  it("Can recieve a single file", () => {
     container.innerHTML = /* html */ `
             <ark-droparea single></ark-droparea>
         `
@@ -120,11 +118,11 @@ describe("Droparea", () => {
     })
 
     dropZone.dispatchEvent(dropEvent)
-    expect(droparea.files[0]).toEqual(droparea.fileList[0])
-    expect(droparea.files[1]).toBeFalsy()
+    expect(droparea.fileList.length).toBe(1)
+    expect(droparea.fileList[1]).toBeFalsy()
   })
 
-  xit("Returns the file list", () => {
+  it("Returns the file list", () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
@@ -147,10 +145,10 @@ describe("Droparea", () => {
     })
 
     dropZone.dispatchEvent(dropEvent)
-    expect(droparea.files.length).toEqual(droparea.fileList.length)
+    expect(droparea.fileList.length).toEqual(2)
   })
 
-  xit("Can select files from input", () => {
+  it("Can select files from input", () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
@@ -169,10 +167,10 @@ describe("Droparea", () => {
     })
     dropOpen.click()
     input.dispatchEvent(changeEvent)
-    expect(droparea.files.length).toBeTruthy()
+    expect(droparea.fileList.length).toBeTruthy()
   })
 
-  xit("Can limit the file formats that component recieves", () => {
+  it("Can limit the file formats that component recieves", () => {
     container.innerHTML = /* html */ `
             <ark-droparea accept="jpg, png"></ark-droparea>
         `
@@ -191,11 +189,12 @@ describe("Droparea", () => {
         files: [myFile, myFile2],
       },
     })
-    input.dispatchEvent(changeEvent)
 
-    expect(droparea.files.length).toBeTruthy()
+    input.dispatchEvent(changeEvent)
+    expect(droparea.fileList.length).toBeTruthy()
   })
-  xit("Does not allow dropping a file that doesn't not exist in accept'", () => {
+
+  it("Does not allow dropping a file that doesn't not exist in accept'", () => {
     container.innerHTML = /* html */ `
             <ark-droparea accept="jpg, png"></ark-droparea>
         `
@@ -212,9 +211,10 @@ describe("Droparea", () => {
       },
     })
     input.dispatchEvent(changeEvent)
-    expect(droparea.files.length).toBeFalsy()
+    expect(droparea.fileList.length).toBeFalsy()
   })
-  xit("General file type values can be specified'", () => {
+
+  it("General file type values can be specified'", () => {
     container.innerHTML = /* html */ `
             <ark-droparea accept="audio, image, video, text">
             </ark-droparea>
@@ -245,9 +245,8 @@ describe("Droparea", () => {
     })
     dropZone.dispatchEvent(dropEvent)
 
-    droparea.files.forEach((file, i) => {
+    droparea.fileList.forEach((file, i) => {
       expect(file.type).toBe(files[i].type)
     })
-
   })
 })
