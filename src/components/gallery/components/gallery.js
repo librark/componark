@@ -80,7 +80,7 @@ export class Gallery extends Component {
   }
 
   get imageList() {
-    return this.images.split(",")
+    return this.images.split("|")
   }
 }
 

@@ -24,8 +24,8 @@ describe("Gallery", () => {
 
   it("image thumbnails can be rendered", () => {
     container.innerHTML = /* html */ `
-    <ark-gallery images="https://picsum.photos/200/300?random=1, 
-                         https://picsum.photos/200/300?random=2, 
+    <ark-gallery images="https://picsum.photos/200/300?random=1| 
+                         https://picsum.photos/200/300?random=2| 
                          https://picsum.photos/200/300?random=3">
     </ark-gallery>
     `
@@ -38,8 +38,8 @@ describe("Gallery", () => {
 
   it("image thumbnails can be selected", () => {
     container.innerHTML = /* html */ `
-    <ark-gallery images="https://picsum.photos/200/300?random=1, 
-                         https://picsum.photos/200/300?random=2, 
+    <ark-gallery images="https://picsum.photos/200/300?random=1| 
+                         https://picsum.photos/200/300?random=2| 
                          https://picsum.photos/200/300?random=3">
     </ark-gallery>
     `
@@ -56,8 +56,8 @@ describe("Gallery", () => {
 
   it("Attribute width and height are reflected on selected image", () => {
     container.innerHTML = /* html */ `
-    <ark-gallery images="https://picsum.photos/?random=1, 
-                         https://picsum.photos/?random=2, 
+    <ark-gallery images="https://picsum.photos/?random=1| 
+                         https://picsum.photos/?random=2| 
                          https://picsum.photos/?random=3"
                  width="1280px"
                  height="720px">

@@ -32,7 +32,7 @@ export class GalleryDemo extends Component {
       images.push(`https://picsum.photos/id/102${i}/500`)
     }
 
-    return images.join()
+    return images.join('|')
   }
 }
 
