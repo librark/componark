@@ -23,11 +23,6 @@ export class Gallery extends Component {
 
     this.handleImages(this.images)
     this.moveAttributes()
-    this.imageSelected = this.select("[data-selected-image]")
-    if (!this.imageSelected.getAttribute("width")) {
-      this.imageSelected.style.maxWidth = "100%"
-      this.imageSelected.style.minWidth = "250px"
-    }
 
     return super.render()
   }
