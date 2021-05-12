@@ -1,6 +1,6 @@
-import { DropareaPreview } from "../../../src/components/droparea/components/droparea-preview"
+import { DropareaPreview } from '../../../src/components/droparea/components/droparea-preview'
 
-describe("Droparea", () => {
+describe('Droparea', () => {
   const createBubbledEvent = (type, props = {}) => {
     const event = new Event(type, {
       bubbles: true,
@@ -10,11 +10,13 @@ describe("Droparea", () => {
   }
 
   global.URL.createObjectURL = jest.fn()
+  global.document.elementFromPoint = jest.fn()
+  const mockProps = { handleDrag: jest.fn() }
 
   let container = null
 
   beforeEach(() => {
-    container = document.createElement("div")
+    container = document.createElement('div')
     document.body.appendChild(container)
   })
 
@@ -23,30 +25,30 @@ describe("Droparea", () => {
     container = null
   })
 
-  it("can be instantiated", () => {
+  it('can be instantiated', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
-    const droparea = container.querySelector("ark-droparea")
-    const preview = droparea.querySelector("ark-droparea-preview")
+    const droparea = container.querySelector('ark-droparea')
+    const preview = droparea.querySelector('ark-droparea-preview')
     expect(preview).toBe(preview.init())
   })
 
-  it("Item can be removed", () => {
+  it('Item can be removed', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const preview = droparea.querySelector("[data-preview-list]")
-    const dropZone = droparea.querySelector(".ark-droparea__form")
-    const myFile = new File(["image"], "Doggy.png", {
-      type: "image/png",
+    const droparea = container.querySelector('ark-droparea')
+    const preview = droparea.querySelector('[data-preview-list]')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['image'], 'Doggy.png', {
+      type: 'image/png',
     })
-    const myFile2 = new File(["image"], "Scooby.png", {
-      type: "image/png",
+    const myFile2 = new File(['image'], 'Scooby.png', {
+      type: 'image/png',
     })
-    const dropEvent = createBubbledEvent("drop", {
+    const dropEvent = createBubbledEvent('drop', {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
@@ -55,7 +57,49 @@ describe("Droparea", () => {
     })
 
     dropZone.dispatchEvent(dropEvent)
-    preview.querySelector("button").click()
-    preview.querySelector("button").click()
+    preview.querySelector('button').click()
+    preview.querySelector('button').click()
+  })
+
+  it('Test', () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea></ark-droparea>
+        `
+
+    const droparea = container.querySelector('ark-droparea')
+    const preview = droparea.querySelector('[data-preview-list]')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['image'], 'Doggy.png', {
+      type: 'image/png',
+    })
+    const myFile2 = new File(['image'], 'Scooby.png', {
+      type: 'image/png',
+    })
+    const dropEvent = createBubbledEvent('drop', {
+      clientX: 0,
+      clientY: 1,
+      dataTransfer: {
+        files: [myFile, myFile2],
+      },
+    })
+
+    dropZone.dispatchEvent(dropEvent)
+
+    preview.handleDrag = jest.fn()
+
+    const getThumbnails = () =>
+      Array.from(preview.querySelectorAll('.ark-droparea-preview__frame'))
+
+    const thumbnails = getThumbnails()
+
+    const startingNode = thumbnails[0]
+    const endingNode = thumbnails[1]
+
+    startingNode.dispatchEvent(
+      createBubbledEvent('dragstart', { clientX: 0, clientY: 0 })
+    )
+    endingNode.dispatchEvent(
+      createBubbledEvent('dragend', { clientX: 0, clientY: 1 })
+    )
   })
 })
