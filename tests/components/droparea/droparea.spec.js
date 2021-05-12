@@ -249,4 +249,6 @@ describe("Droparea", () => {
       expect(file.type).toBe(files[i].type)
     })
   })
+
+  // xit("", () => {})
 })

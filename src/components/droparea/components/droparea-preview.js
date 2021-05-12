@@ -36,9 +36,8 @@ export class DropareaPreview extends Component {
     removeButton.addEventListener("click", this.removeFile.bind(this, file))
     previewZone.appendChild(picture)
     picture.addEventListener("click", this.getFileIndex.bind(this, file))
-    // picture.setAttribute("draggable", true)
     this.toggleVisibility()
-    // this.enableDragSort("drag-sort-enable")
+    this.enableDragSort("drag-sort-enable")
   }
 
   toggleVisibility() {
@@ -48,49 +47,54 @@ export class DropareaPreview extends Component {
       : (previewZone.style.visibility = "hidden")
   }
 
-  // /* DragSort Functionality */
+  /* DragSort Functionality */
 
-  // enableDragSort(listClass) {
-  //   const sortableLists = this.getElementsByClassName(listClass)
-  //   Array.prototype.map.call(sortableLists, (list) => {
-  //     this.enableDragList(list)
-  //   })
-  // }
+  enableDragSort(listClass) {
+    const sortableLists = this.getElementsByClassName(listClass)
+    Array.prototype.map.call(sortableLists, (list) => {
+      this.enableDragList(list)
+    })
+  }
 
-  // enableDragList(list) {
-  //   Array.prototype.map.call(list.children, (item) => {
-  //     this.enableDragItem(item)
-  //   })
-  // }
+  enableDragList(list) {
+    Array.prototype.map.call(list.children, (item) => {
+      this.enableDragItem(item)
+    })
+  }
 
-  // enableDragItem(item) {
-  //   item.setAttribute("draggable", true)
-  //   item.addEventListener("drag", this.handleDrag.bind(this, item))
-  //   item.addEventListener("dragend", this.handleDrop, false)
-  // }
+  enableDragItem(item) {
+    item.setAttribute("draggable", true)
+    item.addEventListener("drag", this.handleDrag.bind(this, item))
+    item.addEventListener("dragend", this.handleDrop, false)
+  }
 
-  // handleDrag(item, event) {
-  //   const selectedItem = item,
-  //     list = selectedItem.parentNode,
-  //     x = event.clientX,
-  //     y = event.clientY
+  handleDrag(item, event) {
+    const selectedItem = item,
+      list = selectedItem.parentNode,
+      x = event.clientX,
+      y = event.clientY
 
-  //   selectedItem.classList.add("drag-sort-active")
-  //   let swapItem =
-  //     document.elementFromPoint(x, y) === null
-  //       ? selectedItem
-  //       : document.elementFromPoint(x, y)
+    selectedItem.classList.add("drag-sort-active")
+    let swapItem =
+      document.elementFromPoint(x, y) === null
+        ? selectedItem
+        : document.elementFromPoint(x, y)
 
-  //   if (list === swapItem.parentNode) {
-  //     swapItem =
-  //       swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling
-  //     list.insertBefore(selectedItem, swapItem)
-  //   }
-  // }
+    if (list === swapItem.parentNode) {
+      swapItem =
+        swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling
+      list.insertBefore(selectedItem, swapItem)
+    }
+  }
 
-  // handleDrop(item) {
-  //   item.target.classList.remove("drag-sort-active")
-  // }
+  handleDrop(item) {
+    item.target.classList.remove("drag-sort-active")
+    item.path[2].dispatchAlterEvent()
+  }
+  /*----------------------------------------------------*/
+  dispatchAlterEvent() {
+    this.emit("alter", this.files)
+  }
 
   fileExists(file) {
     const present = this.files.some((item) => item.name === file.name)
@@ -103,6 +107,7 @@ export class DropareaPreview extends Component {
     this.droparea.fileList.splice(fileIndex, 1)
     element.parentNode.remove()
     this.toggleVisibility()
+    this.dispatchAlterEvent()
   }
 
   getFileIndex(file, event) {

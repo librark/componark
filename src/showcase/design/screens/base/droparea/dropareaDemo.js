@@ -1,6 +1,4 @@
-import {
-  Component
-} from "base/component"
+import { Component } from "base/component"
 
 const tag = "demo-droparea"
 
@@ -16,7 +14,8 @@ export class DropareaDemo extends Component {
         </h1>
         <div class="droparea-demo">
             <p>Default(multi)</p>
-            <ark-droparea></ark-droparea>
+            <ark-droparea listen on-alter="onFileList" ></ark-droparea>
+            <span data-file-multi></span>
         </div>
         <div class="droparea-demo">
            <p>Single</p>
@@ -28,6 +27,17 @@ export class DropareaDemo extends Component {
       </a>
         `
     return super.render()
+  }
+
+  onFileList(event) {
+    const element = this.querySelector("[data-file-multi]")
+    const nameList = []
+    if (element) {
+      event.detail.forEach((file, index) =>
+        nameList.push(` ${index} : ${file.name} `)
+      )
+      element.textContent = nameList.join()
+    }
   }
 }
 
@@ -42,3 +52,4 @@ const styles = /* css */ `
 `
 
 Component.define(tag, DropareaDemo, styles)
+

@@ -23,6 +23,7 @@ export class Droparea extends Component {
         <input type="file" 
                class="ark-droparea__input"
                id="fileElem"
+               data-input
                multiple
                 >
       </form>
@@ -60,7 +61,7 @@ export class Droparea extends Component {
 
   openInput(e) {
     e.stopPropagation()
-    const input = this.parentNode.parentNode._input
+    const input = this.nextElementSibling
     input.click()
   }
 
@@ -112,6 +113,7 @@ export class Droparea extends Component {
         })
       }
     }
+    this.preview.dispatchAlterEvent()
   }
 
   validate(fileList) {
@@ -142,7 +144,7 @@ export class Droparea extends Component {
   }
 
   get preview() {
-    return this.select(".ark-droparea-preview")
+    return this.select("ark-droparea-preview")
   }
 }
 
