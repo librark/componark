@@ -40,7 +40,9 @@ export class Gallery extends Component {
 
   handleImages(images) {
     const imagesList = this.imageList
+    const imageContainer = this.select("[data-selected-image]").parentElement
     if (imagesList.length === 1) {
+      imageContainer.setAttribute("single", "")
       this.galleryThumbnails.style.display = "none"
     } else {
       imagesList.forEach((image) => {
