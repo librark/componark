@@ -2,14 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap"
+  rel="stylesheet">
   <title></title>
 </head>
+<style>
+  body{
+    display:flex;
+    gap:1rem;
+    justify-content:center;
+    font-family: 'Cairo', helvetica, sans-serif;;
+    color:#001e3d;
+    align-items:center;
+    width:100vw;
+    height:100vh;
+  }
+
+  .titles{
+    display: flex;
+    gap:0.8rem;
+  }
+  #version{
+    align-self: center;
+    font-weight: 300;
+    font-size: 0.9rem;
+  }
+
+  .themes{
+    padding: 0;
+    display: flex;
+    gap:1rem;
+    flex-direction: column;
+    align-self:center;
+    text-align:center;
+    list-style-type:none;
+  } 
+  .theme__link{
+    user-select:none;
+    padding:1rem;
+    background: #001e3d;
+    color: #00ffff;
+    border-radius:5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+  }
+  .theme__link:hover{
+    background: #00ffff;
+    color:#001e3d;
+  }
+
+</style>
 <body>
-  <h1>Componark</h1>
-  <h2 id="version"></h2>
-  <ul>
-    <li><a href="/ark/base">ARK</a></li>
-    <li><a href="/material/base">MATERIAL</a></li>
+  <div class="titles">
+    <img src="../showcase/logo-knowark.svg" alt="" class="brand">
+    <h1>Componark</h1>
+    <h2 id="version"></h2>
+  </div>
+  <ul class="themes">
+    <a class="theme__link" href="/ark/base"> <li> ARK </li></a>
+    <a class="theme__link" href="/material/base"><li>MATERIAL</li></a>
   </ul>
 </body>
 </html>
