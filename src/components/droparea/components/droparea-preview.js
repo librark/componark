@@ -32,12 +32,15 @@ export class DropareaPreview extends Component {
       picture.style.backgroundImage = `url('${blobUrl}')`
     }
 
-    picture.appendChild(removeButton)
     removeButton.addEventListener("click", this.removeFile.bind(this, file))
+    picture.appendChild(removeButton)
     previewZone.appendChild(picture)
-    picture.addEventListener("click", this.getFileIndex.bind(this, file))
     this.toggleVisibility()
-    this.enableDragSort("drag-sort-enable")
+
+    if (!this.droparea.hasAttribute("single")) {
+      picture.setAttribute("index", this.fileIndex(file))
+      this.enableDragSort("drag-sort-enable")
+    }
   }
 
   toggleVisibility() {
@@ -88,12 +91,26 @@ export class DropareaPreview extends Component {
   }
 
   handleDrop(item) {
+    const droparea = item.target.closest("ark-droparea")
+    droparea.preview.createNewFileList()
     item.target.classList.remove("drag-sort-active")
-    item.path[2].dispatchAlterEvent()
+    droparea.preview.dispatchAlterEvent()
   }
   /*----------------------------------------------------*/
+
   dispatchAlterEvent() {
     this.emit("alter", this.files)
+  }
+
+  createNewFileList() {
+    const nodeList = this.querySelectorAll("li")
+    const newList = []
+    nodeList.forEach((item, index) => {
+      newList.push(this.droparea.fileList[item.getAttribute("index")])
+      item.setAttribute("index", index)
+    })
+    console.log(newList)
+    this.droparea.fileList = newList
   }
 
   fileExists(file) {
@@ -106,12 +123,14 @@ export class DropareaPreview extends Component {
     const fileIndex = this.droparea.fileList.indexOf(file)
     this.droparea.fileList.splice(fileIndex, 1)
     element.parentNode.remove()
+    this.selectAll("li").forEach((item, index) =>
+      item.setAttribute("index", index)
+    )
     this.toggleVisibility()
     this.dispatchAlterEvent()
   }
 
-  getFileIndex(file, event) {
-    event.stopPropagation()
+  fileIndex(file) {
     return this.droparea.fileList.indexOf(file)
   }
 

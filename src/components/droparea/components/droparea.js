@@ -131,7 +131,6 @@ export class Droparea extends Component {
       if (hasVideo && fileList[i].type.split("/")[0] === "video") continue
       if (hasImage && fileList[i].type.split("/")[0] === "image") continue
       if (hasText && fileList[i].type.split("/")[0] === "text") continue
-      //if (acceptList.indexOf(fileList[i].type) >= 0) continue
 
       return false
     }
