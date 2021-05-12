@@ -10,10 +10,10 @@ export class GalleryDemo extends Component {
     this.innerHTML = /* html */ `
       <h1>Gallery component</h1>
 
-      <ark-gallery images="${this.getImages()}"></ark-gallery>
+      <ark-gallery images="${this.getImages()}" width="400px"></ark-gallery>
 
       <p>Gallery with one file only</p>
-      <ark-gallery images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" width="300px"></ark-gallery>
+      <ark-gallery images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" width="400px"></ark-gallery>
 
       <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/gallery/README.rst">
       * Reference
@@ -32,7 +32,7 @@ export class GalleryDemo extends Component {
       images.push(`https://picsum.photos/id/102${i}/500`)
     }
 
-    return images.join('|')
+    return images.join("|")
   }
 }
 

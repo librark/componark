@@ -12,6 +12,8 @@
   width:100%;
 
   &__thumbnails{
+    height: 20rem;
+    width: 5.5rem;
     padding: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -26,7 +28,7 @@
     list-style: none;
 
     &::-webkit-scrollbar{
-      width: 10px;
+      width: 0.6rem;
       border-radius: 4px;
       background-color:rgba(89, 34, 114, 0.137);
     }
@@ -48,6 +50,7 @@
 
       border: 1px solid rgb(189, 189, 189);
       border-radius: 5px;
+
       transition: all 0.15s ease-in-out;
       &:hover{
         transform: scale(1.05);
@@ -63,6 +66,9 @@
     user-select: none;
     background: transparent;
     padding: 0.5rem;
+    &[single]{
+      grid-column: span 2;
+    }
   }
 
 }
