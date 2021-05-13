@@ -61,7 +61,7 @@ describe('Droparea', () => {
     preview.querySelector('button').click()
   })
 
-  it('Test', () => {
+  it('Can drag previews and sort a new list', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
