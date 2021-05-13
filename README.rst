@@ -29,6 +29,8 @@ Components library
 - `<ark-card> <src/components/card>`_
 - `<ark-chart> <src/components/chart>`_
 - `<ark-checkbox> <src/components/checkbox>`_
+- `<ark-droparea> <src/components/droparea>`_
+- `<ark-gallery> <src/components/gallery>`_
 - `<ark-icon> <src/components/icon>`_
 - `<ark-list> <src/components/list>`_
 - `<ark-input> <src/components/input>`_

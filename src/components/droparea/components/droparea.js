@@ -1,17 +1,15 @@
-import {
-  Component
-} from "../../../base/component"
-import {
-  styles
-} from "../styles"
+import { Component } from '../../../base/component'
+import { DropareaPreview } from './droparea-preview'
+import { styles } from '../styles'
 // @ts-ignore
-const tag = "ark-droparea"
+const tag = 'ark-droparea'
 
 export class Droparea extends Component {
   init(context = {}) {
     this.fileList = []
     this.accept = context.accept || this.accept
-    this.single = this.hasAttribute("single")
+    this.single = this.hasAttribute('single')
+    this.maxSize = context.maxSize || this.maxSize || ''
     return super.init()
   }
 
@@ -20,27 +18,30 @@ export class Droparea extends Component {
       <form class="ark-droparea__form">
           <h1 class="ark-droparea__message">
               Drag & Drop 
-                  <small>${this.accept ? this.accept : ""} Files</small> 
+                  <small>${this.accept ? this.accept : ''} Files </small> 
+                  <p data-message></p>
           </h1>
           <div class="ark-droparea__open">or click to upload</div>
         <input type="file" 
                class="ark-droparea__input"
                id="fileElem"
+               data-input
                multiple
                 >
       </form>
-        <div class="ark-droparea__gallery"></div>
-  `
-    this.dragDropEvents = ["dragenter", "dragover", "dragleave", "drop"]
+      <ark-droparea-preview></ark-droparea-preview>
+      `
+    this.dragDropEvents = ['dragenter', 'dragover', 'dragleave', 'drop']
     this.dragEvents = this.dragDropEvents.slice(0, 2)
     this.dropEvents = this.dragDropEvents.slice(2)
-    this._input = this.select(".ark-droparea__input")
-    this.openButton = this.select(".ark-droparea__open")
+    this._input = this.select('.ark-droparea__input')
+    this.openButton = this.select('.ark-droparea__open')
+
     return super.render()
   }
 
   reflectedProperties() {
-    return ["size", "accept"]
+    return ['size', 'accept', 'maxSize']
   }
 
   async load() {
@@ -56,14 +57,14 @@ export class Droparea extends Component {
       this.addEventListener(eventName, this.unhighlight, false)
     })
 
-    this.addEventListener("drop", this.handleDrop, false)
-    this._input.addEventListener("change", this.onChange, false)
-    this.openButton.addEventListener("click", this.openInput, false)
+    this.addEventListener('drop', this.handleDrop, false)
+    this._input.addEventListener('change', this.onChange, false)
+    this.openButton.addEventListener('click', this.openInput, false)
   }
 
   openInput(e) {
     e.stopPropagation()
-    const input = this.parentNode.parentNode._input
+    const input = this.nextElementSibling
     input.click()
   }
 
@@ -73,11 +74,11 @@ export class Droparea extends Component {
   }
 
   highlight(e) {
-    this.dropZone.classList.add("highlight")
+    this.dropZone.classList.add('highlight')
   }
 
   unhighlight(e) {
-    this.dropZone.classList.remove("highlight")
+    this.dropZone.classList.remove('highlight')
   }
 
   handleDrop(e) {
@@ -99,38 +100,45 @@ export class Droparea extends Component {
     if (this.single) {
       files = [files[0]]
       /* istanbul ignore else */
-      if (this.validate(files)) {
+      if (
+        this.validate(files) &&
+        !this.preview.fileExists(files[0]) &&
+        this.maxSizeValidate(files[0])
+      ) {
         this.fileList[0] = files[0]
-        this.gallery.innerHTML = ""
-        this.previewFile(this.fileList[0])
+        this.preview.querySelector('[data-preview-list]').innerHTML = ''
+        this.preview.previewFile(files[0])
       }
     } else {
       files = [...files]
       if (this.validate(files)) {
         files.forEach((file) => {
-          this.fileList.push(file)
-          this.previewFile(file)
+          /*istanbul ignore else*/
+          if (!this.preview.fileExists(file) && this.maxSizeValidate(file)) {
+            this.fileList.push(file)
+            this.preview.previewFile(file)
+          }
         })
       }
     }
+    this.preview.dispatchAlterEvent()
   }
 
   validate(fileList) {
     if (!this.accept || this.accept.length === 0) return true
-    const acceptList = this.accept.split(",").map((s) => s.trim().toLowerCase())
-    const hasAudio = acceptList.indexOf("audio") >= 0
-    const hasVideo = acceptList.indexOf("video") >= 0
-    const hasImage = acceptList.indexOf("image") >= 0
-    const hasText = acceptList.indexOf("text") >= 0
+    const acceptList = this.accept.split(',').map((s) => s.trim().toLowerCase())
+    const hasAudio = acceptList.indexOf('audio') >= 0
+    const hasVideo = acceptList.indexOf('video') >= 0
+    const hasImage = acceptList.indexOf('image') >= 0
+    const hasText = acceptList.indexOf('text') >= 0
 
     for (let i = 0, len = fileList.length; i < len; ++i) {
-      let ext = "" + fileList[i].name.split(".").pop().toLowerCase()
+      let ext = '' + fileList[i].name.split('.').pop().toLowerCase()
       if (acceptList.indexOf(ext) >= 0) continue
-      if (hasAudio && fileList[i].type.split("/")[0] === "audio") continue
-      if (hasVideo && fileList[i].type.split("/")[0] === "video") continue
-      if (hasImage && fileList[i].type.split("/")[0] === "image") continue
-      if (hasText && fileList[i].type.split("/")[0] === "text") continue
-      //if (acceptList.indexOf(fileList[i].type) >= 0) continue
+      if (hasAudio && fileList[i].type.split('/')[0] === 'audio') continue
+      if (hasVideo && fileList[i].type.split('/')[0] === 'video') continue
+      if (hasImage && fileList[i].type.split('/')[0] === 'image') continue
+      if (hasText && fileList[i].type.split('/')[0] === 'text') continue
 
       return false
     }
@@ -138,45 +146,25 @@ export class Droparea extends Component {
     return true
   }
 
-  previewFile(file) {
-    const gallery = this.gallery
-    let reader = new FileReader()
-    let fileType = file.type.split("/")[0]
-    reader.readAsDataURL(file)
-    /* istanbul ignore next */
-    reader.onloadend = () => {
-      const picture = document.createElement("div")
-      picture.className = "ark-droparea__picture-preview"
-      const removeButton = document.createElement("button")
-      removeButton.innerText = "⨯"
-      removeButton.className = "ark-droparea__remove"
-      if (fileType != "image") {
-        picture.innerHTML = `<p>${file.name}</p>`
-      } else {
-        picture.style.backgroundImage = `url('${reader.result}')`
-      }
-      // removeButton.addEventListener("click", this.removeFile.bind(this, file))
-      gallery.appendChild(picture)
-      picture.appendChild(removeButton)
+  maxSizeValidate(file) {
+    if (!this.maxSize) {
+      return true
+    } else {
+      const sizeInMB = (file.size / (1024 * 1024)).toFixed(3)
+      const validation = sizeInMB <= this.maxSize
+      !validation
+        ? (this.select('[data-message]').innerText = 'File too large')
+        : (this.select('[data-message]').innerText = '')
+      return validation
     }
   }
 
-  // removeFile(file, event) {
-  //   let element = event.target
-  //   const fileIndex = this.fileList.indexOf(file)
-  //   this.fileList.splice(fileIndex, 1)
-  //   element.parentNode.remove()
-  // }
-
   get dropZone() {
-    return this.select(".ark-droparea__form")
-  }
-  get gallery() {
-    return this.select(".ark-droparea__gallery")
+    return this.select('.ark-droparea__form')
   }
 
-  get files() {
-    return this.fileList
+  get preview() {
+    return this.select('ark-droparea-preview')
   }
 }
 

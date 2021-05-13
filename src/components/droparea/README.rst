@@ -21,11 +21,11 @@ Examples
         
         <ark-droparea single></ark-droparea>
 
-    **With the attributes accept and max-size**
+    **With the attributes accept and max-size specified in megabytes**
 
     .. code:: html
         
-        <ark-droparea accept="jpg, png, gif" max-size="10mb" ></ark-droparea>
+        <ark-droparea accept="jpg, png, gif" max-size="10" ></ark-droparea>
 
 
 
@@ -38,7 +38,7 @@ Attributes
 +==========+=========+============+===================================================================================================================================================================+
 | single   | boolean | (multiple) | Limits the number of files to a single one, if not set, recieves multiple files by default                                                                        |
 +----------+---------+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| max-size | string  | (no limit) | Specifies the size of the file in bytes                                                                                                                           |
+| max-size | string  | (no limit) | Specifies the size of the file in megabytes                                                                                                                           |
 +----------+---------+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | accept   | string  | (any)      | Indicates the type of files, with values separated by commas: (png, jpeg, gif, etc.). Is also possible to specify general file types: (image, video, text, audio) |
 +----------+---------+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+

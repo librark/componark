@@ -1,34 +1,44 @@
-import {
-    Component
-} from "base/component"
+import { Component } from 'base/component'
 
-const tag = "demo-droparea"
+const tag = 'demo-droparea'
 
 export class DropareaDemo extends Component {
-    init(context) {
-        return super.init(context)
-    }
+  init(context) {
+    return super.init(context)
+  }
 
-    render() {
-        this.innerHTML = /* html */ `
+  render() {
+    this.innerHTML = /* html */ `
         <h1 class="title">
             This is a drop area
         </h1>
         <div class="droparea-demo">
             <p>Default(multi)</p>
-            <ark-droparea accept="image"></ark-droparea>
+            <ark-droparea listen on-alter="onFileList" max-size="2"></ark-droparea>
+            <span data-file-multi></span>
         </div>
         <div class="droparea-demo">
            <p>Single</p>
-           <ark-droparea single accept="jpg, png"></ark-droparea>
+           <ark-droparea single accept="image" max-size="5"></ark-droparea>
        </div>
 
      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/droparea/README.rst">
       * Reference
       </a>
         `
-        return super.render()
+    return super.render()
+  }
+
+  onFileList(event) {
+    const element = this.querySelector('[data-file-multi]')
+    const nameList = []
+    if (element) {
+      event.detail.forEach((file, index) =>
+        nameList.push(` ${index} : ${file.name} `)
+      )
+      element.textContent = nameList.join()
     }
+  }
 }
 
 const styles = /* css */ `
