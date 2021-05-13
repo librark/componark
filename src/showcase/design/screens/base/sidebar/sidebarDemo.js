@@ -1,12 +1,12 @@
 import { Component } from 'base/component'
 
 export class SidebarDemo extends Component {
-  init (context) {
+  init(context) {
     return super.init(context)
   }
 
-  render () {
-    this.content = /* html */`
+  render() {
+    this.content = /* html */ `
       <div>
         <p>This is a sidebar.</p>
         <ark-button listen on-click="_onClick" background="primary">
@@ -28,7 +28,7 @@ export class SidebarDemo extends Component {
     return super.render()
   }
 
-  _onClick (event) {
+  _onClick(event) {
     const sidebar = this.querySelector('ark-sidebar')
     sidebar['open']()
   }
