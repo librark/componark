@@ -1,8 +1,8 @@
-import { Droparea } from "components/droparea"
+import { Droparea } from 'components/droparea'
 
-import { DropareaGallery } from "../../../src/components/droparea/components/droparea-preview"
+import { DropareaGallery } from '../../../src/components/droparea/components/droparea-preview'
 
-describe("Droparea", () => {
+describe('Droparea', () => {
   const createBubbledEvent = (type, props = {}) => {
     const event = new Event(type, {
       bubbles: true,
@@ -16,7 +16,7 @@ describe("Droparea", () => {
   let container = null
 
   beforeEach(() => {
-    container = document.createElement("div")
+    container = document.createElement('div')
     document.body.appendChild(container)
   })
 
@@ -25,43 +25,43 @@ describe("Droparea", () => {
     container = null
   })
 
-  it("can be instantiated", () => {
+  it('can be instantiated', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
+    const droparea = container.querySelector('ark-droparea')
     expect(droparea).toBe(droparea.init())
   })
 
-  it("drag files to zone highlights the drop area", () => {
+  it('drag files to zone highlights the drop area', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
+    const droparea = container.querySelector('ark-droparea')
     const dropZone = droparea.dropZone
     const dragNode = dropZone
 
     dragNode.dispatchEvent(
-      createBubbledEvent("dragover", {
+      createBubbledEvent('dragover', {
         clientX: 0,
         clientY: 1,
       })
     )
-    expect(dropZone.classList["1"]).toBe("highlight")
+    expect(dropZone.classList['1']).toBe('highlight')
   })
 
-  it("drag files outside the zone unhighlight the drop area", () => {
+  it('drag files outside the zone unhighlight the drop area', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
+    const droparea = container.querySelector('ark-droparea')
     const dropZone = droparea.dropZone
 
     dropZone.dispatchEvent(
-      createBubbledEvent("dragleave", {
+      createBubbledEvent('dragleave', {
         clientX: 0,
         clientY: 1,
       })
@@ -69,20 +69,20 @@ describe("Droparea", () => {
     expect(dropZone.classList.length).toBe(1)
   })
 
-  it("Allows dropping multiple files to the component", () => {
+  it('Allows dropping multiple files to the component', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const dropZone = droparea.querySelector(".ark-droparea__form")
-    const myFile = new File(["image"], "Doggy.png", {
-      type: "image/png",
+    const droparea = container.querySelector('ark-droparea')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['image'], 'Doggy.png', {
+      type: 'image/png',
     })
-    const myFile2 = new File(["image"], "Scooby.png", {
-      type: "image/png",
+    const myFile2 = new File(['image'], 'Scooby.png', {
+      type: 'image/png',
     })
-    const dropEvent = createBubbledEvent("drop", {
+    const dropEvent = createBubbledEvent('drop', {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
@@ -95,21 +95,21 @@ describe("Droparea", () => {
     expect(droparea.fileList[1].name).toEqual(myFile2.name)
   })
 
-  it("Can recieve a single file", () => {
+  it('Can recieve a single file', () => {
     container.innerHTML = /* html */ `
             <ark-droparea single></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const dropZone = droparea.querySelector(".ark-droparea__form")
-    const myFile = new File(["image"], "Snoopy.png", {
-      type: "image/png",
+    const droparea = container.querySelector('ark-droparea')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['image'], 'Snoopy.png', {
+      type: 'image/png',
     })
-    const myFile2 = new File(["image"], "Scooby.png", {
-      type: "image/png",
+    const myFile2 = new File(['image'], 'Scooby.png', {
+      type: 'image/png',
     })
 
-    const dropEvent = createBubbledEvent("drop", {
+    const dropEvent = createBubbledEvent('drop', {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
@@ -122,21 +122,21 @@ describe("Droparea", () => {
     expect(droparea.fileList[1]).toBeFalsy()
   })
 
-  it("Returns the file list", () => {
+  it('Returns the file list', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const dropZone = droparea.querySelector(".ark-droparea__form")
-    const myFile = new File(["image"], "Snoopy.png", {
-      type: "image/png",
+    const droparea = container.querySelector('ark-droparea')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['image'], 'Snoopy.png', {
+      type: 'image/png',
     })
-    const myFile2 = new File(["image"], "Scooby.png", {
-      type: "image/png",
+    const myFile2 = new File(['image'], 'Scooby.png', {
+      type: 'image/png',
     })
 
-    const dropEvent = createBubbledEvent("drop", {
+    const dropEvent = createBubbledEvent('drop', {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
@@ -148,19 +148,19 @@ describe("Droparea", () => {
     expect(droparea.fileList.length).toEqual(2)
   })
 
-  it("Can select files from input", () => {
+  it('Can select files from input', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const dropOpen = droparea.querySelector(".ark-droparea__open")
-    const input = droparea.querySelector(".ark-droparea__input")
-    const myFile = new File(["image"], "Snoopy.png", {
-      type: "image/png",
+    const droparea = container.querySelector('ark-droparea')
+    const dropOpen = droparea.querySelector('.ark-droparea__open')
+    const input = droparea.querySelector('.ark-droparea__input')
+    const myFile = new File(['image'], 'Snoopy.png', {
+      type: 'image/png',
     })
-    const changeEvent = createBubbledEvent("change", {})
-    Object.defineProperty(changeEvent, "target", {
+    const changeEvent = createBubbledEvent('change', {})
+    Object.defineProperty(changeEvent, 'target', {
       value: {
         files: [myFile],
       },
@@ -170,21 +170,21 @@ describe("Droparea", () => {
     expect(droparea.fileList.length).toBeTruthy()
   })
 
-  it("Can limit the file formats that component recieves", () => {
+  it('Can limit the file formats that component recieves', () => {
     container.innerHTML = /* html */ `
             <ark-droparea accept="jpg, png"></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const input = droparea.querySelector(".ark-droparea__input")
-    const myFile = new File(["image"], "Snoopy.jpg", {
-      type: "image/png",
+    const droparea = container.querySelector('ark-droparea')
+    const input = droparea.querySelector('.ark-droparea__input')
+    const myFile = new File(['image'], 'Snoopy.jpg', {
+      type: 'image/png',
     })
-    const myFile2 = new File(["image"], "Scrappy.png", {
-      type: "image/png",
+    const myFile2 = new File(['image'], 'Scrappy.png', {
+      type: 'image/png',
     })
-    const changeEvent = createBubbledEvent("change", {})
-    Object.defineProperty(changeEvent, "target", {
+    const changeEvent = createBubbledEvent('change', {})
+    Object.defineProperty(changeEvent, 'target', {
       value: {
         files: [myFile, myFile2],
       },
@@ -199,13 +199,13 @@ describe("Droparea", () => {
             <ark-droparea accept="jpg, png"></ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const input = droparea.querySelector(".ark-droparea__input")
-    const myFile = new File(["text"], "Snoopy.txt", {
-      type: "text/txt",
+    const droparea = container.querySelector('ark-droparea')
+    const input = droparea.querySelector('.ark-droparea__input')
+    const myFile = new File(['text'], 'Snoopy.txt', {
+      type: 'text/txt',
     })
-    const changeEvent = createBubbledEvent("change", {})
-    Object.defineProperty(changeEvent, "target", {
+    const changeEvent = createBubbledEvent('change', {})
+    Object.defineProperty(changeEvent, 'target', {
       value: {
         files: [myFile],
       },
@@ -220,23 +220,23 @@ describe("Droparea", () => {
             </ark-droparea>
         `
 
-    const droparea = container.querySelector("ark-droparea")
-    const dropZone = droparea.querySelector(".ark-droparea__form")
-    const myFile = new File(["audio"], "autechre.mp3", {
-      type: "audio/mp3",
+    const droparea = container.querySelector('ark-droparea')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['audio'], 'autechre.mp3', {
+      type: 'audio/mp3',
     })
-    const myFile2 = new File(["video"], "cats.mov", {
-      type: "video/mov",
+    const myFile2 = new File(['video'], 'cats.mov', {
+      type: 'video/mov',
     })
-    const myFile3 = new File(["image"], "snoopy.jpg", {
-      type: "image/jpg",
+    const myFile3 = new File(['image'], 'snoopy.jpg', {
+      type: 'image/jpg',
     })
-    const myFile4 = new File(["text"], "styles.css", {
-      type: "text/css",
+    const myFile4 = new File(['text'], 'styles.css', {
+      type: 'text/css',
     })
 
     const files = [myFile, myFile2, myFile3, myFile4]
-    const dropEvent = createBubbledEvent("drop", {
+    const dropEvent = createBubbledEvent('drop', {
       clientX: 0,
       clientY: 1,
       dataTransfer: {
@@ -250,5 +250,33 @@ describe("Droparea", () => {
     })
   })
 
-  // xit("", () => {})
+  it('Size of files can be limited', () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea max-size= "2"></ark-droparea>
+        `
+
+    const droparea = container.querySelector('ark-droparea')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['image'], 'Doggy.png', {
+      type: 'image/png',
+    })
+    const myFile2 = new File(['image'], 'Scooby.png', {
+      type: 'image/png',
+    })
+    Object.defineProperty(myFile2, 'size', { value: 1024 * 1024 + 1 })
+
+    const dropEvent = createBubbledEvent('drop', {
+      clientX: 0,
+      clientY: 1,
+      dataTransfer: {
+        files: [myFile, myFile2],
+      },
+    })
+
+    droparea.maxSizeValidate([])
+    droparea.maxSizeValidate(myFile2)
+
+    dropZone.dispatchEvent(dropEvent)
+    expect(droparea.maxSizeValidate).toBeCalled
+  })
 })

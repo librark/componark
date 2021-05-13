@@ -11,7 +11,6 @@ describe('Droparea', () => {
 
   global.URL.createObjectURL = jest.fn()
   global.document.elementFromPoint = jest.fn()
-  const mockProps = { handleDrag: jest.fn() }
 
   let container = null
 

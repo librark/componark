@@ -1,6 +1,6 @@
-import { Component } from "base/component"
+import { Component } from 'base/component'
 
-const tag = "demo-droparea"
+const tag = 'demo-droparea'
 
 export class DropareaDemo extends Component {
   init(context) {
@@ -14,12 +14,12 @@ export class DropareaDemo extends Component {
         </h1>
         <div class="droparea-demo">
             <p>Default(multi)</p>
-            <ark-droparea listen on-alter="onFileList" ></ark-droparea>
+            <ark-droparea listen on-alter="onFileList" max-size="2"></ark-droparea>
             <span data-file-multi></span>
         </div>
         <div class="droparea-demo">
            <p>Single</p>
-           <ark-droparea single accept="image"></ark-droparea>
+           <ark-droparea single accept="image" max-size="5"></ark-droparea>
        </div>
 
      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/droparea/README.rst">
@@ -30,7 +30,7 @@ export class DropareaDemo extends Component {
   }
 
   onFileList(event) {
-    const element = this.querySelector("[data-file-multi]")
+    const element = this.querySelector('[data-file-multi]')
     const nameList = []
     if (element) {
       event.detail.forEach((file, index) =>
@@ -52,4 +52,3 @@ const styles = /* css */ `
 `
 
 Component.define(tag, DropareaDemo, styles)
-

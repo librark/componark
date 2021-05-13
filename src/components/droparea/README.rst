@@ -25,7 +25,7 @@ Examples
 
     .. code:: html
         
-        <ark-droparea accept="jpg, png, gif" max-size="10mb" ></ark-droparea>
+        <ark-droparea accept="jpg, png, gif" max-size="10" ></ark-droparea>
 
 
 
