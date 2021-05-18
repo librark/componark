@@ -1,27 +1,38 @@
 import { Spinner } from '../../../src/components/spinner'
 
 describe('Spinner', () => {
-  it('can be instantiated', () => {
-    const spinner = new Spinner()
+  let container = null
 
-    spinner.init()
-    spinner.render()
-    spinner.load()
+  beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+  })
 
-    expect(spinner.querySelector('[data-loader]')).toBeTruthy()
+  afterEach(() => {
+    container.remove()
+    container = null
   })
 
   it('can be instantiated', () => {
-    const spinner = new Spinner()
+    container.innerHTML = /* html */ `
+      <ark-spinner></ark-spinner>
+    `
+    const spinner = container.querySelector('ark-spinner')
 
-    spinner.init()
+    expect(spinner).toBeTruthy
+    expect(spinner).toBe(spinner.init())
+  })
 
-    spinner.size = ''
-    spinner.border = ''
+  it('Different types of spinner can be used', () => {
+    container.innerHTML = /* html */ `
+      <ark-spinner type="chase"></ark-spinner>
+      <ark-spinner type="rect"></ark-spinner>
+      <ark-spinner type="loader"></ark-spinner>
+      <ark-spinner type="bounce"></ark-spinner>
+    `
+    const spinner = container.querySelector('ark-spinner')
+    const loader = spinner.loader
 
-    spinner.render()
-    spinner.load()
-
-    expect(!spinner.size.trim().length).toBeTruthy()
+    expect(spinner.loader).toBeCalled
   })
 })
