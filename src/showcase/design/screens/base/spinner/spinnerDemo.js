@@ -2,18 +2,20 @@ import { Component } from 'base/component'
 
 const tag = 'demo-spinner'
 export class SpinnerDemo extends Component {
-  init (context) {
+  init(context) {
     return super.init()
   }
 
-  render () {
+  render() {
     this.content = /* html */ `
       <h1>spinner</h1>
 
       <div class="spinner-container">
-        <ark-spinner border="0.4rem"></ark-spinner>
-        <ark-spinner size='4rem' border="0.5rem"></ark-spinner>
-        <ark-spinner size='8rem' border="0.5rem"></ark-spinner>
+        <ark-spinner></ark-spinner>
+        <ark-spinner size="1.5" type="chase"></ark-spinner>
+        <ark-spinner type="rect"></ark-spinner>
+        <ark-spinner type="loader"></ark-spinner>
+        <ark-spinner type="bounce"></ark-spinner>
       </div>
 
       <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/spinner/README.rst">
@@ -24,9 +26,11 @@ export class SpinnerDemo extends Component {
   }
 }
 
-const styles = /* css */`
+const styles = /* css */ `
 .spinner-container{
   display: flex;
+  gap:1.5rem;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
