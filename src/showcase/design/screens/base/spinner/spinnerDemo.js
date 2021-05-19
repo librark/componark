@@ -1,6 +1,6 @@
-import { Component } from 'base/component'
+import { Component } from "base/component"
 
-const tag = 'demo-spinner'
+const tag = "demo-spinner"
 export class SpinnerDemo extends Component {
   init(context) {
     return super.init()
@@ -12,7 +12,7 @@ export class SpinnerDemo extends Component {
 
       <div class="spinner-container">
         <ark-spinner></ark-spinner>
-        <ark-spinner type="chase"></ark-spinner>
+        <ark-spinner size="1.5" type="chase"></ark-spinner>
         <ark-spinner type="rect"></ark-spinner>
         <ark-spinner type="loader"></ark-spinner>
         <ark-spinner type="bounce"></ark-spinner>

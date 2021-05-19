@@ -1,37 +1,41 @@
-import { Component } from '../../../base/component'
-import { styles } from '../styles'
+import { Component } from "../../../base/component"
+import { styles } from "../styles"
 
-const tag = 'ark-spinner'
+const tag = "ark-spinner"
 export class Spinner extends Component {
   init(context = {}) {
-    this.size = context.size || this.size || '1.5rem'
-    this.type = context.type || this.type || 'circle'
+    this.size = context.size || this.size || "1"
+    this.type = context.type || this.type || "circle"
 
     return super.init()
   }
 
   reflectedProperties() {
-    return ['size', 'type']
+    return ["size", "type"]
   }
 
   render() {
     this.innerHTML = /* html */ `
       ${this.spinnerType(this.type)}
     `
-
+    this.setSize(this.size)
     return super.render()
+  }
+
+  setSize(size) {
+    this.setAttribute("style", `transform:scale(${size})`)
   }
 
   /** @returns {HTMLElement} */
   get loader() {
-    return this.querySelector('[data-loader]')
+    return this.querySelector("[data-loader]")
   }
 
   spinnerType(type) {
-    let content = ''
+    let content = ""
 
     switch (type) {
-      case 'circle':
+      case "circle":
         content = /*html*/ `
         <div data-loader class="sk-fading-circle">
           <div class="sk-circle1 sk-circle"></div>
@@ -50,7 +54,7 @@ export class Spinner extends Component {
         `
         break
 
-      case 'chase':
+      case "chase":
         content = /*html*/ `
         <div data-loader class="sk-chase">
           <div class="sk-chase-dot"></div>
@@ -63,7 +67,7 @@ export class Spinner extends Component {
         `
         break
 
-      case 'rect':
+      case "rect":
         content = /*html*/ `
         <div data-loader class="spinner">
           <div class="rect1"></div>
@@ -75,7 +79,7 @@ export class Spinner extends Component {
         `
         break
 
-      case 'loader':
+      case "loader":
         content = /* html */ `
         <div data-loader class="lds-spinner">
           <div></div>
@@ -93,7 +97,7 @@ export class Spinner extends Component {
         </div>
         `
         break
-      case 'bounce':
+      case "bounce":
         content = /* html */ `
         <div data-loader class="bouncer">
           <div class="bounce1"></div>

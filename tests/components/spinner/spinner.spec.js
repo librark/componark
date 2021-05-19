@@ -35,4 +35,16 @@ describe('Spinner', () => {
 
     expect(spinner.loader).toBeCalled
   })
+
+  it('Can set the size of the spinner', () => {
+    container.innerHTML = /* html */ `
+      <ark-spinner size="2.5" type="chase"></ark-spinner>
+    `
+    const spinner = container.querySelector('ark-spinner')
+
+    expect(spinner.loader).toBeCalled
+    expect(spinner.style.transform.split(')')[0].split('(')[1]).toBe(
+      spinner.size
+    )
+  })
 })
