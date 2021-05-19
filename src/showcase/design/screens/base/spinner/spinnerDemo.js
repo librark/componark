@@ -1,6 +1,6 @@
-import { Component } from "base/component"
+import { Component } from 'base/component'
 
-const tag = "demo-spinner"
+const tag = 'demo-spinner'
 export class SpinnerDemo extends Component {
   init(context) {
     return super.init()
@@ -16,7 +16,6 @@ export class SpinnerDemo extends Component {
         <ark-spinner type="rect"></ark-spinner>
         <ark-spinner type="loader"></ark-spinner>
         <ark-spinner type="bounce"></ark-spinner>
-        <ark-spinner type="round"></ark-spinner>
       </div>
 
       <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/spinner/README.rst">
