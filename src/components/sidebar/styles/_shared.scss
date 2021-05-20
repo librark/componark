@@ -14,7 +14,7 @@
   user-select: none;
 
   &__menu {
-    width: 85%;
+    min-width: 300px;
     height: 100%;
 
     display: flex;
