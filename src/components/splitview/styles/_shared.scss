@@ -4,7 +4,6 @@
 @mixin ark-splitview() {
   background: var(--light, black);
   color: dark;
-  height: 100%;
 
   @each $color in variables.$colors {
     &[background=#{$color}] {
@@ -18,11 +17,8 @@
   }
 
   display: flex;
-
   width: 100%;
-  height: fit-content;
-  height: -moz-fit-content;
-
+  height: 100%;
 
   &>*:first-child {
     border-right: 2px solid rgba($color: gray, $alpha: 0.3);
