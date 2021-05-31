@@ -2,7 +2,7 @@
 @use './config'as *;
 
 @mixin ark-audio() {
-  display: flex;
+  display: grid;
   align-items: center;
   width: fit-content;
   height: auto;
@@ -20,7 +20,6 @@
 
     margin: 0;
     padding: 0;
-
   }
 
   &__recording {
@@ -28,40 +27,38 @@
       font-weight: 700;
     }
 
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
     align-items: center;
     width: 15rem;
-    height: 3rem;
   }
 
-
   &__timer {
-    display: flex;
+    display: grid;
+    justify-items: center;
     background: var(--light);
     color: var(--dark);
-    justify-content: center;
     align-items: center;
     padding: 0.8rem 0.5rem;
   }
 
   &__idle {
-    display: flex;
+    display: grid;
   }
 
-  &__idle::before{
-    content: 'Grabar';
+  &__idle::before {
+    content: "Grabar";
     padding-right: 0.25em;
-  }  
+  }
 
   &__done {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 0.2fr;
     border-radius: 2rem;
 
-    audio{
-      width:220px;
+    audio {
+      width: 220px;
       height: 54px;
       outline: none;
     }
