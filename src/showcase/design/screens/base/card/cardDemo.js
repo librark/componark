@@ -1,13 +1,13 @@
-import { Component } from 'base/component'
+import { Component } from "base/component"
 // @ts-ignore
-import Image from './assets/building.jpg'
+import Image from "./assets/building.jpg"
 
 export class CardDemo extends Component {
-  init (context) {
+  init(context) {
     return super.init(context)
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `
       <ark-card round="xl" background="primary" title="CARD TITLE" subtitle="subtitle card">
         <img slot="media" src="${Image}" alt="" />
@@ -49,17 +49,18 @@ export class CardDemo extends Component {
     return super.render()
   }
 
-  get card () {
-    return this.select('ark-card')
+  get card() {
+    return this.select("ark-card")
   }
 }
 
-const styles = /* css */`
+const styles = /* css */ `
   :root{
     --primary: #1c1c3d;
   }
   .ark-card{
-  width:40%;
+  min-width: 300px;
+  max-width: 50%
   }
 `
-Component.define('demo-card', CardDemo, styles)
+Component.define("demo-card", CardDemo, styles)
