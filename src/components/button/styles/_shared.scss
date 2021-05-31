@@ -7,25 +7,24 @@
   user-select: none;
   cursor: pointer;
 
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  display: inline-grid;
 
   transition: background 0.5s;
 
   @each $color in theme.$colors {
-    &[background=#{$color}] {
+    &[background="#{$color}"] {
       $tone: var(--#{$color}, black);
-      background: $tone radial-gradient(circle, transparent 1%, $tone 1%) center/15000%;
+      background: $tone
+        radial-gradient(circle, transparent 1%, $tone 1%)
+        center/15000%;
       color: white;
     }
 
-    &[outline=#{$color}] {
+    &[outline="#{$color}"] {
       border: 2px solid var(--#{$color}, black);
     }
 
-    &#{&}[color=#{$color}] {
+    &#{&}[color="#{$color}"] {
       color: var(--#{$color}, white);
     }
   }
@@ -62,7 +61,6 @@
     padding: 0.3rem;
   }
 
-
   &:hover {
     filter: contrast(120%) brightness(80%);
   }
@@ -84,14 +82,12 @@
 
     ark-icon {
       padding: 0;
-      display: flex;
-
+      display: grid;
       i {
         vertical-align: middle;
       }
     }
   }
-
 
   // Horizontal
 
@@ -127,6 +123,4 @@
     color: gray;
     background: rgba($color: gray, $alpha: 0.1);
   }
-
-
 }
