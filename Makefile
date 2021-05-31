@@ -15,11 +15,15 @@ coverage:
 dev:
 	npm run dev
 
-build:
-	npm run build
+prod:
+	npm run prod
 
 push:
 	git push && git push --tags
+
+deploy:
+	sshpass -e rsync -av --delete ./dist/ \
+		${RSYNC_USER}@${RSYNC_HOST}:${RSYNC_DIR}
 
 reset:
 	git reset --hard

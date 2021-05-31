@@ -16,6 +16,8 @@ Component.define('nested-master', NestedMaster)
 
 class NestedDetail extends Component {
   init(context) {
+    if(!context.value) return super.init()
+
     this.value = context.value
     return super.init()
   }

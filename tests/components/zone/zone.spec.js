@@ -32,7 +32,7 @@ describe('Zone', () => {
   it('EventAlterZone', () => {
     const eventAlterZone = new EventAlterZone('MOVE')
 
-    const zone = new Zone()
+    const zone = (new Zone()).init()
 
     zone.addEventListener('zone:alter', event => {
       const detail = event['detail']
@@ -43,13 +43,13 @@ describe('Zone', () => {
       expect(detail.value[1].drags.length).toEqual(1)
     })
 
-    const drop1 = new DropZone()
+    const drop1 = (new DropZone()).init()
 
     eventAlterZone.setItem(drop1, new DragZone())
     eventAlterZone.setItem(drop1, new DragZone())
     eventAlterZone.setItem(drop1, new DragZone())
 
-    const drop2 = new DropZone()
+    const drop2 = (new DropZone()).init()
     eventAlterZone.setItem(drop2, new DragZone())
 
     eventAlterZone.dispatch(zone)

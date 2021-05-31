@@ -16,8 +16,6 @@ export class ListItem extends Component {
 
   render () {
     this.content = this.template(this.data)
-
-
     return super.render()
   }
 }

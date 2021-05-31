@@ -17,12 +17,8 @@
   }
 
   display: flex;
-  //grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
-
   width: 100%;
-  height: fit-content;
-  height: -moz-fit-content;
-
+  height: 100%;
 
   &>*:first-child {
     border-right: 2px solid rgba($color: gray, $alpha: 0.3);
@@ -112,6 +108,7 @@
     }
 
     &__main {
+      height: 100%;
       padding: 1rem;
     }
 
@@ -145,7 +142,6 @@
           display: block;
           visibility: visible;
         }
-
 
         &__header {
           display: none;

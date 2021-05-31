@@ -1,29 +1,31 @@
 @use './config'as *;
+@use '../../../base/theme';
 @use '../../../base/theme/variables';
 
 @mixin ark-input() {
     padding: 10px;
-
+    
     &[disabled] {
         pointer-events: none;
         cursor: default;
-
+        
         label {
             input:disabled {
                 background-color: rgb(243, 240, 240);
                 border-color: rgba(185, 185, 185, 0.712);
             }
-
+            
         }
     }
-
+    
     &__label {
         display: block;
         text-overflow: ellipsis;
         user-select: none;
     }
-
+    
     &__input {
+        @include theme.round;
         display: block;
         width: 100%;
         padding: 0.5rem;

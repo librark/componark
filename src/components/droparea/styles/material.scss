@@ -1,0 +1,5 @@
+@use'./shared.scss';
+
+.ark-droparea {
+  @include shared.ark-droparea;
+}
