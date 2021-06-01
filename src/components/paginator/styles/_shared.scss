@@ -6,14 +6,16 @@
 
     &__body {
         width: 100%;
-        display: flex;
+        display: grid;
+        grid-auto-flow: column;
         justify-content: center;
         align-items: center;
         padding: 0.5rem 0;
     }
 
     &__footer {
-        display: flex;
+        display: grid;
+        grid-auto-flow: column;
         justify-content: center;
 
         small[data-info] {
@@ -56,7 +58,8 @@
     }
 
     &__pages {
-        display: flex;
+        display: grid;
+        grid-auto-flow: column;
 
         button {
             min-width: 1.8rem;
