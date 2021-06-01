@@ -44,10 +44,11 @@
 
   &-preview__list {
     visibility: hidden;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-margin-right: 1rem;
     white-space: nowrap;
     border: 1px solid black;
     user-select: none;
