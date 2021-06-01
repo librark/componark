@@ -1,5 +1,5 @@
 @use 'base/theme';
-@use './config' as *;
+@use './config'as *;
 
 @mixin ark-accordion {
   display: grid;
@@ -9,7 +9,11 @@
 
 @mixin ark-accordion-tab {
   @include theme.paint;
+  @include theme.round;
+  width:100%;
+  border-width: 1px;
   border-style: solid;
+  transition: all 0.5s ease-in-out;
 
   &:first-child {
     border-top-left-radius: inherit;
@@ -53,9 +57,12 @@
     text-align: left;
     padding-left: 10px;
 
+    font-size: 1.1rem;
+    font-weight: 700;
+
     cursor: pointer;
 
-    display: flex;
+    display: grid;
     align-items: center;
 
     user-select: none;
@@ -66,7 +73,23 @@
   }
 
   &__content {
+    box-sizing: border-box;
     display: none;
+    width: 100%;
+    padding: 1em;
+    position: relative;
+    animation-name: appear;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to{
+      opacity: 1;
+    }
   }
 
   [active] &__content {

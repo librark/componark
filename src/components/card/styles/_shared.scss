@@ -3,32 +3,32 @@
 
 @mixin ark-card() {
   @include theme.paint;
-
+  @include theme.round;
   display: block;
-  border: 1px solid rgba($color: gray, $alpha: 0.2);
   overflow: hidden;
 
-  &[no-border] {
-    border: 0;
-    border-radius: 0;
-    box-shadow: initial;
-  }
-
   &__media {
-    display: flex;
+    display: grid;
     overflow: hidden;
-    max-height: 20rem;
     user-select: none;
 
     img {
-      width: 100%;
+      max-width: 100%;
     }
   }
 
   &__header,
   &__body,
   &__actions {
-    padding: 0.5rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    user-select: none;
+  }
+
+  &__body {
+    letter-spacing: 0.02em;
+    line-height: 1.5em;
+    width: 80%;
   }
 
   &__title {
@@ -48,10 +48,11 @@
     text-transform: inherit;
   }
 
-  &__body {}
-
   &__actions {
-    display: flex;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 1rem;
+    justify-content: end;
   }
 }

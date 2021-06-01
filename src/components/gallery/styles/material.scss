@@ -1,0 +1,5 @@
+@use'./shared.scss';
+
+.ark-gallery {
+  @include shared.ark-gallery;
+}

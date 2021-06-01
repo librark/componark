@@ -21,12 +21,11 @@
         }
     }
 
-    &__default-buttons {
+    &__buttons {
         margin: 10px;
 
         //Buttons
         button {
-            border-radius: 50%;
             width: 1.8rem;
             height: 1.8rem;
             border: 0;
@@ -36,49 +35,45 @@
 
         button:focus {
             outline: none;
-            border-radius: 50%;
         }
 
         button:active {
             border: 1px solid black;
-            //border: inherit;
         }
 
         button[on-click="_prev"],
         button[on-click="_next"] {
-            background: var(--secondary, black);
+            border: 2px solid rgba(128, 128, 128, 0.411);
+            background: white;
         }
 
         button[on-click="_first"],
         button[on-click="_last"] {
-            background: var(--danger, black);
+            border: 2px solid rgba(128, 128, 128, 0.411);
+            background: white;
         }
 
     }
 
-    &__button-list {
+    &__pages {
         display: flex;
 
-
-        ark-button {
-            border-radius: 50%;
+        button {
             min-width: 1.8rem;
             width: 1.8rem;
             min-height: 1.8rem;
             height: 1.8rem;
             border: 1px solid var(--primary, black);
             margin: 0.1rem;
-            //background: inherit;
             text-align: center;
 
             &:focus {
-                border-radius: 50%;
                 outline: none;
             }
 
             &[active] {
                 background: var(--primary, blue);
-                color: white !important;
+                color: white;
             }
         }
 

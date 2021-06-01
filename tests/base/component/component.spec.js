@@ -3,9 +3,27 @@
 class MockComponent extends Component {
   init(context = {}) {
     this.context = context
+    this.data = {}
+    this.dependency = undefined
     return super.init()
   }
+
   reflectedProperties() { return ['code'] }
+
+  erroringHandler (event) {
+    throw new Error('Something went wrong!')
+  }
+
+  async asyncErroringHandler (event) {
+    const callback = async () => { 
+      throw new Error('Something went async wrong!') }
+    await callback()
+  }
+
+  render() {
+    this.dependency = this.resolve('Dependency')
+    return super.render()
+  }
 }
 Component.define('mock-component', MockComponent)
 
@@ -17,6 +35,7 @@ describe('Component', () => {
     container = document.createElement('div')
     container.innerHTML = `<mock-component code="XYZ123"></mock-component>`
     component = container.querySelector('mock-component')
+    document.body.append(container)
   })
 
   afterEach(() => {
@@ -143,5 +162,106 @@ describe('Component', () => {
       general: [component.select('.body'), component.select('.aside')],
       footer: [component.select('.footer')]
     })
+  })
+  
+  it('binds its properties to children events', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-input="{{ data.value = data }}"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+    const input = component.select('input')
+
+
+    input.dispatchEvent(new InputEvent('input',  {bubbles: true, data: 'E'}))
+
+    expect(component.data.value).toEqual('E')
+  })
+
+  it('binds to the detail.value event property by default', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-alter="{{ data.value }}"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+    const input = component.select('input')
+
+    input.dispatchEvent(
+      new CustomEvent('alter',  {bubbles: true, detail: 'A'}))
+
+    expect(component.data.value).toEqual('A')
+  })
+
+  it('emits an error event on declared listeners', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-alter="erroringHandler"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+
+    let errorEvent = {}
+    component.addEventListener('error', (event) => errorEvent = event)
+
+    const input = component.select('input')
+
+    input.dispatchEvent(
+      new CustomEvent('alter',  { bubbles: true, detail: 'I will error!' }))
+
+    expect(errorEvent.detail.message).toEqual('Something went wrong!')
+  })
+
+  it('emits an error event on declared async listeners', async () => {
+    container.innerHTML = `
+    <mock-component>
+      <input type="text" listen on-alter="asyncErroringHandler"></input>
+    </mock-component>
+    `
+
+    const component = container.querySelector('mock-component')
+
+    let errorEvent = {}
+    component.addEventListener('error', (event) => errorEvent = event)
+
+    const input = component.select('input')
+
+    input.dispatchEvent(
+      new CustomEvent('alter',  { bubbles: true, detail: 'I will error!' }))
+
+    // Sleep
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(errorEvent.detail.message).toEqual('Something went async wrong!')
+  })
+
+  it('updates with a given initialization context', async () => {
+    container.innerHTML = `
+    <mock-component></mock-component>
+    `
+    const component = container.querySelector('mock-component')
+
+    const context = {data: 'context'}
+
+    await component.update(context)
+
+    expect(component.context).toBe(context)
+  })
+
+  it('resolves its resource dependencies using events propagation', () => {
+    document.addEventListener('resolve', (event) => {
+      const resource = event.detail.resource
+      event.detail[resource] = 'RESOLVED_DEPENDENCY'
+    })
+    container.innerHTML = `
+    <mock-component></mock-component>
+    `
+    const component = container.querySelector('mock-component')
+
+    expect(component.dependency).toEqual('RESOLVED_DEPENDENCY')
   })
 })

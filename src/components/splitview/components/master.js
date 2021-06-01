@@ -7,6 +7,11 @@ export class SplitViewMaster extends Component {
     this.addEventListener(
       this['masterEvent'], this._onMasterEvent.bind(this))
   }
+  
+  init(context = {}) {
+    this.binding = 'splitview-master-listen'
+    return super.init(context)
+  }
 
   reflectedProperties () {
     return ['masterEvent']

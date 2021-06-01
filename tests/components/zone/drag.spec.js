@@ -8,6 +8,7 @@ import {
 describe('Drag Zone', () => {
   it('new drag', () => {
     const drag = new DragZone()
+    drag.init()
 
     expect(!drag.x.length).toBeTruthy()
     expect(!drag.y.length).toBeTruthy()

@@ -2,132 +2,109 @@ import { Component } from '../../../base/component'
 import { styles } from '../styles'
 
 const tag = 'ark-paginator'
-
 export class Paginator extends Component {
   init (context = {}) {
-    this.collectionSize = context.collectionSize
-    this.currentPage = context.currentPage || 1
-    this.pageSize = context.pageSize || 24
+    this.binding = 'paginator-listen'
+    this.collectionSize = (
+      context.collectionSize || this.collectionSize || '120')
+    this.pageSize = context.pageSize || this.pageSize || '24'
+    this.currentPage = context.currentPage || this.currentPage || '1'
+    this.displayedPages = (
+      context.displayedPages || this.displayedPages || '12')
 
-    // Local Variables
-    this.global = document
+    this.global = context.global || window
 
     return super.init()
+  }
+
+  reflectedProperties () {
+    return ['collectionSize', 'pageSize', 'displayedPages', 'currentPage']
   }
 
   render () {
     this.content = /* html */ `
       <div class="ark-paginator__body">
-        <div class="ark-paginator__default-buttons">
-          <button listen on-click="_first"><<</button>
-          <button listen on-click="_prev"><</button>
+        <div class="ark-paginator__buttons">
+          <button paginator-listen on-click="_first">&#60;&#60;</button>
+          <button paginator-listen on-click="_prev">&#60;</button>
         </div>
 
-        <div class="ark-paginator__button-list" data-button-list></div>
-
-        <div class="ark-paginator__default-buttons">
-          <button listen on-click="_next">></button>
-          <button listen on-click="_last">>></button>
+        <div paginator-listen on-click="_move" class="ark-paginator__pages">
+          ${this.currentPages.map((page) => (
+          `<button ${page == this.currentPage ? 'active' : ''} 
+            data-page="${page}">${page}</button>`)). join('')}
         </div>
-      </div>
-      <div class="ark-paginator__footer">
-        <small data-info></small>
+
+        <div class="ark-paginator__buttons">
+          <button paginator-listen on-click="_next">&#62;</button>
+          <button paginator-listen on-click="_last">&#62;&#62;</button>
+        </div>
       </div>
     `
 
-    this._renderButtons()
     return super.render()
   }
 
-  _renderButtons (init = this.currentPage) {
-    const list = this.querySelector('[data-button-list]')
-    while (list.firstChild) list.removeChild(list.firstChild)
-
-    const numberButtons =
-      this._collectionLength < 5 ? this._collectionLength : 5
-
-    if (init - 2 <= 0) {
-      init = 1
-    } else if (init + 2 >= this._collectionLength) {
-      init = this._collectionLength - numberButtons + 1
-    } else {
-      init = init - 2
-    }
-
-    for (let index = init; index < init + numberButtons; index++) {
-      const button = this.global.createElement('ark-button')
-      button.innerText = index.toString()
-      button.id = index.toString()
-      button.addEventListener('click', event => {
-        /** @type {HTMLElement} */
-        const target = (/** @type {HTMLElement} */ event.target)
-        this._setCurrentPage(parseInt(target.id))
-      })
-      if (index === this.currentPage) button.setAttribute('active', '')
-      button.setAttribute('background','light');
-      button.setAttribute('color','dark');
-      list.append(button)
-    }
-
-    this._setDataInfo()
-    this._pageChange()
+  get totalPages () {
+    return Math.ceil(this.collectionSize / this.pageSize)
   }
 
-  _setDataInfo () {
-    const currentPage = this._collectionLength ? this.currentPage : 0
-    this.querySelector('[data-info]').innerHTML = /* html */ `
-      Página ${currentPage} de ${this._collectionLength}
-    `
+  get currentPages () {
+    const displayedPages = Math.min(
+      parseInt(this.displayedPages), this.totalPages)
+    const currentPage = parseInt(this.currentPage)
+    let startPage = Math.max(currentPage - Math.trunc(displayedPages / 2), 1)
+    startPage = Math.min(1 + this.totalPages - displayedPages, startPage)
+
+    return Array.from({length: displayedPages}, (_, i) => i + startPage)
   }
 
-  _pageChange () {
-    const offset = (this.currentPage - 1) * this.pageSize
-
-    this.dispatchEvent(
-      new CustomEvent('page-change', {
-        detail: {
-          offset: offset,
-          limit: offset + this.pageSize
-        }
-      })
-    )
+  _notifyChange () {
+    const page = parseInt(this.currentPage)
+    const limit = parseInt(this.pageSize)
+    const offset = (page - 1) * limit
+    this.emit('page-changed', { page, limit, offset })
   }
 
   /** @param {number} currentPage */
   _setCurrentPage (currentPage) {
-    if (currentPage > 0 && currentPage <= this._collectionLength) {
+    if (currentPage > 0 && currentPage <= this.totalPages) {
       this.currentPage = currentPage
-      this._renderButtons()
+      this.render()
+      this._notifyChange()
     }
   }
 
   /** @param {Event} event */
   _first (event) {
-    event.stopImmediatePropagation()
+    event.stopPropagation()
     this._setCurrentPage(1)
   }
 
   /** @param {Event} event */
   _prev (event) {
-    event.stopImmediatePropagation()
-    this._setCurrentPage(this.currentPage - 1)
+    event.stopPropagation()
+    this._setCurrentPage(parseInt(this.currentPage) - 1)
   }
 
   /** @param {Event} event */
-  _last (event) {
-    event.stopImmediatePropagation()
-    this._setCurrentPage(this._collectionLength)
+  _move (event) {
+    event.stopPropagation()
+    const page = parseInt(event.target.dataset.page)
+    this._setCurrentPage(page)
   }
 
   /** @param {Event} event */
   _next (event) {
-    event.stopImmediatePropagation()
-    this._setCurrentPage(this.currentPage + 1)
+    event.stopPropagation()
+    this._setCurrentPage(parseInt(this.currentPage) + 1)
   }
 
-  get _collectionLength () {
-    return Math.ceil(this.collectionSize / this.pageSize) || 0
+  /** @param {Event} event */
+  _last (event) {
+    event.stopPropagation()
+    this._setCurrentPage(this.totalPages)
   }
 }
 
-Component.define(tag, Paginator,styles)
+Component.define(tag, Paginator, styles)

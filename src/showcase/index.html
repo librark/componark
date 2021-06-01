@@ -1,22 +1,68 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,
-      initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Componark</title>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-    crossorigin="anonymous" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap"
-    rel="stylesheet">
+  rel="stylesheet">
+  <title></title>
 </head>
+<style>
+  body{
+    display:flex;
+    gap:1rem;
+    justify-content:center;
+    flex-wrap: wrap;
+    font-family: 'Cairo', helvetica, sans-serif;;
+    color:#001e3d;
+    align-items:center;
+    height:100vh;
+  }
 
+  .titles{
+    display: flex;
+    gap:0.8rem;
+  }
+  #version{
+    align-self: center;
+    font-weight: 300;
+    font-size: 0.9rem;
+  }
+
+  .themes{
+    padding: 0;
+    display: flex;
+    gap:1rem;
+    flex-direction: column;
+    align-self:center;
+    text-align:center;
+    list-style-type:none;
+  } 
+  .theme__link{
+    user-select:none;
+    padding:1rem;
+    background: #001e3d;
+    color: #00ffff;
+    border-radius:5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+  }
+  .theme__link:hover{
+    background: #00ffff;
+    color:#001e3d;
+  }
+
+</style>
 <body>
-  <main></main>
+  <div class="titles">
+    <img src="../showcase/logo-knowark.svg" alt="" class="brand">
+    <h1>Componark</h1>
+    <h2 id="version"></h2>
+  </div>
+  <ul class="themes">
+    <a class="theme__link" href="/ark/base"> <li> ARK </li></a>
+    <a class="theme__link" href="/material/base"><li>MATERIAL</li></a>
+  </ul>
 </body>
-
 </html>

@@ -1,7 +1,15 @@
 @use'./shared.scss';
+@use '@material/feature-targeting/feature-targeting';
+@use '@material/elevation/elevation-theme';
+
+$query: feature-targeting.all();
 
 .ark-alert {
   @include shared.ark-alert;
+
+  &__content {
+    @include elevation-theme.elevation($z-value: 24, $query: $query)
+  }
 
   &__header {
     margin-bottom: 0.5rem;

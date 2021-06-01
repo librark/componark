@@ -1,0 +1,5 @@
+@use'./shared.scss';
+
+.ark-splitview {
+  @include shared.ark-splitview;
+} 

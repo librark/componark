@@ -2,4 +2,16 @@
 
 .ark-input {
   @include shared.ark-input;
+
+  &__input{
+    padding: 0.8rem;
+    border:2px solid rgb(170, 167, 167);
+    outline: none;
+    
+    &:focus,&:hover {
+      box-shadow: 0 0 3pt 1pt rgba(blue, 0.4);
+      outline: none;
+    }
+  
+  }
 }

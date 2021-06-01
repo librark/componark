@@ -1,1 +1,38 @@
-@use'./shared';
+@use'./shared.scss';
+
+.ark-paginator {
+    @include shared.ark-paginator;
+    &__buttons{
+        button{
+            border-radius: 4px;
+            transition: transform 0.1s ease-in-out;
+            &:hover{
+                transform: scale(1.05);
+            }
+        }
+
+    }
+
+        &__pages {
+        display: flex;
+
+        button {
+            border-radius: 4px;
+            transition: transform 0.1s ease-in-out;
+            
+            &:focus {
+                outline: none;
+            }
+
+            &[active] {
+                background: var(--primary, blue);
+                color: white;
+            }
+        
+            &:hover{
+                transform: scale(1.05)
+            }
+        }
+
+    }
+};
