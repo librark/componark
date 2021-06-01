@@ -3,8 +3,8 @@
 @mixin ark-tabs() {
   @include theme.paint;
 
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-auto-flow: column;
   width: 100%;
   height: auto;
 
@@ -21,7 +21,6 @@
   &-item {
     cursor: pointer;
     padding: 0.5rem;
-    width:100%;
     text-align: center;
 
     &[active]{
