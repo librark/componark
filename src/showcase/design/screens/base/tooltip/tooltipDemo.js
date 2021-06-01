@@ -2,12 +2,12 @@ import { Component } from 'base/component'
 
 const tag = 'demo-tooltip'
 export class TooltipDemo extends Component {
-  init (context) {
+  init(context) {
     return super.init(context)
   }
 
-  render () {
-    this.content = /* html */`
+  render() {
+    this.content = /* html */ `
       <div class="demo-tooltip__content">
         <ark-tooltip position="top" text="tooltip Top">
           <span>Top</span>
@@ -35,15 +35,16 @@ export class TooltipDemo extends Component {
     return super.render()
   }
 
-  load () {
+  load() {
     return super.load()
   }
 }
 
-const styles = /* css */`
+const styles = /* css */ `
 
 .demo-tooltip__content{
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-around;
   align-items: center;
   width: 100%;
