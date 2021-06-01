@@ -1,5 +1,7 @@
 import { Component } from '../../../base/component'
+import { styles } from '../styles'
 
+const tag = 'ark-table'
 export class Table extends Component {
   init (context = {}) {
     this.headers = context.headers || this.headers || {}
@@ -50,4 +52,5 @@ export class Table extends Component {
     return data || ''
   }
 }
-customElements.define('ark-table', Table)
+
+Component.define(tag, Table, styles)

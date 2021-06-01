@@ -4,21 +4,21 @@ describe('Chart', () => {
   let container = null
 
   function testData (chart) {
-  const data = [12, 19, 3, 5, 2, 3]
-  const colors = chart.generateColors(data.length)
-  
-  return {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-        {
-          label: '# of Votes',
-          data: data,
-          backgroundColor: colors.backgroundColor,
-          borderColor: colors.borderColor,
-          borderWidth: 1
-        }
-    ]
-    }
+    const data = [12, 19, 3, 5, 2, 3]
+    const colors = chart.generateColors(data.length)
+    
+    return {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [
+          {
+            label: '# of Votes',
+            data: data,
+            backgroundColor: colors.backgroundColor,
+            borderColor: colors.borderColor,
+            borderWidth: 1
+          }
+      ]
+      }
   }
 
   beforeEach(() => {
@@ -38,27 +38,7 @@ describe('Chart', () => {
     const chart = container.querySelector('ark-chart')
     expect(chart).toBeTruthy()
     expect(chart).toBe(chart.init())
-  })
-
-  it('can be instantiated', () => {
-    container.innerHTML = `
-    <ark-chart></ark-chart>
-    `
-    const chart = container.querySelector('ark-chart')
-    expect(!chart.chart).toBeTruthy()
-  })
-
-  it('can be instantiated with empty object', () => {
-    container.innerHTML = `
-    <ark-chart></ark-chart>
-    `
-    const chart = container.querySelector('ark-chart')
-    chart.details = {}
-    chart.render()
-    
-    expect(!chart._resizeCanvas()).toBeFalsy
-    expect(!chart.chart).toBeTruthy()
-    // @ts-ignore
+    expect(chart.chart).toBeFalsy()
   })
 
   it('can be instantiated with details', () => {
@@ -67,21 +47,27 @@ describe('Chart', () => {
     `
     const chart = container.querySelector('ark-chart')
 
-    chart.details = {type: 'bar', data: testData(chart)}
-    chart.render()
+    let givenElement = null
+    let givenDetails = null
+
+    class MockChartJs {
+      constructor(element, details) {
+        givenElement = element
+        givenDetails = details
+      }
+    }
+
+    const lib = MockChartJs
+    const details = {type: 'bar', data: testData(chart)}
+    chart.init({lib, details}).render()
+
     const canvas = chart.querySelector('canvas')
-    chart.chart.ctx = canvas.getContext('2d')
-    chart.render()
-    
-    console.log(chart.chart.canvas)
-    //console.log(chart.details)
-    // @ts-ignore
-    //expect(!chart._resizeCanvas()).toBeFalsy
-    //expect(chart.chart).toBeTruthy()
-    //expect(chart.details.type).toBe('bar')
+    expect(canvas).toBeTruthy()
+    expect(givenElement).toBe(canvas)
+    expect(givenDetails).toBe(details)
   })
 
-  it('get Colors', () => {
+  it('generates its colors', () => {
     container.innerHTML = `
     <ark-chart></ark-chart>
     `

@@ -91,3 +91,6 @@ dist
 
 # Docs
 docs/
+
+# build
+build/

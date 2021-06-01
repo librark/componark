@@ -1,104 +1,155 @@
-const path = require('path')
-const { DefinePlugin, EnvironmentPlugin } = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require("path")
+const { DefinePlugin, EnvironmentPlugin } = require("webpack")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = (env, argv) => {
-  const devMode = argv.mode === 'development'
+  const devMode = argv.mode === "development"
   const target = env.TARGET
 
-  const config = {
+  const commonConfig = {
     mode: argv.mode,
     entry: {
-      app: './src/showcase/index.js'
-    },
-    output: {
-      publicPath: '/',
-      filename: '[name].[contenthash].js',
-      path: path.join(__dirname, '/dist')
-    },
-    optimization: {
-      runtimeChunk: 'single',
-      moduleIds: 'deterministic'
+      showcase: "./src/showcase/design/index.js",
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        chunks: ['app', 'runtime'],
-        title: 'componark',
-        template: './src/showcase/index.html'
+        chunks: ["showcase", "runtime"],
+        title: "Componark",
+        template: "./src/showcase/design/index.html",
+      }),
+      new CopyWebpackPlugin({
+        patterns: ["src/showcase/design/.htaccess"],
       }),
       new MiniCssExtractPlugin({
-        filename: devMode ? '[name].css' : '[name].[hash].css',
-        chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+        filename: devMode ? "[name].css" : "[name].[hash].css",
+        chunkFilename: devMode ? "[id].css" : "[id].[hash].css",
       }),
       new DefinePlugin({
         PRODUCTION: !devMode,
-        VERSION: JSON.stringify(require('./package.json').version),
-        TARGET: JSON.stringify(target)
+        VERSION: JSON.stringify(require("./package.json").version),
+        TARGET: JSON.stringify(target),
       }),
-      new EnvironmentPlugin({
-        ARK_DESIGN: 'material'
-      })
     ],
     module: {
       rules: [
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            'css-loader',
+            "css-loader",
             {
-              loader: 'sass-loader',
+              loader: "sass-loader",
               options: {
                 sassOptions: {
-                  outputStyle: devMode ? 'expanded': 'compressed',
-                  includePaths: ['./node_modules']
-                }
-              }
-            }
-          ]
+                  outputStyle: devMode ? "expanded" : "compressed",
+                  includePaths: ["./node_modules"],
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
-          use: ['file-loader']
+          use: ["file-loader"],
         },
         {
           test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
           use: [
             {
-              loader: 'file-loader',
+              loader: "file-loader",
               options: {
-                name: '[name].[ext]',
-                outputPath: 'fonts/'
-              }
-            }
-          ]
+                name: "[name].[ext]",
+                outputPath: "fonts/",
+              },
+            },
+          ],
         },
         {
           test: /\.(rst|d\.ts)$/,
-          loader: 'ignore-loader'
-        }
-      ]
+          loader: "ignore-loader",
+        },
+      ],
     },
-
     resolve: {
       alias: {
-        base: path.resolve(__dirname, './src/base/'),
-        styles: path.resolve(__dirname, './src/base/theme/styles/'),
-        components: path.resolve(__dirname, './src/components/'),
-        screens: path.resolve(__dirname, './src/showcase/screens/')
-      }
-    }
+        base: path.resolve(__dirname, "./src/base/"),
+        styles: path.resolve(__dirname, "./src/base/theme/styles/"),
+        components: path.resolve(__dirname, "./src/components/"),
+        screens: path.resolve(__dirname, "./src/showcase/screens/"),
+      },
+    },
+  }
+
+  const arkConfig = Object.assign({}, commonConfig, {
+    name: "ark",
+    mode: argv.mode,
+    output: {
+      publicPath: "/ark/",
+      filename: "[name].[contenthash].js",
+      path: path.join(__dirname, "/dist/ark"),
+    },
+    plugins: commonConfig.plugins.concat([
+      new EnvironmentPlugin({
+        ARK_DESIGN: "ark",
+      }),
+    ]),
+  })
+
+  const materialConfig = Object.assign({}, commonConfig, {
+    name: "material",
+    mode: argv.mode,
+    output: {
+      publicPath: "/material/",
+      filename: "[name].[contenthash].js",
+      path: path.join(__dirname, "/dist/material"),
+    },
+    plugins: commonConfig.plugins.concat([
+      new EnvironmentPlugin({
+        ARK_DESIGN: "material",
+      }),
+    ]),
+  })
+
+  const rootConfig = {
+    name: "root",
+    mode: argv.mode,
+    entry: {
+      index: "./src/showcase/index.js",
+    },
+    plugins: [
+      new CleanWebpackPlugin(),
+      new DefinePlugin({
+        PRODUCTION: !devMode,
+        VERSION: JSON.stringify(require("./package.json").version),
+        TARGET: JSON.stringify(target),
+      }),
+      new HtmlWebpackPlugin({
+        title: "Componark",
+        template: "./src/showcase/index.html",
+      }),
+    ],
   }
 
   if (devMode) {
-    config.devServer = {
-      contentBase: './dist',
-      historyApiFallback: true,
-      port: 7890
+    rootConfig.devServer = {
+      contentBase: [
+        path.join(__dirname, "dist"),
+        path.join(__dirname, "dist/ark"),
+        path.join(__dirname, "dist/material"),
+      ],
+      historyApiFallback: {
+        rewrites: [
+          { from: /^\/$/, to: "/index.html" },
+          { from: /^\/ark/, to: "/ark/index.html" },
+          { from: /^\/material/, to: "/material/index.html" },
+        ],
+      },
+      port: 7890,
     }
   }
 
-  return config
+  return [rootConfig, arkConfig, materialConfig]
 }

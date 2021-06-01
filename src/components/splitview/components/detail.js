@@ -2,7 +2,9 @@ import { Component } from '../../../base/component'
 
 const tag = 'ark-splitview-detail'
 export class SplitViewDetail extends Component {
-  init(context={}) {
+  init(context = {}) {
+    this.binding = 'splitview-detail-listen'
+
     const slots = this.slots()
 
     const [main] = slots['general']
@@ -25,7 +27,7 @@ export class SplitViewDetail extends Component {
   render () {
     this.content = `
     <div class="ark-splitview-detail__header">
-      <button listen on-click="hide"
+      <button splitview-detail-listen on-click="hide"
         class="ark-splitview-detail__close">
       </button>
       <div data-master-title class="ark-splitview-detail__title">
@@ -38,9 +40,10 @@ export class SplitViewDetail extends Component {
 
     this.select('.ark-splitview-detail__close').append(this.icon)
     this.select('.ark-splitview-detail__main').append(this.main)
+    if (this.main && this.main.render) {
+      this.main.render()
+    }
 
-    if (this.main) this.main.render()
-   
     return super.render()
   }
 

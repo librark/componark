@@ -3,20 +3,26 @@ import { styles } from '../styles'
 
 const tag = 'ark-sidebar'
 export class Sidebar extends Component {
-  reflectedProperties () {
-    return ['opened']
+  init(context = {}) {
+    this.binding = 'sidebar-listen'
+    this.side = context.side || this.side || 'left'
+    return super.init(context)
   }
 
-  render () {
+  reflectedProperties() {
+    return ['opened', 'side']
+  }
+
+  render() {
     const slots = this.slots()
 
-    this.content = /* html */`
-      <div class="ark-sidebar__menu">
+    this.content = /* html */ `
+      <div side="${this.side}" class="ark-sidebar__menu">
         <div class="ark-sidebar__header"></div>
         <div class="ark-sidebar__body"></div>
         <div class="ark-sidebar__footer"></div>
       </div>
-      <div class="ark-sidebar__scrim" listen on-click="close"></div>
+      <div class="ark-sidebar__scrim" sidebar-listen on-click="close"></div>
     `
 
     this._renderSlot(slots, 'header', '.ark-sidebar__header')
@@ -26,19 +32,21 @@ export class Sidebar extends Component {
     return super.render()
   }
 
-  open () {
+  open() {
     this.setAttribute('opened', '')
+    document.querySelector('body').style.overflow = 'hidden'
   }
 
-  close () {
+  close() {
     this.removeAttribute('opened')
+    document.querySelector('body').style.overflow = 'auto'
   }
 
-  toggle () {
+  toggle() {
     this.toggleAttribute('opened')
   }
 
-  _renderSlot (slots, key, selector) {
+  _renderSlot(slots, key, selector) {
     const elements = slots[key] || []
     for (const element of elements) {
       this.select(selector).append(element)

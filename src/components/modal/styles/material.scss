@@ -23,8 +23,8 @@ $feat-typography: feature-targeting.create-target($query, typography);
 
   &__header {
 
-    .ark-card__title {
-      @include typography.typography(headline4, $query);
+    .ark-modal__title {
+      @include typography.typography(headline5, $query);
     }
 
     .ark-modal__subtitle {
@@ -33,9 +33,6 @@ $feat-typography: feature-targeting.create-target($query, typography);
   }
 
   &__body {
-    background: var(--light);
-    color: var(--primary);
-
     p {
       @include typography.typography(body2, $query);
     }

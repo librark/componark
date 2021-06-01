@@ -16,6 +16,8 @@ Component.define('nested-master', NestedMaster)
 
 class NestedDetail extends Component {
   init(context) {
+    if(!context.value) return super.init()
+
     this.value = context.value
     return super.init()
   }
@@ -47,6 +49,7 @@ describe('SplitView', () => {
     const splitview = container.querySelector('ark-splitview')
 
     expect(splitview).toBeTruthy()
+    expect(splitview.init()).toBe(splitview)
   })
 
   it('can coordinate the master and the detail components', () => {

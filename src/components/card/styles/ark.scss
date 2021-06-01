@@ -1,5 +1,44 @@
-@use'./shared.scss';
+@use './shared.scss';
 
 .ark-card {
   @include shared.ark-card;
+  box-sizing: border-box;
+  box-shadow: 7px 5px 5px -2px rgba(0, 0, 0, 0.1);
+  border: 2px solid #d5d4d4;
+  transition: transform 0.1s ease-in-out;
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 7px 5px 5px -2px rgba(0, 0, 0, 0.23);
+  }
+
+  &__actions {
+    .ark-button {
+      filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.1));
+      transform: scale(1.12);
+      transition: filter 0.2s ease, transform 0.2s ease-in-out;
+    }
+    .ark-button:hover {
+      filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+      transform: scale(1.17);
+      transition: transform 0.2s ease-in-out;
+    }
+    .ark-button:active {
+      transform: scale(1.12);
+    }
+  }
+
+  &__header {
+    border-top: 2px solid rgba(212, 212, 212, 0.178);
+  }
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  &__subtitle {
+    font-size: 1.1rem;
+  }
+  &__body {
+    font-size: 0.95rem;
+    word-wrap: break-word;
+  }
 }

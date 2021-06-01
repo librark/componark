@@ -1,7 +1,5 @@
-import { main } from './screens/main'
 
-// @ts-ignore
-// eslint-disable-next-line no-undef
-const target = TARGET
+const version = VERSION
 
-main(target)
+const versionElement = document.getElementById('version')
+versionElement.textContent = version
