@@ -2,14 +2,14 @@ import { Component } from 'base/component'
 
 const tag = 'demo-paginator'
 export class PaginatorDemo extends Component {
-  init(context={}) {
-    this.limit = 1 
-    this.offset = 0 
+  init(context = {}) {
+    this.limit = 1
+    this.offset = 0
     this.page = 1
     return super.init(context)
   }
 
-  render () {
+  render() {
     this.content = /* html */ `
       <ark-list background="light" color="dark"></ark-list>
       <ark-paginator listen on-page-changed="onPageChanged" 
@@ -21,46 +21,49 @@ export class PaginatorDemo extends Component {
     `
     return super.render()
   }
-  
-  async load () {
-    const template = item => /* html */ `
+
+  async load() {
+    const template = (item) => /* html */ `
     <h1>${item.year}</h1>
     <span data-first>FIRST: ${item.first}</span>
     <span> | </span>
     <span data-second>SECOND: ${item.second}</span>
     `
-    
+
     const source = () => {
       let list = this.list
       if (this.limit) list = list.slice(0, this.limit)
       if (this.offset) list = list.slice(this.offset)
       return list
     }
-    
-    this.select('ark-list').init({
-      source: source(),
-      template: template
-    }).render()
+
+    this.select('ark-list')
+      .init({
+        source: source(),
+        template: template,
+      })
+      .render()
 
     const paginator = this.select('ark-paginator')
-    paginator.init({ 
-      collectionSize: this.list.length,
-      currentPage: this.page
-    }).render()
+    paginator
+      .init({
+        collectionSize: this.list.length,
+        currentPage: this.page,
+      })
+      .render()
     return super.load()
   }
-  
-  
+
   /** @param {CustomEvent} event */
-  async onPageChanged (event) {
+  async onPageChanged(event) {
     event.stopPropagation()
     this.limit = event.detail.limit
     this.offset = event.detail.offset
     this.page = event.detail.page
     await this.update()
   }
-  
-  get list () {
+
+  get list() {
     return [
       { first: 'Colombia', second: 'Argentina', year: 2016 },
       { first: 'Uruguay', second: 'Colombia', year: 2017 },
@@ -69,7 +72,7 @@ export class PaginatorDemo extends Component {
       { first: 'Argentina', second: 'Argentina', year: 2020 },
       { first: 'Chile', second: 'Colombia', year: 2021 },
       { first: 'Colombia', second: 'Argentina', year: 2022 },
-      { first: 'Uruguay', second: 'Bolivia', year: 2023 }
+      { first: 'Uruguay', second: 'Bolivia', year: 2023 },
     ]
   }
 }
