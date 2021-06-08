@@ -14,20 +14,18 @@
   user-select: none;
 
   &__menu {
-    min-width: 300px;
+    min-width: 280px;
     height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
+    display: grid;
+    grid-template-rows: 0.15fr 1fr 0.15fr;
     position: absolute;
 
-    &[side="left"]{
+    &[side="left"] {
       left: 0;
     }
 
-    &[side="right"]{
+    &[side="right"] {
       right: 0;
     }
 
@@ -62,5 +60,4 @@
   &[opened] {
     display: block;
   }
-
 }
