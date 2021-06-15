@@ -5,7 +5,7 @@
     @include theme.paint;
 
     position: relative;
-    display: inline-block;
+    display: flex;
 
     &:hover .ark-tooltip__text {
         visibility: visible;

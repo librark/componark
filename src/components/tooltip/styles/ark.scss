@@ -1,1 +1,5 @@
-@use'./shared';
+@use'./shared.scss';
+
+.ark-tooltip {
+    @include shared.ark-tooltip;
+}
