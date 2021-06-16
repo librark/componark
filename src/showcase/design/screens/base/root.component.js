@@ -267,6 +267,7 @@ body {
     display: none;
     position: absolute;
     z-index: 1000;
+    width: 150px;
   }
   .app-root__menu{
     display: grid;
