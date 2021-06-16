@@ -1,9 +1,9 @@
-import hljs from 'highlight.js/lib/core';
-import 'highlight.js/styles/github.css';
-import xml from 'highlight.js/lib/languages/xml';
+import hljs from 'highlight.js/lib/core'
+import 'highlight.js/styles/github.css'
+import xml from 'highlight.js/lib/languages/xml'
 import { Component } from 'base/component'
 
-hljs.registerLanguage('html', xml);
+hljs.registerLanguage('html', xml)
 hljs.initHighlightingOnLoad()
 
 // @ts-ignore
@@ -14,35 +14,46 @@ const design = process.env.ARK_DESIGN
 
 const tag = 'app-root'
 export class RootComponent extends Component {
-  render () {
+  render() {
     this.content = /* html */ `
     <nav class="app-root__navbar">
-      <a class="app-root__navitem" href="/">
-        <div class="app-root__title">Componark</div>
-        <div class="app-root__subtitle">web components</div>
-      </a>
-      <a class="app-root__navitem" href="#">${design}</a>
-      <a class="app-root__navitem" href="#">Contact</a>
-      <a class="app-root__navitem" href="#">About</a></li>
+      <div class="app-root__menu">
+        <span class="material-icons">
+          list
+        </span>
+      </div>
+      <div class="app-root__brand">
+        <a  href="/">
+          <h1 class="app-root__title">COMPONARK</h1>
+          <p class="app-root__subtitle">web components</p>
+        </a>
+      </div>
+      <div class="app-root__actions"> 
+        <a class="app-root__navitem" href="#">style ${design.toUpperCase()}</a>
+      </div>  
     </nav>
-
-    <aside class="app-root__sidebar">
-      <span class="app-root__sideitem">Menu</span> 
-      ${this.locations.map((location) => `
-      <a class="app-root__sideitem" href="/${design}${location.path}">
-        ${location.name}
-      </a>
-      `).join("")}
+    
+    <aside class="app-root__sidebar"> 
+        ${this.locations
+          .map(
+            (location) => `
+        <a class="app-root__sideitem" href="/${design}${location.path}">
+          ${location.name}
+        </a>
+        `
+          )
+          .join('')}
     </aside>
 
     <section class="app-root__content" data-content></section>
 
     `
+    this.showMenu()
     return super.render()
   }
 
   /** @param {Component} component */
-  setContentComponent (component) {
+  setContentComponent(component) {
     if (!component) return
     const container = this.select('[data-content]')
 
@@ -52,22 +63,28 @@ export class RootComponent extends Component {
   }
 
   /** @param {CustomEvent} event */
-  selectEventListener (event) {
+  selectEventListener(event) {
     event.stopImmediatePropagation()
     const style = event.detail.value
   }
 
   /** @param {CustomEvent} event */
-  onListItemSelected (event) {
+  onListItemSelected(event) {
     this.dispatchEvent(
       new CustomEvent('navigate', {
         bubbles: true,
-        detail: { path: event.detail.data.path }
+        detail: { path: event.detail.data.path },
       })
     )
   }
 
-  get locations () {
+  showMenu() {
+    this.querySelector('.app-root__menu').addEventListener('click', () => {
+      this.querySelector('.app-root__sidebar').style.display = 'grid'
+    })
+  }
+
+  get locations() {
     return [
       { name: 'Accordion', path: '/base/accordion' },
       { name: 'Alert', path: '/base/alert' },
@@ -103,19 +120,17 @@ export class RootComponent extends Component {
   }
 }
 
-const styles = `
+const styles = /* css */ `
 
 body {
   margin: 0;
   padding: 0;
-
   background-color: #fff7ea;
 }
 
 :root {
   color: black;
-  --background: white;
-
+  --background: white; 
   --primary: blue;
   --secondary: orange;
   --success: green;
@@ -132,23 +147,27 @@ body {
   --xl: 3rem;
 }
 
-
 .app-root {
   display: grid;
+  grid-template-rows: 0.05fr 1fr;
   font-family: 'Cairo', helvetica, sans-serif;
   letter-spacing: 0.02em;
 }
 
 .app-root__navbar {
   grid-column: 1 / 13;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   background-color: #334455;
   color: #00ffff;
   text-decoration: none
   overflow: hidden;
   border-bottom:5px solid cyan;
-  align-items:center;
-  height:100px;
+  place-items:center;
+}
+
+.material-icons {
+  font-size: 2.5rem;
 }
 
 .app-root__navitem {
@@ -158,13 +177,14 @@ body {
   height:auto;
 }
 
+.app-root__sideitems{
+  display: flex;
+  flex-direction: column;
+}
+
 .app-root__navitem,
 .app-root__sideitem {
-  transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
+  transition: background 0.2s ease-in-out;
 }
 
 .app-root__navitem:hover,
@@ -173,32 +193,53 @@ body {
   color:black;
 }
 
+.app-root__brand{
+  display: grid;
+  background: white;
+  padding: 0 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.app-root__brand a{
+  text-decoration: none;
+  text-align: center;
+  margin: 0;
+}
+
+.app-root__actions{
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-items: center;
+  grid-column: 6;
+}
+
 .app-root__title {
+  all: inherit;
   font-weight: 700;
   font-size: 1.3rem;
-  text-transform: uppercase;
 }
 
 .app-root__subtitle {
-  display:block;
+  all: inherit;
   font-size:0.9rem;
   font-weight: 300;
-  text-transform:none;
-  position:relative;
-  bottom: 10px;
-  height:10px;
   text-align:center;
 }
 
 .app-root__sidebar {
-  grid-column: 1 / 2;
-  display: flex;
-  flex-direction: column;
+  grid-row: 2 / -1;
+  display: grid;
   background-color: #334455;
   color: #00ffff;
-  text-decoration: none
+  text-decoration: none;
   overflow-x: hidden;
-  max-width:100px;
+  width: fit-content;
+}
+
+.app-root__navbar-brand{
+  display: none;
 }
 
 .app-root__sideitem {
@@ -207,18 +248,38 @@ body {
   color: cyan;
 }
 
-.app-root__sideitem:first-child {
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 1.2rem;
+.app-root__menu {
+  display: none;
   text-align:center;
+  user-select: none;
+  cursor: pointer;
 }
 
 .app-root__content {
-  grid-column: 2 / 13;
+  grid-area: 2 / 2 / auto / 13;
   padding: 2vmin;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
+
+@media only screen and (max-width: 800px) {
+  .app-root__sidebar{
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    width: 150px;
+  }
+  .app-root__menu{
+    display: grid;
+  }
+  .app-root__content{
+    grid-area: 2 / 1 / auto / 13;
+  }
+  .app-root__brand{
+    grid-column: 3 / 5;
+  }
+}
+
 
 `
 Component.define(tag, RootComponent, styles)
