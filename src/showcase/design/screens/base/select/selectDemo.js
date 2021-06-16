@@ -2,21 +2,21 @@ import { Component } from 'base/component'
 
 const tag = 'demo-select'
 export class SelectDemo extends Component {
-  init (context) {
+  init(context) {
     return super.init()
   }
 
-  connectedCallback () {
+  connectedCallback() {
     this.render()
   }
 
-  render () {
-    this.innerHTML = /* html */`
+  render() {
+    this.innerHTML = /* html */ `
       <div>
         <p>This is a select.</p>
       </div>
 
-      <ark-select background="light" color="dark" listen on-alter="selectEventListener" label="my select">
+      <ark-select color="dark" listen on-alter="selectEventListener" label="my select">
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="mercedes">Mercedes</option>
@@ -38,7 +38,7 @@ export class SelectDemo extends Component {
     return super.render()
   }
 
-  selectEventListener (event) {
+  selectEventListener(event) {
     const element = this.querySelector('[data-select-value]')
     if (element) element.textContent = event.detail.value
   }
