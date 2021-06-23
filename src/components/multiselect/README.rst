@@ -2,13 +2,14 @@ MULTISELECT
 ***********
 
 
-The ``ark-multiselect`` allows the user to select multiple items from a list, the items groups in the multiselect field and the list can be filtered from an input text.
+The ``ark-multiselect`` allows the user to select multiple items from a list, the items are grouped in 
+the multiselect field and the list can be filtered from an input text.
 Each item can be removed one by one and at the same time.
 
 Examples
 ========
 
-    **Normal list multiselect**
+    **Simple list multiselect**
     
     .. code-block:: html
 
@@ -59,7 +60,6 @@ Examples
         .then(response => response.json())
         .then((json) => json)
 
-
         const field = "id"
         const template = (item) => `${item['id']} - ${item['name']}`
         
@@ -76,62 +76,26 @@ Examples
         }
 
 
-
-
 Attributes
 ----------
 
-+----------+--------+---------+------------------------------------------------+
-|   Name   |  Type  | Default |                  Description                   |
-+==========+========+=========+================================================+
-| title    | string | null    | Creates a title that displays in the header    |
-+----------+--------+---------+------------------------------------------------+
-| subtitle | string | null    | Creates a subtitle that displays in the header |
-+----------+--------+---------+------------------------------------------------+
-| width    | string | null    | Sets the width of the window                   |
-+----------+--------+---------+------------------------------------------------+
-| height   | string | null    | Sets the height of the window                  |
-+----------+--------+---------+------------------------------------------------+
++-------+--------+---------+------------------------------------------------+
+| Name  |  Type  | Default |                  Description                   |
++=======+========+=========+================================================+
+| label | string | null    | Creates a label text on top of the multiselect |
++-------+--------+---------+------------------------------------------------+
 
 Properties
 ----------
 
-+----------+--------+---------+------------------------------------------------+
-|   Name   |  Type  | Default |                  Description                   |
-+==========+========+=========+================================================+
-| title    | string | null    | Creates a title that displays in the header    |
-+----------+--------+---------+------------------------------------------------+
-| subtitle | string | null    | Creates a subtitle that displays in the header |
-+----------+--------+---------+------------------------------------------------+
-| width    | string | null    | Sets the width of the window                   |
-+----------+--------+---------+------------------------------------------------+
-| height   | string | null    | Sets the height of the window                  |
-+----------+--------+---------+------------------------------------------------+
-
-
-Methods
--------
-
-+--------+------------+-------------------------------------+
-|  Name  | Parameters |             Description             |
-+========+============+=====================================+
-| open   | -          | Shows the window on top of the page |
-+--------+------------+-------------------------------------+
-| close  | -          | Close the window                    |
-+--------+------------+-------------------------------------+
-| toggle | -          | Toggle between open and close       |
-+--------+------------+-------------------------------------+
-
-Slots
------
-
-**Add a** ``slot`` **attribute on the element to specify the section of the card in wich the content is to be displayed**
-
-+---------+------------------------------------------------------------------+
-|  Name   |                           Description                            |
-+=========+==================================================================+
-| general | Every element that has not a slot specified displays in the body |
-+---------+------------------------------------------------------------------+
-| actions | Displays the buttons in the right bottom section of the window   |
-+---------+------------------------------------------------------------------+
-
++----------+-------------+---------+-------------------------------------------------------------------------------------------------+
+|   Name   |    Type     | Default |                                           Description                                           |
++==========+=============+=========+=================================================================================================+
+| label    | string      | null    | Creates a label text on top of the multiselect                                                  |
++----------+-------------+---------+-------------------------------------------------------------------------------------------------+
+| items    | array, json | null    | Can receive an array of items or a complex list from a json file using an async function        |
++----------+-------------+---------+-------------------------------------------------------------------------------------------------+
+| field    | string      | null    | Defines the field as the output for the list of selected items (usefull for handling json data) |
++----------+-------------+---------+-------------------------------------------------------------------------------------------------+
+| template | string      | null    | Defines how items are to be presented in the interface (usefull for handling json data)         |
++----------+-------------+---------+-------------------------------------------------------------------------------------------------+

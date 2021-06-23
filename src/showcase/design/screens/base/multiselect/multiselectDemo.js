@@ -23,6 +23,13 @@ export class MultiselectDemo extends Component {
       <p>value: <span data-multiselect-object></span> </p>
       <ark-multiselect label='multi none'></ark-multiselect>
     </div>
+
+    <br>
+
+    <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/multiselect/README.rst">
+      * Reference
+    </a>
+
 		`
     this.renderMultiselect()
     this.renderMultiselectObject()
@@ -79,8 +86,7 @@ export class MultiselectDemo extends Component {
     const myItems = await fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
         .then((json) => json)
-
-
+    
     const field = "id"
     const template = (item) => `${item['id']} - ${item['name']}`
     
@@ -100,7 +106,6 @@ const styles = /* css */`
 
   .multi-container{
     display:grid;
-    grid-gap:1rem;
   }
 
 `
