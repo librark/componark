@@ -37,6 +37,7 @@ Components library
 - `<ark-location> <src/components/location>`_
 - `<ark-map> <src/components/map>`_
 - `<ark-modal> <src/components/modal>`_
+- `<ark-modal> <src/components/multiselect>`_
 - `<ark-navbar> <src/components/navbar>`_
 - `<ark-paginator> <src/components/paginator>`_
 - `<ark-radio> <src/components/radio>`_
