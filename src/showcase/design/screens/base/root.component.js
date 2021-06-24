@@ -1,9 +1,9 @@
-import hljs from 'highlight.js/lib/core'
-import 'highlight.js/styles/github.css'
-import xml from 'highlight.js/lib/languages/xml'
-import { Component } from 'base/component'
+import hljs from "highlight.js/lib/core"
+import "highlight.js/styles/github.css"
+import xml from "highlight.js/lib/languages/xml"
+import { Component } from "base/component"
 
-hljs.registerLanguage('html', xml)
+hljs.registerLanguage("html", xml)
 hljs.initHighlightingOnLoad()
 
 // @ts-ignore
@@ -12,7 +12,7 @@ export const version = VERSION
 
 const design = process.env.ARK_DESIGN
 
-const tag = 'app-root'
+const tag = "app-root"
 export class RootComponent extends Component {
   render() {
     this.content = /* html */ `
@@ -42,7 +42,7 @@ export class RootComponent extends Component {
         </a>
         `
           )
-          .join('')}
+          .join("")}
     </aside>
 
     <section class="app-root__content" data-content></section>
@@ -55,7 +55,7 @@ export class RootComponent extends Component {
   /** @param {Component} component */
   setContentComponent(component) {
     if (!component) return
-    const container = this.select('[data-content]')
+    const container = this.select("[data-content]")
 
     container.firstChild?.remove()
     container.append(component)
@@ -71,7 +71,7 @@ export class RootComponent extends Component {
   /** @param {CustomEvent} event */
   onListItemSelected(event) {
     this.dispatchEvent(
-      new CustomEvent('navigate', {
+      new CustomEvent("navigate", {
         bubbles: true,
         detail: { path: event.detail.data.path },
       })
@@ -79,41 +79,41 @@ export class RootComponent extends Component {
   }
 
   showMenu() {
-    this.querySelector('.app-root__menu').addEventListener('click', () => {
-      this.querySelector('.app-root__sidebar').style.display = 'grid'
+    this.querySelector(".app-root__menu").addEventListener("click", () => {
+      this.querySelector(".app-root__sidebar").style.display = "grid"
     })
   }
 
   get locations() {
     return [
-      { name: 'Accordion', path: '/base/accordion' },
-      { name: 'Alert', path: '/base/alert' },
-      { name: 'Audio', path: '/base/audio' },
-      { name: 'Button', path: '/base/button' },
-      { name: 'Camera', path: '/base/camera' },
-      { name: 'Card', path: '/base/card' },
-      { name: 'Chart', path: '/base/chart' },
-      { name: 'Checkbox', path: '/base/checkbox' },
-      { name: 'Droparea', path: '/base/droparea' },
-      { name: 'Gallery', path: '/base/gallery' },
-      { name: 'Icon', path: '/base/icon' },
-      { name: 'List', path: '/base/list' },
-      { name: 'Input', path: '/base/input' },
-      { name: 'Location', path: '/base/location' },
-      { name: 'Map', path: '/base/map' },
-      { name: 'Modal', path: '/base/modal' },
-      { name: 'Multiselect', path: '/base/multiselect' },
-      { name: 'Navbar', path: '/base/navbar' },
-      { name: 'Paginator', path: '/base/paginator' },
-      { name: 'Radio', path: '/base/radio' },
-      { name: 'Select', path: '/base/select' },
-      { name: 'Sidebar', path: '/base/sidebar' },
-      { name: 'Signature', path: '/base/signature' },
-      { name: 'Spinner', path: '/base/spinner' },
-      { name: 'SplitView', path: '/base/splitview' },
-      { name: 'Table', path: '/base/table' },
-      { name: 'Tabs', path: '/base/tabs' },
-      { name: 'Tooltip', path: '/base/tooltip' },
+      { name: "Accordion", path: "/base/accordion" },
+      { name: "Alert", path: "/base/alert" },
+      { name: "Audio", path: "/base/audio" },
+      { name: "Button", path: "/base/button" },
+      { name: "Camera", path: "/base/camera" },
+      { name: "Card", path: "/base/card" },
+      { name: "Chart", path: "/base/chart" },
+      { name: "Checkbox", path: "/base/checkbox" },
+      { name: "Droparea", path: "/base/droparea" },
+      { name: "Gallery", path: "/base/gallery" },
+      { name: "Icon", path: "/base/icon" },
+      { name: "List", path: "/base/list" },
+      { name: "Input", path: "/base/input" },
+      { name: "Location", path: "/base/location" },
+      { name: "Map", path: "/base/map" },
+      { name: "Modal", path: "/base/modal" },
+      { name: "Multiselect", path: "/base/multiselect" },
+      { name: "Navbar", path: "/base/navbar" },
+      { name: "Paginator", path: "/base/paginator" },
+      { name: "Radio", path: "/base/radio" },
+      { name: "Select", path: "/base/select" },
+      { name: "Sidebar", path: "/base/sidebar" },
+      { name: "Signature", path: "/base/signature" },
+      { name: "Spinner", path: "/base/spinner" },
+      { name: "SplitView", path: "/base/splitview" },
+      { name: "Table", path: "/base/table" },
+      { name: "Tabs", path: "/base/tabs" },
+      { name: "Tooltip", path: "/base/tooltip" },
       //{ name: 'TreeTable', path: '/base/treetable' },
       //{ name: 'Zone', path: '/base/zone' },
     ]
@@ -193,15 +193,16 @@ body {
   color:black;
 }
 
-.app-root__brand{
+.app-root__brand {
   display: grid;
+  align-items: center;
   background: white;
   padding: 0 1rem;
   width: 100%;
   height: 100%;
 }
 
-.app-root__brand a{
+.app-root__brand a {
   text-decoration: none;
   text-align: center;
   margin: 0;
