@@ -1,6 +1,6 @@
-import { Component } from "base/component"
+import { Component } from 'base/component'
 
-const tag = "demo-gallery"
+const tag = 'demo-gallery'
 export class GalleryDemo extends Component {
   init(context) {
     return super.init(context)
@@ -32,20 +32,29 @@ export class GalleryDemo extends Component {
       images.push(`https://picsum.photos/id/102${i}/500`)
     }
 
-    return images.join("|")
+    return images.join('|')
   }
 }
 
 const styles = /* css */ `
-.demo-gallery{
+.demo-gallery {
   width:100%;
 }  
-.ark-gallery{
-    min-width:40%;
-    max-width: 80%;
-  }
 
-h1{
+.ark-gallery {
+    min-width:40%;
+    max-width: 100%;
+}
+
+.ark-gallery__image {
+  align-items: center;
+}
+
+.ark-gallery__selected {
+  width: 100%;
+}
+
+h1 {
   align-self: flex-start;
 }
 `
