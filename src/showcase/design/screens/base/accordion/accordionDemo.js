@@ -2,7 +2,7 @@ import { Component } from 'base/component'
 
 const tag = 'demo-accordion'
 export class AccordionDemo extends Component {
-  render () {
+  render() {
     this.innerHTML = /* html */ `
     <h1>Normal</h1>  
     <ark-accordion>
@@ -77,6 +77,7 @@ const styles = /* css */ `
           --primary: rgb(41, 31, 177);
         }
         .demo-accordion{
+          margin: 0 auto;
           padding: 1rem;
           display: block;
           width: 70vw;
