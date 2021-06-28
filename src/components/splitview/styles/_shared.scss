@@ -17,9 +17,13 @@
   }
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: none;
   width: 100%;
   height: 100%;
+  
+  @media (min-width: theme.$mobile) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
   &>*:first-child {
     border-right: 2px solid rgba($color: gray, $alpha: 0.3);
@@ -127,6 +131,9 @@
     }
 
     @media (min-width: theme.$mobile) {
+      .ark-splitview {
+        grid-template-columns: none;
+      }
       & {
         overflow: auto;
         position: initial;
