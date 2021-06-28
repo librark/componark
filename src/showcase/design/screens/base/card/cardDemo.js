@@ -1,6 +1,6 @@
-import { Component } from "base/component"
+import { Component } from 'base/component'
 // @ts-ignore
-import Image from "./assets/building.jpg"
+import Image from './assets/building.jpg'
 
 export class CardDemo extends Component {
   init(context) {
@@ -50,17 +50,21 @@ export class CardDemo extends Component {
   }
 
   get card() {
-    return this.select("ark-card")
+    return this.select('ark-card')
   }
 }
 
 const styles = /* css */ `
-  :root{
+  :root {
     --primary: #1c1c3d;
   }
-  .ark-card{
+  .demo-card {
+    display: grid;
+    justify-items: center;
+  }
+  .ark-card {
   min-width: 300px;
   max-width: 50%
   }
 `
-Component.define("demo-card", CardDemo, styles)
+Component.define('demo-card', CardDemo, styles)
