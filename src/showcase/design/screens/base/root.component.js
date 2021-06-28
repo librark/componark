@@ -1,9 +1,9 @@
-import hljs from "highlight.js/lib/core"
-import "highlight.js/styles/github.css"
-import xml from "highlight.js/lib/languages/xml"
-import { Component } from "base/component"
+import hljs from 'highlight.js/lib/core'
+import 'highlight.js/styles/github.css'
+import xml from 'highlight.js/lib/languages/xml'
+import { Component } from 'base/component'
 
-hljs.registerLanguage("html", xml)
+hljs.registerLanguage('html', xml)
 hljs.initHighlightingOnLoad()
 
 // @ts-ignore
@@ -12,7 +12,7 @@ export const version = VERSION
 
 const design = process.env.ARK_DESIGN
 
-const tag = "app-root"
+const tag = 'app-root'
 export class RootComponent extends Component {
   render() {
     this.content = /* html */ `
@@ -42,7 +42,7 @@ export class RootComponent extends Component {
         </a>
         `
           )
-          .join("")}
+          .join('')}
     </aside>
 
     <section class="app-root__content" data-content></section>
@@ -55,7 +55,7 @@ export class RootComponent extends Component {
   /** @param {Component} component */
   setContentComponent(component) {
     if (!component) return
-    const container = this.select("[data-content]")
+    const container = this.select('[data-content]')
 
     container.firstChild?.remove()
     container.append(component)
@@ -71,7 +71,7 @@ export class RootComponent extends Component {
   /** @param {CustomEvent} event */
   onListItemSelected(event) {
     this.dispatchEvent(
-      new CustomEvent("navigate", {
+      new CustomEvent('navigate', {
         bubbles: true,
         detail: { path: event.detail.data.path },
       })
@@ -79,41 +79,41 @@ export class RootComponent extends Component {
   }
 
   showMenu() {
-    this.querySelector(".app-root__menu").addEventListener("click", () => {
-      this.querySelector(".app-root__sidebar").style.display = "grid"
+    this.querySelector('.app-root__menu').addEventListener('click', () => {
+      this.querySelector('.app-root__sidebar').style.display = 'grid'
     })
   }
 
   get locations() {
     return [
-      { name: "Accordion", path: "/base/accordion" },
-      { name: "Alert", path: "/base/alert" },
-      { name: "Audio", path: "/base/audio" },
-      { name: "Button", path: "/base/button" },
-      { name: "Camera", path: "/base/camera" },
-      { name: "Card", path: "/base/card" },
-      { name: "Chart", path: "/base/chart" },
-      { name: "Checkbox", path: "/base/checkbox" },
-      { name: "Droparea", path: "/base/droparea" },
-      { name: "Gallery", path: "/base/gallery" },
-      { name: "Icon", path: "/base/icon" },
-      { name: "List", path: "/base/list" },
-      { name: "Input", path: "/base/input" },
-      { name: "Location", path: "/base/location" },
-      { name: "Map", path: "/base/map" },
-      { name: "Modal", path: "/base/modal" },
-      { name: "Multiselect", path: "/base/multiselect" },
-      { name: "Navbar", path: "/base/navbar" },
-      { name: "Paginator", path: "/base/paginator" },
-      { name: "Radio", path: "/base/radio" },
-      { name: "Select", path: "/base/select" },
-      { name: "Sidebar", path: "/base/sidebar" },
-      { name: "Signature", path: "/base/signature" },
-      { name: "Spinner", path: "/base/spinner" },
-      { name: "SplitView", path: "/base/splitview" },
-      { name: "Table", path: "/base/table" },
-      { name: "Tabs", path: "/base/tabs" },
-      { name: "Tooltip", path: "/base/tooltip" },
+      { name: 'Accordion', path: '/base/accordion' },
+      { name: 'Alert', path: '/base/alert' },
+      { name: 'Audio', path: '/base/audio' },
+      { name: 'Button', path: '/base/button' },
+      { name: 'Camera', path: '/base/camera' },
+      { name: 'Card', path: '/base/card' },
+      { name: 'Chart', path: '/base/chart' },
+      { name: 'Checkbox', path: '/base/checkbox' },
+      { name: 'Droparea', path: '/base/droparea' },
+      { name: 'Gallery', path: '/base/gallery' },
+      { name: 'Icon', path: '/base/icon' },
+      { name: 'List', path: '/base/list' },
+      { name: 'Input', path: '/base/input' },
+      { name: 'Location', path: '/base/location' },
+      { name: 'Map', path: '/base/map' },
+      { name: 'Modal', path: '/base/modal' },
+      { name: 'Multiselect', path: '/base/multiselect' },
+      { name: 'Navbar', path: '/base/navbar' },
+      { name: 'Paginator', path: '/base/paginator' },
+      { name: 'Radio', path: '/base/radio' },
+      { name: 'Select', path: '/base/select' },
+      { name: 'Sidebar', path: '/base/sidebar' },
+      { name: 'Signature', path: '/base/signature' },
+      { name: 'Spinner', path: '/base/spinner' },
+      { name: 'SplitView', path: '/base/splitview' },
+      { name: 'Table', path: '/base/table' },
+      { name: 'Tabs', path: '/base/tabs' },
+      { name: 'Tooltip', path: '/base/tooltip' },
       //{ name: 'TreeTable', path: '/base/treetable' },
       //{ name: 'Zone', path: '/base/zone' },
     ]
@@ -147,14 +147,14 @@ body {
   --xl: 3rem;
 }
 
-.app-root {
+.${tag} {
   display: grid;
   grid-template-rows: 0.05fr 1fr;
   font-family: 'Cairo', helvetica, sans-serif;
   letter-spacing: 0.02em;
 }
 
-.app-root__navbar {
+.${tag}__navbar {
   grid-column: 1 / 13;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -170,45 +170,46 @@ body {
   font-size: 2.5rem;
 }
 
-.app-root__navitem {
+.${tag}__navitem {
   text-decoration: none;
   padding: 2vw;
   color: cyan;
   height:auto;
 }
 
-.app-root__sideitems{
+.${tag}__sideitems {
   display: flex;
   flex-direction: column;
 }
 
-.app-root__navitem,
-.app-root__sideitem {
+.${tag}__navitem,
+.${tag}__sideitem {
   transition: background 0.2s ease-in-out;
 }
 
-.app-root__navitem:hover,
-.app-root__sideitem:hover {
+.${tag}__navitem:hover,
+.${tag}__sideitem:hover {
   background-color: white;
   color:black;
 }
 
-.app-root__brand {
+.${tag}__brand {
   display: grid;
   align-items: center;
   background: white;
   padding: 0 1rem;
-  width: 100%;
   height: 100%;
+  width: fit-content;
+  justify-self: start;
 }
 
-.app-root__brand a {
+.${tag}__brand a {
   text-decoration: none;
   text-align: center;
   margin: 0;
 }
 
-.app-root__actions{
+.${tag}__actions {
   display: grid;
   grid-auto-flow: column;
   align-items: center;
@@ -216,20 +217,20 @@ body {
   grid-column: 6;
 }
 
-.app-root__title {
+.${tag}__title {
   all: inherit;
   font-weight: 700;
   font-size: 1.3rem;
 }
 
-.app-root__subtitle {
+.${tag}__subtitle {
   all: inherit;
   font-size:0.9rem;
   font-weight: 300;
   text-align:center;
 }
 
-.app-root__sidebar {
+.${tag}__sidebar {
   grid-row: 2 / -1;
   display: grid;
   background-color: #334455;
@@ -239,24 +240,24 @@ body {
   width: fit-content;
 }
 
-.app-root__navbar-brand{
+.${tag}__navbar-brand {
   display: none;
 }
 
-.app-root__sideitem {
+.${tag}__sideitem {
   text-decoration: none;
   padding: 1vw;
   color: cyan;
 }
 
-.app-root__menu {
+.${tag}__menu {
   display: none;
   text-align:center;
   user-select: none;
   cursor: pointer;
 }
 
-.app-root__content {
+.${tag}__content {
   grid-area: 2 / 2 / auto / 13;
   padding: 2vmin;
   overflow-x: hidden;
@@ -264,23 +265,26 @@ body {
 }
 
 @media only screen and (max-width: 800px) {
-  .app-root__sidebar{
+  .${tag}__sidebar {
     display: none;
     position: absolute;
     z-index: 1000;
     width: 150px;
   }
-  .app-root__menu{
+
+  .${tag}__menu {
     display: grid;
   }
-  .app-root__content{
+
+  .${tag}__content {
     grid-area: 2 / 1 / auto / 13;
   }
-  .app-root__brand{
+
+  .${tag}__brand {
     grid-column: 3 / 5;
+    justify-self: center;
   }
+
 }
-
-
 `
 Component.define(tag, RootComponent, styles)
