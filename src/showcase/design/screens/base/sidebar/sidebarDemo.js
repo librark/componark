@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from "base/component"
 
 export class SidebarDemo extends Component {
   init(context) {
@@ -14,7 +14,7 @@ export class SidebarDemo extends Component {
         </ark-button>
       </div>
 
-      <ark-sidebar>
+      <ark-sidebar side="left">
         <div slot="header">My Menu</div>
         <div>body</div>
         <div slot="footer">footer</div>
@@ -29,8 +29,8 @@ export class SidebarDemo extends Component {
   }
 
   _onClick(event) {
-    const sidebar = this.querySelector('ark-sidebar')
-    sidebar['open']()
+    const sidebar = this.querySelector("ark-sidebar")
+    sidebar["open"]()
   }
 }
-Component.define('demo-sidebar', SidebarDemo)
+Component.define("demo-sidebar", SidebarDemo)

@@ -5,13 +5,14 @@
   &__menu {
     box-shadow: 4px 3px 5px 3px rgba(0, 0, 0, 0.25);
   }
-  &[opened] {
+
+  &[opened][side="left"] {
     .ark-sidebar__menu {
-      animation: swipe;
+      animation: swipe-left;
       animation-duration: 0.25s;
       animation-timing-function: ease-in-out;
     }
-    @keyframes swipe {
+    @keyframes swipe-left {
       from {
         opacity: 0;
         transform: translateX(-280px);
@@ -22,6 +23,25 @@
       }
     }
   }
+
+  &[opened][side="right"] {
+    .ark-sidebar__menu {
+      animation: swipe-right;
+      animation-duration: 0.25s;
+      animation-timing-function: ease-in-out;
+    }
+    @keyframes swipe-right {
+      from {
+        opacity: 0;
+        transform: translateX(280px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0px);
+      }
+    }
+  }
+
   &__header {
     background: var(--primary);
     color: white;
@@ -29,11 +49,13 @@
     font-weight: 700;
     border-bottom: 4px solid rgba(128, 128, 128, 0.87);
   }
+
   &__footer {
     background: var(--primary);
     color: white;
     border-top: 4px solid rgba(128, 128, 128, 0.87);
   }
+
   &__body {
     box-sizing: border-box;
     padding: 1rem;
