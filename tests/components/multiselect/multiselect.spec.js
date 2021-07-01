@@ -25,19 +25,43 @@ describe('Multiselect', () => {
     expect(multiselect).toEqual(multiselect.init())
   }) 
 
-  it('popup can be open and closed', () => {
+  it('Click on field opens list', () => {
     container.innerHTML = /* html */`
     <ark-multiselect></ark-multiselect>
     `
     const multiselect = container.querySelector('ark-multiselect')
     const field = multiselect.querySelector('.ark-multiselect__field')
     const popup =  multiselect.querySelector('.ark-multiselect__popup')
+    
     field.click()
     expect(popup.style.display).toBe('block')  
     expect(multiselect.isOpened).toBeTruthy()
-    field.click()  
-    expect(popup.style.display).toBe('none')  
+  })
+  
+  it("Click on tag does not open list", () => {
+    container.innerHTML = /* html */`
+    <ark-multiselect></ark-multiselect>
+    `
+    const multiselect = container.querySelector('ark-multiselect')
+    const popup =  multiselect.querySelector('.ark-multiselect__popup')
+    
+    const myItems = [
+      '01 display',
+    ]
+    
+    multiselect.init({
+      items:myItems
+    }).render().load()
+    
+    const list = multiselect.multiselectList
+    
+    list.itemElements[0].click()   
+    
+    let tags = multiselect.querySelectorAll('.ark-multiselect__tag')
+    tags[0].click()
+
     expect(multiselect.isOpened).toBeFalsy()
+
   })
 
   it('tag can be removed',()=>{
@@ -65,7 +89,6 @@ describe('Multiselect', () => {
     
     let removeButtons = multiselect.querySelectorAll('.ark-multiselect__tag-remove-button')
   
-    
     removeButtons[0].click()
     removeButtons[1].click()
     

@@ -67,7 +67,8 @@
       }
 
 
-      &:focus {
+      &:focus,
+      &:focus-within {
         border: 2px solid var(--primary);
         outline: none;
       }
