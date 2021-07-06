@@ -1,10 +1,10 @@
-import { Component } from "../../../base/component"
-import { MultiselectList } from "./multiselect.list"
-import { MultiselectInput } from "./multiselect.input"
+import { Component } from '../../../base/component'
+import { MultiselectList } from './multiselect.list'
+import { MultiselectInput } from './multiselect.input'
 
-import { styles } from "../styles"
+import { styles } from '../styles'
 
-const tag = "ark-multiselect"
+const tag = 'ark-multiselect'
 export class Multiselect extends Component {
   constructor() {
     super()
@@ -12,7 +12,7 @@ export class Multiselect extends Component {
 
   init(context = {}) {
     this.label = this.label
-    this.field = context.field || this.field || ""
+    this.field = context.field || this.field || ''
     this.template = context.template || ((data) => `${data}`)
     this.items = context.items || []
     this.global = context.global || window
@@ -21,11 +21,11 @@ export class Multiselect extends Component {
   }
 
   reflectedProperties() {
-    return ["label"]
+    return ['label']
   }
 
   render() {
-    this.className = "ark-multiselect"
+    this.className = 'ark-multiselect'
     this.fieldContent = /* html */ `
       <ark-multiselect-input></ark-multiselect-input>
     `
@@ -40,9 +40,9 @@ export class Multiselect extends Component {
       </div>
     `
 
-    this._popup = this.select(".ark-multiselect__popup")
-    this._field = this.select(".ark-multiselect__field")
-    this._clean = this.select(".ark-multiselect__field--remove")
+    this._popup = this.select('.ark-multiselect__popup')
+    this._field = this.select('.ark-multiselect__field')
+    this._clean = this.select('.ark-multiselect__field--remove')
 
     this.addListItems()
     this.refreshField()
@@ -51,14 +51,15 @@ export class Multiselect extends Component {
   }
 
   load() {
-    this._field.addEventListener("click", this.fieldClickHandler.bind(this))
-    this._field.addEventListener("blur", this.focusOut.bind(this))
-    this._field.addEventListener("input", this.filterItems.bind(this))
+    this._field.addEventListener('click', this.fieldClickHandler.bind(this))
+    this.addEventListener('blur', this.focusOut.bind(this))
+    this._field.addEventListener('input', this.filterItems.bind(this))
     this.multiselectList.addEventListener(
-      "click",
+      'click',
       this.listClickHandler.bind(this)
     )
-    this._clean.addEventListener("click", this.cleanTags.bind(this))
+    this._clean.addEventListener('click', this.cleanTags.bind(this))
+    this.addEventListener('keydown', this.keyDownHandler.bind(this))
   }
 
   async addListItems() {
@@ -79,10 +80,10 @@ export class Multiselect extends Component {
     let text
     items.forEach((item, index) => {
       let name = this.items[index].name
-      text = !name ? item.getAttribute("field") : name
+      text = !name ? item.getAttribute('field') : name
       text.toUpperCase().indexOf(filter) > -1
-        ? (items[index].style.display = "")
-        : (items[index].style.display = "none")
+        ? (items[index].style.display = '')
+        : (items[index].style.display = 'none')
     })
   }
 
@@ -98,26 +99,26 @@ export class Multiselect extends Component {
 
   showPopup(show) {
     this.isOpened = show
-    this._popup.style.display = show ? "block" : "none"
+    this._popup.style.display = show ? 'block' : 'none'
   }
 
   selectItem(item) {
     const items = this.multiselectList.itemElements
 
-    if (item.tagName === "LI" && !item.hasAttribute("selected")) {
-      item.setAttribute("selected", "")
+    if (item.tagName === 'LI' && !item.hasAttribute('selected')) {
+      item.setAttribute('selected', '')
     }
 
     this.refreshField()
 
     items.forEach((item) => {
-      item.style.display = ""
+      item.style.display = ''
     })
   }
 
   refreshField() {
     this._field.innerHTML = this.fieldContent
-    const selectedItems = this.querySelectorAll("li[selected]")
+    const selectedItems = this.querySelectorAll('li[selected]')
 
     for (let i = 0; i < selectedItems.length; i++) {
       this._field.insertBefore(
@@ -126,7 +127,7 @@ export class Multiselect extends Component {
       )
     }
 
-    this.multiselectInput.addEventListener("focusout", this.focusOut.bind(this))
+    this.multiselectInput.addEventListener('focusout', this.focusOut.bind(this))
   }
 
   listClickHandler(event) {
@@ -135,18 +136,18 @@ export class Multiselect extends Component {
   }
 
   createTag(item) {
-    const tag = document.createElement("div")
-    tag.className = "ark-multiselect__tag"
+    const tag = document.createElement('div')
+    tag.className = 'ark-multiselect__tag'
 
-    const tagText = document.createElement("div")
-    tagText.className = "ark-multiselect__tag-text"
+    const tagText = document.createElement('div')
+    tagText.className = 'ark-multiselect__tag-text'
     tagText.textContent = item.textContent
 
-    const removeButton = document.createElement("div")
-    removeButton.className = "ark-multiselect__tag-remove-button"
-    removeButton.addEventListener("click", this.removeTag.bind(this, tag, item))
+    const removeButton = document.createElement('div')
+    removeButton.className = 'ark-multiselect__tag-remove-button'
+    removeButton.addEventListener('click', this.removeTag.bind(this, tag, item))
 
-    tag.addEventListener("click", (e) => e.stopPropagation())
+    tag.addEventListener('click', (e) => e.stopPropagation())
     tag.appendChild(tagText)
     tag.appendChild(removeButton)
     this.dispatchAlertEvent()
@@ -157,23 +158,37 @@ export class Multiselect extends Component {
     event.stopPropagation()
     this._field.blur()
     tag.remove()
-    item.style.display = "block"
-    item.removeAttribute("selected")
+    item.style.display = 'block'
+    item.removeAttribute('selected')
     this.dispatchAlertEvent()
   }
 
   cleanTags(event) {
     event.stopPropagation()
-    const selectedItems = this.querySelectorAll("li[selected]")
+    const selectedItems = this.querySelectorAll('li[selected]')
     for (let i = 0; i < selectedItems.length; i++) {
-      selectedItems[i].removeAttribute("selected")
+      selectedItems[i].removeAttribute('selected')
     }
     this.dispatchAlertEvent()
     this._field.innerHTML = this.fieldContent
   }
 
   dispatchAlertEvent() {
-    this.emit("alter", this.value)
+    this.emit('alter', this.value)
+  }
+
+  keyDownHandler(event) {
+    switch (event.code) {
+      case 'Enter':
+        this.multiselectInput.firstElementChild.focus()
+        break
+      case 'Escape':
+        this.close()
+        break
+      default:
+        this.multiselectInput.firstElementChild.focus()
+        this.open()
+    }
   }
 
   open() {
@@ -185,11 +200,11 @@ export class Multiselect extends Component {
   }
 
   get multiselectInput() {
-    return this.select("ark-multiselect-input")
+    return this.select('ark-multiselect-input')
   }
 
   get multiselectList() {
-    return /** @type {MultiselectList} */ (this.select("ark-multiselect-list"))
+    return /** @type {MultiselectList} */ (this.select('ark-multiselect-list'))
   }
 
   get value() {
@@ -198,4 +213,3 @@ export class Multiselect extends Component {
 }
 
 Component.define(tag, Multiselect, styles)
-
