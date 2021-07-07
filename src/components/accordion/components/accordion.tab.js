@@ -34,8 +34,8 @@ export class AccordionTab extends Component {
   }
 
   load() {
-    this.tabContent.addEventListener('click', (e) => {
-      e.stopImmediatePropagation()
+    this.tabContent.addEventListener('click', (event) => {
+      event.stopImmediatePropagation()
     })
   }
 
