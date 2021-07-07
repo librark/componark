@@ -7,17 +7,18 @@ const mockGlobal = () => ({
         const mockPosition = {
           coords: {
             latitude: 4,
-            longitude: 72
-          }
+            longitude: 72,
+          },
         }
         resolve(mockPosition)
-      }
-    }
-  }
+      },
+    },
+  },
 })
 
 describe('Location', () => {
   let container = null
+  jest.useFakeTimers()
   beforeEach(() => {
     container = document.createElement('div')
     document.body.appendChild(container)
@@ -33,8 +34,9 @@ describe('Location', () => {
       <ark-map></ark-map>
     `
     const map = container.querySelector('ark-map')
-    expect(map).toBeTruthy()
+    jest.runAllTimers()
 
+    expect(map).toBeTruthy()
     expect(map).toBe(map.init())
   })
 
@@ -71,5 +73,4 @@ describe('Location', () => {
 
     expect(map.select('.leaflet-marker-icon')).toBeTruthy()
   })
-
 })
