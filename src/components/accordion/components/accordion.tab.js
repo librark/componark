@@ -2,44 +2,52 @@ import { Component } from '../../../base/component'
 
 const tag = 'ark-accordion-tab'
 export class AccordionTab extends Component {
-  constructor () {
+  constructor() {
     super()
     this.defaultContent = this.defaultContent || this.innerHTML
   }
 
   /** @param {Object} context */
-  init (context = {}) {
+  init(context = {}) {
     this.binding = 'accordion-tab-listen'
     this.header = context.header
     return super.init(context)
   }
 
-  reflectedProperties () {
+  reflectedProperties() {
     return ['header', 'index']
   }
 
-  render () {
-    this.content = this.header ? /* html */`
+  render() {
+    this.content = this.header
+      ? /* html */ `
       <div class="ark-accordion-tab__header">
         <small data-accordion-tab-header>${this.header}</small>
       </div>
       <div class="ark-accordion-tab__content">
         ${this.defaultContent}
       </div>
-    ` : ''
-
+    `
+      : ''
+    this.tabContent = this.querySelector('.ark-accordion-tab__content')
     return super.render()
   }
 
-  open () {
+  load() {
+    this.tabContent.addEventListener('click', (event) => {
+      event.stopImmediatePropagation()
+    })
+  }
+
+  open() {
     this.setAttribute('active', 'true')
   }
 
-  close () {
+  close() {
     this.removeAttribute('active')
   }
 
-  toggle () {
+  toggle() {
     this.hasAttribute('active') ? this.close() : this.open()
   }
 }

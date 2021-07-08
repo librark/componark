@@ -81,11 +81,13 @@ describe('Accordion', () => {
 
     const tab1 = accordion.select('[data-tab1]')
     const tab2 = accordion.select('[data-tab2]')
+    const tabContent = tab1.querySelector('.ark-accordion-tab__content')
 
     expect(tab1.hasAttribute('active')).toBeFalsy()
     expect(tab2.hasAttribute('active')).toBeFalsy()
 
     tab1.click()
+    tabContent.click()
 
     expect(tab1.hasAttribute('active')).toBeTruthy()
     expect(tab2.hasAttribute('active')).toBeFalsy()
