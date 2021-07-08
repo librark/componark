@@ -6,7 +6,13 @@ export class MapDemo extends Component {
 
     <h1>Normal map</h1>
       <div class="ark-map-main">
-        <ark-map height="60vh" token="${this.token}" zoom="8"></ark-map>
+        <ark-map 
+          lat="2.441838" 
+          lon="-76.606804" 
+          height="60vh" 
+          token="${this.token}" 
+          zoom="20">
+          </ark-map>
       </div>
       
       <h1>Map inside a modal</h1>
@@ -17,7 +23,13 @@ export class MapDemo extends Component {
       title="Prueba mapa" 
       subtitle="Mi mapa"
       width="60%">
-        <ark-map widht="100%" token="${this.token}" zoom="30"></ark-map>
+        <ark-map 
+          widht="100%"
+          lat="2.440363"
+          lon="-76.611944" 
+          token="${this.token}" 
+          zoom="30">
+        </ark-map>
       </ark-modal>
 
       <br>  
@@ -32,6 +44,21 @@ export class MapDemo extends Component {
       
     `
     this.map = this.querySelector('.ark-map')
+    this.modalMap = this.querySelector('.ark-modal .ark-map')
+
+    this.map.addMarker('2.441838', '-76.606804')
+    this.modalMap.addMarker('2.440363', '-76.611944')
+
+    const mapMarkers = this.querySelectorAll('.leaflet-marker-icon')
+    mapMarkers[0].addEventListener('click', () => {
+      console.log('Marker works')
+    })
+
+    const mapMarkerIcon = mapMarkers[0].querySelector('img')
+    mapMarkerIcon.style.cssText = 'width:50px; border-radius: 50%;'
+    mapMarkerIcon.src =
+      'https://www.pngitem.com/pimgs/m/111-1114839_circle-people-icon-flat-png-avatar-icon-transparent.png'
+
     return super.render()
   }
 

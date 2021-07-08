@@ -8,6 +8,7 @@ import icon from '../assets/icons/marker-icon.png'
 const tag = 'ark-map'
 export class Map extends Component {
   init(context = {}) {
+    this.global = context.global || window
     this.lat = parseFloat(context.lat || this.lat || 2.44073)
     this.lon = parseFloat(context.lon || this.lon || -76.602349)
     this.zoom = parseInt(context.zoom || this.zoom || 13)
@@ -48,7 +49,7 @@ export class Map extends Component {
 
   refreshMap() {
     setTimeout(() => {
-      window.dispatchEvent(new Event('resize'))
+      this.global.dispatchEvent(new Event('resize'))
     }, 100)
   }
 
