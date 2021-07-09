@@ -114,6 +114,7 @@ export class RootComponent extends Component {
       { name: 'Table', path: '/base/table' },
       { name: 'Tabs', path: '/base/tabs' },
       { name: 'Tooltip', path: '/base/tooltip' },
+      { name: 'Translate', path: '/base/translate' },
       //{ name: 'TreeTable', path: '/base/treetable' },
       //{ name: 'Zone', path: '/base/zone' },
     ]
