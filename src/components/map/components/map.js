@@ -3,7 +3,7 @@ import { uuid } from '../../../base/utils'
 import * as leaflet from 'leaflet'
 import { styles } from '../styles'
 // @ts-ignore
-import icon from '../assets/icons/marker-icon.png'
+import defaultIcon from '../assets/icons/marker-icon.png'
 
 const tag = 'ark-map'
 export class Map extends Component {
@@ -53,11 +53,15 @@ export class Map extends Component {
     }, 100)
   }
 
-  addMarker(lat, lon) {
-    this.lib
+  addMarker(lat, lon, imageURL) {
+    const marker = this.lib
       .marker([lat, lon], {
         icon: this.lib.divIcon({
-          html: /* html */ `<img src="${icon}"/>`,
+          html: /* html */ imageURL
+            ? `<div class="ark-map__icon--image" style="background-image: url(${imageURL});"/>`
+            : `<img src="${defaultIcon}"/>`,
+          iconSize: [50, 50],
+          className: 'ark-map__icon',
         }),
       })
       .addTo(this.map)

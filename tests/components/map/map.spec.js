@@ -73,4 +73,19 @@ describe('Location', () => {
 
     expect(map.select('.leaflet-marker-icon')).toBeTruthy()
   })
+
+  it('Can create marker with a custom image', () => {
+    container.innerHTML = `
+      <ark-map></ark-map>
+    `
+    const map = container.querySelector('ark-map')
+
+    const imageURL = 'https://www.patitos.com/patito_uno'
+    map.addMarker(2.43, -76.61, imageURL)
+    const icon = map.select('.ark-map__icon')
+
+    expect(imageURL).toBe(
+      icon.firstElementChild.style.backgroundImage.replace(/(url\(|\)|")/g, '')
+    )
+  })
 })

@@ -11,7 +11,7 @@ export class MapDemo extends Component {
           lon="-76.606804" 
           height="60vh" 
           token="${this.token}" 
-          zoom="20">
+          zoom="16">
           </ark-map>
       </div>
       
@@ -46,18 +46,22 @@ export class MapDemo extends Component {
     this.map = this.querySelector('.ark-map')
     this.modalMap = this.querySelector('.ark-modal .ark-map')
 
-    this.map.addMarker('2.441838', '-76.606804')
     this.modalMap.addMarker('2.440363', '-76.611944')
+    this.map.addMarker(
+      '2.441838',
+      '-76.606804',
+      'https://xavierferras.com/wp-content/uploads/2019/02/266-Persona.jpg'
+    )
+    this.map.addMarker(
+      '2.443839',
+      '-76.607905',
+      'https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg'
+    )
 
     const mapMarkers = this.querySelectorAll('.leaflet-marker-icon')
     mapMarkers[0].addEventListener('click', () => {
       console.log('Marker works')
     })
-
-    const mapMarkerIcon = mapMarkers[0].querySelector('img')
-    mapMarkerIcon.style.cssText = 'width:50px; border-radius: 50%;'
-    mapMarkerIcon.src =
-      'https://www.pngitem.com/pimgs/m/111-1114839_circle-people-icon-flat-png-avatar-icon-transparent.png'
 
     return super.render()
   }
