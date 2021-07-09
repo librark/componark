@@ -1,6 +1,17 @@
 @mixin ark-map() {
   display: block;
 
+  &__icon--image {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: 2px solid rgb(173, 172, 172);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+  }
+
   &__map {
     height: 100%;
     width: 100%;
