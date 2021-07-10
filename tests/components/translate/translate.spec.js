@@ -145,7 +145,7 @@ describe('Translate', () => {
   it('translates the page content on language changes', () => {
     const translateContainer = document.createElement('div')
     translateContainer.innerHTML = `
-    <ark-translate>
+    <ark-translate languages="es,en">
       <template>{
         "default": {
           "es": {

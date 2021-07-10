@@ -4,7 +4,6 @@ const tag = 'ark-translate'
 export class Translate extends Component {
   init (context = {}) {
     this.global = context.global || window
-    this.language = context.language || this.language || 'es'
     this.namespace = context.namespace || this.namespace || 'default'
     this.root = context.root || this.root || 'body'
     this.dictionary = context.dictionary || {}
@@ -19,15 +18,19 @@ export class Translate extends Component {
   }
 
   reflectedProperties() {
-    return ['language', 'namespace', 'root']
+    return ['languages', 'namespace', 'root']
   }
 
   render () {
+    const languages = this.languages.split(',').filter(
+      item => Boolean(item) && item.trim())
+    if (!languages.length) return super.render()
+
     this.content = `
     <select listen on-change="onLanguageChanged">
-      <option value="en">English</option>
-      <option value="es">Español</option>
-      <option value="fr">France</option>
+      ${languages.map(code => `
+        <option value="${code}">${LANGUAGE_LIST[code]['name']}</option>
+      `)}
     </select>
     `
     return super.render()
@@ -39,7 +42,7 @@ export class Translate extends Component {
   }
 
   transliterate(options = {}) {
-    const language = options.language || this.language
+    const language = options.language || 'es'
     const root = this.global.document.querySelector(
       options.root || this.root)
     for (const node of root.querySelectorAll('[data-i18n]')) {
@@ -53,3 +56,11 @@ export class Translate extends Component {
   }
 }
 Component.define(tag, Translate)
+
+
+const LANGUAGE_LIST = {
+  es: {name: 'Español'},
+  en: {name: 'English'},
+  fr: {name: 'Français'},
+  pt: {name: 'Português'}
+}

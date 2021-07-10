@@ -7,7 +7,7 @@ export class TranslateDemo extends Component {
     this.content = /* html */ `
 
     <span>
-      <ark-translate>
+      <ark-translate languages='en,es'>
         <template>
           {
             "default": {
