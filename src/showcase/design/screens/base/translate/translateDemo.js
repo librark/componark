@@ -5,32 +5,37 @@ export class TranslateDemo extends Component {
   render() {
     const context = JSON.stringify({name: 'Esteban'})
     this.content = /* html */ `
-    <ark-translate>
-      <template>
-        {
-          "default": {
-            "es": {
-              "world": "Mundo",
-              "magic": "Mágico"
-            },
-            "en": {
-              "world": "World",
-              "magic": "Magic"
-            },
-            "fr": {
-              "world": "Monde",
-              "magic": "Magique"
+
+    <span>
+
+      <ark-translate>
+        <template>
+          {
+            "default": {
+              "es": {
+                "world": "Mundo",
+                "magic": "Mágico"
+              },
+              "en": {
+                "world": "World",
+                "magic": "Magic"
+              },
+              "fr": {
+                "world": "Monde",
+                "magic": "Magique"
+              }
             }
           }
-        }
-      </template>
-    </ark-translate>
-    <div>
+        </template>
+      </ark-translate>
+    </span>
+
+    <span>
       Hello <span data-i18n="world">World</span>
-      <p>
+      <span>
         <strong data-i18n="magic">Magic</strong>
-      </p>
-    </div>
+      </span>
+    </span>
     `
 
     return super.render()
