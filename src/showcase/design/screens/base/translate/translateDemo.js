@@ -7,7 +7,6 @@ export class TranslateDemo extends Component {
     this.content = /* html */ `
 
     <span>
-
       <ark-translate>
         <template>
           {

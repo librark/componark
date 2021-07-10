@@ -141,4 +141,34 @@ describe('Translate', () => {
     `
     expect(root).toEqual(expectedRoot)
   })
+
+  it('translates the page content on language changes', () => {
+    const translateContainer = document.createElement('div')
+    translateContainer.innerHTML = `
+    <ark-translate>
+      <template>{
+        "default": {
+          "es": {
+            "hello": "Hola",
+            "world": "Mundo"
+          },
+          "en": {
+            "hello": "Hello",
+            "world": "World"
+          }
+        }
+      }</template>
+    </ark-translate>
+    `
+    container.appendChild(translateContainer)
+    const translate = /** @type Translate **/ (
+      translateContainer.querySelector('ark-translate'))
+    const mockEvent = {target: {value: 'en'}}
+    let givenOptions = null
+    translate.transliterate = (options) => { givenOptions = options }
+
+    translate.onLanguageChanged(mockEvent)
+
+    expect(givenOptions).toEqual({language: 'en'})
+  })
 })
