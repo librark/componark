@@ -1,6 +1,6 @@
-import { Component } from '../../../base/component'
+import { Component } from "../../../base/component"
 
-const tag = 'ark-accordion-tab'
+const tag = "ark-accordion-tab"
 export class AccordionTab extends Component {
   constructor() {
     super()
@@ -9,13 +9,13 @@ export class AccordionTab extends Component {
 
   /** @param {Object} context */
   init(context = {}) {
-    this.binding = 'accordion-tab-listen'
+    this.binding = "accordion-tab-listen"
     this.header = context.header
     return super.init(context)
   }
 
   reflectedProperties() {
-    return ['header', 'index']
+    return ["header", "index"]
   }
 
   render() {
@@ -28,27 +28,27 @@ export class AccordionTab extends Component {
         ${this.defaultContent}
       </div>
     `
-      : ''
-    this.tabContent = this.querySelector('.ark-accordion-tab__content')
+      : ""
+    this.tabContent = this.querySelector(".ark-accordion-tab__content")
     return super.render()
   }
 
-  load() {
-    this.tabContent && this.tabContent.addEventListener('click', (event) => {
+  async load() {
+    this.tabContent && this.tabContent.addEventListener("click", (event) => {
       event.stopImmediatePropagation()
     })
   }
 
   open() {
-    this.setAttribute('active', 'true')
+    this.setAttribute("active", "true")
   }
 
   close() {
-    this.removeAttribute('active')
+    this.removeAttribute("active")
   }
 
   toggle() {
-    this.hasAttribute('active') ? this.close() : this.open()
+    this.hasAttribute("active") ? this.close() : this.open()
   }
 }
 Component.define(tag, AccordionTab)
