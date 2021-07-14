@@ -7,30 +7,12 @@ export class TranslateDemo extends Component {
     this.content = /* html */ `
 
     <span>
-      <ark-translate languages='en,es'>
-        <template>
-          {
-            "default": {
-              "es": {
-                "world": "Mundo",
-                "magic": "Mágico"
-              },
-              "en": {
-                "world": "World",
-                "magic": "Magic"
-              },
-              "fr": {
-                "world": "Monde",
-                "magic": "Magique"
-              }
-            }
-          }
-        </template>
-      </ark-translate>
+      <ark-translate languages='en,es'></ark-translate>
     </span>
 
     <span>
-      Hello <span data-i18n="world">World</span>
+      <span data-i18n="hello">Hello</span>
+      <span data-i18n="world">World</span>
       <span>
         <strong data-i18n="magic">Magic</strong>
       </span>

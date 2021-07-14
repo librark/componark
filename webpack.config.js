@@ -126,6 +126,11 @@ module.exports = (env, argv) => {
         VERSION: JSON.stringify(require("./package.json").version),
         TARGET: JSON.stringify(target),
       }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: "src/showcase/locales/", to: "locales/" }
+        ],
+      }),
       new HtmlWebpackPlugin({
         title: "Componark",
         template: "./src/showcase/index.html",

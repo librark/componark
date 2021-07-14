@@ -38,6 +38,7 @@ export class Translate extends Component {
   }
 
   async onLanguageChanged(event) {
+    event.stopPropagation()
     const language = event.target.value
     await this.transliterate({ language })
   }
@@ -67,6 +68,9 @@ export class Translate extends Component {
     const response = await this.global.fetch(url)
     
     dictionary = await response.json()
+
+    this.dictionary[language] || (this.dictionary[language] = {})
+    this.dictionary[language][namespace] = dictionary
 
     return dictionary
   }

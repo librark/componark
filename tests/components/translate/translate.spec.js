@@ -168,7 +168,8 @@ describe('Translate', () => {
     container.appendChild(translateContainer)
     const translate = /** @type Translate **/ (
       translateContainer.querySelector('ark-translate'))
-    const mockEvent = {target: {value: 'en'}}
+    const mockEvent = {
+      target: {value: 'en'}, stopPropagation: () => {}}
     let givenOptions = null
     translate.transliterate = async (options) => {
       givenOptions = options }
