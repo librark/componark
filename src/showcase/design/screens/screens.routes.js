@@ -14,15 +14,7 @@ export function setMainRoutes (mainComponent, resolver, prefix) {
         const _prefix = prefix + 'base/'
         setMainComponent(mainComponent, module.hub(resolver, _prefix))
       }
-    },
-    //{
-      //path: 'blank',
-      //action: async () => {
-        //const module = await import('./blank/index.js')
-        //const _prefix = prefix + 'blank/'
-        //setMainComponent(mainComponent, module.hub(resolver, _prefix))
-      //}
-    //}
+    }
   ])
 }
 
