@@ -38,12 +38,14 @@ describe('Translate', () => {
     translateContainer.innerHTML = `
     <ark-translate>
       <template>{
-        "default": {
-          "en": {
+        "en": {
+          "default": {
             "hello": "Hello",
             "world": "World"
-          },
-          "es": {
+          }
+        },
+        "es": {
+          "default": {
             "hello": "Hola",
             "world": "Mundo"
           }
@@ -82,22 +84,22 @@ describe('Translate', () => {
     translateContainer.innerHTML = `
     <ark-translate>
       <template>{
-        "default": {
-          "es": {
+        "es": {
+          "default": {
             "hello": "Hola",
             "world": "Mundo"
           },
-          "en": {
-            "hello": "Hello",
-            "world": "World"
-          }
-        },
-        "introModule": {
-          "es": {
+          "introModule": {
             "hello": "Quiubo",
             "world": "Gente"
+          }
+        },
+        "en": {
+          "default": {
+            "hello": "Hello",
+            "world": "World"
           },
-          "en": {
+          "introModule": {
             "hello": "Hey",
             "world": "Folks"
           }
@@ -109,7 +111,7 @@ describe('Translate', () => {
     const translate = /** @type Translate **/ (
       translateContainer.querySelector('ark-translate'))
 
-    let options = { namespace: 'introModule', language: 'en' }
+    let options = { language: 'en', namespace: 'introModule' }
     await translate.transliterate(options)
 
     const expectedRoot = document.createElement('div')
@@ -148,12 +150,14 @@ describe('Translate', () => {
     translateContainer.innerHTML = `
     <ark-translate languages="es,en">
       <template>{
-        "default": {
-          "es": {
+        "es": {
+          "default": {
             "hello": "Hola",
             "world": "Mundo"
-          },
-          "en": {
+          }
+        },
+        "en": {
+          "default": {
             "hello": "Hello",
             "world": "World"
           }

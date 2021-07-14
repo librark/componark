@@ -49,15 +49,15 @@ export class Translate extends Component {
     for (const node of root.querySelectorAll('[data-i18n]')) {
       const key = node.dataset.i18n
       const namespace = options.namespace || this.namespace
-      const dictionary = await this.resolveDictionary(namespace, language) 
+      const dictionary = await this.resolveDictionary(language, namespace) 
 
       node.textContent = dictionary[key] || node.textContent
     }
   }
 
-  async resolveDictionary(namespace, language) {
-    let dictionary = ((this.dictionary[namespace]
-        || {})[language] || null)
+  async resolveDictionary(language, namespace) {
+    let dictionary = ((this.dictionary[language]
+        || {})[namespace] || null)
 
     if (dictionary !== null) return dictionary
 
