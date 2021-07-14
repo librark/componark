@@ -4,6 +4,7 @@ const tag = 'ark-translate'
 export class Translate extends Component {
   init (context = {}) {
     this.global = context.global || window
+    this.endpoint = context.endpoint || this.endpoint || '/locales'
     this.namespace = context.namespace || this.namespace || 'default'
     this.root = context.root || this.root || 'body'
     this.dictionary = context.dictionary || {}
@@ -18,7 +19,7 @@ export class Translate extends Component {
   }
 
   reflectedProperties() {
-    return ['languages', 'namespace', 'root']
+    return ['languages', 'endpoint', 'namespace', 'root']
   }
 
   render () {
@@ -36,24 +37,40 @@ export class Translate extends Component {
     return super.render()
   }
 
-  onLanguageChanged(event) {
+  async onLanguageChanged(event) {
     const language = event.target.value
-    this.transliterate({ language })
+    await this.transliterate({ language })
   }
 
-  transliterate(options = {}) {
+  async transliterate(options = {}) {
     const language = options.language || 'es'
     const root = this.global.document.querySelector(
       options.root || this.root)
     for (const node of root.querySelectorAll('[data-i18n]')) {
       const key = node.dataset.i18n
       const namespace = options.namespace || this.namespace
-      const dictionary = ((this.dictionary[namespace]
-        || {})[language] || {})
+      const dictionary = await this.resolveDictionary(namespace, language) 
 
       node.textContent = dictionary[key] || node.textContent
     }
   }
+
+  async resolveDictionary(namespace, language) {
+    let dictionary = ((this.dictionary[namespace]
+        || {})[language] || null)
+
+    if (dictionary !== null) return dictionary
+
+    if (!this.global.fetch) return {}
+    
+    const url = `${this.endpoint}/${language}/${namespace}.json`
+    const response = await this.global.fetch(url)
+    
+    dictionary = await response.json()
+
+    return dictionary
+  }
+
 }
 Component.define(tag, Translate)
 
