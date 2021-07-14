@@ -73,10 +73,10 @@ describe('Translate', () => {
   it('might use different translation languages and namespaces', async () => {
     const root = document.createElement('div')
     root.innerHTML = `
-    <span data-i18n="hello">hello</span>
+    <span data-i18n="introModule:hello">hello</span>
     <p>
-      <span data-i18n="happy">happy</span>!!!
-      <span data-i18n="world">world</span>!!!
+      <span data-i18n="introModule:happy">happy</span>!!!
+      <span data-i18n="introModule:world">world</span>!!!
     </p>
     `
     container.appendChild(root)
@@ -111,35 +111,38 @@ describe('Translate', () => {
     const translate = /** @type Translate **/ (
       translateContainer.querySelector('ark-translate'))
 
-    let options = { language: 'en', namespace: 'introModule' }
+    let options = { language: 'en', }
     await translate.transliterate(options)
 
     const expectedRoot = document.createElement('div')
     expectedRoot.innerHTML = `
-    <span data-i18n="hello">Hey</span>
+    <span data-i18n="introModule:hello">Hey</span>
     <p>
-      <span data-i18n="happy">happy</span>!!!
-      <span data-i18n="world">Folks</span>!!!
+      <span data-i18n="introModule:happy">happy</span>!!!
+      <span data-i18n="introModule:world">Folks</span>!!!
     </p>
     `
     expect(root).toEqual(expectedRoot)
 
+
+    // Unknown Namespace:
+
     root.innerHTML = `
-    <span data-i18n="hello">Hello</span>
+    <span data-i18n="unknown:hello">Hello</span>
     <p>
-      <span data-i18n="happy">Happy</span>!!!
-      <span data-i18n="world">World</span>!!!
+      <span data-i18n="unknown:happy">Happy</span>!!!
+      <span data-i18n="unknown:world">World</span>!!!
     </p>
     `
 
-    options = { namespace: 'unknown', language: 'es' }
+    options = { language: 'es' }
     await translate.transliterate(options)
 
     expectedRoot.innerHTML = `
-    <span data-i18n="hello">Hello</span>
+    <span data-i18n="unknown:hello">Hello</span>
     <p>
-      <span data-i18n="happy">Happy</span>!!!
-      <span data-i18n="world">World</span>!!!
+      <span data-i18n="unknown:happy">Happy</span>!!!
+      <span data-i18n="unknown:world">World</span>!!!
     </p>
     `
     expect(root).toEqual(expectedRoot)

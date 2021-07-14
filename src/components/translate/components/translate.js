@@ -47,13 +47,26 @@ export class Translate extends Component {
     const language = options.language || 'es'
     const root = this.global.document.querySelector(
       options.root || this.root)
+
     for (const node of root.querySelectorAll('[data-i18n]')) {
-      const key = node.dataset.i18n
-      const namespace = options.namespace || this.namespace
-      const dictionary = await this.resolveDictionary(language, namespace) 
+      const { key, namespace } = this.parseKey(node.dataset.i18n)
+      const dictionary = await this.resolveDictionary(language, namespace)
 
       node.textContent = dictionary[key] || node.textContent
     }
+  }
+
+  parseKey(value) {
+    let key = value
+    let namespace = this.namespace
+
+    const splitList  = value.split(':')
+    if (splitList.length > 1) {
+      namespace = splitList[0]
+      key = splitList[1]
+    }
+
+    return { key, namespace }
   }
 
   async resolveDictionary(language, namespace) {
