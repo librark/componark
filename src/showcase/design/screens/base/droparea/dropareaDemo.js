@@ -15,6 +15,8 @@ export class DropareaDemo extends Component {
         <div class="droparea-demo">
             <p>Default(multi)</p>
             <ark-droparea listen on-alter="onFileList" max-size="2"></ark-droparea>
+
+            <h4>Output as objectURL:</h4>
             <span data-file-multi></span>
         </div>
         <div class="droparea-demo">
@@ -29,14 +31,18 @@ export class DropareaDemo extends Component {
     return super.render()
   }
 
-  onFileList(event) {
+  async onFileList(event) {
     const element = this.querySelector('[data-file-multi]')
-    const nameList = []
+    const urlList = []
+    // await event.detail.forEach((blobUrl) => {
+    //   let blob = fetch(blobUrl).then((r) => r.blob())
+    //   blob.then((data) => console.log(data))
+    // })
     if (element) {
-      event.detail.forEach((file, index) =>
-        nameList.push(` ${index} : ${file.name} `)
+      event.detail.forEach((url, index) =>
+        urlList.push(` ${index} : "${url}" `)
       )
-      element.textContent = nameList.join()
+      element.textContent = urlList.join()
     }
   }
 }

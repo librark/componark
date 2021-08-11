@@ -1,6 +1,5 @@
 import { Droparea } from 'components/droparea'
-
-import { DropareaGallery } from '../../../src/components/droparea/components/droparea-preview'
+import { DropareaPreview } from '../../../src/components/droparea/components/droparea-preview'
 
 describe('Droparea', () => {
   const createBubbledEvent = (type, props = {}) => {
@@ -122,7 +121,7 @@ describe('Droparea', () => {
     expect(droparea.fileList[1]).toBeFalsy()
   })
 
-  it('Returns the file list', () => {
+  it('Returns the file list as object URL', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
