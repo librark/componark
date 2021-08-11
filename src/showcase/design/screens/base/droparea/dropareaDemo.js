@@ -14,7 +14,7 @@ export class DropareaDemo extends Component {
         </h1>
         <div class="droparea-demo">
             <p>Default(multi)</p>
-            <ark-droparea listen on-alter="onFileList></ark-droparea>
+            <ark-droparea listen on-alter="onFileList"></ark-droparea>
 
             <h4>Output as objectURL:</h4>
             <div data-file-multi></div>
