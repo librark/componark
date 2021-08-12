@@ -145,6 +145,7 @@ describe('Droparea', () => {
 
     dropZone.dispatchEvent(dropEvent)
     expect(droparea.fileList.length).toEqual(2)
+    expect(droparea.urlList.length).toEqual(2)
   })
 
   it('Can select files from input', () => {

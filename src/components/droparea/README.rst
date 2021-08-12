@@ -56,4 +56,13 @@ Properties
 | accept  | string  | (any)      | Indicates the type of files, with values separated by commas: (png, jpeg, gif, etc.), It's also possible to specify general file types: (image, video, text, audio) |
 +---------+---------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+Methods
+-------
 
++----------+----------------------------------+
+|   Name   |           Description            |
++==========+==================================+
+| fileList | Returns the list of files droped |
++----------+----------------------------------+
+| urlList  | Returns a list of url strings    |
++----------+----------------------------------+

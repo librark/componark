@@ -153,7 +153,8 @@ export class Droparea extends Component {
       const sizeInMB = (file.size / (1024 * 1024)).toFixed(3)
       const validation = sizeInMB <= this.maxSize
       !validation
-        ? (this.select('[data-message]').innerText = 'File too large')
+        ? (this.select('[data-message]').innerText =
+            'File too large, max-size: ' + this.maxSize + 'mb')
         : (this.select('[data-message]').innerText = '')
       return validation
     }
@@ -165,6 +166,10 @@ export class Droparea extends Component {
 
   get preview() {
     return this.select('ark-droparea-preview')
+  }
+
+  get urlList() {
+    return this.preview.urlList
   }
 }
 

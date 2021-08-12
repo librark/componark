@@ -99,7 +99,7 @@ export class DropareaPreview extends Component {
   /*----------------------------------------------------*/
 
   dispatchAlterEvent() {
-    this.emit('alter', this.filesURL)
+    this.emit('alter', this.urlList)
   }
 
   createNewFileList() {
@@ -137,7 +137,7 @@ export class DropareaPreview extends Component {
     return this.parentNode
   }
 
-  get filesURL() {
+  get urlList() {
     const urlList = []
     this.droparea.fileList.map((file) => {
       urlList.push(URL.createObjectURL(file))
