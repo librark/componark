@@ -17,11 +17,13 @@ export class Button extends Component {
     this.horizontal = context.horizontal || this.horizontal
     this.vertical = context.vertical || this.vertical
 
+    this.size = context.size || this.size
+
     return super.init()
   }
 
   reflectedProperties() {
-    return ['href', 'horizontal', 'vertical', 'vibrate', 'iconPosition']
+    return ['href', 'horizontal', 'vertical', 'vibrate', 'iconPosition', 'size']
   }
 
   render() {
