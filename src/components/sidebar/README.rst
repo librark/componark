@@ -37,6 +37,10 @@ Attributes
 +--------+---------+----------+--------------------------------------------------------------------+
 | width  | string  | 'normal' | Changes the max width of the navbar ("compact", "normal", "wide")  |
 +--------+---------+----------+--------------------------------------------------------------------+
+| gap    | boolean | null     | Adds a gap between items in the body                               |
++--------+---------+----------+--------------------------------------------------------------------+
+| padded | boolean | null     | Adds padding to body content                                       |
++--------+---------+----------+--------------------------------------------------------------------+
 
 
 Properties
@@ -50,6 +54,10 @@ Properties
 | side   | string  | 'left'   | Changes the side from which the sidebar is displayed (right, left) |
 +--------+---------+----------+--------------------------------------------------------------------+
 | width  | string  | 'normal' | Changes the max width of the navbar ("compact", "normal", "wide")  |
++--------+---------+----------+--------------------------------------------------------------------+
+| gap    | boolean | null     | Adds a gap between items in the body                               |
++--------+---------+----------+--------------------------------------------------------------------+
+| padded | boolean | null     | Adds padding to body content                                       |
 +--------+---------+----------+--------------------------------------------------------------------+
 
 
