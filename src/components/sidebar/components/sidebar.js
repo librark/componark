@@ -6,11 +6,13 @@ export class Sidebar extends Component {
   init(context = {}) {
     this.binding = 'sidebar-listen'
     this.side = context.side || this.side || 'left'
+    this.width = context.width || this.width || 'left'
+    // this.gap = context.gap || this.gap
     return super.init(context)
   }
 
   reflectedProperties() {
-    return ['opened', 'side']
+    return ['opened', 'side', 'width', 'gap', 'padded']
   }
 
   render() {
