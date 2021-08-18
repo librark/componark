@@ -137,12 +137,17 @@ export class DropareaPreview extends Component {
     return this.parentNode
   }
 
-  get urlList() {
-    const urlList = []
+  get mediaList() {
+    const mediaList = []
     this.droparea.fileList.map((file) => {
-      urlList.push(URL.createObjectURL(file))
+      mediaList.push({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        url: URL.createObjectURL(file)
+      })
     })
-    return urlList
+    return mediaList
   }
 
   get files() {
