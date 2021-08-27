@@ -28,7 +28,7 @@ export class GalleryDemo extends Component {
   getImages() {
     const images = []
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
       images.push(`https://picsum.photos/id/102${i}/500`)
     }
 
@@ -43,7 +43,7 @@ const styles = /* css */ `
 
 .ark-gallery {
     min-width:40%;
-    max-width: 100%;
+    max-width: 500px;
 }
 
 .ark-gallery__image {
