@@ -69,7 +69,7 @@
     padding: 0.5rem;
 
     &[single] {
-      grid-column: span 2;
+      grid-row: span 2;
     }
   }
 }
