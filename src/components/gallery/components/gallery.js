@@ -57,10 +57,11 @@ export class Gallery extends Component {
   }
 
   selectImages(event) {
-    const thumbnail =
-      event.target.closest('[data-thumbnail]').style.backgroundImage
-    /*istanbul ignore else*/
-    if (thumbnail) {
+    let thumbnail = 
+      event.target.closest('[data-thumbnail]')
+      /*istanbul ignore else*/
+      if (thumbnail) {
+      thumbnail = thumbnail.style.backgroundImage
       const image = thumbnail.slice(4, -1).replace(/"/g, '')
       this.select('[data-image]').src = image
     }
