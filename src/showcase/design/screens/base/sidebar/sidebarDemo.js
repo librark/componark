@@ -39,7 +39,7 @@ export class SidebarDemo extends Component {
         <div slot="footer">footer</div>
       </ark-sidebar>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/navbar/README.rst">
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/sidebar/README.rst">
       * Reference
       </a>
     `
