@@ -28,7 +28,7 @@ export class GalleryDemo extends Component {
   getImages() {
     const images = []
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       images.push(`https://picsum.photos/id/102${i}/500`)
     }
 
