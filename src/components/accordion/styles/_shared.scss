@@ -8,9 +8,8 @@
 }
 
 @mixin ark-accordion-tab {
-  @include theme.paint;
   @include theme.round;
-  width:100%;
+  width: 100%;
   border-width: 1px;
   border-style: solid;
   transition: all 0.5s ease-in-out;
@@ -51,6 +50,7 @@
   }
 
   &__header {
+    @include theme.paint;
     width: auto;
     height: 2.5rem;
 
@@ -87,7 +87,8 @@
     from {
       opacity: 0;
     }
-    to{
+
+    to {
       opacity: 1;
     }
   }
