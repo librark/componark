@@ -11,17 +11,21 @@ export class AccordionTab extends Component {
   init(context = {}) {
     this.binding = "accordion-tab-listen"
     this.header = context.header
+    this.background = context.background || this.background || "primary"
+    this.color = context.color || this.color || "light"
     return super.init(context)
   }
 
   reflectedProperties() {
-    return ["header", "index"]
+    return ["header", "index", "background", "color"]
   }
 
   render() {
     this.content = this.header
       ? /* html */ `
-      <div class="ark-accordion-tab__header">
+      <div background="${this.background}" 
+           color="${this.color}" 
+           class="ark-accordion-tab__header">
         <small data-accordion-tab-header>${this.header}</small>
       </div>
       <div class="ark-accordion-tab__content">

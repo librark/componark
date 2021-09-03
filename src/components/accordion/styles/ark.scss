@@ -9,20 +9,18 @@
 .ark-accordion-tab {
   @include shared.ark-accordion-tab;
   border: 1px solid rgb(206, 206, 206);
-  
-  &__header{
-    background: var(--primary);
-    color: white;
+
+  &__header {
     border-radius: 4px 4px 0px 0px;
   }
 
-  &__content{
-    word-wrap: break-word ;
+  &__content {
+    word-wrap: break-word;
   }
-  
 
 
-  &[disabled]{
+
+  &[disabled] {
     background: gray;
     opacity: 20%;
   }

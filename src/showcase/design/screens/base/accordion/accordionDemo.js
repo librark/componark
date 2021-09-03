@@ -6,7 +6,7 @@ export class AccordionDemo extends Component {
     this.innerHTML = /* html */ `
     <h1>Normal</h1>  
     <ark-accordion>
-        <ark-accordion-tab header="tab 1" >
+        <ark-accordion-tab background="dark" color="danger" header="tab 1" >
           <span>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
           sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
