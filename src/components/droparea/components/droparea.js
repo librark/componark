@@ -62,36 +62,36 @@ export class Droparea extends Component {
     this.openButton.addEventListener('click', this.openInput, false)
   }
 
-  openInput(e) {
-    e.stopPropagation()
+  openInput(event) {
+    event.stopPropagation()
     const input = this.nextElementSibling
     input.click()
   }
 
-  preventDefaults(e) {
-    e.preventDefault()
-    e.stopPropagation()
+  preventDefaults(event) {
+    event.preventDefault()
+    event.stopPropagation()
   }
 
-  highlight(e) {
+  highlight(event) {
     this.dropZone.classList.add('highlight')
   }
 
-  unhighlight(e) {
+  unhighlight(event) {
     this.dropZone.classList.remove('highlight')
   }
 
-  handleDrop(e) {
-    e.stopPropagation()
-    let data = e.dataTransfer
+  handleDrop(event) {
+    event.stopPropagation()
+    let data = event.dataTransfer
     let files = data.files
     this.handleFiles(files)
   }
 
-  onChange(e) {
-    e.stopPropagation()
+  onChange(event) {
+    event.stopPropagation()
     const droparea = this.parentElement.parentElement
-    const input = e.target
+    const input = event.target
     const files = input.files
     droparea.handleFiles(files)
   }
@@ -153,7 +153,8 @@ export class Droparea extends Component {
       const sizeInMB = (file.size / (1024 * 1024)).toFixed(3)
       const validation = sizeInMB <= this.maxSize
       !validation
-        ? (this.select('[data-message]').innerText = 'File too large')
+        ? (this.select('[data-message]').innerText =
+            'File too large, max-size: ' + this.maxSize + 'mb')
         : (this.select('[data-message]').innerText = '')
       return validation
     }
@@ -165,6 +166,10 @@ export class Droparea extends Component {
 
   get preview() {
     return this.select('ark-droparea-preview')
+  }
+
+  get mediaList() {
+    return this.preview.mediaList
   }
 }
 

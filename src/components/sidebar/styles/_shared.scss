@@ -13,8 +13,13 @@
 
   user-select: none;
 
+  $compact-width : 30%;
+  $normal-width : 45%;
+  $wide-width : 60%;
+
   &__menu {
     min-width: 280px;
+    width: $wide-width;
     height: 100%;
 
     display: grid;
@@ -32,9 +37,42 @@
     @include theme.paint;
   }
 
+  /*Dynamic Width*/
+  
+  &[width="compact"] {
+    .ark-sidebar__menu {
+      width: $compact-width;
+    }
+  }
+
+  &[width="normal"] {
+    .ark-sidebar__menu {
+      width: $normal-width;
+    }
+  }
+
+  &[width="wide"] {
+    .ark-sidebar__menu {
+      width: $wide-width;
+    }
+  }
+
   &__body {
-    overflow-y: scroll;
+    display: grid;
+    overflow-y: auto;
     height: 100%;
+  }
+
+  &[gap] {
+    .ark-sidebar__body {
+      grid-gap: 1rem;
+    }
+  }
+  
+  &[padded] {
+    .ark-sidebar__body {
+      padding: 1rem;
+    }
   }
 
   &__header,

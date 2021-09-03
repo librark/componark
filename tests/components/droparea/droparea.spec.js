@@ -1,6 +1,5 @@
 import { Droparea } from 'components/droparea'
-
-import { DropareaGallery } from '../../../src/components/droparea/components/droparea-preview'
+import { DropareaPreview } from '../../../src/components/droparea/components/droparea-preview'
 
 describe('Droparea', () => {
   const createBubbledEvent = (type, props = {}) => {
@@ -122,7 +121,7 @@ describe('Droparea', () => {
     expect(droparea.fileList[1]).toBeFalsy()
   })
 
-  it('Returns the file list', () => {
+  it('Returns the file list as object URL', () => {
     container.innerHTML = /* html */ `
             <ark-droparea></ark-droparea>
         `
@@ -146,6 +145,46 @@ describe('Droparea', () => {
 
     dropZone.dispatchEvent(dropEvent)
     expect(droparea.fileList.length).toEqual(2)
+  })
+
+  it('Returns a media list of file metadata objects', () => {
+    container.innerHTML = /* html */ `
+            <ark-droparea></ark-droparea>
+        `
+
+    const droparea = container.querySelector('ark-droparea')
+    const dropZone = droparea.querySelector('.ark-droparea__form')
+    const myFile = new File(['image'], 'Snoopy.png', {
+      type: 'image/png',
+    })
+    const myFile2 = new File(['image'], 'Scooby.png', {
+      type: 'image/png',
+    })
+
+    const dropEvent = createBubbledEvent('drop', {
+      clientX: 0,
+      clientY: 1,
+      dataTransfer: {
+        files: [myFile, myFile2],
+      },
+    })
+
+    dropZone.dispatchEvent(dropEvent)
+    expect(droparea.mediaList.length).toEqual(2)
+    expect(droparea.mediaList).toEqual([
+      {
+        "name": "Snoopy.png",
+        "size": 5,
+        "type": "image/png",
+        "url": undefined,
+      },
+      {
+        "name": "Scooby.png",
+        "size": 5,
+        "type": "image/png",
+        "url": undefined,
+      }
+    ])
   })
 
   it('Can select files from input', () => {

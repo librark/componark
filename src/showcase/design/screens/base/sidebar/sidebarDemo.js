@@ -1,4 +1,4 @@
-import { Component } from "base/component"
+import { Component } from 'base/component'
 
 export class SidebarDemo extends Component {
   init(context) {
@@ -14,13 +14,32 @@ export class SidebarDemo extends Component {
         </ark-button>
       </div>
 
-      <ark-sidebar side="left">
+      <ark-sidebar width="compact" gap padded side="left">
         <div slot="header">My Menu</div>
-        <div>body</div>
+        <div fake-card>
+          <h1>Fake Card</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, ipsa.</p>
+          <button>submit</button>
+        </div>
+        <div fake-card>
+          <h1>Fake Card</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, ipsa.</p>
+          <button>submit</button>
+        </div>
+        <div fake-card>
+          <h1>Fake Card</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, ipsa.</p>
+          <button>submit</button>
+        </div>
+        <div fake-card>
+          <h1>Fake Card</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, ipsa.</p>
+          <button>submit</button>
+        </div>
         <div slot="footer">footer</div>
       </ark-sidebar>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/navbar/README.rst">
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/sidebar/README.rst">
       * Reference
       </a>
     `
@@ -29,8 +48,18 @@ export class SidebarDemo extends Component {
   }
 
   _onClick(event) {
-    const sidebar = this.querySelector("ark-sidebar")
-    sidebar["open"]()
+    const sidebar = this.querySelector('ark-sidebar')
+    sidebar['open']()
   }
 }
-Component.define("demo-sidebar", SidebarDemo)
+
+const styles = /*css*/ `
+[fake-card] {
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+
+`
+
+Component.define('demo-sidebar', SidebarDemo, styles)

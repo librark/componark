@@ -1,6 +1,6 @@
-import { Component } from "base/component"
+import { Component } from 'base/component'
 
-const tag = "demo-button"
+const tag = 'demo-button'
 export class ButtonDemo extends Component {
   init(context) {
     return super.init(context)
@@ -92,11 +92,11 @@ export class ButtonDemo extends Component {
 
       <p>This is a Fab Button</p>
       <div class="fab-box">
-        <ark-button fab background="primary">
+        <ark-button size="small" fab background="primary">
           <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
         </ark-button>
 
-        <ark-button horizontal="start" vertical="start" fab background="primary">
+        <ark-button size="medium" horizontal="start" vertical="start" fab background="primary">
           <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
         </ark-button>
         
@@ -139,8 +139,9 @@ export class ButtonDemo extends Component {
     return super.render()
   }
 
-  renderPhoto(){
-    this.querySelector('.photo').style.backgroundImage = 'url("https://picsum.photos/id/237/200/300")'
+  renderPhoto() {
+    this.querySelector('.photo').style.backgroundImage =
+      'url("https://picsum.photos/id/237/200/300")'
   }
 }
 const styles = /* css */ `
