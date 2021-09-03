@@ -8,13 +8,14 @@ export class AccordionTab extends Component {
 
   /** @param {Object} context */
   init(context = {}) {
+    const slots = this.slots()
+    
     this.binding = "accordion-tab-listen"
     this.header = context.header
     
     this.background = context.background || this.background || "primary"
     this.color = context.color || this.color || "light"
     
-    const slots = this.slots()
     
     const [icon] = slots['icon'] || []
     const [body] = slots['general']
@@ -30,42 +31,41 @@ export class AccordionTab extends Component {
   }
 
   render() {
-    this.content = this.header
-      ? /* html */ `
+    this.content =  /* html */ `
       <div background="${this.background}" 
            color="${this.color}" 
            class="ark-accordion-tab__header">
         <small data-accordion-tab-header>
-        ${this.header}
+          ${this.header}
         </small>
-        </div>
-        <div class="ark-accordion-tab__content">
-        </div>
-        `
-        : ""
+      </div>
+      <div class="ark-accordion-tab__content">
+      </div>
+      `
 
-        this.tabContent = this.querySelector(".ark-accordion-tab__content")
-        const header = this.select('[data-accordion-tab-header]')
-        
-        if(this.icon) {
-          header.innerHTML = /* html */`
-            <icon class="ark-accordion-tab__icon"></icon>
-            ${this.header}
-            `
-            const icon = this.select('.ark-accordion-tab__icon')
-            icon.append(this.icon)
-        } 
-        this.tabContent.append(this.body)
-        return super.render()
-      }
+    this.tabContent = this.querySelector(".ark-accordion-tab__content")
+    this.tabContent.append(this.body)
+    
+    const header = this.select('[data-accordion-tab-header]')
+    
+    if(this.icon) {
+      header.innerHTML = /* html */`
+        <icon class="ark-accordion-tab__icon"></icon>
+        ${this.header}
+        `
+        const icon = this.select('.ark-accordion-tab__icon')
+        icon.append(this.icon)
+    }
       
-      async load() {
-        this.tabContent
-      ? this.tabContent.addEventListener("click", (event) => {
-          event.stopImmediatePropagation()
-        })
-        : ""
-      }
+
+    return super.render()
+  }
+      
+  async load() {
+    this.tabContent.addEventListener("click", (event) => {
+      event.stopImmediatePropagation()
+    })
+  }
 
   open() {
     this.setAttribute("active", "true")
