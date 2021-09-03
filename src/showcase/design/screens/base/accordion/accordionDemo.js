@@ -48,6 +48,7 @@ export class AccordionDemo extends Component {
 
       <ark-accordion multiple>
         <ark-accordion-tab header="tab A" >
+          <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
           <span>content tab A</span>
         </ark-accordion-tab>
         <ark-accordion-tab header="tab B">
