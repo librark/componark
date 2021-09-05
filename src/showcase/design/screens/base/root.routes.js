@@ -16,7 +16,7 @@ export function setRoutes(resolver, rootComponent, prefix) {
 
   const router = resolver.resolve('Router')
   router.addRoutes(prefix, [
-    getComponentRoute('accordion'),
+    getComponentRoute('accordion', ['icon']),
     getComponentRoute('alert', ['button']),
     getComponentRoute('audio', ['button']),
     getComponentRoute('button', ['icon']),
