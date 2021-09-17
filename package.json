@@ -1,6 +1,6 @@
 {
   "name": "componark",
-  "version": "0.38.0",
+  "version": "0.39.0",
   "author": "Knowark <it@knowark.com>",
   "description": "Knowark's Web Components Library",
   "license": "ISC",
@@ -17,7 +17,7 @@
     "web",
     "components"
   ],
-  "prettier" : {
+  "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
     "semi": false,
