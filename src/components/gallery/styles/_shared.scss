@@ -7,7 +7,6 @@
   display: grid;
   justify-items: center;
   place-content: center;
-  grid-template-rows: 3fr 1fr;
 
   width: 100%;
 
@@ -82,11 +81,10 @@
     }
   }
 
-  &__image {
+  &__images {
     display: grid;
     user-select: none;
     background: transparent;
-    padding: 0.5rem;
 
     &[single] {
       grid-row: span 2;
