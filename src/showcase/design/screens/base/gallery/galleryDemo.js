@@ -13,7 +13,7 @@ export class GalleryDemo extends Component {
       <ark-gallery images="${this.getImages()}" width="400px"></ark-gallery>
 
       <p>Gallery with single image</p>
-      <ark-gallery single images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" width="400px"></ark-gallery>
+      <ark-gallery images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" width="400px"></ark-gallery>
 
       <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/gallery/README.rst">
       * Reference
