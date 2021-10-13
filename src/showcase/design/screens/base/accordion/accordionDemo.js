@@ -6,7 +6,7 @@ export class AccordionDemo extends Component {
     this.innerHTML = /* html */ `
     <h1>Normal</h1>  
     <ark-accordion>
-        <ark-accordion-tab header="tab 1" >
+        <ark-accordion-tab background="dark" color="danger" header="tab 1" >
           <span>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
           sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
@@ -48,6 +48,7 @@ export class AccordionDemo extends Component {
 
       <ark-accordion multiple>
         <ark-accordion-tab header="tab A" >
+          <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
           <span>content tab A</span>
         </ark-accordion-tab>
         <ark-accordion-tab header="tab B">
@@ -63,7 +64,8 @@ export class AccordionDemo extends Component {
       
       <br>
       
-      <a href="https://github.com/knowark/componark/blob/master/src/components/accordion/README.rst">
+      <a target="_blank"
+         href="https://github.com/knowark/componark/blob/master/src/components/accordion/README.rst">
       * Reference
       </a>
     `
@@ -72,16 +74,15 @@ export class AccordionDemo extends Component {
 }
 
 const styles = /* css */ `
-
-        :root{
-          --primary: rgb(41, 31, 177);
-        }
-        .demo-accordion{
-          margin: 0 auto;
-          padding: 1rem;
-          display: block;
-          width: 70vw;
-        }
+  :root{
+    --primary: rgb(41, 31, 177);
+  }
+  .demo-accordion{
+    margin: 0 auto;
+    padding: 1rem;
+    display: block;
+    width: 70vw;
+  }
 `
 
 Component.define(tag, AccordionDemo, styles)

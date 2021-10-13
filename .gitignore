@@ -94,3 +94,6 @@ docs/
 
 # build
 build/
+
+#VsCode
+.code-workspace

@@ -4,11 +4,11 @@ import { Alert } from 'components/alert'
 const tag = 'demo-alert'
 
 export class AlertDemo extends Component {
-  init (context) {
+  init(context) {
     return super.init(context)
   }
 
-  render () {
+  render() {
     this.innerHTML = /* html */ `
       <div>
         <p>This is an alert.</p>
@@ -39,21 +39,22 @@ export class AlertDemo extends Component {
     return super.render()
   }
 
-  _onClick (event) {
-    Alert.launch({
-      title: 'Atención ¡esto es un Alert!',
-      text: 'Y este un texto descriptivo',
-      showConfirmButton: true,
-      confirmButtonText: 'Confirm',
-      confirmButtonBackground: 'success',
-      contentBackground: 'light',
-      contentColor: 'dark',
-      showCancelButton: true,
-      cancelButtonText: 'Cerrar',
-      cancelButtonBackground: 'dark',
-      horizontal: 'center',
-      vertical: 'center'
-    }, this)
+  _onClick(event) {
+    Alert.launch(
+      {
+        title: 'Atención ¡esto es un Alert!',
+        text: 'Y este un texto descriptivo',
+        showConfirmButton: true,
+        confirmButtonText: 'Confirm',
+        confirmButtonBackground: 'success',
+        contentBackground: 'light',
+        contentColor: 'dark',
+        showCancelButton: false,
+        horizontal: 'center',
+        vertical: 'center',
+      },
+      this
+    )
   }
 }
 

@@ -12,7 +12,7 @@ export class GalleryDemo extends Component {
 
       <ark-gallery images="${this.getImages()}" width="400px"></ark-gallery>
 
-      <p>Gallery with one file only</p>
+      <p>Gallery with single image</p>
       <ark-gallery images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" width="400px"></ark-gallery>
 
       <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/gallery/README.rst">
@@ -43,7 +43,7 @@ const styles = /* css */ `
 
 .ark-gallery {
     min-width:40%;
-    max-width: 100%;
+    max-width: 500px;
 }
 
 .ark-gallery__image {
