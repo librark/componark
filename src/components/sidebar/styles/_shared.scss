@@ -7,15 +7,15 @@
 
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 
   user-select: none;
 
-  $compact-width : 30%;
-  $normal-width : 45%;
-  $wide-width : 60%;
+  $compact-width: 30%;
+  $normal-width: 45%;
+  $wide-width: 60%;
 
   &__menu {
     min-width: 280px;
@@ -38,7 +38,7 @@
   }
 
   /*Dynamic Width*/
-  
+
   &[width="compact"] {
     .ark-sidebar__menu {
       width: $compact-width;
@@ -68,7 +68,7 @@
       grid-gap: 1rem;
     }
   }
-  
+
   &[padded] {
     .ark-sidebar__body {
       padding: 1rem;
