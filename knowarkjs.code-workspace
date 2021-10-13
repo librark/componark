@@ -1,37 +1,38 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"emmet.includeLanguages": {
-		"javascript": "html",
-    	},
-    "[javascript]": {
-        "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "emmet.includeLanguages": {
+      "javascript": "html"
     },
-		"editor.formatOnSave": true,
-		"editor.tabSize": 2,
-		"editor.insertSpaces": true,
-		"editor.detectIndentation": false
-	},
-	"extensions": {
-		"recommendations": [
-			"bashmish.es6-string-css",
-			"tobermory.es6-string-html",
-			"zjcompt.es6-string-javascript",
-			"xabikos.javascriptsnippets",
-			"graphql.vscode-graphql",
-			"dbaeumer.vscode-eslint",
-			"syler.sass-indented",
-			"simonsiefke.prettier-vscode",
-			"lextudio.restructuredtext",
-			"yzhang.markdown-all-in-one",
-			"mervin.markdown-formatter",
-			"shd101wyy.markdown-preview-enhanced",
-			"shuworks.vscode-table-formatter",
-			"waderyan.gitblame"
-		]
-	}
+    "[javascript]": {
+      "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  },
+  "extensions": {
+    "recommendations": [
+      "bashmish.es6-string-css",
+      "tobermory.es6-string-html",
+      "zjcompt.es6-string-javascript",
+      "xabikos.javascriptsnippets",
+      "graphql.vscode-graphql",
+      "dbaeumer.vscode-eslint",
+      "syler.sass-indented",
+      "simonsiefke.prettier-vscode",
+      "yzhang.markdown-all-in-one",
+      "mervin.markdown-formatter",
+      "shd101wyy.markdown-preview-enhanced",
+      "shuworks.vscode-table-formatter",
+      "waderyan.gitblame",
+      "snooty.snooty",
+      "trond-snekvik.simple-rst"
+    ]
+  }
 }

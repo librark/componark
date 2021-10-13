@@ -9,7 +9,7 @@ export class CardDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `
-      <ark-card round="xl" background="primary" title="CARD TITLE" subtitle="subtitle card">
+      <ark-card animated round="xl" background="primary" title="CARD TITLE" subtitle="subtitle card">
         <img slot="media" src="${Image}" alt="" />
 
         <div>
