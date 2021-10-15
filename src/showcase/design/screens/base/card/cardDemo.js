@@ -9,21 +9,29 @@ export class CardDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `
-      <ark-card animated round="xl" background="primary" title="CARD TITLE" subtitle="subtitle card">
-        <img slot="media" src="${Image}" alt="" />
+    <ark-card animated round="xl" background="primary" title="CARD TITLE" subtitle="subtitle card">
+      <img slot="media" src="${Image}" alt="" />
 
-        <div>
-          Lorem ipsum dolor sit, amet consectetur 
-          adipisicing elit. Alias harum ea inventore 
-          iure autem porro debitis provident architecto accusantium id?
-        </div>
+      <div>
+        Lorem ipsum dolor sit, amet consectetur 
+        adipisicing elit. Alias harum ea inventore 
+        iure autem porro debitis provident architecto accusantium id?
+      </div>
 
-        <ark-button fab slot="actions"  background="light" color="dark" >
-          <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
-        </ark-button>
+      <ark-button fab slot="actions"  background="light" color="dark" >
+        <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
+      </ark-button>
 
-      </ark-card>
+    </ark-card>
 
+    <ark-card no-borders title="Borderless card" subtitle="subtitle card">
+      <div>
+        Lorem ipsum dolor sit, amet consectetur 
+        adipisicing elit. Alias harum ea inventore 
+        iure autem porro debitis provident architecto accusantium id?
+      </div>
+    </ark-card>
+    
 
 
       <hr/>
@@ -61,6 +69,7 @@ const styles = /* css */ `
   .demo-card {
     display: grid;
     justify-items: center;
+    gap: 1rem;
   }
   .ark-card {
   min-width: 300px;
