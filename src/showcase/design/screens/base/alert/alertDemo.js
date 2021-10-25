@@ -13,7 +13,6 @@ export class AlertDemo extends Component {
       <div>
         <p>This is an alert.</p>
         <ark-button background="primary" listen on-click="_onClick">open</ark-button>
-        <!-- <button btn-toggle>toggle</button> -->
       </div>
 
       <div>
@@ -34,27 +33,42 @@ export class AlertDemo extends Component {
       
     `
 
-    this._onClick()
-
     return super.render()
   }
 
+  async load() {
+    const alert = this.querySelector('ark-alert')
+    if (alert) {
+      alert.addEventListener('alert:confirm', (event) => {
+        console.log('works')
+      })
+    }
+  }
+
   _onClick(event) {
-    Alert.launch(
-      {
-        title: 'Atención ¡esto es un Alert!',
-        text: 'Y este un texto descriptivo',
-        showConfirmButton: true,
-        confirmButtonText: 'Confirm',
-        confirmButtonBackground: 'success',
-        contentBackground: 'light',
-        contentColor: 'dark',
-        showCancelButton: false,
-        horizontal: 'center',
-        vertical: 'center',
-      },
-      this
-    )
+    if (!this.select('ark-alert')) {
+      Alert.launch(
+        {
+          title: 'Atención ¡esto es un Alert!',
+          text: 'Y este un texto descriptivo',
+          showConfirmButton: true,
+          confirmButtonText: 'Confirm',
+          confirmButtonBackground: 'success',
+          contentBackground: 'light',
+          contentColor: 'dark',
+          showCancelButton: false,
+          horizontal: 'center',
+          vertical: 'center',
+        },
+        this
+      )
+      const alert = this.selector('ark-alert')
+      alert.addEventListener('alert:confirm', () => this.openTrue())
+    }
+  }
+
+  openTrue() {
+    console.log('true')
   }
 }
 

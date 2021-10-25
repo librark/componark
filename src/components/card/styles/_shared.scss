@@ -10,6 +10,7 @@
   &__media {
     display: grid;
     overflow: hidden;
+    place-items: center;
     user-select: none;
 
     img {

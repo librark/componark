@@ -25,6 +25,7 @@ export class CardDemo extends Component {
     </ark-card>
 
     <ark-card no-borders title="Borderless card" subtitle="subtitle card">
+      <img src="${Image}" slot="media">
       <div>
         Lorem ipsum dolor sit, amet consectetur 
         adipisicing elit. Alias harum ea inventore 
