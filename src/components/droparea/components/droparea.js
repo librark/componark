@@ -7,6 +7,7 @@ const tag = 'ark-droparea'
 export class Droparea extends Component {
   init(context = {}) {
     this.fileList = []
+    this.contextFiles = context.contextFiles || this.contextFiles || []
     this.accept = context.accept || this.accept
     this.single = this.hasAttribute('single')
     this.maxSize = context.maxSize || this.maxSize || ''
@@ -15,22 +16,26 @@ export class Droparea extends Component {
 
   render() {
     this.content = /* html */ `
-      <form class="ark-droparea__form">
-          <h1 class="ark-droparea__message">
-              Drag & Drop 
-                  <small>${this.accept ? this.accept : ''} Files </small> 
-                  <p data-message></p>
-          </h1>
-          <div class="ark-droparea__open">or click to upload</div>
-        <input type="file" 
-               class="ark-droparea__input"
-               id="fileElem"
-               data-input
-               multiple
-                >
-      </form>
-      <ark-droparea-preview></ark-droparea-preview>
-      `
+        <form class="${tag}__form">
+          <div class="${tag}__header">
+            <h1 class="${tag}__message">
+              Drag & Drop
+              <small>${this.accept ? this.accept : ''} Files </small>
+              <p data-message></p>
+            </h1>
+            <div class="${tag}__open">or click to upload
+            </div>
+            <input
+              type="file"
+              class="${tag}__input"
+              id="fileElem"
+              data-input
+              multiple
+            />
+          </div>
+          <ark-droparea-preview></ark-droparea-preview>
+        </form>
+    `
     this.dragDropEvents = ['dragenter', 'dragover', 'dragleave', 'drop']
     this.dragEvents = this.dragDropEvents.slice(0, 2)
     this.dropEvents = this.dragDropEvents.slice(2)
@@ -58,13 +63,18 @@ export class Droparea extends Component {
     })
 
     this.addEventListener('drop', this.handleDrop, false)
-    this._input.addEventListener('change', this.onChange, false)
-    this.openButton.addEventListener('click', this.openInput, false)
+    this._input.addEventListener('change', this.onChange.bind(this))
+    this.openButton.addEventListener('click', this.openInput.bind(this))
+
+    /* istanbul ignore else */
+    if (this.contextFiles) {
+      await this.handleFiles(this.contextFiles)
+    }
   }
 
   openInput(event) {
     event.stopPropagation()
-    const input = this.nextElementSibling
+    const input = this.select('[data-input]')
     input.click()
   }
 
@@ -90,17 +100,16 @@ export class Droparea extends Component {
 
   onChange(event) {
     event.stopPropagation()
-    const droparea = this.parentElement.parentElement
     const input = event.target
     const files = input.files
-    droparea.handleFiles(files)
+    this.handleFiles(files)
   }
 
   handleFiles(files) {
     if (this.single) {
       files = [files[0]]
-      /* istanbul ignore else */
       if (
+        files[0] != undefined &&
         this.validate(files) &&
         !this.preview.fileExists(files[0]) &&
         this.maxSizeValidate(files[0])
@@ -111,7 +120,7 @@ export class Droparea extends Component {
       }
     } else {
       files = [...files]
-      if (this.validate(files)) {
+      if (!files.includes(undefined) && this.validate(files)) {
         files.forEach((file) => {
           /*istanbul ignore else*/
           if (!this.preview.fileExists(file) && this.maxSizeValidate(file)) {

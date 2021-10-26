@@ -46,8 +46,8 @@ export class DropareaPreview extends Component {
   toggleVisibility() {
     const previewZone = this.select('[data-preview-list]')
     this.files.length !== 0
-      ? (previewZone.style.visibility = 'visible')
-      : (previewZone.style.visibility = 'hidden')
+      ? (previewZone.style.display = 'grid')
+      : (previewZone.style.display = 'none')
   }
 
   /* DragSort Functionality */
@@ -99,7 +99,7 @@ export class DropareaPreview extends Component {
   /*----------------------------------------------------*/
 
   dispatchAlterEvent() {
-    this.emit('alter', this.urlList)
+    this.emit('alter', this.mediaList)
   }
 
   createNewFileList() {
@@ -134,7 +134,7 @@ export class DropareaPreview extends Component {
   }
 
   get droparea() {
-    return this.parentNode
+    return this.closest('.ark-droparea')
   }
 
   get mediaList() {
@@ -144,7 +144,7 @@ export class DropareaPreview extends Component {
         name: file.name,
         type: file.type,
         size: file.size,
-        url: URL.createObjectURL(file)
+        url: URL.createObjectURL(file),
       })
     })
     return mediaList
