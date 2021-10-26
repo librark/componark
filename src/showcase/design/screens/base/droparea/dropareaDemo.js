@@ -45,8 +45,8 @@ export class DropareaDemo extends Component {
           `
           <p>
           <strong>${index}</strong> : ${file.name} 
-          <strong>url:</strong>"${droparea.urlList[index]}"
-          <a href="${droparea.urlList[index]}" target="_blank">link</a>
+          <strong>url:</strong>"${droparea.mediaList[index].url}"
+          <a href="${droparea.mediaList[index].url}" target="_blank">link</a>
           </p>
           `
         )

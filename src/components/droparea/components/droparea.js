@@ -15,22 +15,26 @@ export class Droparea extends Component {
 
   render() {
     this.content = /* html */ `
-      <form class="ark-droparea__form">
-          <h1 class="ark-droparea__message">
-              Drag & Drop 
-                  <small>${this.accept ? this.accept : ''} Files </small> 
-                  <p data-message></p>
-          </h1>
-          <div class="ark-droparea__open">or click to upload</div>
-        <input type="file" 
-               class="ark-droparea__input"
-               id="fileElem"
-               data-input
-               multiple
-                >
-      </form>
-      <ark-droparea-preview></ark-droparea-preview>
-      `
+        <form class="${tag}__form">
+          <div class="${tag}__header">
+            <h1 class="${tag}__message">
+              Drag & Drop
+              <small>${this.accept ? this.accept : ''} Files </small>
+              <p data-message></p>
+            </h1>
+            <div class="${tag}__open">or click to upload
+            </div>
+            <input
+              type="file"
+              class="${tag}__input"
+              id="fileElem"
+              data-input
+              multiple
+            />
+          </div>
+          <ark-droparea-preview></ark-droparea-preview>
+        </form>
+    `
     this.dragDropEvents = ['dragenter', 'dragover', 'dragleave', 'drop']
     this.dragEvents = this.dragDropEvents.slice(0, 2)
     this.dropEvents = this.dragDropEvents.slice(2)
@@ -58,13 +62,13 @@ export class Droparea extends Component {
     })
 
     this.addEventListener('drop', this.handleDrop, false)
-    this._input.addEventListener('change', this.onChange, false)
-    this.openButton.addEventListener('click', this.openInput, false)
+    this._input.addEventListener('change', this.onChange.bind(this))
+    this.openButton.addEventListener('click', this.openInput.bind(this))
   }
 
   openInput(event) {
     event.stopPropagation()
-    const input = this.nextElementSibling
+    const input = this.select('[data-input]')
     input.click()
   }
 
@@ -90,10 +94,9 @@ export class Droparea extends Component {
 
   onChange(event) {
     event.stopPropagation()
-    const droparea = this.parentElement.parentElement
     const input = event.target
     const files = input.files
-    droparea.handleFiles(files)
+    this.handleFiles(files)
   }
 
   handleFiles(files) {
