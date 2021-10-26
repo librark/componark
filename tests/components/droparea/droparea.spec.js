@@ -173,17 +173,17 @@ describe('Droparea', () => {
     expect(droparea.mediaList.length).toEqual(2)
     expect(droparea.mediaList).toEqual([
       {
-        "name": "Snoopy.png",
-        "size": 5,
-        "type": "image/png",
-        "url": undefined,
+        name: 'Snoopy.png',
+        size: 5,
+        type: 'image/png',
+        url: undefined,
       },
       {
-        "name": "Scooby.png",
-        "size": 5,
-        "type": "image/png",
-        "url": undefined,
-      }
+        name: 'Scooby.png',
+        size: 5,
+        type: 'image/png',
+        url: undefined,
+      },
     ])
   })
 
@@ -314,7 +314,6 @@ describe('Droparea', () => {
 
     droparea.maxSizeValidate([])
     droparea.maxSizeValidate(myFile2)
-
     dropZone.dispatchEvent(dropEvent)
     expect(droparea.maxSizeValidate).toBeCalled
   })

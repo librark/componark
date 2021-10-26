@@ -99,7 +99,7 @@ export class DropareaPreview extends Component {
   /*----------------------------------------------------*/
 
   dispatchAlterEvent() {
-    this.emit('alter', this.urlList)
+    this.emit('alter', this.mediaList)
   }
 
   createNewFileList() {

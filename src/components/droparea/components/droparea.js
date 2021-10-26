@@ -7,6 +7,7 @@ const tag = 'ark-droparea'
 export class Droparea extends Component {
   init(context = {}) {
     this.fileList = []
+    this.contextFiles = context.contextFiles || this.contextFiles || []
     this.accept = context.accept || this.accept
     this.single = this.hasAttribute('single')
     this.maxSize = context.maxSize || this.maxSize || ''
@@ -64,6 +65,11 @@ export class Droparea extends Component {
     this.addEventListener('drop', this.handleDrop, false)
     this._input.addEventListener('change', this.onChange.bind(this))
     this.openButton.addEventListener('click', this.openInput.bind(this))
+
+    /* istanbul ignore else */
+    if (this.contextFiles) {
+      await this.handleFiles(this.contextFiles)
+    }
   }
 
   openInput(event) {
@@ -102,8 +108,8 @@ export class Droparea extends Component {
   handleFiles(files) {
     if (this.single) {
       files = [files[0]]
-      /* istanbul ignore else */
       if (
+        files[0] != undefined &&
         this.validate(files) &&
         !this.preview.fileExists(files[0]) &&
         this.maxSizeValidate(files[0])
@@ -114,7 +120,7 @@ export class Droparea extends Component {
       }
     } else {
       files = [...files]
-      if (this.validate(files)) {
+      if (!files.includes(undefined) && this.validate(files)) {
         files.forEach((file) => {
           /*istanbul ignore else*/
           if (!this.preview.fileExists(file) && this.maxSizeValidate(file)) {

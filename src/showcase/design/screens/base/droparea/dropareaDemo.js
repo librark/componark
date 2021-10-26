@@ -9,26 +9,53 @@ export class DropareaDemo extends Component {
 
   render() {
     this.innerHTML = /* html */ `
-        <h1 class="title">
-            This is a drop area
-        </h1>
-        <div class="droparea-demo">
-            <p>Default(multi)</p>
-            <ark-droparea listen on-alter="onFileList"></ark-droparea>
+      <h1 class="title">
+        This is a drop area
+      </h1>
+      <div class="droparea-demo">
+        <p>Default(multi)</p>
+        <ark-droparea listen on-alter="onFileList"></ark-droparea>
 
-            <h4>Output as objectURL:</h4>
-            <div data-file-multi></div>
-        </div>
-        <div class="droparea-demo">
-           <p>Single</p>
-           <ark-droparea single accept="image" max-size="5"></ark-droparea>
-       </div>
+        <h4>Output as objectURL:</h4>
+        <div data-file-multi></div>
+      </div>
+      <div class="droparea-demo">
+        <p>Single</p>
+        <ark-droparea single accept="image" max-size="5"></ark-droparea>
+      </div>
+      <div class="droparea-demo">
+        <p>Single</p>
+        <ark-droparea data-load single accept="image" max-size="5"></ark-droparea>
+      </div>
 
-     <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/droparea/README.rst">
-      * Reference
+      <a
+        class="reference"
+        target="_blank"
+        href="https://github.com/knowark/componark/tree/master/src/components/droparea/README.rst"
+      >
+        * Reference
       </a>
-        `
+    `
     return super.render()
+  }
+
+  async load() {
+    const myUrl =
+      'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1888&q=80'
+    // console.log(URL.createObjectURL(myFile))
+
+    const myFile = await this.getFileFromUrl(myUrl, 'Dogo.jpeg')
+    this.select('ark-droparea[data-load]').update({ contextFiles: [myFile] })
+  }
+
+  // createFileList(urlString) {}
+
+  async getFileFromUrl(url, name, defaultType = 'image/jpeg') {
+    const response = await fetch(url)
+    const data = await response.blob()
+    return new File([data], name, {
+      type: response.headers.get('content-type') || defaultType,
+    })
   }
 
   async onFileList(event) {
