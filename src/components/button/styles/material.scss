@@ -9,7 +9,6 @@ $query: feature-targeting.all();
 .ark-button {
   @include shared.ark-button;
 
-  @include mixins.base_($query);
   @include mixins.shape-radius(variables.$shape-radius, $query: $query);
   @include mixins.density(variables.$density-scale, $query: $query);
 

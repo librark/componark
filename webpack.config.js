@@ -140,7 +140,7 @@ module.exports = (env, argv) => {
 
   if (devMode) {
     rootConfig.devServer = {
-      contentBase: [
+      static: [
         path.join(__dirname, "dist"),
         path.join(__dirname, "dist/ark"),
         path.join(__dirname, "dist/material"),
