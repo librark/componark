@@ -100,21 +100,6 @@ describe('Multiselect', () => {
       .not.toHaveLength
   })
 
-  xit('Click outside element close list', () => {
-    container.innerHTML = /* html */ `
-    <ark-multiselect></ark-multiselect>
-    `
-    const multiselect = container.querySelector('ark-multiselect')
-    multiselect.addEventListener('focusout', multiselect.focusOut())
-
-    multiselect.click()
-    container.click()
-
-    jest.runAllTimers()
-
-    expect(setTimeout).toBeCalledTimes(1)
-  })
-
   it('Clean button clean all tags from field', () => {
     container.innerHTML = /* html */ `
     <ark-multiselect></ark-multiselect>
@@ -157,6 +142,8 @@ describe('Multiselect', () => {
 
     const list = multiselect.multiselectList
 
+    const event = new Event('mouseup', { bubbles: true })
+    multiselect.multiselectList.dispatchEvent(event)
     list.itemElements[0].click()
     list.itemElements[1].click()
     expect(multiselect.value).toBe(list.selectedList.join())

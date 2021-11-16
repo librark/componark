@@ -51,9 +51,18 @@ export class Multiselect extends Component {
   }
 
   async load() {
-    this._field.addEventListener('click', this.fieldClickHandler.bind(this))
-    //this.addEventListener('blur', this.focusOut.bind(this))
+    this._field.addEventListener('click', (event) => {
+      event.stopPropagation()
+      this.open()
+    })
+
+    this.multiselectList.addEventListener('mouseup', (event) => {
+      event.stopPropagation()
+      this.close()
+    })
+
     this._field.addEventListener('input', this.filterItems.bind(this))
+
     this.multiselectList.addEventListener(
       'click',
       this.listClickHandler.bind(this)
@@ -87,16 +96,6 @@ export class Multiselect extends Component {
     })
   }
 
-  //focusOut(e) {
-    //setTimeout(() => {
-      //this.close()
-    //}, 200)
-  //}
-
-  fieldClickHandler() {
-    this.open()
-  }
-
   showPopup(show) {
     this.isOpened = show
     this._popup.style.display = show ? 'block' : 'none'
@@ -126,8 +125,6 @@ export class Multiselect extends Component {
         this._field.firstElementChild
       )
     }
-
-    //this.multiselectInput.addEventListener('focusout', this.focusOut.bind(this))
   }
 
   listClickHandler(event) {
