@@ -2,7 +2,6 @@ import { Multiselect } from '../../../src/components/multiselect/components/mult
 
 describe('Multiselect', () => {
   let container = null
-  jest.useFakeTimers()
 
   beforeEach(() => {
     container = document.createElement('div')
@@ -53,7 +52,7 @@ describe('Multiselect', () => {
       .render()
       .load()
 
-    const list = multiselect.multiselectList
+    const list = multiselect.querySelector('ark-multiselect-list')
 
     list.itemElements[0].click()
 
@@ -84,7 +83,7 @@ describe('Multiselect', () => {
       .render()
       .load()
 
-    const list = multiselect.multiselectList
+    const list = multiselect.querySelector('ark-multiselect-list')
 
     list.itemElements[1].click()
     list.itemElements[2].click()
@@ -114,7 +113,7 @@ describe('Multiselect', () => {
       .render()
       .load()
 
-    const list = multiselect.multiselectList
+    const list = multiselect.querySelector('ark-multiselect-list')
     const clean = multiselect._clean
 
     list.itemElements[0].click()
@@ -140,10 +139,10 @@ describe('Multiselect', () => {
       .render()
       .load()
 
-    const list = multiselect.multiselectList
+    const list = multiselect.querySelector('ark-multiselect-list')
 
     const event = new Event('mouseup', { bubbles: true })
-    multiselect.multiselectList.dispatchEvent(event)
+    list.dispatchEvent(event)
     list.itemElements[0].click()
     list.itemElements[1].click()
     expect(multiselect.value).toBe(list.selectedList.join())
@@ -164,7 +163,7 @@ describe('Multiselect', () => {
       .load()
 
     const input = multiselect.querySelector('ark-multiselect-input')
-    const list = multiselect.multiselectList
+    const list = multiselect.querySelector('ark-multiselect-list')
     const field = multiselect._field
 
     input.value = 'display'
@@ -198,7 +197,7 @@ describe('Multiselect', () => {
       .load()
 
     const input = multiselect.querySelector('ark-multiselect-input')
-    const list = multiselect.multiselectList
+    const list = multiselect.querySelector('ark-multiselect-list')
     const field = multiselect._field
 
     input.value = 'camila'
@@ -212,7 +211,8 @@ describe('Multiselect', () => {
     <ark-multiselect></ark-multiselect>
     `
     const multiselect = container.querySelector('ark-multiselect')
-    const input = multiselect.multiselectInput.firstElementChild
+    const input = multiselect.querySelector('ark-multiselect-input')
+      .firstElementChild
 
     const popup = multiselect._popup
 

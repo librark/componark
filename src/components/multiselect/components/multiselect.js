@@ -53,26 +53,29 @@ export class Multiselect extends Component {
   async load() {
     this._field.addEventListener('click', (event) => {
       event.stopPropagation()
-      this.open()
+      this.showPopup(true)
     })
 
-    this.multiselectList.addEventListener('mouseup', (event) => {
+    const multiselectList = this.select('ark-multiselect-list')
+
+    multiselectList.addEventListener('mouseup', (event) => {
       event.stopPropagation()
-      this.close()
+      this.showPopup(false)
+    })
+
+    multiselectList.addEventListener('click', (event) => {
+      const item = event.target
+      this.selectItem(item)
     })
 
     this._field.addEventListener('input', this.filterItems.bind(this))
 
-    this.multiselectList.addEventListener(
-      'click',
-      this.listClickHandler.bind(this)
-    )
     this._clean.addEventListener('click', this.cleanTags.bind(this))
     this.addEventListener('keydown', this.keyDownHandler.bind(this))
   }
 
   async addListItems() {
-    await this.multiselectList
+    await this.select('ark-multiselect-list')
       .init({
         field: this.field,
         template: this.template,
@@ -83,9 +86,9 @@ export class Multiselect extends Component {
   }
 
   filterItems() {
-    let inputValue = this.multiselectInput.value
+    let inputValue = this.select('ark-multiselect-input').value
     const filter = inputValue.toUpperCase()
-    const items = this.multiselectList.itemElements
+    const items = this.select('ark-multiselect-list').itemElements
     let text
     items.forEach((item, index) => {
       let name = this.items[index].name
@@ -102,7 +105,7 @@ export class Multiselect extends Component {
   }
 
   selectItem(item) {
-    const items = this.multiselectList.itemElements
+    const items = this.select('ark-multiselect-list').itemElements
 
     if (item.tagName === 'LI' && !item.hasAttribute('selected')) {
       item.setAttribute('selected', '')
@@ -127,11 +130,6 @@ export class Multiselect extends Component {
     }
   }
 
-  listClickHandler(event) {
-    const item = event.target
-    this.selectItem(item)
-  }
-
   createTag(item) {
     const tag = document.createElement('div')
     tag.className = 'ark-multiselect__tag'
@@ -147,7 +145,7 @@ export class Multiselect extends Component {
     tag.addEventListener('click', (e) => e.stopPropagation())
     tag.appendChild(tagText)
     tag.appendChild(removeButton)
-    this.dispatchAlertEvent()
+    this.emit('alter', this.value)
     return tag
   }
 
@@ -157,7 +155,7 @@ export class Multiselect extends Component {
     tag.remove()
     item.style.display = 'block'
     item.removeAttribute('selected')
-    this.dispatchAlertEvent()
+    this.emit('alter', this.value)
   }
 
   cleanTags(event) {
@@ -166,46 +164,27 @@ export class Multiselect extends Component {
     for (let i = 0; i < selectedItems.length; i++) {
       selectedItems[i].removeAttribute('selected')
     }
-    this.dispatchAlertEvent()
-    this._field.innerHTML = this.fieldContent
-  }
-
-  dispatchAlertEvent() {
     this.emit('alter', this.value)
+    this._field.innerHTML = this.fieldContent
   }
 
   keyDownHandler(event) {
     switch (event.code) {
       case 'Enter':
-        this.multiselectInput.firstElementChild.focus()
+        this.select('ark-multiselect-input').firstElementChild.focus()
         break
       case 'Escape':
-        this.close()
+        this.showPopup(false)
         break
       default:
-        this.multiselectInput.firstElementChild.focus()
-        this.open()
+        this.select('ark-multiselect-input').firstElementChild.focus()
+        this.showPopup(true)
     }
   }
 
-  open() {
-    this.showPopup(true)
-  }
-
-  close() {
-    this.showPopup(false)
-  }
-
-  get multiselectInput() {
-    return this.select('ark-multiselect-input')
-  }
-
-  get multiselectList() {
-    return /** @type {MultiselectList} */ (this.select('ark-multiselect-list'))
-  }
-
   get value() {
-    return this.multiselectList.selectedList.join()
+    const list = this.select('ark-multiselect-list')
+    return list.selectedList.join()
   }
 }
 
