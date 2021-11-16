@@ -98,6 +98,7 @@
   "jest": {
     "verbose": true,
     "clearMocks": true,
+    "testEnvironment": "jsdom",
     "coverageDirectory": "coverage",
     "setupFiles": [
       "./tests/__mocks__/canvasMock.js"
