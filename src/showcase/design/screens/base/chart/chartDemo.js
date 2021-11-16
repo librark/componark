@@ -42,7 +42,7 @@ export class ChartDemo extends Component {
   _initElement () {
     const pie = this.select('[data-chart-pie]')
     pie.init({
-      details: this._getDetailsPie(pie)
+      details: this._getDetails('pie', pie)
     }).render()
 
     const doughnut = this.select('[data-chart-doughnut]')
@@ -64,6 +64,13 @@ export class ChartDemo extends Component {
     radar.init({
       details: this._getDetailsRadar(radar)
     }).render()
+  }
+
+  _getDetails (type, chart) {
+    return {
+      type: type,
+      data: this._data(chart)
+    }
   }
 
   _getDetailsDoughnut (chart) {

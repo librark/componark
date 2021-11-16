@@ -1,4 +1,4 @@
-import { Chart as ChartJs } from 'chart.js'
+import ChartJs from 'chart.js/auto'
 import { Component } from '../../../base/component'
 import { styles } from '../styles'
 

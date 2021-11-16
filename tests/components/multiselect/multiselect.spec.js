@@ -100,7 +100,7 @@ describe('Multiselect', () => {
       .not.toHaveLength
   })
 
-  it('Click outside element close list', () => {
+  xit('Click outside element close list', () => {
     container.innerHTML = /* html */ `
     <ark-multiselect></ark-multiselect>
     `
