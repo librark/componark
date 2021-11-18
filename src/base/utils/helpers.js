@@ -38,6 +38,16 @@ export function listen (self) {
   }
 }
 
+/** @param {HTMLElement} self  */
+function provide (self) {
+  if (self.provide) {
+    self.addEventListener('resolve', (event) => {
+      const resource = event.detail.resource
+      event.detail[resource] = self.provide(resource)
+    })
+  }
+}
+
 /** @param {HTMLElement} self @param {string[]} properties */
 export function reflect (self, properties) {
   /** @type {PropertyDescriptorMap} */
@@ -54,6 +64,7 @@ export function reflect (self, properties) {
     }
   }
   Object.defineProperties(self, descriptors)
+  provide(self)
 }
 
 /** @param {Object} object @param {string} path @param {any} value */

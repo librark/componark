@@ -253,15 +253,38 @@ describe('Component', () => {
   })
 
   it('resolves its resource dependencies using events propagation', () => {
-    document.addEventListener('resolve', (event) => {
+    const listener = (event) => {
       const resource = event.detail.resource
       event.detail[resource] = 'RESOLVED_DEPENDENCY'
-    })
+    }
+    document.addEventListener('resolve', listener)
     container.innerHTML = `
     <mock-component></mock-component>
     `
     const component = container.querySelector('mock-component')
 
     expect(component.dependency).toEqual('RESOLVED_DEPENDENCY')
+    document.removeEventListener('resolve', listener)
+  })
+
+  it('provides the dependencies requested to it by child components', () => {
+    class ParentComponent extends MockComponent {
+      provide(resource) {
+        const id = this.id
+        return `RESOURCE: ${resource} PROVIDED BY: ${id}`
+      }
+    }
+    Component.define('parent-component', ParentComponent)
+
+    container.innerHTML = `
+    <parent-component id="parent">
+      <mock-component id="child"></mock-component>
+    </parent-component>
+    `
+    const parent = container.querySelector('#parent')
+    const child = container.querySelector('#child')
+
+    expect(child.dependency).toEqual(
+      "RESOURCE: Dependency PROVIDED BY: parent")
   })
 })
