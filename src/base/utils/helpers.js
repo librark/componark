@@ -40,12 +40,14 @@ export function listen (self) {
 
 /** @param {HTMLElement} self  */
 function provide (self) {
-  if (self.provide) {
-    self.addEventListener('resolve', (event) => {
-      const resource = event.detail.resource
-      event.detail[resource] = self.provide(resource)
-    })
-  }
+  if (!self.provide) return
+  self.addEventListener('resolve', (event) => {
+    const resource = event.detail.resource
+    const dependency = self.provide(resource)
+    if (dependency === undefined) return
+    event.detail[resource] = dependency
+  })
+  
 }
 
 /** @param {HTMLElement} self @param {string[]} properties */

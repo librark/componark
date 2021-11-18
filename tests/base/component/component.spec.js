@@ -270,8 +270,10 @@ describe('Component', () => {
   it('provides the dependencies requested to it by child components', () => {
     class ParentComponent extends MockComponent {
       provide(resource) {
-        const id = this.id
-        return `RESOURCE: ${resource} PROVIDED BY: ${id}`
+        if (resource === 'Dependency') {
+          return `RESOURCE: ${resource} PROVIDED BY: ${this.id}`
+        }
+        if (resource === 'state') return { key: 'value' }
       }
     }
     Component.define('parent-component', ParentComponent)
@@ -286,5 +288,11 @@ describe('Component', () => {
 
     expect(child.dependency).toEqual(
       "RESOURCE: Dependency PROVIDED BY: parent")
+
+    const state = child.resolve('state')
+    expect(state).toEqual({ key: 'value' })
+
+    const unknown = child.resolve('unknown')
+    expect(unknown).toBe(undefined)
   })
 })
