@@ -6,7 +6,15 @@
   z-index: 4096;
 
   width: 100vw;
-  height: 100vh;
+
+  //Height responsive config
+  height: 100%;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: fill-available;
+  height: stretch;
+  /* Latest specification */
+
   position: fixed;
   top: 0;
   left: 0;

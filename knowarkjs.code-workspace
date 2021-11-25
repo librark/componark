@@ -9,7 +9,7 @@
       "javascript": "html"
     },
     "[javascript]": {
-      "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.formatOnSave": true,
     "editor.tabSize": 2,
@@ -25,14 +25,14 @@
       "graphql.vscode-graphql",
       "dbaeumer.vscode-eslint",
       "syler.sass-indented",
-      "simonsiefke.prettier-vscode",
       "yzhang.markdown-all-in-one",
       "mervin.markdown-formatter",
       "shd101wyy.markdown-preview-enhanced",
       "shuworks.vscode-table-formatter",
       "waderyan.gitblame",
       "snooty.snooty",
-      "trond-snekvik.simple-rst"
+      "trond-snekvik.simple-rst",
+      "esbenp.prettier-vscode"
     ]
   }
 }
