@@ -1,27 +1,6 @@
-@use'./shared.scss';
+@use './shared.scss';
 
 .ark-list {
-    @include shared.ark-list;
-    &-item{
-        font-size: 1.1rem;
-    }
-
-    &[data-template-list]{
-        .ark-list-item{
-            h1{
-                font-size: 2rem;
-                margin: 0;
-            }
-
-
-            transition: transform 0.15s ease-in-out;
-            &:hover{
-                transform: scale(1.005);
-            }
-            &:active{
-                transform: scale(1);
-            }
-        }
-    }
-
+  @include shared.ark-list;
 }
+

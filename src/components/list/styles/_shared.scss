@@ -4,12 +4,13 @@
 @mixin ark-list() {
   @include theme.paint();
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
   user-select: none;
 
   &-item {
     padding: 5px;
-    
+
     &[click-disabled] {
       cursor: default;
     }
@@ -21,12 +22,4 @@
       cursor: pointer;
     }
   }
-
-  &[grid] {
-    display: flex;
-    flex-direction: column;
-    flex-flow: wrap;
-    justify-content: space-around;
-  }
 }
-

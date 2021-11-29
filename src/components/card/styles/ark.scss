@@ -38,13 +38,8 @@
     box-shadow: none;
   }
 
-
   &__header {
     border-top: 2px solid rgba(212, 212, 212, 0.178);
-  }
-
-  &__subtitle {
-    font-size: 1.1rem;
   }
 
   &__body {
@@ -52,3 +47,4 @@
     word-wrap: break-word;
   }
 }
+
