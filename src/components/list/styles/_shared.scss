@@ -4,8 +4,7 @@
 @mixin ark-list() {
   @include theme.paint();
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
   user-select: none;
 
   &-item {
