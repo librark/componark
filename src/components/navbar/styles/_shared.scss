@@ -1,5 +1,5 @@
 @use 'base/theme';
-@use './config' as *;
+@use './config'as *;
 
 @mixin ark-nav() {
   @include theme.paint;
@@ -46,7 +46,7 @@
   }
 
   &[justify='end'] {
-    justify-content: flex-end;
+    justify-content: end;
   }
 
   &[justify='between'] {

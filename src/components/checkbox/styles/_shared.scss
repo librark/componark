@@ -4,7 +4,10 @@
 @mixin ark-checkbox() {
   @include theme.paint();
 
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  justify-items: start;
   cursor: pointer;
   user-select: none;
 

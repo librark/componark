@@ -20,10 +20,10 @@
   grid-template-columns: none;
   width: 100%;
   height: 100%;
-  
+
   @media (min-width: theme.$mobile) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   &>*:first-child {
     border-right: 2px solid rgba($color: gray, $alpha: 0.3);
@@ -67,7 +67,7 @@
       background: inherit;
       color: inherit;
 
-      display: flex;
+      display: grid;
       width: 100%;
       height: fit-content;
       font-size: initial;
@@ -99,7 +99,7 @@
     }
 
     &__title {
-      display: flex;
+      display: grid;
       align-items: center;
       font-size: larger;
     }
@@ -119,8 +119,8 @@
       width: 100%;
       height: 100%;
 
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-auto-flow: column;
       justify-content: center;
       align-items: center;
 
@@ -134,6 +134,7 @@
       .ark-splitview {
         grid-template-columns: none;
       }
+
       & {
         overflow: auto;
         position: initial;

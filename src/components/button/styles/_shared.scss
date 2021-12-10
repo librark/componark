@@ -14,9 +14,7 @@
   @each $color in theme.$colors {
     &[background="#{$color}"] {
       $tone: var(--#{$color}, black);
-      background: $tone
-        radial-gradient(circle, transparent 1%, $tone 1%)
-        center/15000%;
+      background: $tone radial-gradient(circle, transparent 1%, $tone 1%) center/15000%;
       color: white;
     }
 
@@ -48,8 +46,8 @@
     color: inherit;
     background: inherit;
 
-    &[fab]{
-      display: flex;
+    &[fab] {
+      display: grid;
       justify-content: center;
     }
 
@@ -70,9 +68,9 @@
   }
 
   // Fab
-  $fab-size-small: 2rem; 
-  $fab-size-medium: 2.5rem; 
-  $fab-size-big: 3rem; 
+  $fab-size-small: 2rem;
+  $fab-size-medium: 2.5rem;
+  $fab-size-big: 3rem;
 
   &[fab] {
     position: relative;
@@ -89,6 +87,7 @@
     ark-icon {
       padding: 0;
       display: grid;
+
       i {
         vertical-align: middle;
       }
@@ -133,21 +132,22 @@
   }
 
   &[size="small"] {
-      width: $fab-size-small;
-      height: $fab-size-small;
-      min-width: $fab-size-small;
-      min-height: $fab-size-small;
+    width: $fab-size-small;
+    height: $fab-size-small;
+    min-width: $fab-size-small;
+    min-height: $fab-size-small;
 
-      ark-icon {
+    ark-icon {
       padding: 0;
       display: grid;
+
       i {
         vertical-align: middle;
         font-size: medium;
       }
     }
   }
-  
+
   &[size="medium"] {
     width: $fab-size-medium;
     height: $fab-size-medium;
@@ -155,19 +155,20 @@
     min-height: $fab-size-medium;
 
     ark-icon {
-    padding: 0;
-    display: grid;
-    i {
-      vertical-align: middle;
-      font-size: large;
+      padding: 0;
+      display: grid;
+
+      i {
+        vertical-align: middle;
+        font-size: large;
+      }
     }
   }
-  }
-  
+
   &[size="big"] {
-      width: $fab-size-big;
-      height: $fab-size-big;
-      min-width: $fab-size-big;
-      min-height: $fab-size-big;
+    width: $fab-size-big;
+    height: $fab-size-big;
+    min-width: $fab-size-big;
+    min-height: $fab-size-big;
   }
 }

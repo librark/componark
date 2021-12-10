@@ -27,7 +27,7 @@
     &-button {
         @include theme.paint;
         cursor: pointer;
-        display: flex;
+        display: grid;
         user-select: none;
 
         &__button {

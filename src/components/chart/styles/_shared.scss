@@ -3,7 +3,7 @@
 
 @mixin ark-chart() {
   @include theme.paint;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
   position: relative;

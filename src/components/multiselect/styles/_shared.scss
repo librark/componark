@@ -27,8 +27,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       // align-items: center;
-      flex-wrap: wrap;
-      flex-grow: 1;
 
       overflow: hidden;
       border: 1px solid var(--light);
@@ -76,7 +74,6 @@
       input {
         width: 100%;
         min-width: 100px;
-        flex: 1 1;
         padding: 0.5em;
         border: none;
         outline: none;

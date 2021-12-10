@@ -4,26 +4,26 @@
 
 @mixin ark-input() {
     padding: 10px;
-    
+
     &[disabled] {
         pointer-events: none;
         cursor: default;
-        
+
         label {
             input:disabled {
                 background-color: rgb(243, 240, 240);
                 border-color: rgba(185, 185, 185, 0.712);
             }
-            
+
         }
     }
-    
+
     &__label {
         display: block;
         text-overflow: ellipsis;
         user-select: none;
     }
-    
+
     &__input {
         @include theme.round;
         display: block;
@@ -58,7 +58,9 @@
     }
 
     &[inline] label {
-        display: flex;
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 0.1fr 1fr;
         white-space: nowrap;
         align-items: center;
         width: 100%;
