@@ -28,6 +28,8 @@
         @include theme.paint;
         cursor: pointer;
         display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
         user-select: none;
 
         &__button {
