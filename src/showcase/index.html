@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap"
-  rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
   <title></title>
 </head>
 <style>
-  body{
+  html {
+    height: -webkit-fill-available;
+  }
+
+  body {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    font-family: 'Cairo', helvetica, sans-serif;;
+    font-family: 'Cairo', helvetica, sans-serif;
     color: #001e3d;
-    align-items:center;
-    height:100vh;
+    align-items: center;
+    height: 100%;
   }
 
-  .titles{
+  .titles {
     display: flex;
-    gap:0.8rem;
+    gap: 0.8rem;
   }
-  #version{
+
+  #version {
     align-self: center;
     font-weight: 300;
     font-size: 0.9rem;
   }
 
-  .themes{
+  .themes {
     padding: 0;
     display: flex;
-    gap:1rem;
+    gap: 1rem;
     flex-direction: column;
-    align-self:center;
-    text-align:center;
-    list-style-type:none;
-  } 
-  .theme__link{
-    user-select:none;
-    padding:1rem;
+    align-self: center;
+    text-align: center;
+    list-style-type: none;
+  }
+
+  .theme__link {
+    user-select: none;
+    padding: 1rem;
     background: #001e3d;
     color: #00ffff;
-    border-radius:5px;
+    border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     transition: all 0.2s ease-in-out;
   }
-  .theme__link:hover{
-    background: #00ffff;
-    color:#001e3d;
-  }
 
+  .theme__link:hover {
+    background: #00ffff;
+    color: #001e3d;
+  }
 </style>
+
 <body>
   <div class="titles">
     <img src="../showcase/logo-knowark.svg" alt="" class="brand">
@@ -61,8 +68,13 @@
     <h2 id="version"></h2>
   </div>
   <ul class="themes">
-    <a class="theme__link" href="/ark/base"> <li> ARK </li></a>
-    <a class="theme__link" href="/material/base"><li>MATERIAL</li></a>
+    <a class="theme__link" href="/ark/base">
+      <li> ARK </li>
+    </a>
+    <a class="theme__link" href="/material/base">
+      <li>MATERIAL</li>
+    </a>
   </ul>
 </body>
+
 </html>

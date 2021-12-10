@@ -34,7 +34,8 @@ export class RootComponent extends Component {
     </nav>
     
     <aside class="app-root__sidebar"> 
-        ${this.locations
+      <div class="${tag}__sidebar-content">
+      ${this.locations
           .map(
             (location) => `
         <a class="app-root__sideitem" href="/${design}${location.path}">
@@ -43,6 +44,7 @@ export class RootComponent extends Component {
         `
           )
           .join('')}
+      </div>
     </aside>
 
     <section class="app-root__content" data-content></section>
@@ -123,10 +125,16 @@ export class RootComponent extends Component {
 
 const styles = /* css */ `
 
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: #fff7ea;
+  height: 100%;
 }
 
 :root {
@@ -150,6 +158,7 @@ body {
 
 .${tag} {
   display: grid;
+  height: 100%;
   grid-template-rows: 0.05fr 1fr;
   font-family: 'Cairo', helvetica, sans-serif;
   letter-spacing: 0.02em;
@@ -232,13 +241,18 @@ body {
 }
 
 .${tag}__sidebar {
-  grid-row: 2 / -1;
   display: grid;
+  height: 100%;
+  width: 157px;
+  grid-row: 2 / -1;
   background-color: #334455;
   color: #00ffff;
   text-decoration: none;
   overflow-x: hidden;
-  width: fit-content;
+}
+
+.${tag}__sidebar-content {
+  display: inherit;
 }
 
 .${tag}__navbar-brand {

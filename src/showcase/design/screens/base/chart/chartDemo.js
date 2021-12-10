@@ -126,4 +126,11 @@ export class ChartDemo extends Component {
     }
   }
 }
-Component.define(tag, ChartDemo)
+const styles = /* css */`
+  ${tag} {
+    display: grid;
+    width: 75%;
+  }
+
+`
+Component.define(tag, ChartDemo, styles)
