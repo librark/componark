@@ -13,10 +13,10 @@ describe('Alert', () => {
     expect(alert.horizontal).toEqual('center')
     expect(alert.vertical).toEqual('center')
     expect(alert.showConfirmButton).toBeTruthy()
-    expect(alert.confirmButtonText).toEqual('Aceptar')
+    expect(alert.confirmButtonText).toEqual('Accept')
     expect(alert.confirmButtonBackground).toEqual('success')
     expect(alert.showCancelButton).toBeTruthy()
-    expect(alert.cancelButtonText).toEqual('Cancelar')
+    expect(alert.cancelButtonText).toEqual('Cancel')
     expect(alert.cancelButtonBackground).toEqual('primary')
   })
 

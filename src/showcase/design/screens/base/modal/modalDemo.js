@@ -76,8 +76,8 @@ export class ModalDemo extends Component {
           </div>
         </div>
 
-        <ark-button background="success" color="dark" slot="action">Aceptar</ark-button>
-        <ark-button background="primary" slot="action" close>Cerrar</ark-button>
+        <ark-button background="success" color="dark" slot="action">Accept</ark-button>
+        <ark-button background="primary" slot="action" close>Close</ark-button>
       </ark-modal>
       <br>
       <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/modal/README.rst">

@@ -21,7 +21,7 @@ export class Alert extends Component {
     this.showConfirmButton = context.showConfirmButton ?? true
 
     this.confirmButtonText = (
-      context.confirmButtonText || this.confirmButtonText || 'Aceptar')
+      context.confirmButtonText || this.confirmButtonText || 'Accept')
 
     this.confirmButtonBackground = (
       context.confirmButtonBackground || 
@@ -30,7 +30,7 @@ export class Alert extends Component {
     this.showCancelButton = context.showCancelButton ?? true
 
     this.cancelButtonText = (
-      context.cancelButtonText || this.cancelButtonText || 'Cancelar')
+      context.cancelButtonText || this.cancelButtonText || 'Cancel')
 
     this.cancelButtonBackground = (
       context.cancelButtonBackground ||
