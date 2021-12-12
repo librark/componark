@@ -46,26 +46,25 @@ describe('Gallery', () => {
     const thumbnails = container.querySelectorAll('[data-thumbnail]')
     const image = gallery.querySelector('[data-image]')
 
-    thumbnails[0].click()
-    expect(image.src).toBe(gallery.imageList[0].trim())
+    //getting data-img background-image:
+    const backgroundImage = image.style.backgroundImage
+    const imageSource = backgroundImage.slice(4, -1).replace(/"/g, "")
 
-    thumbnails[1].click()
-    expect(image.src).toBe(gallery.imageList[1].trim())
+    thumbnails[0].click()
+    expect(imageSource).toBe(gallery.imageList[0].trim())
   })
 
-  it('Attribute width and height are reflected on selected image', () => {
+  it('Attributes are reflected on image', () => {
     container.innerHTML = /* html */ `
     <ark-gallery images="https://myPhoto/dog.png|https://myPhoto/cat.png"
-    width="1280px"
-    height="720px">
+    size="300px" contain>
     </ark-gallery>
     `
 
     const gallery = container.querySelector('ark-gallery')
-    const thumbnails = container.querySelectorAll('[data-thumbnail]')
     const image = gallery.querySelector('[data-image]')
 
-    expect(image.getAttribute('width')).toBe('1280px')
-    expect(image.getAttribute('height')).toBe('720px')
+    expect(image.getAttribute('size')).toBe('300px')
+    expect(image.hasAttribute('contain')).toBeTruthy()
   })
 })

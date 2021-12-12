@@ -6,25 +6,26 @@ const tag = 'ark-gallery'
 export class Gallery extends Component {
   init(context = {}) {
     this.images = context.images || this.images || []
+    this.size = context.size || this.size || '400px'
     return super.init()
   }
 
   reflectedProperties() {
-    return ['images']
+    return ['images', 'size']
   }
 
   render() {
     if (this.imageList.length === 1) {
       this.content = /* html */ `
       <div single class="ark-gallery__images">
-        <img data-image src="${this.imageList[0]}" alt="product image">
-      </div>
-      `
-    } else {
-      this.content = /* html */ `
-       <ul data-thumbnails class="ark-gallery__thumbnails"></ul>
-       <div class="ark-gallery__images">
-         <img data-image src="${this.imageList[0]}" alt="product image">
+        <div data-image style="background-image: url('${this.imageList[0]}'); height:${this.size}"></div>
+        </div>
+        `
+      } else {
+        this.content = /* html */ `
+        <ul data-thumbnails class="ark-gallery__thumbnails"></ul>
+        <div class="ark-gallery__images">
+        <div data-image style="background-image: url('${this.imageList[0]}'); height:${this.size};"></div>
        </div>
        `
 
@@ -45,7 +46,7 @@ export class Gallery extends Component {
     }
   }
 
-  moveAttributes() {
+    moveAttributes() {
     Array.from(this.attributes).forEach((attribute) => {
       if (attribute.name != 'images') {
         this.select('[data-image]').setAttribute(
@@ -62,7 +63,7 @@ export class Gallery extends Component {
     if (thumbnail) {
       thumbnail = thumbnail.style.backgroundImage
       const image = thumbnail.slice(4, -1).replace(/"/g, '')
-      this.select('[data-image]').src = image
+      this.select('[data-image]').style.backgroundImage = `url('${image}')`
     }
   }
 
