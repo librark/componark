@@ -9,11 +9,15 @@ export class GalleryDemo extends Component {
   render() {
     this.innerHTML = /* html */ `
       <h1>Gallery component</h1>
-
-      <ark-gallery images="${this.getImages()}" width="400px"></ark-gallery>
-
+      
+      <p>Gallery with contain mode</p>
+      <ark-gallery images="${this.getImages()}" size="300px" contain></ark-gallery>
+      
+      <p>Gallery with cover mode</p>
+      <ark-gallery images="${this.getImages()}" size="300px" cover></ark-gallery>
+      
       <p>Gallery with single image</p>
-      <ark-gallery images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" width="400px"></ark-gallery>
+      <ark-gallery images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" size="300px" cover></ark-gallery>
 
       <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/gallery/README.rst">
       * Reference
