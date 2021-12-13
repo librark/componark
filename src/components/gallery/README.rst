@@ -26,7 +26,7 @@ Attributes
 +=========+===========================+=====================================================================+
 | images  | (image url)               | Recieves a list of images url separated by pipes                    |
 +---------+---------------------------+---------------------------------------------------------------------+
-| size    | (units: px, % ,rem, etc.) | configures the height of the container, default (400px)             |
+| size    | (units: px, % ,rem, etc.) | configures the height of the container, default (150px)             |
 +---------+---------------------------+---------------------------------------------------------------------+
 | contain | .                         | The height of the image adjust to the container                     |
 +---------+---------------------------+---------------------------------------------------------------------+

@@ -6,7 +6,7 @@ const tag = 'ark-gallery'
 export class Gallery extends Component {
   init(context = {}) {
     this.images = context.images || this.images || []
-    this.size = context.size || this.size || '400px'
+    this.size = context.size || this.size || '150px'
     return super.init()
   }
 

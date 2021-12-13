@@ -68,6 +68,8 @@
       color: inherit;
 
       display: grid;
+      grid-auto-flow: column;
+      justify-content: start;
       width: 100%;
       height: fit-content;
       font-size: initial;
