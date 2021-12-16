@@ -1,4 +1,5 @@
 import { Component } from 'base/component'
+import { Tooltip } from 'components/tooltip'
 
 const tag = 'demo-button'
 export class ButtonDemo extends Component {
@@ -117,7 +118,9 @@ export class ButtonDemo extends Component {
 
       <div class="fab-box photo">
         <ark-button class="close-photo" horizontal="end" vertical="start" fab background="primary">
-          <ark-icon slot='icon' type="mat" name="close"></ark-icon>
+          <ark-tooltip position="bottom" text="remove">
+            <ark-icon slot='icon' type="mat" name="close"></ark-icon>
+          </ark-tooltip>
         </ark-button>
       </div>
 
@@ -149,14 +152,16 @@ const styles = /* css */ `
     box-sizing: border-box;
     border: 1px solid var(--primary);
     padding:1rem;
-    width:50%;
-    height:20%;
+    width:100%;
+    height:300px;
 }
 
 .photo{
   background-repeat: no-repeat;
   background-size: cover;
   background-position:center;
+  min-width: 200px;
+  max-width: 400px;
 }
 
 .photo > ark-button{
@@ -170,7 +175,6 @@ const styles = /* css */ `
   visibility: visible;
   opacity: 1;
 }
-
 
 .ark-button{
     margin:10px;

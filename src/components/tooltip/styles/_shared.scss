@@ -2,7 +2,6 @@
 @use '../../../base/theme';
 
 @mixin ark-tooltip() {
-    @include theme.paint;
 
     position: relative;
     display: grid;
@@ -13,11 +12,12 @@
     }
 
     .ark-tooltip {
+        background: transparent;
+
         &__text {
+            @include theme.paint;
             visibility: hidden;
             width: 120px;
-            background-color: #555;
-            color: #fff;
             text-align: center;
             padding: 5px 0;
             border-radius: 6px;
