@@ -113,6 +113,7 @@ export class RootComponent extends Component {
       { name: 'Signature', path: '/base/signature' },
       { name: 'Spinner', path: '/base/spinner' },
       { name: 'SplitView', path: '/base/splitview' },
+      { name: 'Switch', path: '/base/switch' },
       { name: 'Table', path: '/base/table' },
       { name: 'Tabs', path: '/base/tabs' },
       { name: 'Tooltip', path: '/base/tooltip' },

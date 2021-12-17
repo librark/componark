@@ -42,6 +42,7 @@ export function setRoutes(resolver, rootComponent, prefix) {
     getComponentRoute('signature', ['button']),
     getComponentRoute('spinner'),
     getComponentRoute('splitview', ['icon', 'list']),
+    getComponentRoute('switch'),
     getComponentRoute('table'),
     getComponentRoute('tabs', ['icon']),
     getComponentRoute('translate'),
