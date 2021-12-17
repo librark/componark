@@ -18,7 +18,7 @@ Examples
     
     .. code:: html
 
-        <ark-switch listen on-change="nameOfEvent"></ark-switch>
+        <ark-switch listen on-alter="nameOfEvent"></ark-switch>
 
 Attributes
 ----------
@@ -48,7 +48,7 @@ Events
 +-----------+----------------------+---------------------------------------------------+
 |   Name    |        detail        |                    Description                    |
 +===========+======================+===================================================+
-| on-change | value : false - true | Trigger a event when the user click on the siwtch |
+| on-alter  | value : false - true | Trigger a event when the user click on the switch |
 +-----------+----------------------+---------------------------------------------------+
 
 

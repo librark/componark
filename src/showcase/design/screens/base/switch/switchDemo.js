@@ -30,7 +30,7 @@ export class SwitchDemo extends Component {
 
       
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/spinner/README.rst">
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/switch/README.rst">
       * Reference
       </a>
     `
@@ -47,7 +47,6 @@ export class SwitchDemo extends Component {
 }
 
 const styles = /* css */ `
-
   .switch-container {
     display: grid;
     place-items: center;
