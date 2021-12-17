@@ -4,6 +4,7 @@ import { styles } from '../styles'
 const tag = 'ark-switch'
 export class Switch extends Component {
   init (context = {}) {
+    this.value = this.value || false
     return super.init()
   }
 
@@ -14,6 +15,7 @@ export class Switch extends Component {
     `
 
     this.moveAttributes()
+    this.value = this.select('[data-switch]').hasAttribute('checked')
 
     return super.render()
   }
@@ -27,6 +29,17 @@ export class Switch extends Component {
     !dataSwitch.hasAttribute('checked') ? 
     dataSwitch.setAttribute('checked', '') :
     dataSwitch.removeAttribute('checked')
+
+    this.onEmitAlter(event)
+  }
+
+  onEmitAlter(event) {
+    event.stopPropagation()
+    this.value = this.select('[data-switch]').hasAttribute('checked')
+    this.emit('alter', {
+      value: this.value,
+      origin: event
+    })
   }
 
   moveAttributes () {

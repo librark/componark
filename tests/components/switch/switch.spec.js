@@ -61,7 +61,21 @@ describe('Switch', () => {
     
     switchElement.click()
     expect(switchElement.hasAttribute('checked')).toBeFalsy()
+  })
+
+  it('Emits a false or true value on alter event', () => {
+    container.innerHTML = `
+      <ark-switch listen on-alter="onSwitchAlter"></ark-switch>
+    `
+    const switchElement = container.querySelector('.ark-switch')
+    const dataSwitch = switchElement.select('[data-switch]')
     
+
+    dataSwitch.click()
+    expect(switchElement.value).toBeTruthy()
+    dataSwitch.click()
+    expect(switchElement.value).toBeFalsy()
+
   })
   
 
