@@ -1,4 +1,5 @@
 import { Component } from "base/component"
+import { Icon } from "components/icon"
 
 export class ModalDemo extends Component {
   init(context) {
@@ -17,8 +18,8 @@ export class ModalDemo extends Component {
         round="md" 
         title="My Title" 
         subtitle="My Subtitle"
-        width="80vw" 
-        height="40vh">
+        width="clamp(15.625rem, 50vw - 6.2rem, 25rem);" 
+        height="50vh">
 
         <div style="margin: 1rem;">
           <div>
@@ -78,6 +79,16 @@ export class ModalDemo extends Component {
 
         <ark-button background="success" color="dark" slot="action">Accept</ark-button>
         <ark-button background="primary" slot="action" close>Close</ark-button>
+        <ark-button 
+          fab
+          size="small"
+          background="light" 
+          color="dark"
+          vertical="center"
+          slot="header" close>
+          <ark-icon slot="icon" name="fas fa-times"></ark-icon
+        ></ark-button>
+        
       </ark-modal>
       <br>
       <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/modal/README.rst">

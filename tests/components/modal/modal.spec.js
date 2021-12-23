@@ -43,6 +43,7 @@ describe("Modal", () => {
     container.innerHTML = /* html */ `
       <ark-modal title="myTitle">
         <div>MyBody</div>
+        <div slot="header">head</div>
         <div slot="action" close>action</div>
       </ark-modal>
     `
