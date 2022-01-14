@@ -101,6 +101,7 @@
     "clearMocks": true,
     "testEnvironment": "jsdom",
     "coverageDirectory": "coverage",
+    "transform": {},
     "setupFiles": [
       "./tests/__mocks__/canvasMock.js"
     ],

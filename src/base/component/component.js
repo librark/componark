@@ -16,9 +16,9 @@ export class Component extends HTMLElement {
   }
 
   /**
-   * @param {Object<string, any>} context
+   * @param {Object<string, any>} _context
    * @return {Component} */
-  init(context = {}) {
+  init(_context = {}) {
     return this
   }
 

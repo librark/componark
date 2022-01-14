@@ -1,4 +1,4 @@
-import { Button } from 'components/button'
+import 'components/button/index.js'
 
 describe('Button', () => {
   let container = null

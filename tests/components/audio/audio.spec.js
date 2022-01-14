@@ -1,4 +1,4 @@
-import { Audio } from 'components/audio'
+import '../../../src/components/audio/index.js'
 
 jest.useFakeTimers()
 

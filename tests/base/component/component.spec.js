@@ -1,4 +1,5 @@
- import { Component } from 'base/component'
+import { jest } from '@jest/globals'
+import { Component } from 'base/component'
 
 class MockComponent extends Component {
   init(context = {}) {
@@ -10,11 +11,11 @@ class MockComponent extends Component {
 
   reflectedProperties() { return ['code'] }
 
-  erroringHandler (event) {
+  erroringHandler (_event) {
     throw new Error('Something went wrong!')
   }
 
-  async asyncErroringHandler (event) {
+  async asyncErroringHandler (_event) {
     const callback = async () => { 
       throw new Error('Something went async wrong!') }
     await callback()
