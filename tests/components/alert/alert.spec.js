@@ -1,4 +1,4 @@
-import { Alert } from 'components/alert'
+import { Alert } from 'components/alert/index.js'
 
 describe('Alert', () => {
   it('can be instantiated', () => {

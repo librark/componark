@@ -1,4 +1,4 @@
-import { Accordion, AccordionTab } from '../../../src/components/accordion'
+import '../../../src/components/accordion/index.js'
 
 describe('Accordion', () => {
   let container = null

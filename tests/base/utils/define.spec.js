@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import { define } from 'base/utils'
 
 describe('Define', () => {

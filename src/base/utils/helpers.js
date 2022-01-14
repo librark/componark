@@ -1,4 +1,4 @@
-import { camelToKebab } from './format'
+import { camelToKebab } from './format.js'
 
 /** @param {HTMLElement} self */
 export function listen (self) {

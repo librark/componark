@@ -1,4 +1,4 @@
-import { define, listen, reflect, slot } from "../utils"
+import { define, listen, reflect, slot } from "../utils/index.js"
 
 export class Component extends HTMLElement {
   constructor() {

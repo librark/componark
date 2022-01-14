@@ -1,6 +1,6 @@
-import { Component } from '../../../base/component'
-import { AccordionTab } from './accordion.tab'
-import { styles } from '../styles'
+import { Component } from '../../../base/component/index.js'
+import { AccordionTab } from './accordion.tab.js'
+import { styles } from '../styles/index.js'
 
 const tag = 'ark-accordion'
 export class Accordion extends Component {

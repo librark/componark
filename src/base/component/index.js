@@ -1,1 +1,1 @@
-export { Component } from './component'
+export { Component } from './component.js'

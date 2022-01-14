@@ -1,6 +1,6 @@
 import { Injectark } from '@knowark/injectarkjs'
 import { buildInjector } from '../core/factories'
-import { setMainRoutes } from './screens.routes'
+import { setMainRoutes } from './screens.routes.js'
 
 /** @param {string} target */
 export function main (target) {
