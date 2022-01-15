@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.knowark.com/web/componark.git"
+    "url": "https://github.com/knowark/componark.git"
   },
   "keywords": [
     "web",
@@ -25,9 +25,7 @@
     "singleQuote": true
   },
   "types": "src/components/index",
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
