@@ -1,4 +1,4 @@
-import { Input } from 'components/input'
+import 'components/input'
 
 describe('Input', () => {
   let container = null
@@ -16,6 +16,7 @@ describe('Input', () => {
     container.innerHTML = `<ark-input></ark-input>`
     const component = container.querySelector('ark-input')
     expect(component).toBeTruthy()
+    expect(component).toBe(component.init())
   })
 
   it('sets its value attribute on input event', () => {

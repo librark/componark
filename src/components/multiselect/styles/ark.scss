@@ -1,5 +1,198 @@
-@use'./shared.scss';
+@use '../../../base/theme';
+@use './config';
+
+@mixin ark-multiselect() {
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) 0.2fr;
+  grid-template-row: repeat(3, 1fr);
+  grid-gap: 0.2rem;
+
+  h1 {
+    user-select: none;
+  }
+
+  .ark-multiselect {
+    box-sizing: content-box;
+    width: 100%;
+
+
+    &__field {
+      @include theme.paint;
+      grid-row: 2;
+      grid-column: span 2;
+      min-width: 0;
+      padding: 0.5em;
+
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      // align-items: center;
+
+      overflow: hidden;
+      border: 1px solid var(--light);
+      border-radius: .2em;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+
+      &--remove {
+        cursor: pointer;
+        grid-row: 2;
+        grid-column: 3;
+        align-self: start;
+        font-size: 0.5rem;
+        position: relative;
+        left: -25px;
+        width: fit-content;
+        width: -moz-fit-content;
+        padding: 0.28rem 0.4rem;
+        background: transparent;
+        color: black;
+        user-select: none;
+
+        &:hover {
+          background: rgb(250, 110, 110);
+          color: white;
+        }
+
+        &:hover:after {
+          content: 'clear';
+          position: absolute;
+          top: 20px;
+          left: 2px;
+          color: black;
+        }
+      }
+
+
+      &:focus,
+      &:focus-within {
+        border: 2px solid var(--primary);
+        outline: none;
+      }
+
+      input {
+        width: 100%;
+        min-width: 100px;
+        padding: 0.5em;
+        border: none;
+        outline: none;
+        background: transparent;
+        margin: .2em .2em;
+
+      }
+
+    }
+
+    &__tag {
+      position: relative;
+      display: inline-grid;
+      align-items: center;
+      padding: .25em 1.5em .25em .5em;
+      border: 1px solid #bdbdbd;
+      border-radius: .2em;
+      margin: .2em;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    &__tag:last-child {
+      margin-right: 0;
+    }
+
+    &__tag:hover {
+      background: #efefef;
+    }
+
+    &__tag-text {
+      min-height: 1em;
+    }
+
+    &__tag-remove-button {
+      position: absolute;
+      top: .25em;
+      right: .25em;
+      width: 1em;
+      height: 1em;
+      opacity: 0.3;
+    }
+
+    &__tag-remove-button:hover {
+      opacity: 1;
+    }
+
+    &__tag-remove-button:before,
+    &__tag-remove-button:after {
+      content: ' ';
+      position: absolute;
+      left: .5em;
+      width: 2px;
+      height: 1em;
+      background-color: #333;
+    }
+
+    &__tag-remove-button:before {
+      transform: rotate(45deg);
+    }
+
+    &__tag-remove-button:after {
+      transform: rotate(-45deg);
+    }
+
+    &__popup {
+      display: none;
+      grid-row: 3;
+      grid-column: span 2;
+      overflow-y: auto;
+      width: 100%;
+      max-height: 300px;
+      box-sizing: border-box;
+      border: 1px solid var(--light);
+      border-radius: .2em;
+      background: white;
+      user-select: none;
+    }
+
+    &-list {
+      padding: 0;
+      margin: 0;
+
+      &__no-options {
+        pointer-events: none;
+        user-select: none;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        padding: .5em 1em;
+        min-height: 1em;
+        list-style: none;
+        cursor: pointer;
+      }
+
+      li[selected] {
+        background: #ceebcb;
+      }
+
+      li[selected]::after {
+        content: "✓";
+      }
+
+      li:focus,
+      li:hover {
+        outline: dotted 1px var(--dark);
+        background: var(--primary);
+        color: var(--light);
+      }
+    }
+
+  }
+}
 
 .ark-multiselect {
-  @include shared.ark-multiselect;
+  @include ark-multiselect;
 }

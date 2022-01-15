@@ -1,6 +1,28 @@
-@use './shared.scss';
+@use '../../../base/theme';
+@use './config'as *;
 
-.ark-list {
-  @include shared.ark-list;
+@mixin ark-list() {
+  @include theme.paint();
+
+  display: grid;
+  user-select: none;
+
+  &-item {
+    padding: 5px;
+
+    &[click-disabled] {
+      cursor: default;
+    }
+  }
+
+  &[action] {
+    .ark-list-item {
+      padding: 1rem;
+      cursor: pointer;
+    }
+  }
 }
 
+.ark-list {
+  @include ark-list;
+}

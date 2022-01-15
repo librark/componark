@@ -1,5 +1,7 @@
-@use'./shared.scss';
+@mixin ark-location() {
+
+}
 
 .ark-location {
-  @include shared.ark-location;
+  @include ark-location;
 }

@@ -2,7 +2,7 @@ import { Component } from '../../../base/component/index.js'
 
 const tag = 'ark-icon'
 export class Icon extends Component {
-  init (context = {}) {
+  init (_context = {}) {
     this.type = this.type || 'awe'
     this.name = this.name || 'fas cloud'
 

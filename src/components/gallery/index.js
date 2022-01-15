@@ -1,1 +1,1 @@
-export {Gallery} from './components/gallery.js'
+export { Gallery } from './components/gallery.js'

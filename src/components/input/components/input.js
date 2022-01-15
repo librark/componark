@@ -3,7 +3,7 @@ import { styles } from '../styles/index.js'
 
 const tag = 'ark-input'
 export class Input extends Component {
-  init(context) {
+  init(context = {}) {
     this.background = context.background || this.background || ''
     this.color = context.color || this.color || ''
     this.borderColor = context.borderColor  || this.borderColor || ''
