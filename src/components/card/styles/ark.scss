@@ -1,7 +1,64 @@
-@use './shared.scss';
+@use '../../../base/theme';
+@use './config'as *;
+
+@mixin ark-card() {
+  @include theme.paint;
+  @include theme.round;
+  display: block;
+  overflow: hidden;
+
+  &__media {
+    display: grid;
+    overflow: hidden;
+    place-items: center;
+    user-select: none;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__header,
+  &__body,
+  &__actions {
+    box-sizing: border-box;
+    padding: 1rem;
+    user-select: none;
+  }
+
+  &__body {
+    letter-spacing: 0.02em;
+    line-height: 1.5em;
+    width: 80%;
+  }
+
+  &__title {
+    font-weight: 700;
+    letter-spacing: 0.0125em;
+    text-decoration: inherit;
+    text-transform: inherit;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    line-height: 1.25 rem;
+    font-weight: 400;
+    letter-spacing: 0.0125em;
+    text-decoration: inherit;
+    text-transform: inherit;
+  }
+
+  &__actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 1rem;
+    justify-content: end;
+  }
+}
 
 .ark-card {
-  @include shared.ark-card;
+  @include ark-card;
   box-sizing: border-box;
   box-shadow: 7px 5px 5px -2px rgba(0, 0, 0, 0.1);
   border: 2px solid #d5d4d4;
@@ -47,4 +104,3 @@
     word-wrap: break-word;
   }
 }
-

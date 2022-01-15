@@ -1,5 +1,19 @@
-@use'./shared.scss';
+@mixin ark-camera() {
+  display: grid;
+  width: fit-content;
+  height: fit-content;
+  overflow: hidden;
+  user-select: none;
+
+  &__canvas {
+    display: none;
+  }
+
+  &__video {
+    transform: rotateY(180deg);
+  }
+}
 
 .ark-camera {
-  @include shared.ark-camera;
+  @include ark-camera;
 }
