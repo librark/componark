@@ -1,4 +1,4 @@
-import { Checkbox } from 'components/checkbox'
+import 'components/checkbox/index.js'
 
 describe('Checkbox', () => {
   let container = null

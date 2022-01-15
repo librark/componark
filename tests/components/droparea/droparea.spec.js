@@ -1,5 +1,5 @@
-import { Droparea } from 'components/droparea'
-import { DropareaPreview } from '../../../src/components/droparea/components/droparea-preview'
+import 'components/droparea'
+import '../../../src/components/droparea/components/droparea-preview'
 
 describe('Droparea', () => {
   const createBubbledEvent = (type, props = {}) => {

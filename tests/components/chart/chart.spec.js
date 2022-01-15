@@ -1,4 +1,4 @@
-import { Chart } from '../../../src/components/chart'
+import '../../../src/components/chart/index.js'
 
 describe('Chart', () => {
   let container = null

@@ -1,4 +1,4 @@
-import { CheckboxGroup } from 'components/checkbox'
+import 'components/checkbox/index.js'
 
 describe('Checkbox', () => {
 

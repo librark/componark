@@ -1,4 +1,5 @@
-import { DropareaPreview } from '../../../src/components/droparea/components/droparea-preview'
+import { jest } from '@jest/globals'
+import '../../../src/components/droparea/components/droparea-preview'
 
 describe('Droparea', () => {
   const createBubbledEvent = (type, props = {}) => {

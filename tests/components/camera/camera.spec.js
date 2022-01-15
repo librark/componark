@@ -1,10 +1,10 @@
-import { Camera } from 'components/camera'
+import 'components/camera/index.js'
 
 const mockGlobal = () => ({
   navigator: {
     mediaDevices: {
       __stops: 0,
-      async getUserMedia(options) {
+      async getUserMedia(_options) {
         return { getTracks: () => [{stop: () => {this.__stops += 1}}] }
       }
     }

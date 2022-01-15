@@ -1,4 +1,5 @@
-import { Signature } from '../../../src/components/signature'
+import { jest } from '@jest/globals'
+import '../../../src/components/signature/index.js'
 
 jest.mock('signature_pad', () => jest.fn(
   () => ({ 

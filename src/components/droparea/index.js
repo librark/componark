@@ -1,1 +1,1 @@
-export { Droparea } from './components/droparea'
+export { Droparea } from './components/droparea.js'

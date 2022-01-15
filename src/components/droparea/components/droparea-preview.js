@@ -1,10 +1,10 @@
-import { Component } from '../../../base/component'
-import { Droparea } from './droparea'
+import { Component } from '../../../base/component/index.js'
+import './droparea.js'
 // @ts-ignore
 const tag = 'ark-droparea-preview'
 
 export class DropareaPreview extends Component {
-  init(context = {}) {
+  init(_context = {}) {
     return super.init()
   }
 

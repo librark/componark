@@ -1,6 +1,6 @@
-import { Component } from '../../../base/component'
+import { Component } from '../../../base/component/index.js'
 import SignaturePad from 'signature_pad'
-import { styles } from '../styles'
+import { styles } from '../styles/index.js'
 
 
 const tag = 'ark-signature'

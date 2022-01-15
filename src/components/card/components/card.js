@@ -1,6 +1,6 @@
-import { Component } from '../../../base/component'
-import { getSlots } from '../../../base/utils'
-import { styles } from '../styles'
+import { Component } from '../../../base/component/index.js'
+import { getSlots } from '../../../base/utils/index.js'
+import { styles } from '../styles/index.js'
 
 const tag = 'ark-card'
 export class Card extends Component {

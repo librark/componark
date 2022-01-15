@@ -1,6 +1,6 @@
-import { Component } from '../../../base/component'
-import { DropareaPreview } from './droparea-preview'
-import { styles } from '../styles'
+import { Component } from '../../../base/component/index.js'
+import './droparea-preview.js'
+import { styles } from '../styles/index.js'
 // @ts-ignore
 const tag = 'ark-droparea'
 

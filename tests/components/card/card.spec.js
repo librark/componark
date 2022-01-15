@@ -1,4 +1,4 @@
-import { Card } from 'components/card'
+import 'components/card/index.js'
 
 describe('Card', () => {
   let container = null

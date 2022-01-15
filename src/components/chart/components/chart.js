@@ -1,6 +1,6 @@
-import ChartJs from 'chart.js/auto'
-import { Component } from '../../../base/component'
-import { styles } from '../styles'
+import ChartJs from 'chart.js/auto/auto.esm.js'
+import { Component } from '../../../base/component/index.js'
+import { styles } from '../styles/index.js'
 
 const tag = 'ark-chart'
 export class Chart extends Component {

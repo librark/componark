@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import '../../../src/components/audio/index.js'
 
 jest.useFakeTimers()
