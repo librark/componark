@@ -51,15 +51,13 @@ describe('Accordion Tab', () => {
     expect(tab.hasAttribute('active')).toBeTruthy()
 
     tab.close()
-    expect(!tab.hasAttribute('active')).toBeTruthy()
-
-    const eventClick = new Event('click')
+    expect(tab.hasAttribute('active')).toBeFalsy()
 
     tab.toggle()
     expect(tab.hasAttribute('active')).toBeTruthy()
 
     tab.toggle()
-    expect(!tab.hasAttribute('active')).toBeTruthy()
+    expect(tab.hasAttribute('active')).toBeFalsy()
   })
 
   it('can render tab with empty header', () => {
@@ -99,5 +97,26 @@ describe('Accordion Tab', () => {
     
     const tabHeader = container.querySelector('[data-accordion-tab-header]')
     expect(tabHeader.querySelector('ark-icon')).toBeTruthy()
+  })
+
+  it('does nothing when clicking on disable tabs', () => {
+    container.innerHTML = /* html */ `
+    <ark-accordion>
+      <ark-accordion-tab header='Tab Icon' disabled>
+        <p>
+          Lorem, ipsum dolor sit amet 
+          consectetur adipisicing elit. Totam nihil, 
+          similique vel accusamus quo adipisci repellendus 
+          velit quisquam laborum doloribus alias accusantium
+          est et porro ex molestias? Iure, eveniet odit.
+        </p>
+      </ark-accordion-tab>
+    </ark-accordion>
+    `
+    const tab = container.querySelector('ark-accordion')
+
+    tab.click()
+
+    expect(tab.hasAttribute('active')).toBeFalsy()
   })
 })

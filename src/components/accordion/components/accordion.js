@@ -26,6 +26,8 @@ export class Accordion extends Component {
     const tab = /** @type {AccordionTab} */ (
       target.closest('ark-accordion-tab'))
 
+    if (!tab) return
+
     tab.toggle()
 
     if (this.hasAttribute('multiple')) return

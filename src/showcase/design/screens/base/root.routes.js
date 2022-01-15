@@ -1,14 +1,14 @@
 export function setRoutes(resolver, rootComponent, prefix) {
-  /** @param {string} path @returns {{path, action}} */
+  /** @param {string} path @returns {{ path: string, action: function }} */
   function getComponentRoute(path, dependencies = []) {
     return {
       path: path,
       action: async () => {
         for (const dependency of dependencies) {
-          await import(`components/${dependency}`)
+          await import(`components/${dependency}/index.js`)
         }
-        const component = await import(`components/${path}`)
-        const module = await import(`./${path}`)
+        await import(`components/${path}/index.js`)
+        const module = await import(`./${path}/index.js`)
         rootComponent.setContentComponent(module.hub(resolver))
       },
     }

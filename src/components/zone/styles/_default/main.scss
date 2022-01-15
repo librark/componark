@@ -1,9 +1,0 @@
-@import "./drag.default";
-@import "./drop.default";
-@import "./zone.default";
-
-@mixin zone_default() {
-  @include drag_default_();
-  @include drop_default_();
-  @include zone_default_();
-}
