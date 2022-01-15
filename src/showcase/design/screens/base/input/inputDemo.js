@@ -1,7 +1,6 @@
-import { Component } from 'base/component'
+import { Component } from 'base/component/index.js'
 
 const tag = 'demo-input'
-
 export class InputDemo extends Component {
   init(context) {
     this.data = {}

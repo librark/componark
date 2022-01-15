@@ -1,5 +1,4 @@
-import { container } from 'webpack'
-import { Select } from '../../../src/components/select'
+import '../../../src/components/select'
 
 describe('Select', () => {
 

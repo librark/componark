@@ -1,5 +1,5 @@
 import { Injectark } from '@knowark/injectarkjs'
-import { buildInjector } from '../core/factories'
+import { buildInjector } from '../core/factories/index.js'
 import { setMainRoutes } from './screens.routes.js'
 
 /** @param {string} target */

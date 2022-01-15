@@ -1,5 +1,5 @@
-import { Component } from 'base/component'
-import { Alert } from 'components/alert'
+import { Component } from 'base/component/index.js'
+import { Alert } from 'components/alert/index.js'
 
 const tag = 'demo-alert'
 

@@ -1,4 +1,3 @@
-export const styles = (async () => {
-  const design = process.env.ARK_DESIGN ?? 'ark'
-  return (await import(`./${design}.scss`)).default?.toString()
-})()
+// @ts-nocheck
+import ark from './ark.scss'
+export const styles = ark.default?.toString()

@@ -1,4 +1,4 @@
-import { InputDemo } from './inputDemo'
+import { InputDemo } from './inputDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

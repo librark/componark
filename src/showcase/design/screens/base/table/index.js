@@ -1,4 +1,4 @@
-import { TableDemo } from './tableDemo'
+import { TableDemo } from './tableDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

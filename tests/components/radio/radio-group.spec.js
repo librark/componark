@@ -1,4 +1,4 @@
-import { RadioButton, RadioGroup } from '../../../src/components/radio'
+import { RadioButton } from '../../../src/components/radio/index.js'
 
 describe('RadioGroup', () => {
   let container = null

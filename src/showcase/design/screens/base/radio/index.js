@@ -1,4 +1,4 @@
-import { RadioDemo } from './radioDemo'
+import { RadioDemo } from './radioDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

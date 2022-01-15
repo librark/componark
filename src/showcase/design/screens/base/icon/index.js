@@ -1,4 +1,4 @@
-import { IconDemo } from './iconDemo'
+import { IconDemo } from './iconDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

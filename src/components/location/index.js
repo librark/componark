@@ -1,1 +1,1 @@
-export { Location } from './components/location'
+export { Location } from './components/location.js'

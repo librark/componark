@@ -1,4 +1,4 @@
-import { Component } from "base/component"
+import { Component } from "base/component/index.js"
 
 const tag = "demo-translate"
 export class TranslateDemo extends Component {

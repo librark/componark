@@ -1,4 +1,4 @@
-import { ZoneDemo } from './zoneDemo'
+import { ZoneDemo } from './zoneDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

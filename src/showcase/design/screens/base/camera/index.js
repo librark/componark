@@ -1,4 +1,4 @@
-import { CameraDemo } from './cameraDemo'
+import { CameraDemo } from './cameraDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

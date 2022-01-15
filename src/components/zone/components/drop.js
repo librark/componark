@@ -2,8 +2,8 @@
  * @typedef {import('./drag').DragZone} DragZone
  * */
 
-import { Component } from '../../../base/component'
-import { uuid } from '../../../base/utils'
+import { Component } from '../../../base/component/index.js'
+import { uuid } from '../../../base/utils/index.js'
 
 export class DropZone extends Component {
   init (context = {}) {
@@ -28,7 +28,7 @@ export class DropZone extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     // drag
     this.addEventListener('dragenter', this.onDragenter.bind(this))
     this.addEventListener('dragleave', this.onDragleave.bind(this))

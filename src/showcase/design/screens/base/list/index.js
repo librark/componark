@@ -1,4 +1,4 @@
-import { ListDemo } from './listDemo'
+import { ListDemo } from './listDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

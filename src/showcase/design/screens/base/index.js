@@ -1,5 +1,5 @@
 /** @typedef {import('./root.component').RootComponent} RootComponent */
-import './root.component'
+import './root.component.js'
 import { setRoutes } from './root.routes.js'
 
 export function hub (parentResolver, prefix) {

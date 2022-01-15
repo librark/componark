@@ -1,5 +1,5 @@
-import { Component } from "base/component"
-import { Icon } from "components/icon"
+import "components/icon/index.js"
+import { Component } from "base/component/index.js"
 
 export class ModalDemo extends Component {
   init(context) {

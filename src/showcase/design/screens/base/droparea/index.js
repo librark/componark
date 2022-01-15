@@ -1,4 +1,4 @@
-import { DropareaDemo } from "./dropareaDemo"
+import { DropareaDemo } from "./dropareaDemo.js"
 
 export function hub(parentResolver) {
   const resolver = parentResolver.forge({

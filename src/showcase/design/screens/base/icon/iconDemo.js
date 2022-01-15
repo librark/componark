@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from 'base/component/index.js'
 
 const tag = 'demo-icon'
 export class IconDemo extends Component {
@@ -32,13 +32,11 @@ export class IconDemo extends Component {
   }
 }
 const styles = /* css */`
-  .title{
+  .ark-icon {
+    font-size: 2rem;
+  }
+  .ark-icon .title {
     color:var(--primary);
   }
-  ark-icon,.material-icons{
-    font-size:2rem;
-  }
-
-
 `
 Component.define(tag, IconDemo, styles)

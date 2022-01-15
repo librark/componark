@@ -1,6 +1,5 @@
-import { Component } from 'base/component'
-
-import './detailDemo'
+import { Component } from 'base/component/index.js'
+import './detailDemo.js'
 
 const tag = 'demo-splitview'
 

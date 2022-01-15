@@ -1,4 +1,4 @@
-import { SidebarDemo } from './sidebarDemo'
+import { SidebarDemo } from './sidebarDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

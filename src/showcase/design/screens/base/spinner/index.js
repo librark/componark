@@ -1,4 +1,4 @@
-import { SpinnerDemo } from './spinnerDemo'
+import { SpinnerDemo } from './spinnerDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

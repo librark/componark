@@ -1,4 +1,4 @@
-import { PaginatorDemo } from './paginatorDemo'
+import { PaginatorDemo } from './paginatorDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

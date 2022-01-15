@@ -1,7 +1,6 @@
-import { Component } from '../../../base/component'
+import { Component } from '../../../base/component/index.js'
 
 const tag = 'ark-multiselect-input'
-
 export class MultiselectInput extends Component {
   /** @param {{}} context */
   init (context) {

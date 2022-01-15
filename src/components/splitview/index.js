@@ -1,3 +1,3 @@
-export { SplitViewDetail } from './components/detail'
-export { SplitViewMaster } from './components/master'
-export { SplitView } from './components/splitView'
+export { SplitViewDetail } from './components/detail.js'
+export { SplitViewMaster } from './components/master.js'
+export { SplitView } from './components/splitView.js'

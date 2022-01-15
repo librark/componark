@@ -1,4 +1,4 @@
-import { SelectDemo } from './selectDemo'
+import { SelectDemo } from './selectDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

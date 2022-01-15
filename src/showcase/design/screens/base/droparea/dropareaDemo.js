@@ -1,7 +1,6 @@
-import { Component } from 'base/component'
+import { Component } from 'base/component/index.js'
 
 const tag = 'demo-droparea'
-
 export class DropareaDemo extends Component {
   init(context) {
     return super.init(context)

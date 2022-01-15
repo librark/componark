@@ -1,4 +1,4 @@
-import { SwitchDemo } from './switchDemo'
+import { SwitchDemo } from './switchDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

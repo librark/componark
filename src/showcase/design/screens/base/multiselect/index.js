@@ -1,4 +1,4 @@
-import { MultiselectDemo } from './multiselectDemo'
+import { MultiselectDemo } from './multiselectDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

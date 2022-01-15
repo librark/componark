@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from 'base/component/index.js'
 // @ts-ignore
 import Image from './assets/building.jpg'
 

@@ -1,4 +1,4 @@
-import { CardDemo } from './cardDemo'
+import { CardDemo } from './cardDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

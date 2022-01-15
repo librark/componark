@@ -1,1 +1,1 @@
-export * from './development.factory'
+export * from './development.factory.js'

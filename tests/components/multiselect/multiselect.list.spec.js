@@ -1,5 +1,4 @@
-import { template } from '@babel/core'
-import { Multiselect } from '../../../src/components/multiselect/components/multiselect'
+import '../../../src/components/multiselect/components/multiselect'
 
 describe('MultiselectList', () => {
   let container = null

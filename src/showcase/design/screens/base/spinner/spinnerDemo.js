@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from 'base/component/index.js'
 
 const tag = 'demo-spinner'
 export class SpinnerDemo extends Component {

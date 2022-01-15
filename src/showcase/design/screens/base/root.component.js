@@ -1,10 +1,4 @@
-import hljs from 'highlight.js/lib/core'
-import 'highlight.js/styles/github.css'
-import xml from 'highlight.js/lib/languages/xml'
 import { Component } from 'base/component'
-
-hljs.registerLanguage('html', xml)
-hljs.initHighlightingOnLoad()
 
 // @ts-ignore
 // eslint-disable-next-line no-undef
@@ -118,8 +112,6 @@ export class RootComponent extends Component {
       { name: 'Tabs', path: '/base/tabs' },
       { name: 'Tooltip', path: '/base/tooltip' },
       { name: 'Translate', path: '/base/translate' },
-      //{ name: 'TreeTable', path: '/base/treetable' },
-      //{ name: 'Zone', path: '/base/zone' },
     ]
   }
 }
@@ -177,7 +169,7 @@ body {
   place-items:center;
 }
 
-.material-icons {
+.${tag} .material-icons {
   font-size: 2.5rem;
 }
 

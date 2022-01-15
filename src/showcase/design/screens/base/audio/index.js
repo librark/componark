@@ -1,4 +1,4 @@
-import { AudioDemo } from './audioDemo'
+import { AudioDemo } from './audioDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

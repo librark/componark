@@ -1,4 +1,4 @@
-import { Component } from 'base/component'
+import { Component } from 'base/component/index.js'
 
 export class LocationDemo extends Component {
   init (context) {

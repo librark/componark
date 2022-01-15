@@ -1,4 +1,4 @@
-import { AlertDemo } from './alertDemo'
+import { AlertDemo } from './alertDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

@@ -1,4 +1,4 @@
-import { ModalDemo } from './modalDemo'
+import { ModalDemo } from './modalDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

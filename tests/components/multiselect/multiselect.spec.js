@@ -1,4 +1,4 @@
-import { Multiselect } from '../../../src/components/multiselect/components/multiselect'
+import '../../../src/components/multiselect/components/multiselect'
 
 describe('Multiselect', () => {
   let container = null

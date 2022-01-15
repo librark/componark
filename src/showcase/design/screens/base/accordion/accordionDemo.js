@@ -1,4 +1,4 @@
-import { Component } from 'base/component.js'
+import { Component } from 'base/component/index.js'
 
 const tag = 'demo-accordion'
 export class AccordionDemo extends Component {

@@ -1,4 +1,4 @@
-import { LocationDemo } from './locationDemo'
+import { LocationDemo } from './locationDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

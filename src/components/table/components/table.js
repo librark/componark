@@ -1,5 +1,5 @@
-import { Component } from '../../../base/component'
-import { styles } from '../styles'
+import { Component } from '../../../base/component/index.js'
+import { styles } from '../styles/index.js'
 
 const tag = 'ark-table'
 export class Table extends Component {

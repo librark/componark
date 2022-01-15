@@ -1,4 +1,4 @@
-import { AccordionDemo } from './accordionDemo'
+import { AccordionDemo } from './accordionDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

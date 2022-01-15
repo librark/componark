@@ -1,4 +1,4 @@
-import { ButtonDemo } from './buttonDemo'
+import { ButtonDemo } from './buttonDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

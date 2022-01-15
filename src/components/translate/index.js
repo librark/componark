@@ -1,1 +1,1 @@
-export { Translate } from './components/translate'
+export { Translate } from './components/translate.js'

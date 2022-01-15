@@ -1,7 +1,7 @@
-import { Component } from 'base/component'
+import { Component } from 'base/component/index.js'
 
 export class RadioDemo extends Component {
-  init (context) {
+  init (_context) {
     return super.init()
   }
 

@@ -1,5 +1,4 @@
-import { Component } from 'base/component'
-
+import { Component } from 'base/component/index.js'
 
 export class AudioDemo extends Component {
   init (context) {

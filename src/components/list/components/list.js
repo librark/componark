@@ -1,7 +1,6 @@
-// @ts-nocheck
-import { Component } from "../../../base/component"
-import { ListItem } from "./list.item"
-import { styles } from "../styles"
+import { Component } from "../../../base/component/index.js"
+import { ListItem } from "./list.item.js"
+import { styles } from "../styles/index.js"
 
 const tag = "ark-list"
 

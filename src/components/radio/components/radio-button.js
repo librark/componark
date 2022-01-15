@@ -1,4 +1,4 @@
-import { Component } from '../../../base/component'
+import { Component } from '../../../base/component/index.js'
 
 const tag = 'ark-radio-button'
 export class RadioButton extends Component {

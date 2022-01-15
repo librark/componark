@@ -1,4 +1,4 @@
-import { CheckboxDemo } from './checkboxDemo'
+import { CheckboxDemo } from './checkboxDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

@@ -1,8 +1,7 @@
-import { Component } from '../../../base/component'
-import { MultiselectList } from './multiselect.list'
-import { MultiselectInput } from './multiselect.input'
-
-import { styles } from '../styles'
+import { Component } from '../../../base/component/index.js'
+import './multiselect.list.js'
+import './multiselect.input.js'
+import { styles } from '../styles/index.js'
 
 const tag = 'ark-multiselect'
 export class Multiselect extends Component {

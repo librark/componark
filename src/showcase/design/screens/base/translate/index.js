@@ -1,4 +1,4 @@
-import { TranslateDemo } from './translateDemo'
+import { TranslateDemo } from './translateDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

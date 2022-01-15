@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import 'components/droparea'
 import '../../../src/components/droparea/components/droparea-preview'
 

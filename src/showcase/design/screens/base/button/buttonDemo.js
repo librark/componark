@@ -1,5 +1,5 @@
-import { Component } from 'base/component'
-import { Tooltip } from 'components/tooltip'
+import 'components/tooltip/index.js'
+import { Component } from 'base/component/index.js'
 
 const tag = 'demo-button'
 export class ButtonDemo extends Component {

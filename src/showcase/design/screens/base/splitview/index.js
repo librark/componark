@@ -1,4 +1,4 @@
-import { SplitViewDemo } from './splitViewDemo'
+import { SplitViewDemo } from './splitViewDemo.js'
 
 export function hub (parentResolver) {
   const resolver = parentResolver.forge({

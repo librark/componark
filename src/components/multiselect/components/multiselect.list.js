@@ -1,7 +1,6 @@
-import { Component } from '../../../base/component'
+import { Component } from '../../../base/component/index.js'
 
 const tag = 'ark-multiselect-list'
-
 export class MultiselectList extends Component {
   constructor () {
     super()

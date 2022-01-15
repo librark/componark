@@ -1,4 +1,4 @@
-import { StandardFactory, standardStrategy } from '../standard.factory'
+import { StandardFactory, standardStrategy } from '../standard.factory.js'
 
 export class DevelopmentFactory extends StandardFactory { }
 

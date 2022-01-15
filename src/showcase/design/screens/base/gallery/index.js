@@ -1,4 +1,4 @@
-import { GalleryDemo } from "./galleryDemo"
+import { GalleryDemo } from "./galleryDemo.js"
 
 export function hub(parentResolver) {
   const resolver = parentResolver.forge({
