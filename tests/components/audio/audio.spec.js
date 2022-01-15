@@ -55,7 +55,7 @@ describe('Audio', () => {
     audio.init({global: mockGlobal})
 
     expect(audio.status).toEqual('idle')
-    await audio.start()
+    await audio.start(new Event('click'))
     expect(audio.status).toEqual('recording')
     expect(audio.recorder).toBeTruthy()
   })
@@ -68,9 +68,9 @@ describe('Audio', () => {
     audio.init({global: mockGlobal})
 
     expect(audio.status).toEqual('idle')
-    await audio.start()
+    await audio.start(new Event('click'))
     expect(audio.status).toEqual('recording')
-    audio.stop()
+    audio.stop(new Event('click'))
     expect(audio.status).toEqual('done')
   })
 
@@ -82,11 +82,11 @@ describe('Audio', () => {
     audio.init({global: mockGlobal})
 
     expect(audio.status).toEqual('idle')
-    await audio.start()
+    await audio.start(new Event('click'))
     expect(audio.status).toEqual('recording')
-    audio.stop()
+    audio.stop(new Event('click'))
     expect(audio.status).toEqual('done')
-    audio.reset()
+    audio.reset(new Event('click'))
     expect(audio.status).toEqual('idle')
     expect(audio.recorder).toBeNull()
   })
@@ -98,7 +98,7 @@ describe('Audio', () => {
     const audio = container.querySelector('ark-audio')
     audio.init({global: mockGlobal})
 
-    await audio.start()
+    await audio.start(new Event('click'))
     jest.runOnlyPendingTimers()
 
     const timer = audio.select('.ark-audio__timer')
@@ -114,8 +114,8 @@ describe('Audio', () => {
     const audio = container.querySelector('ark-audio')
     audio.init({global: mockGlobal})
 
-    await audio.start()
-    audio.stop()
+    await audio.start(new Event('click'))
+    audio.stop(new Event('click'))
 
     audio._onData({data: new Blob(['Hello'], {type: 'text/plain'})})
     jest.runOnlyPendingTimers()
