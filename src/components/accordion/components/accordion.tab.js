@@ -48,7 +48,7 @@ export class AccordionTab extends Component {
     
     const header = this.select('[data-accordion-tab-header]')
     
-    if(this.icon) {
+    if (this.icon) {
       header.innerHTML = /* html */`
         <icon class="ark-accordion-tab__icon"></icon>
         ${this.header}
