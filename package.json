@@ -26,21 +26,7 @@
   },
   "types": "src/components/index",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "@material/button": "^13.0.0",
-    "@material/card": "^13.0.0",
-    "@material/dialog": "^13.0.0",
-    "@material/drawer": "^13.0.0",
-    "@material/fab": "^13.0.0",
-    "@material/floating-label": "^13.0.0",
-    "@material/form-field": "^13.0.0",
-    "@material/list": "^13.0.0",
-    "@material/select": "^13.0.0",
-    "@material/snackbar": "^13.0.0",
-    "@material/tab-bar": "^13.0.0",
-    "@material/toolbar": "^2.3.0",
-    "material-components-web": "^13.0.0",
-    "material-design-icons": "^3.0.1"
+    "@fortawesome/fontawesome-free": "^5.15.4"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
