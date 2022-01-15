@@ -44,7 +44,9 @@ export class Audio extends Component {
     return super.render()
   }
 
-  async start () {
+  /** @param {Event} event */
+  async start (event) {
+    event.stopPropagation()
     this.status = 'recording'
     this.render()
     const options = {audio: true}
@@ -57,13 +59,14 @@ export class Audio extends Component {
     this.recorder.start()
   }
 
-  stop () {
+  /** @param {Event} event */
+  stop (event) {
+    event.stopPropagation()
     this.status = 'done'
-    this.render()
-    this.recorder.stop()
     clearInterval(this.timerId)
-    this.recorder.stream.getTracks().forEach(
-      track => track.stop())
+    this.recorder.stop()
+    this.recorder.stream.getTracks().forEach(track => track.stop())
+    this.render()
   }
 
   reset () {
@@ -88,6 +91,7 @@ export class Audio extends Component {
     }, 1000)
   }
 
+  /** @param {any} event */
   _onData(event) {
     const audio = this.select('.ark-audio__audio')
     audio['src'] = this.global.URL.createObjectURL(event.data)
