@@ -65,8 +65,7 @@
   },
   "standard": {
     "env": [
-      "jest",
-      "customElements"
+      "jest"
     ]
   },
   "jest": {
