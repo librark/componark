@@ -62,7 +62,7 @@ export class Component extends HTMLElement {
 
   /** @return {Component} */
   render() {
-    this.className = this.tagName.toLowerCase()
+    this.classList.add(this.tagName.toLowerCase())
     listen(this)
     return this
   }

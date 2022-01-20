@@ -83,6 +83,15 @@ describe('Component', () => {
     expect(component.className).toEqual('mock-component')
   })
 
+  it('keeps its previous classes after rendering', () => {
+    component.classList.add('custom-class')
+    component.classList.add('custom-class')
+    component.classList.add('special-class')
+    component.render()
+    expect(component.className).toEqual(
+      'mock-component custom-class special-class')
+  })
+
   it('emits custom events', () => {
     let detail = null
     const handler = (event) => {detail = event.detail}
