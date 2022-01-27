@@ -54,8 +54,7 @@ export class Alert extends Component {
 
   render () {
     this.content = /* html */ `
-    <div background="${this.contentBackground}"
-      color="${this.contentColor}" class="ark-alert__content">
+    <div class="ark-alert__content">
         <div class="ark-alert__header">
           ${this._renderTitle()}
           ${this._renderText()}
@@ -66,6 +65,11 @@ export class Alert extends Component {
         </div>
       </div>
       <div class="ark-alert__scrim" listen on-click="close"></div>
+    `
+
+    this.querySelector('.ark-alert__content').style.cssText = `
+      background: var(--${this.contentBackground});
+      color: var(--${this.contentColor});
     `
 
     return super.render()
