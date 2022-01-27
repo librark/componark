@@ -1,0 +1,104 @@
+.ark-accordion {
+  display: grid;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.ark-accordion-tab {
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  transition: all 0.5s ease-in-out;
+}
+
+.ark-accordion-tab:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.ark-accordion-tab:first-child {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.ark-accordion-tab[active] {
+  margin-bottom: var(--margin, 15px);
+}
+
+.ark-accordion-tab[active]~.ark-accordion-tab[active] {
+  margin-top: 0;
+}
+
+.ark-accordion-tab[active]~.ark-accordion-tab:not([active]) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ark-accordion-tab:not([active])~.ark-accordion-tab[active] {
+  margin-top: var(margin, 15px);
+}
+
+.ark-accordion-tab[disabled] {
+  pointer-events: none;
+  color: gray;
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.ark-accordion-tab__header {
+  width: auto;
+  height: 2.5rem;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  align-items: center;
+  user-select: none;
+}
+
+.ark-accordion-tab__header small {
+  all: unset;
+}
+
+.ark-accordion-tab__content {
+  box-sizing: border-box;
+  display: none;
+  width: 100%;
+  padding: 1em;
+  position: relative;
+  animation-name: appear;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+[active] .ark-accordion-tab__content {
+  display: block;
+}
+
+.ark-accordion-tab {
+  border: 1px solid #cecece;
+}
+
+.ark-accordion-tab__header {
+  border-radius: 4px 4px 0px 0px;
+}
+
+.ark-accordion-tab__content {
+  word-wrap: break-word;
+}
+
+.ark-accordion-tab[disabled] {
+  background: gray;
+  opacity: 20%;
+}

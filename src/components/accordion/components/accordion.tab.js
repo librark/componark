@@ -42,7 +42,13 @@ export class AccordionTab extends Component {
       <div class="ark-accordion-tab__content">
       </div>
       `
-
+    
+    
+    this.querySelector('.ark-accordion-tab__header').style.cssText = `
+      background: var(--${this.background});
+      color: var(--${this.color});
+    `
+    
     this.tabContent = this.querySelector(".ark-accordion-tab__content")
     this.tabContent.append(this.body)
     
