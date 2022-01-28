@@ -5,7 +5,7 @@
 }
 
 .ark-button {
-  border-radius: var(--xs, 4px);
+  border-radius: var(--roundness, 4px);
   user-select: none;
   cursor: pointer;
   display: inline-grid;
@@ -14,26 +14,6 @@
   padding: 0.2rem 0.8rem;
   font-size: 1.05rem;
   vertical-align: middle;
-}
-
-.ark-button[round=xs] {
-  border-radius: var(--xs, 4px);
-}
-
-.ark-button[round=sm] {
-  border-radius: var(--sm, 4px);
-}
-
-.ark-button[round=md] {
-  border-radius: var(--md, 4px);
-}
-
-.ark-button[round=lg] {
-  border-radius: var(--lg, 4px);
-}
-
-.ark-button[round=xl] {
-  border-radius: var(--xl, 4px);
 }
 
 .ark-button[background=primary] {

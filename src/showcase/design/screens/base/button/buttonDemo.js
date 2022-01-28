@@ -126,10 +126,10 @@ export class ButtonDemo extends Component {
 
       <div class="demo-button">
         <p>Roundness examples</p>
-        <ark-button background="primary" round="xs">round xs</ark-button>
-        <ark-button background="primary" round="sm">round sm</ark-button>
-        <ark-button background="primary" round="md">round md</ark-button>
-        <ark-button background="primary" round="lg">round lg</ark-button>
+        <ark-button background="primary" roundness="4px">roundness 4px</ark-button>
+        <ark-button background="primary" roundness="6px">roundness 6px</ark-button>
+        <ark-button background="primary" roundness="10px">roundness 10px</ark-button>
+        <ark-button background="primary" roundness="15px">roundness 15px</ark-button>
       </div>
       
       <a href="https://github.com/knowark/componark/blob/master/src/components/button/README.rst">
