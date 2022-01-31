@@ -9,15 +9,17 @@ export class Card extends Component {
     this.title = context.title
     this.subtitle = context.subtitle
     this.global = context.global || window
+    this.headerAlign = context.headerAlign || this.headerAlign || 'left'
 
     return super.init()
   }
 
   reflectedProperties () {
-    return ['title', 'subtitle']
+    return ['title', 'subtitle', 'headerAlign']
   }
 
   render () {
+    console.log(this.headerAlign)
     const slots = getSlots(this)
 
     this._renderMedia(slots)
@@ -36,7 +38,9 @@ export class Card extends Component {
     const media = this.global.document.createElement('div')
     media.className = 'ark-card__media'
 
-    mediaSlots.forEach(element => media.append(element))
+    mediaSlots.forEach(element => {
+      media.append(element)
+    })
 
     this.append(media)
   }
@@ -46,6 +50,8 @@ export class Card extends Component {
 
     const header = this.global.document.createElement('div')
     header.className = 'ark-card__header'
+
+    header.setAttribute('header-align', this.headerAlign)
 
     const title = this.title.trim().length ? /* html */ `
       <div class="ark-card__title">${this.title}</div>
