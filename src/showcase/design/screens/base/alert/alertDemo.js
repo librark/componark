@@ -27,7 +27,7 @@ export class AlertDemo extends Component {
         </ul>
       </div>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/alert/README.rst">
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/alert/README.md">
       * Reference
       </a>
       
