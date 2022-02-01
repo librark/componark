@@ -25,10 +25,95 @@
 }
 
 .ark-checkbox__input {
+  background: var(--canvas, white);
+  color: var(--ink, black);
+
   display: grid;
   margin: 0;
-  color: var(--primary);
 }
+
+/*Theme applying*/
+.ark-checkbox__input[background=primary] {
+  background: var(--primary, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=primary] {
+  color: var(--primary, white);
+}
+
+.ark-checkbox__input[background=secondary] {
+  background: var(--secondary, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=secondary] {
+  color: var(--secondary, white);
+}
+
+.ark-checkbox__input[background=success] {
+  background: var(--success, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=success] {
+  color: var(--success, white);
+}
+
+.ark-checkbox__input[background=danger] {
+  background: var(--danger, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=danger] {
+  color: var(--danger, white);
+}
+
+.ark-checkbox__input[background=warning] {
+  background: var(--warning, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=warning] {
+  color: var(--warning, white);
+}
+
+.ark-checkbox__input[background=info] {
+  background: var(--info, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=info] {
+  color: var(--info, white);
+}
+
+.ark-checkbox__input[background=dark] {
+  background: var(--dark, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=dark] {
+  color: var(--dark, white);
+}
+
+.ark-checkbox__input[background=muted] {
+  background: var(--muted, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=muted] {
+  color: var(--muted, white);
+}
+
+.ark-checkbox__input[background=light] {
+  background: var(--light, black);
+  color: white;
+}
+
+.ark-checkbox__input.ark-checkbox__input[color=light] {
+  color: var(--light, white);
+}
+
 
 .ark-checkbox__input input[type=checkbox] {
   display: grid;

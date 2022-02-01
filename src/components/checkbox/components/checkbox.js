@@ -13,16 +13,21 @@ export class Checkbox extends Component {
     this.name = context.name
     this.checked = context.checked
     this.value = context.value
+    this.background = context.background || this.background || 'white'
+    this.color = context.color || this.color || 'dark'
     return super.init()
   }
 
   reflectedProperties () {
-    return ['name', 'value']
+    return ['name', 'value', 'background', 'color']
   }
 
   render () {
     this.content = /* html */ `
-      <div class="ark-checkbox__input">
+      <div class="ark-checkbox__input" 
+        background="${this.background}" 
+        color="${this.color}"
+      >
         <input data-input type="checkbox">
       </div>
       <div class="ark-checkbox__label">
