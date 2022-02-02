@@ -30,7 +30,7 @@ export class DropareaDemo extends Component {
       <a
         class="reference"
         target="_blank"
-        href="https://github.com/knowark/componark/tree/master/src/components/droparea/README.rst"
+        href="https://github.com/knowark/componark/tree/master/src/components/droparea/README.md"
       >
         * Reference
       </a>
