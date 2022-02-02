@@ -26,7 +26,8 @@ export class MultiselectDemo extends Component {
 
     <br>
 
-    <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/multiselect/README.rst">
+    <a target="_blank" 
+      href="https://github.com/knowark/componark/blob/master/src/components/multiselect/README.md">
       * Reference
     </a>
 
@@ -103,7 +104,6 @@ export class MultiselectDemo extends Component {
 }
 
 const styles = /* css */`
-
   .multi-container{
     display:grid;
   }
