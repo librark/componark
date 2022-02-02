@@ -91,7 +91,7 @@ export class ModalDemo extends Component {
         
       </ark-modal>
       <br>
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/modal/README.rst">
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/modal/README.md">
       * Reference
       </a>
     `

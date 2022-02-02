@@ -20,8 +20,11 @@ export class LocationDemo extends Component {
 
       <br>
 
-      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/location/README.rst">
-      * Reference
+      <a 
+        class="reference" 
+        target="_blank" 
+        href="https://github.com/knowark/componark/tree/master/src/components/location/README.md">
+        * Reference
       </a>
     `
 

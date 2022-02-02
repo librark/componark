@@ -17,9 +17,12 @@ export class ListDemo extends Component {
       <ark-list background="light" color="primary"  data-template-list action default
         listen on-list:selected="onTemplateListSelected"></ark-list>
     
-        <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/list/README.rst">
+      <a 
+        class="reference" 
+        target="_blank" 
+        href="https://github.com/knowark/componark/tree/master/src/components/list/README.md">
         * Reference
-        </a>
+      </a>
     `
 
     return super.render()
