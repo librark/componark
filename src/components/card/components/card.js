@@ -19,7 +19,6 @@ export class Card extends Component {
   }
 
   render () {
-    console.log(this.headerAlign)
     const slots = getSlots(this)
 
     this._renderMedia(slots)
