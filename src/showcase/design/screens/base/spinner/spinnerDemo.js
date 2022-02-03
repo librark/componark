@@ -18,7 +18,8 @@ export class SpinnerDemo extends Component {
         <ark-spinner type="bounce"></ark-spinner>
       </div>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/spinner/README.rst">
+      <a 
+        target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/spinner/README.md">
       * Reference
       </a>
     `
