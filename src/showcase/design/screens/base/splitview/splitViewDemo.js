@@ -18,7 +18,10 @@ export class SplitViewDemo extends Component {
 
       </ark-splitview>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/splitview/README.rst" class="reference">
+      <a 
+        target="_blank"
+        href="https://github.com/knowark/componark/blob/master/src/components/splitview/README.md" 
+        class="reference">
       * Reference
       </a>
     `
