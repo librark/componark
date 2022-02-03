@@ -15,7 +15,10 @@ export class PaginatorDemo extends Component {
       <ark-paginator listen on-page-changed="onPageChanged" 
         displayed-pages="4" page-size="1"></ark-paginator>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/paginator/README.rst" class="reference">
+      <a 
+        target="_blank" 
+        href="https://github.com/knowark/componark/blob/master/src/components/paginator/README.md" 
+        class="reference">
       * Reference
       </a>
     `
