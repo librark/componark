@@ -18,7 +18,10 @@ export class RadioDemo extends Component {
 
       <p>Valor seleccionado: <span data-radio-button-value></span></p>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/radio/README.rst" class="reference">
+      <a
+        target="_blank" 
+        href="https://github.com/knowark/componark/blob/master/src/components/radio/README.md" 
+        class="reference">
       * Reference
       </a>
     `
