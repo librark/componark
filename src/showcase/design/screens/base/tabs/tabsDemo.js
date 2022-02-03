@@ -32,7 +32,10 @@ export class TabsDemo extends Component {
 
       <div tab-content></div>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/tabs/README.rst" class="reference">
+      <a 
+        target="_blank" 
+        href="https://github.com/knowark/componark/blob/master/src/components/tabs/README.md" 
+        class="reference">
       * Reference
       </a>
     `
