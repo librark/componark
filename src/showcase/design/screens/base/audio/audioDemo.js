@@ -9,7 +9,9 @@ export class AudioDemo extends Component {
     this.content = /* html */ `
       <ark-audio></ark-audio>
 
-      <a href="https://github.com/knowark/componark/blob/master/src/components/audio/README.md">
+      <a 
+        target="_blank"
+        href="https://github.com/knowark/componark/blob/master/src/components/audio/README.md">
       * Reference
       </a>
     `

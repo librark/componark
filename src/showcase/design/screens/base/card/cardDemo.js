@@ -53,7 +53,9 @@ export class CardDemo extends Component {
 
       <br/>
 
-      <a href="https://github.com/knowark/componark/blob/master/src/components/card/README.rst">
+      <a
+        target="_demo" 
+        href="https://github.com/knowark/componark/blob/master/src/components/card/README.md">
       * Reference
       </a>
     `

@@ -20,7 +20,10 @@ export class CheckboxDemo extends Component {
 
       <p>Valor seleccionado: <span data-checkbox-value></span></p>
 
-      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/checkbox/README.md">
+      <a 
+        class="reference" 
+        target="_blank" 
+        href="https://github.com/knowark/componark/tree/master/src/components/checkbox/README.md">
       * Reference
       </a>
     `

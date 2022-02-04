@@ -64,8 +64,9 @@ export class AccordionDemo extends Component {
       
       <br>
       
-      <a target="_blank"
-         href="https://github.com/knowark/componark/blob/master/src/components/accordion/README.rst">
+      <a 
+        target="_blank"
+        href="https://github.com/knowark/componark/blob/master/src/components/accordion/README.md">
       * Reference
       </a>
     `

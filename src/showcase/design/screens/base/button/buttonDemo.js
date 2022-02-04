@@ -132,7 +132,9 @@ export class ButtonDemo extends Component {
         <ark-button background="primary" roundness="15px">roundness 15px</ark-button>
       </div>
       
-      <a href="https://github.com/knowark/componark/blob/master/src/components/button/README.md">
+      <a
+        target="_blank" 
+        href="https://github.com/knowark/componark/blob/master/src/components/button/README.md">
       * Reference
       </a>
     `
