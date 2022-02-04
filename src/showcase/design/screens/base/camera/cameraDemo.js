@@ -17,7 +17,7 @@ export class CameraDemo extends Component {
 
       <br>
 
-      <a href="https://github.com/knowark/componark/blob/master/src/components/camera/README.rst">
+      <a href="https://github.com/knowark/componark/blob/master/src/components/camera/README.md">
       * Reference
       </a>
     `

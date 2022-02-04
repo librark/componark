@@ -30,7 +30,11 @@ export class InputDemo extends Component {
       ${this.thirdExample}
     </section>
     
-    <a class="reference" target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/input/README.rst">* Reference</a>
+    <a 
+      class="reference" target="_blank" 
+      href="https://github.com/knowark/componark/blob/master/src/components/input/README.md">
+      * Reference
+    </a>
     `
     return super.render()
   }

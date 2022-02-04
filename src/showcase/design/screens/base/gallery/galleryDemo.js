@@ -19,7 +19,10 @@ export class GalleryDemo extends Component {
       <p>Gallery with single image</p>
       <ark-gallery images="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp" size="300px" cover></ark-gallery>
 
-      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/gallery/README.rst">
+      <a 
+        class="reference" 
+        target="_blank" 
+        href="https://github.com/knowark/componark/tree/master/src/components/gallery/README.md">
       * Reference
       </a>
     `

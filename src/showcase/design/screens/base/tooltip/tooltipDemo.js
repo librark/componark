@@ -26,7 +26,9 @@ export class TooltipDemo extends Component {
         </ark-tooltip>
         </div>
         <br>
-        <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/tooltip/README.rst">
+        <a 
+          target="_blank" 
+          href="https://github.com/knowark/componark/blob/master/src/components/tooltip/README.md">
         * Reference
         </a>
 

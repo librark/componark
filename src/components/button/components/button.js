@@ -17,13 +17,15 @@ export class Button extends Component {
     this.horizontal = context.horizontal || this.horizontal
     this.vertical = context.vertical || this.vertical
 
+    this.roundness = context.roundness || this.roundness || '4px'
+
     this.size = context.size || this.size
 
     return super.init()
   }
 
   reflectedProperties() {
-    return ['href', 'horizontal', 'vertical', 'vibrate', 'iconPosition', 'size']
+    return ['roundness','href', 'horizontal', 'vertical', 'vibrate', 'iconPosition', 'size']
   }
 
   render() {
@@ -34,6 +36,10 @@ export class Button extends Component {
         <div class="ark-button__icon"></div>
         <div class="ark-button__body"></div>
       </${element}>
+    `
+
+    this.style.cssText = `
+      --roundness: ${this.roundness};
     `
 
     const properties = ['class', 'horizontal', 'vertical', 'vibrate']

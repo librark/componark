@@ -27,7 +27,7 @@ export class AlertDemo extends Component {
         </ul>
       </div>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/alert/README.rst">
+      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/alert/README.md">
       * Reference
       </a>
       
@@ -53,9 +53,9 @@ export class AlertDemo extends Component {
           text: 'Y este un texto descriptivo',
           showConfirmButton: true,
           confirmButtonText: 'Confirm',
-          confirmButtonBackground: 'success',
-          contentBackground: 'light',
-          contentColor: 'dark',
+          confirmButtonBackground: 'primary',
+          contentBackground: 'dark',
+          contentColor: 'light',
           showCancelButton: false,
           horizontal: 'center',
           vertical: 'center',

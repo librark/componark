@@ -8,8 +8,13 @@ export class CardDemo extends Component {
   }
 
   render() {
-    this.innerHTML = /* html */ `
-    <ark-card animated round="xl" background="primary" title="CARD TITLE" subtitle="subtitle card">
+    this.content = /* html */ `
+    <ark-card animated 
+      background="primary" 
+      title="CARD TITLE" 
+      subtitle="subtitle card"
+      header-align="center"
+    >
       <img slot="media" src="${Image}" alt="" />
 
       <div>
@@ -18,14 +23,13 @@ export class CardDemo extends Component {
         iure autem porro debitis provident architecto accusantium id?
       </div>
 
-      <ark-button fab slot="actions"  background="light" color="dark" >
+      <ark-button fab slot="actions"  background="light" color="dark" size="medium">
         <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
       </ark-button>
 
     </ark-card>
 
     <ark-card no-borders title="Borderless card" subtitle="subtitle card">
-      <img src="${Image}" slot="media">
       <div>
         Lorem ipsum dolor sit, amet consectetur 
         adipisicing elit. Alias harum ea inventore 
@@ -38,7 +42,6 @@ export class CardDemo extends Component {
       <hr/>
 
       <ark-card title="titulo" subtitle="subtitle [Hello World]" no-border>
-        <img slot="media" src="${Image}" alt="" />
 
         <div>
           body
@@ -73,8 +76,8 @@ const styles = /* css */ `
     gap: 1rem;
   }
   .ark-card {
-  min-width: 300px;
-  max-width: 50%
+    min-width: 300px;
+    max-width: 50%
   }
 `
 Component.define('demo-card', CardDemo, styles)

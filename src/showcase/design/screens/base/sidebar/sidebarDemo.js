@@ -39,7 +39,9 @@ export class SidebarDemo extends Component {
         <div slot="footer">footer</div>
       </ark-sidebar>
 
-      <a target="_blank" href="https://github.com/knowark/componark/blob/master/src/components/sidebar/README.rst">
+      <a 
+        target="_blank" 
+        href="https://github.com/knowark/componark/blob/master/src/components/sidebar/README.md">
       * Reference
       </a>
     `
@@ -58,8 +60,6 @@ const styles = /*css*/ `
   border: 1px solid black;
   padding: 1rem;
 }
-
-
 `
 
 Component.define('demo-sidebar', SidebarDemo, styles)

@@ -23,7 +23,7 @@ export class IconDemo extends Component {
 
       <br>
 
-      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/icon/README.rst">
+      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/icon/README.md">
       * Reference
       </a>
     `

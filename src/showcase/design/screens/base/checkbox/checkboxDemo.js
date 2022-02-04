@@ -7,27 +7,24 @@ export class CheckboxDemo extends Component {
   }
 
   render () {
-    const background = "light"
-    const color = "dark"
 
     this.innerHTML = /* html */ `
       <ark-checkbox-group listen on-alter="onSelectedCheckboxGroup"
         label="Checkboxs">
 
-        <ark-checkbox background="${background}" color="${color}" value="op1">Opcion 1</ark-checkbox>
-        <ark-checkbox background="${background}" color="${color}" value="op2" checked>Opcion 2</ark-checkbox>
-        <ark-checkbox background="${background}" color="${color}" value="op3">Opcion 3</ark-checkbox>
+        <ark-checkbox color="primary" value="op1">Opcion 1</ark-checkbox>
+        <ark-checkbox value="op2">Opcion 2</ark-checkbox>
+        <ark-checkbox value="op3">Opcion 3</ark-checkbox>
 
       </ark-checkbox-group>
 
       <p>Valor seleccionado: <span data-checkbox-value></span></p>
 
-      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/checkbox/README.rst">
+      <a class="reference" target="_blank" href="https://github.com/knowark/componark/tree/master/src/components/checkbox/README.md">
       * Reference
       </a>
     `
 
-    this.checkboxGroup['value'] = 'op1,op2'
 
     return super.render()
   }
