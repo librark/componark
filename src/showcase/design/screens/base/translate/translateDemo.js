@@ -6,23 +6,25 @@ export class TranslateDemo extends Component {
     const context = JSON.stringify({name: 'Esteban'})
     this.content = /* html */ `
 
-    <span>
-      <ark-translate languages='en,es,fr'></ark-translate>
-    </span>
-
-    <span>
-      <span data-i18n="hello">Hello</span>
-      <span data-i18n="world">World</span>
+    <section class="translate-demo_container">
       <span>
-        <strong data-i18n="magic">Magic</strong>
+        <ark-translate languages='en,es,fr'></ark-translate>
       </span>
-    </span>
 
-    <a 
-      target="_blank" 
-      href="https://github.com/knowark/componark/blob/master/src/components/translate/README.md">
-      * Reference
-    </a>
+      <span>
+        <span data-i18n="hello">Hello</span>
+        <span data-i18n="world">World</span>
+        <span>
+          <strong data-i18n="magic">Magic</strong>
+        </span>
+      </span>
+
+      <a 
+        target="_blank" 
+        href="https://github.com/knowark/componark/blob/master/src/components/translate/README.md">
+        * Reference
+      </a>
+    </section>
     `
 
     return super.render()
@@ -30,6 +32,12 @@ export class TranslateDemo extends Component {
 
 }
 const styles = /* css */ `
+
+.translate-demo_container {
+  display: grid;
+}
+
+
 `
 
 Component.define(tag, TranslateDemo, styles)
