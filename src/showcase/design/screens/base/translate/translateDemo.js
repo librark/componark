@@ -17,6 +17,12 @@ export class TranslateDemo extends Component {
         <strong data-i18n="magic">Magic</strong>
       </span>
     </span>
+
+    <a 
+      target="_blank" 
+      href="https://github.com/knowark/componark/blob/master/src/components/translate/README.md">
+      * Reference
+    </a>
     `
 
     return super.render()
