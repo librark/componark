@@ -4,9 +4,11 @@ const tag = 'demo-accordion'
 export class AccordionDemo extends Component {
   render() {
     this.innerHTML = /* html */ `
-    <h1>Normal</h1>  
+    <h2>Normal</h2>  
     <ark-accordion>
-        <ark-accordion-tab background="dark" color="danger" header="tab 1" >
+      
+        <ark-accordion-tab color="black" header="Header I" >
+          <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
           sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
@@ -15,7 +17,8 @@ export class AccordionDemo extends Component {
           vero expedita, ipsum repellat quisquam nostrum voluptate tempora dolore!
           </span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab 2">
+        <ark-accordion-tab header="Header II">
+          <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
           sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
@@ -24,7 +27,8 @@ export class AccordionDemo extends Component {
           vero expedita, ipsum repellat quisquam nostrum voluptate tempora dolore!
           </span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab 3">
+        <ark-accordion-tab header="Header III">
+          <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>
            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
           sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
@@ -33,7 +37,8 @@ export class AccordionDemo extends Component {
           vero expedita, ipsum repellat quisquam nostrum voluptate tempora dolore!
           </span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab 4" disabled>
+        <ark-accordion-tab header="Header IV" disabled>
+        <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>
            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, 
           sunt iusto inventore earum molestiae corrupti provident obcaecati vitae 
@@ -44,20 +49,23 @@ export class AccordionDemo extends Component {
         </ark-accordion-tab>
       </ark-accordion>
 
-      <h1>multiple</h1>
+      <h2>Multiple</h2>
 
       <ark-accordion multiple>
-        <ark-accordion-tab header="tab A" >
-          <ark-icon slot='icon' name="fas fa-address-book"></ark-icon>
+        <ark-accordion-tab header="Header I" >
+          <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>content tab A</span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab B">
+        <ark-accordion-tab header="Header II">
+          <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>content tab B</span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab C">
+        <ark-accordion-tab header="Header III">
+          <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>content tab C</span>
         </ark-accordion-tab>
-        <ark-accordion-tab header="tab D" disabled>
+        <ark-accordion-tab header="Header IV" disabled>
+         <ark-icon slot='icon' name="fas fa-angle-right"></ark-icon>
           <span>content tab D</span>
         </ark-accordion-tab>
       </ark-accordion>
@@ -76,13 +84,20 @@ export class AccordionDemo extends Component {
 
 const styles = /* css */ `
   :root{
-    --primary: rgb(41, 31, 177);
+    --primary: #ffffff;
   }
   .demo-accordion{
     margin: 0 auto;
     padding: 1rem;
     display: block;
     width: 70vw;
+    box-shadow: 1px -1px 0px 1px #0000000d;
+    border-radius: 6px;
+    background-color:white;
+  }
+
+  .demo-accordion h2 {
+      color: #001e3d;
   }
 `
 

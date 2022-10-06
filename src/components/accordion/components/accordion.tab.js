@@ -13,8 +13,8 @@ export class AccordionTab extends Component {
     this.binding = "accordion-tab-listen"
     this.header = context.header
     
-    this.background = context.background || this.background || "primary"
-    this.color = context.color || this.color || "light"
+    this.background = context.background
+    this.color = context.color || this.color || "black"
     
     
     const [icon] = slots['icon'] || []
@@ -82,7 +82,10 @@ export class AccordionTab extends Component {
   }
 
   toggle() {
-    this.hasAttribute("active") ? this.close() : this.open()
+    if(this.hasAttribute("active") || this.hasAttribute("disabled")) {
+      return this.close()
+    }
+    return this.open()
   }
 }
 Component.define(tag, AccordionTab)

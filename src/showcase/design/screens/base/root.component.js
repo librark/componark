@@ -123,14 +123,14 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #fff7ea;
+  background-color: #eff3f8;
   height: 100%;
 }
 
 :root {
   color: black;
   --background: white; 
-  --primary: blue;
+  --primary: #1976d2;
   --secondary: orange;
   --success: green;
   --danger: red;
@@ -150,7 +150,7 @@ body {
   display: grid;
   height: 100%;
   grid-template-rows: 0.05fr 1fr;
-  font-family: 'Cairo', helvetica, sans-serif;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
   letter-spacing: 0.02em;
 }
 
@@ -158,11 +158,12 @@ body {
   grid-column: 1 / 13;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  background-color: #334455;
+  background-color: rgb(0 30 61);
   color: #00ffff;
   text-decoration: none
   overflow: hidden;
-  border-bottom:5px solid cyan;
+  border-bottom:4px solid rgb(160 255 255 / 53%);
+  box-shadow: 0px 0px 4px rgba(0,0,0,.6);
   place-items:center;
 }
 
@@ -184,19 +185,28 @@ body {
 
 .${tag}__navitem,
 .${tag}__sideitem {
-  transition: background 0.2s ease-in-out;
+  transition: background 0.1s ease;
 }
 
 .${tag}__navitem:hover,
 .${tag}__sideitem:hover {
-  background-color: white;
-  color:black;
+  background-color: rgb(38 54 70);
+  color: cyan;
+}
+.${tag}__navitem:active,
+.${tag}__sideitem:active {
+  background-color: rgb(239, 243, 248);
+  color: cyan;
+}
+.${tag}__navitem:hover, .app-root__sideitem:hover {
+  background-color: rgb(131 170 209);
+    color: rgb(0 1 2);
+    font-weight: bold;
 }
 
 .${tag}__brand {
   display: grid;
   align-items: center;
-  background: white;
   padding: 0 1rem;
   height: 100%;
   width: fit-content;
@@ -207,7 +217,15 @@ body {
   text-decoration: none;
   text-align: center;
   margin: 0;
+  color: white;
+  transition: .1s;
 }
+
+.${tag}__brand:hover a {
+  color: rgb(0, 255, 255);
+  transition: .1s;
+}
+
 
 .${tag}__actions {
   display: grid;
@@ -233,9 +251,9 @@ body {
 .${tag}__sidebar {
   display: grid;
   height: 100%;
-  width: 157px;
+  width: 240px;
   grid-row: 2 / -1;
-  background-color: #334455;
+  background-color: #001e3d;
   color: #00ffff;
   text-decoration: none;
   overflow-x: hidden;
@@ -252,7 +270,8 @@ body {
 .${tag}__sideitem {
   text-decoration: none;
   padding: 1vw;
-  color: cyan;
+  color: rgb(160 255 255);
+  border-bottom: 1px solid #8080801c;
 }
 
 .${tag}__menu {

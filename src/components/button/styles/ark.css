@@ -11,7 +11,7 @@
   display: inline-grid;
   transition: background 0.5s;
   box-sizing: border-box;
-  padding: 0.2rem 0.8rem;
+  padding: 0.3rem 0.8rem;
   font-size: 1.05rem;
   vertical-align: middle;
 }
