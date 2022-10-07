@@ -1,4 +1,4 @@
-import { Component } from "../../../base/component/index.js"
+import { Component, html } from "../../../base/component/index.js"
 
 const tag = "ark-accordion-tab"
 export class AccordionTab extends Component {
@@ -31,7 +31,7 @@ export class AccordionTab extends Component {
   }
 
   render() {
-    this.content =  /* html */ `
+    this.content =  html`
       <div background="${this.background}" 
            color="${this.color}" 
            class="ark-accordion-tab__header">
@@ -41,7 +41,7 @@ export class AccordionTab extends Component {
       </div>
       <div class="ark-accordion-tab__content">
       </div>
-      `
+    `
     
     
     this.querySelector('.ark-accordion-tab__header').style.cssText = `
