@@ -9,7 +9,7 @@ setup:
 install:
 	npm install
 
-coverage:
+test:
 	npm run test
 
 dev:
