@@ -21,6 +21,10 @@ test suite, you will need to install 'canvas' in your operating system.
 
 https://www.npmjs.com/package/canvas
 
+https://github.com/jsdom/jsdom/issues/1782
+
+https://github.com/hustcc/jest-canvas-mock
+
 Reference
 =========
 
