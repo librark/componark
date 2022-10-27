@@ -2,7 +2,7 @@
  * @typedef {import('./tabs.item').TabsItem} TabsItem
  **/
 import { Component } from '../../../base/component/index.js'
-import { styles }  from '../styles/index.js'
+import styles from '../styles/index.js'
 
 const tag = 'ark-tabs'
 export class Tabs extends Component {

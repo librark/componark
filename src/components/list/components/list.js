@@ -1,6 +1,6 @@
 import { Component } from "../../../base/component/index.js"
 import { ListItem } from "./list.item.js"
-import { styles } from "../styles/index.js"
+import styles from "../styles/index.js"
 
 const tag = "ark-list"
 
@@ -36,7 +36,7 @@ export class List extends Component {
     return super.render()
   }
 
-  load() {
+  async load() {
     this.addEventListener("click", this._onSelected.bind(this))
   }
 

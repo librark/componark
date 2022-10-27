@@ -1,4 +1,4 @@
-import { ListItem } from '../../../src/components/list'
+import { ListItem } from '../../../src/components/list/index.js'
 
 describe('List item', () => {
   let container = null

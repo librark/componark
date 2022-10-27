@@ -1,6 +1,6 @@
 import { Component } from '../../../base/component/index.js'
 import { uuid } from '../../../base/utils/index.js'
-import { styles } from '../styles/index.js'
+import styles from '../styles/index.js'
 import { RadioButton } from './radio-button.js'
 
 const tag = 'ark-radio-group'
@@ -41,7 +41,7 @@ export class RadioGroup extends Component {
     return super.render()
   }
 
-  load () {
+  async load () {
     this.addEventListener('click', this.onAlter.bind(this))
   }
 

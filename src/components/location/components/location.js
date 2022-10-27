@@ -1,5 +1,5 @@
 import { Component } from '../../../base/component/index.js'
-import { styles } from '../styles/index.js'
+import styles from '../styles/index.js'
 
 export class Location extends Component {
   init (context={}) {

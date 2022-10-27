@@ -1,6 +1,6 @@
 import { Component } from '../../../base/component/index.js'
 import { Checkbox } from './checkbox.js'
-import { styles } from '../styles/index.js'
+import styles from '../styles/index.js'
 
 const tag = 'ark-checkbox-group'
 export class CheckboxGroup extends Component {

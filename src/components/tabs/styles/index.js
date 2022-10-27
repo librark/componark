@@ -1,3 +1,2 @@
-// @ts-nocheck
-import ark from './ark.css'
-export const styles = ark.toString()
+import styles from "./ark.css.js"
+export default styles

@@ -5,13 +5,6 @@
     }
   ],
   "settings": {
-    "emmet.includeLanguages": {
-      "javascript": "html"
-    },
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "editor.formatOnSave": true,
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false
@@ -31,8 +24,6 @@
       "shuworks.vscode-table-formatter",
       "waderyan.gitblame",
       "snooty.snooty",
-      "trond-snekvik.simple-rst",
-      "esbenp.prettier-vscode"
     ]
   }
 }
