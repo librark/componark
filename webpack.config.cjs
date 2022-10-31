@@ -3,7 +3,6 @@ const { DefinePlugin, EnvironmentPlugin } = require("webpack")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = (env, argv) => {
   const devMode = argv.mode === "development"
@@ -24,10 +23,6 @@ module.exports = (env, argv) => {
       new CopyWebpackPlugin({
         patterns: ["src/showcase/design/.htaccess"],
       }),
-      new MiniCssExtractPlugin({
-        filename: devMode ? "[name].css" : "[name].[hash].css",
-        chunkFilename: devMode ? "[id].css" : "[id].[hash].css",
-      }),
       new DefinePlugin({
         PRODUCTION: !devMode,
         VERSION: JSON.stringify(require("./package.json").version),
@@ -36,21 +31,6 @@ module.exports = (env, argv) => {
     ],
     module: {
       rules: [
-        {
-          test: /\.(sa|sc|c)ss$/,
-          use: [
-            "css-loader",
-            {
-              loader: "sass-loader",
-              options: {
-                sassOptions: {
-                  outputStyle: devMode ? "expanded" : "compressed",
-                  includePaths: ["./node_modules"],
-                },
-              },
-            },
-          ],
-        },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: ["file-loader"],
@@ -66,17 +46,12 @@ module.exports = (env, argv) => {
               },
             },
           ],
-        },
-        {
-          test: /\.(rst|d\.ts)$/,
-          loader: "ignore-loader",
-        },
+        }
       ],
     },
     resolve: {
       alias: {
         base: path.resolve(__dirname, "./src/base/"),
-        styles: path.resolve(__dirname, "./src/base/theme/styles/"),
         components: path.resolve(__dirname, "./src/components/"),
         screens: path.resolve(__dirname, "./src/showcase/screens/"),
       },
@@ -94,21 +69,6 @@ module.exports = (env, argv) => {
     plugins: commonConfig.plugins.concat([
       new EnvironmentPlugin({
         ARK_DESIGN: "ark",
-      }),
-    ]),
-  })
-
-  const materialConfig = Object.assign({}, commonConfig, {
-    name: "material",
-    mode: argv.mode,
-    output: {
-      publicPath: "/material/",
-      filename: "[name].[contenthash].js",
-      path: path.join(__dirname, "/dist/material"),
-    },
-    plugins: commonConfig.plugins.concat([
-      new EnvironmentPlugin({
-        ARK_DESIGN: "material",
       }),
     ]),
   })
@@ -143,18 +103,16 @@ module.exports = (env, argv) => {
       static: [
         path.join(__dirname, "dist"),
         path.join(__dirname, "dist/ark"),
-        path.join(__dirname, "dist/material"),
       ],
       historyApiFallback: {
         rewrites: [
           { from: /^\/$/, to: "/index.html" },
           { from: /^\/ark/, to: "/ark/index.html" },
-          { from: /^\/material/, to: "/material/index.html" },
         ],
       },
       port: 7890,
     }
   }
 
-  return [rootConfig, arkConfig, materialConfig]
+  return [rootConfig, arkConfig]
 }
