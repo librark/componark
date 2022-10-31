@@ -35,6 +35,9 @@ purge:
 http:
 	http-server -p 8084 -c-1 dist
 
+updates:
+	npx npm-check-updates
+
 browser-sync:
 	browser-sync start --proxy "localhost:8084" --files "*" --https
 
