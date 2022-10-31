@@ -85,10 +85,6 @@
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!@knowark)"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png)$": "<rootDir>/tests/__mocks__/fileMock.js",
-      "\\.(css|less|sass|scss)$": "<rootDir>/tests/__mocks__/styleMock.js"
-    }
+    ]
   }
 }
