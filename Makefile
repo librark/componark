@@ -38,6 +38,10 @@ http:
 updates:
 	npx npm-check-updates
 
+upgrade:
+	npx npm-check-updates --upgrade
+	npm install
+
 browser-sync:
 	browser-sync start --proxy "localhost:8084" --files "*" --https
 
