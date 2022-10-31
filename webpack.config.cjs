@@ -11,17 +11,17 @@ module.exports = (env, argv) => {
   const commonConfig = {
     mode: argv.mode,
     entry: {
-      showcase: "./src/showcase/design/index.js",
+      showcase: "./lib/showcase/design/index.js",
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         chunks: ["showcase", "runtime"],
         title: "Componark",
-        template: "./src/showcase/design/index.html",
+        template: "./lib/showcase/design/index.html",
       }),
       new CopyWebpackPlugin({
-        patterns: ["src/showcase/design/.htaccess"],
+        patterns: ["lib/showcase/design/.htaccess"],
       }),
       new DefinePlugin({
         PRODUCTION: !devMode,
@@ -51,9 +51,9 @@ module.exports = (env, argv) => {
     },
     resolve: {
       alias: {
-        base: path.resolve(__dirname, "./src/base/"),
-        components: path.resolve(__dirname, "./src/components/"),
-        screens: path.resolve(__dirname, "./src/showcase/screens/"),
+        base: path.resolve(__dirname, "./lib/base/"),
+        components: path.resolve(__dirname, "./lib/components/"),
+        screens: path.resolve(__dirname, "./lib/showcase/screens/"),
       },
     },
   }
@@ -77,7 +77,7 @@ module.exports = (env, argv) => {
     name: "root",
     mode: argv.mode,
     entry: {
-      index: "./src/showcase/index.js",
+      index: "./lib/showcase/index.js",
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -88,12 +88,12 @@ module.exports = (env, argv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          { from: "src/showcase/locales/", to: "locales/" }
+          { from: "lib/showcase/locales/", to: "locales/" }
         ],
       }),
       new HtmlWebpackPlugin({
         title: "Componark",
-        template: "./src/showcase/index.html",
+        template: "./lib/showcase/index.html",
       }),
     ],
   }

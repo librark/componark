@@ -16,34 +16,34 @@ extended in your own application code to create new components.
 Reference
 =========
 
-- `Base Component <src/base/component>`_
+- `Base Component <lib/base/component>`_
 
 Components library
 ------------------
 
-- `<ark-accordion> <src/components/accordion>`_
-- `<ark-alert> <src/components/alert>`_
-- `<ark-audio> <src/components/audio>`_
-- `<ark-button> <src/components/button>`_
-- `<ark-camera> <src/components/camera>`_
-- `<ark-card> <src/components/card>`_
-- `<ark-chart> <src/components/chart>`_
-- `<ark-checkbox> <src/components/checkbox>`_
-- `<ark-droparea> <src/components/droparea>`_
-- `<ark-gallery> <src/components/gallery>`_
-- `<ark-icon> <src/components/icon>`_
-- `<ark-list> <src/components/list>`_
-- `<ark-input> <src/components/input>`_
-- `<ark-location> <src/components/location>`_
-- `<ark-map> <src/components/map>`_
-- `<ark-modal> <src/components/modal>`_
-- `<ark-multiselect> <src/components/multiselect>`_
-- `<ark-paginator> <src/components/paginator>`_
-- `<ark-radio> <src/components/radio>`_
-- `<ark-select> <src/components/select>`_
-- `<ark-sidebar> <src/components/sidebar>`_
-- `<ark-signature> <src/components/signature>`_
-- `<ark-spinner> <src/components/spinner>`_
-- `<ark-splitview> <src/components/splitview>`_
-- `<ark-tabs> <src/components/tabs>`_
-- `<ark-tooltip> <src/components/tooltip>`_
+- `<ark-accordion> <lib/components/accordion>`_
+- `<ark-alert> <lib/components/alert>`_
+- `<ark-audio> <lib/components/audio>`_
+- `<ark-button> <lib/components/button>`_
+- `<ark-camera> <lib/components/camera>`_
+- `<ark-card> <lib/components/card>`_
+- `<ark-chart> <lib/components/chart>`_
+- `<ark-checkbox> <lib/components/checkbox>`_
+- `<ark-droparea> <lib/components/droparea>`_
+- `<ark-gallery> <lib/components/gallery>`_
+- `<ark-icon> <lib/components/icon>`_
+- `<ark-list> <lib/components/list>`_
+- `<ark-input> <lib/components/input>`_
+- `<ark-location> <lib/components/location>`_
+- `<ark-map> <lib/components/map>`_
+- `<ark-modal> <lib/components/modal>`_
+- `<ark-multiselect> <lib/components/multiselect>`_
+- `<ark-paginator> <lib/components/paginator>`_
+- `<ark-radio> <lib/components/radio>`_
+- `<ark-select> <lib/components/select>`_
+- `<ark-sidebar> <lib/components/sidebar>`_
+- `<ark-signature> <lib/components/signature>`_
+- `<ark-spinner> <lib/components/spinner>`_
+- `<ark-splitview> <lib/components/splitview>`_
+- `<ark-tabs> <lib/components/tabs>`_
+- `<ark-tooltip> <lib/components/tooltip>`_

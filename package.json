@@ -18,7 +18,7 @@
     "web",
     "components"
   ],
-  "types": "src/components/index",
+  "types": "lib/components/index",
   "devDependencies": {
     "@knowark/injectarkjs": "^0.8.1",
     "@knowark/routarkjs": "^0.6.3",
@@ -55,10 +55,10 @@
     ],
     "moduleDirectories": [
       "node_modules",
-      "src"
+      "lib"
     ],
     "collectCoverageFrom": [
-      "**/src/**",
+      "**/lib/**",
       "!**/showcase/**"
     ],
     "transformIgnorePatterns": [
