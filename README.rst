@@ -13,24 +13,12 @@ inter-component compatibility and common development idioms. This class is only
 a thin wrapper on top of the *HTMLElement* custom elements class, and might be
 extended in your own application code to create new components.
 
-Dependencies
-============
-
-This project has zero runtime dependencies. However, to effectively run the
-test suite, you will need to install 'canvas' in your operating system.
-
-https://www.npmjs.com/package/canvas
-
-https://github.com/jsdom/jsdom/issues/1782
-
-https://github.com/hustcc/jest-canvas-mock
-
 Reference
 =========
 
 - `Base Component <src/base/component>`_
 
-Components library 
+Components library
 ------------------
 
 - `<ark-accordion> <src/components/accordion>`_
