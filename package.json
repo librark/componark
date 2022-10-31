@@ -73,7 +73,7 @@
     "coverageDirectory": "/tmp/coverage",
     "transform": {},
     "setupFiles": [
-      "./tests/__mocks__/canvasMock.js"
+      "jest-canvas-mock"
     ],
     "moduleDirectories": [
       "node_modules",
