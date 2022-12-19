@@ -17,15 +17,17 @@
     margin: 0;
   }
 
-  body {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    color: #001e3d;
-    align-items: center;
+  html {
     height: 100%;
+  }
+
+  body {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    color: #001e3d;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    min-height: 100%;
   }
 
   .titles {
@@ -67,16 +69,18 @@
 </style>
 
 <body>
-  <div class="titles">
-    <img src="../showcase/logo-knowark.svg" alt="" class="brand">
-    <h1>Componark</h1>
-    <h2 id="version"></h2>
-  </div>
-  <ul class="themes">
-    <a class="theme__link" href="/ark/base/accordion">
-      <li> ARK </li>
-    </a>
-  </ul>
+  <main>
+    <div class="titles">
+      <img src="../showcase/logo-knowark.svg" alt="" class="brand">
+      <h1>Componark</h1>
+      <h2 id="version"></h2>
+    </div>
+    <ul class="themes">
+      <a class="theme__link" href="/ark/base/accordion">
+        <li> ARK </li>
+      </a>
+    </ul>
+  </main>
 </body>
 
 </html>
