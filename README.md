@@ -1,8 +1,6 @@
-ComponArk
-#########
+# ComponArk
 
 Pragmatic Web Components Library
-
 
 Introduction
 ============
