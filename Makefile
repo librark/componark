@@ -12,6 +12,9 @@ install:
 test:
 	npm run test
 
+clean:
+	rm -rf ./dist
+
 dev:
 	npm run dev
 
@@ -41,10 +44,3 @@ updates:
 upgrade:
 	npx npm-check-updates --upgrade
 	npm install
-
-browser-sync:
-	browser-sync start --proxy "localhost:8084" --files "*" --https
-
-inotifyWatchesLimit:
-	sudo sysctl fs.inotify.max_user_watches=524288
-	sudo sysctl -p --system
