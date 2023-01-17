@@ -1,8 +1,8 @@
 LOCATION
 ========
 
-The ``ark-location`` component makes use of the [Geolocation API](https://developer.mozilla.org/es/docs/WebAPI/Using_geolocation) a simple fast way for the user to provide their location.
-    
+The ``ark-location`` component makes use of the [Geolocation API](https://developer.mozilla.org/es/docs/WebAPI/Using_geolocation). It provides a simple and fast way for the user to provide their location.
+
 
 Examples
 --------
