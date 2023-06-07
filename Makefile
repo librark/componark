@@ -15,6 +15,9 @@ test:
 clean:
 	rm -rf ./dist
 
+showcase:
+	npx live-server ./showcase/
+
 dev:
 	npm run dev
 
