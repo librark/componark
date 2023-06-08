@@ -11,19 +11,65 @@
       }
     }
     </script>
+    <style>
+      :root {
+        --secondary: #00ffff;
+        --primary: #001e3d;
+      }
+
+      html, body {
+        height: 100%;
+      }
+    </style>
+
   </head>
   <body>
-    <main><app-root></app-root></main>
+    <app-root style="height:100%;;"></app-root>
     <script type="module">
       import { Component, html } from '@knowark/componarkjs'
-      import { yupi } from './script.js'
 
       const tag = 'app-root'
       class RootComponent extends Component {
         render () {
           this.content = html`
-          <h1>ROOT!!!</h1>
+          <nav style="background:var(--primary); color:white; --padding:4;
+          --height:4">
+            NAVBAR
+          </nav>
+          <main style="height:calc(100% - (var(--height-step) * 4));
+          --grid: auto-flow / 1fr 5fr">
+            <aside id="menu" style="--flow:row; overflow:auto"
+              listen on-click="onMenuItem">
+              ${[
+                { component: 'audio' },
+                { component: 'camera' },
+                { component: 'capture' },
+                { component: 'droparea' },
+                { component: 'emit' },
+                { component: 'list' },
+                { component: 'paginator' },
+                { component: 'splitview' },
+                { component: 'translate' },
+              ].map(item => html`
+                <button style="height:100%; width:100%; font-weight:bold;
+                text-align:center; text-transform:capitalize; cursor:pointer;
+                --all:unset; --background-hover:var(--dark);
+                --color-hover:var(--light);">
+                  ${item.component}
+                </button>
+              `).join('\n')}
+            </aside>
+            <article id="content" style="background:var(--dark)">
+
+            </article>
+
+          </main>
           `
+          return super.render()
+        }
+
+        onMenuItem (event) {
+          console.log('MENU-EVENT::', event.target.textContent)
         }
       }
       Component.define(tag, RootComponent)
