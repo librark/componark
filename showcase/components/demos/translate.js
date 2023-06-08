@@ -1,4 +1,4 @@
-import { Component } from "base/component/index.js"
+import { Component } from '@knowark/componarkjs'
 
 const tag = "demo-translate"
 export class TranslateDemo extends Component {

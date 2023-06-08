@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Componark - Components</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet"href="https://unpkg.com/@knowark/styleark@0.6.1/dist/styles.min.css">
     <script type="importmap">
     {
@@ -15,13 +16,13 @@
       :root {
         --secondary: #00ffff;
         --primary: #001e3d;
+        font-family: "Roboto";
       }
 
       html, body {
         height: 100%;
       }
     </style>
-
   </head>
   <body>
     <app-root style="height:100%;;"></app-root>
@@ -32,9 +33,8 @@
       class RootComponent extends Component {
         render () {
           this.content = html`
-          <nav style="background:var(--primary); color:white; --padding:4;
-          --height:4">
-            NAVBAR
+          <nav style="background:var(--primary); --padding:4; --height:4">
+            <a href="/" style="text-decoration:none; color:white">COMPONARK</a>
           </nav>
           <main style="height:calc(100% - (var(--height-step) * 4));
           --grid: auto-flow / 1fr 5fr">
@@ -43,33 +43,37 @@
               ${[
                 { component: 'audio' },
                 { component: 'camera' },
-                { component: 'capture' },
-                { component: 'droparea' },
-                { component: 'emit' },
+                //{ component: 'capture' },
+                //{ component: 'droparea' },
+                //{ component: 'emit' },
                 { component: 'list' },
                 { component: 'paginator' },
                 { component: 'splitview' },
                 { component: 'translate' },
               ].map(item => html`
-                <button style="height:100%; width:100%; font-weight:bold;
-                text-align:center; text-transform:capitalize; cursor:pointer;
-                --all:unset; --background-hover:var(--dark);
-                --color-hover:var(--light);">
-                  ${item.component}
-                </button>
+              <button style="height:100%; width:100%; font-weight:bold;
+              text-align:center; text-transform:capitalize; cursor:pointer;
+              --all:unset; --background-hover:var(--primary);
+              --color-hover:var(--light);">
+                ${item.component}
+              </button>
               `).join('\n')}
             </aside>
-            <article id="content" style="background:var(--dark)">
-
+            <article id="content" style="background:var(--muted); --padding:4">
             </article>
-
           </main>
           `
           return super.render()
         }
 
-        onMenuItem (event) {
-          console.log('MENU-EVENT::', event.target.textContent)
+        async onMenuItem (event) {
+          const component = event.target.textContent.trim()
+          const file = `./demos/${component}.js`
+          console.log('file::', file)
+          const module = await import(file)
+          this.querySelector('#content').innerHTML = `
+            <demo-${component}></demo-${component}>
+          `
         }
       }
       Component.define(tag, RootComponent)
