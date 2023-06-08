@@ -28,7 +28,7 @@ push:
 	git push && git push --tags
 
 deploy:
-	sshpass -e rsync -av --delete ./dist/ \
+	sshpass -e rsync -av --delete ./showcase/ \
 		${RSYNC_USER}@${RSYNC_HOST}:${RSYNC_DIR}
 
 reset:
