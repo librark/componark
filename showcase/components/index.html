@@ -69,7 +69,6 @@
         async onMenuItem (event) {
           const component = event.target.textContent.trim()
           const file = `./demos/${component}.js`
-          console.log('file::', file)
           const module = await import(file)
           this.querySelector('#content').innerHTML = `
             <demo-${component}></demo-${component}>
