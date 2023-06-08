@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
-  <div>
-    Hello World 
-  </div>
-</body>
-<script type="importmap">
-  {
-    "imports": {
-      "@knowark/componarkjs": "https://unpkg.com/@knowark/componarkjs@1.7.3/lib/index.js"
+  <head>
+    <meta charset="UTF-8">
+    <title>Componark - Components</title>
+    <link rel="stylesheet"href="https://unpkg.com/@knowark/styleark@0.6.1/dist/styles.min.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "@knowark/componarkjs": "https://unpkg.com/@knowark/componarkjs@1.7.3/lib/index.js"
+      }
     }
-  }
-</script>
-<script type="module">
-  import { Component } from '@knowark/componarkjs'
-  import { yupi } from './index.js'
+    </script>
+  </head>
+  <body>
+    <main><app-root></app-root></main>
+    <script type="module">
+      import { Component, html } from '@knowark/componarkjs'
+      import { yupi } from './script.js'
 
-  class MyComponent extends Component {}
-
-  console.log('Importing component!!')
-
-  console.log('Comporent::', Component)
-
-  console.log('MyComponent::', MyComponent)
-
-  console.log('>>>>>', yupi())
-
-</script>
+      const tag = 'app-root'
+      class RootComponent extends Component {
+        render () {
+          this.content = html`
+          <h1>ROOT!!!</h1>
+          `
+        }
+      }
+      Component.define(tag, RootComponent)
+    </script>
+  </body>
 </html>
