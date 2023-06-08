@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div>
+    Hello World 
+  </div>
+</body>
+<script type="importmap">
+  {
+    "imports": {
+      "@knowark/componarkjs": "https://unpkg.com/@knowark/componarkjs@1.7.3/lib/index.js"
+    }
+  }
+</script>
+<script type="module">
+  import { Component } from '@knowark/componarkjs'
+  import { yupi } from './index.js'
+
+  class MyComponent extends Component {}
+
+  console.log('Importing component!!')
+
+  console.log('Comporent::', Component)
+
+  console.log('MyComponent::', MyComponent)
+
+  console.log('>>>>>', yupi())
+
+</script>
+</html>

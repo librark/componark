@@ -1,4 +1,4 @@
-.PHONY: all tests coverage
+.PHONY: all tests coverage showcase
 
 setup:
 	npm install -g browser-sync && \
@@ -16,7 +16,7 @@ clean:
 	rm -rf ./dist
 
 showcase:
-	npx live-server ./showcase/
+	npx live-server ./showcase
 
 dev:
 	npm run dev

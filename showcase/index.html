@@ -1,86 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="https://unpkg.com/@knowark/styleark@0.6.1/dist/styles.min.css">
+    <title></title>
+  </head>
+  <style>
+    :root {
+      --secondary: #00ffff;
+      --primary: #001e3d;
+    }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-  <title></title>
-</head>
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-  }
+    html, body {
+      height: 100%;
+    }
+  </style>
 
-  html {
-    height: 100%;
-  }
-
-  body {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    color: #001e3d;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    min-height: 100%;
-  }
-
-  .titles {
-    display: flex;
-    gap: 0.8rem;
-  }
-
-  #version {
-    align-self: center;
-    font-weight: 300;
-    font-size: 0.9rem;
-  }
-
-  .themes {
-    padding: 0;
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-    align-self: center;
-    text-align: center;
-    list-style-type: none;
-  }
-
-  .theme__link {
-    user-select: none;
-    padding: 1rem;
-    background: #001e3d;
-    color: #00ffff;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.2s ease-in-out;
-  }
-
-  .theme__link:hover {
-    background: #00ffff;
-    color: #001e3d;
-  }
-</style>
-
-<body>
-  <main>
-    <div class="titles">
-      <img src="../showcase/logo-knowark.svg" alt="" class="brand">
-      <h1>Componark</h1>
-      <h2 id="version"></h2>
-    </div>
-    <ul class="themes">
-      <a class="theme__link" href="/ark/base/accordion">
-        <li> ARK </li>
-      </a>
-    </ul>
-  </main>
-</body>
+  <body>
+    <main style="display:grid; grid: 1fr 2fr / auto-flow;
+    justify-items:center; height:100%; --padding:8">
+      <section id="title" style="--margin-top:12">
+        <h1 style="text-align:center; --margin-bottom:8">Componark</h1>
+        <img style="display:block; --width:15;" src="./knowark.svg">
+      </section>
+      <section id="entries" style="display:grid; place-items:center;
+        --padding-vertical:12">
+        <div style="width:100%;">
+          <a style="display:block; background:var(--primary);
+          color:var(--secondary); text-decoration:none; text-align:center;
+          border-radius:5px; --padding:2;" href="/base">
+            Base
+          </a>
+        </div>
+        <div style="width:100%;">
+          <a style="display:block; background:var(--primary);
+          color:var(--secondary); text-decoration:none; text-align:center;
+          border-radius:5px; --padding:2;" href="/components">
+            Components
+          </a>
+        </div>
+        <div style="width:100%;">
+          <a style="display:block; background:var(--primary);
+          color:var(--secondary); text-decoration:none; text-align:center;
+          border-radius:5px; --padding:2;" href="/support">
+            Support
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
 
 </html>
