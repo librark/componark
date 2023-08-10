@@ -24,25 +24,25 @@ export class CameraDemo extends Component {
       </a>
     `
 
-    this.camera['start']()
+    this.camera.start()
 
     return super.render()
   }
 
   disconnectedCallback () {
-    this.camera['stop']()
+    this.camera.stop()
   }
 
   takepicture () {
-    this.photo.setAttribute('src', this.camera['dataURL'](200, 200))
+    this.photo.setAttribute('src', this.camera.dataURL(200, 200))
   }
 
   startCamera () {
-    this.camera['start']()
+    this.camera.start()
   }
 
   stopCamera () {
-    this.camera['stop']()
+    this.camera.stop()
   }
 
   get camera () {
@@ -53,7 +53,6 @@ export class CameraDemo extends Component {
   get photo () {
     return this.querySelector('[data-photo]')
   }
-
 }
 
 const styles = /* css */`

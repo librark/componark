@@ -15,6 +15,9 @@ test:
 clean:
 	rm -rf ./dist
 
+standard:
+	npx standard --fix
+
 showcase:
 	npx live-server ./showcase
 

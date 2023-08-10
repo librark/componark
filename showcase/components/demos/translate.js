@@ -1,9 +1,9 @@
 import { Component } from '@knowark/componarkjs'
 
-const tag = "demo-translate"
+const tag = 'demo-translate'
 export class TranslateDemo extends Component {
-  render() {
-    const context = JSON.stringify({name: 'Esteban'})
+  render () {
+    const context = JSON.stringify({ name: 'Esteban' })
     this.content = /* html */ `
 
     <section class="translate-demo_container">
@@ -29,7 +29,6 @@ export class TranslateDemo extends Component {
 
     return super.render()
   }
-
 }
 const styles = /* css */ `
 

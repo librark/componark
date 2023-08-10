@@ -1,4 +1,3 @@
-
 const version = VERSION
 
 const versionElement = document.getElementById('version')

@@ -29,7 +29,6 @@ export class SplitViewDemo extends Component {
     return super.render()
   }
 
-
   initList () {
     const template = item => /* html */ `
       <h1>${item.year}</h1>
@@ -46,17 +45,16 @@ export class SplitViewDemo extends Component {
     ]
 
     this.select('[data-list]').init({
-      source: source,
-      template: template
+      source,
+      template
     }).render()
-
   }
 }
 Component.define(tag, SplitViewDemo)
 
-tag = "demo-splitview-detail"
+tag = 'demo-splitview-detail'
 export class SplitviewDetailDemo extends Component {
-  init(context = {}) {
+  init (context = {}) {
     if (!context.data) return super.init()
 
     const data = context.data
@@ -66,7 +64,7 @@ export class SplitviewDetailDemo extends Component {
     return super.init()
   }
 
-  render() {
+  render () {
     this.content = this.first
       ? /* html */ `
       <button listen on-click="onClick"

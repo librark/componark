@@ -2,11 +2,11 @@ import { Component } from '@knowark/componarkjs'
 
 const tag = 'demo-droparea'
 export class DropareaDemo extends Component {
-  init(context) {
+  init (context) {
     return super.init(context)
   }
 
-  render() {
+  render () {
     this.innerHTML = /* html */ `
       <h1 class="title">
         This is a drop area
@@ -38,7 +38,7 @@ export class DropareaDemo extends Component {
     return super.render()
   }
 
-  async load() {
+  async load () {
     const myUrl =
       'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1888&q=80'
 
@@ -46,15 +46,15 @@ export class DropareaDemo extends Component {
     this.select('ark-droparea[data-load]').update({ contextFiles: [myFile] })
   }
 
-  async getFileFromUrl(url, name, defaultType = 'image/jpeg') {
+  async getFileFromUrl (url, name, defaultType = 'image/jpeg') {
     const response = await fetch(url)
     const data = await response.blob()
     return new File([data], name, {
-      type: response.headers.get('content-type') || defaultType,
+      type: response.headers.get('content-type') || defaultType
     })
   }
 
-  async onFileList(event) {
+  async onFileList (event) {
     const element = this.querySelector('[data-file-multi]')
     const droparea = this.select('.ark-droparea')
     const urlList = []

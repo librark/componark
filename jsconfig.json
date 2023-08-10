@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "allowJs": true,
+    "checkJs": true,
+    "baseUrl": "lib",
+    "paths": {
+      "@base*": [
+          "base",
+          "base*"
+      ],
+      "*": [
+        "*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "*/node_modules/"
+  ]
+}

@@ -60,7 +60,7 @@ export class ListDemo extends Component {
     templateList
       .init({
         source: sourceTemplate,
-        template: template
+        template
       })
       .render()
 
@@ -84,6 +84,5 @@ const styles = /* css */`
     margin-bottom:20px;
   }
 `
-
 
 Component.define(tag, ListDemo, styles)

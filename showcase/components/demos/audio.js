@@ -24,5 +24,5 @@ const styles = `
     margin: 1rem;
   }
 `
- 
+
 Component.define('demo-audio', AudioDemo, styles)
