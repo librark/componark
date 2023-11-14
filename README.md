@@ -4,7 +4,7 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://codecov.io/gh/librark/routark">
+  <a href="https://codecov.io/gh/librark/componark">
     <img src="https://codecov.io/gh/librark/componark/graphs/sunburst.svg?token=IWNapsPUch"/>
   </a>
 </p>
