@@ -1,3 +1,4 @@
+// @ts-ignore
 const version = VERSION
 
 const versionElement = document.getElementById('version')
