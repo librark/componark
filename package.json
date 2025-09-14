@@ -4,8 +4,9 @@
   "author": "Knowark",
   "description": "Knowark's Web Components Library",
   "license": "ISC",
-  "main": "lib/index.js",
   "type": "module",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --coverage",
     "dev": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' webpack serve --mode development --env development",
@@ -63,5 +64,8 @@
     "transformIgnorePatterns": [
       "node_modules/(?!@knowark)"
     ]
+  },
+  "imports": {
+    "#base/*": "./lib/base/*"
   }
 }
