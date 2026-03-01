@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --coverage",
+    "test": "NODE_OPTIONS='--no-warnings' node --test --test-concurrency=1 --import ./scripts/node-test-setup.js",
     "dev": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' webpack serve --mode development --env development",
     "prod": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' webpack --mode production --env production"
   },
@@ -23,14 +23,10 @@
   "devDependencies": {
     "@knowark/injectarkjs": "^0.10.6",
     "@knowark/routarkjs": "^0.6.6",
-    "@types/jest": "^29.5.11",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^12.0.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.0",
-    "jest": "^29.7.0",
-    "jest-canvas-mock": "^2.5.2",
-    "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^24.0.0",
     "npm-check-updates": "^16.14.12",
     "webpack": "^5.90.0",
@@ -42,27 +38,7 @@
   },
   "standard": {
     "env": [
-      "jest"
-    ]
-  },
-  "jest": {
-    "verbose": true,
-    "clearMocks": true,
-    "testEnvironment": "jsdom",
-    "transform": {},
-    "setupFiles": [
-      "jest-canvas-mock"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "lib"
-    ],
-    "collectCoverageFrom": [
-      "**/lib/**",
-      "!**/showcase/**"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!@knowark)"
+      "node"
     ]
   },
   "imports": {
