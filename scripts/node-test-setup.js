@@ -37,7 +37,8 @@ const forceGlobals = [
   'CSSStyleSheet',
   'URL',
   'File',
-  'Blob'
+  'Blob',
+  'MediaStream'
 ]
 
 for (const key of forceGlobals) {
