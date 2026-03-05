@@ -1,11 +1,11 @@
 <p align="center">
   <a href="https://codecov.io/gh/librark/componark">
-    <img src="https://codecov.io/gh/librark/componark/graph/badge.svg?token=IWNapsPUch"/>
+    <img src="https://codecov.io/gh/librark/componark/graph/badge.svg?token=IWNapsPUch" alt="codecov" />
   </a>
 </p>
 <p align="center">
   <a href="https://codecov.io/gh/librark/componark">
-    <img src="https://codecov.io/gh/librark/componark/graphs/sunburst.svg?token=IWNapsPUch"/>
+    <img src="https://codecov.io/gh/librark/componark/graphs/sunburst.svg?token=IWNapsPUch" alt="coverage sunburst" />
   </a>
 </p>
 
@@ -13,46 +13,58 @@
 
 Pragmatic Web Components Library
 
-Introduction
-============
+## Introduction
 
-Componark is a collection of ready to use web components to propel the creation
-of user interfaces. A common *Component* base class is provided to ensure
-inter-component compatibility and common development idioms. This class is only
-a thin wrapper on top of the *HTMLElement* custom elements class, and might be
-extended in your own application code to create new components.
+ComponArk is a lightweight Web Components library with a shared base class for
+consistency and event-driven composition.
 
-Reference
-=========
+The library is organized as custom elements that can be used directly in HTML or
+combined with your application code.
 
-- `Base Component <lib/base/component>`_
+## Reference
 
-Components library
-------------------
+- [Base Component](lib/base/component)
+- [Showcase](showcase)
 
-- `<ark-accordion> <lib/components/accordion>`_
-- `<ark-alert> <lib/components/alert>`_
-- `<ark-audio> <lib/components/audio>`_
-- `<ark-button> <lib/components/button>`_
-- `<ark-camera> <lib/components/camera>`_
-- `<ark-card> <lib/components/card>`_
-- `<ark-chart> <lib/components/chart>`_
-- `<ark-checkbox> <lib/components/checkbox>`_
-- `<ark-droparea> <lib/components/droparea>`_
-- `<ark-gallery> <lib/components/gallery>`_
-- `<ark-icon> <lib/components/icon>`_
-- `<ark-list> <lib/components/list>`_
-- `<ark-input> <lib/components/input>`_
-- `<ark-location> <lib/components/location>`_
-- `<ark-map> <lib/components/map>`_
-- `<ark-modal> <lib/components/modal>`_
-- `<ark-multiselect> <lib/components/multiselect>`_
-- `<ark-paginator> <lib/components/paginator>`_
-- `<ark-radio> <lib/components/radio>`_
-- `<ark-select> <lib/components/select>`_
-- `<ark-sidebar> <lib/components/sidebar>`_
-- `<ark-signature> <lib/components/signature>`_
-- `<ark-spinner> <lib/components/spinner>`_
-- `<ark-splitview> <lib/components/splitview>`_
-- `<ark-tabs> <lib/components/tabs>`_
-- `<ark-tooltip> <lib/components/tooltip>`_
+## Components library
+
+> Components marked in **bold** are available in this repository.
+
+- **`ark-audio`** ([docs](lib/components/audio/README.md))
+- **`ark-camera`** ([docs](lib/components/camera/README.md))
+- **`ark-capture`** ([docs](lib/components/capture/README.md))
+- **`ark-droparea`** ([docs](lib/components/droparea/README.md))
+- **`ark-emit`** ([docs](lib/components/emit/README.md))
+- **`ark-list`** ([docs](lib/components/list/README.md))
+- **`ark-paginator`** ([docs](lib/components/paginator/README.md))
+- **`ark-spinner`** ([docs](lib/components/spinner/README.md))
+- **`ark-splitview`** ([docs](lib/components/splitview/README.md))
+- **`ark-translate`** ([docs](lib/components/translate/README.md))
+
+## Why this exists
+
+- Minimal, reusable base (`Component`) with lifecycle hooks and dependency
+  resolution.
+- Template/event binding helper (`listen`) with custom attribute syntax.
+- Lightweight styling support with constructor stylesheet + fallback support.
+- Small test surface included with native Node test runner.
+
+## Basic usage
+
+```html
+<ark-translate languages="en,es"></ark-translate>
+
+<span data-i18n="hello">Hello</span>
+```
+
+## Development
+
+- Run tests: `npm test`
+- Build production bundle: `npm run prod`
+- Start local dev server: `npm run dev`
+
+## Notes
+
+Some older docs in the previous release referenced components that are not in the
+current snapshot of this repository. If you need one of those modules, check
+the release tags or open a request with expected parity.
