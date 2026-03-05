@@ -1,8 +1,6 @@
 export { Component } from "./component.js";
-export const css: (template: {
-    raw: readonly string[] | ArrayLike<string>;
-}, ...substitutions: any[]) => string;
-export const html: (template: {
-    raw: readonly string[] | ArrayLike<string>;
-}, ...substitutions: any[]) => string;
+/** @type {typeof String.raw} */
+export const css: typeof String.raw;
+/** @type {typeof String.raw} */
+export const html: typeof String.raw;
 //# sourceMappingURL=index.d.ts.map

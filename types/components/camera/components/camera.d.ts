@@ -1,14 +1,22 @@
+/**
+ * Camera capture component.
+ */
 export class Camera extends Component {
-    init(context?: {}): Component;
+    /** @param {object} context
+     *  @returns {Camera} */
+    init(context?: object): Camera;
     width: any;
     height: any;
     facingMode: any;
-    global: any;
     /** @returns {string} */
     dataURL(width?: any, height?: any): string;
+    /** @returns {Promise<void>} */
     start(): Promise<void>;
+    /** @returns {void} */
     stop(): void;
-    setCameraOrientation(facingMode: any): Promise<void>;
+    /** @param {string} facingMode
+     *  @returns {Promise<void>} */
+    setCameraOrientation(facingMode: string): Promise<void>;
     /** @returns {HTMLVideoElement} */
     get video(): HTMLVideoElement;
     /** @returns {HTMLCanvasElement} */

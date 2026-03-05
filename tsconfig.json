@@ -5,7 +5,7 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "baseUrl": "lib",
     "declaration": true,
     "emitDeclarationOnly": true,

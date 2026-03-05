@@ -9,6 +9,7 @@
   "types": "types/index.d.ts",
   "scripts": {
     "test": "NODE_OPTIONS='--no-warnings' node --test --experimental-test-coverage --test-coverage-include='lib/**/*.js' --test-coverage-exclude='**/*.test.js' --import ./scripts/node-test-setup.js",
+    "types": "tsc -p tsconfig.json --emitDeclarationOnly false --noEmit --checkJs false",
     "dev": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' webpack serve --mode development --env development",
     "prod": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' webpack --mode production --env production"
   },
