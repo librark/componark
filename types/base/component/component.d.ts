@@ -12,7 +12,7 @@ export class Component extends HTMLElement {
      */
     static define(tagName: string, element: CustomElementConstructor, styles?: string): void;
     binding: string;
-    local: {};
+    local: Record<string, any>;
     _isConnected: boolean;
     _cleanupCallbacks: any[];
     _needsBinding: boolean;
